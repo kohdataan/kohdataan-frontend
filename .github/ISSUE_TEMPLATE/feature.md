@@ -2,7 +2,7 @@
 name: Feature
 about: Feature for this project
 title: ''
-labels: ''
+labels: feature, frontend
 assignees: ''
 
 ---
