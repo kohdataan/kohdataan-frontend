@@ -1,0 +1,10 @@
+.main-container {
+  width: 100%;
+}
+
+@media screen and (min-width: 960px) {
+  .main-container {
+    width: 960px;
+    margin: 0 auto;
+  }
+}

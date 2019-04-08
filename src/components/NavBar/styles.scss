@@ -1,0 +1,50 @@
+.bottom-nav {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 5px 0px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.26);
+  z-index: 1030;
+}
+
+.pos-absolute {
+  position: absolute !important;
+}
+
+.nav-button {
+  width: auto;
+  height: 100%;
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+  text-transform: capitalize;
+  margin: 0;
+  border-radius: 0;
+  line-height: normal;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 34px;
+  height: 36px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  background-color: #ebebeb;
+  color: #1d1d1d;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
