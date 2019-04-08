@@ -6,5 +6,7 @@
   .main-container {
     width: 960px;
     margin: 0 auto;
+    position: relative;
+    min-height: 100vh;
   }
 }

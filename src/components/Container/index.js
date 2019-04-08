@@ -9,7 +9,7 @@ const Container = props => {
 
 Container.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.instanceOf(Array).isRequired,
 }
 
 export default Container

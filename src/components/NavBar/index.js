@@ -8,7 +8,7 @@ const NavBar = props => {
   return (
     <div className="bottom-nav pos-absolute">
       {routes.map(route => (
-        <NavBarLink {...route} />
+        <NavBarLink {...route} key={route.route} />
       ))}
     </div>
   )
