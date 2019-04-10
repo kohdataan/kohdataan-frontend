@@ -4,7 +4,11 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^6.3.2",
+    "core-js": "^2.6.5",
     "history": "^4.9.0",
+    "localforage": "^1.7.3",
+    "localforage-observable": "^1.4.0",
+    "mattermost-redux": "^5.9.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -13,7 +17,10 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-persist": "4.10.2",
+    "redux-thunk": "^2.3.0",
+    "remote-redux-devtools": "^0.5.16",
+    "zen-observable": "^0.8.14"
   },
   "scripts": {
     "start": "react-scripts start",
