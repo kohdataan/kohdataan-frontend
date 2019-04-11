@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "clone": "^2.1.2",
     "connected-react-router": "^6.3.2",
     "core-js": "^2.6.5",
     "history": "^4.9.0",
