@@ -8,7 +8,7 @@ import Chat from '../components/Chat'
 
 const GroupsContainer = (props) => {
 
-  const [currentChannel, setCurrentChannel] = useState('')
+  const [currentChannel, setCurrentChannel] = useState({})
   const [currentPosts, setCurrentPosts] = useState([])
 
   // Sort posts based on created timestamp
@@ -74,12 +74,12 @@ const GroupsContainer = (props) => {
 
   return (
     <div>
-      <div>Ryhmät</div>
+      <div>Tiimit</div>
       { Object.values(props.teams).length > 0 && Object.values(props.teams).map((value => 
           <li key={value.id}>{value.name}</li>
         ))
       }
-      <div>Kanavat</div>
+      <div>Omat ryhmät</div>
       { Object.keys(props.channels).length > 0 && Object.values(props.channels).map((channel => 
           <button key={channel.id} onClick={selectChannel(channel.id)}>{channel.display_name}</button>
         ))
