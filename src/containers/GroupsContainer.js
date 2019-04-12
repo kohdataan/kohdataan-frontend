@@ -6,6 +6,7 @@ import {getPosts, createPost} from 'mattermost-redux/actions/posts'
 import {fetchMyChannelsAndMembers} from 'mattermost-redux/actions/channels'
 import Chat from '../components/Chat'
 import Groups from '../components/Groups'
+import GroupSuggestions from '../components/GroupSuggestions'
 
 const GroupsContainer = (props) => {
 
@@ -77,14 +78,7 @@ const GroupsContainer = (props) => {
 
   return (
     <div>
-      <div>
-        <h3>Ehdotetut ryhmät</h3>
-      </div>
-      <div>Tiimit</div>
-      { Object.values(props.teams).length > 0 && Object.values(props.teams).map((value => 
-          <li key={value.id}>{value.name}</li>
-        ))
-      }
+      <GroupSuggestions />
       <Groups channels={props.channels} selectChannel={selectChannel} />
       <Chat channel={currentChannel} posts={currentPosts} createPost={props.createPost}/>
     </div>
