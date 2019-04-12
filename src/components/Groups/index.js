@@ -8,7 +8,9 @@ const Groups = props => {
 
   return (
     <div>
-        <div>Omat ryhmät</div>
+        <div>
+            <h3>Omat ryhmät</h3>
+        </div>
         <div>
         { Object.keys(channels).length > 0 && Object.values(channels).map((channel => 
             <Group key={channel.id} channel={channel} clickHandler={selectChannel} />

@@ -2,23 +2,15 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {loadMe, getMe} from 'mattermost-redux/actions/users'
+import Profile from '../components/Profile/Profile'
 
 const ProfileContainer = (props) => {
   useEffect(() => {
-    //props.loadMe()
     props.getMe()
   }, [])
 
   return (
-  <div>
-      <div>Profiili</div>
-      {props.user &&
-        <div>
-          <div>email: {props.user.email}</div>
-          <div>käyttäjänimi: {props.user.username}</div>
-        </div>
-      }
-  </div>
+    <Profile user={props.user} />
   )
 }
 

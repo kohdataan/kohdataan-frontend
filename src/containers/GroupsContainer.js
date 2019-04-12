@@ -35,6 +35,7 @@ const GroupsContainer = (props) => {
   // Set current channel based on channel id
   const selectChannel = (id) => () => {
     const current = props.channels[id]
+    console.log('current channel', current.display_name)
     setCurrentChannel(current)
   }
 
@@ -46,6 +47,7 @@ const GroupsContainer = (props) => {
   // Get channels and members based on team id
   useEffect(() => {
     console.log('teams effect')
+    console.log('teams:', props.teams)
     const teamId = Object.keys(props.teams)[0]
     if (teamId) {
       props.fetchMyChannelsAndMembers(teamId)
@@ -56,7 +58,7 @@ const GroupsContainer = (props) => {
   useEffect(() => {
     console.log('channels effect')
     const channel = currentChannel
-    if(channel) {
+    if(channel['id']) {
       props.getPosts(channel['id'])
     }
   }, [props.channels, currentChannel])
@@ -65,7 +67,7 @@ const GroupsContainer = (props) => {
   useEffect(() => {
     console.log('posts effect')
     const channel = currentChannel
-    if(channel) {
+    if(channel['id']) {
       const filteredPosts = filterPostsByChannelId(channel['id'])
       const sorted = sortPosts(filteredPosts)
       setCurrentPosts(sorted)
@@ -75,6 +77,9 @@ const GroupsContainer = (props) => {
 
   return (
     <div>
+      <div>
+        <h3>Ehdotetut ryhmät</h3>
+      </div>
       <div>Tiimit</div>
       { Object.values(props.teams).length > 0 && Object.values(props.teams).map((value => 
           <li key={value.id}>{value.name}</li>
@@ -92,6 +97,8 @@ const mapStateToProps = (state) => {
   const channels = state.entities.channels.channels
   const user = state.entities.users.profiles[currentUserId]
   const posts = state.entities.posts.posts
+  const members = state.entities.channels.membersInChannel
+  const myChannelMembers = state.entities.channels.myMembers
 
   return {
       currentUserId: currentUserId,
@@ -99,6 +106,8 @@ const mapStateToProps = (state) => {
       teams: teams,
       posts: posts,
       channels: channels,
+      members: members,
+      myMembers: myChannelMembers
   }
 }
 

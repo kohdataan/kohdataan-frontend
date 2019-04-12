@@ -12,7 +12,7 @@ const Chat = props => {
     <div>
         <Header channel={channel} />
         <MessageList posts={posts} />
-        { channel &&
+        { channel['id'] &&
             <UserInput channel={channel} createPost={createPost} />
         }
     </div>
