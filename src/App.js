@@ -5,7 +5,8 @@ import NavBarContainer from './containers/NavBarContainer'
 import GroupsContainer from './containers/GroupsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
-import {Client4} from 'mattermost-redux/client';
+import EditProfileContainer from './containers/EditProfileContainer'
+import {Client4} from 'mattermost-redux/client'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {login} from 'mattermost-redux/actions/users'
@@ -34,6 +35,7 @@ const App = (props) => {
         <Route path="/profiili" component={ProfileContainer} />
         <Route path="/kysymykset" component={QuestionsContainer} />
         <Route path="/ryhmat" component={GroupsContainer} />
+        <Route path="/muokkaa" component={EditProfileContainer} />
         <NavBarContainer />
       </Container>
     </Router>

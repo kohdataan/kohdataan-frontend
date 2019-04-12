@@ -3,14 +3,21 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {loadMe, getMe} from 'mattermost-redux/actions/users'
 import Profile from '../components/Profile'
+import EditButton from '../components/Profile/EditButton'
 
 const ProfileContainer = (props) => {
+  
+  const profileRoute = '/muokkaa'
+
   useEffect(() => {
     props.getMe()
   }, [])
 
   return (
-    <Profile user={props.user} />
+    <div>
+      <Profile user={props.user} />
+      <EditButton route={profileRoute} />
+    </div>
   )
 }
 
