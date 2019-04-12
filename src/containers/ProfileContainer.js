@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {loadMe, getMe} from 'mattermost-redux/actions/users'
-import Profile from '../components/Profile/Profile'
+import Profile from '../components/Profile'
 
 const ProfileContainer = (props) => {
   useEffect(() => {
