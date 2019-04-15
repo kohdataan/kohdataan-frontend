@@ -7,7 +7,7 @@ import Interests from './Interests'
 
 const Profile = props => {
     const { user } = props
-    const descriptionText = "Innokas purjehtija Helsingistä"
+    const descriptionText = "Esimerkkikuvaus käyttäjästä"
     return (
         <div>
             <h3>Oma Profiili</h3>
@@ -27,7 +27,7 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
 }
 
 export default Profile

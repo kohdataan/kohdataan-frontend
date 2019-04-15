@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MessageList from './MessageList/MessageList'
-import Header from './Header/Header'
-import UserInput from './UserInput/UserInput'
+import MessageList from './MessageList'
+import Header from './Header'
+import UserInput from './UserInput'
 import './styles.scss'
 
 const Chat = props => {
