@@ -5,7 +5,7 @@ const Interests = props => {
 
   return (
     <div>
-        <h3>Kiinnostuksen kohteet</h3>
+        <h2 className="interests-header">Minua kiinnostaa</h2>
     </div>
   )
 }

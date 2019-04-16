@@ -5,6 +5,7 @@ import ProfileImage from './ProfileImage'
 import Description from './Description'
 import Interests from './Interests'
 import EditButton from './EditButton'
+import Header from './Header'
 
 const Profile = props => {
 
@@ -14,15 +15,7 @@ const Profile = props => {
 
     return (
         <div>
-            <h1>Oma profiili</h1>
-
-            { user &&
-                <div>
-                    <div>email: {user.email}</div>
-                    <div>käyttäjänimi: {user.username}</div>
-                </div>
-            }
-            <br />
+        { user && <Header username={user.username} /> }
             <ProfileImage />
             <Description text={descriptionText}/>
             <Interests />
