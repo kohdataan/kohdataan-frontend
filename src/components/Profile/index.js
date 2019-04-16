@@ -4,10 +4,14 @@ import './styles.scss'
 import ProfileImage from './ProfileImage'
 import Description from './Description'
 import Interests from './Interests'
+import EditButton from './EditButton'
 
 const Profile = props => {
+
     const { user } = props
     const descriptionText = "Esimerkkikuvaus käyttäjästä"
+    const editProfileRoute = '/muokkaa'
+
     return (
         <div>
             <h1>Oma profiili</h1>
@@ -22,6 +26,7 @@ const Profile = props => {
             <ProfileImage />
             <Description text={descriptionText}/>
             <Interests />
+            <EditButton route={editProfileRoute} />
         </div>
     )
 }
