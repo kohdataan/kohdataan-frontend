@@ -10,7 +10,7 @@ const Profile = props => {
     const descriptionText = "Esimerkkikuvaus käyttäjästä"
     return (
         <div>
-            <h3>Oma Profiili</h3>
+            <h1>Oma profiili</h1>
 
             { user &&
                 <div>
