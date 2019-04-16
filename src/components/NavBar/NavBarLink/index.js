@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const NavBarLink = props => {
-  const { title, route } = props
+  const { title, route, icon } = props
   return (
     <Link to={route} className="nav-link">
+      <div><i className={icon}></i></div>
       <span className="label">{title}</span>
     </Link>
   )
@@ -15,6 +16,7 @@ const NavBarLink = props => {
 NavBarLink.propTypes = {
   title: PropTypes.string.isRequired,
   route: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 }
 
 export default NavBarLink

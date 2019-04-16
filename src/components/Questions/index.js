@@ -12,7 +12,7 @@ const Questions = props => {
     const { data } = props
 
     return (
-        <div>
+        <div className="align-center">
             <Header />
             <Options data={data[currentQuestion]} />
             <PrevNextNav current={currentQuestion} setCurrent={setCurrentQuestion} data={data}/>

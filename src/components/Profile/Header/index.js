@@ -5,10 +5,10 @@ const Header = props => {
   const { username } = props
 
   return (
-    <div>
-        <h1 className="profile-header">{username}</h1>
-        <h2 className="profile-info-text">26 vuotta</h2>
-    </div>
+    <span className="flex-item">
+        <h1>{username}</h1>
+        <div>28 vuotta</div>
+    </span>
   )
 }
 

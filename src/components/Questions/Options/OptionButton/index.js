@@ -6,7 +6,7 @@ const OptionButton = props => {
 
     return (
         <div>
-            <button onClick={clickHandler}>{text}</button>
+            <button className="options-button" onClick={clickHandler}>{text}</button>
         </div>
     )
 }

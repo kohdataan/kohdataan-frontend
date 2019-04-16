@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const EditButton = props => {
-  const { route, title } = props
+  const { route } = props
 
   return (
-    <Link to={route}>
-      <span>Muokkaa</span>
+    <Link to={route} className="flex-item user-edit-button">
+      <i className="fas fa-user-edit"></i>
     </Link>
   )
 }

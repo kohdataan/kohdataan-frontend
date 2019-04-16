@@ -1,10 +1,42 @@
 .interests-header {
-    font-family: 'Poppins', sans-serif;
     font-size: 22px;
     font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: -0.2px;
+    padding: 0 0.75rem;
     color: #000c4d;
+}
+
+.interests-button {
+    width: 258px;
+    height: 42px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 24.5px;
+    border: solid 1px #f5a623;
+    background-color: #fff2e7;
+    line-height: normal;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    line-height: 34px;
+    height: 36px;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    color: #1d1d1d;
+    cursor: pointer;
+    outline: none;
+}
+
+.interests-text {
+    padding: 0 0.75rem;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.centered-div {
+    text-align: center;
 }

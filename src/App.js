@@ -11,6 +11,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {login} from 'mattermost-redux/actions/users'
 import {init} from 'mattermost-redux/actions/websocket'
+import '../src/styles/defaults.scss'
 
 Client4.setUrl("http://localhost:9090")
 

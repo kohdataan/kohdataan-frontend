@@ -4,7 +4,7 @@ import './styles.scss'
 const ProfileImage = props => {
 
   return (
-    <img alt="Avatar placeholder"></img>
+    <span className="flex-item"><i className="profile-img far fa-smile"></i></span>
   )
 }
 

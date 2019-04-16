@@ -4,8 +4,8 @@ import './styles.scss'
 const Header = props => {
 
   return (
-    <div>
-        <h3>Valitse mieluisin vaihtoehto</h3>
+    <div className="questions-header">
+        <div className="questions-header-text">Valitse mieluisin vaihtoehto</div>
         <div>Vastausten perusteella ehdotamme sinulle uusia ryhmiä</div>
     </div>
   )

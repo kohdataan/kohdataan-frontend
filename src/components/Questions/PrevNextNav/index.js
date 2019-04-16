@@ -15,9 +15,9 @@ const PrevNextNav = props => {
 
     return (
         <div className="prevnext-nav pos-absolute">
-            { showPrew && <button className="nav-button-prev" onClick={handleClick('prev')}>Edellinen</button> }
+            { showPrew && <button className="nav-button prev-button" onClick={handleClick('prev')}>Edellinen</button> }
             <span> {current + 1}/{numQuestions} </span>
-            { showNext &&  <button className="nav-button-next" onClick={handleClick('next')}>Seuraava</button> }
+            { showNext &&  <button className="nav-button next-button" onClick={handleClick('next')}>Seuraava</button> }
         </div>
     )
 }

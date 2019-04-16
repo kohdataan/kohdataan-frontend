@@ -15,11 +15,13 @@ const Profile = props => {
 
     return (
         <div>
-        { user && <Header username={user.username} /> }
-            <ProfileImage />
+            <div className="flex-row">
+                <ProfileImage />
+                { user && <Header username={user.username} /> }
+                <EditButton route={editProfileRoute} />
+            </div>
             <Description text={descriptionText}/>
             <Interests />
-            <EditButton route={editProfileRoute} />
         </div>
     )
 }

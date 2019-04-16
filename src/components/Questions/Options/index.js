@@ -12,7 +12,7 @@ const Options = props => {
 
     return (
         <div>
-            { question && <h3>{ question }</h3> }
+            { question && <h1>{ question }</h1> }
             { options &&  options.map((option => 
                 <OptionButton key={option} text={option} clickHandler={handleClick(option, question)} />
                 ))
