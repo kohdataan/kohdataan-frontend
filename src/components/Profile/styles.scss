@@ -7,7 +7,6 @@
     left: 0;
     width: 100%;
     margin: 0 auto;
-    z-index: 1000;
 }
 
 .flex-item {
@@ -15,15 +14,9 @@
     flex-grow: 1;
     flex-basis: 0;
     text-align: center;
-    text-transform: capitalize;
-    text-decoration: none;
     margin: 0;
-    line-height: normal;
     display: inline-block;
     white-space: nowrap;
     padding: 0 0.75rem;
-    -webkit-transition: all 0.15s ease-in-out;
-    transition: all 0.15s ease-in-out;
-    outline: none;
     position: relative;
   }

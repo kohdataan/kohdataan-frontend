@@ -7,9 +7,9 @@ const Groups = props => {
   const { channels, selectChannel } = props
 
   return (
-    <div>
+    <div className="groups-wrapper">
         <div>
-            <h3>Omat ryhmät</h3>
+            <h1>Omat ryhmät</h1>
         </div>
         <div>
         { Object.keys(channels).length > 0 && Object.values(channels).map((channel => 

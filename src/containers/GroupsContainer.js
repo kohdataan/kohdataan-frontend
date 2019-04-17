@@ -12,6 +12,7 @@ const GroupsContainer = (props) => {
 
   const [currentChannel, setCurrentChannel] = useState({})
   const [currentPosts, setCurrentPosts] = useState([])
+  const [showChat, setShowChat] = useState(false)
 
   // Sort posts based on created timestamp
   const sortPosts = (posts) => {
@@ -38,6 +39,7 @@ const GroupsContainer = (props) => {
     const current = props.channels[id]
     console.log('current channel', current.display_name)
     setCurrentChannel(current)
+    setShowChat(true)
   }
 
   // Get user's teams at initial render
@@ -78,9 +80,9 @@ const GroupsContainer = (props) => {
 
   return (
     <div>
-      <GroupSuggestions />
-      <Groups channels={props.channels} selectChannel={selectChannel} />
-      <Chat channel={currentChannel} posts={currentPosts} createPost={props.createPost}/>
+      { !showChat && <GroupSuggestions /> }
+      { !showChat && <Groups channels={props.channels} selectChannel={selectChannel} /> }
+      { showChat && <Chat channel={currentChannel} posts={currentPosts} createPost={props.createPost}/> }
     </div>
   )
 }
