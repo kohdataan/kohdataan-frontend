@@ -4,20 +4,19 @@
   "private": true,
   "dependencies": {
     "clone": "^2.1.2",
-    "connected-react-router": "^6.4.0",
+    "connected-react-router": "^6.3.2",
     "core-js": "^2.6.5",
     "history": "^4.9.0",
     "localforage": "^1.7.3",
     "localforage-observable": "^1.4.0",
-    "mattermost-redux": "^5.10.0",
+    "mattermost-redux": "^5.9.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-redux": "^7.0.2",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
     "redux-persist": "4.10.2",
     "redux-thunk": "^2.3.0",
@@ -28,9 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "pretest": "npm run lint",
-    "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint src/**/*.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
