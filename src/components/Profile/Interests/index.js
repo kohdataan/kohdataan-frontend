@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.scss'
+import ButtonContainer from '../../ButtonContainer'
 
 const Interests = () => {
   return (
@@ -9,9 +10,9 @@ const Interests = () => {
         Kerro muille, mistä asioista olet kiinnostunut.
       </div>
       <div className="centered-div">
-        <button type="button" className="interests-button">
+        <ButtonContainer className="interests-button">
           Kiinnostuksen kohteet
-        </button>
+        </ButtonContainer>
       </div>
     </div>
   )

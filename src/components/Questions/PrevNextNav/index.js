@@ -1,6 +1,7 @@
 import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import ButtonContainer from '../../ButtonContainer'
 
 const PrevNextNav = props => {
   const { current, setCurrent, data } = props
@@ -15,25 +16,23 @@ const PrevNextNav = props => {
   }
 
   return (
-    <div className="prevnext-nav pos-absolute">
+    <div className="prevnext-nav">
       {showPrew && (
-        <button
-          type="button"
+        <ButtonContainer
           className="nav-button prev-button"
           onClick={handleClick('prev')}
         >
           Edellinen
-        </button>
+        </ButtonContainer>
       )}
       <span>{`${current + 1}/${numQuestions}`}</span>
       {showNext && (
-        <button
-          type="button"
+        <ButtonContainer
           className="nav-button next-button"
           onClick={handleClick('next')}
         >
           Seuraava
-        </button>
+        </ButtonContainer>
       )}
     </div>
   )

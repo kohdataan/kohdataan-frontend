@@ -12,7 +12,7 @@ const MessageList = props => {
 
   return (
     <div
-      className="chat-messages-box pos-absolute"
+      className="chat-message-list"
       ref={el => {
         scrollList = el
       }}

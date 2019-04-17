@@ -6,7 +6,7 @@ const Header = props => {
   const { channel } = props
 
   return (
-    <div className="chat-header pos-absolute">
+    <div className="chat-header">
       <h3>{channel && channel.display_name}</h3>
     </div>
   )

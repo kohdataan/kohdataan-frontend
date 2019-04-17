@@ -23,7 +23,7 @@ const UserInput = props => {
 
   return (
     <div>
-      <form className="chat-input-field pos-absolute" onSubmit={handleSubmit}>
+      <form className="chat-user-input" onSubmit={handleSubmit}>
         <label htmlFor="message">
           Viesti:
           <input

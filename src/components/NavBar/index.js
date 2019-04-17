@@ -6,7 +6,7 @@ import NavBarLink from './NavBarLink'
 const NavBar = props => {
   const { routes } = props
   return (
-    <div className="bottom-nav pos-absolute">
+    <div className="bottom-nav">
       {routes.map(route => (
         <NavBarLink {...route} key={route.route} />
       ))}
