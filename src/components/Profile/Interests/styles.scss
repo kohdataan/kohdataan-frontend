@@ -1,0 +1,33 @@
+.interests-header {
+    font-size: 22px;
+    font-weight: 500;
+    padding: 0 0.75rem;
+    color: #000c4d;
+}
+
+.interests-button {
+    width: 60vw;
+    text-transform: uppercase;
+    max-width: 400px;
+    min-width: 200px;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    height: 4.5vh;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    color: #1d1d1d;
+    cursor: pointer;
+    outline: none;
+}
+
+.interests-text {
+    padding: 0 0.75rem;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.interests-container {
+    text-align: center;
+}

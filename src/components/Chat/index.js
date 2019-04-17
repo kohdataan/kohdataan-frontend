@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MessageList from './MessageList/MessageList'
-import Header from './Header/Header'
-import UserInput from './UserInput/UserInput'
+import MessageList from './MessageList'
+import ChatHeader from './ChatHeader'
+import UserInput from './UserInput'
 import './styles.scss'
 
 const Chat = props => {
@@ -10,19 +10,17 @@ const Chat = props => {
 
   return (
     <div>
-        <Header channel={channel} />
-        <MessageList posts={posts} />
-        { channel['id'] &&
-            <UserInput channel={channel} createPost={createPost} />
-        }
+      <ChatHeader channel={channel} />
+      <MessageList posts={posts} />
+      {channel.id && <UserInput channel={channel} createPost={createPost} />}
     </div>
   )
 }
 
 Chat.propTypes = {
-    channel: PropTypes.object.isRequired,
-    posts: PropTypes.instanceOf(Array).isRequired,
-    createPost: PropTypes.func.isRequired
+  channel: PropTypes.instanceOf(Object).isRequired,
+  posts: PropTypes.instanceOf(Array).isRequired,
+  createPost: PropTypes.func.isRequired,
 }
 
 export default Chat

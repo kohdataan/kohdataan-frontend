@@ -1,11 +1,11 @@
 import React from 'react'
 import './styles.scss'
 
-const GroupSuggestions = props => {
-
+const GroupSuggestions = () => {
   return (
-    <div>
-        <h3>Ehdotetut ryhmät</h3>
+    <div className="group-suggestions">
+      <h1>Ehdotetut ryhmät</h1>
+      <div>Saat lisää ehdotuksia vastaamalla päivän kysymyksiin.</div>
     </div>
   )
 }

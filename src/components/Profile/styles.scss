@@ -1,0 +1,22 @@
+.profile-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: left;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.profile-header-item {
+    width: auto;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: center;
+    margin: 0;
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0 0.75rem;
+    position: relative;
+  }

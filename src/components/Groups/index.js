@@ -7,22 +7,27 @@ const Groups = props => {
   const { channels, selectChannel } = props
 
   return (
-    <div>
-        <div>
-            <h3>Omat ryhmät</h3>
-        </div>
-        <div>
-        { Object.keys(channels).length > 0 && Object.values(channels).map((channel => 
-            <Group key={channel.id} channel={channel} clickHandler={selectChannel} />
-            ))
-        }
-        </div>
+    <div className="groups-wrapper">
+      <div>
+        <h1>Omat ryhmät</h1>
+      </div>
+      <div>
+        {Object.keys(channels).length > 0 &&
+          Object.values(channels).map(channel => (
+            <Group
+              key={channel.id}
+              channel={channel}
+              clickHandler={selectChannel}
+            />
+          ))}
+      </div>
     </div>
   )
 }
 
 Groups.propTypes = {
-    channels: PropTypes.object.isRequired,
+  channels: PropTypes.instanceOf(Object).isRequired,
+  selectChannel: PropTypes.func.isRequired,
 }
 
 export default Groups
