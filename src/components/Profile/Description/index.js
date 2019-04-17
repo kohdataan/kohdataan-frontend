@@ -6,8 +6,8 @@ const Description = props => {
 
   return (
     <div>
-        <h2 className="description-header">Kuvaus</h2>
-        <div className="description-text">{text}</div>
+      <h2 className="description-header">Kuvaus</h2>
+      <div className="description-text">{text}</div>
     </div>
   )
 }

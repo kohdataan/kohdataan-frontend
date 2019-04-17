@@ -7,7 +7,7 @@ const EditButton = props => {
 
   return (
     <Link to={route} className="flex-item user-edit-button">
-      <i className="fas fa-user-edit"></i>
+      <i className="fas fa-user-edit" />
     </Link>
   )
 }

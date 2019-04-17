@@ -1,26 +1,26 @@
-import React, {useEffect}from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Client4 } from 'mattermost-redux/client'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { login } from 'mattermost-redux/actions/users'
+import { init } from 'mattermost-redux/actions/websocket'
 import Container from './components/Container'
 import NavBarContainer from './containers/NavBarContainer'
 import GroupsContainer from './containers/GroupsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
-import {Client4} from 'mattermost-redux/client'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {login} from 'mattermost-redux/actions/users'
-import {init} from 'mattermost-redux/actions/websocket'
-import '../src/styles/defaults.scss'
+import propTypes from 'prop-types'
+import './styles/defaults.scss'
 
-Client4.setUrl("http://localhost:9090")
+Client4.setUrl('http://localhost:9090')
 
-const App = (props) => {
-
+const App = props => {
   // login effect
   useEffect(() => {
     props.login(
-      process.env.REACT_APP_MATTERMOST_USERNAME, 
+      process.env.REACT_APP_MATTERMOST_USERNAME,
       process.env.REACT_APP_MATTERMOST_PASSWORD
     )
   }, [])
@@ -43,10 +43,17 @@ const App = (props) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  login,
-  init,
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      login,
+      init,
+    },
+    dispatch
+  )
 
 // export default App
-export default connect(null, mapDispatchToProps)(App)
+export default connect(
+  null,
+  mapDispatchToProps
+)(App)

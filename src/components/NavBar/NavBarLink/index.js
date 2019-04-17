@@ -7,7 +7,9 @@ const NavBarLink = props => {
   const { title, route, icon } = props
   return (
     <Link to={route} className="nav-link">
-      <div><i className={icon}></i></div>
+      <div>
+        <i className={icon} />
+      </div>
       <span className="label">{title}</span>
     </Link>
   )

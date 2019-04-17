@@ -6,8 +6,8 @@ const Header = props => {
 
   return (
     <span className="flex-item">
-        <h1>{username}</h1>
-        <div>28 vuotta</div>
+      <h1>{username}</h1>
+      <div>28 vuotta</div>
     </span>
   )
 }

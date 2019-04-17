@@ -8,26 +8,25 @@ import EditButton from './EditButton'
 import Header from './Header'
 
 const Profile = props => {
+  const { user } = props
+  const descriptionText = 'Esimerkkikuvaus käyttäjästä'
+  const editProfileRoute = '/muokkaa'
 
-    const { user } = props
-    const descriptionText = "Esimerkkikuvaus käyttäjästä"
-    const editProfileRoute = '/muokkaa'
-
-    return (
-        <div>
-            <div className="flex-row">
-                <ProfileImage />
-                { user && <Header username={user.username} /> }
-                <EditButton route={editProfileRoute} />
-            </div>
-            <Description text={descriptionText}/>
-            <Interests />
-        </div>
-    )
+  return (
+    <div>
+      <div className="flex-row">
+        <ProfileImage />
+        {user && <Header username={user.username} />}
+        <EditButton route={editProfileRoute} />
+      </div>
+      <Description text={descriptionText} />
+      <Interests />
+    </div>
+  )
 }
 
 Profile.propTypes = {
-    user: PropTypes.object,
+  user: PropTypes.object,
 }
 
 export default Profile
