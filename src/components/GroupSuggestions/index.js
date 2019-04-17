@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.scss'
 
-const GroupSuggestions = props => {
+const GroupSuggestions = () => {
   return (
     <div className="group-suggestions">
       <h1>Ehdotetut ryhmät</h1>

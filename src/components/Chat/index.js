@@ -12,13 +12,13 @@ const Chat = props => {
     <div>
       <Header channel={channel} />
       <MessageList posts={posts} />
-      {channel['id'] && <UserInput channel={channel} createPost={createPost} />}
+      {channel.id && <UserInput channel={channel} createPost={createPost} />}
     </div>
   )
 }
 
 Chat.propTypes = {
-  channel: PropTypes.object.isRequired,
+  channel: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   createPost: PropTypes.func.isRequired,
 }

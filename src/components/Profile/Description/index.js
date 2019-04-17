@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.scss'
 
 const Description = props => {
-  const { text } = props
+  const { text } = props || ''
 
   return (
     <div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import Header from './Header'
 import Options from './Options'
 import PrevNextNav from './PrevNextNav'
-import PropTypes from 'prop-types'
 import './styles.scss'
 
 const Questions = props => {
@@ -24,7 +24,7 @@ const Questions = props => {
 }
 
 Questions.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.instanceOf(Array).isRequired,
 }
 
 export default Questions

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './styles.scss'
 import ProfileImage from './ProfileImage'
 import Description from './Description'
@@ -8,7 +7,7 @@ import EditButton from './EditButton'
 import Header from './Header'
 
 const Profile = props => {
-  const { user } = props
+  const { user } = props || {}
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
   const editProfileRoute = '/muokkaa'
 
@@ -23,10 +22,6 @@ const Profile = props => {
       <Interests />
     </div>
   )
-}
-
-Profile.propTypes = {
-  user: PropTypes.object,
 }
 
 export default Profile

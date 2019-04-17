@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.scss'
 
 const Header = props => {
-  const { username } = props
+  const { username } = props || ''
 
   return (
     <span className="flex-item">

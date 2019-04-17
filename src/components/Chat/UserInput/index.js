@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './styles.scss'
+import PropTypes from 'prop-types'
 
 const UserInput = props => {
   const { createPost, channel } = props
@@ -10,7 +11,7 @@ const UserInput = props => {
     console.log(message)
     const post = {
       channel_id: channel.id,
-      message: message,
+      message,
     }
     createPost(post)
     setMessage('')
@@ -23,14 +24,24 @@ const UserInput = props => {
   return (
     <div>
       <form className="chat-input-field pos-absolute" onSubmit={handleSubmit}>
-        <label>
+        <label htmlFor="message">
           Viesti:
-          <input type="text" value={message} onChange={handleChange} />
+          <input
+            id="message"
+            type="text"
+            value={message}
+            onChange={handleChange}
+          />
         </label>
         <input type="submit" value="Submit" />
       </form>
     </div>
   )
+}
+
+UserInput.propTypes = {
+  createPost: PropTypes.func.isRequired,
+  channel: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default UserInput

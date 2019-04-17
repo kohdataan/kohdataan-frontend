@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const EditButton = props => {
-  const { route } = props
+  const { route } = props || ''
 
   return (
     <Link to={route} className="flex-item user-edit-button">

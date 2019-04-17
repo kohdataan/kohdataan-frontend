@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import './styles.scss'
+import propTypes from 'prop-types'
 
 const MessageList = props => {
   const { posts } = props
@@ -12,11 +13,17 @@ const MessageList = props => {
   return (
     <div
       className="chat-messages-box pos-absolute"
-      ref={el => (scrollList = el)}
+      ref={el => {
+        scrollList = el
+      }}
     >
       {posts.length > 0 && posts.map(post => <li key={post[1]}>{post[2]}</li>)}
     </div>
   )
+}
+
+MessageList.propTypes = {
+  posts: propTypes.instanceOf(Array).isRequired,
 }
 
 export default MessageList

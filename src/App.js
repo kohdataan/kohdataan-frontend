@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login } from 'mattermost-redux/actions/users'
 import { init } from 'mattermost-redux/actions/websocket'
+import PropTypes from 'prop-types'
 import Container from './components/Container'
 import NavBarContainer from './containers/NavBarContainer'
 import GroupsContainer from './containers/GroupsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
-import propTypes from 'prop-types'
 import './styles/defaults.scss'
 
 Client4.setUrl('http://localhost:9090')
@@ -41,6 +41,11 @@ const App = props => {
       </Container>
     </Router>
   )
+}
+
+App.propTypes = {
+  init: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
