@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Header from './Header'
+import PropTypes from 'prop-types'
+import QuestionsHeader from './QuestionsHeader'
 import Options from './Options'
 import PrevNextNav from './PrevNextNav'
-import PropTypes from 'prop-types'
 import './styles.scss'
 
 const Questions = props => {
@@ -12,7 +12,7 @@ const Questions = props => {
 
   return (
     <div className="align-center">
-      <Header />
+      <QuestionsHeader />
       <Options data={data[currentQuestion]} />
       <PrevNextNav
         current={currentQuestion}
@@ -24,7 +24,7 @@ const Questions = props => {
 }
 
 Questions.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.instanceOf(Array).isRequired,
 }
 
 export default Questions

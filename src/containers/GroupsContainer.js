@@ -1,118 +1,152 @@
-import React, {useEffect, useState} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {getMyTeams} from 'mattermost-redux/actions/teams'
-import {getPosts, createPost} from 'mattermost-redux/actions/posts'
-import {fetchMyChannelsAndMembers} from 'mattermost-redux/actions/channels'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getMyTeams as getMyTeamsAction } from 'mattermost-redux/actions/teams'
+import {
+  getPosts as getPostsAction,
+  createPost as createPostAction,
+} from 'mattermost-redux/actions/posts'
+import { fetchMyChannelsAndMembers as fetchChannelsAndMembersAction } from 'mattermost-redux/actions/channels'
+import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 
-const GroupsContainer = (props) => {
-
+const GroupsContainer = props => {
+  const {
+    posts,
+    channels,
+    teams,
+    createPost,
+    getPosts,
+    getMyTeams,
+    fetchMyChannelsAndMembers,
+  } = props
   const [currentChannel, setCurrentChannel] = useState({})
   const [currentPosts, setCurrentPosts] = useState([])
   const [showChat, setShowChat] = useState(false)
 
   // Sort posts based on created timestamp
-  const sortPosts = (posts) => {
-    const postsArr = Object.values(posts).map((post =>
-      [
-        post.create_at,
-        post.id,
-        post.message, 
-      ]
-    ))
+  const sortPosts = allPosts => {
+    const postsArr = Object.values(allPosts).map(post => [
+      post.create_at,
+      post.id,
+      post.message,
+    ])
     postsArr.sort((a, b) => a[0] - b[0])
     return postsArr
   }
 
   // Filter posts by channel id
-  const filterPostsByChannelId = (channelId) => {
-    const filteredPosts = Object.values(props.posts)
-    .filter(post => post.channel_id === channelId)
+  const filterPostsByChannelId = channelId => {
+    const filteredPosts = Object.values(posts).filter(
+      post => post.channel_id === channelId
+    )
     return filteredPosts
   }
 
   // Set current channel based on channel id
-  const selectChannel = (id) => () => {
-    const current = props.channels[id]
-    console.log('current channel', current.display_name)
+  const selectChannel = id => () => {
+    const current = channels[id]
+    // console.log('current channel', current.display_name)
     setCurrentChannel(current)
     setShowChat(true)
   }
 
   // Get user's teams at initial render
   useEffect(() => {
-    props.getMyTeams()
+    getMyTeams()
   }, [])
 
   // Get channels and members based on team id
   useEffect(() => {
-    console.log('teams effect')
-    console.log('teams:', props.teams)
-    const teamId = Object.keys(props.teams)[0]
+    // console.log('teams effect')
+    const teamId = Object.keys(teams)[0]
     if (teamId) {
-      props.fetchMyChannelsAndMembers(teamId)
+      fetchMyChannelsAndMembers(teamId)
     }
-  }, [props.teams])
+  }, [teams])
 
   // Channels & current channel dependent effect
   useEffect(() => {
-    console.log('channels effect')
+    // console.log('channels effect')
     const channel = currentChannel
-    if(channel['id']) {
-      props.getPosts(channel['id'])
+    if (channel.id) {
+      getPosts(channel.id)
     }
-  }, [props.channels, currentChannel])
+  }, [channels, currentChannel])
 
   // Sort and filter posts, posts dependent effect
   useEffect(() => {
-    console.log('posts effect')
+    // console.log('posts effect')
     const channel = currentChannel
-    if(channel['id']) {
-      const filteredPosts = filterPostsByChannelId(channel['id'])
+    if (channel.id) {
+      const filteredPosts = filterPostsByChannelId(channel.id)
       const sorted = sortPosts(filteredPosts)
       setCurrentPosts(sorted)
     }
-  }, [props.posts])
-
+  }, [posts])
 
   return (
     <div>
-      { !showChat && <GroupSuggestions /> }
-      { !showChat && <Groups channels={props.channels} selectChannel={selectChannel} /> }
-      { showChat && <Chat channel={currentChannel} posts={currentPosts} createPost={props.createPost}/> }
+      {!showChat && <GroupSuggestions />}
+      {!showChat && (
+        <Groups channels={channels} selectChannel={selectChannel} />
+      )}
+      {showChat && (
+        <Chat
+          channel={currentChannel}
+          posts={currentPosts}
+          createPost={createPost}
+        />
+      )}
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  const currentUserId = state.entities.users.currentUserId
-  const teams = state.entities.teams.teams
-  const channels = state.entities.channels.channels
+GroupsContainer.propTypes = {
+  posts: PropTypes.instanceOf(Object).isRequired,
+  channels: PropTypes.instanceOf(Object).isRequired,
+  teams: PropTypes.instanceOf(Object).isRequired,
+  getPosts: PropTypes.func.isRequired,
+  getMyTeams: PropTypes.func.isRequired,
+  createPost: PropTypes.func.isRequired,
+  fetchMyChannelsAndMembers: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state => {
+  const { currentUserId } = state.entities.users
+  const { teams } = state.entities.teams
+  const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
-  const posts = state.entities.posts.posts
+  const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannelMembers = state.entities.channels.myMembers
 
   return {
-      currentUserId: currentUserId,
-      user: user,
-      teams: teams,
-      posts: posts,
-      channels: channels,
-      members: members,
-      myMembers: myChannelMembers
+    currentUserId,
+    user,
+    teams,
+    posts,
+    channels,
+    members,
+    myMembers: myChannelMembers,
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getMyTeams,
-  getPosts,
-  createPost,
-  fetchMyChannelsAndMembers
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getMyTeams: getMyTeamsAction,
+      getPosts: getPostsAction,
+      createPost: createPostAction,
+      fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
+    },
+    dispatch
+  )
 
 // export default GroupsContainer
-export default connect(mapStateToProps, mapDispatchToProps)(GroupsContainer)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GroupsContainer)

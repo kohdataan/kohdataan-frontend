@@ -1,11 +1,16 @@
 import React from 'react'
 import './styles.scss'
 
-const ProfileImage = props => {
+const ProfileImage = () => {
   return (
-    <span className="flex-item">
-      <i className="profile-img far fa-smile" />
-    </span>
+    <div className="profile-header-item">
+      <i
+        aria-hidden="true"
+        className="profile-img far fa-smile"
+        title="Profiilikuva"
+      />
+      <span className="sr-only">Profiilikuva</span>
+    </div>
   )
 }
 

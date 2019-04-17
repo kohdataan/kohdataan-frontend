@@ -1,16 +1,23 @@
 import React from 'react'
 import './styles.scss'
+import propTypes from 'prop-types'
+import ButtonContainer from '../../../ButtonContainer'
 
 const OptionButton = props => {
   const { text, clickHandler } = props
 
   return (
     <div>
-      <button className="options-button" onClick={clickHandler}>
+      <ButtonContainer className="options-button" onClick={clickHandler}>
         {text}
-      </button>
+      </ButtonContainer>
     </div>
   )
+}
+
+OptionButton.propTypes = {
+  text: propTypes.string.isRequired,
+  clickHandler: propTypes.func.isRequired,
 }
 
 export default OptionButton

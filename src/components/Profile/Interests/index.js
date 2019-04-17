@@ -1,15 +1,22 @@
 import React from 'react'
 import './styles.scss'
+import ButtonContainer from '../../ButtonContainer'
 
-const Interests = props => {
+const Interests = () => {
+  const handleClick = () => {
+    console.log('clicked')
+  }
+
   return (
     <div>
       <h2 className="interests-header">Minua kiinnostaa</h2>
-      <div className="interests-text">
+      <p className="interests-text">
         Kerro muille, mistä asioista olet kiinnostunut.
-      </div>
-      <div className="centered-div">
-        <button className="interests-button">Kiinnostuksen kohteet</button>
+      </p>
+      <div className="interests-container">
+        <ButtonContainer className="interests-button" onClick={handleClick}>
+          Kiinnostuksen kohteet
+        </ButtonContainer>
       </div>
     </div>
   )

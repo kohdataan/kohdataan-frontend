@@ -6,18 +6,15 @@
 }
 
 .interests-button {
-    width: 258px;
+    width: 60vw;
     text-transform: uppercase;
-    border-radius: 24.5px;
-    border: solid 1px #f5a623;
-    background-color: #fff2e7;
-
+    max-width: 400px;
+    min-width: 200px;
     white-space: nowrap;
     vertical-align: middle;
-    user-select: none;
     padding: 0 0.75rem;
     font-size: 0.875rem;
-    height: 36px;
+    height: 4.5vh;
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
     color: #1d1d1d;
@@ -31,6 +28,6 @@
     margin-bottom: 40px;
 }
 
-.centered-div {
+.interests-container {
     text-align: center;
 }

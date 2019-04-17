@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.scss'
+import propTypes from 'prop-types'
 import OptionButton from './OptionButton'
 
 const Options = props => {
@@ -7,7 +8,7 @@ const Options = props => {
   const { question, options } = data
 
   const handleClick = (o, q) => () => {
-    console.log(q + ' - ' + o)
+    console.log(q, o)
   }
 
   return (
@@ -23,6 +24,10 @@ const Options = props => {
         ))}
     </div>
   )
+}
+
+Options.propTypes = {
+  data: propTypes.instanceOf(Object).isRequired,
 }
 
 export default Options

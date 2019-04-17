@@ -26,7 +26,8 @@ const Groups = props => {
 }
 
 Groups.propTypes = {
-  channels: PropTypes.object.isRequired,
+  channels: PropTypes.instanceOf(Object).isRequired,
+  selectChannel: PropTypes.func.isRequired,
 }
 
 export default Groups
