@@ -7,11 +7,3 @@ exports[`Button container it matches the snapshot 1`] = `
   type="button"
 />
 `;
-
-exports[`Feature component it matches the snapshot 1`] = `
-<button
-  className="button-container undefined"
-  tabIndex="0"
-  type="button"
-/>
-`;
