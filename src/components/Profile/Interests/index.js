@@ -3,6 +3,10 @@ import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
 const Interests = () => {
+  const handleClick = () => {
+    console.log('clicked')
+  }
+
   return (
     <div>
       <h2 className="interests-header">Minua kiinnostaa</h2>
@@ -10,7 +14,7 @@ const Interests = () => {
         Kerro muille, mistä asioista olet kiinnostunut.
       </div>
       <div className="centered-div">
-        <ButtonContainer className="interests-button">
+        <ButtonContainer className="interests-button" onClick={handleClick}>
           Kiinnostuksen kohteet
         </ButtonContainer>
       </div>
