@@ -5,7 +5,7 @@ const Header = props => {
   const { username } = props || ''
 
   return (
-    <span className="flex-item">
+    <span className="profile-header-item">
       <h1>{username}</h1>
       <div>28 vuotta</div>
     </span>

@@ -1,4 +1,4 @@
-.flex-row {
+.profile-container {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -9,7 +9,7 @@
     margin: 0 auto;
 }
 
-.flex-item {
+.profile-header-item {
     width: auto;
     flex-grow: 1;
     flex-basis: 0;

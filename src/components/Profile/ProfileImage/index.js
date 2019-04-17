@@ -3,7 +3,7 @@ import './styles.scss'
 
 const ProfileImage = () => {
   return (
-    <div className="flex-item">
+    <div className="profile-header-item">
       <i
         aria-hidden="true"
         className="profile-img far fa-smile"

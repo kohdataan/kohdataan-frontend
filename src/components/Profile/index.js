@@ -13,7 +13,7 @@ const Profile = props => {
 
   return (
     <div>
-      <div className="flex-row">
+      <div className="profile-container">
         <ProfileImage />
         {user && <ProfileHeader username={user.username} />}
         <EditButton route={editProfileRoute} />

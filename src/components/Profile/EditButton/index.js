@@ -6,7 +6,7 @@ const EditButton = props => {
   const { route } = props || ''
 
   return (
-    <Link to={route} className="flex-item user-edit-button">
+    <Link to={route} className="profile-header-item user-edit-button">
       <i
         aria-hidden="true"
         className="fas fa-user-edit"

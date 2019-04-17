@@ -10,10 +10,10 @@ const Interests = () => {
   return (
     <div>
       <h2 className="interests-header">Minua kiinnostaa</h2>
-      <div className="interests-text">
+      <p className="interests-text">
         Kerro muille, mistä asioista olet kiinnostunut.
-      </div>
-      <div className="centered-div">
+      </p>
+      <div className="interests-container">
         <ButtonContainer className="interests-button" onClick={handleClick}>
           Kiinnostuksen kohteet
         </ButtonContainer>
