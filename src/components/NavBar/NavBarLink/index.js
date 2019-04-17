@@ -8,7 +8,7 @@ const NavBarLink = props => {
   return (
     <Link to={route} className="nav-link">
       <div>
-        <i className={icon} />
+        <i aria-hidden="true" className={icon} title={title} />
       </div>
       <span className="label">{title}</span>
     </Link>

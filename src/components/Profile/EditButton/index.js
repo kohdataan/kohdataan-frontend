@@ -7,7 +7,12 @@ const EditButton = props => {
 
   return (
     <Link to={route} className="flex-item user-edit-button">
-      <i className="fas fa-user-edit" />
+      <i
+        aria-hidden="true"
+        className="fas fa-user-edit"
+        title="Muokkaa profiilia"
+      />
+      <span className="sr-only">Muokkaa profiilia</span>
     </Link>
   )
 }
