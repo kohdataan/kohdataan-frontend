@@ -4,7 +4,7 @@ import ProfileImage from './ProfileImage'
 import Description from './Description'
 import Interests from './Interests'
 import EditButton from './EditButton'
-import Header from './Header'
+import ProfileHeader from './ProfileHeader'
 
 const Profile = props => {
   const { user } = props || {}
@@ -15,7 +15,7 @@ const Profile = props => {
     <div>
       <div className="flex-row">
         <ProfileImage />
-        {user && <Header username={user.username} />}
+        {user && <ProfileHeader username={user.username} />}
         <EditButton route={editProfileRoute} />
       </div>
       <Description text={descriptionText} />

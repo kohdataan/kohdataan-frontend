@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MessageList from './MessageList'
-import Header from './Header'
+import ChatHeader from './ChatHeader'
 import UserInput from './UserInput'
 import './styles.scss'
 
@@ -10,7 +10,7 @@ const Chat = props => {
 
   return (
     <div>
-      <Header channel={channel} />
+      <ChatHeader channel={channel} />
       <MessageList posts={posts} />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
     </div>
