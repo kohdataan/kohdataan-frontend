@@ -32,7 +32,7 @@ Teknisenä kumppanina ja yhteiskehittämisen koordinaattorina hankkeessa toimii 
 
 ## Dokumentaatio ja arkkitehtuuri
 
-![Kohdataan arkkitehtuuri](documentation/kohdataan-architecture.png?raw=true "Kohdataan arkkitehtuuri")
+![Kohdataan arkkitehtuuri](https://github.com/kohdataan/kohdataan-backend/blob/master/documentation/kohdataan-architecture.png?raw=true "Kohdataan arkkitehtuuri")
 
 ## Ulkoasu
 
