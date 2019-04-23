@@ -28,6 +28,15 @@ Teknisenä kumppanina ja yhteiskehittämisen koordinaattorina hankkeessa toimii 
 
 ### Frontend
 
+Saat frontendin kehitysympäristön pystyyn ajamalla seuraavat komennot:
+
+````bash
+git clone git@github.com:kohdataan/kohdataan-frontend.git
+cd kohdataan-frontend
+npm install
+npm start
+````
+
 ### Tunnukset testaamiseen
 
 ## Dokumentaatio ja arkkitehtuuri
@@ -63,6 +72,37 @@ Projektissa on käytössä [ESLint](https://github.com/eslint/eslint) ja [Airbnb
 Noudata containereiden ja componentien hierarkiassa [tätä ohjetta](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
 Projektissa on käytössä SASS, jokaiselle komponentille on oma .scss-tiedostonsa komponentin kansiossa.
+
+### Mattermost-redux
+
+Projektissa hyödynnetään [Mattermostin](https://mattermost.com/) backendia chat-toiminnallisuuksien toteuttamisessa. Lisäksi Mattermost-integraatioiden ja sovellusten hyödynnettäväksi on vapaassa käytössä myös reduxiin pohjautuva [mattermost-redux](https://github.com/mattermost/mattermost-redux), joka tarjoaa valmiina suurimman osan tarvittavista actioneista chattiin liittyvän datan käsittelyä varten. Jos reduxin periaatteet eivät ole jo valmiiksi tuttuja, kannattaa ensin käydä tutustumassa niihin. 
+
+Mattermost-redux on lisätty valmiiksi tähän projektiin. Kun toteutat mitä tahansa keskusteluihin ja etenkin keskusteludataan liittyviä toiminnallisuuksia, hyvä lähtökohta on aluksi tarkistaa mattermost-reduxin olemassa olevat actionit, sillä usein kaikki tarvittava löytyy valmiina, eikä tällöin ole syytä luoda omia actioneita näiden lisäksi. Kaikki valmiina olevat actionit löytyvät mattermost-reduxin [lähdekoodista](https://github.com/mattermost/mattermost-redux/tree/master/src/actions). Valitettavasti näitä ei ole dokumentoitu lähdekoodin lisäksi muualle. Joitakin hyödyllisiä vinkkejä voi löytyä myös tutkimalla [Mattermost API-kuvausta](https://api.mattermost.com/). Näitä rajapintoja ei tosin suoraan ole syytä hyödyntää, sillä vastaavat toiminnot löytyvät myös suoraan actioneina. Käytännössä ainakin `users.js`, `groups.js`, `posts.js`, `websockets.js` ja `channels.js` tiedostoista löytyy tämän projektin kannalta hyödyllisiä actioneita, joita voit suoraan ottaa käyttöön:
+
+````
+import { login } from 'mattermost-redux/actions/users'
+````
+
+Tämän jälkeen actionit voidaan yhdistää komponentin propseihin tuttuun tyyliin, käyttämällä connectia:
+
+````
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      login,
+    },
+    dispatch
+  )
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App)
+````
+
+Kannattaa ehkä lisätä selaimeen esimerkiksi React Developer Tools, jonka avulla storen tilaa on helpompi pitää silmällä kehitysvaiheessa. Mattermost-reduxissa on actioneiden lisäksi valmiina kasapäin selectoreja, jotka kannattaa käydä läpi, ja joita kannattanee hyödyntää mahdollisuuksien mukaan ennen omien toteuttamista. Selectorit löytyvät mattermost-reduxin kansiosta [selectors](https://github.com/mattermost/mattermost-redux/tree/master/src/selectors) ja reducerit puolestaan kansiosta [reducers](https://github.com/mattermost/mattermost-redux/tree/master/src/reducers). Lisäksi storen hahmottamisessa auttaa [initial_state.js](https://github.com/mattermost/mattermost-redux/blob/master/src/store/initial_state.js).
+
+Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan-palvelua, joten aivan kaikkea ei löydy valmiina mattermost-reduxista. Esimerkiksi käyttäjäprofiiliin ja päivän kysymyksiin liittyvä toiminnallisuus on osittain tai kokonaan mattermostin ulkopuolella, joten näihin liittyvän tilan käsittelyyn on tarkoituksenmukaista luoda omat actionit tarvittaessa.
 
 ### Testaaminen
 
