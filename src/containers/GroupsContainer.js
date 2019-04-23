@@ -6,6 +6,10 @@ import {
   getPosts as getPostsAction,
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
+import {
+  getProfiles as getProfilesAction,
+  getProfilesInChannel as getProfilesInChannelAction,
+} from 'mattermost-redux/actions/users'
 import { fetchMyChannelsAndMembers as fetchChannelsAndMembersAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
@@ -16,10 +20,12 @@ const GroupsContainer = props => {
   const {
     posts,
     channels,
+    profiles,
     teams,
     createPost,
     getPosts,
     getMyTeams,
+    getProfiles,
     fetchMyChannelsAndMembers,
   } = props
   const [currentChannel, setCurrentChannel] = useState({})
@@ -32,6 +38,7 @@ const GroupsContainer = props => {
       post.create_at,
       post.id,
       post.message,
+      post.user_id,
     ])
     postsArr.sort((a, b) => a[0] - b[0])
     return postsArr
@@ -53,9 +60,10 @@ const GroupsContainer = props => {
     setShowChat(true)
   }
 
-  // Get user's teams at initial render
+  // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getMyTeams()
+    getProfiles()
   }, [])
 
   // Get channels and members based on team id
@@ -97,6 +105,7 @@ const GroupsContainer = props => {
         <Chat
           channel={currentChannel}
           posts={currentPosts}
+          profiles={profiles}
           createPost={createPost}
         />
       )}
@@ -108,9 +117,11 @@ GroupsContainer.propTypes = {
   posts: PropTypes.instanceOf(Object).isRequired,
   channels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   getMyTeams: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
 }
 
@@ -119,6 +130,7 @@ const mapStateToProps = state => {
   const { teams } = state.entities.teams
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
+  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannelMembers = state.entities.channels.myMembers
@@ -126,6 +138,7 @@ const mapStateToProps = state => {
   return {
     currentUserId,
     user,
+    profiles,
     teams,
     posts,
     channels,
@@ -141,6 +154,8 @@ const mapDispatchToProps = dispatch =>
       getPosts: getPostsAction,
       createPost: createPostAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
+      getProfiles: getProfilesAction,
+      getProfilesInChannel: getProfilesInChannelAction,
     },
     dispatch
   )

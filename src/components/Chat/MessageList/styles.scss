@@ -1,13 +1,31 @@
-.chat-message-list {
-    align-items: left;
+.chat-message-list-container {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: top;
-    top: 15em;
+    justify-content: flex-start;
+    top: 5em;
     left: 0;
     position: absolute;
-    width: 100%;
-    height: 50%;
+    width: 95%;
+    height: 70%;
     overflow-y: auto;
     margin: 0 auto;
+    padding-left: 30px;
+}
+
+.chat-message-content {
+    display: flex;
+    word-wrap: break-word;
+    flex-flow: column nowrap;
+    padding: 17px 20px;
+    border-radius: 20px 20px 20px 5px;
+    border: 1px solid #3a3a3a;
+    background-color: #ffe9d9;
+    width: max-content;
+    max-width: 60vw;
+    margin-bottom: 10px;
+}
+
+.chat-message-content-header {
+    margin-block-end: 0.3em;
+    font-weight: bold;
 }

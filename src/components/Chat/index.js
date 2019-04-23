@@ -6,12 +6,12 @@ import UserInput from './UserInput'
 import './styles.scss'
 
 const Chat = props => {
-  const { channel, posts, createPost } = props
+  const { channel, posts, profiles, createPost } = props
 
   return (
     <div>
       <ChatHeader channel={channel} />
-      <MessageList posts={posts} />
+      <MessageList posts={posts} profiles={profiles} />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
     </div>
   )
@@ -20,6 +20,7 @@ const Chat = props => {
 Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   createPost: PropTypes.func.isRequired,
 }
 
