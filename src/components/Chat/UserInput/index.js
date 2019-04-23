@@ -32,6 +32,7 @@ const UserInput = props => {
             type="text"
             value={message}
             onChange={handleChange}
+            placeholder="Aa"
           />
         </label>
         <input type="submit" value=">" />

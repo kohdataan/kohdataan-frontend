@@ -5,9 +5,12 @@ import propTypes from 'prop-types'
 const Message = props => {
   const { sender, text } = props
   return (
-    <div className="chat-message-content">
-      <span className="chat-message-content-header">{sender}</span>
-      <span>{text}</span>
+    <div className="chat-message-wrapper">
+      <span className="chat-message-sender-icon">{sender[0]}</span>
+      <div className="chat-message-content">
+        <span className="chat-message-content-header">{sender}</span>
+        <span>{text}</span>
+      </div>
     </div>
   )
 }
