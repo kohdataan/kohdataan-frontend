@@ -60,6 +60,11 @@ const GroupsContainer = props => {
     setShowChat(true)
   }
 
+  // Handler for hiding chat window
+  const handleHideChat = () => {
+    setShowChat(false)
+  }
+
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getMyTeams()
@@ -107,6 +112,7 @@ const GroupsContainer = props => {
           posts={currentPosts}
           profiles={profiles}
           createPost={createPost}
+          hideChat={handleHideChat}
         />
       )}
     </div>

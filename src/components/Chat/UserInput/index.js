@@ -22,18 +22,19 @@ const UserInput = props => {
   }
 
   return (
-    <div>
-      <form className="chat-user-input" onSubmit={handleSubmit}>
+    <div className="chat-user-input-wrapper">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="message">
           Viesti:
           <input
+            className="chat-user-input-text-field"
             id="message"
             type="text"
             value={message}
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value=">" />
       </form>
     </div>
   )
