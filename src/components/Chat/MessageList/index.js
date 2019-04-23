@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import Message from './Message'
 
 const MessageList = props => {
   const { posts, profiles } = props
@@ -26,16 +27,11 @@ const MessageList = props => {
     >
       {posts.length > 0 &&
         posts.map(post => (
-          <div>
-            <div className="chat-message-content" key={post[1]}>
-              {post[3] && (
-                <span className="chat-message-content-header">
-                  {getUserNamebyId(post[3])}
-                </span>
-              )}
-              <span>{post[2]}</span>
-            </div>
-          </div>
+          <Message
+            key={post[1]}
+            sender={getUserNamebyId(post[3])}
+            text={post[2]}
+          />
         ))}
     </div>
   )
