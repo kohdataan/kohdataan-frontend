@@ -7,7 +7,7 @@ const Groups = props => {
   const { channels, selectChannel } = props
 
   return (
-    <div>
+    <div className="groups-wrapper">
       <div className="groups-header">
         <h1>Omat ryhmät</h1>
       </div>

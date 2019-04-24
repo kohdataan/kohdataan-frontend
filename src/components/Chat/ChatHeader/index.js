@@ -14,9 +14,9 @@ const Header = props => {
       >
         {'< Takaisin'}
       </ButtonContainer>
-      <h1 className="chat-header-channel-name">
-        {channel && channel.display_name}
-      </h1>
+      {channel && (
+        <h1 className="chat-header-channel-name">{channel.display_name}</h1>
+      )}
       <span>Group image</span>
     </div>
   )

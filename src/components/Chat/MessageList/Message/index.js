@@ -16,13 +16,16 @@ const Message = props => {
   return (
     <div className={messageWrapperClassList.join(' ')}>
       {currentUserId !== senderId && (
-        <span className="chat-message-sender-icon">{sender[0]}</span>
+        <div className="chat-message-sender-icon">
+          <i aria-hidden="true" title={sender[0]} />
+          <span className="label">{sender[0]}</span>
+        </div>
       )}
       <div className={messageContentClassList.join(' ')}>
         {currentUserId !== senderId && (
-          <span className="chat-message-content-header">{sender}</span>
+          <h3 className="chat-message-content-header">{sender}</h3>
         )}
-        <span>{text}</span>
+        <p className="chat-message-content-text">{text}</p>
       </div>
     </div>
   )

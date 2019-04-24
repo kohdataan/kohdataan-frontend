@@ -32,7 +32,7 @@ const UserInput = props => {
             type="text"
             value={message}
             onChange={handleChange}
-            placeholder="Aa"
+            placeholder="Kirjoita viesti"
           />
         </label>
         <input type="submit" value=">" />

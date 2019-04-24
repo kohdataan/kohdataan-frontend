@@ -35,6 +35,8 @@
 
 .chat-message-content-header {
     margin-block-end: 0.3em;
+    margin-block-start: 0em;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -43,4 +45,9 @@
     align-self: flex-end;
     padding-right: 10px;
     text-transform: uppercase;
+}
+
+.chat-message-content-text {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
 }

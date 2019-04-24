@@ -12,8 +12,8 @@ const MessageList = props => {
   })
 
   const getUserNamebyId = id => {
-    const user = Object.values(profiles).filter(profile => profile.id === id)
-    return user.length ? user[0].username : ''
+    const user = Object.values(profiles).find(profile => profile.id === id)
+    return user ? user.username : ''
   }
 
   return (
