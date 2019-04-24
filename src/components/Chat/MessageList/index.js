@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, profiles } = props
+  const { posts, profiles, currentUserId } = props
   let scrollList = React.createRef()
 
   useEffect(() => {
@@ -12,10 +12,8 @@ const MessageList = props => {
   })
 
   const getUserNamebyId = id => {
-    const username = Object.values(profiles).filter(
-      profile => profile.id === id
-    )
-    return username.length ? username[0].username : ''
+    const user = Object.values(profiles).filter(profile => profile.id === id)
+    return user.length ? user[0].username : ''
   }
 
   return (
@@ -31,6 +29,8 @@ const MessageList = props => {
             key={post[1]}
             sender={getUserNamebyId(post[3])}
             text={post[2]}
+            senderId={post[3]}
+            currentUserId={currentUserId}
           />
         ))}
     </div>
@@ -40,6 +40,7 @@ const MessageList = props => {
 MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  currentUserId: propTypes.string.isRequired,
 }
 
 export default MessageList

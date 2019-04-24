@@ -1,7 +1,11 @@
 .chat-message-wrapper {
     display: flex;
+    justify-content: flex-start;
     flex-flow: row nowrap;
-    align-content: flex-start;
+}
+
+.wrapper-sent {
+    justify-content: flex-end;
 }
 
 .chat-message-content {
@@ -9,12 +13,24 @@
     word-wrap: break-word;
     flex-flow: column nowrap;
     padding: 17px 20px;
-    border-radius: 20px 20px 20px 5px;
+    border-radius: 20px 20px 20px 0px;
     border: 1px solid #3a3a3a;
     background-color: #ffe9d9;
     width: max-content;
     max-width: 60vw;
     margin-top: 10px;
+}
+
+.content-sent {
+    border-radius: 20px 20px 0px 20px;
+    margin-right: 20px;
+    background-color: #f59023;
+    border: none;
+}
+
+.content-no-sender {
+    background-color: white;
+    border: none;
 }
 
 .chat-message-content-header {
