@@ -7,14 +7,14 @@ import { login } from 'mattermost-redux/actions/users'
 import { init } from 'mattermost-redux/actions/websocket'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
-import NavBarContainer from './containers/NavBarContainer'
+import BottomNavigationContainer from './containers/BottomNavigationContainer'
 import GroupsContainer from './containers/GroupsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import './styles/defaults.scss'
 
-Client4.setUrl('http://localhost:9090')
+Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
 
 const App = props => {
   // login effect
@@ -27,7 +27,7 @@ const App = props => {
 
   // websocket effect
   useEffect(() => {
-    props.init('web', 'ws://localhost:9090')
+    props.init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
   }, [])
 
   return (
@@ -37,7 +37,7 @@ const App = props => {
         <Route path="/kysymykset" component={QuestionsContainer} />
         <Route path="/ryhmat" component={GroupsContainer} />
         <Route path="/muokkaa" component={EditProfileContainer} />
-        <NavBarContainer />
+        <BottomNavigationContainer />
       </Container>
     </Router>
   )
