@@ -9,7 +9,6 @@ import { createTransform, persistStore } from 'redux-persist'
 import { General, RequestStatus } from 'mattermost-redux/constants'
 import configureServiceStore from 'mattermost-redux/store'
 import reduxInitialState from 'mattermost-redux/store/initial_state'
-
 import storageRehydrate from './storage/storageAction'
 import { clearUserCookie } from './user/userAction'
 import getAppReducer, { appReducer } from './rootReducer'
@@ -17,7 +16,6 @@ import transformSet from './utils'
 import detect from '../utils/network'
 import * as ActionTypes from '../contants/actionTypes'
 import getBasePath from './general/generalSelectors'
-import { history } from './history'
 
 const usersSetTransform = [
   'profilesInChannel',
@@ -224,9 +222,9 @@ export default function configureStore(initialState) {
 
   return configureServiceStore(
     {},
-    appReducer(history),
+    appReducer(),
     offlineOptions,
-    getAppReducer(history),
+    getAppReducer(),
     {
       enableBuffer: false,
     }

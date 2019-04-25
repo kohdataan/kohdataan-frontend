@@ -13,6 +13,7 @@ import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import './styles/defaults.scss'
+import ChatContainer from './containers/ChatContainer'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
 
@@ -37,6 +38,7 @@ const App = props => {
         <Route path="/kysymykset" component={QuestionsContainer} />
         <Route path="/ryhmat" component={GroupsContainer} />
         <Route path="/muokkaa" component={EditProfileContainer} />
+        <Route path="/chat/:id" component={ChatContainer} />
         <BottomNavigationContainer />
       </Container>
     </Router>

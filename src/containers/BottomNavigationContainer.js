@@ -1,9 +1,18 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import BottomNavigation from '../components/BottomNavigation'
 import BottomNavigationLink from '../components/BottomNavigationLink'
 
-const BottomNavigationContainer = () => {
+const BottomNavigationContainer = props => {
+  const {
+    location: { pathname },
+  } = props
+
+  if (pathname.split('/')[1] === 'chat') {
+    return <div />
+  }
+
   return (
     <BottomNavigation>
       <BottomNavigationLink
@@ -25,11 +34,8 @@ const BottomNavigationContainer = () => {
   )
 }
 
-const mapStateToProps = state => {
-  const location = state.router && state.router.location
-  return {
-    location,
-  }
+BottomNavigationContainer.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
-export default connect(mapStateToProps)(BottomNavigationContainer)
+export default withRouter(BottomNavigationContainer)
