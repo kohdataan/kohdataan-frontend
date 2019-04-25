@@ -8,7 +8,6 @@ const UserInput = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(message)
     const post = {
       channel_id: channel.id,
       message,

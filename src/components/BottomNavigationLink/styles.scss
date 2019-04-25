@@ -1,0 +1,39 @@
+.nav-link {
+  width: auto;
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+  text-decoration: none;
+  line-height: normal;
+  display: block;
+  white-space: nowrap;
+  user-select: none;
+  padding: 0.25rem;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  & p {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  & i {
+    font-size: 22px;
+  }
+}
+
+.nav-link-active {
+  & i {
+    transition-property: font-size;
+    transition-duration: 0.1s;
+    font-size: 24px;
+    color: #f59023;
+  }
+  & p {
+    transition-property: font-size;
+    transition-duration: 0.1s;
+    font-size: 14px;
+  }
+}

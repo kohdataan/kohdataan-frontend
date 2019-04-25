@@ -1,22 +1,20 @@
 import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import ButtonContainer from '../../ButtonContainer'
+import { Link } from 'react-router-dom'
 
 const Group = props => {
-  const { channel, clickHandler } = props
+  const { channel } = props
 
   return (
-    <ButtonContainer className="group-box" onClick={clickHandler(channel.id)}>
+    <Link className="group-box" to={`/chat/${channel.id}`}>
       <h2>{channel.display_name}</h2>
-      <h4>test</h4>
-    </ButtonContainer>
+    </Link>
   )
 }
 
 Group.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
-  clickHandler: propTypes.func.isRequired,
 }
 
 export default Group

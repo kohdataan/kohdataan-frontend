@@ -1,30 +1,27 @@
 import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import ButtonContainer from '../../ButtonContainer'
+import { Link } from 'react-router-dom'
 
 const Header = props => {
-  const { channel, hideChat } = props
+  const { channel } = props
 
   return (
     <div className="chat-header">
-      <ButtonContainer
-        className="chat-header-nav-back-button"
-        onClick={hideChat}
-      >
+      <Link className="chat-header-nav-back-button" to="/ryhmat">
         {'< Takaisin'}
-      </ButtonContainer>
-      {channel && (
-        <h1 className="chat-header-channel-name">{channel.display_name}</h1>
-      )}
+      </Link>
+      <h1 className="chat-header-channel-name">{channel.display_name}</h1>
       <span>Group image</span>
     </div>
   )
 }
 
+Header.defaultProps = {
+  channel: {},
+}
 Header.propTypes = {
-  channel: propTypes.instanceOf(Object).isRequired,
-  hideChat: propTypes.func.isRequired,
+  channel: propTypes.instanceOf(Object),
 }
 
 export default Header

@@ -1,24 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './styles.scss'
 
-const NavBarLink = props => {
+const BottomNavigationLink = props => {
   const { title, route, icon } = props
   return (
-    <Link to={route} className="nav-link">
+    <NavLink to={route} className="nav-link" activeClassName="nav-link-active">
       <div>
         <i aria-hidden="true" className={icon} title={title} />
       </div>
-      <span className="label">{title}</span>
-    </Link>
+      <p className="label">{title}</p>
+    </NavLink>
   )
 }
 
-NavBarLink.propTypes = {
+BottomNavigationLink.propTypes = {
   title: PropTypes.string.isRequired,
   route: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
 }
 
-export default NavBarLink
+export default BottomNavigationLink

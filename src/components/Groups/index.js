@@ -4,7 +4,7 @@ import Group from './Group'
 import './styles.scss'
 
 const Groups = props => {
-  const { channels, selectChannel } = props
+  const { channels } = props
 
   return (
     <div className="groups-wrapper">
@@ -12,14 +12,9 @@ const Groups = props => {
         <h1>Omat ryhmät</h1>
       </div>
       <div className="groups-boxes">
-        {Object.keys(channels).length > 0 &&
-          Object.values(channels).map(channel => (
-            <Group
-              key={channel.id}
-              channel={channel}
-              clickHandler={selectChannel}
-            />
-          ))}
+        {Object.values(channels).map(channel => (
+          <Group key={channel.id} channel={channel} />
+        ))}
       </div>
     </div>
   )
@@ -27,7 +22,6 @@ const Groups = props => {
 
 Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
-  selectChannel: PropTypes.func.isRequired,
 }
 
 export default Groups
