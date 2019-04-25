@@ -11,7 +11,7 @@ const Questions = props => {
   const { data } = props
 
   return (
-    <div className="align-center">
+    <div className="questions-wrapper">
       <QuestionsHeader />
       <Options data={data[currentQuestion]} />
       <PrevNextNav

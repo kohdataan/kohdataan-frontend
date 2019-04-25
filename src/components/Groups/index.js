@@ -8,10 +8,10 @@ const Groups = props => {
 
   return (
     <div className="groups-wrapper">
-      <div>
+      <div className="groups-header">
         <h1>Omat ryhmät</h1>
       </div>
-      <div>
+      <div className="groups-boxes">
         {Object.keys(channels).length > 0 &&
           Object.values(channels).map(channel => (
             <Group
