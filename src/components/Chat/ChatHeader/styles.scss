@@ -1,4 +1,24 @@
 .chat-header {
-    top: 12em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
     position: absolute;
+    z-index: 3000;
+    border-bottom: 1px solid #f59023;
+}
+
+.chat-header-nav-back-button {
+    background: none;
+    border: none;
+    font-weight: normal;
+    font-size: 15px;
+    color: #3a3a3a;
+}
+
+.chat-header-channel-name {
+    padding: 0 1.5rem;
 }

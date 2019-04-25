@@ -6,12 +6,23 @@ import UserInput from './UserInput'
 import './styles.scss'
 
 const Chat = props => {
-  const { channel, posts, createPost } = props
+  const {
+    channel,
+    posts,
+    profiles,
+    createPost,
+    hideChat,
+    currentUserId,
+  } = props
 
   return (
-    <div>
-      <ChatHeader channel={channel} />
-      <MessageList posts={posts} />
+    <div className="chat-wrapper">
+      <ChatHeader channel={channel} hideChat={hideChat} />
+      <MessageList
+        posts={posts}
+        profiles={profiles}
+        currentUserId={currentUserId}
+      />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
     </div>
   )
@@ -20,7 +31,10 @@ const Chat = props => {
 Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   createPost: PropTypes.func.isRequired,
+  hideChat: PropTypes.func.isRequired,
+  currentUserId: PropTypes.string.isRequired,
 }
 
 export default Chat

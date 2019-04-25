@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getMyTeams as getMyTeamsAction } from 'mattermost-redux/actions/teams'
 import {
   getPosts as getPostsAction,
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
+import {
+  loadMe as loadMeAction,
+  getProfiles as getProfilesAction,
+  getProfilesInChannel as getProfilesInChannelAction,
+} from 'mattermost-redux/actions/users'
 import { fetchMyChannelsAndMembers as fetchChannelsAndMembersAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
@@ -16,11 +20,14 @@ const GroupsContainer = props => {
   const {
     posts,
     channels,
+    profiles,
     teams,
     createPost,
     getPosts,
-    getMyTeams,
+    loadMe,
+    getProfiles,
     fetchMyChannelsAndMembers,
+    currentUserId,
   } = props
   const [currentChannel, setCurrentChannel] = useState({})
   const [currentPosts, setCurrentPosts] = useState([])
@@ -32,6 +39,7 @@ const GroupsContainer = props => {
       post.create_at,
       post.id,
       post.message,
+      post.user_id,
     ])
     postsArr.sort((a, b) => a[0] - b[0])
     return postsArr
@@ -53,9 +61,15 @@ const GroupsContainer = props => {
     setShowChat(true)
   }
 
-  // Get user's teams at initial render
+  // Handler for hiding chat window
+  const handleHideChat = () => {
+    setShowChat(false)
+  }
+
+  // Get user profiles and current user's teams at initial render
   useEffect(() => {
-    getMyTeams()
+    getProfiles()
+    loadMe()
   }, [])
 
   // Get channels and members based on team id
@@ -97,7 +111,10 @@ const GroupsContainer = props => {
         <Chat
           channel={currentChannel}
           posts={currentPosts}
+          profiles={profiles}
           createPost={createPost}
+          hideChat={handleHideChat}
+          currentUserId={currentUserId}
         />
       )}
     </div>
@@ -108,9 +125,12 @@ GroupsContainer.propTypes = {
   posts: PropTypes.instanceOf(Object).isRequired,
   channels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
+  loadMe: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
-  getMyTeams: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
+  currentUserId: PropTypes.string.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
 }
 
@@ -119,6 +139,7 @@ const mapStateToProps = state => {
   const { teams } = state.entities.teams
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
+  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannelMembers = state.entities.channels.myMembers
@@ -126,6 +147,7 @@ const mapStateToProps = state => {
   return {
     currentUserId,
     user,
+    profiles,
     teams,
     posts,
     channels,
@@ -137,10 +159,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getMyTeams: getMyTeamsAction,
       getPosts: getPostsAction,
       createPost: createPostAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
+      getProfiles: getProfilesAction,
+      getProfilesInChannel: getProfilesInChannelAction,
+      loadMe: loadMeAction,
     },
     dispatch
   )

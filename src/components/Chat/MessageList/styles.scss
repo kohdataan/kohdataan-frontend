@@ -1,13 +1,12 @@
-.chat-message-list {
-    align-items: left;
+.chat-message-list-container {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: top;
-    top: 15em;
+    top: 10%;
     left: 0;
     position: absolute;
     width: 100%;
-    height: 50%;
+    height: 80%;
     overflow-y: auto;
     margin: 0 auto;
+    padding-left: 10px;
 }
