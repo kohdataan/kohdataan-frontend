@@ -13,7 +13,7 @@ const Chat = props => {
 
   const getIconColor = userId => {
     const index = members.findIndex(member => member.user_id === userId)
-    return iconColors[index]
+    return iconColors[index] || ''
   }
 
   const toggleSider = () =>
