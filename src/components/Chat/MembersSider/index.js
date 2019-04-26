@@ -5,8 +5,10 @@ import './styles.scss'
 const MembersSider = props => {
   const { members, getUserNamebyId, getIconColor, currentUserId } = props
   const getIconClassNameList = userId => {
-    const classNameList = ['label', 'chat-header-members-icon']
-    classNameList.push(`sider-${getIconColor(userId)}-icon`)
+    const classNameList = [
+      'chat-header-members-icon',
+      `sider-${getIconColor(userId)}-icon`,
+    ]
     return classNameList.join(' ')
   }
 
