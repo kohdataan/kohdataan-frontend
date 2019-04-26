@@ -10,7 +10,10 @@ import {
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
 } from 'mattermost-redux/actions/users'
-import { fetchMyChannelsAndMembers as fetchChannelsAndMembersAction } from 'mattermost-redux/actions/channels'
+import {
+  getChannelMembers as getChannelMembersAction,
+  fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
+} from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
 
@@ -27,17 +30,20 @@ const ChatContainer = props => {
     fetchMyChannelsAndMembers,
     currentChannelId,
     getPosts,
+    getChannelMembers,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
-
+  const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
+
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
     loadMe()
   }, [])
 
+  // Get team related channels and members
   useEffect(() => {
     const teamId = Object.keys(teams)[0]
     if (teamId) {
@@ -45,11 +51,10 @@ const ChatContainer = props => {
     }
   }, [teams])
 
+  // Get posts for current channel
   useEffect(() => {
-    // console.log('channels effect')
-    const channel = currentChannel
-    if (channel && channel.id) {
-      getPosts(channel.id)
+    if (currentChannelId) {
+      getPosts(currentChannelId)
     }
   }, [teams])
 
@@ -61,22 +66,31 @@ const ChatContainer = props => {
     return filteredPosts
   }
 
+  // Get current channel members
+  useEffect(() => {
+    if (currentChannelId) {
+      getChannelMembers(currentChannelId).then(data =>
+        setCurrentMembers(data.data)
+      )
+    }
+  }, [channels])
+
   // Sort posts based on created timestamp
   const sortPosts = allPosts => {
     const postsArr = Object.values(allPosts).map(post => [
       post.create_at,
       post.id,
       post.message,
-      post.user_id,
+      post.user_id || '',
     ])
     postsArr.sort((a, b) => a[0] - b[0])
     return postsArr
   }
 
+  // Filter and sort posts after fetching
   useEffect(() => {
-    const channel = currentChannel
-    if (channel && channel.id) {
-      const filteredPosts = filterPostsByChannelId(channel.id)
+    if (currentChannelId) {
+      const filteredPosts = filterPostsByChannelId(currentChannelId)
       const sorted = sortPosts(filteredPosts)
       setCurrentPosts(sorted)
     }
@@ -91,6 +105,7 @@ const ChatContainer = props => {
           profiles={profiles}
           createPost={createPost}
           currentUserId={currentUserId}
+          members={currentMembers}
         />
       )}
     </>
@@ -107,6 +122,7 @@ ChatContainer.propTypes = {
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
+  getChannelMembers: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentChannelId: PropTypes.string.isRequired,
 }
@@ -118,8 +134,6 @@ const mapStateToProps = (state, ownProps) => {
   const user = state.entities.users.profiles[currentUserId]
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
-  const members = state.entities.channels.membersInChannel
-  const myChannelMembers = state.entities.channels.myMembers
   const currentChannelId = ownProps.match.params.id
 
   return {
@@ -130,8 +144,6 @@ const mapStateToProps = (state, ownProps) => {
     teams,
     posts,
     channels,
-    members,
-    myMembers: myChannelMembers,
   }
 }
 
@@ -141,6 +153,7 @@ const mapDispatchToProps = dispatch =>
       getPosts: getPostsAction,
       createPost: createPostAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
+      getChannelMembers: getChannelMembersAction,
       getProfiles: getProfilesAction,
       getProfilesInChannel: getProfilesInChannelAction,
       loadMe: loadMeAction,

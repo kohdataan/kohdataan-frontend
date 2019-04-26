@@ -1,0 +1,16 @@
+.chat-header-members-sider {
+    z-index: 1000;
+    height: 90%;
+    width: 60%;
+    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.6);
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    padding: 60px 28px;
+}
+
+.chat-header-members-sider-title {
+    text-transform: uppercase;
+    text-align: left;
+}

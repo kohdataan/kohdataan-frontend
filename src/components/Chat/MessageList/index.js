@@ -4,17 +4,12 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, profiles, currentUserId } = props
+  const { posts, currentUserId, getUserNamebyId } = props
   let scrollList = React.createRef()
 
   useEffect(() => {
     scrollList.scrollTop = scrollList.scrollHeight
   })
-
-  const getUserNamebyId = id => {
-    const user = Object.values(profiles).find(profile => profile.id === id)
-    return user ? user.username : ''
-  }
 
   return (
     <div
@@ -39,8 +34,8 @@ const MessageList = props => {
 
 MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
-  profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
+  getUserNamebyId: propTypes.func.isRequired,
 }
 
 export default MessageList
