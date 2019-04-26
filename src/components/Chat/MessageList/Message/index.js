@@ -3,7 +3,8 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
-  const { sender, text, currentUserId, senderId } = props
+  const { sender, text, currentUserId, senderId, iconColor } = props
+
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
@@ -13,10 +14,16 @@ const Message = props => {
     currentUserId === senderId ? 'content-sent' : 'content-received',
     senderId ? '' : 'content-no-sender',
   ]
+
+  const senderIconClassList = [
+    'chat-message-sender-icon',
+    `chat-${iconColor}-icon`,
+  ]
+
   return (
     <div className={messageWrapperClassList.join(' ')}>
       {currentUserId !== senderId && (
-        <div className="chat-message-sender-icon">
+        <div className={senderIconClassList.join(' ')}>
           <i aria-hidden="true" title={sender[0]} />
           <span className="label">{sender[0]}</span>
         </div>
@@ -36,6 +43,7 @@ Message.propTypes = {
   text: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string.isRequired,
+  iconColor: propTypes.string.isRequired,
 }
 
 export default Message

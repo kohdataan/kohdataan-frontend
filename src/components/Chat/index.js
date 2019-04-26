@@ -8,7 +8,13 @@ import './styles.scss'
 
 const Chat = props => {
   const { channel, posts, profiles, createPost, currentUserId, members } = props
+  const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
+
+  const getIconColor = userId => {
+    const index = members.findIndex(member => member.user_id === userId)
+    return iconColors[index]
+  }
 
   const toggleSider = () =>
     showSider === true ? setShowSider(false) : setShowSider(true)
@@ -25,10 +31,16 @@ const Chat = props => {
         posts={posts}
         currentUserId={currentUserId}
         getUserNamebyId={getUserNamebyId}
+        getIconColor={getIconColor}
       />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
       {showSider && (
-        <MembersSider members={members} getUserNamebyId={getUserNamebyId} />
+        <MembersSider
+          members={members}
+          currentUserId={currentUserId}
+          getUserNamebyId={getUserNamebyId}
+          getIconColor={getIconColor}
+        />
       )}
     </div>
   )

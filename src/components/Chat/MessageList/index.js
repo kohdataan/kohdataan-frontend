@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, currentUserId, getUserNamebyId } = props
+  const { posts, currentUserId, getUserNamebyId, getIconColor } = props
   let scrollList = React.createRef()
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const MessageList = props => {
             text={post[2]}
             senderId={post[3]}
             currentUserId={currentUserId}
+            iconColor={getIconColor(post[3])}
           />
         ))}
     </div>
@@ -36,6 +37,7 @@ MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
+  getIconColor: propTypes.func.isRequired,
 }
 
 export default MessageList

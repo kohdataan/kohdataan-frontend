@@ -43,8 +43,32 @@
 .chat-message-sender-icon {
     display: flex;
     align-self: flex-end;
-    padding-right: 10px;
+    padding: 4px 8px;
+    margin-right: 5px;
     text-transform: uppercase;
+    color: white;
+    border-radius: 50%;
+    
+}
+
+.chat-darkblue-icon {
+    background-color: #000c4d;
+}
+
+.chat-orange-icon {
+    background-color: #f59023;
+}
+
+.chat-maroon-icon {
+    background-color: #850a34;
+}
+
+.chat-beige-icon {
+    background-color: #ffe9d9;
+}
+
+.chat-green-icon {
+    background-color: #66b10f;
 }
 
 .chat-message-content-text {

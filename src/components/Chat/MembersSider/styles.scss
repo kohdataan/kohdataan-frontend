@@ -14,3 +14,42 @@
     text-transform: uppercase;
     text-align: left;
 }
+
+.chat-header-members-sider-members-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.chat-header-current-user-label {
+    margin-left: 4px;
+}
+
+.chat-header-members-icon {
+    color: white;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.sider-darkblue-icon {
+    background-color: #000c4d;
+}
+
+.sider-orange-icon {
+    background-color: #f59023;
+}
+
+.sider-maroon-icon {
+    background-color: #850a34;
+}
+
+.sider-beige-icon {
+    background-color: #ffe9d9;
+}
+
+.sider-green-icon {
+    background-color: #66b10f;
+}
