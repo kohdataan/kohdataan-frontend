@@ -1,6 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
+import Member from './Member'
 
 const MembersSider = props => {
   const { members, getUserNamebyId, getIconColor, currentUserId } = props
@@ -17,19 +18,13 @@ const MembersSider = props => {
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
         {members.map(member => (
-          <div
+          <Member
             key={member.user_id}
-            className="chat-header-members-sider-members-wrapper"
-          >
-            <i aria-hidden="true" title={getUserNamebyId(member.user_id)[0]} />
-            <span className={getIconClassNameList(member.user_id)}>
-              {getUserNamebyId(member.user_id)[0]}
-            </span>
-            <p>{getUserNamebyId(member.user_id)}</p>
-            {currentUserId === member.user_id && (
-              <p className="chat-header-current-user-label">(sinä)</p>
-            )}
-          </div>
+            userId={member.user_id}
+            userName={getUserNamebyId(member.user_id)}
+            currentUserId={currentUserId}
+            iconClassNameList={getIconClassNameList(member.user_id)}
+          />
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
       </div>
