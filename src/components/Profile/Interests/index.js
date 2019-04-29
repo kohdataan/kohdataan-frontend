@@ -8,12 +8,12 @@ const Interests = () => {
   }
 
   return (
-    <div>
+    <div className="interests-container">
       <h2 className="interests-header">Minua kiinnostaa</h2>
       <p className="interests-text">
         Kerro muille, mistä asioista olet kiinnostunut.
       </p>
-      <div className="interests-container">
+      <div className="interests-button-container">
         <ButtonContainer className="interests-button" onClick={handleClick}>
           Kiinnostuksen kohteet
         </ButtonContainer>

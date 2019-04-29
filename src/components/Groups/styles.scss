@@ -1,6 +1,7 @@
 .groups-wrapper {
   overflow-y: auto;
-  height: 60vh;
+  /*height: 60vh;*/
+  height: calc(100vh - 242px);
 }
 
 .groups-header {

@@ -12,8 +12,8 @@ const Profile = props => {
   const editProfileRoute = '/muokkaa'
 
   return (
-    <div>
-      <div className="profile-container">
+    <div className="profile-container">
+      <div className="profile-header-container">
         <ProfileImage />
         {user && <ProfileHeader username={user.username} />}
         <EditButton route={editProfileRoute} />
