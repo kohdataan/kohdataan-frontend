@@ -9,16 +9,23 @@ const Header = props => {
 
   return (
     <div className="chat-header">
-      <Link className="chat-header-nav-back-button" to="/ryhmat">
+      <Link
+        className="chat-header-item chat-header-nav-back-button "
+        to="/ryhmat"
+      >
         {'< Takaisin'}
       </Link>
-      <h1 className="chat-header-channel-name">{channel.display_name}</h1>
-      <ButtonContainer
-        className="chat-header-group-img-button"
-        onClick={toggleSider}
-      >
-        Group image
-      </ButtonContainer>
+      <h1 className="chat-header-item chat-header-channel-name">
+        {channel.display_name}
+      </h1>
+      <div className="chat-header-item">
+        <ButtonContainer
+          className=" chat-header-group-img-button"
+          onClick={toggleSider}
+        >
+          Group img
+        </ButtonContainer>
+      </div>
     </div>
   )
 }

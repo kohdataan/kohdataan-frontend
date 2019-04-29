@@ -14,23 +14,25 @@ const MembersSider = props => {
 
   return (
     <div className="chat-header-members-sider">
-      <h4 className="chat-header-members-sider-title">Jäsenet</h4>
-      {members.map(member => (
-        <div
-          key={member.user_id}
-          className="chat-header-members-sider-members-wrapper"
-        >
-          <i aria-hidden="true" title={getUserNamebyId(member.user_id)[0]} />
-          <span className={getIconClassNameList(member.user_id)}>
-            {getUserNamebyId(member.user_id)[0]}
-          </span>
-          <p>{getUserNamebyId(member.user_id)}</p>
-          {currentUserId === member.user_id && (
-            <p className="chat-header-current-user-label">(sinä)</p>
-          )}
-        </div>
-      ))}
-      <h4 className="chat-header-members-sider-title">Yhteistä</h4>
+      <div className="chat-header-members-sider-content">
+        <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
+        {members.map(member => (
+          <div
+            key={member.user_id}
+            className="chat-header-members-sider-members-wrapper"
+          >
+            <i aria-hidden="true" title={getUserNamebyId(member.user_id)[0]} />
+            <span className={getIconClassNameList(member.user_id)}>
+              {getUserNamebyId(member.user_id)[0]}
+            </span>
+            <p>{getUserNamebyId(member.user_id)}</p>
+            {currentUserId === member.user_id && (
+              <p className="chat-header-current-user-label">(sinä)</p>
+            )}
+          </div>
+        ))}
+        <h4 className="chat-header-members-sider-title">Yhteistä</h4>
+      </div>
     </div>
   )
 }
