@@ -4,3 +4,26 @@
     border: 1px solid #000c4d;
     border-radius: 5px;
 }
+
+.description-text-edit-title-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.description-header-edit {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.max-length-label {
+    font-size: 13px;
+    font-weight: normal;
+    width: auto;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: right;
+}

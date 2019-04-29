@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 
 const DescriptionTextEdit = props => {
   const { currentText } = props
-  const [descriptionText, setDescriptionText] = useState('')
+  const [descriptionText, setDescriptionText] = useState(currentText)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -18,16 +18,19 @@ const DescriptionTextEdit = props => {
 
   return (
     <div className="description-container">
-      <h2 className="description-header">Kuvaus</h2>
+      <div className="description-text-edit-title-wrapper">
+        <h2 className="description-header-edit">Kuvaus</h2>
+        <h2 className="max-length-label">{`${descriptionText.length}/ 200`}</h2>
+      </div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="message">
+        <label htmlFor="description textfield">
           <textarea
             className="description-text-edit-input"
-            id="message"
+            id="description"
+            maxLength="200"
             type="text"
             value={descriptionText}
             onChange={handleChange}
-            placeholder={currentText}
           />
         </label>
         <input type="submit" value=">" />
