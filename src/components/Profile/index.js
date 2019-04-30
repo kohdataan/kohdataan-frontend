@@ -12,8 +12,7 @@ const Profile = props => {
   const [editProfile, setEditProfile] = useState(false)
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
 
-  const toggleEditProfile = () =>
-    editProfile ? setEditProfile(false) : setEditProfile(true)
+  const toggleEditProfile = () => setEditProfile(!editProfile)
 
   return (
     <div className="profile-container">
@@ -27,7 +26,10 @@ const Profile = props => {
       </div>
       {!editProfile && <Description text={descriptionText} />}
       {editProfile && <DescriptionTextEdit currentText={descriptionText} />}
-      <Interests />
+      <Interests
+        editProfile={editProfile}
+        toggleEditProfile={toggleEditProfile}
+      />
     </div>
   )
 }

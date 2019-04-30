@@ -8,7 +8,9 @@ const Group = props => {
 
   return (
     <Link className="group-box" to={`/chat/${channel.id}`}>
-      <h2>{channel.display_name}</h2>
+      <div className="group-info-wrapper">
+        <h2>{channel.display_name}</h2>
+      </div>
     </Link>
   )
 }

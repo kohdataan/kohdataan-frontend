@@ -16,8 +16,7 @@ const Chat = props => {
     return iconColors[index] || ''
   }
 
-  const toggleSider = () =>
-    showSider === true ? setShowSider(false) : setShowSider(true)
+  const toggleSider = () => setShowSider(!showSider)
 
   const getUserNamebyId = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)

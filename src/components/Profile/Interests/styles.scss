@@ -1,14 +1,16 @@
 .interests-container {
     position: absolute;
-    padding: 0 0.95rem;
-    bottom: 150px;
+    bottom: 71px;
     width: 100%;
+    height: calc(100vh - 490px);
+    overflow-y: auto;
 }
 
 .interests-header {
     font-size: 22px;
     font-weight: 500;
     color: #000c4d;
+    padding: 0 0.95rem;
 }
 
 .interests-button {
@@ -23,15 +25,26 @@
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
     color: #1d1d1d;
-    cursor: pointer;
     outline: none;
+}
+
+.interests-ready-button {
+    height: 4.5vh;
+    width: 40vw;
+    max-width: 400px;
+    background-color: #f59023;
+    border: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin: 20px;
 }
 
 .interests-text {
     margin-top: 20px;
     margin-bottom: 40px;
+    padding: 0 0.95rem;
 }
 
-.interests-button-container {
+.interests-grid-wrapper {
     text-align: center;
 }
