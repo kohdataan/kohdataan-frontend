@@ -1,4 +1,10 @@
 .profile-container {
+    background-image: url(../../assets/Profiili-aalto-bg.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 50vh;
+}
+
+.profile-header-container {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -17,6 +23,6 @@
     margin: 0;
     display: inline-block;
     white-space: nowrap;
-    padding: 0 0.75rem;
+    padding: 0.85rem 0.75rem;
     position: relative;
   }

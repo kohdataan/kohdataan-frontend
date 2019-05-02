@@ -11,14 +11,31 @@
     border-bottom: 1px solid #f59023;
 }
 
+.chat-header-item {
+    width: auto;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: right;
+    padding: 0.35rem;
+}
+
 .chat-header-nav-back-button {
     background: none;
     border: none;
     font-weight: normal;
     font-size: 15px;
     color: #3a3a3a;
+    text-align: left;
 }
 
 .chat-header-channel-name {
-    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.chat-header-group-img-button {
+    background-color: #f9edcf;
+    border: none;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
 }

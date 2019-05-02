@@ -6,7 +6,7 @@ const ProfileImage = () => {
     <div className="profile-header-item">
       <i
         aria-hidden="true"
-        className="profile-img far fa-smile"
+        className="profile-img far fa-user"
         title="Profiilikuva"
       />
       <span className="sr-only">Profiilikuva</span>

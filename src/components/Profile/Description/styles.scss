@@ -1,13 +1,14 @@
+.description-container {
+    padding: 0 0.95rem 300px;
+    height: calc(100vh - 80vh);
+}
+
 .description-header {
     font-weight: bold;
     font-size: 13px;
-    margin-top: 20px;
-    padding: 0 0.75rem;
     text-transform: uppercase;
 }
 
 .description-text {
-    height: 200px;
-    padding: 0 0.75rem;
-    width: 291px;
+    width: 100%;
 }
