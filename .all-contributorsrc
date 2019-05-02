@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "rovaniemi",
+      "name": "Mauri Karlin",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21308995?v=4",
+      "profile": "https://github.com/rovaniemi",
+      "contributions": [
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "kohdataan-frontend",
+  "projectOwner": "kohdataan",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
