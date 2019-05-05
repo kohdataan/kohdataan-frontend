@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
-import './styles.scss'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { login } from 'mattermost-redux/actions/users'
 import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
+import * as API from '../../api/user'
+import './styles.scss'
 
-const LogIn = () => {
+const LogIn = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { login: matterMostLogin } = props
 
-  const handleLogin = () => {
-    console.log('login')
+  const handleLogin = async () => {
+    const user = { email, password }
+    await API.userLogin(user).then(e => {
+      console.log(e)
+    })
+    await matterMostLogin(email, password)
   }
 
   return (
@@ -37,4 +47,19 @@ const LogIn = () => {
   )
 }
 
-export default LogIn
+LogIn.propTypes = {
+  login: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      login,
+    },
+    dispatch
+  )
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LogIn)
