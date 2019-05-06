@@ -33,7 +33,7 @@ const App = props => {
   return (
     <Router>
       <Container className="main-container">
-        <Route path="/profiili" component={ProfileContainer} />
+        <Route path="/profiili/:username?" component={ProfileContainer} />
         <Route path="/kysymykset" component={QuestionsContainer} />
         <Route path="/ryhmat" component={GroupsContainer} />
         <Route path="/chat/:id" component={ChatContainer} />
