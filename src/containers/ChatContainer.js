@@ -11,8 +11,10 @@ import {
   getProfilesInChannel as getProfilesInChannelAction,
 } from 'mattermost-redux/actions/users'
 import {
+  leaveChannel as leaveChannelAction,
   getChannelMembers as getChannelMembersAction,
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
+  updateChannel as updateChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
@@ -31,6 +33,7 @@ const ChatContainer = props => {
     currentChannelId,
     getPosts,
     getChannelMembers,
+    leaveChannel,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -87,6 +90,12 @@ const ChatContainer = props => {
     return postsArr
   }
 
+  // Leave current channel
+  const handleLeaveChannel = () => {
+    // Only works for private channels for now
+    leaveChannel(currentChannelId)
+  }
+
   // Filter and sort posts after fetching
   useEffect(() => {
     if (currentChannelId) {
@@ -106,6 +115,7 @@ const ChatContainer = props => {
           createPost={createPost}
           currentUserId={currentUserId}
           members={currentMembers}
+          handleLeaveChannel={handleLeaveChannel}
         />
       )}
     </>
@@ -125,6 +135,7 @@ ChatContainer.propTypes = {
   getChannelMembers: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentChannelId: PropTypes.string.isRequired,
+  leaveChannel: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -156,7 +167,9 @@ const mapDispatchToProps = dispatch =>
       getChannelMembers: getChannelMembersAction,
       getProfiles: getProfilesAction,
       getProfilesInChannel: getProfilesInChannelAction,
+      leaveChannel: leaveChannelAction,
       loadMe: loadMeAction,
+      updateChannel: updateChannelAction,
     },
     dispatch
   )

@@ -7,7 +7,15 @@ import MembersSider from './MembersSider'
 import './styles.scss'
 
 const Chat = props => {
-  const { channel, posts, profiles, createPost, currentUserId, members } = props
+  const {
+    channel,
+    posts,
+    profiles,
+    createPost,
+    currentUserId,
+    members,
+    handleLeaveChannel,
+  } = props
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
 
@@ -39,6 +47,7 @@ const Chat = props => {
           currentUserId={currentUserId}
           getUserNamebyId={getUserNamebyId}
           getIconColor={getIconColor}
+          handleLeaveChannel={handleLeaveChannel}
         />
       )}
     </div>
@@ -52,6 +61,7 @@ Chat.propTypes = {
   members: PropTypes.instanceOf(Object).isRequired,
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
+  handleLeaveChannel: PropTypes.func.isRequired,
 }
 
 export default Chat

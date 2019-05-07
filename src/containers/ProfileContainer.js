@@ -42,12 +42,13 @@ const mapStateToProps = (state, ownProps) => {
 ProfileContainer.propTypes = {
   getMe: PropTypes.func.isRequired,
   currentUser: PropTypes.instanceOf(Object),
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   getProfilesByUsernames: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
   currentUser: {},
+  username: '',
 }
 
 const mapDispatchToProps = dispatch =>
