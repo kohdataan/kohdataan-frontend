@@ -32,7 +32,7 @@ const Chat = props => {
   }
 
   return (
-    <div className="chat-wrapper">
+    <div className="chat-wrapper" id="chat">
       <ChatHeader channel={channel} toggleSider={toggleSider} />
       <MessageList
         posts={posts}

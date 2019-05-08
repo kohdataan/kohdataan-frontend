@@ -4,6 +4,7 @@ import './styles.scss'
 import { Link } from 'react-router-dom'
 import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
+import ModalContainer from '../../ModalContainer'
 
 const MembersSider = props => {
   const {
@@ -24,12 +25,11 @@ const MembersSider = props => {
     return classNameList.join(' ')
   }
 
-  const clickHandler = () => {
-    setShowConfirmation(!showConfirmation)
-  }
+  const openModal = () => setShowConfirmation(true)
+  const closeModal = () => setShowConfirmation(false)
 
   return (
-    <div className="chat-header-members-sider">
+    <div className="chat-header-members-sider" id="members-sider">
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
         {members.map(member => (
@@ -43,20 +43,32 @@ const MembersSider = props => {
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
         <ButtonContainer
-          onClick={clickHandler}
+          onClick={openModal}
           className="members-sider-leave-group-button"
         >
           Poistu ryhmästä
         </ButtonContainer>
-        {showConfirmation && (
-          <Link
-            className="leave-channel-link"
-            to="/ryhmat"
-            onClick={handleLeaveChannel}
+        <ModalContainer
+          modalIsOpen={showConfirmation}
+          closeModal={closeModal}
+          label="leaveChannelModal"
+        >
+          <h2>Haluatko varmasti poistua ryhmästä?</h2>
+          <ButtonContainer
+            onClick={closeModal}
+            className="cancel-leave-channel-button"
           >
-            Varmistus
+            Peruuta
+          </ButtonContainer>
+          <Link className="leave-channel-link" to="/ryhmat">
+            <ButtonContainer
+              onClick={handleLeaveChannel}
+              className="confirm-leave-channel-button"
+            >
+              Kyllä
+            </ButtonContainer>
           </Link>
-        )}
+        </ModalContainer>
       </div>
     </div>
   )
