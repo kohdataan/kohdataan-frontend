@@ -19,6 +19,7 @@ const GroupsContainer = props => {
     getProfiles,
     fetchMyChannelsAndMembers,
     users,
+    myChannels,
   } = props
 
   // Get user profiles and current user's teams at initial render
@@ -45,16 +46,25 @@ const GroupsContainer = props => {
     return filteredChannels
   }
 
+  // Get channel objects based on myChannels
+  const getChannelInfoForMyChannels = () => {
+    const myCurrentChannels = Object.values(channels).filter(channel =>
+      Object.keys(myChannels).includes(channel.id)
+    )
+    return myCurrentChannels
+  }
+
   return (
     <>
       <GroupSuggestions />
-      <Groups channels={getGroupChannels(channels)} />
+      <Groups channels={getGroupChannels(getChannelInfoForMyChannels())} />
     </>
   )
 }
 
 GroupsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
+  myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
   loadMe: PropTypes.func.isRequired,
@@ -71,7 +81,7 @@ const mapStateToProps = state => {
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
-  const myChannelMembers = state.entities.channels.myMembers
+  const myChannels = state.entities.channels.myMembers
 
   return {
     currentUserId,
@@ -82,7 +92,7 @@ const mapStateToProps = state => {
     posts,
     channels,
     members,
-    myMembers: myChannelMembers,
+    myChannels,
   }
 }
 
