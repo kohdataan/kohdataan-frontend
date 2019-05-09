@@ -29,14 +29,14 @@ const LogIn = props => {
           label="Sähköposti"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          inputClassName="login-input-label"
+          inputClassName="login-input-text"
           labelClassName="login-input-field"
         />
         <InputField
           label="Salasana"
           value={password}
           onChange={e => setPassword(e.target.value)}
-          inputClassName="login-input-label"
+          inputClassName="login-input-text"
           labelClassName="login-input-field"
         />
         <ButtonContainer className="login-button" onClick={handleLogin}>

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = props => {
+const Textarea = props => {
   const { label, value, inputClassName, labelClassName, onChange } = props
   return (
     <label htmlFor={label} className={inputClassName}>
       {label}
-      <input
+      <textarea
         type="text"
         name={label}
         id={label}
@@ -19,7 +19,7 @@ const InputField = props => {
   )
 }
 
-InputField.propTypes = {
+Textarea.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string,
   inputClassName: PropTypes.string,
@@ -27,10 +27,10 @@ InputField.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-InputField.defaultProps = {
+Textarea.defaultProps = {
   value: '',
   inputClassName: '',
   labelClassName: '',
 }
 
-export default InputField
+export default Textarea

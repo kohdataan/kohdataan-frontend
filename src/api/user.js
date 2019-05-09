@@ -16,7 +16,7 @@ const userLogin = async data => {
 const userSignUp = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
 
-  const resp = await fetch(`${uri}/signup`, {
+  const resp = await fetch(`${uri}/user`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {

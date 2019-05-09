@@ -7,6 +7,7 @@ import StepButton from '../components/RegistrationFlow/StepButton'
 import Container from '../components/Container'
 import InfoPage from '../components/RegistrationFlow/InfoPage'
 import Nickname from '../components/RegistrationFlow/Nickname'
+import Description from '../components/RegistrationFlow/Description'
 
 const RegistrationContainer = props => {
   const {
@@ -24,7 +25,7 @@ const RegistrationContainer = props => {
       case pages['add-location'].current:
         return <div />
       case pages['add-description'].current:
-        return <div />
+        return <Description />
       case pages['add-image'].current:
         return <div />
       default:

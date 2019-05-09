@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-// Test
-export const TEST = 'TEST'
+// User
+export const ADD_USER_TO_STATE = 'ADD_USER_TO_STATE'
 
 // Mattermost
 export const STORE_REHYDRATION_FAILED = 'STORE_REHYDRATION_FAILED'
