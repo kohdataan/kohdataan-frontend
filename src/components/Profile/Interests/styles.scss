@@ -1,50 +1,48 @@
 .interests-container {
-    position: absolute;
-    bottom: 71px;
-    width: 100%;
-    height: calc(100vh - 490px);
-    overflow-y: auto;
+  position: absolute;
+  bottom: 71px;
+  width: 100%;
+  height: calc(100vh - 490px);
+  overflow-y: auto;
 }
 
 .interests-header {
-    font-size: 22px;
-    font-weight: 500;
-    color: #000c4d;
-    padding: 0 0.95rem;
+  font-size: 22px;
+  font-weight: 500;
+  color: #000c4d;
+  padding: 0 0.95rem;
 }
 
 .interests-button {
-    width: 60vw;
-    text-transform: uppercase;
-    max-width: 400px;
-    min-width: 200px;
-    white-space: nowrap;
-    vertical-align: middle;
-    font-size: 0.875rem;
-    height: 4.5vh;
-    -webkit-transition: all 0.15s ease-in-out;
-    transition: all 0.15s ease-in-out;
-    color: #1d1d1d;
-    outline: none;
+  width: 60vw;
+  max-width: 400px;
+  min-width: 200px;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 0.875rem;
+  height: 4.5vh;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  color: #1d1d1d;
+  outline: none;
 }
 
 .interests-ready-button {
-    height: 4.5vh;
-    width: 40vw;
-    max-width: 400px;
-    background-color: #f59023;
-    border: none;
-    text-transform: uppercase;
-    font-size: 13px;
-    margin: 20px;
+  height: 4.5vh;
+  width: 40vw;
+  max-width: 400px;
+  background-color: #f59023;
+  border: none;
+  font-size: 13px;
+  margin: 20px;
 }
 
 .interests-text {
-    margin-top: 20px;
-    margin-bottom: 40px;
-    padding: 0 0.95rem;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0 0.95rem;
 }
 
 .interests-grid-wrapper {
-    text-align: center;
+  text-align: center;
 }

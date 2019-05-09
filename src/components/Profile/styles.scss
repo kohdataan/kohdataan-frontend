@@ -1,28 +1,42 @@
 .profile-container {
-    background-image: url(../../assets/Profiili-aalto-bg.svg);
-    background-repeat: no-repeat;
-    background-size: 100% 50vh;
+  background-image: url(../../assets/Profiili-aalto-bg.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 50vh;
 }
 
 .profile-header-container {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: left;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: left;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .profile-header-item {
-    width: auto;
-    flex-grow: 1;
-    flex-basis: 0;
-    text-align: center;
-    margin: 0;
-    display: inline-block;
-    white-space: nowrap;
-    padding: 0.85rem 0.75rem;
-    position: relative;
-  }
+  width: auto;
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.85rem 0.75rem;
+  position: relative;
+}
+
+.profile-modal-header {
+  font-size: 28px;
+  font-weight: 500;
+  color: #000c4d;
+  padding: 0 0.95rem;
+}
+
+.profile-modal-button {
+  padding: 10px 40px;
+  background-color: #f59023;
+  border: none;
+  font-size: 13px;
+}

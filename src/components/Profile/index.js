@@ -7,13 +7,17 @@ import Interests from './Interests'
 import EditButton from './EditButton'
 import ProfileHeader from './ProfileHeader'
 import DescriptionTextEdit from './DescriptionTextEdit'
+import Instructions from './Instructions'
 
 const Profile = props => {
   const { user, currentUser } = props
   const [editProfile, setEditProfile] = useState(false)
+  const [showModal, setShowModal] = useState(true)
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
 
   const toggleEditProfile = () => setEditProfile(!editProfile)
+  // const openModal = () => setShowModal(true)
+  const closeModal = () => setShowModal(false)
 
   return (
     <div className="profile-container">
@@ -33,6 +37,7 @@ const Profile = props => {
         editProfile={editProfile}
         toggleEditProfile={toggleEditProfile}
       />
+      <Instructions showModal={showModal} closeModal={closeModal} />
     </div>
   )
 }
