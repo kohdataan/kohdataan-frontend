@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
-import { Link } from 'react-router-dom'
 import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
-import ModalContainer from '../../ModalContainer'
+import LeaveChannelModal from './LeaveChannelModal'
 
 const MembersSider = props => {
   const {
@@ -48,27 +47,11 @@ const MembersSider = props => {
         >
           Poistu ryhmästä
         </ButtonContainer>
-        <ModalContainer
-          modalIsOpen={showConfirmation}
+        <LeaveChannelModal
+          handleLeaveChannel={handleLeaveChannel}
           closeModal={closeModal}
-          label="leaveChannelModal"
-        >
-          <h2>Haluatko varmasti poistua ryhmästä?</h2>
-          <ButtonContainer
-            onClick={closeModal}
-            className="cancel-leave-channel-button"
-          >
-            Peruuta
-          </ButtonContainer>
-          <Link className="leave-channel-link" to="/ryhmat">
-            <ButtonContainer
-              onClick={handleLeaveChannel}
-              className="confirm-leave-channel-button"
-            >
-              Kyllä
-            </ButtonContainer>
-          </Link>
-        </ModalContainer>
+          showConfirmation={showConfirmation}
+        />
       </div>
     </div>
   )

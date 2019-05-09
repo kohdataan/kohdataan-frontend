@@ -2,9 +2,9 @@ import React from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
-import './styles.scss'
 import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg'
 import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg'
+import './styles.scss'
 
 const Instructions = props => {
   const { showModal1, showModal2, closeModal } = props
