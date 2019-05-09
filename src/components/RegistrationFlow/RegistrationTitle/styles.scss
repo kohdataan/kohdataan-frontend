@@ -1,0 +1,17 @@
+@import '../../../styles/colors.scss';
+
+.registration-title {
+  text-transform: uppercase;
+  color: $orange;
+  font-weight: 700;
+}
+
+.registration-description {
+  text-align: center;
+}
+
+.registration-title-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

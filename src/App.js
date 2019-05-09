@@ -14,6 +14,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import './styles/defaults.scss'
 import ChatContainer from './containers/ChatContainer'
 import LogInContainer from './containers/LogInContainer'
+import RegistrationContainer from './containers/RegistrationContainer'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
 
@@ -27,6 +28,7 @@ const App = props => {
     <Router>
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
+        <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute path="/profiili" component={ProfileContainer} />
         <PrivateRoute path="/kysymykset" component={QuestionsContainer} />
         <PrivateRoute path="/ryhmat" component={GroupsContainer} />

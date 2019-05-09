@@ -2,9 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const InputField = props => {
-  const { label, value, inputClassName, labelClassName, onChange } = props
+  const {
+    label,
+    value,
+    inputClassName,
+    labelClassName,
+    onChange,
+    hidelabel,
+  } = props
   return (
-    <label htmlFor={label} className={inputClassName}>
+    <label
+      htmlFor={label}
+      className={`${hidelabel ? 'visuallyhidden' : ''} ${inputClassName}`}
+    >
       {label}
       <input
         type="text"
@@ -25,12 +35,14 @@ InputField.propTypes = {
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  hidelabel: PropTypes.bool,
 }
 
 InputField.defaultProps = {
   value: '',
   inputClassName: '',
   labelClassName: '',
+  hidelabel: false,
 }
 
 export default InputField
