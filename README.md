@@ -114,9 +114,9 @@ Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen medi
 Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. Kyse ei ole kuitenkaan vain laista tai säädöksistä, vaan aivan arkipäiväisestä käytettävyydestä josta hyötyvät kaikki. Keskeistä Kohdataan-palvelussa on käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta. Viestiä voi erilaisin keinoin. 
 
 Yleistä tieto saavutettavuudesta löydät mm. Papunetistä:
-*[Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
-*[Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
-*[Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
+* [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
+* [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
+* [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
 
 Projekti noudattaa [Web Content Accessibility Guidelines (WCAG) 2.1 -saavutettavuusstandardia](https://www.w3.org/TR/WCAG21/). Kattava saavutettavuuden testaus ja arviointi on luonnollisesti osa tämän tavoitteen saavuttamista. Siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin. Saavutettavuuteenkin liittyviä kysymyksiä voi esittää [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/). 
 
@@ -131,7 +131,6 @@ Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia 
   * Uuden viestin lähettäminen
   * Uuden viestin vastaanottaminen
   * jne.
-* 
 
 Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä. Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
 
@@ -141,8 +140,8 @@ Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydelli
 
 Kun osallistut projektin kehittämiseen, oleellista on käyttää aiemmin mainittuja automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla on myös helppo tarkistaa tekniset saavutettavuuden ongelmat.
 
-*Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
-*axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
+* Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
+* axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
 
 ### Pull Request -käytännöt
 
