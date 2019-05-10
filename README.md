@@ -105,13 +105,26 @@ Kannattaa ehkä lisätä selaimeen esimerkiksi React Developer Tools, jonka avul
 
 Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan-palvelua, joten aivan kaikkea ei löydy valmiina mattermost-reduxista. Esimerkiksi käyttäjäprofiiliin ja päivän kysymyksiin liittyvä toiminnallisuus on osittain tai kokonaan mattermostin ulkopuolella, joten näihin liittyvän tilan käsittelyyn on tarkoituksenmukaista luoda omat actionit tarvittaessa.
 
-### Testaaminen
+### Saavutettavuus ja sen testaaminen
 
-Projektin tavoittelema lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Kattava testaus on luonnollisesti osa tämän tavoitteen saavuttamista.
+#### Yleistä saavutettavuudesta
 
-Projekti noudattaa Web Content Accessibility Guidelines (WCAG) 2.1 -saavutettavuusstandardia. Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
+Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille. Sovellusta tulee kuitenkin voida käyttää myös muilla laitteilla.
 
-Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia näkymässä muuttuu: 
+Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. Kyse ei ole kuitenkaan vain laista tai säädöksistä, vaan aivan arkipäiväisestä käytettävyydestä josta hyötyvät kaikki. Keskeistä Kohdataan-palvelussa on käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta. Viestiä voi erilaisin keinoin. 
+
+Yleistä tieto saavutettavuudesta löydät mm. Papunetistä:
+*[Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
+*[Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
+*[Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
+
+Projekti noudattaa [Web Content Accessibility Guidelines (WCAG) 2.1 -saavutettavuusstandardia](https://www.w3.org/TR/WCAG21/). Kattava saavutettavuuden testaus ja arviointi on luonnollisesti osa tämän tavoitteen saavuttamista. Siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin. Saavutettavuuteenkin liittyviä kysymyksiä voi esittää [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/). 
+
+#### Automaattinen testaus
+
+Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Tällä tavoin on helppo tarkistaa isoimmat saavutettavuuden tekniset ongelmat. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
+
+Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia näkymässä muuttuu:
 
 * Toiseen näkymään navigointi
 * Viestit:
@@ -120,7 +133,16 @@ Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia 
   * jne.
 * 
 
-Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä. Ennen pull requestin tekoa tarkistathan, että toteuttamasi ominaisuudet eivät ole ristiriidassa <insert sopiva saavutettavuuden checklist> kanssa.
+Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä. Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
+
+#### Saavutettavuuden periaatteet ja lyhyt tarkistuslista
+
+#### Muita työkaluja
+
+Kun osallistut projektin kehittämiseen, oleellista on käyttää aiemmin mainittuja automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla on myös helppo tarkistaa tekniset saavutettavuuden ongelmat.
+
+*Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
+*axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
 
 ### Pull Request -käytännöt
 
