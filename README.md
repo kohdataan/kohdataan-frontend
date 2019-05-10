@@ -109,18 +109,24 @@ Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan
 
 #### Yleistä saavutettavuudesta
 
-Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille. Sovellusta tulee kuitenkin voida käyttää myös muilla laitteilla.
+Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Keskeistä on käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla.
 
-Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. Kyse ei ole kuitenkaan vain laista tai säädöksistä, vaan aivan arkipäiväisestä käytettävyydestä josta hyötyvät kaikki. Keskeistä Kohdataan-palvelussa on käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta. Viestiä voi erilaisin keinoin. 
+Projektissa noudatetaan [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)-saavutettavuusstandardia, ja siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin. Kattava saavutettavuuden testaus ja arviointi on luonnollisesti osa tämän tavoitteen saavuttamista.
+
+Verkkosisällön saavutettavuusohjeet (WCAG 2.1) suomeksi:
+* [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto
+* [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
+
+WCAG 2.1 on käytössä myös saavutettavuutta koskevan lainsäädännön pohjana. Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. On hyvä muistaa, että kyse ei ole vain laista tai säädöksistä, vaan aivan arkipäiväisestä saavutettavuudesta ja käytettävyydestä joista hyötyvät kaikki.
+
+On myös syytä muistaa, että WCAG-ohjeistuksella ei pystytä ratkaisemaan kaikkia ongelmia, joita toimintarajoitteiset käyttäjät kohtaavat. Saavutettavuun ja käytettävyyteen liittyviä kysymyksiä voi esittää myös [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/).
 
 Yleistä tieto saavutettavuudesta löydät mm. Papunetistä:
 * [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
 * [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
 * [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
 
-Projekti noudattaa [Web Content Accessibility Guidelines (WCAG) 2.1 -saavutettavuusstandardia](https://www.w3.org/TR/WCAG21/). Kattava saavutettavuuden testaus ja arviointi on luonnollisesti osa tämän tavoitteen saavuttamista. Siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin. Saavutettavuuteenkin liittyviä kysymyksiä voi esittää [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/). 
-
-#### Automaattinen testaus
+#### Automaattinen saavutettavuuden testaus
 
 Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Tällä tavoin on helppo tarkistaa isoimmat saavutettavuuden tekniset ongelmat. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
 
@@ -132,7 +138,16 @@ Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia 
   * Uuden viestin vastaanottaminen
   * jne.
 
-Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä. Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
+Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
+
+Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Muista, että automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä.
+
+#### Muita työkaluja
+
+Kun osallistut projektin kehittämiseen, oleellista on käyttää automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla voidaan myös helposti tarkistaa isoimmat tekniset saavutettavuuden ongelmat.
+
+* Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
+* axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
 
 #### Saavutettavuuden periaatteet ja lyhyt tarkistuslista
 
