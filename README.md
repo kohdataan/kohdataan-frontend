@@ -142,13 +142,6 @@ Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät
 
 Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä.
 
-#### Muita työkaluja
-
-Kun osallistut projektin kehittämiseen, oleellista on käyttää automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla voidaan myös helposti tarkistaa isoimmat tekniset saavutettavuuden ongelmat.
-
-* Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
-* axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
-
 #### Saavutettavuuden periaatteet ja lyhyt tarkistuslista
 
 #### Muita työkaluja
