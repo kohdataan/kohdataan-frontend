@@ -1,7 +1,7 @@
 const userLogin = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
 
-  const resp = await fetch(`${uri}/login`, {
+  const resp = await fetch(`${uri}/auth/login`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -9,7 +9,9 @@ const userLogin = async data => {
     },
   })
     .then(res => res.json())
-    .catch(err => err)
+    .catch(err => {
+      console.log(err)
+    })
   return resp
 }
 

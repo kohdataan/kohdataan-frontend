@@ -14,7 +14,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import ChatContainer from './containers/ChatContainer'
 import LogInContainer from './containers/LogInContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
-import { signUp } from './store/user/userAction'
+import { signUpAndSignIn } from './store/user/userAction'
 import './styles/defaults.scss'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
@@ -28,11 +28,13 @@ const App = props => {
 
   // TODO: remove after beta (if user is not signed in, create new user, and sign in)
   useEffect(() => {
-    if (!localStorage.getItem('authToken')) {
-      localStorage.setItem('authToken', 'jotain')
-      props.signUp()
-      history.push('/registration/info')
+    async function registerUserAndSignUp() {
+      if (!localStorage.getItem('authToken')) {
+        await props.signUpAndSignIn()
+        history.push('/registration/info')
+      }
     }
+    registerUserAndSignUp()
   }, [])
 
   return (
@@ -51,14 +53,14 @@ const App = props => {
 App.propTypes = {
   init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  signUp: PropTypes.func.isRequired,
+  signUpAndSignIn: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       init,
-      signUp,
+      signUpAndSignIn,
     },
     dispatch
   )

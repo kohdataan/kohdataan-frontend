@@ -3,23 +3,28 @@ import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
 
 // TODO: remove after beta.
-export const signUp = () => {
+export const signUpAndSignIn = () => {
   return async dispatch => {
-    const user = {
-      email: `${uuid()}@kohdataanbeta.fi`,
-      password: `${uuid()}`,
-      username: `${uuid()}`,
+    try {
+      const user = {
+        email: `${uuid()}@kohdataanbeta.fi`,
+        password: `${uuid()}`,
+        username: `${uuid()}`,
+      }
+
+      await API.userSignUp(user)
+      const signInResponse = await API.userLogin(user)
+
+      localStorage.setItem('authToken', signInResponse.token)
+      dispatch({
+        type: types.ADD_USER_TO_STATE,
+        user: signInResponse,
+      })
+    } catch (e) {
+      // throw error message if sign up or sign in fail
+      // eslint-disable-next-line no-console
+      console.error(e)
     }
-
-    const response = await API.userSignUp(user)
-
-    console.log({ user })
-
-    console.log(response)
-    dispatch({
-      type: types.ADD_USER_TO_STATE,
-      user: '',
-    })
   }
 }
 
