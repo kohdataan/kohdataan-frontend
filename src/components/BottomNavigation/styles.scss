@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .bottom-navigation {
   display: flex;
   flex-flow: row nowrap;
@@ -8,8 +10,8 @@
   width: 100%;
   margin: 0 auto;
   height: 70px;
-  background-color: #1c1c1c;
-  border-top: 1px solid #f59023;
+  background-color: $black;
+  border-top: 1px solid $orange;
   box-shadow: 0 5px 0px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.26);
   z-index: 1000;
   position: absolute;

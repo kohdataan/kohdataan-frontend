@@ -7,13 +7,20 @@ import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg'
 import './styles.scss'
 
 const Instructions = props => {
-  const { showModal1, showModal2, closeModal } = props
+  const { showModals, closeModal } = props
+  const modals = {
+    PROFILE_INFO_IS_PUBLIC: 1,
+    THIS_IS_YOUR_PROFILE: 2,
+  }
   return (
     <div className="profile-instructions">
       <ModalContainer
-        modalIsOpen={showModal2 && !showModal1}
-        closeModal={closeModal(2)}
-        label="profile-instructions-modal-2"
+        modalIsOpen={
+          showModals[modals.PROFILE_INFO_IS_PUBLIC] &&
+          !showModals[modals.THIS_IS_YOUR_PROFILE]
+        }
+        closeModal={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
+        label="profile-info-is-public"
       >
         <h2 className="profile-modal-header">
           Profiilisi tiedot näkyvät myös muille.
@@ -23,37 +30,39 @@ const Instructions = props => {
         </h2>
         <ButtonContainer
           className="profile-modal-button"
-          onClick={closeModal(2)}
+          onClick={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
         >
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModal2 && !showModal1 && (
-        <ArrowUp className="profile-instructions-arrow-up" />
-      )}
+      {showModals[modals.PROFILE_INFO_IS_PUBLIC] &&
+        !showModals[modals.THIS_IS_YOUR_PROFILE] && (
+          <ArrowUp className="profile-instructions-arrow-up" />
+        )}
       <ModalContainer
-        modalIsOpen={showModal1}
-        closeModal={closeModal(1)}
-        label="profile-instructions-modal-1"
+        modalIsOpen={showModals[modals.THIS_IS_YOUR_PROFILE]}
+        closeModal={closeModal(modals.THIS_IS_YOUR_PROFILE)}
+        label="this-is-your-profile"
       >
         <h2 className="profile-modal-header">
           Tämä on oma profiilisi! Jatkossa löydät sen täältä.
         </h2>
         <ButtonContainer
           className="profile-modal-button"
-          onClick={closeModal(1)}
+          onClick={closeModal(modals.THIS_IS_YOUR_PROFILE)}
         >
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModal1 && <ArrowDown className="profile-instructions-arrow-down" />}
+      {showModals[modals.THIS_IS_YOUR_PROFILE] && (
+        <ArrowDown className="profile-instructions-arrow-down" />
+      )}
     </div>
   )
 }
 
 Instructions.propTypes = {
-  showModal1: propTypes.bool.isRequired,
-  showModal2: propTypes.bool.isRequired,
+  showModals: propTypes.instanceOf(Object).isRequired,
   closeModal: propTypes.func.isRequired,
 }
 

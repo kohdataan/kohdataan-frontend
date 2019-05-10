@@ -12,13 +12,16 @@ import Instructions from './Instructions'
 const Profile = props => {
   const { user, currentUser } = props
   const [editProfile, setEditProfile] = useState(false)
-  const [showModal1, setShowModal1] = useState(true)
-  const [showModal2, setShowModal2] = useState(true)
+  const [showModals, setShowModals] = useState({ 1: true, 2: true })
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
 
   const toggleEditProfile = () => setEditProfile(!editProfile)
-  const closeModal = i => () =>
-    i === 1 ? setShowModal1(false) : setShowModal2(false)
+
+  const closeModal = modal => () => {
+    const newState = { ...showModals }
+    newState[modal] = false
+    setShowModals(newState)
+  }
 
   return (
     <div className="profile-container">
@@ -38,11 +41,7 @@ const Profile = props => {
         editProfile={editProfile}
         toggleEditProfile={toggleEditProfile}
       />
-      <Instructions
-        showModal1={showModal1}
-        closeModal={closeModal}
-        showModal2={showModal2}
-      />
+      <Instructions closeModal={closeModal} showModals={showModals} />
     </div>
   )
 }

@@ -1,3 +1,5 @@
+@import '../../../styles/colors.scss';
+
 .chat-header-members-sider {
   z-index: 1000;
   height: 90%;
@@ -37,41 +39,41 @@
   width: calc(100% - 46px);
   font-family: Poppins;
   font-size: 13px;
-  color: #3a3a3a;
+  color: $gray;
   font-size: 13px;
 }
 
 .cancel-leave-channel-button {
-  background-color: #f59023;
+  background-color: $orange;
   margin: 20px 10px;
-  color: #3a3a3a;
+  color: $gray;
   padding: 8px 20px;
   font-size: 13px;
 }
 
 .confirm-leave-channel-button {
   margin: 20px 10px;
-  color: #3a3a3a;
+  color: $gray;
   padding: 8px 20px;
   font-size: 13px;
 }
 
 .sider-darkblue-icon {
-  background-color: #000c4d;
+  background-color: $darkblue;
 }
 
 .sider-orange-icon {
-  background-color: #f59023;
+  background-color: $orange;
 }
 
 .sider-maroon-icon {
-  background-color: #850a34;
+  background-color: $maroon;
 }
 
 .sider-beige-icon {
-  background-color: #ffe9d9;
+  background-color: $beige;
 }
 
 .sider-green-icon {
-  background-color: #66b10f;
+  background-color: $green;
 }

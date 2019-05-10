@@ -1,7 +1,8 @@
+@import '../../styles/colors.scss';
+
 .profile-container {
-  background-image: url(../../assets/Profiili-aalto-bg.svg);
-  background-repeat: no-repeat;
-  background-size: 100% 50vh;
+  height: 100vh;
+  overflow: auto;
 }
 
 .profile-header-container {
@@ -9,6 +10,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: left;
+  background-color: $background-gray;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -24,20 +26,19 @@
   display: inline-block;
   white-space: nowrap;
   padding: 0.85rem 0.75rem;
-  position: relative;
 }
 
 .profile-modal-header {
   font-size: 24px;
   font-weight: 500;
-  color: #000c4d;
+  color: $darkblue;
   font-weight: normal;
   padding: 0 0.95rem;
 }
 
 .profile-modal-button {
   padding: 10px 40px;
-  background-color: #f59023;
+  background-color: $orange;
   border: none;
   font-size: 13px;
 }

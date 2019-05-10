@@ -1,9 +1,10 @@
 /* Text styles */
 @import './colors.scss';
 @import './normalize.scss';
+@import './colors.scss';
 
 h1 {
-  color: var(--black);
+  color: $black;
   font-family: 'Paytone One', sans-serif;
   font-size: 22px;
   letter-spacing: -0.1px;
@@ -15,14 +16,14 @@ h2 {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: -0.2px;
-  color: #4a4a4a;
+  color: $gray;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   letter-spacing: -0.2px;
-  color: #3a3a3a;
+  color: $gray;
 }
 
 h4 {
@@ -31,7 +32,7 @@ h4 {
   font-weight: bold;
   letter-spacing: -0.1px;
   text-align: center;
-  color: #3a3a3a;
+  color: $gray;
 }
 
 button {
@@ -40,8 +41,8 @@ button {
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
-  background-color: #fff2e7;
-  border: solid 1px #f5a623;
+  background-color: $beige;
+  border: solid 1px $orange;
   border-radius: 30px;
 }
 
