@@ -109,19 +109,19 @@ Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan
 
 #### Yleistä saavutettavuudesta
 
-Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Keskeistä on käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla.
+Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla. Saavutettavuuden ja helppokäyttöisyyden osalta keskeistä on käyttäjien erilaisten tarpeiden huomioiminen. 
 
-Projektissa noudatetaan [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)-saavutettavuusstandardia, ja siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin. Kattava saavutettavuuden testaus ja arviointi on luonnollisesti osa tämän tavoitteen saavuttamista.
-
-Verkkosisällön saavutettavuusohjeet (WCAG 2.1) suomeksi:
-* [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto
-* [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
+Kattava saavutettavuuden testaus ja arviointi ovat siis luonnollisesti osa projektin tavoitteiden saavuttamisessa. Projektissa noudatetaan [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)-saavutettavuusstandardia, ja siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin.
 
 WCAG 2.1 on käytössä myös saavutettavuutta koskevan lainsäädännön pohjana. Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. On hyvä muistaa, että kyse ei ole vain laista tai säädöksistä, vaan aivan arkipäiväisestä saavutettavuudesta ja käytettävyydestä joista hyötyvät kaikki.
 
-On myös syytä muistaa, että WCAG-ohjeistuksella ei pystytä ratkaisemaan kaikkia ongelmia, joita toimintarajoitteiset käyttäjät kohtaavat. Saavutettavuun ja käytettävyyteen liittyviä kysymyksiä voi esittää myös [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/).
+Verkkosisällön saavutettavuusohjeet (WCAG 2.1) suomeksi:
+* [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto)
+* [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
 
-Yleistä tieto saavutettavuudesta löydät mm. Papunetistä:
+On myös hyvä tiedostaa, että WCAG-ohjeistuksella ei pystytä ratkaisemaan kaikkia saavutettavuuden ongelmia. Projektin saavutettavuun ja käytettävyyteen liittyviä kysymyksiä voi esittää myös [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/).
+
+Yleistä ja ajantasaista tietoa saavutettavuudesta löydät mm. Papunetistä:
 * [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
 * [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
 * [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
@@ -140,7 +140,7 @@ Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia 
 
 Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
 
-Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Muista, että automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä.
+Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä.
 
 #### Muita työkaluja
 
