@@ -1,14 +1,21 @@
 .description-container {
-    padding: 0 0.95rem 300px;
-    height: calc(100vh - 80vh);
+  padding: 0 0.95rem 13rem;
+  background-image: url(../../../assets/Profiili-aalto-bg.svg);
+  background-repeat: no-repeat;
+  min-height: 20vh;
+  background-size: 100% 40vh;
+  & h2 {
+    margin-block-start: 0;
+    padding-block-start: 0.83em;
+  }
 }
 
 .description-header {
-    font-weight: bold;
-    font-size: 13px;
-    text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 .description-text {
-    width: 100%;
+  width: 100%;
 }

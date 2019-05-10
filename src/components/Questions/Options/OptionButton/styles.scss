@@ -1,10 +1,12 @@
+@import '../../../../styles/colors.scss';
+
 .options-button {
-    color: #ffffff;
-    font-weight: normal;
-    width: 50vw;
-    height: 5vh;
-    box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.2);
-    border: solid 1px #f59023;
-    background-color: #1c1c1c;
-    margin-top: 20px;
+  color: #ffffff;
+  font-weight: normal;
+  width: 50vw;
+  height: 5vh;
+  box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.2);
+  border: solid 1px $orange;
+  background-color: $black;
+  margin-top: 20px;
 }

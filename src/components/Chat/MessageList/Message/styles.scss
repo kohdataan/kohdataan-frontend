@@ -1,77 +1,78 @@
+@import '../../../../styles/colors.scss';
+
 .chat-message-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    flex-flow: row nowrap;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
 }
 
 .wrapper-sent {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .chat-message-content {
-    display: flex;
-    word-wrap: break-word;
-    flex-flow: column nowrap;
-    padding: 17px 20px;
-    border-radius: 20px 20px 20px 0px;
-    border: 1px solid #3a3a3a;
-    background-color: #ffe9d9;
-    width: max-content;
-    max-width: 60vw;
-    margin-top: 10px;
+  display: flex;
+  word-wrap: break-word;
+  flex-flow: column nowrap;
+  padding: 17px 20px;
+  border-radius: 20px 20px 20px 0px;
+  border: 1px solid $gray;
+  background-color: $beige;
+  width: max-content;
+  max-width: 60vw;
+  margin-top: 10px;
 }
 
 .content-sent {
-    border-radius: 20px 20px 0px 20px;
-    margin-right: 20px;
-    background-color: #f59023;
-    border: none;
+  border-radius: 20px 20px 0px 20px;
+  margin-right: 20px;
+  background-color: $orange;
+  border: none;
 }
 
 .content-no-sender {
-    background-color: white;
-    border: none;
+  background-color: white;
+  border: none;
 }
 
 .chat-message-content-header {
-    margin-block-end: 0.3em;
-    margin-block-start: 0em;
-    font-size: 15px;
-    font-weight: bold;
+  margin-block-end: 0.3em;
+  margin-block-start: 0em;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .chat-message-sender-icon {
-    display: flex;
-    align-self: flex-end;
-    padding: 4px 8px;
-    margin-right: 5px;
-    text-transform: uppercase;
-    color: white;
-    border-radius: 50%;
-    
+  display: flex;
+  align-self: flex-end;
+  padding: 4px 8px;
+  margin-right: 5px;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 50%;
 }
 
 .chat-darkblue-icon {
-    background-color: #000c4d;
+  background-color: $darkblue;
 }
 
 .chat-orange-icon {
-    background-color: #f59023;
+  background-color: $orange;
 }
 
 .chat-maroon-icon {
-    background-color: #850a34;
+  background-color: $maroon;
 }
 
 .chat-beige-icon {
-    background-color: #ffe9d9;
+  background-color: $beige;
 }
 
 .chat-green-icon {
-    background-color: #66b10f;
+  background-color: $green;
 }
 
 .chat-message-content-text {
-    margin-block-start: 0em;
-    margin-block-end: 0em;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
 }

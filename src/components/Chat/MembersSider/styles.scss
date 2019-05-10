@@ -1,51 +1,79 @@
+@import '../../../styles/colors.scss';
+
 .chat-header-members-sider {
-    z-index: 1000;
-    height: 90%;
-    width: 70%;
-    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.6);
-    background-color: white;
-    position: absolute;
-    top: 10%;
-    right: 0;
+  z-index: 1000;
+  height: 90%;
+  width: 70%;
+  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.6);
+  background-color: white;
+  position: absolute;
+  top: 10%;
+  right: 0;
 }
 
 .chat-header-members-sider-content {
-    padding: 0 28px;
+  padding: 0 28px;
 }
 
 .chat-header-members-sider-title {
-    text-transform: uppercase;
-    text-align: left;
+  text-transform: uppercase;
+  text-align: left;
 }
 
 .chat-header-current-user-label {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
 .chat-header-members-icon {
-    color: white;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    margin-right: 10px;
-    border-radius: 50%;
+  color: white;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.members-sider-leave-group-button {
+  position: absolute;
+  padding: 10px 28px;
+  bottom: 20px;
+  width: calc(100% - 46px);
+  font-family: Poppins;
+  font-size: 13px;
+  color: $gray;
+  font-size: 13px;
+}
+
+.cancel-leave-channel-button {
+  background-color: $orange;
+  margin: 20px 10px;
+  color: $gray;
+  padding: 8px 20px;
+  font-size: 13px;
+}
+
+.confirm-leave-channel-button {
+  margin: 20px 10px;
+  color: $gray;
+  padding: 8px 20px;
+  font-size: 13px;
 }
 
 .sider-darkblue-icon {
-    background-color: #000c4d;
+  background-color: $darkblue;
 }
 
 .sider-orange-icon {
-    background-color: #f59023;
+  background-color: $orange;
 }
 
 .sider-maroon-icon {
-    background-color: #850a34;
+  background-color: $maroon;
 }
 
 .sider-beige-icon {
-    background-color: #ffe9d9;
+  background-color: $beige;
 }
 
 .sider-green-icon {
-    background-color: #66b10f;
+  background-color: $green;
 }

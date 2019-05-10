@@ -6,7 +6,6 @@ import ButtonContainer from '../../ButtonContainer'
 
 const Header = props => {
   const { channel, toggleSider } = props
-
   return (
     <div className="chat-header">
       <Link
@@ -23,7 +22,7 @@ const Header = props => {
           className=" chat-header-group-img-button"
           onClick={toggleSider}
         >
-          Group img
+          <h2>{channel.display_name[0]}</h2>
         </ButtonContainer>
       </div>
     </div>
