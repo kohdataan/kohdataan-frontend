@@ -23,16 +23,6 @@ const EditButton = props => {
         <span className="sr-only">Muokkaa profiilia</span>
       </ButtonContainer>
     </div>
-    /*
-    <Link to={route} className="profile-header-item user-edit-button">
-      <i
-        aria-hidden="true"
-        className="fas fa-user-edit"
-        title="Muokkaa profiilia"
-      />
-      <span className="sr-only">Muokkaa profiilia</span>
-    </Link>
-    */
   )
 }
 

@@ -33,6 +33,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "eevajonnapanula",
+      "name": "Eeva-Jonna",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/28345294?v=4",
+      "profile": "https://github.com/eevajonnapanula",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

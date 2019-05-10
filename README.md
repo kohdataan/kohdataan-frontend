@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/kohdataan/kohdataan-frontend.svg?style=svg)](https://circleci.com/gh/kohdataan/kohdataan-frontend)
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/maintainability)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/test_coverage)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/test_coverage)
 
@@ -105,22 +105,51 @@ Kannattaa ehkä lisätä selaimeen esimerkiksi React Developer Tools, jonka avul
 
 Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan-palvelua, joten aivan kaikkea ei löydy valmiina mattermost-reduxista. Esimerkiksi käyttäjäprofiiliin ja päivän kysymyksiin liittyvä toiminnallisuus on osittain tai kokonaan mattermostin ulkopuolella, joten näihin liittyvän tilan käsittelyyn on tarkoituksenmukaista luoda omat actionit tarvittaessa.
 
-### Testaaminen
+### Saavutettavuus ja sen testaaminen
 
-Projektin tavoittelema lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Kattava testaus on luonnollisesti osa tämän tavoitteen saavuttamista.
+#### Yleistä saavutettavuudesta
 
-Projekti noudattaa Web Content Accessibility Guidelines (WCAG) 2.1 -saavutettavuusstandardia. Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
+Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla. Saavutettavuuden ja helppokäyttöisyyden osalta keskeistä on käyttäjien erilaisten tarpeiden huomioiminen. 
 
-Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia näkymässä muuttuu: 
+Kattava saavutettavuuden testaus ja arviointi ovat siis luonnollisesti osa projektin tavoitteiden saavuttamisessa. Projektissa noudatetaan [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)-saavutettavuusstandardia, ja siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin.
+
+WCAG 2.1 on käytössä myös saavutettavuutta koskevan lainsäädännön pohjana. Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. On hyvä muistaa, että kyse ei ole vain laista tai säädöksistä, vaan aivan arkipäiväisestä saavutettavuudesta ja käytettävyydestä joista hyötyvät kaikki.
+
+Verkkosisällön saavutettavuusohjeet (WCAG 2.1) suomeksi:
+* [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto)
+* [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
+
+On myös hyvä tiedostaa, että WCAG-ohjeistuksella ei pystytä ratkaisemaan kaikkia saavutettavuuden ongelmia. Projektin saavutettavuun ja käytettävyyteen liittyviä kysymyksiä voi esittää myös [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/).
+
+Yleistä ja ajantasaista tietoa saavutettavuudesta löydät mm. Papunetistä:
+* [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
+* [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
+* [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
+
+#### Automaattinen saavutettavuuden testaus
+
+Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Tällä tavoin on helppo tarkistaa isoimmat saavutettavuuden tekniset ongelmat. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
+
+Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia näkymässä muuttuu:
 
 * Toiseen näkymään navigointi
 * Viestit:
   * Uuden viestin lähettäminen
   * Uuden viestin vastaanottaminen
   * jne.
-* 
 
-Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä. Ennen pull requestin tekoa tarkistathan, että toteuttamasi ominaisuudet eivät ole ristiriidassa <insert sopiva saavutettavuuden checklist> kanssa.
+Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
+
+Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydellisiä ja ne ovat vain teknisesti suuntaa antavia. Automaattitesti ei esimerkiksi ota kantaa siihen, onko informaation ja käyttöliittymän toiminta käyttäjälle ymmärrettävä.
+
+#### Saavutettavuuden periaatteet ja lyhyt tarkistuslista
+
+#### Muita työkaluja
+
+Kun osallistut projektin kehittämiseen, oleellista on käyttää aiemmin mainittuja automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla on myös helppo tarkistaa tekniset saavutettavuuden ongelmat.
+
+* Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
+* axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
 
 ### Pull Request -käytännöt
 
@@ -146,7 +175,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/rovaniemi"><img src="https://avatars2.githubusercontent.com/u/21308995?v=4" width="100px;" alt="Mauri Karlin"/><br /><sub><b>Mauri Karlin</b></sub></a><br /><a href="#infra-rovaniemi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td><td align="center"><a href="https://github.com/synyker"><img src="https://avatars2.githubusercontent.com/u/1566005?v=4" width="100px;" alt="Jonne Airaksinen"/><br /><sub><b>Jonne Airaksinen</b></sub></a><br /><a href="#infra-synyker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#projectManagement-synyker" title="Project Management">📆</a></td><td align="center"><a href="https://github.com/Pninja"><img src="https://avatars0.githubusercontent.com/u/23714794?v=4" width="100px;" alt="Pinja Kuosmanen"/><br /><sub><b>Pinja Kuosmanen</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Code">💻</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Documentation">📖</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/rovaniemi"><img src="https://avatars2.githubusercontent.com/u/21308995?v=4" width="100px;" alt="Mauri Karlin"/><br /><sub><b>Mauri Karlin</b></sub></a><br /><a href="#infra-rovaniemi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td><td align="center"><a href="https://github.com/synyker"><img src="https://avatars2.githubusercontent.com/u/1566005?v=4" width="100px;" alt="Jonne Airaksinen"/><br /><sub><b>Jonne Airaksinen</b></sub></a><br /><a href="#infra-synyker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#projectManagement-synyker" title="Project Management">📆</a></td><td align="center"><a href="https://github.com/Pninja"><img src="https://avatars0.githubusercontent.com/u/23714794?v=4" width="100px;" alt="Pinja Kuosmanen"/><br /><sub><b>Pinja Kuosmanen</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Code">💻</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/eevajonnapanula"><img src="https://avatars0.githubusercontent.com/u/28345294?v=4" width="100px;" alt="Eeva-Jonna"/><br /><sub><b>Eeva-Jonna</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=eevajonnapanula" title="Code">💻</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

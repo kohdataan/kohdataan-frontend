@@ -20,8 +20,11 @@ const ButtonContainer = props => {
 
 ButtonContainer.propTypes = {
   className: propTypes.string.isRequired,
-  children: propTypes.oneOfType([propTypes.string, propTypes.instanceOf(Array)])
-    .isRequired,
+  children: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.instanceOf(Array),
+    propTypes.node,
+  ]).isRequired,
   onClick: propTypes.func.isRequired,
 }
 

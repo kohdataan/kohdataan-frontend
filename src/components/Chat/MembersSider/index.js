@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 import Member from './Member'
+import ButtonContainer from '../../ButtonContainer'
+import LeaveChannelModal from './LeaveChannelModal'
 
 const MembersSider = props => {
-  const { members, getUserNamebyId, getIconColor, currentUserId } = props
+  const {
+    members,
+    getUserNamebyId,
+    getIconColor,
+    currentUserId,
+    handleLeaveChannel,
+  } = props
+
+  const [showConfirmation, setShowConfirmation] = useState(false)
+
   const getIconClassNameList = userId => {
     const classNameList = [
       'chat-header-members-icon',
@@ -13,8 +24,11 @@ const MembersSider = props => {
     return classNameList.join(' ')
   }
 
+  const openModal = () => setShowConfirmation(true)
+  const closeModal = () => setShowConfirmation(false)
+
   return (
-    <div className="chat-header-members-sider">
+    <div className="chat-header-members-sider" id="members-sider">
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
         {members.map(member => (
@@ -27,6 +41,17 @@ const MembersSider = props => {
           />
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
+        <ButtonContainer
+          onClick={openModal}
+          className="members-sider-leave-group-button"
+        >
+          Poistu ryhmästä
+        </ButtonContainer>
+        <LeaveChannelModal
+          handleLeaveChannel={handleLeaveChannel}
+          closeModal={closeModal}
+          showConfirmation={showConfirmation}
+        />
       </div>
     </div>
   )
@@ -37,6 +62,7 @@ MembersSider.propTypes = {
   getUserNamebyId: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
+  handleLeaveChannel: propTypes.func.isRequired,
 }
 
 export default MembersSider

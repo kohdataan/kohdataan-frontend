@@ -18,6 +18,8 @@ const GroupsContainer = props => {
     loadMe,
     getProfiles,
     fetchMyChannelsAndMembers,
+    users,
+    myChannels,
   } = props
 
   // Get user profiles and current user's teams at initial render
@@ -27,24 +29,44 @@ const GroupsContainer = props => {
   }, [])
 
   // Get channels and members based on team id
+  // & When user joins a channel, users props is changed and
+  // channels need to be fetched again
   useEffect(() => {
     const teamId = Object.keys(teams)[0]
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-  }, [teams])
+  }, [teams, users])
+
+  // Get only group channels (filter direct messages out)
+  const getGroupChannels = allChannels => {
+    const filteredChannels = Object.values(allChannels).filter(
+      channel => channel.type !== 'D'
+    )
+    return filteredChannels
+  }
+
+  // Get channel objects based on myChannels
+  const getChannelInfoForMyChannels = () => {
+    const myCurrentChannels = Object.values(channels).filter(channel =>
+      Object.keys(myChannels).includes(channel.id)
+    )
+    return myCurrentChannels
+  }
 
   return (
     <>
       <GroupSuggestions />
-      <Groups channels={channels} />
+      <Groups channels={getGroupChannels(getChannelInfoForMyChannels())} />
     </>
   )
 }
 
 GroupsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
+  myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
+  users: PropTypes.instanceOf(Object).isRequired,
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
@@ -54,21 +76,23 @@ const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
   const { teams } = state.entities.teams
   const { channels } = state.entities.channels
-  const user = state.entities.users.profiles[currentUserId]
+  const { users } = state.entities
+  const user = users.profiles[currentUserId]
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
-  const myChannelMembers = state.entities.channels.myMembers
+  const myChannels = state.entities.channels.myMembers
 
   return {
     currentUserId,
+    users,
     user,
     profiles,
     teams,
     posts,
     channels,
     members,
-    myMembers: myChannelMembers,
+    myChannels,
   }
 }
 

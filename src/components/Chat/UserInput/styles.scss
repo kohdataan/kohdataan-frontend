@@ -1,3 +1,5 @@
+@import '../../../styles/colors.scss';
+
 .chat-user-input-wrapper {
   display: flex;
   flex-flow: row nowrap;
@@ -9,13 +11,19 @@
   height: 10%;
   margin: 0 auto;
   position: absolute;
-  background-color: #f5f5f5;
+  background-color: $background-gray;
+}
+
+.chat-user-input-content {
+  width: 100%;
+  text-align: center;
 }
 
 .chat-user-input-text-field {
-  border: 1px solid #1c1c1c;
+  border: 1px solid $black;
   border-radius: 15px;
+  width: 60%;
   height: 5vh;
   margin: 0 15px;
-  padding: 0 15px;
+  padding: 0 20px;
 }

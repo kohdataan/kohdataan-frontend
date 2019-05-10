@@ -1,16 +1,28 @@
 import React from 'react'
 import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const Member = props => {
   const { userId, userName, currentUserId, iconClassNameList } = props
+  const userFirstLetter = userName[0]
   return (
     <div className="chat-header-members-sider-member">
-      <i aria-hidden="true" title={userName[0]} />
-      <span className={iconClassNameList}>{userName[0]}</span>
-      <p>{userName}</p>
+      <i aria-hidden="true" title={userFirstLetter} />
+      <span className={iconClassNameList}>{userFirstLetter}</span>
+      {currentUserId !== userId && (
+        <Link
+          className="members-sider-profile-link"
+          to={`/profiili/${userName}`}
+        >
+          {userName}
+        </Link>
+      )}
       {currentUserId === userId && (
-        <p className="chat-header-current-user-label">(sinä)</p>
+        <>
+          <p>{userName}</p>
+          <p className="chat-header-current-user-label">(sinä)</p>
+        </>
       )}
     </div>
   )

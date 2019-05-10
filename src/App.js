@@ -39,7 +39,7 @@ const App = props => {
     <Container className="main-container">
       <Route path="/login" component={LogInContainer} />
       <Route path="/registration/:step" component={RegistrationContainer} />
-      <PrivateRoute path="/profiili" component={ProfileContainer} />
+      <PrivateRoute path="/profiili/:username?" component={ProfileContainer} />
       <PrivateRoute path="/kysymykset" component={QuestionsContainer} />
       <PrivateRoute path="/ryhmat" component={GroupsContainer} />
       <PrivateRoute path="/chat/:id" component={ChatContainer} />

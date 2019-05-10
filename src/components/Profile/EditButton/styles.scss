@@ -1,20 +1,20 @@
+@import '../../../styles/colors.scss';
+
 .user-edit-button {
-    color: #1c1c1c;
-    background: none;
-    border: none;
-    width: 64px;
-    height: 46px;
-    & i {
-        font-size: 22px;
-    }
+  color: $black;
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  & i {
+    font-size: 22px;
+  }
 }
 
 .user-edit-button-active {
-    background-color: #1c1c1c;
-    border-radius: 5px;
-    color: white;
-    & i {
-        font-size: 22px;
-    }
+  background-color: $black;
+  border-radius: 5px;
+  color: white;
+  & i {
+    font-size: 22px;
+  }
 }
-

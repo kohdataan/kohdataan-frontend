@@ -1,8 +1,9 @@
+@import '../../../../styles/colors.scss';
+
 .chat-message-wrapper {
   display: flex;
   justify-content: flex-start;
   flex-flow: row nowrap;
-  flex-shrink: 0;
 }
 
 .wrapper-sent {
@@ -15,8 +16,8 @@
   flex-flow: column nowrap;
   padding: 17px 20px;
   border-radius: 20px 20px 20px 0px;
-  border: 1px solid #3a3a3a;
-  background-color: #ffe9d9;
+  border: 1px solid $gray;
+  background-color: $beige;
   width: max-content;
   max-width: 60vw;
   margin-top: 10px;
@@ -25,7 +26,7 @@
 .content-sent {
   border-radius: 20px 20px 0px 20px;
   margin-right: 20px;
-  background-color: #f59023;
+  background-color: $orange;
   border: none;
 }
 
@@ -52,23 +53,23 @@
 }
 
 .chat-darkblue-icon {
-  background-color: #000c4d;
+  background-color: $darkblue;
 }
 
 .chat-orange-icon {
-  background-color: #f59023;
+  background-color: $orange;
 }
 
 .chat-maroon-icon {
-  background-color: #850a34;
+  background-color: $maroon;
 }
 
 .chat-beige-icon {
-  background-color: #ffe9d9;
+  background-color: $beige;
 }
 
 .chat-green-icon {
-  background-color: #66b10f;
+  background-color: $green;
 }
 
 .chat-message-content-text {
