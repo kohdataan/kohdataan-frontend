@@ -10,7 +10,12 @@ const StepButton = props => {
 
   return (
     <div className="step-button-container">
-      <Link className="next-step-button" to={`/registration/${next}`}>
+      <Link
+        className={`${
+          !skippable ? 'next-step-button-extra' : ''
+        } next-step-button`}
+        to={`/registration/${next}`}
+      >
         Seuraava
       </Link>
       {skippable && (

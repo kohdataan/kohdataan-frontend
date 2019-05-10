@@ -22,6 +22,7 @@ const pages = {
   'add-image': {
     current: 'add-image',
     last: true,
+    skippable: true,
   },
 }
 

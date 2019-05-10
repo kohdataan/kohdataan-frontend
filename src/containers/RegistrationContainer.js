@@ -8,6 +8,8 @@ import Container from '../components/Container'
 import InfoPage from '../components/RegistrationFlow/InfoPage'
 import Nickname from '../components/RegistrationFlow/Nickname'
 import Description from '../components/RegistrationFlow/Description'
+import Picture from '../components/RegistrationFlow/Picture'
+import Location from '../components/RegistrationFlow/Location'
 
 const RegistrationContainer = props => {
   const {
@@ -23,11 +25,11 @@ const RegistrationContainer = props => {
       case pages['add-nickname'].current:
         return <Nickname />
       case pages['add-location'].current:
-        return <div />
+        return <Location />
       case pages['add-description'].current:
         return <Description />
       case pages['add-image'].current:
-        return <div />
+        return <Picture />
       default:
         return null
     }
