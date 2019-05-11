@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './styles.scss'
-import ButtonContainer from '../../ButtonContainer'
 
 const StepButton = props => {
   const {
@@ -12,7 +11,6 @@ const StepButton = props => {
 
   return (
     <div className="step-button-container">
-      <ButtonContainer onClick={onClick}>test</ButtonContainer>
       <Link
         className={`${
           !skippable ? 'next-step-button-extra' : ''

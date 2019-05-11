@@ -14,6 +14,7 @@ import Description from '../components/RegistrationFlow/Description'
 import Picture from '../components/RegistrationFlow/Picture'
 import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
+import dataUriToBlob from '../utils/dataUriToBlob'
 import { updateUser } from '../store/user/userAction'
 
 const RegistrationContainer = props => {
@@ -74,7 +75,7 @@ const RegistrationContainer = props => {
         return props.updateUser({ description })
       }
       case pages['add-image'].current: {
-        return props.uploadProfileImage(mattermostId, img)
+        return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
         return console.log('add-interests')
