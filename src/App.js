@@ -14,13 +14,17 @@ import PrivateRoute from './utils/PrivateRoute'
 import ChatContainer from './containers/ChatContainer'
 import LogInContainer from './containers/LogInContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
-import { signUpAndSignIn } from './store/user/userAction'
+import {
+  signUpAndSignIn,
+  addUserToStateAndMattermostLogin,
+} from './store/user/userAction'
 import './styles/defaults.scss'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
 
 const App = props => {
   const { history } = props
+
   // websocket effect
   useEffect(() => {
     props.init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
@@ -32,6 +36,8 @@ const App = props => {
       if (!localStorage.getItem('authToken')) {
         await props.signUpAndSignIn()
         history.push('/registration/info')
+      } else {
+        await props.addUserToStateAndMattermostLogin()
       }
     }
     registerUserAndSignUp()
@@ -54,6 +60,7 @@ App.propTypes = {
   init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   signUpAndSignIn: PropTypes.func.isRequired,
+  addUserToStateAndMattermostLogin: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -61,14 +68,19 @@ const mapDispatchToProps = dispatch =>
     {
       init,
       signUpAndSignIn,
+      addUserToStateAndMattermostLogin,
     },
     dispatch
   )
 
+const mapStateToProps = store => {
+  return { user: store.user }
+}
+
 // export default App
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 )

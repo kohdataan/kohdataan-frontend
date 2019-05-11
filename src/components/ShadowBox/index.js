@@ -8,8 +8,11 @@ const ShadowBox = props => {
 }
 
 ShadowBox.propTypes = {
-  children: propTypes.oneOfType([propTypes.string, propTypes.instanceOf(Array)])
-    .isRequired,
+  children: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.instanceOf(Array),
+    propTypes.node,
+  ]).isRequired,
 }
 
 export default ShadowBox

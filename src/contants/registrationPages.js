@@ -21,6 +21,11 @@ const pages = {
   },
   'add-image': {
     current: 'add-image',
+    next: 'add-interests',
+    skippable: true,
+  },
+  'add-interests': {
+    current: 'add-interests',
     last: true,
     skippable: true,
   },

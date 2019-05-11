@@ -1,17 +1,19 @@
 @import '../../../styles/colors.scss';
 
-.add-user-nickname-container {
+.add-user-description-container {
   margin: 10px;
+  position: relative;
 }
 
-.add-user-nickname-text {
+.add-user-description-text {
   display: flex;
   flex-direction: column;
   margin: 0 0 20px 0;
   width: 100%;
+  font-weight: 700;
 }
 
-.add-user-nickname-field {
+.add-user-description-field {
   margin-top: 5px;
   background: transparent;
   border: solid 1px $black;
@@ -19,4 +21,15 @@
   &::placeholder {
     color: $text-gray;
   }
+}
+
+.add-user-description-limit {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  font-weight: 700;
+}
+
+.add-user-description-title {
+  font-weight: 500;
 }
