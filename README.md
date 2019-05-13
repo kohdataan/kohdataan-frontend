@@ -11,7 +11,7 @@ Projektissa kehitämme ja toteutamme yhdessä uutta saavutettavaa somepalvelua, 
 
 Tavoitteena on luoda palvelu, jossa on turvallinen ja myönteinen ilmapiiri, jossa ketään ei kiusata, ja jossa ketään ei jätetä yksin. Palvelussa tuetaan kohtaamista ja vuorovaikutusta, jotta kaikilla olisi mahdollisuus tutustua omanhenkisiin ihmisiin, ja myös ylläpitää kaverisuhteitaan.
 
-Palvelu on avoin kaikille yli 15-vuotiaille nuorille ja aikuisille. Palvelun toteutuksessa otetaan huomioon käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta, ja palvelussa voi myös viestiä erilaisin keinoin. Palvelu toteutetaan web-sovelluksena ensisijaisesti mobiililaitteille, mutta palvelua voi käyttää myös muilla laitteilla.
+Palvelu on avoin kaikille yli 15-vuotiaille nuorille ja aikuisille. Palvelun toteutuksessa otetaan huomioon käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta, ja palvelussa voi myös viestiä erilaisin keinoin. Palvelun alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla.
 
 Palvelu ja sen tekninen yhteiskehittäminen liittyy Somettamalla uutta kohtaamista eli [Kohdataan-hankkeeseen](https://kohdataan.fi/), jossa tavoitteena on yksinäisyyden vähentäminen somen keinoin. 
 
@@ -101,7 +101,7 @@ export default connect(
 )(App)
 ````
 
-Kannattaa ehkä lisätä selaimeen esimerkiksi React Developer Tools, jonka avulla storen tilaa on helpompi pitää silmällä kehitysvaiheessa. Mattermost-reduxissa on actioneiden lisäksi valmiina kasapäin selectoreja, jotka kannattaa käydä läpi, ja joita kannattanee hyödyntää mahdollisuuksien mukaan ennen omien toteuttamista. Selectorit löytyvät mattermost-reduxin kansiosta [selectors](https://github.com/mattermost/mattermost-redux/tree/master/src/selectors) ja reducerit puolestaan kansiosta [reducers](https://github.com/mattermost/mattermost-redux/tree/master/src/reducers). Lisäksi storen hahmottamisessa auttaa [initial_state.js](https://github.com/mattermost/mattermost-redux/blob/master/src/store/initial_state.js).
+Selaimeen kannattaa lisätä esimerkiksi [React Developer Tools](https://github.com/facebook/react-devtools), jonka avulla storen tilaa on helpompi pitää silmällä kehitysvaiheessa. Mattermost-reduxissa on actioneiden lisäksi valmiina paljon selectoreja, jotka kannattaa käydä läpi. Niitä kannattaa myös hyödyntää mahdollisuuksien mukaan ennen omien toteuttamista. Selectorit löytyvät mattermost-reduxin kansiosta [selectors](https://github.com/mattermost/mattermost-redux/tree/master/src/selectors) ja reducerit puolestaan kansiosta [reducers](https://github.com/mattermost/mattermost-redux/tree/master/src/reducers). Lisäksi storen hahmottamisessa auttaa [initial_state.js](https://github.com/mattermost/mattermost-redux/blob/master/src/store/initial_state.js).
 
 Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan-palvelua, joten aivan kaikkea ei löydy valmiina mattermost-reduxista. Esimerkiksi käyttäjäprofiiliin ja päivän kysymyksiin liittyvä toiminnallisuus on osittain tai kokonaan mattermostin ulkopuolella, joten näihin liittyvän tilan käsittelyyn on tarkoituksenmukaista luoda omat actionit tarvittaessa.
 
