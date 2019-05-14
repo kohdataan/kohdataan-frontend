@@ -1,14 +1,14 @@
 import React from 'react'
 import './styles.scss'
 
-const ProfileImage = () => {
+const ProfileImage = props => {
+  const { userId } = props || ''
+  const imageUri = `http://${
+    process.env.REACT_APP_MATTERMOST_URL
+  }/api/v4/users/${userId}/image`
   return (
     <div className="profile-header-item">
-      <i
-        aria-hidden="true"
-        className="profile-img far fa-user"
-        title="Profiilikuva"
-      />
+      <img className="profile-img" src={imageUri} alt="Profiilikuva" />
       <span className="sr-only">Profiilikuva</span>
     </div>
   )

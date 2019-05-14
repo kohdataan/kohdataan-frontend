@@ -26,12 +26,13 @@ const Profile = props => {
   return (
     <div className="profile-container">
       <div className="profile-header-container">
-        <ProfileImage />
+        <ProfileImage userId={user.id} />
         {user && <ProfileHeader username={user.username} />}
         {user === currentUser && (
           <EditButton
             toggleEditProfile={toggleEditProfile}
             isActive={editProfile}
+            isHighlighted={!showModals[2] && showModals[1]}
           />
         )}
       </div>

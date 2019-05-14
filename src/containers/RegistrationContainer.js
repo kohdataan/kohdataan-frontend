@@ -29,6 +29,7 @@ const RegistrationContainer = props => {
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
+  const [interests, setInterests] = useState([])
 
   const subpage = () => {
     switch (step) {
@@ -57,7 +58,7 @@ const RegistrationContainer = props => {
       case pages['add-image'].current:
         return <Picture onChange={p => setImg(p)} />
       case pages['add-interests'].current:
-        return <Interests />
+        return <Interests interests={interests} setInterests={setInterests} />
       default:
         return undefined
     }
@@ -78,7 +79,8 @@ const RegistrationContainer = props => {
         return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
-        return console.log('add-interests')
+        return console.log(`add-interests ${interests}`)
+        // TODO: POST interests to backend
       }
       default:
         return undefined

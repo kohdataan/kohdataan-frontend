@@ -15,7 +15,6 @@ const ProfileContainer = props => {
   useEffect(() => {
     getMe()
   }, [])
-
   useEffect(() => {
     if (username) {
       getProfilesByUsernames([username]).then(data => setUser(data.data[0]))
