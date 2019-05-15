@@ -8,6 +8,15 @@ export default function user(state = {}, action) {
     case types.UPDATE_USER: {
       return { ...state, ...action.user }
     }
+    case types.SIGNUP_SIGNIN_FAILURE: {
+      return { ...state, errorMessage: action.payload.message }
+    }
+    case types.GET_USER_FAILURE: {
+      return { ...state, errorMessage: action.payload.message }
+    }
+    case types.UPDATE_USER_FAILURE: {
+      return { ...state, errorMessage: action.payload.message }
+    }
     default:
       return state
   }

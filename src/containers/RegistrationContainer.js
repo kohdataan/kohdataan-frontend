@@ -16,6 +16,7 @@ import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import { updateUser } from '../store/user/userAction'
+import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 
 const RegistrationContainer = props => {
   const {
@@ -23,8 +24,8 @@ const RegistrationContainer = props => {
       params: { step },
     },
     mattermostId,
+    registrationError,
   } = props
-
   const [nickname, setNickname] = useState('')
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
@@ -91,7 +92,12 @@ const RegistrationContainer = props => {
     <Container className="registration-container">
       {step !== pages['add-interests'].current && <RegistrationTitle />}
       {subpage()}
-      <StepButton params={pages[step]} onClick={stepButtonActions} />
+      {!registrationError && (
+        <StepButton params={pages[step]} onClick={stepButtonActions} />
+      )}
+      {registrationError && (
+        <ErrorNotification errorMessage={registrationError} />
+      )}
     </Container>
   )
 }
@@ -101,6 +107,11 @@ RegistrationContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   mattermostId: PropTypes.string.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
+  registrationError: PropTypes.string,
+}
+
+RegistrationContainer.defaultProps = {
+  registrationError: null,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -115,6 +126,7 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = state => {
   return {
     mattermostId: state.entities.users.currentUserId,
+    registrationError: state.user.errorMessage,
   }
 }
 

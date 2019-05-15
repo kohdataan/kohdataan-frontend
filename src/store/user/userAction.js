@@ -9,27 +9,31 @@ export const addUserToStateAndMattermostLogin = () => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
-    const user = await API.getUser(id, token)
-    dispatch({
-      type: types.ADD_USER_TO_STATE,
-      user: user.user,
-    })
+    try {
+      const user = await API.getUser(id, token)
+      dispatch({
+        type: types.ADD_USER_TO_STATE,
+        user: user.user,
+      })
 
-    /* TODO: MATTERMOST LOGIN, backend is not ready
+      /* TODO: MATTERMOST LOGIN, backend is not ready
+        dispatch(
+          login(
+            user.username,
+            user.password
+          )
+        )
+        */
+
       dispatch(
         login(
-          user.username,
-          user.password
+          process.env.REACT_APP_MATTERMOST_USERNAME,
+          process.env.REACT_APP_MATTERMOST_PASSWORD
         )
       )
-      */
-
-    dispatch(
-      login(
-        process.env.REACT_APP_MATTERMOST_USERNAME,
-        process.env.REACT_APP_MATTERMOST_PASSWORD
-      )
-    )
+    } catch (e) {
+      dispatch({ type: types.GET_USER_FAILURE, payload: e, error: true })
+    }
   }
 }
 
@@ -37,11 +41,17 @@ export const updateUser = data => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
-    await API.updateUser(data, id, token)
-    dispatch({
-      type: types.UPDATE_USER,
-      user: data,
-    })
+    try {
+      await API.updateUser(data, id, token)
+      dispatch({
+        type: types.UPDATE_USER,
+        user: data,
+      })
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      dispatch({ type: types.UPDATE_USER_FAILURE, payload: e, error: true })
+    }
   }
 }
 
@@ -69,8 +79,7 @@ export const signUpAndSignIn = () => {
       )
     } catch (e) {
       // throw error message if sign up or sign in fail
-      // eslint-disable-next-line no-console
-      console.error(e)
+      dispatch({ type: types.SIGNUP_SIGNIN_FAILURE, payload: e, error: true })
     }
   }
 }
