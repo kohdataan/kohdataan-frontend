@@ -18,6 +18,7 @@ import {
   signUpAndSignIn,
   addUserToStateAndMattermostLogin,
 } from './store/user/userAction'
+import getInterests from './store/interest/interestAction'
 import './styles/defaults.scss'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
@@ -43,6 +44,10 @@ const App = props => {
     registerUserAndSignUp()
   }, [])
 
+  useEffect(() => {
+    props.getInterests()
+  }, [])
+
   return (
     <Container className="main-container">
       <Route path="/login" component={LogInContainer} />
@@ -61,6 +66,7 @@ App.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   signUpAndSignIn: PropTypes.func.isRequired,
   addUserToStateAndMattermostLogin: PropTypes.func.isRequired,
+  getInterests: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -69,6 +75,7 @@ const mapDispatchToProps = dispatch =>
       init,
       signUpAndSignIn,
       addUserToStateAndMattermostLogin,
+      getInterests,
     },
     dispatch
   )

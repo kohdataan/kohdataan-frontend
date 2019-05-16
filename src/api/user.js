@@ -83,10 +83,10 @@ const addUserInterests = async (data, token) => {
   }
 }
 
-const getUserInterest = async (id, token) => {
+const getUserInterest = async token => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
-    const resp = await fetch(`${uri}/userInterest/${id}`, {
+    const resp = await fetch(`${uri}/userInterest`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

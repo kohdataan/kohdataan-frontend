@@ -15,7 +15,7 @@ import Picture from '../components/RegistrationFlow/Picture'
 import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
-import { updateUser } from '../store/user/userAction'
+import { updateUser, addUserInterests } from '../store/user/userAction'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 
 const RegistrationContainer = props => {
@@ -24,6 +24,7 @@ const RegistrationContainer = props => {
       params: { step },
     },
     mattermostId,
+    interestOptions,
     registrationError,
   } = props
   const [nickname, setNickname] = useState('')
@@ -31,6 +32,8 @@ const RegistrationContainer = props => {
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
+  const userId = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
 
   const subpage = () => {
     switch (step) {
@@ -59,7 +62,13 @@ const RegistrationContainer = props => {
       case pages['add-image'].current:
         return <Picture onChange={p => setImg(p)} />
       case pages['add-interests'].current:
-        return <Interests interests={interests} setInterests={setInterests} />
+        return (
+          <Interests
+            options={interestOptions}
+            interests={interests}
+            setInterests={setInterests}
+          />
+        )
       default:
         return undefined
     }
@@ -80,7 +89,9 @@ const RegistrationContainer = props => {
         return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
-        return console.log(`add-interests ${interests}`)
+        console.log(`add-interests ${interests}`)
+        const data = { userId, userInterests: interests }
+        return props.addUserInterests(data, token)
         // TODO: POST interests to backend
       }
       default:
@@ -107,11 +118,14 @@ RegistrationContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   mattermostId: PropTypes.string.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
+  interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
+  addUserInterests: PropTypes.func.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
   registrationError: null,
+  interestOptions: [],
 }
 
 const mapDispatchToProps = dispatch =>
@@ -119,6 +133,7 @@ const mapDispatchToProps = dispatch =>
     {
       updateUser,
       uploadProfileImage,
+      addUserInterests,
     },
     dispatch
   )
@@ -126,6 +141,7 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = state => {
   return {
     mattermostId: state.entities.users.currentUserId,
+    interestOptions: state.interests.results,
     registrationError: state.user.errorMessage,
   }
 }

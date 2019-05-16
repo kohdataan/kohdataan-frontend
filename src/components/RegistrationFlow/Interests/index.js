@@ -2,24 +2,11 @@ import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
+import icons from '../../../contants/interestIcons'
 
 const Interests = props => {
-  const { interests, setInterests } = props
-
-  const interestList = [
-    { key: 'Eläimet', icon: 'fas fa-paw fa-fw' },
-    { key: 'Matkustus', icon: 'fas fa-globe-europe fa-fw' },
-    { key: 'Urheilu', icon: 'fas fa-volleyball-ball fa-fw' },
-    { key: 'Luonto', icon: 'fas fa-tree fa-fw' },
-    { key: 'Elokuvat', icon: 'fas fa-film fa-fw' },
-    { key: 'Ruoka', icon: 'fas fa-utensils fa-fw' },
-    { key: 'Mekaniikka', icon: 'fas fa-cogs fa-fw' },
-    { key: 'Musiikki', icon: 'fas fa-music fa-fw' },
-    { key: 'Taide', icon: 'fas fa-palette fa-fw' },
-  ]
-
-  const itemIsSelected = key => interests.includes(key)
-
+  const { options, interests, setInterests } = props
+  const itemIsSelected = id => interests.includes(id)
   // Select item if less than 5 items are selected
   const addToSelected = key => {
     if (interests.length < 5) {
@@ -29,10 +16,15 @@ const Interests = props => {
     }
   }
 
+  const getIcon = name => {
+    const iconObject = icons.find(item => item.key === name)
+    return iconObject.icon
+  }
+
   // Remove from selected items
-  const removeFromSelected = key => {
+  const removeFromSelected = id => {
     const interestsArr = interests
-    const indx = interests.indexOf(key)
+    const indx = interests.indexOf(id)
     if (indx > -1) {
       interestsArr.splice(indx, 1)
       setInterests(interestsArr)
@@ -40,21 +32,13 @@ const Interests = props => {
   }
 
   // Toggle selection
-  const handleClick = interest => () => {
-    console.log(`clicked ${interest}`)
-    if (!itemIsSelected(interest)) {
-      addToSelected(interest)
+  const handleClick = id => () => {
+    console.log(`clicked ${id}`)
+    if (!itemIsSelected(id)) {
+      addToSelected(id)
     } else {
-      removeFromSelected(interest)
+      removeFromSelected(id)
     }
-  }
-
-  const getClassNamesList = item => {
-    return [
-      'interests-grid-edit-button',
-      'interests-grid-edit-item',
-      itemIsSelected(item) ? 'interests-grid-item-selected' : '',
-    ].join(' ')
   }
 
   return (
@@ -63,18 +47,20 @@ const Interests = props => {
       <p>Käytämme näitä kun suosittelemme sinulle uusia ryhmiä.</p>
       <h3>Valitse 1 - 5</h3>
       <div className="interests-grid">
-        {interestList.map(interest => (
+        {options.map(interest => (
           <ButtonContainer
-            key={interest.key}
-            className={getClassNamesList(interest.key)}
-            onClick={handleClick(interest.key)}
+            key={interest.name}
+            className={`${
+              itemIsSelected(interest.id) ? 'interests-grid-item-selected' : ''
+            } interests-grid-edit-button interests-grid-edit-item`}
+            onClick={handleClick(interest.id)}
           >
             <i
               aria-hidden="true"
-              className={interest.icon}
-              title={interest.key}
+              className={getIcon(interest.name)}
+              title={interest.name}
             />
-            <span className="interests-grid-label">{interest.key}</span>
+            <span className="interests-grid-label">{interest.name}</span>
           </ButtonContainer>
         ))}
       </div>
@@ -85,6 +71,7 @@ const Interests = props => {
 Interests.propTypes = {
   interests: propTypes.instanceOf(Array).isRequired,
   setInterests: propTypes.func.isRequired,
+  options: propTypes.instanceOf(Array).isRequired,
 }
 
 export default Interests

@@ -10,11 +10,10 @@ import DescriptionTextEdit from './DescriptionTextEdit'
 import Instructions from './Instructions'
 
 const Profile = props => {
-  const { user, currentUser } = props
+  const { user, currentUser, userInterests } = props
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({ 1: true, 2: true })
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
-
   const toggleEditProfile = () => setEditProfile(!editProfile)
 
   const closeModal = modal => () => {
@@ -41,6 +40,7 @@ const Profile = props => {
       <Interests
         editProfile={editProfile}
         toggleEditProfile={toggleEditProfile}
+        userInterests={userInterests}
       />
       <Instructions closeModal={closeModal} showModals={showModals} />
     </div>
@@ -50,6 +50,7 @@ const Profile = props => {
 Profile.propTypes = {
   user: propTypes.instanceOf(Object).isRequired,
   currentUser: propTypes.instanceOf(Object).isRequired,
+  userInterests: propTypes.instanceOf(Array).isRequired,
 }
 
 export default Profile

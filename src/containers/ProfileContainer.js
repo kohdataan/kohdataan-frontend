@@ -6,35 +6,53 @@ import {
   getProfilesByUsernames as getProfilesByUsernamesAction,
 } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
+import { addUserInterests, getUserInterests } from '../store/user/userAction'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
-  const { currentUser, username, getProfilesByUsernames, getMe } = props
+  // mattermost user
+  const {
+    currentUser,
+    username,
+    getProfilesByUsernames,
+    getMe,
+    userInterests,
+  } = props
   const [user, setUser] = useState({})
+  // TODO: Get other user's interests for other user profile
+  const [interests, setInterests] = useState([])
 
   useEffect(() => {
     getMe()
   }, [])
+
   useEffect(() => {
     if (username) {
       getProfilesByUsernames([username]).then(data => setUser(data.data[0]))
+      // TODO: Get other users interests
     } else {
       setUser(currentUser)
+      props.getUserInterests()
+      setInterests(userInterests)
     }
-  }, [username, currentUser])
+  }, [username, currentUser, userInterests])
 
-  return <Profile user={user} currentUser={currentUser} />
+  return (
+    <Profile user={user} currentUser={currentUser} userInterests={interests} />
+  )
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { currentUserId } = state.entities.users
   const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
+  const userInterests = state.user.Interest
 
   return {
     currentUserId,
     currentUser,
     username,
+    userInterests,
   }
 }
 
@@ -43,11 +61,14 @@ ProfileContainer.propTypes = {
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
   getProfilesByUsernames: PropTypes.func.isRequired,
+  userInterests: PropTypes.instanceOf(Array),
+  getUserInterests: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
   currentUser: {},
   username: '',
+  userInterests: [],
 }
 
 const mapDispatchToProps = dispatch =>
@@ -55,6 +76,8 @@ const mapDispatchToProps = dispatch =>
     {
       getMe: getMeAction,
       getProfilesByUsernames: getProfilesByUsernamesAction,
+      addUserInterests,
+      getUserInterests,
     },
     dispatch
   )

@@ -12,10 +12,19 @@ export const addUserToStateAndMattermostLogin = (mmusername, mmpassword) => {
       const user = await API.getUser(id, token)
       dispatch({
         type: types.ADD_USER_TO_STATE,
-        user: user.user,
+        user,
       })
 
       dispatch(login(mmusername, mmpassword))
+
+      /*
+      dispatch(
+        login(
+          process.env.REACT_APP_MATTERMOST_USERNAME,
+          process.env.REACT_APP_MATTERMOST_PASSWORD
+        )
+      )
+      */
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -52,10 +61,8 @@ export const signUpAndSignIn = () => {
         username: `${uniqid.process()}`,
       }
 
-      const signUpResponse = await API.userSignUp(user)
-      console.log(signUpResponse)
+      await API.userSignUp(user)
       const signInResponse = await API.userLogin(user)
-      console.log(signInResponse)
       localStorage.setItem('userId', signInResponse.user.id)
       localStorage.setItem('authToken', signInResponse.token)
 
@@ -77,14 +84,13 @@ export const signUpAndSignIn = () => {
 }
 
 export const getUserInterests = () => {
-  const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
-      const userInterests = await API.getUserInterest(id, token)
+      const data = await API.getUserInterest(token)
       await dispatch({
         type: types.GET_USER_INTERESTS,
-        userInterests,
+        userInterests: data.result[0],
       })
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -94,15 +100,11 @@ export const getUserInterests = () => {
 }
 
 export const addUserInterests = data => {
-  // const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
       await API.addUserInterests(data, token)
-      await dispatch({
-        type: types.ADD_USER_INTERESTS,
-        userInterests: data,
-      })
+      await dispatch(getUserInterests())
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)

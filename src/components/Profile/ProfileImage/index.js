@@ -8,7 +8,9 @@ const ProfileImage = props => {
   }/api/v4/users/${userId}/image`
   return (
     <div className="profile-header-item">
-      <img className="profile-img" src={imageUri} alt="Profiilikuva" />
+      {userId && (
+        <img className="profile-img" src={imageUri} alt="Profiilikuva" />
+      )}
       <span className="sr-only">Profiilikuva</span>
     </div>
   )

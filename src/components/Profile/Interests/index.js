@@ -4,24 +4,19 @@ import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import InterestsGrid from './InterestsGrid'
 import EditInterestsGrid from './EditInterestsGrid'
+import icons from '../../../contants/interestIcons'
 
 const Interests = props => {
-  const { editProfile, toggleEditProfile } = props
+  const { userInterests, editProfile, toggleEditProfile } = props
   const [showInterestsGrid, setShowInterestsGrid] = useState(false)
   const handleClick = () => {
     setShowInterestsGrid(!showInterestsGrid)
   }
-  const interestList = [
-    { key: 'Eläimet', icon: 'fas fa-paw fa-fw' },
-    { key: 'Matkustus', icon: 'fas fa-globe-europe fa-fw' },
-    { key: 'Urheilu', icon: 'fas fa-volleyball-ball fa-fw' },
-    { key: 'Luonto', icon: 'fas fa-tree fa-fw' },
-    { key: 'Elokuvat', icon: 'fas fa-film fa-fw' },
-    { key: 'Ruoka', icon: 'fas fa-utensils fa-fw' },
-    { key: 'Mekaniikka', icon: 'fas fa-cogs fa-fw' },
-    { key: 'Musiikki', icon: 'fas fa-music fa-fw' },
-    { key: 'Taide', icon: 'fas fa-palette fa-fw' },
-  ]
+  const getIcon = name => {
+    const iconObject = icons.find(item => item.key === name)
+    return iconObject.icon
+  }
+
   return (
     <div className="interests-container">
       <h2 className="interests-header">Minua kiinnostaa</h2>
@@ -36,7 +31,7 @@ const Interests = props => {
         )}
         {editProfile && (
           <>
-            <EditInterestsGrid interestList={interestList} />
+            <EditInterestsGrid interestList={userInterests} />
             <ButtonContainer
               className="interests-ready-button"
               onClick={toggleEditProfile}
@@ -46,7 +41,7 @@ const Interests = props => {
           </>
         )}
         {showInterestsGrid && !editProfile && (
-          <InterestsGrid interestList={interestList} />
+          <InterestsGrid interestList={userInterests} getIcon={getIcon} />
         )}
       </div>
     </div>
@@ -56,6 +51,7 @@ const Interests = props => {
 Interests.propTypes = {
   editProfile: propTypes.bool.isRequired,
   toggleEditProfile: propTypes.func.isRequired,
+  userInterests: propTypes.instanceOf(Array).isRequired,
 }
 
 export default Interests

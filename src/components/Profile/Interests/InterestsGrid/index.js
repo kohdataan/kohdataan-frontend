@@ -3,17 +3,17 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const InterestsGrid = props => {
-  const { interestList } = props
+  const { interestList, getIcon } = props
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
-        <span key={interest.key} className="interests-grid-item">
+        <span key={interest.name} className="interests-grid-item">
           <i
             aria-hidden="true"
-            className={interest.icon}
-            title={interest.key}
+            className={getIcon(interest.name)}
+            title={interest.name}
           />
-          <span className="interests-grid-label">{interest.key}</span>
+          <span className="interests-grid-label">{interest.name}</span>
         </span>
       ))}
     </div>
@@ -22,6 +22,7 @@ const InterestsGrid = props => {
 
 InterestsGrid.propTypes = {
   interestList: propTypes.instanceOf(Array).isRequired,
+  getIcon: propTypes.func.isRequired,
 }
 
 export default InterestsGrid

@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
 
 const EditInterestsGrid = props => {
-  const { interestList } = props
+  const { interestList, getIcon } = props
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
@@ -27,6 +27,7 @@ const EditInterestsGrid = props => {
 
 EditInterestsGrid.propTypes = {
   interestList: propTypes.instanceOf(Array).isRequired,
+  getIcon: propTypes.func.isRequired,
 }
 
 export default EditInterestsGrid
