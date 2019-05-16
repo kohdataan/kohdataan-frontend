@@ -4,8 +4,7 @@ import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
 
 // TODO: remove after beta.
-
-export const addUserToStateAndMattermostLogin = () => {
+export const addUserToStateAndMattermostLogin = (mmusername, mmpassword) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
@@ -16,22 +15,10 @@ export const addUserToStateAndMattermostLogin = () => {
         user: user.user,
       })
 
-      /* TODO: MATTERMOST LOGIN, backend is not ready
-        dispatch(
-          login(
-            user.username,
-            user.password
-          )
-        )
-        */
-
-      dispatch(
-        login(
-          process.env.REACT_APP_MATTERMOST_USERNAME,
-          process.env.REACT_APP_MATTERMOST_PASSWORD
-        )
-      )
+      dispatch(login(mmusername, mmpassword))
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
       dispatch({ type: types.GET_USER_FAILURE, payload: e, error: true })
     }
   }
@@ -65,21 +52,60 @@ export const signUpAndSignIn = () => {
         username: `${uniqid.process()}`,
       }
 
-      await API.userSignUp(user)
+      const signUpResponse = await API.userSignUp(user)
+      console.log(signUpResponse)
       const signInResponse = await API.userLogin(user)
-
+      console.log(signInResponse)
       localStorage.setItem('userId', signInResponse.user.id)
       localStorage.setItem('authToken', signInResponse.token)
 
       await dispatch(
         addUserToStateAndMattermostLogin(
-          signInResponse.user.id,
-          signInResponse.token
+          // signInResponse.user.id,
+          // signInResponse.token,
+          user.email,
+          user.password
         )
       )
     } catch (e) {
       // throw error message if sign up or sign in fail
+      // eslint-disable-next-line no-console
+      console.error(e)
       dispatch({ type: types.SIGNUP_SIGNIN_FAILURE, payload: e, error: true })
+    }
+  }
+}
+
+export const getUserInterests = () => {
+  const id = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
+  return async dispatch => {
+    try {
+      const userInterests = await API.getUserInterest(id, token)
+      await dispatch({
+        type: types.GET_USER_INTERESTS,
+        userInterests,
+      })
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+}
+
+export const addUserInterests = data => {
+  // const id = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
+  return async dispatch => {
+    try {
+      await API.addUserInterests(data, token)
+      await dispatch({
+        type: types.ADD_USER_INTERESTS,
+        userInterests: data,
+      })
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
     }
   }
 }

@@ -66,4 +66,44 @@ const updateUser = async (data, id, token) => {
   }
 }
 
-export { userLogin, userSignUp, getUser, updateUser }
+const addUserInterests = async (data, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/userInterest`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const getUserInterest = async (id, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/userInterest/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+export {
+  userLogin,
+  userSignUp,
+  getUser,
+  updateUser,
+  getUserInterest,
+  addUserInterests,
+}
