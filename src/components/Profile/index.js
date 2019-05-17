@@ -19,9 +19,12 @@ const Profile = props => {
     addUserInterests,
     updateUser,
   } = props
-  const { location, description, nickname } = myUserInfo
+  const { location, description, nickname, tutorialWatched } = myUserInfo
   const [editProfile, setEditProfile] = useState(false)
-  const [showModals, setShowModals] = useState({ 1: true, 2: true })
+  const [showModals, setShowModals] = useState({
+    1: !tutorialWatched,
+    2: !tutorialWatched,
+  })
   const [currentInterestIds, setCurrentInterestsIds] = useState([])
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
@@ -37,6 +40,9 @@ const Profile = props => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
+    if (modal === 2) {
+      updateUser({ tutorialWatched: true })
+    }
   }
 
   return (

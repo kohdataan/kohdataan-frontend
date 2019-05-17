@@ -8,9 +8,10 @@ const EditInterestsContainer = props => {
   const { options, interests, setInterests } = props
   const itemIsSelected = id => interests.includes(id)
   // Select item if less than 5 items are selected
+
   const addToSelected = key => {
     if (interests.length < 5) {
-      const interestsArr = interests
+      const interestsArr = [...interests]
       interestsArr.push(key)
       setInterests(interestsArr)
     }
@@ -18,7 +19,7 @@ const EditInterestsContainer = props => {
 
   // Remove from selected items
   const removeFromSelected = id => {
-    const interestsArr = interests
+    const interestsArr = [...interests]
     const indx = interests.indexOf(id)
     if (indx > -1) {
       interestsArr.splice(indx, 1)
@@ -41,7 +42,9 @@ const EditInterestsContainer = props => {
         <ButtonContainer
           key={interest.name}
           className={`${
-            itemIsSelected(interest.id) ? 'interests-grid-item-selected' : ''
+            interests.includes(interest.id)
+              ? 'interests-grid-item-selected'
+              : ''
           } interests-grid-edit-button interests-grid-edit-item`}
           onClick={handleClick(interest.id)}
         >
