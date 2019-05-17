@@ -28,7 +28,6 @@ const EditInterestsContainer = props => {
 
   // Toggle selection
   const handleClick = id => () => {
-    console.log(`clicked ${id}`)
     if (!itemIsSelected(id)) {
       addToSelected(id)
     } else {

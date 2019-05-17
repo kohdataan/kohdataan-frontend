@@ -3,13 +3,14 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const DescriptionTextEdit = props => {
-  const { currentText } = props
+  const { currentText, updateUser } = props
   const [descriptionText, setDescriptionText] = useState(currentText)
 
   const handleSubmit = e => {
     e.preventDefault()
     console.log(descriptionText)
-    setDescriptionText('')
+    updateUser({ description: descriptionText })
+    setDescriptionText(descriptionText)
   }
 
   const handleChange = e => {
@@ -41,6 +42,7 @@ const DescriptionTextEdit = props => {
 
 DescriptionTextEdit.propTypes = {
   currentText: propTypes.string.isRequired,
+  updateUser: propTypes.func.isRequired,
 }
 
 export default DescriptionTextEdit

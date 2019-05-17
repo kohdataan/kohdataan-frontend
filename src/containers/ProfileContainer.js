@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,
   getUserInterests as getUserInterestsAction,
+  updateUser as updateUserAction,
 } from '../store/user/userAction'
 import getInterests from '../store/interest/interestAction'
 import Profile from '../components/Profile'
@@ -24,11 +25,12 @@ const ProfileContainer = props => {
     interestOptions,
     addUserInterests,
     getUserInterests,
+    updateUser,
+    myUserInfo,
   } = props
-  const [user, setUser] = useState({})
+  const [mmuser, setmmUser] = useState({})
   // TODO: Get other user's interests for other user profile
   // const [interests, setInterests] = useState([])
-
   useEffect(() => {
     getMe()
     props.getInterests()
@@ -36,21 +38,23 @@ const ProfileContainer = props => {
 
   useEffect(() => {
     if (username) {
-      getProfilesByUsernames([username]).then(data => setUser(data.data[0]))
-      // TODO: Get other users interests
+      getProfilesByUsernames([username]).then(data => setmmUser(data.data[0]))
+      // TODO: Get other users info from node backend (interests, location, description)
     } else {
-      setUser(currentUser)
+      setmmUser(currentUser)
       getUserInterests()
     }
   }, [username, currentUser])
 
   return (
     <Profile
-      user={user}
+      user={mmuser}
       currentUser={currentUser}
       userInterests={userInterests}
       interestOptions={interestOptions}
       addUserInterests={addUserInterests}
+      myUserInfo={myUserInfo}
+      updateUser={updateUser}
     />
   )
 }
@@ -61,6 +65,7 @@ const mapStateToProps = (state, ownProps) => {
   const currentUser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.Interest
   const interestOptions = state.interests.results
+  const myUserInfo = state.user
 
   return {
     currentUserId,
@@ -68,6 +73,7 @@ const mapStateToProps = (state, ownProps) => {
     username,
     userInterests,
     interestOptions,
+    myUserInfo,
   }
 }
 
@@ -75,12 +81,14 @@ ProfileContainer.propTypes = {
   getMe: PropTypes.func.isRequired,
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
+  myUserInfo: PropTypes.instanceOf(Object).isRequired,
   getProfilesByUsernames: PropTypes.func.isRequired,
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
   getInterests: PropTypes.func.isRequired,
   addUserInterests: PropTypes.func.isRequired,
   getUserInterests: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
@@ -97,6 +105,7 @@ const mapDispatchToProps = dispatch =>
       getProfilesByUsernames: getProfilesByUsernamesAction,
       addUserInterests: addUserInterestsAction,
       getUserInterests: getUserInterestsAction,
+      updateUser: updateUserAction,
       getInterests,
     },
     dispatch

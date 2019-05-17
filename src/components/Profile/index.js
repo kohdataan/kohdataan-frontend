@@ -12,21 +12,23 @@ import Instructions from './Instructions'
 const Profile = props => {
   const {
     user,
+    myUserInfo,
     currentUser,
     userInterests,
     interestOptions,
     addUserInterests,
+    updateUser,
   } = props
+  const { location, description, nickname } = myUserInfo
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({ 1: true, 2: true })
   const [currentInterestIds, setCurrentInterestsIds] = useState([])
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
   }, [userInterests])
-  const descriptionText = 'Esimerkkikuvaus käyttäjästä'
   const toggleEditProfile = () => setEditProfile(!editProfile)
   const handleEditReady = () => {
-    // TODO: POST interests to backend
+    // eslint-disable-next-line no-console
     console.log('adding user interests', currentInterestIds)
     addUserInterests({ userInterests: currentInterestIds })
     toggleEditProfile()
@@ -41,7 +43,7 @@ const Profile = props => {
     <div className="profile-container">
       <div className="profile-header-container">
         <ProfileImage userId={user.id} />
-        {user && <ProfileHeader username={user.username} />}
+        {user && <ProfileHeader username={user.username} location={location} />}
         {user === currentUser && (
           <EditButton
             toggleEditProfile={toggleEditProfile}
@@ -50,8 +52,13 @@ const Profile = props => {
           />
         )}
       </div>
-      {!editProfile && <Description text={descriptionText} />}
-      {editProfile && <DescriptionTextEdit currentText={descriptionText} />}
+      {!editProfile && <Description text={description} />}
+      {editProfile && (
+        <DescriptionTextEdit
+          currentText={description}
+          updateUser={updateUser}
+        />
+      )}
       <Interests
         editProfile={editProfile}
         handleEditReady={handleEditReady}
@@ -67,10 +74,12 @@ const Profile = props => {
 
 Profile.propTypes = {
   user: propTypes.instanceOf(Object).isRequired,
+  myUserInfo: propTypes.instanceOf(Object).isRequired,
   currentUser: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array).isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
   addUserInterests: propTypes.func.isRequired,
+  updateUser: propTypes.func.isRequired,
 }
 
 export default Profile
