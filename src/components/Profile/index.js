@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ProfileImage from './ProfileImage'
@@ -10,12 +10,27 @@ import DescriptionTextEdit from './DescriptionTextEdit'
 import Instructions from './Instructions'
 
 const Profile = props => {
-  const { user, currentUser, userInterests } = props
+  const {
+    user,
+    currentUser,
+    userInterests,
+    interestOptions,
+    addUserInterests,
+  } = props
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({ 1: true, 2: true })
+  const [currentInterestIds, setCurrentInterestsIds] = useState([])
+  useEffect(() => {
+    setCurrentInterestsIds(userInterests.map(item => item.id))
+  }, [userInterests])
   const descriptionText = 'Esimerkkikuvaus käyttäjästä'
   const toggleEditProfile = () => setEditProfile(!editProfile)
-
+  const handleEditReady = () => {
+    // TODO: POST interests to backend
+    console.log('adding user interests', currentInterestIds)
+    addUserInterests({ userInterests: currentInterestIds })
+    toggleEditProfile()
+  }
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
@@ -39,8 +54,11 @@ const Profile = props => {
       {editProfile && <DescriptionTextEdit currentText={descriptionText} />}
       <Interests
         editProfile={editProfile}
-        toggleEditProfile={toggleEditProfile}
+        handleEditReady={handleEditReady}
         userInterests={userInterests}
+        currentInterestIds={currentInterestIds}
+        setCurrentInterestsIds={setCurrentInterestsIds}
+        interestOptions={interestOptions}
       />
       <Instructions closeModal={closeModal} showModals={showModals} />
     </div>
@@ -51,6 +69,8 @@ Profile.propTypes = {
   user: propTypes.instanceOf(Object).isRequired,
   currentUser: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array).isRequired,
+  interestOptions: propTypes.instanceOf(Array).isRequired,
+  addUserInterests: propTypes.func.isRequired,
 }
 
 export default Profile

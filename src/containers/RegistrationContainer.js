@@ -32,8 +32,6 @@ const RegistrationContainer = props => {
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
-  const userId = localStorage.getItem('userId')
-  const token = localStorage.getItem('authToken')
 
   const subpage = () => {
     switch (step) {
@@ -90,9 +88,7 @@ const RegistrationContainer = props => {
       }
       case pages['add-interests'].current: {
         console.log(`add-interests ${interests}`)
-        const data = { userId, userInterests: interests }
-        return props.addUserInterests(data, token)
-        // TODO: POST interests to backend
+        return props.addUserInterests({ userInterests: interests })
       }
       default:
         return undefined

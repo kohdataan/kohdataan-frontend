@@ -99,10 +99,12 @@ export const getUserInterests = () => {
   }
 }
 
-export const addUserInterests = data => {
+export const addUserInterests = interests => {
+  const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
+      const data = { userId: id, ...interests }
       await API.addUserInterests(data, token)
       await dispatch(getUserInterests())
     } catch (e) {

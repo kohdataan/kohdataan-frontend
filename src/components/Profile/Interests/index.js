@@ -3,18 +3,20 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import InterestsGrid from './InterestsGrid'
-import EditInterestsGrid from './EditInterestsGrid'
-import icons from '../../../contants/interestIcons'
+import EditInterestsContainer from '../../EditInterestsContainer'
 
 const Interests = props => {
-  const { userInterests, editProfile, toggleEditProfile } = props
+  const {
+    userInterests,
+    currentInterestIds,
+    setCurrentInterestsIds,
+    editProfile,
+    handleEditReady,
+    interestOptions,
+  } = props
   const [showInterestsGrid, setShowInterestsGrid] = useState(false)
   const handleClick = () => {
     setShowInterestsGrid(!showInterestsGrid)
-  }
-  const getIcon = name => {
-    const iconObject = icons.find(item => item.key === name)
-    return iconObject.icon
   }
 
   return (
@@ -31,17 +33,21 @@ const Interests = props => {
         )}
         {editProfile && (
           <>
-            <EditInterestsGrid interestList={userInterests} />
+            <EditInterestsContainer
+              options={interestOptions}
+              setInterests={setCurrentInterestsIds}
+              interests={currentInterestIds}
+            />
             <ButtonContainer
               className="interests-ready-button"
-              onClick={toggleEditProfile}
+              onClick={handleEditReady}
             >
               Valmis
             </ButtonContainer>
           </>
         )}
         {showInterestsGrid && !editProfile && (
-          <InterestsGrid interestList={userInterests} getIcon={getIcon} />
+          <InterestsGrid interestList={userInterests} />
         )}
       </div>
     </div>
@@ -50,8 +56,11 @@ const Interests = props => {
 
 Interests.propTypes = {
   editProfile: propTypes.bool.isRequired,
-  toggleEditProfile: propTypes.func.isRequired,
+  handleEditReady: propTypes.func.isRequired,
   userInterests: propTypes.instanceOf(Array).isRequired,
+  interestOptions: propTypes.instanceOf(Array).isRequired,
+  currentInterestIds: propTypes.instanceOf(Array).isRequired,
+  setCurrentInterestsIds: propTypes.func.isRequired,
 }
 
 export default Interests

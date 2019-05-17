@@ -1,9 +1,10 @@
 import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import getIcon from '../../../../utils/getIcon'
 
 const InterestsGrid = props => {
-  const { interestList, getIcon } = props
+  const { interestList } = props
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
@@ -22,7 +23,6 @@ const InterestsGrid = props => {
 
 InterestsGrid.propTypes = {
   interestList: propTypes.instanceOf(Array).isRequired,
-  getIcon: propTypes.func.isRequired,
 }
 
 export default InterestsGrid
