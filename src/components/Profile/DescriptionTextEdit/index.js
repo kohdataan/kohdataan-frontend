@@ -8,7 +8,6 @@ const DescriptionTextEdit = props => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(descriptionText)
     updateUser({ description: descriptionText })
     setDescriptionText(descriptionText)
   }
