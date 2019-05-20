@@ -40,7 +40,7 @@ const Profile = props => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
-    if (modal === 2) {
+    if (modal === 2 && currentUser) {
       updateUser({ tutorialWatched: true })
     }
   }
@@ -50,7 +50,7 @@ const Profile = props => {
       <div className="profile-header-container">
         <ProfileImage userId={user.id} />
         {user && <ProfileHeader username={user.username} location={location} />}
-        {user === currentUser && (
+        {currentUser && (
           <EditButton
             toggleEditProfile={toggleEditProfile}
             isActive={editProfile}
@@ -61,7 +61,7 @@ const Profile = props => {
       {!editProfile && <Description text={description} />}
       {editProfile && (
         <DescriptionTextEdit
-          currentText={description}
+          currentText={description || ''}
           updateUser={updateUser}
         />
       )}
@@ -81,11 +81,17 @@ const Profile = props => {
 Profile.propTypes = {
   user: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
-  currentUser: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array).isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
-  addUserInterests: propTypes.func.isRequired,
-  updateUser: propTypes.func.isRequired,
+  addUserInterests: propTypes.func,
+  currentUser: propTypes.instanceOf(Object),
+  updateUser: propTypes.func,
+}
+
+Profile.defaultProps = {
+  updateUser: null,
+  currentUser: null,
+  addUserInterests: null,
 }
 
 export default Profile

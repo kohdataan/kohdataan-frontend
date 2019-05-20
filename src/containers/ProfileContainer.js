@@ -12,6 +12,7 @@ import {
   updateUser as updateUserAction,
 } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
+import { getInterestsByUsername } from '../api/user'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
@@ -29,33 +30,69 @@ const ProfileContainer = props => {
     myUserInfo,
   } = props
   const [mmuser, setmmUser] = useState({})
+  const [interests, setInterests] = useState([])
   // TODO: Get other user's interests for other user profile
-  // const [interests, setInterests] = useState([])
   useEffect(() => {
     getMe()
     props.getInterestsAction()
   }, [])
 
+  async function fetchOtherUser() {
+    try {
+      const res = await getInterestsByUsername(
+        localStorage.getItem('authToken'),
+        username
+      )
+      if (res.result[0]) {
+        const data = res.result[0].interests
+        setInterests(data)
+      }
+      // eslint-disable-next-line no-console
+      console.log(res)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+
+  // If username is given, get other user's info
   useEffect(() => {
     if (username) {
       getProfilesByUsernames([username]).then(data => setmmUser(data.data[0]))
-      // TODO: Get other users info from node backend (interests, location, description)
-    } else {
-      setmmUser(currentUser)
+      // TODO: Get other users info from node backend (location, description)
+      fetchOtherUser()
+    }
+  }, [username])
+
+  // If no username is given, get current user interests
+  useEffect(() => {
+    if (!username) {
       getUserInterests()
     }
-  }, [username, currentUser])
+  }, [currentUser])
 
   return (
-    <Profile
-      user={mmuser}
-      currentUser={currentUser}
-      userInterests={userInterests}
-      interestOptions={interestOptions}
-      addUserInterests={addUserInterests}
-      myUserInfo={myUserInfo}
-      updateUser={updateUser}
-    />
+    <>
+      {!username && (
+        <Profile
+          user={currentUser}
+          currentUser={currentUser}
+          userInterests={userInterests}
+          interestOptions={interestOptions}
+          addUserInterests={addUserInterests}
+          myUserInfo={myUserInfo}
+          updateUser={updateUser}
+        />
+      )}
+      {username && (
+        <Profile
+          user={mmuser}
+          userInterests={interests}
+          interestOptions={interestOptions}
+          myUserInfo={myUserInfo}
+        />
+      )}
+    </>
   )
 }
 
@@ -63,7 +100,7 @@ const mapStateToProps = (state, ownProps) => {
   const { currentUserId } = state.entities.users
   const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
-  const userInterests = state.user.Interest
+  const userInterests = state.user.interests
   const interestOptions = state.interests.results
   const myUserInfo = state.user
 

@@ -99,6 +99,22 @@ const getUserInterest = async token => {
   }
 }
 
+const getInterestsByUsername = async (token, username) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/userInterest/${username}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
   userSignUp,
@@ -106,4 +122,5 @@ export {
   updateUser,
   getUserInterest,
   addUserInterests,
+  getInterestsByUsername,
 }
