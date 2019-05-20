@@ -11,7 +11,7 @@ import {
   getUserInterests as getUserInterestsAction,
   updateUser as updateUserAction,
 } from '../store/user/userAction'
-import getInterests from '../store/interest/interestAction'
+import getInterestsAction from '../store/interest/interestAction'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
@@ -33,7 +33,7 @@ const ProfileContainer = props => {
   // const [interests, setInterests] = useState([])
   useEffect(() => {
     getMe()
-    props.getInterests()
+    props.getInterestsAction()
   }, [])
 
   useEffect(() => {
@@ -85,7 +85,7 @@ ProfileContainer.propTypes = {
   getProfilesByUsernames: PropTypes.func.isRequired,
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
-  getInterests: PropTypes.func.isRequired,
+  getInterestsAction: PropTypes.func.isRequired,
   addUserInterests: PropTypes.func.isRequired,
   getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch =>
       addUserInterests: addUserInterestsAction,
       getUserInterests: getUserInterestsAction,
       updateUser: updateUserAction,
-      getInterests,
+      getInterestsAction,
     },
     dispatch
   )

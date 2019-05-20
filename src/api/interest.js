@@ -16,4 +16,4 @@ const getInterests = async token => {
   }
 }
 
-export { getInterests }
+export default getInterests

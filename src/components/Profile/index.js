@@ -19,7 +19,7 @@ const Profile = props => {
     addUserInterests,
     updateUser,
   } = props
-  const { location, description, nickname, tutorialWatched } = myUserInfo
+  const { location, description, tutorialWatched } = myUserInfo
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({
     1: !tutorialWatched,

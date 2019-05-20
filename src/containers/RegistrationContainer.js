@@ -16,7 +16,7 @@ import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import { updateUser, addUserInterests } from '../store/user/userAction'
-import getInterests from '../store/interest/interestAction'
+import getInterestsAction from '../store/interest/interestAction'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 
 const RegistrationContainer = props => {
@@ -131,7 +131,7 @@ const mapDispatchToProps = dispatch =>
       updateUser,
       uploadProfileImage,
       addUserInterests,
-      getInterests,
+      getInterestsAction,
     },
     dispatch
   )

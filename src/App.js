@@ -18,7 +18,7 @@ import {
   signUpAndSignIn,
   addUserToStateAndMattermostLogin,
 } from './store/user/userAction'
-import getInterests from './store/interest/interestAction'
+import getInterestsAction from './store/interest/interestAction'
 import './styles/defaults.scss'
 
 Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
@@ -45,7 +45,7 @@ const App = props => {
   }, [])
 
   useEffect(() => {
-    props.getInterests()
+    props.getInterestsAction()
   }, [])
 
   return (
@@ -66,7 +66,7 @@ App.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   signUpAndSignIn: PropTypes.func.isRequired,
   addUserToStateAndMattermostLogin: PropTypes.func.isRequired,
-  getInterests: PropTypes.func.isRequired,
+  getInterestsAction: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -75,7 +75,7 @@ const mapDispatchToProps = dispatch =>
       init,
       signUpAndSignIn,
       addUserToStateAndMattermostLogin,
-      getInterests,
+      getInterestsAction,
     },
     dispatch
   )

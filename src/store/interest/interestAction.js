@@ -1,12 +1,13 @@
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/interest'
+// import * as API from '../../api/interest'
+import getInterests from '../../api/interest'
 
-const getInterests = () => {
+const getInterestsAction = () => {
   // const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
-      const interests = await API.getInterests(token)
+      const interests = await getInterests(token)
       await dispatch({
         type: types.GET_INTERESTS,
         interests,
@@ -18,4 +19,4 @@ const getInterests = () => {
   }
 }
 
-export default getInterests
+export default getInterestsAction
