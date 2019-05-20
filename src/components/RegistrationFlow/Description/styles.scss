@@ -1,0 +1,35 @@
+@import '../../../styles/colors.scss';
+
+.add-user-description-container {
+  margin: 10px;
+  position: relative;
+}
+
+.add-user-description-text {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px 0;
+  width: 100%;
+  font-weight: 700;
+}
+
+.add-user-description-field {
+  margin-top: 5px;
+  background: transparent;
+  border: solid 1px $black;
+  padding: 10px 0 10px 10px;
+  &::placeholder {
+    color: $text-gray;
+  }
+}
+
+.add-user-description-limit {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  font-weight: 700;
+}
+
+.add-user-description-title {
+  font-weight: 500;
+}

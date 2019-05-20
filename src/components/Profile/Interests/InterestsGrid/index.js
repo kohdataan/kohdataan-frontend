@@ -1,19 +1,20 @@
 import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import getIcon from '../../../../utils/getIcon'
 
 const InterestsGrid = props => {
   const { interestList } = props
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
-        <span key={interest.key} className="interests-grid-item">
+        <span key={interest.name} className="interests-grid-item">
           <i
             aria-hidden="true"
-            className={interest.icon}
-            title={interest.key}
+            className={getIcon(interest.name)}
+            title={interest.name}
           />
-          <span className="interests-grid-label">{interest.key}</span>
+          <span className="interests-grid-label">{interest.name}</span>
         </span>
       ))}
     </div>

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import test from './test/testReducer'
+import user from './user/userReducer'
+import interests from './interest/interestReducer'
 
 export const appReducer = () => {
   return {
-    test,
+    user,
+    interests,
   }
 }
 

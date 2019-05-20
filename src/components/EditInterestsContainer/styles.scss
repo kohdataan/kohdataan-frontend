@@ -1,4 +1,4 @@
-@import '../../../../styles/colors.scss';
+@import '../../styles/colors.scss';
 
 .interests-grid-edit-item {
   display: flex;
@@ -29,4 +29,5 @@
   font-size: 15px;
   color: $gray;
   letter-spacing: -0.2px;
+  border-radius: 0px;
 }

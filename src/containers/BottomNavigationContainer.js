@@ -13,6 +13,10 @@ const BottomNavigationContainer = props => {
     return <div />
   }
 
+  if (pathname.split('/')[1] === 'registration') {
+    return <div />
+  }
+
   return (
     <BottomNavigation>
       <BottomNavigationLink

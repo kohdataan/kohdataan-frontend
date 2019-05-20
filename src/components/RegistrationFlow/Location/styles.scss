@@ -1,0 +1,26 @@
+@import '../../../styles/colors.scss';
+
+.add-user-location-container {
+  margin: 10px;
+}
+
+.add-user-location-text {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+.add-user-location-field {
+  margin-top: 5px;
+  background: transparent;
+  border: solid 1px $black;
+  padding: 10px 0 10px 10px;
+  &::placeholder {
+    color: $text-gray;
+  }
+}
+
+.add-user-location-title {
+  font-weight: 500;
+}
