@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
 import GroupsContainer from './containers/GroupsContainer'
-import QuestionsContainer from './containers/QuestionsContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PrivateRoute from './utils/PrivateRoute'
 import ChatContainer from './containers/ChatContainer'
@@ -21,13 +20,12 @@ import {
 import getInterestsAction from './store/interest/interestAction'
 import './styles/defaults.scss'
 
-Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-
 const App = props => {
   const { history } = props
 
   // websocket effect
   useEffect(() => {
+    Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     props.init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
   }, [])
 
@@ -53,7 +51,6 @@ const App = props => {
       <Route path="/login" component={LogInContainer} />
       <Route path="/registration/:step" component={RegistrationContainer} />
       <PrivateRoute path="/profiili/:username?" component={ProfileContainer} />
-      <PrivateRoute path="/kysymykset" component={QuestionsContainer} />
       <PrivateRoute path="/ryhmat" component={GroupsContainer} />
       <PrivateRoute path="/chat/:id" component={ChatContainer} />
       {localStorage.getItem('authToken') && <BottomNavigationContainer />}

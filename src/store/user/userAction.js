@@ -16,15 +16,6 @@ export const addUserToStateAndMattermostLogin = (mmusername, mmpassword) => {
       })
 
       dispatch(login(mmusername, mmpassword))
-
-      /*
-      dispatch(
-        login(
-          process.env.REACT_APP_MATTERMOST_USERNAME,
-          process.env.REACT_APP_MATTERMOST_PASSWORD
-        )
-      )
-      */
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -60,6 +51,8 @@ export const signUpAndSignIn = () => {
         password: `${uniqid.process()}`,
         username: `${uniqid.process()}`,
       }
+
+      console.log(user)
 
       await API.userSignUp(user)
       const signInResponse = await API.userLogin(user)
