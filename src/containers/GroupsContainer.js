@@ -9,6 +9,7 @@ import {
 import {
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
+  getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import getChannelInvitationsAction from '../store/channels/channelAction'
@@ -28,12 +29,13 @@ const GroupsContainer = props => {
     joinChannel,
     channelSuggestions,
     getChannelInvitations,
+    getChannelMembers,
+    profiles,
   } = props
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
     loadMe()
-    // TODO: Get channel suggestions from backend
     getChannelInvitations()
   }, [])
 
@@ -84,7 +86,11 @@ const GroupsContainer = props => {
         channels={getFilteredChannelSuggestions()}
         handleJoinChannel={handleJoinChannel}
       />
-      <Groups channels={getGroupChannels(getChannelInfoForMyChannels())} />
+      <Groups
+        channels={getGroupChannels(getChannelInfoForMyChannels())}
+        getMembers={getChannelMembers}
+        profiles={profiles}
+      />
     </>
   )
 }
@@ -94,6 +100,7 @@ GroupsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
@@ -101,6 +108,7 @@ GroupsContainer.propTypes = {
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
   getChannelInvitations: PropTypes.func.isRequired,
+  getChannelMembers: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -144,6 +152,7 @@ const mapDispatchToProps = dispatch =>
       loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelInvitations: getChannelInvitationsAction,
+      getChannelMembers: getChannelMembersAction,
     },
     dispatch
   )
