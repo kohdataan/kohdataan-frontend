@@ -29,10 +29,10 @@ const Profile = props => {
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
   }, [userInterests])
+  const [updatedDescription, setUpdatedDescription] = useState(description)
   const toggleEditProfile = () => setEditProfile(!editProfile)
   const handleEditReady = () => {
-    // eslint-disable-next-line no-console
-    console.log('adding user interests', currentInterestIds)
+    updateUser({ description: updatedDescription })
     addUserInterests({ userInterests: currentInterestIds })
     toggleEditProfile()
   }
@@ -61,8 +61,12 @@ const Profile = props => {
       {!editProfile && <Description text={description} />}
       {editProfile && (
         <DescriptionTextEdit
-          currentText={description || ''}
-          updateUser={updateUser}
+          currentText={
+            typeof updatedDescription === 'string'
+              ? updatedDescription
+              : description || ''
+          }
+          onChange={setUpdatedDescription}
         />
       )}
       <Interests

@@ -29,7 +29,7 @@ h2 {
 
 body {
   font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: -0.2px;
   height: 100%;
   color: $gray;
@@ -37,7 +37,7 @@ body {
 
 h4 {
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing: -0.1px;
   text-align: center;
@@ -83,4 +83,8 @@ input[type='week'],
 select:focus,
 textarea {
   font-size: 16px;
+}
+
+#react-select-2-input {
+  font-size: 16px !important;
 }

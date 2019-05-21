@@ -42,7 +42,7 @@ const Interests = props => {
               className="interests-ready-button"
               onClick={handleEditReady}
             >
-              Valmis
+              Tallenna
             </ButtonContainer>
           </>
         )}
