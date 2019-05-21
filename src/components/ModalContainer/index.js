@@ -19,7 +19,7 @@ const customStyles = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '3000',
+    zIndex: '2000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }

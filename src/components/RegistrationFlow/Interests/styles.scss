@@ -1,0 +1,16 @@
+@import '../../../styles/colors.scss';
+
+.add-user-interests-container {
+  margin: 30px;
+}
+
+.add-user-interests-title {
+  font-weight: 500;
+}
+
+.interests-grid-item-selected {
+  & i {
+    background: black;
+    color: $orange;
+  }
+}

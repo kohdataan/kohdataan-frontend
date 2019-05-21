@@ -3,6 +3,14 @@
 @import './normalize.scss';
 @import './colors.scss';
 
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 h1 {
   color: $black;
   font-family: 'Paytone One', sans-serif;
@@ -16,19 +24,20 @@ h2 {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: -0.2px;
-  color: $gray;
+  color: #4a4a4a;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: -0.2px;
+  height: 100%;
   color: $gray;
 }
 
 h4 {
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing: -0.1px;
   text-align: center;
@@ -55,4 +64,27 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+input[type='color'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
+select:focus,
+textarea {
+  font-size: 16px;
+}
+
+#react-select-2-input {
+  font-size: 16px !important;
 }

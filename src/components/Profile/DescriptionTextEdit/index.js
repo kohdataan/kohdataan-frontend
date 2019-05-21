@@ -1,39 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 
 const DescriptionTextEdit = props => {
-  const { currentText } = props
-  const [descriptionText, setDescriptionText] = useState(currentText)
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    console.log(descriptionText)
-    setDescriptionText('')
-  }
+  const { currentText, onChange } = props
 
   const handleChange = e => {
-    setDescriptionText(e.target.value)
+    onChange(e.target.value)
   }
 
   return (
     <div className="description-container">
       <div className="description-text-edit-title-wrapper">
         <h2 className="description-header-edit">Kuvaus</h2>
-        <h2 className="max-length-label">{`${descriptionText.length}/ 200`}</h2>
+        <h2 className="max-length-label">{`${currentText.length}/ 200`}</h2>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor="description textfield">
           <textarea
             className="description-text-edit-input"
             id="description"
             maxLength="200"
             type="text"
-            value={descriptionText}
+            value={currentText}
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value=">" />
       </form>
     </div>
   )
@@ -41,6 +33,7 @@ const DescriptionTextEdit = props => {
 
 DescriptionTextEdit.propTypes = {
   currentText: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
 }
 
 export default DescriptionTextEdit

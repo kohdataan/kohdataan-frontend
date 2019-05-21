@@ -13,17 +13,16 @@ const BottomNavigationContainer = props => {
     return <div />
   }
 
+  if (pathname.split('/')[1] === 'registration') {
+    return <div />
+  }
+
   return (
     <BottomNavigation>
       <BottomNavigationLink
         title="Profiili"
         route="/profiili"
         icon="fas fa-user-circle"
-      />
-      <BottomNavigationLink
-        title="Kysymykset"
-        route="/kysymykset"
-        icon="fas fa-balance-scale"
       />
       <BottomNavigationLink
         title="Ryhmät"

@@ -1,0 +1,12 @@
+@import '../../../styles/colors.scss';
+
+.error-notification-container {
+  display: flex;
+  color: white;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: $black;
+  padding: 30px 0;
+  min-height: 80px;
+}

@@ -18,3 +18,11 @@
     font-size: 22px;
   }
 }
+
+.user-edit-button-highlight {
+  border-radius: 50%;
+  background: $background-gray;
+  padding: 19px 19px;
+  z-index: 4000;
+  position: relative;
+}
