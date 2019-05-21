@@ -49,7 +49,9 @@ const Profile = props => {
     <div className="profile-container">
       <div className="profile-header-container">
         <ProfileImage userId={user.id} />
-        {user && <ProfileHeader username={user.username} location={location} />}
+        {user && (
+          <ProfileHeader nickname={myUserInfo.nickname} location={location} />
+        )}
         {currentUser && (
           <EditButton
             toggleEditProfile={toggleEditProfile}

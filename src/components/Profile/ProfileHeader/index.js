@@ -2,11 +2,11 @@ import React from 'react'
 import './styles.scss'
 
 const Header = props => {
-  const { username, location } = props || ''
+  const { nickname, location } = props || ''
 
   return (
     <span className="profile-header-item">
-      <h1>{username}</h1>
+      <h1>{nickname}</h1>
       <div>{location}</div>
     </span>
   )
