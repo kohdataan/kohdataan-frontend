@@ -7,19 +7,19 @@
 
 ## Projektin tausta ja tavoitteet
 
-Projektissa kehitämme ja toteutamme yhdessä uutta saavutettavaa somepalvelua, jossa on helppo tutustua uusiin ihmisiin. 
+Projektissa kehitämme ja toteutamme yhdessä uutta saavutettavaa somepalvelua, jossa on helppo tutustua uusiin ihmisiin.
 
 Tavoitteena on luoda palvelu, jossa on turvallinen ja myönteinen ilmapiiri, jossa ketään ei kiusata, ja jossa ketään ei jätetä yksin. Palvelussa tuetaan kohtaamista ja vuorovaikutusta, jotta kaikilla olisi mahdollisuus tutustua omanhenkisiin ihmisiin, ja myös ylläpitää kaverisuhteitaan.
 
 Palvelu on avoin kaikille yli 15-vuotiaille nuorille ja aikuisille. Palvelun toteutuksessa otetaan huomioon käyttäjien erilaiset tarpeet saavutettavuuden ja helppokäyttöisyyden osalta, ja palvelussa voi myös viestiä erilaisin keinoin. Palvelu toteutetaan web-sovelluksena ensisijaisesti mobiililaitteille, mutta palvelua voi käyttää myös muilla laitteilla.
 
-Palvelu ja sen tekninen yhteiskehittäminen liittyy Somettamalla uutta kohtaamista eli [Kohdataan-hankkeeseen](https://kohdataan.fi/), jossa tavoitteena on yksinäisyyden vähentäminen somen keinoin. 
+Palvelu ja sen tekninen yhteiskehittäminen liittyy Somettamalla uutta kohtaamista eli [Kohdataan-hankkeeseen](https://kohdataan.fi/), jossa tavoitteena on yksinäisyyden vähentäminen somen keinoin.
 
 Palvelun kehittäminen käynnistettiin keväällä 2018 Kohdataan-hackathonissa, jossa haastettiin eri alojen osaajia innovoimaan ja ideoimaan tulevaisuuden somepalvelua. Ideoista on työstetty yhdessä käyttäjien ja kumppaneiden kanssa konsepti, jonka kehittämistä ja toteuttamista on jatkettu keväällä 2019. Palvelu julkaistaan syksyllä 2019.
 
 Palvelun toteutuksessa keskeistä on käyttäjälähtöisyys. Myös tekniseen toteutukseen on luotu yhteiskehittämisen malli, jossa palvelua kehitetään yhteistyössä paitsi käyttäjien, myös kaikkien palvelusta kiinnostuneiden ohjelmistokehittäjien ja muiden osaajien kanssa. Avoimuus ja yhdessä tekeminen, samoin uusien toimintatapojen kokeileminen on koko hankkeen ytimessä. Yhteiskehittämisestä saadaan myös tärkeää lisäresurssia palvelun toteutukseen.
 
-Kohdataan-hanke on [Kehitysvammaliiton](https://www.kehitysvammaliitto.fi/) ja [Mielenterveysseuran](https://www.mielenterveysseura.fi/) yhteishanke. 
+Kohdataan-hanke on [Kehitysvammaliiton](https://www.kehitysvammaliitto.fi/) ja [Mielenterveysseuran](https://www.mielenterveysseura.fi/) yhteishanke.
 
 Hanketta rahoittaa Sosiaali- ja terveysjärjestöjen avustuskeskus [STEA](https://www.stea.fi/).
 
@@ -31,18 +31,29 @@ Teknisenä kumppanina ja yhteiskehittämisen koordinaattorina hankkeessa toimii 
 
 Saat frontendin kehitysympäristön pystyyn ajamalla seuraavat komennot:
 
-````bash
-git clone git@github.com:kohdataan/kohdataan-frontend.git
+```bash
+git clone https://github.com/kohdataan/kohdataan-frontend.git
 cd kohdataan-frontend
 npm install
 npm start
-````
+```
+
+Ympäristömuuttujat voi tallentaa esim. .env tiedostoon seuraavalla tyylillä:
+
+```
+REACT_APP_MATTERMOST_USERNAME = "example@example.fi"
+REACT_APP_MATTERMOST_PASSWORD = "examplePassword"
+REACT_APP_MATTERMOST_URL = "localhost:9090"
+REACT_APP_NODE_BACKEND_URL = "http://localhost:9090/node_api"
+```
+
+Tässä oletetaan, että backend on lokaalisti pystyssä, ja sinne on luotu käyttäjä vastaavilla tunnuksilla. Kunnes kirjautumis- ja rekisteröitymistoiminnallisuudet valmistuvat, tarvitaan siis valmiiksi luotu mattermost-käyttäjä. Käyttäjiä voi toistaiseksi luoda joko mattermost-käyttöliittymän avulla avaamalla selaimessa http://localhost:9090, tai suoraan mattermost apin:n kautta. Kehityksen tukena voi hyvin muutenkin hyödyntää mattermostin omaa käyttöliittymää, ja varmistaa että Kohdataan-käyttöliittymä toimii oletetusti.
 
 ### Tunnukset testaamiseen
 
 ## Dokumentaatio ja arkkitehtuuri
 
-![Kohdataan arkkitehtuuri](https://github.com/kohdataan/kohdataan-backend/blob/master/documentation/kohdataan-architecture.png?raw=true "Kohdataan arkkitehtuuri")
+![Kohdataan arkkitehtuuri](https://github.com/kohdataan/kohdataan-backend/blob/master/documentation/kohdataan-architecture.png?raw=true 'Kohdataan arkkitehtuuri')
 
 ## Ulkoasu
 
@@ -66,7 +77,7 @@ Slackin lisäksi projektiin liittyvää kommunikaatiota on myös GitHubissa Pull
 
 ### Lähdekoodin tyyliohjeet
 
-Projektissa on käytössä [ESLint](https://github.com/eslint/eslint) ja [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) pienin muutoksin. 
+Projektissa on käytössä [ESLint](https://github.com/eslint/eslint) ja [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) pienin muutoksin.
 
 #### Frontend
 
@@ -76,17 +87,17 @@ Projektissa on käytössä SASS, jokaiselle komponentille on oma .scss-tiedoston
 
 ### Mattermost-redux
 
-Projektissa hyödynnetään [Mattermostin](https://mattermost.com/) backendia chat-toiminnallisuuksien toteuttamisessa. Lisäksi Mattermost-integraatioiden ja sovellusten hyödynnettäväksi on vapaassa käytössä myös reduxiin pohjautuva [mattermost-redux](https://github.com/mattermost/mattermost-redux), joka tarjoaa valmiina suurimman osan tarvittavista actioneista chattiin liittyvän datan käsittelyä varten. Jos reduxin periaatteet eivät ole jo valmiiksi tuttuja, kannattaa ensin käydä tutustumassa niihin. 
+Projektissa hyödynnetään [Mattermostin](https://mattermost.com/) backendia chat-toiminnallisuuksien toteuttamisessa. Lisäksi Mattermost-integraatioiden ja sovellusten hyödynnettäväksi on vapaassa käytössä myös reduxiin pohjautuva [mattermost-redux](https://github.com/mattermost/mattermost-redux), joka tarjoaa valmiina suurimman osan tarvittavista actioneista chattiin liittyvän datan käsittelyä varten. Jos reduxin periaatteet eivät ole jo valmiiksi tuttuja, kannattaa ensin käydä tutustumassa niihin.
 
 Mattermost-redux on lisätty valmiiksi tähän projektiin. Kun toteutat mitä tahansa keskusteluihin ja etenkin keskusteludataan liittyviä toiminnallisuuksia, hyvä lähtökohta on aluksi tarkistaa mattermost-reduxin olemassa olevat actionit, sillä usein kaikki tarvittava löytyy valmiina, eikä tällöin ole syytä luoda omia actioneita näiden lisäksi. Kaikki valmiina olevat actionit löytyvät mattermost-reduxin [lähdekoodista](https://github.com/mattermost/mattermost-redux/tree/master/src/actions). Valitettavasti näitä ei ole dokumentoitu lähdekoodin lisäksi muualle. Joitakin hyödyllisiä vinkkejä voi löytyä myös tutkimalla [Mattermost API-kuvausta](https://api.mattermost.com/). Näitä rajapintoja ei tosin suoraan ole syytä hyödyntää, sillä vastaavat toiminnot löytyvät myös suoraan actioneina. Käytännössä ainakin `users.js`, `groups.js`, `posts.js`, `websockets.js` ja `channels.js` tiedostoista löytyy tämän projektin kannalta hyödyllisiä actioneita, joita voit suoraan ottaa käyttöön:
 
-````
+```
 import { login } from 'mattermost-redux/actions/users'
-````
+```
 
 Tämän jälkeen actionit voidaan yhdistää komponentin propseihin tuttuun tyyliin, käyttämällä connectia:
 
-````
+```
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -99,7 +110,7 @@ export default connect(
   null,
   mapDispatchToProps
 )(App)
-````
+```
 
 Kannattaa ehkä lisätä selaimeen esimerkiksi React Developer Tools, jonka avulla storen tilaa on helpompi pitää silmällä kehitysvaiheessa. Mattermost-reduxissa on actioneiden lisäksi valmiina kasapäin selectoreja, jotka kannattaa käydä läpi, ja joita kannattanee hyödyntää mahdollisuuksien mukaan ennen omien toteuttamista. Selectorit löytyvät mattermost-reduxin kansiosta [selectors](https://github.com/mattermost/mattermost-redux/tree/master/src/selectors) ja reducerit puolestaan kansiosta [reducers](https://github.com/mattermost/mattermost-redux/tree/master/src/reducers). Lisäksi storen hahmottamisessa auttaa [initial_state.js](https://github.com/mattermost/mattermost-redux/blob/master/src/store/initial_state.js).
 
@@ -109,34 +120,36 @@ Keskusteluun liittyvät toiminnallisuudet ovat kuitenkin vain yksi osa kohdataan
 
 #### Yleistä saavutettavuudesta
 
-Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla. Saavutettavuuden ja helppokäyttöisyyden osalta keskeistä on käyttäjien erilaisten tarpeiden huomioiminen. 
+Toteutuksen osalta tässä projektissa tavoiteltu lopputulos on sosiaalisen median alusta, jolla voit tutustua uusiin ihmisiin turvallisesti ja saavutettavasti. Alusta toteutaan Web-sovelluksena, ensisijaisesti mobiililaitteille, mutta sovellusta tulee voida käyttää myös muilla laitteilla. Saavutettavuuden ja helppokäyttöisyyden osalta keskeistä on käyttäjien erilaisten tarpeiden huomioiminen.
 
 Kattava saavutettavuuden testaus ja arviointi ovat siis luonnollisesti osa projektin tavoitteiden saavuttamisessa. Projektissa noudatetaan [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)-saavutettavuusstandardia, ja siksi jokaisen frontendin tekemiseen osallistuvan on hyvä tutustua saavutettavuuden periaatteisiin.
 
 WCAG 2.1 on käytössä myös saavutettavuutta koskevan lainsäädännön pohjana. Yhdenvertaisuuslaki ja syksyllä 2018 voimaan tullut EU:n saavutettavuusdirektiivi velvoittaa kaikkia julkisen sektorin toimijoita tekemään verkkopalveluistaan ja mobiilisovelluksistaan saavutettavia. On hyvä muistaa, että kyse ei ole vain laista tai säädöksistä, vaan aivan arkipäiväisestä saavutettavuudesta ja käytettävyydestä joista hyötyvät kaikki.
 
 Verkkosisällön saavutettavuusohjeet (WCAG 2.1) suomeksi:
-* [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto)
-* [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
+
+- [Rakenne ja käyttö](http://papunet.net/saavutettavuus/wcag-21n-rakenne-ja-kaytto)
+- [Ohjeet](http://papunet.net/saavutettavuus/wcag-21-ohjeet)
 
 On myös hyvä tiedostaa, että WCAG-ohjeistuksella ei pystytä ratkaisemaan kaikkia saavutettavuuden ongelmia. Projektin saavutettavuun ja käytettävyyteen liittyviä kysymyksiä voi esittää myös [Kohdataan Development Slackissa](https://kohdataan-dev.slack.com/).
 
 Yleistä ja ajantasaista tietoa saavutettavuudesta löydät mm. Papunetistä:
-* [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
-* [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
-* [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
+
+- [Miksi saavutettava?](http://papunet.net/saavutettavuus/miksi-saavutettava)
+- [Lait ja standardit](http://papunet.net/saavutettavuus/lait-ja-standardit)
+- [Ohjeita ja oppaita](http://papunet.net/saavutettavuus/ohjeita-ja-oppaita)
 
 #### Automaattinen saavutettavuuden testaus
 
-Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Tällä tavoin on helppo tarkistaa isoimmat saavutettavuuden tekniset ongelmat. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa *(jest-axe, cypress-axe tms, pitää valita)*.
+Kun osallistut projektin kehittämiseen, oleellinen osa on myös kattavien saavutettavuutta mittaavien automaatiotestien tekeminen. Tällä tavoin on helppo tarkistaa isoimmat saavutettavuuden tekniset ongelmat. Projektissa käytetään [axe-core](https://github.com/dequelabs/axe-core)-pohjaista saavutettavuustestaukseen tarkoitettua kirjastoa _(jest-axe, cypress-axe tms, pitää valita)_.
 
 Testaamisen lähtökohta on, että saavutettavuus testataan aina, kun joku asia näkymässä muuttuu:
 
-* Toiseen näkymään navigointi
-* Viestit:
-  * Uuden viestin lähettäminen
-  * Uuden viestin vastaanottaminen
-  * jne.
+- Toiseen näkymään navigointi
+- Viestit:
+  - Uuden viestin lähettäminen
+  - Uuden viestin vastaanottaminen
+  - jne.
 
 Ennen pull requestin tekoa tarkista aina, että toteuttamasi ominaisuudet eivät ole ristiriidassa saavutettavuuden periaatteiden kanssa!
 
@@ -148,8 +161,8 @@ Automaattisen saavutettavuustestauksen työkalut eivät kuitenkaan ole täydelli
 
 Kun osallistut projektin kehittämiseen, oleellista on käyttää aiemmin mainittuja automaattisen saavutettavuustestauksen työkaluja. Olemassa on kuitenkin myös selainlaajennuksia WCAG-standardien mukaiseen testaamiseen. Niiden avulla on myös helppo tarkistaa tekniset saavutettavuuden ongelmat.
 
-* Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
-* axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
+- Microsoftin selainlaajennus (selaintuki: Chrome, Edge Insider) löytyy [täältä](https://accessibilityinsights.io)
+- axe-selainlaajennus (selaintuki: Chrome, Firefox, Android) löytyy [täältä](https://www.deque.com/axe/)
 
 ### Pull Request -käytännöt
 
@@ -166,8 +179,8 @@ Jos löydät projektista bugeja tee uusi issue [projektin issueihin](https://git
 Voit myös tehdä ehdotuksia uusiksi toteutettaviksi ominaisuuksiksi projektiin käyttäen samalta sivulta löytyvää "Feature"-pohjaa. Hankkeen henkilökunta arvioi ominaisuusehdotuksen tarpeellisuuden ja tarkoituksenmukaisuuden isommassa mittakaavassa, päättää otetaanko se projektin työlistalle, priorisoi sen sopivalle tasolle ja tarkentaa ominaisuuden kuvausta tarvittaessa.
 
 ## Kehitystyötä tukevaa materiaalia
-[Mattermost API documentation](https://api.mattermost.com/)
 
+[Mattermost API documentation](https://api.mattermost.com/)
 
 ## Contributors
 

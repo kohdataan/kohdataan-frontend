@@ -4,7 +4,7 @@ import Group from './Group'
 import './styles.scss'
 
 const Groups = props => {
-  const { channels } = props
+  const { channels, getMembers, profiles } = props
 
   return (
     <div className="groups-wrapper">
@@ -13,7 +13,12 @@ const Groups = props => {
       </div>
       <div className="groups-boxes">
         {Object.values(channels).map(channel => (
-          <Group key={channel.id} channel={channel} />
+          <Group
+            key={channel.id}
+            channel={channel}
+            getMembers={getMembers}
+            profiles={profiles}
+          />
         ))}
       </div>
     </div>
@@ -22,6 +27,8 @@ const Groups = props => {
 
 Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
+  getMembers: PropTypes.func.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default Groups

@@ -1,0 +1,29 @@
+.suggestion-buttons-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.suggestion-button {
+  background: none;
+  border: none;
+  border-radius: 0px;
+  text-transform: none;
+  font-weight: normal;
+  padding: 10px 0 10px 0;
+  & i {
+    padding: 0 10px 0 0;
+  }
+}
+
+.join {
+  & i {
+    color: green;
+  }
+}
+
+.cancel {
+  & i {
+    color: red;
+  }
+}
