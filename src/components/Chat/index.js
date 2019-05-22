@@ -26,9 +26,15 @@ const Chat = props => {
 
   const toggleSider = () => setShowSider(!showSider)
 
-  const getUserNamebyId = id => {
+  const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
-    return user ? user.username : ''
+    let visibleName = ''
+    if (user && user.nickname) {
+      visibleName = user.nickname
+    } else if (user) {
+      visibleName = user.username
+    }
+    return visibleName
   }
 
   return (
@@ -37,7 +43,7 @@ const Chat = props => {
       <MessageList
         posts={posts}
         currentUserId={currentUserId}
-        getUserNamebyId={getUserNamebyId}
+        getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
       />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
@@ -45,7 +51,7 @@ const Chat = props => {
         <MembersSider
           members={members}
           currentUserId={currentUserId}
-          getUserNamebyId={getUserNamebyId}
+          getUserNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
         />

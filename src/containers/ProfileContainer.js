@@ -12,7 +12,7 @@ import {
   updateUser as updateUserAction,
 } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
-import { getInterestsByUsername } from '../api/user'
+import { getInterestsByUsername, getUserByUsername } from '../api/user'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
@@ -31,6 +31,7 @@ const ProfileContainer = props => {
   } = props
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
+  const [otherUserInfo, setOtherUserInfo] = useState([])
   // TODO: Get other user's interests for other user profile
   useEffect(() => {
     getMe()
@@ -49,6 +50,13 @@ const ProfileContainer = props => {
       }
       // eslint-disable-next-line no-console
       console.log(res)
+      const userInfo = await getUserByUsername(
+        username,
+        localStorage.getItem('authToken')
+      )
+      if (userInfo) {
+        setOtherUserInfo(userInfo)
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -58,7 +66,10 @@ const ProfileContainer = props => {
   // If username is given, get other user's info
   useEffect(() => {
     if (username) {
-      getProfilesByUsernames([username]).then(data => setmmUser(data.data[0]))
+      getProfilesByUsernames([username])
+        .then(data => setmmUser(data.data[0]))
+        // eslint-disable-next-line no-console
+        .catch(e => console.error(e))
       // TODO: Get other users info from node backend (location, description)
       fetchOtherUser()
     }
@@ -89,7 +100,7 @@ const ProfileContainer = props => {
           user={mmuser}
           userInterests={interests}
           interestOptions={interestOptions}
-          myUserInfo={myUserInfo}
+          myUserInfo={otherUserInfo}
         />
       )}
     </>
