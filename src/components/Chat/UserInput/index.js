@@ -33,7 +33,7 @@ const UserInput = props => {
             placeholder="Kirjoita viesti"
           />
         </label>
-        <input type="submit" value=">" />
+        <input type="submit" value="➤" className="send-message-button" />
       </form>
     </div>
   )
