@@ -8,14 +8,19 @@ const InterestsGrid = props => {
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
-        <span key={interest.name} className="interests-grid-item">
-          <i
-            aria-hidden="true"
-            className={getIcon(interest.name)}
-            title={interest.name}
-          />
-          <span className="interests-grid-label">{interest.name}</span>
-        </span>
+        <div className="interests-grid-item-container">
+          <span
+            key={`${interest.name} ${interest.id}`}
+            className="interests-grid-item"
+          >
+            <i
+              aria-hidden="true"
+              className={getIcon(interest.name)}
+              title={interest.name}
+            />
+            <span className="interests-grid-label">{interest.name}</span>
+          </span>
+        </div>
       ))}
     </div>
   )

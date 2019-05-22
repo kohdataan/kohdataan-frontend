@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { PureComponent } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
@@ -20,42 +20,41 @@ import {
 import getInterestsAction from './store/interest/interestAction'
 import './styles/defaults.scss'
 
-const App = props => {
-  const { history } = props
-
-  // websocket effect
-  useEffect(() => {
-    Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-    props.init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
-  }, [])
-
-  // TODO: remove after beta (if user is not signed in, create new user, and sign in)
-  useEffect(() => {
-    async function registerUserAndSignUp() {
-      if (!localStorage.getItem('authToken')) {
-        await props.signUpAndSignIn()
-        history.push('/registration/info')
-      } else {
-        await props.addUserToStateAndMattermostLogin()
-      }
+class App extends PureComponent {
+  async componentDidMount() {
+    const {
+      history,
+      init: pInit,
+      addUserToStateAndMattermostLogin: pAddUserToStateAndMattermostLogin,
+      getInterestsAction: pGetInterestsAction,
+      signUpAndSignIn: pSignUpAndSignIn,
+    } = this.props
+    await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
+    await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
+    if (!localStorage.getItem('authToken')) {
+      await pSignUpAndSignIn()
+      history.push('/registration/info')
+    } else {
+      await pAddUserToStateAndMattermostLogin()
     }
-    registerUserAndSignUp()
-  }, [])
+    await pGetInterestsAction()
+  }
 
-  useEffect(() => {
-    props.getInterestsAction()
-  }, [])
-
-  return (
-    <Container className="main-container">
-      <Route path="/login" component={LogInContainer} />
-      <Route path="/registration/:step" component={RegistrationContainer} />
-      <PrivateRoute path="/profiili/:username?" component={ProfileContainer} />
-      <PrivateRoute path="/ryhmat" component={GroupsContainer} />
-      <PrivateRoute path="/chat/:id" component={ChatContainer} />
-      {localStorage.getItem('authToken') && <BottomNavigationContainer />}
-    </Container>
-  )
+  render() {
+    return (
+      <Container className="main-container">
+        <Route path="/login" component={LogInContainer} />
+        <Route path="/registration/:step" component={RegistrationContainer} />
+        <PrivateRoute
+          path="/profiili/:username?"
+          component={ProfileContainer}
+        />
+        <PrivateRoute path="/ryhmat" component={GroupsContainer} />
+        <PrivateRoute path="/chat/:id" component={ChatContainer} />
+        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
+      </Container>
+    )
+  }
 }
 
 App.propTypes = {
