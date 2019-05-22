@@ -22,7 +22,11 @@ const Header = props => {
           className=" chat-header-group-img-button"
           onClick={toggleSider}
         >
-          <h2>{channel.display_name[0]}</h2>
+          <i
+            aria-hidden="true"
+            className="fas fa-users"
+            title="Group Members"
+          />
         </ButtonContainer>
       </div>
     </div>
