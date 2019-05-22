@@ -58,10 +58,14 @@ Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
-  members: PropTypes.instanceOf(Object).isRequired,
+  members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
+}
+
+Chat.defaultProps = {
+  members: [],
 }
 
 export default Chat
