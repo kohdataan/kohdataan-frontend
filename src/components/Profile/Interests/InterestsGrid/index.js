@@ -8,11 +8,8 @@ const InterestsGrid = props => {
   return (
     <div className="interests-grid">
       {interestList.map(interest => (
-        <div className="interests-grid-item-container">
-          <span
-            key={`${interest.name} ${interest.id}`}
-            className="interests-grid-item"
-          >
+        <div className="interests-grid-item-container" key={interest.id}>
+          <span className="interests-grid-item">
             <i
               aria-hidden="true"
               className={getIcon(interest.name)}

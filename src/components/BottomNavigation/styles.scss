@@ -5,14 +5,21 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  margin: 0 auto;
   height: 70px;
   background-color: $black;
   border-top: 1px solid $orange;
   box-shadow: 0 5px 0px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.26);
   z-index: 3000;
+  width: 100%;
+  max-width: 960px;
+}
+
+.bottom-navigation-container {
+  width: 100%;
   position: fixed;
+  height: 70px;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
 }

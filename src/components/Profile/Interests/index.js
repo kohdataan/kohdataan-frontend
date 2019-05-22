@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
@@ -14,10 +14,6 @@ const Interests = props => {
     handleEditReady,
     interestOptions,
   } = props
-  const [showInterestsGrid, setShowInterestsGrid] = useState(false)
-  const handleClick = () => {
-    setShowInterestsGrid(!showInterestsGrid)
-  }
 
   return (
     <div className="interests-container">
@@ -26,11 +22,6 @@ const Interests = props => {
         Kerro muille, mistä asioista olet kiinnostunut.
       </p>
       <div className="interests-grid-wrapper">
-        {!editProfile && !showInterestsGrid && (
-          <ButtonContainer className="interests-button" onClick={handleClick}>
-            Kiinnostuksen kohteet
-          </ButtonContainer>
-        )}
         {editProfile && (
           <>
             <EditInterestsContainer
@@ -46,9 +37,7 @@ const Interests = props => {
             </ButtonContainer>
           </>
         )}
-        {showInterestsGrid && !editProfile && (
-          <InterestsGrid interestList={userInterests} />
-        )}
+        {!editProfile && <InterestsGrid interestList={userInterests} />}
       </div>
     </div>
   )
