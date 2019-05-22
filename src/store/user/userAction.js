@@ -1,5 +1,5 @@
 import uniqid from 'uniqid'
-import { login } from 'mattermost-redux/actions/users'
+import { loadMe, login } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
 
@@ -7,6 +7,7 @@ import * as API from '../../api/user'
 export const addUserToStateAndMattermostLogin = (mmusername, mmpassword) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
+
   return async dispatch => {
     try {
       const user = await API.getUser(id, token)
@@ -15,7 +16,11 @@ export const addUserToStateAndMattermostLogin = (mmusername, mmpassword) => {
         user,
       })
 
-      dispatch(login(mmusername, mmpassword))
+      if (mmusername && mmpassword) {
+        dispatch(login(mmusername, mmpassword))
+      } else {
+        dispatch(loadMe())
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -51,8 +56,6 @@ export const signUpAndSignIn = () => {
         password: `${uniqid.process()}`,
         username: `${uniqid.process()}`,
       }
-
-      console.log(user)
 
       await API.userSignUp(user)
       const signInResponse = await API.userLogin(user)
