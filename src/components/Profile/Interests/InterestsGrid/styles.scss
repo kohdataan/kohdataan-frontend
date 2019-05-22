@@ -1,20 +1,32 @@
 .interests-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .interests-grid-item {
+  display: flex;
+  flex-direction: column;
+  & i {
     display: flex;
-    flex-flow: column nowrap;
-    & i {
-        background: black;
-        border: 1px solid black;
-        color:orange;
-        font-size: 32px;
-        padding: 15px 11px;
-        border-radius: 50%;
-        margin: 5px;
-        align-self: center;
-    }
+    height: 65px;
+    width: 65px;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    border: 1px solid black;
+    color: orange;
+    font-size: 32px;
+    padding: 15px 11px;
+    border-radius: 50%;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.interests-grid-item-container {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 10px 0;
 }
