@@ -1,12 +1,33 @@
 .chat-message-list-container {
-    display: flex;
-    flex-flow: column nowrap;
-    top: 10%;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 80%;
-    overflow-y: auto;
-    margin: 0 auto;
-    padding-left: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  top: 10%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding-left: 10px;
+}
+
+.chat--message-list {
+  // With column-reverse browser will always align content to bottom so we don't
+  // have to scroll to bottom with javascript when new messages come
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  padding: 5px 0;
+
+  &.normal {
+    max-height: 400px;
+  }
+}
+
+@media screen and (max-width: 100%) {
+  .chat--message-list {
+    &.normal {
+      max-height: 50vh;
+    }
+  }
 }
