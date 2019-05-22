@@ -5,9 +5,11 @@ import './styles.scss'
 const BottomNavigation = props => {
   const { children, className, ...other } = props
   return (
-    <nav className={className} {...other}>
-      {children}
-    </nav>
+    <div className="bottom-navigation-container">
+      <nav className={className} {...other}>
+        {children}
+      </nav>
+    </div>
   )
 }
 
