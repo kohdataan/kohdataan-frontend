@@ -13,7 +13,7 @@ const SuggestionBox = props => {
         <h2>{channel.display_name}</h2>
         <p>Yhteistä: urheilu, ulkoilu, mekaniikka</p>
         <div className="suggestion-buttons-wrapper">
-          <Link to="/ryhmat">
+          <Link to="/">
             <ButtonContainer
               className="suggestion-button cancel"
               onClick={() => console.log('clicked')}
@@ -26,7 +26,7 @@ const SuggestionBox = props => {
               Älä liity
             </ButtonContainer>
           </Link>
-          <Link to="/ryhmat">
+          <Link to="/">
             <ButtonContainer
               className="suggestion-button join"
               onClick={handleJoinChannel(channel.id)}

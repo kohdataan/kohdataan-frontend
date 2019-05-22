@@ -17,15 +17,17 @@
 .chat-user-input-content {
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat-user-input-text-field {
   border: 1px solid $black;
   border-radius: 15px;
-  width: 60%;
-  height: 5vh;
-  margin: 0 15px;
-  padding: 0 20px;
+  margin: 0 5px;
+  padding: 10px;
+  min-width: 70%;
 }
 
 .send-message-button {

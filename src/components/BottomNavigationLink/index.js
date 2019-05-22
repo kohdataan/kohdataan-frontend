@@ -6,7 +6,12 @@ import './styles.scss'
 const BottomNavigationLink = props => {
   const { title, route, icon } = props
   return (
-    <NavLink to={route} className="nav-link" activeClassName="nav-link-active">
+    <NavLink
+      exact
+      to={route}
+      className="nav-link"
+      activeClassName="nav-link-active"
+    >
       <div>
         <i aria-hidden="true" className={icon} title={title} />
       </div>
