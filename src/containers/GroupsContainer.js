@@ -49,10 +49,14 @@ const GroupsContainer = props => {
     }
   }, [teams, users])
 
-  // Get only group channels (filter direct messages out)
+  // Get only group channels
+  // (filter direct messages and default channels out)
   const getGroupChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel => channel.type !== 'D'
+      channel =>
+        channel.type !== 'D' &&
+        channel.name !== 'off-topic' &&
+        channel.name !== 'town-square'
     )
     return filteredChannels
   }
@@ -67,13 +71,11 @@ const GroupsContainer = props => {
 
   const handleJoinChannel = channelId => () => {
     const currentTeamId = Object.keys(teams)[0]
-    joinChannel(currentUserId, currentTeamId, channelId).then(res =>
-      console.log(res)
-    )
+    joinChannel(currentUserId, currentTeamId, channelId)
   }
 
+  // Get only those channels suggestions that user has not yet joined
   const getFilteredChannelSuggestions = () => {
-    // TODO: Filter out channels that user has is already joined
     const mySuggestions = channelSuggestions.filter(
       channel => !Object.keys(myChannels).includes(channel.id)
     )
