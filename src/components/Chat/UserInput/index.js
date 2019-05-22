@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import './styles.scss'
+import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
+import './styles.scss'
 
 const UserInput = props => {
   const { createPost, channel } = props
@@ -23,16 +24,16 @@ const UserInput = props => {
   return (
     <div className="chat-user-input-wrapper">
       <form onSubmit={handleSubmit} className="chat-user-input-content">
-        <label htmlFor="message">
-          <input
-            className="chat-user-input-text-field"
-            id="message"
-            type="text"
-            value={message}
-            onChange={handleChange}
-            placeholder="Kirjoita viesti"
-          />
-        </label>
+        <TextareaAutosize
+          className="chat-user-input-text-field"
+          id="message"
+          type="text"
+          value={message}
+          onChange={handleChange}
+          placeholder="Kirjoita viesti"
+          maxRows={3}
+          rows={1}
+        />
         <input type="submit" value="➤" className="send-message-button" />
       </form>
     </div>
