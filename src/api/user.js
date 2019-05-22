@@ -12,7 +12,6 @@ const userLogin = async data => {
     })
     return handleFetchErrors(resp)
   } catch (e) {
-    console.error(e)
     throw new Error(e)
   }
 }
@@ -37,6 +36,23 @@ const getUser = async (id, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/user/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const getUserByUsername = async (username, token) => {
+  // TODO
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/username/${username}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -119,6 +135,7 @@ export {
   userLogin,
   userSignUp,
   getUser,
+  getUserByUsername,
   updateUser,
   getUserInterest,
   addUserInterests,

@@ -20,8 +20,8 @@ const Member = props => {
       )}
       {currentUserId === userId && (
         <>
-          <p>{userName}</p>
-          <p className="chat-header-current-user-label">(sinä)</p>
+          <span>{userName}</span>
+          <span className="chat-header-current-user-label">(sinä)</span>
         </>
       )}
     </div>
