@@ -18,7 +18,11 @@ const SuggestionBox = props => {
               className="suggestion-button cancel"
               onClick={() => console.log('clicked')}
             >
-              <i className="fas fa-times" />
+              <i
+                aria-hidden="true"
+                className="fas fa-times"
+                title="Älä Liity"
+              />
               Älä liity
             </ButtonContainer>
           </Link>
@@ -27,7 +31,11 @@ const SuggestionBox = props => {
               className="suggestion-button join"
               onClick={handleJoinChannel(channel.id)}
             >
-              <i className="far fa-check-circle" />
+              <i
+                aria-hidden="true"
+                className="far fa-check-circle"
+                title="Liity"
+              />
               Liity
             </ButtonContainer>
           </Link>
