@@ -26,7 +26,7 @@ class BottomNavigationContainer extends PureComponent {
         />
         <BottomNavigationLink
           title="Ryhmät"
-          route="/ryhmat"
+          route="/"
           icon="fas fa-user-friends"
         />
       </BottomNavigation>

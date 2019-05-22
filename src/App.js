@@ -45,11 +45,11 @@ class App extends PureComponent {
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
         <Route path="/registration/:step" component={RegistrationContainer} />
+        <PrivateRoute exact path="/" component={GroupsContainer} />
         <PrivateRoute
           path="/profiili/:username?"
           component={ProfileContainer}
         />
-        <PrivateRoute path="/ryhmat" component={GroupsContainer} />
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>

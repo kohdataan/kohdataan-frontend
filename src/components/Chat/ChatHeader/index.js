@@ -8,10 +8,7 @@ const Header = props => {
   const { channel, toggleSider } = props
   return (
     <div className="chat-header">
-      <Link
-        className="chat-header-item chat-header-nav-back-button "
-        to="/ryhmat"
-      >
+      <Link className="chat-header-item chat-header-nav-back-button " to="/">
         {'< Takaisin'}
       </Link>
       <h1 className="chat-header-item chat-header-channel-name">

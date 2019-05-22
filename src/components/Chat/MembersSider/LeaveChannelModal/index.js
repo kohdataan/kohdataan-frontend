@@ -21,7 +21,7 @@ const LeaveChannelModal = props => {
         >
           Peruuta
         </ButtonContainer>
-        <Link className="leave-channel-link" to="/ryhmat">
+        <Link className="leave-channel-link" to="/">
           <ButtonContainer
             onClick={handleLeaveChannel}
             className="confirm-leave-channel-button"
