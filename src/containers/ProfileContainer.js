@@ -88,7 +88,7 @@ const ProfileContainer = props => {
 
   // Update profile picture
   const updateProfilePicture = () => {
-    if (currentUser) {
+    if (currentUser && img) {
       uploadProfileImage(currentUser.id, dataUriToBlob(img))
     }
   }

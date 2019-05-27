@@ -40,7 +40,11 @@ const Profile = props => {
   const [updatedDescription, setUpdatedDescription] = useState(description)
   const toggleEditProfile = () => setEditProfile(!editProfile)
   const handleEditReady = () => {
-    updateUser({ description: updatedDescription, nickname: newNickname })
+    updateUser({
+      description: updatedDescription,
+      nickname: newNickname,
+      mmid: currentUser.id,
+    })
     addUserInterests({ userInterests: currentInterestIds })
     updateProfilePicture()
     toggleEditProfile()
