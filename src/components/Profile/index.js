@@ -8,6 +8,8 @@ import EditButton from './EditButton'
 import ProfileHeader from './ProfileHeader'
 import DescriptionTextEdit from './DescriptionTextEdit'
 import Instructions from './Instructions'
+import EditProfileImage from './EditProfileImage'
+import EditNickname from './EditNickname'
 
 const Profile = props => {
   const {
@@ -17,24 +19,30 @@ const Profile = props => {
     userInterests,
     interestOptions,
     addUserInterests,
+    updateProfilePicture,
     updateUser,
+    setImg,
   } = props
-
-  const { location, description, tutorialWatched } = myUserInfo
+  const { location, description, tutorialWatched, nickname } = myUserInfo
+  const getShowModals = () => {
+    return !!(!tutorialWatched && currentUser)
+  }
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({
-    1: !tutorialWatched,
-    2: !tutorialWatched,
+    1: getShowModals(),
+    2: getShowModals(),
   })
   const [currentInterestIds, setCurrentInterestsIds] = useState([])
+  const [newNickname, setNewNickname] = useState('')
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
   }, [userInterests])
   const [updatedDescription, setUpdatedDescription] = useState(description)
   const toggleEditProfile = () => setEditProfile(!editProfile)
   const handleEditReady = () => {
-    updateUser({ description: updatedDescription })
+    updateUser({ description: updatedDescription, nickname: newNickname })
     addUserInterests({ userInterests: currentInterestIds })
+    updateProfilePicture()
     toggleEditProfile()
   }
   const closeModal = modal => () => {
@@ -49,9 +57,21 @@ const Profile = props => {
   return (
     <div className="profile-container">
       <div className="profile-header-container">
-        <ProfileImage userId={user.id} />
-        {user && (
-          <ProfileHeader nickname={myUserInfo.nickname} location={location} />
+        {!editProfile && <ProfileImage userId={user.id} />}
+        {editProfile && <EditProfileImage onChange={setImg} />}
+        {user && myUserInfo && !editProfile && (
+          <ProfileHeader nickname={nickname} location={location} />
+        )}
+        {user && !nickname && !editProfile && (
+          <ProfileHeader nickname={user.username} location={location} />
+        )}
+        {editProfile && (
+          <EditNickname
+            value={newNickname}
+            onChange={e => {
+              setNewNickname(e.target.value)
+            }}
+          />
         )}
         {currentUser && (
           <EditButton
@@ -91,14 +111,18 @@ Profile.propTypes = {
   userInterests: propTypes.instanceOf(Array).isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
   addUserInterests: propTypes.func,
+  updateProfilePicture: propTypes.func,
   currentUser: propTypes.instanceOf(Object),
   updateUser: propTypes.func,
+  setImg: propTypes.func,
 }
 
 Profile.defaultProps = {
   updateUser: null,
   currentUser: null,
   addUserInterests: null,
+  updateProfilePicture: null,
+  setImg: null,
 }
 
 export default Profile

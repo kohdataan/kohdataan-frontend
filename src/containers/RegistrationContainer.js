@@ -76,7 +76,7 @@ const RegistrationContainer = props => {
   const stepButtonActions = () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        return props.updateUser({ nickname, mmid: mattermostId })
+        return props.updateUser({ nickname })
       }
       case pages['add-location'].current: {
         return props.updateUser({ location: location.value })
