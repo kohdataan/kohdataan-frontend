@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Group from './Group'
 import './styles.scss'
@@ -31,4 +31,4 @@ Groups.propTypes = {
   profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
-export default Groups
+export default memo(Groups)

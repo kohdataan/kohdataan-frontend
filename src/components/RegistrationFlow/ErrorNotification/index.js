@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const ErrorNotification = props => {
@@ -10,4 +10,4 @@ const ErrorNotification = props => {
   )
 }
 
-export default ErrorNotification
+export default memo(ErrorNotification)

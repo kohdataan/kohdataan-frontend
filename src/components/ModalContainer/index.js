@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 
@@ -26,7 +26,6 @@ const customStyles = {
 
 const ModalContainer = props => {
   const { children, modalIsOpen, closeModal, label } = props
-
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -50,4 +49,4 @@ ModalContainer.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export default ModalContainer
+export default memo(ModalContainer)

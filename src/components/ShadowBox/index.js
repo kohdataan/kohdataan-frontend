@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
@@ -15,4 +15,4 @@ ShadowBox.propTypes = {
   ]).isRequired,
 }
 
-export default ShadowBox
+export default memo(ShadowBox)

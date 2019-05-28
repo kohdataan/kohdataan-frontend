@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
@@ -66,4 +66,4 @@ Instructions.propTypes = {
   closeModal: propTypes.func.isRequired,
 }
 
-export default Instructions
+export default memo(Instructions)

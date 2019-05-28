@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const RegistrationTitle = () => {
@@ -12,4 +12,4 @@ const RegistrationTitle = () => {
   )
 }
 
-export default RegistrationTitle
+export default memo(RegistrationTitle)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Questions from '../components/Questions'
 
 const QuestionsContainer = () => {
@@ -17,4 +17,4 @@ const QuestionsContainer = () => {
   return <Questions data={dummyQuestionData} />
 }
 
-export default QuestionsContainer
+export default memo(QuestionsContainer)

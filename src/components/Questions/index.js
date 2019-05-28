@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import QuestionsHeader from './QuestionsHeader'
 import Options from './Options'
@@ -27,4 +27,4 @@ Questions.propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
 }
 
-export default Questions
+export default memo(Questions)

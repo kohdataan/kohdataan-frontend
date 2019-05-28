@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import ShadowBox from '../../ShadowBox'
@@ -52,4 +52,4 @@ Location.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default Location
+export default memo(Location)

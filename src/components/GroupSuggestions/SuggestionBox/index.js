@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -6,7 +6,6 @@ import ButtonContainer from '../../ButtonContainer'
 
 const SuggestionBox = props => {
   const { channel, handleJoinChannel } = props
-
   return (
     <div className="group-box">
       <div>
@@ -50,4 +49,4 @@ SuggestionBox.propTypes = {
   handleJoinChannel: propTypes.func.isRequired,
 }
 
-export default SuggestionBox
+export default memo(SuggestionBox)

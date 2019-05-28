@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 
@@ -36,4 +36,4 @@ DescriptionTextEdit.propTypes = {
   onChange: propTypes.func.isRequired,
 }
 
-export default DescriptionTextEdit
+export default memo(DescriptionTextEdit)

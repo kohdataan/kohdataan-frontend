@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -38,4 +38,4 @@ Header.propTypes = {
   toggleSider: propTypes.func.isRequired,
 }
 
-export default Header
+export default memo(Header)

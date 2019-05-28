@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
@@ -66,4 +66,4 @@ EditInterestsContainer.propTypes = {
   options: propTypes.instanceOf(Array).isRequired,
 }
 
-export default EditInterestsContainer
+export default memo(EditInterestsContainer)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ProfileImage from './ProfileImage'
@@ -129,4 +129,4 @@ Profile.defaultProps = {
   setImg: null,
 }
 
-export default Profile
+export default memo(Profile)

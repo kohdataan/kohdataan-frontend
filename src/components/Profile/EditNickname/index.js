@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import InputField from '../../InputField'
 import './styles.scss'
@@ -23,4 +23,4 @@ EditNickname.propTypes = {
   value: PropTypes.string.isRequired,
 }
 
-export default EditNickname
+export default memo(EditNickname)

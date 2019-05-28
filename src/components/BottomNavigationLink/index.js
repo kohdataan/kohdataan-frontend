@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './styles.scss'
@@ -26,4 +26,4 @@ BottomNavigationLink.propTypes = {
   icon: PropTypes.string.isRequired,
 }
 
-export default BottomNavigationLink
+export default memo(BottomNavigationLink)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import './styles.scss'
@@ -6,7 +6,6 @@ import './styles.scss'
 const UserInput = props => {
   const { createPost, channel } = props
   const [message, setMessage] = useState('')
-
   const handleSubmit = e => {
     e.preventDefault()
     const post = {
@@ -45,4 +44,4 @@ UserInput.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
 }
 
-export default UserInput
+export default memo(UserInput)

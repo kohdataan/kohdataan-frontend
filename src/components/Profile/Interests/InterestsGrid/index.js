@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import getIcon from '../../../../utils/getIcon'
@@ -27,4 +27,4 @@ InterestsGrid.propTypes = {
   interestList: propTypes.instanceOf(Array).isRequired,
 }
 
-export default InterestsGrid
+export default memo(InterestsGrid)

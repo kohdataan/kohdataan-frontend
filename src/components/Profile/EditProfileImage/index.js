@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
 const EditProfileImage = props => {
   const { onChange } = props
-
   return (
     <div className="profile-header-item">
       <Avatar
@@ -23,4 +22,4 @@ EditProfileImage.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default EditProfileImage
+export default memo(EditProfileImage)

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -38,7 +38,6 @@ const GroupsContainer = props => {
     loadMe()
     getChannelInvitations()
   }, [])
-
   // Get channels and members based on team id
   // & When user joins a channel, users props is changed and
   // channels need to be fetched again
@@ -162,4 +161,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GroupsContainer)
+)(memo(GroupsContainer))

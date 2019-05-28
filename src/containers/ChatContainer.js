@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -174,4 +174,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChatContainer)
+)(memo(ChatContainer))

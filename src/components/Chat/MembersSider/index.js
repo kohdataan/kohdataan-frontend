@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 import Member from './Member'
@@ -65,4 +65,4 @@ MembersSider.propTypes = {
   handleLeaveChannel: propTypes.func.isRequired,
 }
 
-export default MembersSider
+export default memo(MembersSider)

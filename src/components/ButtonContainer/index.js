@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 
 const ButtonContainer = props => {
   const { className, children, onClick } = props
-
   return (
     <button
       type="button"
@@ -28,4 +27,4 @@ ButtonContainer.propTypes = {
   onClick: propTypes.func.isRequired,
 }
 
-export default ButtonContainer
+export default memo(ButtonContainer)

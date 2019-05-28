@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
@@ -22,4 +22,4 @@ BottomNavigation.defaultProps = {
   className: 'bottom-navigation',
 }
 
-export default BottomNavigation
+export default memo(BottomNavigation)

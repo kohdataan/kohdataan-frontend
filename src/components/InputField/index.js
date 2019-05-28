@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const InputField = props => {
@@ -33,4 +33,4 @@ InputField.defaultProps = {
   labelClassName: '',
 }
 
-export default InputField
+export default memo(InputField)

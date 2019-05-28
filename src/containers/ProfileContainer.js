@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -66,7 +66,6 @@ const ProfileContainer = props => {
       console.error(e)
     }
   }
-
   // If username is given, get other user's info
   useEffect(() => {
     if (username) {
@@ -178,4 +177,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileContainer)
+)(memo(ProfileContainer))

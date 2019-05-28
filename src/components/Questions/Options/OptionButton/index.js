@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -20,4 +20,4 @@ OptionButton.propTypes = {
   clickHandler: propTypes.func.isRequired,
 }
 
-export default OptionButton
+export default memo(OptionButton)

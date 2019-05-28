@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './styles.scss'
@@ -52,4 +52,4 @@ StepButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export default StepButton
+export default memo(StepButton)

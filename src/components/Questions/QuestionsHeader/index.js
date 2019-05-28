@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const Header = () => {
@@ -10,4 +10,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)

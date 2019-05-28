@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import SuggestionBox from './SuggestionBox'
 
@@ -24,4 +24,4 @@ const GroupSuggestions = props => {
   )
 }
 
-export default GroupSuggestions
+export default memo(GroupSuggestions)

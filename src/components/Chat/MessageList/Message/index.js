@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
   const { sender, text, currentUserId, senderId, iconColor } = props
-
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
@@ -46,4 +45,4 @@ Message.propTypes = {
   iconColor: propTypes.string.isRequired,
 }
 
-export default Message
+export default memo(Message)

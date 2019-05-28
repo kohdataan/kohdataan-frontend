@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './styles.scss'
@@ -35,4 +35,4 @@ Member.propTypes = {
   iconClassNameList: propTypes.string.isRequired,
 }
 
-export default Member
+export default memo(Member)

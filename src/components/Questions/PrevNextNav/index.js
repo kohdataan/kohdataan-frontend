@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
@@ -44,4 +44,4 @@ PrevNextNav.propTypes = {
   data: propTypes.instanceOf(Array).isRequired,
 }
 
-export default PrevNextNav
+export default memo(PrevNextNav)

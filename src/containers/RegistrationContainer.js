@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -149,5 +149,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(RegistrationContainer)
+  )(memo(RegistrationContainer))
 )

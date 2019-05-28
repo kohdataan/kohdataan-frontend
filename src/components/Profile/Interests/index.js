@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
@@ -52,4 +52,4 @@ Interests.propTypes = {
   setCurrentInterestsIds: propTypes.func.isRequired,
 }
 
-export default Interests
+export default memo(Interests)

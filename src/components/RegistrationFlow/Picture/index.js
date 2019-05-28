@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
 import './styles.scss'
@@ -23,4 +23,4 @@ Picture.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default Picture
+export default memo(Picture)

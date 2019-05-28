@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
@@ -12,4 +12,4 @@ Container.propTypes = {
   children: PropTypes.instanceOf(Array).isRequired,
 }
 
-export default Container
+export default memo(Container)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 const Group = props => {
   const { channel, getMembers /* profiles */ } = props
   const [members, setMembers] = useState([])
+
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
   }, [])
@@ -26,4 +27,4 @@ Group.propTypes = {
   // profiles: propTypes.instanceOf(Object).isRequired,
 }
 
-export default Group
+export default memo(Group)

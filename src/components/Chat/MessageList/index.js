@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
@@ -32,4 +32,4 @@ MessageList.propTypes = {
   getIconColor: propTypes.func.isRequired,
 }
 
-export default MessageList
+export default memo(MessageList)
