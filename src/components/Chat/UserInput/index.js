@@ -6,13 +6,18 @@ import './styles.scss'
 const UserInput = props => {
   const { createPost, channel } = props
   const [message, setMessage] = useState('')
+  const isEmpty = str => {
+    return str.replace(/^\s+|\s+$/g, '').length === 0
+  }
   const handleSubmit = e => {
     e.preventDefault()
     const post = {
       channel_id: channel.id,
       message,
     }
-    createPost(post)
+    if (message && !isEmpty(message)) {
+      createPost(post)
+    }
     setMessage('')
   }
 
