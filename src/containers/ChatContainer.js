@@ -79,13 +79,8 @@ const ChatContainer = props => {
 
   // Sort posts based on created timestamp
   const sortPosts = allPosts => {
-    const postsArr = Object.values(allPosts).map(post => [
-      post.create_at,
-      post.id,
-      post.message,
-      post.user_id || '',
-    ])
-    postsArr.sort((a, b) => a[0] - b[0])
+    const postsArr = Object.values(allPosts)
+    postsArr.sort((a, b) => a.create_at - b.create_at)
     return postsArr
   }
 

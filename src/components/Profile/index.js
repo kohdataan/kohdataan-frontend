@@ -23,7 +23,7 @@ const Profile = props => {
     updateUser,
     setImg,
   } = props
-  const { location, description, tutorialWatched, nickname } = myUserInfo
+  const { location, description, tutorialWatched } = myUserInfo
   const getShowModals = () => {
     return !!(!tutorialWatched && currentUser)
   }
@@ -63,10 +63,10 @@ const Profile = props => {
       <div className="profile-header-container">
         {!editProfile && <ProfileImage userId={user.id} />}
         {editProfile && <EditProfileImage onChange={setImg} />}
-        {user && myUserInfo && !editProfile && (
-          <ProfileHeader nickname={nickname} location={location} />
+        {user && user.nickname && !editProfile && (
+          <ProfileHeader nickname={user.nickname} location={location} />
         )}
-        {user && !nickname && !editProfile && (
+        {user && !user.nickname && !editProfile && (
           <ProfileHeader nickname={user.username} location={location} />
         )}
         {editProfile && (
