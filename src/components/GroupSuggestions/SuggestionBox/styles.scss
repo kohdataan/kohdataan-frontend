@@ -1,3 +1,5 @@
+@import '../../../styles/colors.scss';
+
 .suggestion-buttons-wrapper {
   display: flex;
   flex-flow: row nowrap;
@@ -7,10 +9,12 @@
 .suggestion-button {
   background: none;
   border: none;
+  text-decoration: none;
+  color: $darkblue;
   border-radius: 0px;
   text-transform: none;
   font-weight: normal;
-  padding: 10px 0 10px 0;
+  padding: 30px 0 10px 0;
   & i {
     padding: 0 10px 0 0;
   }
