@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -76,7 +76,7 @@ const RegistrationContainer = props => {
   const stepButtonActions = () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        return props.updateUser({ nickname, mmid: mattermostId })
+        return props.updateUser({ nickname, mmId: mattermostId })
       }
       case pages['add-location'].current: {
         return props.updateUser({ location: location.value })
@@ -149,5 +149,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(RegistrationContainer)
+  )(memo(RegistrationContainer))
 )

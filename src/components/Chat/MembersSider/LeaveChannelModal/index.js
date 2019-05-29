@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ButtonContainer from '../../../ButtonContainer'
@@ -40,4 +40,4 @@ LeaveChannelModal.propTypes = {
   handleLeaveChannel: propTypes.func.isRequired,
 }
 
-export default LeaveChannelModal
+export default memo(LeaveChannelModal)

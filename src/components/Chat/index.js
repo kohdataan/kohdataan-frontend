@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import MessageList from './MessageList'
 import ChatHeader from './ChatHeader'
@@ -74,4 +74,4 @@ Chat.defaultProps = {
   members: [],
 }
 
-export default Chat
+export default memo(Chat)

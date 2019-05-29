@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import ShadowBox from '../../ShadowBox'
 import Textarea from '../../TextField'
@@ -38,4 +38,4 @@ Description.defaultProps = {
   value: '',
 }
 
-export default Description
+export default memo(Description)

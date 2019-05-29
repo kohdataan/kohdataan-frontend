@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
@@ -20,7 +20,7 @@ import {
 import getInterestsAction from './store/interest/interestAction'
 import './styles/defaults.scss'
 
-class App extends PureComponent {
+class App extends Component {
   async componentDidMount() {
     const {
       history,
@@ -38,6 +38,32 @@ class App extends PureComponent {
       await pAddUserToStateAndMattermostLogin()
     }
     await pGetInterestsAction()
+  }
+
+  // Compare important props and prevent re-render if those are not changing
+  shouldComponentUpdate(nextProps) {
+    const {
+      history,
+      init: pInit,
+      addUserToStateAndMattermostLogin: pAddUserToStateAndMattermostLogin,
+      getInterestsAction: pGetInterestsAction,
+      signUpAndSignIn: pSignUpAndSignIn,
+      user: pUser,
+    } = this.props
+    return !(
+      nextProps.addUserToStateAndMattermostLogin ===
+        pAddUserToStateAndMattermostLogin &&
+      nextProps.getInterestsAction === pGetInterestsAction &&
+      nextProps.init === pInit &&
+      nextProps.history === history &&
+      nextProps.signUpAndSignIn === pSignUpAndSignIn &&
+      nextProps.user === pUser
+    )
+  }
+
+  componentDidUpdate(nextProps) {
+    console.log('App updated')
+    console.log(nextProps)
   }
 
   render() {
@@ -63,6 +89,7 @@ App.propTypes = {
   signUpAndSignIn: PropTypes.func.isRequired,
   addUserToStateAndMattermostLogin: PropTypes.func.isRequired,
   getInterestsAction: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapDispatchToProps = dispatch =>

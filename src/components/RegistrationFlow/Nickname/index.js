@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import ShadowBox from '../../ShadowBox'
 import InputField from '../../InputField'
@@ -28,4 +28,4 @@ Nickname.propTypes = {
   value: PropTypes.string.isRequired,
 }
 
-export default Nickname
+export default memo(Nickname)

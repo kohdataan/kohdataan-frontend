@@ -1,21 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-// import getUsernamesById from '../../../utils/getUsernameById'
 
 const Group = props => {
-  const { channel, getMembers /* profiles */ } = props
+  const { channel, getMembers, unreadCount } = props
   const [members, setMembers] = useState([])
+
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
   }, [])
+
   return (
-    <Link className="group-box" to={`/chat/${channel.id}`}>
-      <div className="group-info-wrapper">
-        <h2>{channel.display_name}</h2>
+    <Link
+      className={`${unreadCount > 0 ? 'group-box-unreads' : ''} group-box`}
+      to={`/chat/${channel.id}`}
+    >
+      <div className="group-box-content">
+        <div className="group-header">
+          <h2>{channel.display_name}</h2>
+          {members && (
+            <p className="groups-num-members">{`${members.length} jäsentä`}</p>
+          )}
+        </div>
+        <p>{`Yhteistä: ${channel.display_name}`}</p>
       </div>
-      {members && <p>{`${members.length} jäsentä`}</p>}
+      {unreadCount > 0 && (
+        <div className="group-unreads-text">
+          <li>{`${unreadCount} uutta viestiä`}</li>
+        </div>
+      )}
+      {unreadCount <= 0 && (
+        <div className="group-unreads-text no-unreads">
+          <p>Ei uusia viestejä</p>
+        </div>
+      )}
     </Link>
   )
 }
@@ -23,7 +42,7 @@ const Group = props => {
 Group.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   getMembers: propTypes.func.isRequired,
-  // profiles: propTypes.instanceOf(Object).isRequired,
+  unreadCount: propTypes.number.isRequired,
 }
 
-export default Group
+export default memo(Group)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const InfoPage = () => {
@@ -9,4 +9,4 @@ const InfoPage = () => {
   )
 }
 
-export default InfoPage
+export default memo(InfoPage)

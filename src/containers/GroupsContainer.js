@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -30,7 +30,6 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelInvitations,
     getChannelMembers,
-    profiles,
   } = props
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -38,7 +37,6 @@ const GroupsContainer = props => {
     loadMe()
     getChannelInvitations()
   }, [])
-
   // Get channels and members based on team id
   // & When user joins a channel, users props is changed and
   // channels need to be fetched again
@@ -47,6 +45,7 @@ const GroupsContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
+    // getChannelMembersByChannelId('yga5m796j3gwjgpg9n8u1yohwh')
   }, [teams, users])
 
   // Get only group channels
@@ -82,6 +81,21 @@ const GroupsContainer = props => {
     return mySuggestions
   }
 
+  // TODO: Get unread count by channel id
+  const getUnreadCountByChannelId = channelId => {
+    if (channels) {
+      const channel = Object.values(channels).find(
+        item => item.id === channelId
+      )
+      if (channel) {
+        const channelMsgCount = channel.total_msg_count
+        const myMessageCount = myChannels[channel.id].msg_count
+        return channelMsgCount - myMessageCount
+      }
+    }
+    return 0
+  }
+
   return (
     <>
       <GroupSuggestions
@@ -91,7 +105,7 @@ const GroupsContainer = props => {
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
-        profiles={profiles}
+        getUnreadCount={getUnreadCountByChannelId}
       />
     </>
   )
@@ -102,7 +116,6 @@ GroupsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
@@ -162,4 +175,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GroupsContainer)
+)(memo(GroupsContainer))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const Textarea = props => {
@@ -47,4 +47,4 @@ Textarea.defaultProps = {
   rows: 4,
 }
 
-export default Textarea
+export default memo(Textarea)

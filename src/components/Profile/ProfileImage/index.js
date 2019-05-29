@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const ProfileImage = props => {
@@ -16,4 +16,4 @@ const ProfileImage = props => {
   )
 }
 
-export default ProfileImage
+export default memo(ProfileImage)

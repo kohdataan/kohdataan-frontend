@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -31,4 +31,4 @@ PrivateRoute.defaultProps = {
   location: '',
 }
 
-export default PrivateRoute
+export default memo(PrivateRoute)

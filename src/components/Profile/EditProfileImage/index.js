@@ -3,24 +3,23 @@ import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-const Picture = props => {
+const EditProfileImage = props => {
   const { onChange } = props
-
   return (
-    <div className="add-user-picture-container">
-      <h3 className="add-user-picture-title">Valitse oma kuvake</h3>
+    <div className="profile-header-item">
       <Avatar
-        width={200}
-        height={200}
-        label="Valitse tiedosto"
+        width={80}
+        height={80}
+        label="Valitse"
         onCrop={onChange}
+        labelStyle={{ fontSize: '15px', fontWeight: 'bold' }}
       />
     </div>
   )
 }
 
-Picture.propTypes = {
+EditProfileImage.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default memo(Picture)
+export default memo(EditProfileImage)

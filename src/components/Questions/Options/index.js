@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import OptionButton from './OptionButton'
@@ -30,4 +30,4 @@ Options.propTypes = {
   data: propTypes.instanceOf(Object).isRequired,
 }
 
-export default Options
+export default memo(Options)

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   getMe as getMeAction,
   getProfilesByUsernames as getProfilesByUsernamesAction,
+  uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import {
@@ -14,6 +15,7 @@ import {
 import getInterestsAction from '../store/interest/interestAction'
 import { getInterestsByUsername, getUserByUsername } from '../api/user'
 import Profile from '../components/Profile'
+import dataUriToBlob from '../utils/dataUriToBlob'
 
 const ProfileContainer = props => {
   // mattermost user
@@ -28,10 +30,12 @@ const ProfileContainer = props => {
     getUserInterests,
     updateUser,
     myUserInfo,
+    uploadProfileImage,
   } = props
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
+  const [img, setImg] = useState(null)
   // TODO: Get other user's interests for other user profile
   useEffect(() => {
     getMe()
@@ -62,7 +66,6 @@ const ProfileContainer = props => {
       console.error(e)
     }
   }
-
   // If username is given, get other user's info
   useEffect(() => {
     if (username) {
@@ -82,6 +85,13 @@ const ProfileContainer = props => {
     }
   }, [currentUser])
 
+  // Update profile picture
+  const updateProfilePicture = () => {
+    if (currentUser && img) {
+      uploadProfileImage(currentUser.id, dataUriToBlob(img))
+    }
+  }
+
   return (
     <>
       {!username && (
@@ -93,9 +103,11 @@ const ProfileContainer = props => {
           addUserInterests={addUserInterests}
           myUserInfo={myUserInfo}
           updateUser={updateUser}
+          setImg={setImg}
+          updateProfilePicture={updateProfilePicture}
         />
       )}
-      {username && (
+      {username && otherUserInfo && mmuser && interests && (
         <Profile
           user={mmuser}
           userInterests={interests}
@@ -137,6 +149,7 @@ ProfileContainer.propTypes = {
   addUserInterests: PropTypes.func.isRequired,
   getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
+  uploadProfileImage: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
@@ -154,6 +167,7 @@ const mapDispatchToProps = dispatch =>
       addUserInterests: addUserInterestsAction,
       getUserInterests: getUserInterestsAction,
       updateUser: updateUserAction,
+      uploadProfileImage: uploadProfileImageAction,
       getInterestsAction,
     },
     dispatch
@@ -163,4 +177,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProfileContainer)
+)(memo(ProfileContainer))
