@@ -81,6 +81,24 @@ const GroupsContainer = props => {
     return mySuggestions
   }
 
+  // TODO: Get unread count by channel id
+  const getUnreadCountByChannelId = channelId => {
+    if (channels) {
+      const channel = Object.values(channels).find(
+        item => item.id === channelId
+      )
+      if (channel) {
+        const channelMsgCount = channel.total_msg_count
+        const myMessageCount = myChannels[channel.id].msg_count
+        return channelMsgCount - myMessageCount
+      }
+    }
+    return 0
+  }
+
+  // console.log(getUnreadCountByChannelId('q9dutgxrb3b8xmw1t3gsqmaaoo'))
+  // console.log(getGroupChannels(getChannelInfoForMyChannels()))
+
   return (
     <>
       <GroupSuggestions
@@ -91,6 +109,7 @@ const GroupsContainer = props => {
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
         profiles={profiles}
+        getUnreadCount={getUnreadCountByChannelId}
       />
     </>
   )

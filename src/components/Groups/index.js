@@ -4,7 +4,7 @@ import Group from './Group'
 import './styles.scss'
 
 const Groups = props => {
-  const { channels, getMembers, profiles } = props
+  const { channels, getMembers, profiles, getUnreadCount } = props
 
   return (
     <div className="groups-wrapper">
@@ -18,6 +18,7 @@ const Groups = props => {
             channel={channel}
             getMembers={getMembers}
             profiles={profiles}
+            unreadCount={getUnreadCount(channel.id)}
           />
         ))}
       </div>
@@ -29,6 +30,7 @@ Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   getMembers: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
+  getUnreadCount: PropTypes.func.isRequired,
 }
 
 export default memo(Groups)

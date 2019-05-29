@@ -5,18 +5,27 @@ import { Link } from 'react-router-dom'
 // import getUsernamesById from '../../../utils/getUsernameById'
 
 const Group = props => {
-  const { channel, getMembers /* profiles */ } = props
+  const { channel, getMembers, unreadCount /* profiles */ } = props
   const [members, setMembers] = useState([])
 
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
   }, [])
   return (
-    <Link className="group-box" to={`/chat/${channel.id}`}>
-      <div className="group-info-wrapper">
+    <Link
+      className={`${unreadCount > 0 ? 'group-box-unreads' : ''} group-box`}
+      to={`/chat/${channel.id}`}
+    >
+      <div className="group-header">
         <h2>{channel.display_name}</h2>
+        {members && <p>{`${members.length} jäsentä`}</p>}
       </div>
-      {members && <p>{`${members.length} jäsentä`}</p>}
+      <p>Yhteistä:</p>
+      {unreadCount > 0 && (
+        <div className="group-unreads-text">
+          <li>{`${unreadCount} uutta viestiä`}</li>
+        </div>
+      )}
     </Link>
   )
 }
@@ -24,6 +33,7 @@ const Group = props => {
 Group.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   getMembers: propTypes.func.isRequired,
+  unreadCount: propTypes.number.isRequired,
   // profiles: propTypes.instanceOf(Object).isRequired,
 }
 

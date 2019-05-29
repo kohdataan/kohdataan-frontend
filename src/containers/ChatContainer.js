@@ -14,6 +14,7 @@ import {
   removeChannelMember as removeChannelMemberAction,
   getChannelMembers as getChannelMembersAction,
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
+  viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
@@ -33,6 +34,7 @@ const ChatContainer = props => {
     getPosts,
     getChannelMembers,
     removeChannelMember,
+    viewChannel,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -53,10 +55,11 @@ const ChatContainer = props => {
     }
   }, [teams])
 
-  // Get posts for current channel
+  // Get posts for current channel and view channel
   useEffect(() => {
     if (currentChannelId) {
       getPosts(currentChannelId)
+      viewChannel(currentChannelId)
     }
   }, [teams])
 
@@ -128,6 +131,7 @@ ChatContainer.propTypes = {
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentChannelId: PropTypes.string.isRequired,
   removeChannelMember: PropTypes.func.isRequired,
+  viewChannel: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -161,6 +165,7 @@ const mapDispatchToProps = dispatch =>
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       loadMe: loadMeAction,
+      viewChannel: viewChannelAction,
     },
     dispatch
   )
