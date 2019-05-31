@@ -12,12 +12,13 @@ const MessageList = props => {
         {posts.length > 0 &&
           posts.map(post => (
             <Message
-              key={post[1]}
-              sender={getUserNamebyId(post[3])}
-              text={post[2]}
-              senderId={post[3]}
+              key={post.id}
+              type={post.type}
+              sender={getUserNamebyId(post.user_id)}
+              text={post.message}
+              senderId={post.user_id}
               currentUserId={currentUserId}
-              iconColor={getIconColor(post[3])}
+              iconColor={getIconColor(post.user_id)}
             />
           ))}
       </div>

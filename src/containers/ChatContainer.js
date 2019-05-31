@@ -14,6 +14,7 @@ import {
   removeChannelMember as removeChannelMemberAction,
   getChannelMembers as getChannelMembersAction,
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
+  viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import Chat from '../components/Chat'
@@ -33,6 +34,7 @@ const ChatContainer = props => {
     getPosts,
     getChannelMembers,
     removeChannelMember,
+    viewChannel,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -53,10 +55,11 @@ const ChatContainer = props => {
     }
   }, [teams])
 
-  // Get posts for current channel
+  // Get posts for current channel and view channel
   useEffect(() => {
     if (currentChannelId) {
       getPosts(currentChannelId)
+      viewChannel(currentChannelId)
     }
   }, [teams])
 
@@ -79,13 +82,8 @@ const ChatContainer = props => {
 
   // Sort posts based on created timestamp
   const sortPosts = allPosts => {
-    const postsArr = Object.values(allPosts).map(post => [
-      post.create_at,
-      post.id,
-      post.message,
-      post.user_id || '',
-    ])
-    postsArr.sort((a, b) => a[0] - b[0])
+    const postsArr = Object.values(allPosts)
+    postsArr.sort((a, b) => a.create_at - b.create_at)
     return postsArr
   }
 
@@ -133,6 +131,7 @@ ChatContainer.propTypes = {
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentChannelId: PropTypes.string.isRequired,
   removeChannelMember: PropTypes.func.isRequired,
+  viewChannel: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -166,6 +165,7 @@ const mapDispatchToProps = dispatch =>
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       loadMe: loadMeAction,
+      viewChannel: viewChannelAction,
     },
     dispatch
   )

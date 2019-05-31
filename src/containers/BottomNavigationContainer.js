@@ -5,7 +5,6 @@ import BottomNavigation from '../components/BottomNavigation'
 import BottomNavigationLink from '../components/BottomNavigationLink'
 
 const BottomNavigationContainer = props => {
-  console.log('asdfqwe')
   const {
     location: { pathname },
   } = props

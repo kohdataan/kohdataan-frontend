@@ -34,8 +34,6 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
 
-  console.log('asdfasdfasdfasdf')
-
   const subpage = () => {
     switch (step) {
       case pages.info.current:

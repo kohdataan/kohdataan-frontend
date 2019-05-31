@@ -3,15 +3,28 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
-  const { sender, text, currentUserId, senderId, iconColor } = props
+  const { sender, text, currentUserId, senderId, iconColor, type } = props
+
+  // Checks if message is system message
+  const isSystemMessage = () =>
+    type === 'system_join_channel' || type === 'system_leave_channel'
+
+  // Checks if message is combined user activity message
+  const isSystemCombinedUserActivity = () =>
+    type === 'system_combined_user_activity'
+
+  // Get message wrapper classes
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
+    isSystemMessage() ? 'wrapper-system' : '',
   ]
+
+  // Get message content classes
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    senderId ? '' : 'content-no-sender',
+    isSystemCombinedUserActivity() ? 'content-system-combined' : '',
   ]
 
   const senderIconClassList = [
@@ -40,6 +53,7 @@ const Message = props => {
 Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
+  type: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string.isRequired,
   iconColor: propTypes.string.isRequired,

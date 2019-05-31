@@ -30,10 +30,8 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelInvitations,
     getChannelMembers,
-    profiles,
   } = props
 
-  console.log('asdfasdf')
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -48,6 +46,7 @@ const GroupsContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
+    // getChannelMembersByChannelId('yga5m796j3gwjgpg9n8u1yohwh')
   }, [teams, users])
 
   // Get only group channels
@@ -83,6 +82,21 @@ const GroupsContainer = props => {
     return mySuggestions
   }
 
+  // TODO: Get unread count by channel id
+  const getUnreadCountByChannelId = channelId => {
+    if (channels) {
+      const channel = Object.values(channels).find(
+        item => item.id === channelId
+      )
+      if (channel) {
+        const channelMsgCount = channel.total_msg_count
+        const myMessageCount = myChannels[channel.id].msg_count
+        return channelMsgCount - myMessageCount
+      }
+    }
+    return 0
+  }
+
   return (
     <>
       <GroupSuggestions
@@ -92,7 +106,7 @@ const GroupsContainer = props => {
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
-        profiles={profiles}
+        getUnreadCount={getUnreadCountByChannelId}
       />
     </>
   )
@@ -103,7 +117,6 @@ GroupsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,

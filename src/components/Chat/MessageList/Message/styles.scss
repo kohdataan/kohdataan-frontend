@@ -11,6 +11,10 @@
   justify-content: flex-end;
 }
 
+.wrapper-system {
+  display: none;
+}
+
 .chat-message-content {
   display: flex;
   word-wrap: break-word;
@@ -26,13 +30,13 @@
 
 .content-sent {
   border-radius: 20px 20px 0px 20px;
-  margin-right: 20px;
   background-color: $orange;
   border: none;
 }
 
-.content-no-sender {
+.content-system-combined {
   background-color: white;
+  color: gray;
   border: none;
 }
 
