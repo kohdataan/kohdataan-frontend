@@ -32,6 +32,8 @@ const GroupsContainer = props => {
     getChannelMembers,
     profiles,
   } = props
+
+  console.log('asdfasdf')
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -158,7 +160,13 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
+const shouldComponentUpdate = (props, prevProps) => {
+  const { match: pMatch, ...prest } = prevProps
+  const { match, ...rest } = props
+  return JSON.stringify(rest) === JSON.stringify(prest)
+}
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(memo(GroupsContainer))
+)(memo(GroupsContainer, shouldComponentUpdate))

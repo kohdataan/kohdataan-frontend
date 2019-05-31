@@ -64,11 +64,12 @@ const Profile = props => {
         {!editProfile && <ProfileImage userId={user.id} />}
         {editProfile && <EditProfileImage onChange={setImg} />}
         {user && myUserInfo && !editProfile && (
-          <ProfileHeader nickname={nickname} location={location} />
+          <ProfileHeader
+            nickname={nickname || user.username}
+            location={location}
+          />
         )}
-        {user && !nickname && !editProfile && (
-          <ProfileHeader nickname={user.username} location={location} />
-        )}
+
         {editProfile && (
           <EditNickname
             value={newNickname}

@@ -8,11 +8,11 @@ import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
 import GroupsContainer from './containers/GroupsContainer'
-import ProfileContainer from './containers/ProfileContainer'
 import PrivateRoute from './utils/PrivateRoute'
 import ChatContainer from './containers/ChatContainer'
 import LogInContainer from './containers/LogInContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
+import ProfileContainer from './containers/ProfileContainer'
 import {
   signUpAndSignIn,
   addUserToStateAndMattermostLogin,
@@ -61,11 +61,6 @@ class App extends Component {
     )
   }
 
-  componentDidUpdate(nextProps) {
-    console.log('App updated')
-    console.log(nextProps)
-  }
-
   render() {
     return (
       <Container className="main-container">
@@ -108,9 +103,7 @@ const mapStateToProps = store => {
 }
 
 // export default App
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(App))
