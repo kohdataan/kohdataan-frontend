@@ -58,8 +58,11 @@ Tässä oletetaan, että backend on lokaalisti pystyssä, ja sinne on luotu käy
 ## Ulkoasu
 
 Projektin ulkoasu ja tyyliohjeet löytyvät osoitteesta https://app.zeplin.io/project/5cb591097f5deba21424eb89/
+Palvelun toiminnasta saa kiinni prototyypin avulla: https://invis.io/AYRCBXKH2R4 
 
-Tutustuaksesi designiin sinun täytyy rekisteröityä Zeplinin käyttäjäksi. Rekisteröitymisen jälkeen sinulla on pääsy ajantasaiseen näkymäkohtaiseen designiin. Projektin issueista linkataan suoraan yksittäisten näkymien designiin, jotta pääset helposti kiinni tekemiseen ulkoasunkin puolesta.
+Tutustuaksesi designiin sinun täytyy rekisteröityä Zeplinin käyttäjäksi. Rekisteröitymisen jälkeen sinulla on pääsy ajantasaiseen näkymäkohtaiseen designiin. Projektin issueista linkataan suoraan yksittäisten näkymien designiin, jotta pääset helposti kiinni tekemiseen ulkoasunkin puolesta. Pyrimme liittämään myös screenshotin niihin issueihin, joihin liittyy suoraan jokin näkymä.
+
+Tämänhetkiset näkymät sekä käytetyt ikonit löytyvät myös kootusti assets-repositoriosta: https://github.com/kohdataan/kohdataan-assets 
 
 ## Projektiin osallistuminen
 
