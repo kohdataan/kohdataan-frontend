@@ -42,7 +42,7 @@ const Profile = props => {
   const handleEditReady = () => {
     updateUser({
       description: updatedDescription,
-      nickname: newNickname,
+      nickname: newNickname || nickname,
       mmid: currentUser.id,
     })
     addUserInterests({ userInterests: currentInterestIds })

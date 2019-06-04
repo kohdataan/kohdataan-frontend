@@ -19,6 +19,13 @@
   }
 }
 
+.interests-grid-item-selected {
+  & i {
+    background: black;
+    color: $orange;
+  }
+}
+
 .interests-grid-label {
   align-self: center;
   text-transform: none;
