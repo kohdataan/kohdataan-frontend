@@ -45,6 +45,7 @@ const ChatContainer = props => {
   useEffect(() => {
     getProfiles()
     loadMe()
+    console.log(currentUserId)
   }, [])
 
   // Get team related channels and members
