@@ -1,3 +1,5 @@
+@import '../../../../styles/colors.scss';
+
 .interests-grid {
   display: flex;
   flex-wrap: wrap;
@@ -6,15 +8,14 @@
 .interests-grid-item {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  align-items: center;
   & i {
     display: flex;
     height: 65px;
     width: 65px;
-    justify-content: center;
-    align-items: center;
     background: black;
-    border: 1px solid black;
-    color: orange;
+    color: $orange;
     font-size: 32px;
     padding: 15px 11px;
     border-radius: 50%;

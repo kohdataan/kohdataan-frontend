@@ -7,8 +7,26 @@ import getIcon from '../../utils/getIcon'
 const EditInterestsContainer = props => {
   const { options, interests, setInterests } = props
   const itemIsSelected = id => interests.includes(id)
-  // Select item if less than 5 items are selected
 
+  /*
+  const sortOptions = () => {
+    sortedOptions = Object.values(options).sort((a, b) => {
+      if (itemIsSelected(a.id)) {
+        // Sort by selection
+        if (itemIsSelected(b.id)) {
+          return a.name > b.name ? 1 : -1
+        }
+        return -1
+      }
+      if (itemIsSelected(b.id)) {
+        return 1
+      }
+      return a.name > b.name ? 1 : -1
+    })
+    return sortedOptions
+  }
+  */
+  // Select item if less than 5 items are selected
   const addToSelected = key => {
     if (interests.length < 5) {
       const interestsArr = [...interests]
