@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
@@ -6,11 +6,11 @@ import getIcon from '../../utils/getIcon'
 
 const EditInterestsContainer = props => {
   const { options, interests, setInterests } = props
+  const [sortedOptions, setSortedOptions] = useState(options)
   const itemIsSelected = id => interests.includes(id)
 
-  /*
   const sortOptions = () => {
-    sortedOptions = Object.values(options).sort((a, b) => {
+    const sorted = Object.values(options).sort((a, b) => {
       if (itemIsSelected(a.id)) {
         // Sort by selection
         if (itemIsSelected(b.id)) {
@@ -23,9 +23,13 @@ const EditInterestsContainer = props => {
       }
       return a.name > b.name ? 1 : -1
     })
-    return sortedOptions
+    return sorted
   }
-  */
+
+  useEffect(() => {
+    setSortedOptions(sortOptions())
+  }, [])
+
   // Select item if less than 5 items are selected
   const addToSelected = key => {
     if (interests.length < 5) {
@@ -56,7 +60,7 @@ const EditInterestsContainer = props => {
 
   return (
     <div className="interests-grid">
-      {options.map(interest => (
+      {sortedOptions.map(interest => (
         <ButtonContainer
           key={interest.name}
           className={`${
