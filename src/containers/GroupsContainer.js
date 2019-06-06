@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -13,6 +13,7 @@ import {
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import getChannelInvitationsAction from '../store/channels/channelAction'
+import { getChannelInvitationMembers } from '../api/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 
@@ -32,12 +33,23 @@ const GroupsContainer = props => {
     getChannelMembers,
   } = props
 
+  const [filteredSuggestions, setFilteredSuggestions] = useState([])
+
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
     loadMe()
     getChannelInvitations()
   }, [])
+
+  // Get only those channels suggestions that user has not yet joined
+  const getFilteredChannelSuggestions = () => {
+    const mySuggestions = channelSuggestions.filter(
+      channel => !Object.keys(myChannels).includes(channel.id)
+    )
+    return mySuggestions
+  }
+
   // Get channels and members based on team id
   // & When user joins a channel, users props is changed and
   // channels need to be fetched again
@@ -46,7 +58,9 @@ const GroupsContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-    // getChannelMembersByChannelId('yga5m796j3gwjgpg9n8u1yohwh')
+    if (myChannels) {
+      setFilteredSuggestions(getFilteredChannelSuggestions())
+    }
   }, [teams, users])
 
   // Get only group channels
@@ -59,6 +73,24 @@ const GroupsContainer = props => {
         channel.name !== 'town-square'
     )
     return filteredChannels
+  }
+
+  const getMembersByChannelId = async (channelId, signal) => {
+    try {
+      const res = await getChannelInvitationMembers(
+        localStorage.getItem('authToken'),
+        channelId,
+        signal
+      )
+      if (res.userDetails) {
+        return res.userDetails
+      }
+      return []
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      return []
+    }
   }
 
   // Get channel objects based on myChannels
@@ -74,15 +106,7 @@ const GroupsContainer = props => {
     joinChannel(currentUserId, currentTeamId, channelId)
   }
 
-  // Get only those channels suggestions that user has not yet joined
-  const getFilteredChannelSuggestions = () => {
-    const mySuggestions = channelSuggestions.filter(
-      channel => !Object.keys(myChannels).includes(channel.id)
-    )
-    return mySuggestions
-  }
-
-  // TODO: Get unread count by channel id
+  // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
       const channel = Object.values(channels).find(
@@ -100,8 +124,9 @@ const GroupsContainer = props => {
   return (
     <>
       <GroupSuggestions
-        channels={getFilteredChannelSuggestions()}
+        channels={filteredSuggestions}
         handleJoinChannel={handleJoinChannel}
+        getMembersByChannelId={getMembersByChannelId}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}

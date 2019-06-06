@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
 import './styles.scss'
+import propTypes from 'prop-types'
 import SuggestionBox from './SuggestionBox'
 
 const GroupSuggestions = props => {
-  const { channels, handleJoinChannel } = props || []
+  const { channels, handleJoinChannel, getMembersByChannelId } = props
   return (
     <div className="group-suggestions">
       <h1>Ehdotetut ryhmät</h1>
@@ -17,11 +18,18 @@ const GroupSuggestions = props => {
               key={channel.id}
               channel={channel}
               handleJoinChannel={handleJoinChannel}
+              getMembersByChannelId={getMembersByChannelId}
             />
           ))}
       </div>
     </div>
   )
+}
+
+GroupSuggestions.propTypes = {
+  channels: propTypes.instanceOf(Array).isRequired,
+  handleJoinChannel: propTypes.func.isRequired,
+  getMembersByChannelId: propTypes.func.isRequired,
 }
 
 export default memo(GroupSuggestions)
