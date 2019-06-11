@@ -34,21 +34,26 @@ const Profile = props => {
   })
   const [currentInterestIds, setCurrentInterestsIds] = useState([])
   const [newNickname, setNewNickname] = useState('')
+
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
   }, [userInterests])
+
   const [updatedDescription, setUpdatedDescription] = useState(description)
+
   const toggleEditProfile = () => setEditProfile(!editProfile)
+
   const handleEditReady = () => {
     updateUser({
       description: updatedDescription,
-      nickname: newNickname,
+      nickname: newNickname || nickname,
       mmid: currentUser.id,
     })
     addUserInterests({ userInterests: currentInterestIds })
     updateProfilePicture()
     toggleEditProfile()
   }
+
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
