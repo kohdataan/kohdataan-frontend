@@ -50,12 +50,17 @@ const Message = props => {
   )
 }
 
+Message.defaultProps = {
+  type: '',
+  senderId: '',
+}
+
 Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
-  type: propTypes.string.isRequired,
+  type: propTypes.string,
   currentUserId: propTypes.string.isRequired,
-  senderId: propTypes.string.isRequired,
+  senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,
 }
 

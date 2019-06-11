@@ -26,10 +26,14 @@ const Groups = props => {
   )
 }
 
+Groups.defaultProps = {
+  profiles: {},
+}
+
 Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   getMembers: PropTypes.func.isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object),
   getUnreadCount: PropTypes.func.isRequired,
 }
 

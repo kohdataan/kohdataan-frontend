@@ -36,6 +36,7 @@ const ProfileContainer = props => {
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
   const [img, setImg] = useState(null)
+
   // TODO: Get other user's interests for other user profile
   useEffect(() => {
     getMe()
@@ -52,8 +53,6 @@ const ProfileContainer = props => {
         const data = res.result[0].interests
         setInterests(data)
       }
-      // eslint-disable-next-line no-console
-      console.log(res)
       const userInfo = await getUserByUsername(
         username,
         localStorage.getItem('authToken')
@@ -159,6 +158,12 @@ ProfileContainer.defaultProps = {
   interestOptions: [],
 }
 
+const shouldComponentUpdate = (props, prevProps) => {
+  const { match: pMatch, ...prest } = prevProps
+  const { match, ...rest } = props
+  return JSON.stringify(rest) === JSON.stringify(prest)
+}
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -172,9 +177,8 @@ const mapDispatchToProps = dispatch =>
     },
     dispatch
   )
-
 // export default GroupsContainer
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(memo(ProfileContainer))
+)(memo(ProfileContainer, shouldComponentUpdate))

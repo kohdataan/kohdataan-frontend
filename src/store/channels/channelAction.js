@@ -1,11 +1,11 @@
 import * as types from '../../contants/actionTypes'
-import getChannelInvitations from '../../api/channels'
+import * as API from '../../api/channels'
 
 const getChannelInvitationsAction = () => {
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
-      const data = await getChannelInvitations(token)
+      const data = await API.getChannelInvitations(token)
       dispatch({
         type: types.GET_CHANNEL_INVITATIONS,
         channelInvitations: data,

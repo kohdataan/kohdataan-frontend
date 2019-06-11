@@ -13,6 +13,11 @@ const EditProfileImage = props => {
         label="Valitse"
         onCrop={onChange}
         labelStyle={{ fontSize: '15px', fontWeight: 'bold' }}
+        borderStyle={{
+          border: '2px dashed rgb(151, 151, 151)',
+          borderRadius: '50%',
+          textAlign: 'center',
+        }}
       />
     </div>
   )

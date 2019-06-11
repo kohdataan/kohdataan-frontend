@@ -10,8 +10,6 @@ const PrevNextNav = props => {
   const showPrew = current > 0
 
   const handleClick = e => () => {
-    // console.log('current question:', current)
-    // console.log('button clicked:', e)
     return e === 'next' ? setCurrent(current + 1) : setCurrent(current - 1)
   }
 

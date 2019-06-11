@@ -23,7 +23,7 @@ const Profile = props => {
     updateUser,
     setImg,
   } = props
-  const { location, description, tutorialWatched } = myUserInfo
+  const { location, description, tutorialWatched, nickname } = myUserInfo
   const getShowModals = () => {
     return !!(!tutorialWatched && currentUser)
   }
@@ -34,21 +34,26 @@ const Profile = props => {
   })
   const [currentInterestIds, setCurrentInterestsIds] = useState([])
   const [newNickname, setNewNickname] = useState('')
+
   useEffect(() => {
     setCurrentInterestsIds(userInterests.map(item => item.id))
   }, [userInterests])
+
   const [updatedDescription, setUpdatedDescription] = useState(description)
+
   const toggleEditProfile = () => setEditProfile(!editProfile)
+
   const handleEditReady = () => {
     updateUser({
       description: updatedDescription,
-      nickname: newNickname,
+      nickname: newNickname || nickname,
       mmid: currentUser.id,
     })
     addUserInterests({ userInterests: currentInterestIds })
     updateProfilePicture()
     toggleEditProfile()
   }
+
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
@@ -63,12 +68,13 @@ const Profile = props => {
       <div className="profile-header-container">
         {!editProfile && <ProfileImage userId={user.id} />}
         {editProfile && <EditProfileImage onChange={setImg} />}
-        {user && user.nickname && !editProfile && (
-          <ProfileHeader nickname={user.nickname} location={location} />
+        {user && myUserInfo && !editProfile && (
+          <ProfileHeader
+            nickname={nickname || user.username}
+            location={location}
+          />
         )}
-        {user && !user.nickname && !editProfile && (
-          <ProfileHeader nickname={user.username} location={location} />
-        )}
+
         {editProfile && (
           <EditNickname
             value={newNickname}

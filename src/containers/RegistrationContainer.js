@@ -88,7 +88,6 @@ const RegistrationContainer = props => {
         return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
-        console.log(`add-interests ${interests}`)
         return props.addUserInterests({ userInterests: interests })
       }
       default:
@@ -144,10 +143,16 @@ const mapStateToProps = state => {
   }
 }
 
+const shouldComponentUpdate = (props, prevProps) => {
+  const { match: pMatch, ...prest } = prevProps
+  const { match, ...rest } = props
+  return JSON.stringify(rest) === JSON.stringify(prest)
+}
+
 // export default App
 export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(memo(RegistrationContainer))
+  )(memo(RegistrationContainer, shouldComponentUpdate))
 )
