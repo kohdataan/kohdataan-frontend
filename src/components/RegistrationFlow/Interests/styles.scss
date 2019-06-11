@@ -10,7 +10,7 @@
 
 .interests-grid-item-selected {
   & i {
-    background: black;
+    background: black !important;
     color: $orange;
   }
 }
