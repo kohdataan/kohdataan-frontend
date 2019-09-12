@@ -25,23 +25,35 @@ const LogIn = props => {
     <div className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="login-fields-container">
-        <InputField
-          label="Sähköposti"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          inputClassName="login-input-text"
-          labelClassName="login-input-field"
-        />
-        <InputField
-          label="Salasana"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          inputClassName="login-input-text"
-          labelClassName="login-input-field"
-        />
-        <ButtonContainer className="login-button" onClick={handleLogin}>
-          Sisään
-        </ButtonContainer>
+        <h2 className="login-title">KIRJAUTUMINEN</h2>
+        <div className="login-input-fields-container">
+          <InputField
+            label="Sähköposti"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            inputClassName="login-input-text"
+            labelClassName="login-input-field"
+          />
+          <InputField
+            label="Salasana"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            inputClassName="login-input-text"
+            labelClassName="login-input-field"
+            type="password"
+          />
+          <ButtonContainer className="login-button" onClick={handleLogin}>
+            Kirjaudu
+          </ButtonContainer>
+        </div>
+        <div className="login-links-container">
+          <a className="login-link" href="/">
+            Olen unohtanut salasanani
+          </a>
+          <a className="login-link" href="/">
+            Olen uusi käyttäjä ja haluan rekisteröityä
+          </a>
+        </div>
       </div>
     </div>
   )
