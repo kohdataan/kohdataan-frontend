@@ -14,15 +14,21 @@ const LogIn = props => {
   const { login: matterMostLogin } = props
 
   const handleLogin = async () => {
-    const user = { email, password }
-    await API.userLogin(user).then(e => {
-      console.log(e)
-    })
-    await matterMostLogin(email, password)
+    try {
+      const user = { email, password }
+      await API.userLogin(user).then(res => {
+        localStorage.setItem('userId', res.user.id)
+        localStorage.setItem('authToken', res.token)
+      })
+      await matterMostLogin(email, password)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 
   return (
-    <div className="login-container">
+    <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="login-fields-container">
         <InputField
@@ -43,7 +49,7 @@ const LogIn = props => {
           Sisään
         </ButtonContainer>
       </div>
-    </div>
+    </main>
   )
 }
 

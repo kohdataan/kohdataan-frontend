@@ -42,7 +42,6 @@ const ProfileContainer = props => {
     getMe()
     props.getInterestsAction()
   }, [])
-
   async function fetchOtherUser() {
     try {
       const res = await getInterestsByUsername(
