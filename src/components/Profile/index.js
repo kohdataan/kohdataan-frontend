@@ -16,11 +16,13 @@ const Profile = props => {
     user,
     myUserInfo,
     currentUser,
+    loggedInUser,
     userInterests,
     interestOptions,
     addUserInterests,
     updateProfilePicture,
     updateUser,
+    startDirect,
     setImg,
   } = props
   const { location, description, tutorialWatched, nickname } = myUserInfo
@@ -72,6 +74,9 @@ const Profile = props => {
           <ProfileHeader
             nickname={nickname || user.username}
             location={location}
+            user={user}
+            loggedInUser={loggedInUser}
+            startDirect={startDirect}
           />
         )}
 
@@ -122,6 +127,7 @@ Profile.propTypes = {
   interestOptions: propTypes.instanceOf(Array).isRequired,
   addUserInterests: propTypes.func,
   updateProfilePicture: propTypes.func,
+  startDirect: propTypes.func,
   currentUser: propTypes.instanceOf(Object),
   updateUser: propTypes.func,
   setImg: propTypes.func,
