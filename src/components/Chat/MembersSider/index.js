@@ -1,9 +1,10 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useRef } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
 import LeaveChannelModal from './LeaveChannelModal'
+import useOutsideClick from '../../../hooks/useOutsideClick'
 
 const MembersSider = props => {
   const {
@@ -12,6 +13,7 @@ const MembersSider = props => {
     getIconColor,
     currentUserId,
     handleLeaveChannel,
+    toggleSiderClosedIfOpen,
   } = props
 
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -27,8 +29,14 @@ const MembersSider = props => {
   const openModal = () => setShowConfirmation(true)
   const closeModal = () => setShowConfirmation(false)
 
+  const ref = useRef()
+
+  useOutsideClick(ref, () => {
+    toggleSiderClosedIfOpen()
+  })
+
   return (
-    <div className="chat-header-members-sider" id="members-sider">
+    <div className="chat-header-members-sider" id="members-sider" ref={ref}>
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
         {members.map(member => (
@@ -63,6 +71,7 @@ MembersSider.propTypes = {
   getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
   handleLeaveChannel: propTypes.func.isRequired,
+  toggleSiderClosedIfOpen: propTypes.func.isRequired,
 }
 
 export default memo(MembersSider)
