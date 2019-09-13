@@ -1,0 +1,68 @@
+@import '../../../styles/colors.scss';
+
+.group-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: stretch;
+  text-align: left;
+  & p {
+    color: $gray;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+}
+
+.group-box-content {
+  padding: 15px 20px;
+}
+
+.group-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group-box-unreads {
+  border: 1px solid $orange;
+}
+
+.groups-num-members {
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.group-unreads-text {
+  background-color: $orange;
+  padding: 10px 0 10px 0;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.no-unreads {
+  font-size: 16px;
+  border-top: 1px solid #9a9a9a;
+  background-color: white;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.group-logo {
+  border-radius: 50%;
+  padding: 15px 15px;
+  height: 55px;
+  width: 55px;
+}
