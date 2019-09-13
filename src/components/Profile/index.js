@@ -74,9 +74,8 @@ const Profile = props => {
           <ProfileHeader
             nickname={nickname || user.username}
             location={location}
-            user={user}
-            loggedInUser={loggedInUser}
             startDirect={startDirect}
+            currentUser={currentUser}
           />
         )}
 
