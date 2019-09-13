@@ -7,12 +7,12 @@ import {
 } from 'mattermost-redux/actions/users'
 
 const Header = props => {
-  const { nickname, location, user, loggedInUser, startDirect } = props || ''
+  const { nickname, location, startDirect, currentUser } = props || ''
 
   return (
     <span className="profile-header-item">
       <h1>{nickname}</h1>
-      <button onClick={startDirect}>Aloita keskustelu</button>
+      {!currentUser && <button onClick={startDirect}>Aloita keskustelu</button>}
       <div>{location}</div>
     </span>
   )

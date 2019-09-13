@@ -122,7 +122,6 @@ const ProfileContainer = props => {
       {username && otherUserInfo && mmuser && interests && (
         <Profile
           user={mmuser}
-          loggedInUser={currentUser}
           userInterests={interests}
           interestOptions={interestOptions}
           myUserInfo={otherUserInfo}
