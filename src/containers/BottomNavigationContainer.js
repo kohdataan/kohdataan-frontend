@@ -25,6 +25,11 @@ const BottomNavigationContainer = props => {
         icon="fas fa-user-circle"
       />
       <BottomNavigationLink
+        title="Kaverit"
+        route="/friends"
+        icon="fas fa-user-circle"
+      />
+      <BottomNavigationLink
         title="Ryhmät"
         route="/"
         icon="fas fa-user-friends"
