@@ -15,6 +15,7 @@ import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
+import FriendsContainer from './containers/FriendsContainer'
 import {
   signUpAndSignIn,
   addUserToStateAndMattermostLogin,
@@ -71,6 +72,7 @@ class App extends Component {
         <Route path="/createaccount" component={CreateAccountContainer} />
         <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute exact path="/" component={GroupsContainer} />
+        <PrivateRoute exact path="/friends/" component={FriendsContainer} />
         <PrivateRoute
           path="/profiili/:username?"
           component={ProfileContainer}
