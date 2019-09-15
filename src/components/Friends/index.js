@@ -17,7 +17,6 @@ const Friends = props => {
             key={channel.id}
             channel={channel}
             getMembers={getMembers}
-            profiles={profiles}
             unreadCount={getUnreadCount(channel.id)}
           />
         ))}

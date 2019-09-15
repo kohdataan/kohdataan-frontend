@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 
 const Friend = props => {
-  const { channel, getMembers, currentUser, unreadCount, getProfile } = props
+  const { channel, getMembers, unreadCount } = props
   const [members, setMembers] = useState([])
 
   useEffect(() => {
