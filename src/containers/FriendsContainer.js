@@ -144,7 +144,6 @@ const mapDispatchToProps = dispatch =>
       loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
-      getProfilesByUsernames: getProfilesByUsernamesAction,
     },
     dispatch
   )
