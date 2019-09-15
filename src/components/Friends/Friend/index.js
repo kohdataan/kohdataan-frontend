@@ -3,8 +3,9 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+
 const Friend = props => {
-  const { channel, getMembers, unreadCount } = props
+  const { channel, getMembers, currentUser, unreadCount, getProfile } = props
   const [members, setMembers] = useState([])
 
   useEffect(() => {
