@@ -4,7 +4,7 @@ import Friend from './Friend'
 import './styles.scss'
 
 const Friends = props => {
-  const { channels, getMembers, profiles, getUnreadCount } = props
+  const { channels, getMembers, currentUser, getUnreadCount, getProfile } = props
 
   return (
     <div className="groups-wrapper">

@@ -12,9 +12,7 @@ import {
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getChannelInvitationMembers } from '../api/channels'
 import Friends from '../components/Friends'
-import GroupSuggestions from '../components/GroupSuggestions'
 
 
 const FriendsContainer = props => {
@@ -27,12 +25,9 @@ const FriendsContainer = props => {
     users,
     currentUserId,
     myChannels,
-    joinChannel,
-    channelSuggestions,
+    getProfilesByUsernames,
     getChannelMembers,
   } = props
-
-  const [filteredSuggestions, setFilteredSuggestions] = useState([])
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -49,53 +44,25 @@ const FriendsContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-    if (myChannels) {
-      // setFilteredSuggestions(getFilteredChannelSuggestions())
-    }
   }, [teams, users])
 
   // Get only direct channels
   const getDirectChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
       channel =>
-        channel.type == 'D'
+        channel.type === 'D'
     )
-    console.log("filtered channels", filteredChannels)
-    console.log("all channels", allChannels)
     return filteredChannels
   }
 
-  // const getMembersByChannelId = async (channelId, signal) => {
-  //   try {
-  //     const res = await getChannelInvitationMembers(
-  //       localStorage.getItem('authToken'),
-  //       channelId,
-  //       signal
-  //     )
-  //     if (res.userDetails) {
-  //       return res.userDetails
-  //     }
-  //     return []
-  //   } catch (e) {
-  //     // eslint-disable-next-line no-console
-  //     console.error(e)
-  //     return []
-  //   }
-  // }
 
   // Get channel objects based on myChannels
   const getChannelInfoForMyChannels = () => {
     const myCurrentChannels = Object.values(channels).filter(channel =>
       Object.keys(myChannels).includes(channel.id)
     )
-    console.log("kanavatiedot", channels)
     return myCurrentChannels
   }
-
-  // const handleJoinChannel = channelId => () => {
-  //   const currentTeamId = Object.keys(teams)[0]
-  //   joinChannel(currentUserId, currentTeamId, channelId)
-  // }
 
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
@@ -134,7 +101,6 @@ FriendsContainer.propTypes = {
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
-  getChannelInvitations: PropTypes.func.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
 }
 
@@ -175,10 +141,10 @@ const mapDispatchToProps = dispatch =>
     {
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getProfiles: getProfilesAction,
-      // getProfilesInChannel: getProfilesInChannelAction,
       loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
+      getProfilesByUsernames: getProfilesByUsernamesAction,
     },
     dispatch
   )
