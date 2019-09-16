@@ -15,7 +15,11 @@ const Chat = props => {
     currentUserId,
     members,
     handleLeaveChannel,
+    statuses
   } = props
+
+  console.log(statuses)
+
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
 
@@ -37,6 +41,14 @@ const Chat = props => {
     return visibleName
   }
 
+  const getStatusById = id => {
+    if (id) {
+    const status = statuses[id]
+  return status
+    }
+    else return ""
+  }
+
   return (
     <div className="chat-wrapper" id="chat">
       <ChatHeader channel={channel} toggleSider={toggleSider} />
@@ -54,6 +66,7 @@ const Chat = props => {
           getUserNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
+          getStatusById={getStatusById}
         />
       )}
     </div>

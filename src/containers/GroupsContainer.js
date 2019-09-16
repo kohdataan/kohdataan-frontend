@@ -169,6 +169,7 @@ const mapStateToProps = state => {
   const { user } = state
   const channelSuggestions = state.channels.found
 
+
   return {
     currentUserId,
     channelSuggestions,
@@ -180,7 +181,7 @@ const mapStateToProps = state => {
     posts,
     channels,
     members,
-    myChannels,
+    myChannels
   }
 }
 

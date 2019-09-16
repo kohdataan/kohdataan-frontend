@@ -9,6 +9,7 @@ const MembersSider = props => {
   const {
     members,
     getUserNamebyId,
+    getStatusById,
     getIconColor,
     currentUserId,
     handleLeaveChannel,
@@ -24,6 +25,11 @@ const MembersSider = props => {
     return classNameList.join(' ')
   }
 
+  const getIconMemberStatus = userId => {
+    const statusIcon = `chat-header-${getStatusById(userId)}-status-icon`
+    return statusIcon
+  }
+  
   const openModal = () => setShowConfirmation(true)
   const closeModal = () => setShowConfirmation(false)
 
@@ -38,6 +44,7 @@ const MembersSider = props => {
             userName={getUserNamebyId(member.user_id)}
             currentUserId={currentUserId}
             iconClassNameList={getIconClassNameList(member.user_id)}
+            iconMemberStatus={getIconMemberStatus(member.user_id)}
           />
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
