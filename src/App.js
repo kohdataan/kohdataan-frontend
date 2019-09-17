@@ -15,16 +15,23 @@ import LogInContainer from './containers/LogInContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import getInterestsAction from './store/interest/interestAction'
+import { getUserProfile } from './store/user/userAction'
 import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const { init: pInit, getInterestsAction: pGetInterestsAction } = this.props
+    const {
+      init: pInit,
+      getInterestsAction: pGetInterestsAction,
+      getUserProfile: pGetUserProfile,
+    } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
       return <LogInContainer />
     }
+    await pGetUserProfile()
+
     await pGetInterestsAction()
   }
 
@@ -34,10 +41,12 @@ class App extends Component {
       history,
       init: pInit,
       getInterestsAction: pGetInterestsAction,
+      getUserProfile: pGetUserProfile,
       user: pUser,
     } = this.props
     return !(
       nextProps.getInterestsAction === pGetInterestsAction &&
+      nextProps.getUserProfile === pGetUserProfile &&
       nextProps.init === pInit &&
       nextProps.history === history &&
       nextProps.user === pUser
@@ -65,6 +74,7 @@ App.propTypes = {
   init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   getInterestsAction: PropTypes.func.isRequired,
+  getUserProfile: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
 }
 
@@ -74,6 +84,7 @@ const mapDispatchToProps = dispatch =>
       init,
       login,
       getInterestsAction,
+      getUserProfile,
     },
     dispatch
   )

@@ -1,6 +1,22 @@
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
 
+export const getUserProfile = () => {
+  console.log('here')
+  return async dispatch => {
+    try {
+      const user = await API.getUser()
+      console.log('user ', user)
+      await dispatch({
+        type: types.ADD_USER_TO_STATE,
+        user,
+      })
+    } catch (e) {
+      console.error('e')
+    }
+  }
+}
+
 export const updateUser = data => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
