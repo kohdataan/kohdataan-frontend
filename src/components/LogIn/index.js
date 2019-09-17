@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login } from 'mattermost-redux/actions/users'
+import { Link } from 'react-router-dom'
 import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
 import * as API from '../../api/user'
@@ -47,12 +48,12 @@ const LogIn = props => {
           </ButtonContainer>
         </div>
         <div className="login-links-container">
-          <a className="login-link" href="/">
-            Olen unohtanut salasanani
-          </a>
-          <a className="login-link" href="/">
-            Olen uusi käyttäjä ja haluan rekisteröityä
-          </a>
+          <Link className="login-link" to="/">
+            {'Olen unohtanut salasanani'}
+          </Link>
+          <Link className="login-link" to="/">
+            {'Olen uusi käyttäjä ja haluan rekisteröityä'}
+          </Link>
         </div>
       </div>
     </div>
