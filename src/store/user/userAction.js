@@ -1,18 +1,22 @@
+import { loadMe } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
 
-export const getUserProfile = () => {
-  console.log('here')
+export const addUserToState = () => {
   return async dispatch => {
+    const id = localStorage.getItem('userId')
+    const token = localStorage.getItem('authToken')
     try {
-      const user = await API.getUser()
-      console.log('user ', user)
-      await dispatch({
+      const user = await API.getUser(id, token)
+      dispatch({
         type: types.ADD_USER_TO_STATE,
         user,
       })
+      dispatch(loadMe())
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error('e')
+      dispatch({ type: types.GET_USER_FAILURE, payload: e, error: true })
     }
   }
 }

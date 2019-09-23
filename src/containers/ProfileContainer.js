@@ -19,7 +19,6 @@ import dataUriToBlob from '../utils/dataUriToBlob'
 
 const ProfileContainer = props => {
   // mattermost user
-  console.log('props ', props)
   const {
     currentUser,
     username,
@@ -33,7 +32,7 @@ const ProfileContainer = props => {
     myUserInfo,
     uploadProfileImage,
   } = props
-  console.log('props after ', props)
+  console.log('props at container ', props)
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
@@ -44,6 +43,7 @@ const ProfileContainer = props => {
     getMe()
     props.getInterestsAction()
   }, [])
+
   async function fetchOtherUser() {
     try {
       const res = await getInterestsByUsername(
@@ -58,7 +58,6 @@ const ProfileContainer = props => {
         username,
         localStorage.getItem('authToken')
       )
-      console.log('userinfo ', userInfo)
       if (userInfo) {
         setOtherUserInfo(userInfo)
       }
@@ -70,7 +69,6 @@ const ProfileContainer = props => {
   // If username is given, get other user's info
   useEffect(() => {
     if (username) {
-      console.log('username')
       getProfilesByUsernames([username])
         .then(data => setmmUser(data.data[0]))
         // eslint-disable-next-line no-console

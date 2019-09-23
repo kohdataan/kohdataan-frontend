@@ -4,7 +4,7 @@ import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { init } from 'mattermost-redux/actions/websocket'
-import { login } from 'mattermost-redux/actions/users'
+import { loadMe } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -15,23 +15,24 @@ import LogInContainer from './containers/LogInContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import getInterestsAction from './store/interest/interestAction'
-import { getUserProfile } from './store/user/userAction'
+import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
     const {
+      history,
       init: pInit,
       getInterestsAction: pGetInterestsAction,
-      getUserProfile: pGetUserProfile,
+      addUserToState: pAddUserToState,
     } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
-      return <LogInContainer />
+      history.push('/login')
+    } else {
+      await pAddUserToState()
     }
-    await pGetUserProfile()
-
     await pGetInterestsAction()
   }
 
@@ -41,15 +42,17 @@ class App extends Component {
       history,
       init: pInit,
       getInterestsAction: pGetInterestsAction,
-      getUserProfile: pGetUserProfile,
+      addUserToState: pAddUserToState,
+      loadMe: pLoadMe,
       user: pUser,
     } = this.props
     return !(
       nextProps.getInterestsAction === pGetInterestsAction &&
-      nextProps.getUserProfile === pGetUserProfile &&
+      nextProps.addUserToState === pAddUserToState &&
       nextProps.init === pInit &&
       nextProps.history === history &&
-      nextProps.user === pUser
+      nextProps.user === pUser &&
+      nextProps.loadMe === pLoadMe
     )
   }
 
@@ -74,7 +77,8 @@ App.propTypes = {
   init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   getInterestsAction: PropTypes.func.isRequired,
-  getUserProfile: PropTypes.func.isRequired,
+  addUserToState: PropTypes.func.isRequired,
+  loadMe: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
 }
 
@@ -82,15 +86,17 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       init,
-      login,
+      addUserToState,
+      loadMe,
       getInterestsAction,
-      getUserProfile,
     },
     dispatch
   )
 
 const mapStateToProps = store => {
-  return { user: store.user }
+  return {
+    user: store.user,
+  }
 }
 
 // export default App
