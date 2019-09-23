@@ -16,11 +16,13 @@ const LogIn = props => {
   const handleLogin = async () => {
     try {
       const user = { email, password }
+
+      await matterMostLogin(email, password)
+
       await API.userLogin(user).then(res => {
         localStorage.setItem('userId', res.user.id)
         localStorage.setItem('authToken', res.token)
       })
-      await matterMostLogin(email, password)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
