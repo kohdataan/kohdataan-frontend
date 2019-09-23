@@ -7,6 +7,7 @@ import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
 import * as API from '../../api/user'
 import './styles.scss'
+import { addUserToState } from '../../store/user/userAction'
 
 const LogIn = props => {
   const [email, setEmail] = useState('')
@@ -63,6 +64,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       login,
+      addUserToState,
     },
     dispatch
   )

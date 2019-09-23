@@ -33,6 +33,7 @@ const ProfileContainer = props => {
     myUserInfo,
     uploadProfileImage,
   } = props
+  console.log('props at container ', props)
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
@@ -111,7 +112,7 @@ const ProfileContainer = props => {
       )}
       {username && otherUserInfo && mmuser && interests && (
         <Profile
-          user={mmuser}
+          user={currentUser}
           userInterests={interests}
           interestOptions={interestOptions}
           myUserInfo={otherUserInfo}
