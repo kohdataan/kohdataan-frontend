@@ -11,6 +11,10 @@ import {
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
+import {
+  getPosts as getPostsAction,
+} from 'mattermost-redux/actions/posts'
+import { getUserByUsername } from '../api/user'
 import PropTypes from 'prop-types'
 import Friends from '../components/Friends'
 
@@ -18,6 +22,7 @@ import Friends from '../components/Friends'
 const FriendsContainer = props => {
   const {
     channels,
+    username,
     teams,
     loadMe,
     getProfiles,
@@ -25,9 +30,13 @@ const FriendsContainer = props => {
     users,
     currentUserId,
     myChannels,
+    profiles,
+    getPosts,
     getProfilesByUsernames,
     getChannelMembers,
   } = props
+
+  
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -64,6 +73,15 @@ const FriendsContainer = props => {
     return myCurrentChannels
   }
 
+  const getusername = (members)=> {
+    if(members.length>0) {
+      const friendid=members.find(member => member.user_id!==currentUserId).user_id
+      const friendInfo=Object.values(profiles).find(profile => profile.id==friendid).username
+      return friendInfo
+    }
+    
+  }
+
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
@@ -81,10 +99,16 @@ const FriendsContainer = props => {
 
   return (
     <>
+    {console.log("testaan", username)}
       <Friends
         channels={getDirectChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
+        currentUser={currentUserId}
+        profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
+        getUserByUsername={getUserByUsername}
+        getusername={getusername}
+        getPosts={getPosts}
       />
     </>
   )
@@ -144,6 +168,7 @@ const mapDispatchToProps = dispatch =>
       loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
+      getPosts: getPostsAction,
     },
     dispatch
   )
