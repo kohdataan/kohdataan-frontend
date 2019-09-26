@@ -5,7 +5,6 @@ import Message from './Message'
 
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
-
   return (
     <div className="chat-message-list-container chat--message-list">
       <div className="chat--message-list--container">
@@ -19,6 +18,7 @@ const MessageList = props => {
               senderId={post.user_id}
               currentUserId={currentUserId}
               iconColor={getIconColor(post.user_id)}
+              timestamp={post.create_at}
             />
           ))}
       </div>

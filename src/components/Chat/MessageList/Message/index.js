@@ -3,8 +3,21 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
-  const { sender, text, currentUserId, senderId, iconColor, type } = props
+  const {
+    sender,
+    text,
+    currentUserId,
+    senderId,
+    iconColor,
+    type,
+    timestamp,
+  } = props
 
+  const timeSent = new Date(timestamp).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
   // Checks if message is system message
   const isSystemMessage = () =>
     type === 'system_join_channel' || type === 'system_leave_channel'
@@ -34,17 +47,22 @@ const Message = props => {
 
   return (
     <div className={messageWrapperClassList.join(' ')}>
-      {currentUserId !== senderId && (
-        <div className={senderIconClassList.join(' ')}>
-          <i aria-hidden="true" title={sender[0]} />
-          <span className="label">{sender[0]}</span>
+      <div className="message-content">
+        <div className="message-header-content">
+          {currentUserId === senderId && (
+            <h3 className="chat-message-content-header">{sender}</h3>
+          )}
+          <p className="chat-message-timestamp">{timeSent}</p>
         </div>
-      )}
-      <div className={messageContentClassList.join(' ')}>
         {currentUserId !== senderId && (
-          <h3 className="chat-message-content-header">{sender}</h3>
+          <div className={senderIconClassList.join(' ')}>
+            <i aria-hidden="true" title={sender[0]} />
+            <span className="label">{sender[0]}</span>
+          </div>
         )}
-        <p className="chat-message-content-text">{text}</p>
+        <div className={messageContentClassList.join(' ')}>
+          <p className="chat-message-content-text">{text}</p>
+        </div>
       </div>
     </div>
   )
@@ -62,6 +80,7 @@ Message.propTypes = {
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,
+  timestamp: propTypes.number.isRequired,
 }
 
 export default memo(Message)

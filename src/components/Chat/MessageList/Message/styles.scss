@@ -2,9 +2,13 @@
 
 .chat-message-wrapper {
   display: flex;
-  justify-content: flex-start;
-  flex-flow: row nowrap;
+  justify-content: space-around;
+  flex-flow: row wrap;
   flex-shrink: 0;
+}
+
+.wrapper-received {
+  justify-content: flex-start;
 }
 
 .wrapper-sent {
@@ -25,13 +29,33 @@
   background-color: $beige;
   width: max-content;
   max-width: 60vw;
-  margin-top: 10px;
+  //margin-top: 10px;
+}
+
+.chat-message-timestamp {
+  width: 33px;
+  height: 15px;
+  font-family: Silka;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.14px;
+  color: #9b9b9b;
+}
+
+.message-header-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .content-sent {
   border-radius: 20px 20px 0px 20px;
   background-color: $orange;
   border: none;
+  justify-content: flex-end;
 }
 
 .content-system-combined {
@@ -45,13 +69,13 @@
   margin-block-start: 0em;
   font-size: 15px;
   font-weight: bold;
+  margin: 13px 0;
 }
 
 .chat-message-sender-icon {
-  display: flex;
   align-self: flex-end;
   padding: 4px 8px;
-  margin-right: 5px;
+  margin-right: 8px;
   text-transform: uppercase;
   color: white;
   border-radius: 50%;
