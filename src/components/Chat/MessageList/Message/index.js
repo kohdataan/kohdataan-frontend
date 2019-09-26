@@ -49,21 +49,23 @@ const Message = props => {
     <div className={messageWrapperClassList.join(' ')}>
       <div className="message-content">
         <div className="message-header-content">
-          {currentUserId === senderId && (
+          <span className="chat-message-timestamp">{timeSent}</span>
+          {currentUserId !== senderId && (
             <h3 className="chat-message-content-header">{sender}</h3>
           )}
-          <p className="chat-message-timestamp">{timeSent}</p>
         </div>
-        {currentUserId !== senderId && (
-          <div className={senderIconClassList.join(' ')}>
-            <i aria-hidden="true" title={sender[0]} />
-            <span className="label">{sender[0]}</span>
+        <div className="message-content-text">
+          <div className={messageContentClassList.join(' ')}>
+            <p className="chat-message-content-text">{text}</p>
           </div>
-        )}
-        <div className={messageContentClassList.join(' ')}>
-          <p className="chat-message-content-text">{text}</p>
         </div>
       </div>
+      {currentUserId !== senderId && (
+        <div className={senderIconClassList.join(' ')}>
+          <i aria-hidden="true" title={sender[0]} />
+          <span className="label">{sender[0]}</span>
+        </div>
+      )}
     </div>
   )
 }
