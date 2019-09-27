@@ -96,19 +96,28 @@ const FriendsContainer = props => {
     }
     return 0
   }
+  const getLatestMessage= posts => {
+    const postMap=Object.values(posts)[1]
+    if(postMap) {
+      const postsArray=Object.values(postMap)
+      postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
+      return postsArray[0]
+    }
+    return null
+  }
+
+
 
   return (
     <>
-    {console.log("testaan", username)}
       <Friends
         channels={getDirectChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
-        currentUser={currentUserId}
-        profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
         getUserByUsername={getUserByUsername}
         getusername={getusername}
         getPosts={getPosts}
+        getLatestMessage={getLatestMessage}
       />
     </>
   )
