@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 
 
 const Friend = props => {
-  const { channel, getMembers, unreadCount, currentUser, profiles, key, getUserByUsername, getusername, getPosts } = props
+  const { channel, getMembers, unreadCount, getUserByUsername, getusername, getPosts, getLatestMessage } = props
   const [members, setMembers] = useState([])
   const [otherUser, setOtherUser] = useState({})
   const [posts, setPosts] = useState({})
+  const [message, setMessage] = useState({})
 
 
   
@@ -21,16 +22,12 @@ const Friend = props => {
   useEffect(() => {
     if(members) {
       const username=getusername(members)
-      if(username){        
-        try{
-          getUserByUsername(
-            username,
-            localStorage.getItem('authToken')
-          ).then(data => setOtherUser(data))
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.error(e)
-        }
+      if(username){
+        getUserByUsername(
+          username,
+          localStorage.getItem('authToken'))
+        .then(data => setOtherUser(data))
+        .catch(error=>console.log(error))
       }
 
     }
@@ -39,57 +36,26 @@ const Friend = props => {
   useEffect(() => {
     if (channel) {
       getPosts(channel.id).then(data =>setPosts(data.data))
+      setMessage(getLatestMessage(posts))
     }
   }, [channel])
 
- const getLatest=()=> {
-   const postMap=Object.values(posts)[1]
-   console.log("latest")
-   if(postMap) {
-     const postsArray=Object.values(postMap)
-     postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
-     return postsArray[0]
-   }
-   return null
- }
- const message=getLatest()
-
-
-
-
-
   return (
     <Link
-      className={`${unreadCount > 0 ? 'group-box-unreads' : ''} group-box`}
+      className={`${unreadCount > 0 ? 'friend-box-unreads' : ''} friend-box`}
       to={`/chat/${channel.id}`}
     >
-      {console.log("kanava", channel)}
-      {console.log("postit", Object.values(posts)[1])}
-      {console.log("viimeisin", getLatest())}
-      <div className="group-box-content">
-        <div className="group-header">
+      <div className="friend-box-content">
+        <div className="friend-header">
           <h2>{otherUser.nickname}</h2>
-          {members && (
-            <p className="groups-num-members">{`${members.length} jäsentä`}</p>
-          )}
+          {unreadCount > 0 && (
+        <span className="unread-badge">{members.length}</span>
+      )}
         </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
-      </div>
-      <div>
         {message && (
           <p>{message.message}</p>
         )}
       </div>
-      {unreadCount > 0 && (
-        <div className="group-unreads-text">
-          <li>{`${unreadCount} uutta viestiä`}</li>
-        </div>
-      )}
-      {unreadCount <= 0 && (
-        <div className="group-unreads-text no-unreads">
-          <p>Ei uusia viestejä</p>
-        </div>
-      )}
     </Link>
   )
 }

@@ -4,25 +4,24 @@ import Friend from './Friend'
 import './styles.scss'
 
 const Friends = props => {
-  const { channels, getMembers, currentUser, getUnreadCount, profiles, getUserByUsername, getusername, getPosts } = props
+  const { channels, getMembers, getUnreadCount, getUserByUsername, getusername, getPosts, getLatestMessage } = props
 
   return (
-    <div className="groups-wrapper">
-      <div className="groups-header">
+    <div className="friends-wrapper">
+      <div className="friends-header">
         <h1>Kaverit</h1>
       </div>
-      <div className="groups-boxes">
+      <div className="friends-boxes">
         {Object.values(channels).map(channel => (
           <Friend
             key={channel.id}
             channel={channel}
             getMembers={getMembers}
             unreadCount={getUnreadCount(channel.id)}
-            currentUser={currentUser}
-            profiles={profiles}
             getUserByUsername={getUserByUsername}
             getusername={getusername}
             getPosts={getPosts}
+            getLatestMessage ={getLatestMessage}
           />
         ))}
       </div>
