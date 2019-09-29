@@ -76,7 +76,7 @@ const FriendsContainer = props => {
   const getusername = (members)=> {
     if(members.length>0) {
       const friendid=members.find(member => member.user_id!==currentUserId).user_id
-      const friendInfo=Object.values(profiles).find(profile => profile.id==friendid).username
+      const friendInfo=Object.values(profiles).find(profile => profile.id==friendid)
       return friendInfo
     }
     
@@ -101,7 +101,9 @@ const FriendsContainer = props => {
     if(postMap) {
       const postsArray=Object.values(postMap)
       postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
-      return postsArray[0]
+      const messageObj=postsArray[0]
+      const senderInfo=messageObj.user_id===currentUserId ? "Sinä: " : ""
+      return `${senderInfo}${postsArray[0].message}`
     }
     return null
   }
