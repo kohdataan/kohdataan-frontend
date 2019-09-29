@@ -7,16 +7,15 @@ import { Link } from 'react-router-dom'
 
 const Friend = props => {
   const { channel, getMembers, unreadCount, getUserByUsername, getusername, getPosts, getLatestMessage } = props
+  
   const [members, setMembers] = useState([])
   const [otherUser, setOtherUser] = useState({})
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
+
+  const imageUri = user!==undefined ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image` : null
   const message=getLatestMessage(posts)
  
-
-
-  
-
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
   }, [])
@@ -24,7 +23,6 @@ const Friend = props => {
   useEffect(() => {
     if(members) {
       const user=getusername(members)
-      console.log("kayttaja", user)
       if(user){
         setUser(user)
         getUserByUsername(
@@ -42,9 +40,6 @@ const Friend = props => {
       getPosts(channel.id).then(data =>setPosts(data.data))
     }
   }, [channel])
-
-
-  const imageUri = user!==undefined ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image` : null
     
 
   return (
@@ -52,14 +47,11 @@ const Friend = props => {
       className="friend-box"
       to={`/chat/${channel.id}`}
     >
-      
-
       <div className="friend-box-content">
         <div className="friend-icon-box">
         {imageUri && (
         <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
       )}
-
         </div>
         <div className="friend-text-content">
         <div className="friend-header">
@@ -68,7 +60,6 @@ const Friend = props => {
         <span className="unread-badge">{unreadCount}</span>
       )}
         </div>
-        {console.log(message)}
         {message && (
           <span>{message}</span>
         )}
