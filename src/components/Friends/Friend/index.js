@@ -9,8 +9,10 @@ const Friend = props => {
   const { channel, getMembers, unreadCount, getUserByUsername, getusername, getPosts, getLatestMessage } = props
   const [members, setMembers] = useState([])
   const [otherUser, setOtherUser] = useState({})
+  const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
-  const [message, setMessage] = useState({})
+  const message=getLatestMessage(posts)
+ 
 
 
   
@@ -21,12 +23,14 @@ const Friend = props => {
 
   useEffect(() => {
     if(members) {
-      const username=getusername(members)
-      if(username){
+      const user=getusername(members)
+      console.log("kayttaja", user)
+      if(user){
+        setUser(user)
         getUserByUsername(
-          username,
+          user.username,
           localStorage.getItem('authToken'))
-        .then(data => setOtherUser(data))
+        .then(data => {setOtherUser(data)})
         .catch(error=>console.log(error))
       }
 
@@ -36,25 +40,39 @@ const Friend = props => {
   useEffect(() => {
     if (channel) {
       getPosts(channel.id).then(data =>setPosts(data.data))
-      setMessage(getLatestMessage(posts))
     }
   }, [channel])
 
+
+  const imageUri = user!==undefined ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image` : null
+    
+
   return (
     <Link
-      className={`${unreadCount > 0 ? 'friend-box-unreads' : ''} friend-box`}
+      className="friend-box"
       to={`/chat/${channel.id}`}
     >
+      
+
       <div className="friend-box-content">
+        <div className="friend-icon-box">
+        {imageUri && (
+        <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+      )}
+
+        </div>
+        <div className="friend-text-content">
         <div className="friend-header">
           <h2>{otherUser.nickname}</h2>
           {unreadCount > 0 && (
-        <span className="unread-badge">{members.length}</span>
+        <span className="unread-badge">{unreadCount}</span>
       )}
         </div>
+        {console.log(message)}
         {message && (
-          <p>{message.message}</p>
+          <span>{message}</span>
         )}
+        </div>
       </div>
     </Link>
   )

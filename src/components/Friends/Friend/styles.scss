@@ -6,29 +6,42 @@
   border-radius: 5px;
   box-shadow: none;
   background-color: white;
-  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   align-items: stretch;
   text-align: left;
 }
-
+.friend-icon {
+  background-color: gray;
+  padding: none;
+  height: 32px;
+  width: 32px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.friend-icon-box {
+  text-align: right;
+  width: 55px;
+  padding:23px 15px;
+  flex:0;
+}
 .friend-box-content {
-  margin-left: 15%;
-  padding: 15px 20px;
-  border-bottom: 1px solid #9a9a9a;
+  padding-top: 15px;
+  display:flex;
+  flex-flow: row nowrap;
   & h2 {
-    font-family: Lato;
-    font-size: 18px;
     font-weight: bold;
-    color: $black;
   }
-  & p {
-    font-family: Lato;
-    font-size:18px;
-    color: $black;
-  }
+}
+.friend-text-content {
+  padding-bottom: 15px;
+  padding-left:10px;
+  font-family: Lato;
+  font-size:18px;
+  color: $black;
+  flex:10;
+  border-bottom: 1px solid #9a9a9a;
 }
 
 .friend-header {
@@ -36,42 +49,6 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-}
-
-.friend-box-unreads {
-  border: 1px solid $orange;
-}
-
-.-num-members {
-  color: black;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 13px;
-}
-
-.friend-unreads-text {
-  background-color: $orange;
-  padding: 10px 0 10px 0;
-  color: white;
-  font-weight: bold;
-  font-size: 13px;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.no-unreads {
-  font-size: 16px;
-  border-top: 1px solid #9a9a9a;
-  background-color: white;
-  text-transform: none;
-  font-weight: normal;
-}
-
-.group-logo {
-  border-radius: 50%;
-  padding: 15px 15px;
-  height: 55px;
-  width: 55px;
 }
 
 .unread-badge {

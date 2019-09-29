@@ -5,7 +5,16 @@
 }
 
 .friends-header {
-  padding: 0 30px;
+  text-align: center;
+  & h1 {
+    font-size: 32px;
+    color: $orange;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: condensed;
+    line-height: normal;
+    letter-spacing: 1.02px;
+  }
 }
 
 .friends-boxes {
