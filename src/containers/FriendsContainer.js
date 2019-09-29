@@ -1,10 +1,9 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   loadMe as loadMeAction,
   getProfiles as getProfilesAction,
-  getProfilesInChannel as getProfilesInChannelAction,
 } from 'mattermost-redux/actions/users'
 import {
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
@@ -22,7 +21,6 @@ import Friends from '../components/Friends'
 const FriendsContainer = props => {
   const {
     channels,
-    username,
     teams,
     loadMe,
     getProfiles,
@@ -32,7 +30,6 @@ const FriendsContainer = props => {
     myChannels,
     profiles,
     getPosts,
-    getProfilesByUsernames,
     getChannelMembers,
   } = props
 
@@ -75,8 +72,8 @@ const FriendsContainer = props => {
 
   const getusername = (members)=> {
     if(members.length>0) {
-      const friendid=members.find(member => member.user_id!==currentUserId).user_id
-      const friendInfo=Object.values(profiles).find(profile => profile.id==friendid)
+      const friendid=members.find(member => member.user_id !== currentUserId).user_id
+      const friendInfo=Object.values(profiles).find(profile => profile.id === friendid)
       return friendInfo
     }
     
@@ -96,6 +93,7 @@ const FriendsContainer = props => {
     }
     return 0
   }
+
   const getLatestMessage= posts => {
     const postMap=Object.values(posts)[1]
     if(postMap) {
@@ -107,8 +105,6 @@ const FriendsContainer = props => {
     }
     return null
   }
-
-
 
   return (
     <>
