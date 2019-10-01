@@ -18,6 +18,7 @@ const Chat = props => {
   } = props
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
+  const directChannel=channel.type==='D'
 
   const getIconColor = userId => {
     const index = members.findIndex(member => member.user_id === userId)
@@ -34,6 +35,7 @@ const Chat = props => {
 
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
+    console.log("user ", user)
     let visibleName = ''
     if (user && user.nickname) {
       visibleName = user.nickname
@@ -43,14 +45,27 @@ const Chat = props => {
     return visibleName
   }
 
+  const getOtherUserName=()=>  {
+    if(directChannel) {
+      const otherUser=members.find(member=> member.user_id!==currentUserId)
+      if(otherUser) {
+        return getNicknameById(otherUser.user_id)
+      }
+    }
+    return null;
+  }
+
   return (
     <div className="chat-wrapper" id="chat">
-      <ChatHeader channel={channel} toggleSider={toggleSider} />
+      {console.log("channel ", members)}
+      {console.log("otheruser ", getOtherUserName())}
+      <ChatHeader channel={channel} toggleSider={toggleSider} otherUser={getOtherUserName()} />
       <MessageList
         posts={posts}
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
+        directChannel={directChannel}
       />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
       {showSider && (

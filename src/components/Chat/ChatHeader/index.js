@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 
 const Header = props => {
-  const { channel, toggleSider } = props
+  const { channel, toggleSider, otherUser } = props
+
+  const redirection=channel.type==="D" ? "/friends" : "/"
+  const header=otherUser ? otherUser : channel.display_name
+
   return (
     <div className="chat-header">
-      <Link className="chat-header-item chat-header-nav-back-button" to="/">
+      <Link className="chat-header-item chat-header-nav-back-button" to={redirection}>
         {'< Takaisin'}
       </Link>
       <h1 className="chat-header-item chat-header-channel-name">
-        {channel.display_name}
+        {header}
       </h1>
       <div className="chat-header-item">
         <ButtonContainer

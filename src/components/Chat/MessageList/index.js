@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, currentUserId, getUserNamebyId, getIconColor } = props
+  const { posts, currentUserId, getUserNamebyId, getIconColor, directChannel } = props
 
   return (
     <div className="chat-message-list-container chat--message-list">
@@ -19,6 +19,7 @@ const MessageList = props => {
               senderId={post.user_id}
               currentUserId={currentUserId}
               iconColor={getIconColor(post.user_id)}
+              directChannel={directChannel}
             />
           ))}
       </div>
