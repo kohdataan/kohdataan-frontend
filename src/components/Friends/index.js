@@ -4,7 +4,15 @@ import Friend from './Friend'
 import './styles.scss'
 
 const Friends = props => {
-  const { channels, getMembers, getUnreadCount, getUserByUsername, getusername, getPosts, getLatestMessage } = props
+  const {
+    channels,
+    getMembers,
+    getUnreadCount,
+    getUserByUsername,
+    getUsername,
+    getPosts,
+    getLatestMessage,
+  } = props
 
   return (
     <div className="friends-wrapper">
@@ -19,9 +27,9 @@ const Friends = props => {
             getMembers={getMembers}
             unreadCount={getUnreadCount(channel.id)}
             getUserByUsername={getUserByUsername}
-            getusername={getusername}
+            getUsername={getUsername}
             getPosts={getPosts}
-            getLatestMessage ={getLatestMessage}
+            getLatestMessage={getLatestMessage}
           />
         ))}
       </div>
@@ -29,15 +37,14 @@ const Friends = props => {
   )
 }
 
-Friends.defaultProps = {
-  profiles: {},
-}
-
 Friends.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   getMembers: PropTypes.func.isRequired,
-  profiles: PropTypes.instanceOf(Object),
   getUnreadCount: PropTypes.func.isRequired,
+  getUserByUsername: PropTypes.func.isRequired,
+  getUsername: PropTypes.func.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  getLatestMessage: PropTypes.func.isRequired,
 }
 
 export default memo(Friends)

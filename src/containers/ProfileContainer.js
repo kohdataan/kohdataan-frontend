@@ -98,8 +98,6 @@ const ProfileContainer = props => {
 
   async function startDirectChannel() {
     const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
-    console.log("kanavatiedot", newChannel)
-    console.log("kanavatiedotId", newChannel.data.id)
     // console.log(history)
     history.push(`/chat/${newChannel.data.id}`)
   }
@@ -164,6 +162,7 @@ ProfileContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Array).isRequired,
 }
 
 ProfileContainer.defaultProps = {

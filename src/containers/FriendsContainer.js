@@ -10,13 +10,10 @@ import {
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
-import {
-  getPosts as getPostsAction,
-} from 'mattermost-redux/actions/posts'
-import { getUserByUsername } from '../api/user'
+import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
+import { getUserByUsername } from '../api/user'
 import Friends from '../components/Friends'
-
 
 const FriendsContainer = props => {
   const {
@@ -33,14 +30,11 @@ const FriendsContainer = props => {
     getChannelMembers,
   } = props
 
-  
-
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
     loadMe()
   }, [])
-
 
   // Get channels and members based on team id
   // & When user joins a channel, users props is changed and
@@ -55,12 +49,10 @@ const FriendsContainer = props => {
   // Get only direct channels
   const getDirectChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel =>
-        channel.type === 'D'
+      channel => channel.type === 'D'
     )
     return filteredChannels
   }
-
 
   // Get channel objects based on myChannels
   const getChannelInfoForMyChannels = () => {
@@ -70,13 +62,16 @@ const FriendsContainer = props => {
     return myCurrentChannels
   }
 
-  const getusername = (members)=> {
-    if(members.length>0) {
-      const friendid=members.find(member => member.user_id !== currentUserId).user_id
-      const friendInfo=Object.values(profiles).find(profile => profile.id === friendid)
+  const getUsername = members => {
+    if (members.length > 0) {
+      const friendid = members.find(member => member.user_id !== currentUserId)
+        .user_id
+      const friendInfo = Object.values(profiles).find(
+        profile => profile.id === friendid
+      )
       return friendInfo
     }
-    
+    return null
   }
 
   // Get unread count by channel id
@@ -94,13 +89,13 @@ const FriendsContainer = props => {
     return 0
   }
 
-  const getLatestMessage= posts => {
-    const postMap=Object.values(posts)[1]
-    if(postMap) {
-      const postsArray=Object.values(postMap)
+  const getLatestMessage = posts => {
+    const postMap = Object.values(posts)[1]
+    if (postMap) {
+      const postsArray = Object.values(postMap)
       postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
-      const messageObj=postsArray[0]
-      const senderInfo=messageObj.user_id===currentUserId ? "Sinä: " : ""
+      const messageObj = postsArray[0]
+      const senderInfo = messageObj.user_id === currentUserId ? 'Sinä: ' : ''
       return `${senderInfo}${postsArray[0].message}`
     }
     return null
@@ -113,7 +108,7 @@ const FriendsContainer = props => {
         getMembers={getChannelMembers}
         getUnreadCount={getUnreadCountByChannelId}
         getUserByUsername={getUserByUsername}
-        getusername={getusername}
+        getUsername={getUsername}
         getPosts={getPosts}
         getLatestMessage={getLatestMessage}
       />
@@ -129,14 +124,10 @@ FriendsContainer.propTypes = {
   loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
-  joinChannel: PropTypes.func.isRequired,
-  channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
-}
-
-FriendsContainer.defaultProps = {
-  channelSuggestions: [],
+  profiles: PropTypes.instanceOf(Object).isRequired,
+  getPosts: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
