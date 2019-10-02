@@ -6,9 +6,7 @@ import {
   getProfilesByUsernames as getProfilesByUsernamesAction,
   uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
-import {
-  createDirectChannel as createDirectChannelAction,
-} from 'mattermost-redux/actions/channels'
+import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,

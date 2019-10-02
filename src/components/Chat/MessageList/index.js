@@ -4,7 +4,13 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, currentUserId, getUserNamebyId, getIconColor, directChannel } = props
+  const {
+    posts,
+    currentUserId,
+    getUserNamebyId,
+    getIconColor,
+    directChannel,
+  } = props
 
   return (
     <div className="chat-message-list-container chat--message-list">
@@ -32,6 +38,7 @@ MessageList.propTypes = {
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
+  directChannel: propTypes.bool.isRequired,
 }
 
 export default memo(MessageList)

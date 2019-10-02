@@ -3,7 +3,15 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
-  const { sender, text, currentUserId, senderId, iconColor, type, directChannel } = props
+  const {
+    sender,
+    text,
+    currentUserId,
+    senderId,
+    iconColor,
+    type,
+    directChannel,
+  } = props
 
   // Checks if message is system message
   const isSystemMessage = () =>
@@ -41,7 +49,7 @@ const Message = props => {
         </div>
       )}
       <div className={messageContentClassList.join(' ')}>
-        {(currentUserId !== senderId && !directChannel) && (
+        {currentUserId !== senderId && !directChannel && (
           <h3 className="chat-message-content-header">{sender}</h3>
         )}
         <p className="chat-message-content-text">{text}</p>
@@ -62,6 +70,7 @@ Message.propTypes = {
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,
+  directChannel: propTypes.bool.isRequired,
 }
 
 export default memo(Message)
