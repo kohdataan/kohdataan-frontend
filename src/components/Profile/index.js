@@ -16,7 +16,6 @@ const Profile = props => {
     user,
     myUserInfo,
     currentUser,
-    loggedInUser,
     userInterests,
     interestOptions,
     addUserInterests,
@@ -138,6 +137,7 @@ Profile.defaultProps = {
   addUserInterests: null,
   updateProfilePicture: null,
   setImg: null,
+  startDirect: null,
 }
 
 export default memo(Profile)

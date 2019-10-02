@@ -47,7 +47,7 @@ const Friend = props => {
 
   useEffect(() => {
     if (channel) {
-      getPosts(channel.id).then(data =>setPosts(data.data))
+      getPosts(channel.id).then(data => setPosts(data.data))
     }
   }, [channel])
 
@@ -66,7 +66,7 @@ const Friend = props => {
               <mark className="unread-badge">{unreadCount}</mark>
             )}
           </div>
-          {message && <div>{message}</div>}
+          {message && <>{message}</>}
         </div>
       </div>
     </Link>
