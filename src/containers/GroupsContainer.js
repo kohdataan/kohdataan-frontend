@@ -16,6 +16,7 @@ import getChannelInvitationsAction from '../store/channels/channelAction'
 import { getChannelInvitationMembers } from '../api/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
+import { updateUnreadCount as updateUnreadCountAction } from '../store/chat/chatReducer'
 
 const GroupsContainer = props => {
   const {
@@ -31,6 +32,7 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelInvitations,
     getChannelMembers,
+    updateUnreadCount,
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
@@ -115,6 +117,7 @@ const GroupsContainer = props => {
       if (channel) {
         const channelMsgCount = channel.total_msg_count
         const myMessageCount = myChannels[channel.id].msg_count
+        updateUnreadCount(channelMsgCount - myMessageCount)
         return channelMsgCount - myMessageCount
       }
     }
@@ -150,6 +153,7 @@ GroupsContainer.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   getChannelInvitations: PropTypes.func.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
+  updateUnreadCount: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -194,6 +198,7 @@ const mapDispatchToProps = dispatch =>
       joinChannel: joinChannelAction,
       getChannelInvitations: getChannelInvitationsAction,
       getChannelMembers: getChannelMembersAction,
+      updateUnreadCount: updateUnreadCountAction,
     },
     dispatch
   )

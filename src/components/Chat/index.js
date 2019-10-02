@@ -15,6 +15,7 @@ const Chat = props => {
     currentUserId,
     members,
     handleLeaveChannel,
+    unreadCount,
   } = props
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
@@ -45,6 +46,7 @@ const Chat = props => {
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
+        unreadCount={unreadCount}
       />
       {channel.id && <UserInput channel={channel} createPost={createPost} />}
       {showSider && (
@@ -68,6 +70,7 @@ Chat.propTypes = {
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
+  unreadCount: PropTypes.number.isRequired,
 }
 
 Chat.defaultProps = {

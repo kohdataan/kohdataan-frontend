@@ -24,6 +24,11 @@
   }
 }
 
+.chat--unread-divider {
+  margin-top: 10px;
+  text-align: center;
+}
+
 @media screen and (max-width: 100%) {
   .chat--message-list {
     &.normal {
