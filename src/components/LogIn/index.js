@@ -1,36 +1,14 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { login } from 'mattermost-redux/actions/users'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
-import * as API from '../../api/user'
 import './styles.scss'
-import { addUserToState } from '../../store/user/userAction'
 
 const LogIn = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { login: matterMostLogin } = props
-
-  const handleLogin = async () => {
-    try {
-      const user = { email, password }
-
-      await matterMostLogin(email, password)
-
-      await API.userLogin(user).then(res => {
-        localStorage.setItem('userId', res.user.id)
-        localStorage.setItem('authToken', res.token)
-      })
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  }
-
+  const { handleLogin } = props
   return (
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -52,7 +30,10 @@ const LogIn = props => {
             labelClassName="login-input-field"
             type="password"
           />
-          <ButtonContainer className="login-button" onClick={handleLogin}>
+          <ButtonContainer
+            className="login-button"
+            onClick={() => handleLogin(email, password)}
+          >
             Kirjaudu
           </ButtonContainer>
         </div>
@@ -70,19 +51,7 @@ const LogIn = props => {
 }
 
 LogIn.propTypes = {
-  login: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      login,
-      addUserToState,
-    },
-    dispatch
-  )
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(memo(LogIn))
+export default memo(LogIn)
