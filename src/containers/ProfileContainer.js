@@ -33,7 +33,6 @@ const ProfileContainer = props => {
     myUserInfo,
     uploadProfileImage,
   } = props
-  console.log('props at container ', props)
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
@@ -112,7 +111,7 @@ const ProfileContainer = props => {
       )}
       {username && otherUserInfo && mmuser && interests && (
         <Profile
-          user={currentUser}
+          user={mmuser}
           userInterests={interests}
           interestOptions={interestOptions}
           myUserInfo={otherUserInfo}
@@ -179,7 +178,7 @@ const mapDispatchToProps = dispatch =>
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
       getInterestsAction,
-      addUserToStateAction
+      addUserToStateAction,
     },
     dispatch
   )
