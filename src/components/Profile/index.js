@@ -25,7 +25,7 @@ const Profile = props => {
   } = props
   const { location, description, tutorialWatched, nickname } = myUserInfo
   const getShowModals = () => {
-    return !(!tutorialWatched && currentUser)
+    return !!(!tutorialWatched && currentUser)
   }
   const [editProfile, setEditProfile] = useState(false)
   const [showModals, setShowModals] = useState({
