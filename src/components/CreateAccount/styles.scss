@@ -1,16 +1,14 @@
 @import '../../styles/colors.scss';
 
 @font-face {
-  font-family: 'Next Art';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-}
+    font-family: 'Next Art';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
+  }
 
-.login-container {
+.create-account-container {
   background-color: $black;
-  height: 100%;
-  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -20,22 +18,26 @@
 .main-title {
   font-size: 42px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-family: 'Next Art', sans-serif;
 }
 
-.login-fields-container {
+.create-account-text {
+    color: #fff;
+}
+
+.create-account-content-container {
   width: 80%;
 
 }
 
-.login-input-fields-container {
+.create-account-input-content-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-input-text {
+.create-account-input-text {
   display: flex;
   flex-direction: column;
   color: $white;
@@ -43,7 +45,7 @@
   width: 100%;
 }
 
-.login-input-field {
+.create-account-input-field {
   margin-top: 5px;
   background: transparent;
   border: solid 1px $orange;
@@ -60,7 +62,7 @@
   }
 }
 
-.login-button {
+.create-account-button {
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -74,23 +76,35 @@
   height: 42px;
 }
 
-.login-links-container {
-  padding-top: 30px;
-}
-
-.login-link {
+%create-account-link-shared {
   color: $white;
   font-size: 15px;
-  display: block;
-  text-align: center;
-  padding: 10px 0 10px 0;
 
   :visited {
     color: $white;
   }
 }
 
-.login-title {
+.create-account-link {
+    @extend %create-account-link-shared;
+}
+
+.create-account-link-block {
+    @extend %create-account-link-shared;
+    display: block;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+.create-account-links-container {
+    padding-top: 30px;
+}
+
+.create-account-title {
   text-align: left;
   color: $white;
+}
+
+.divider {
+    border: 0.5px solid $orange;
 }
