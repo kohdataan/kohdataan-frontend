@@ -51,7 +51,7 @@ const LogIn = props => {
           <Link className="login-link" to="/">
             {'Olen unohtanut salasanani'}
           </Link>
-          <Link className="login-link" to="/">
+          <Link className="login-link" to="/createaccount">
             {'Olen uusi käyttäjä ja haluan rekisteröityä'}
           </Link>
         </div>
