@@ -3,21 +3,36 @@ import PropTypes from 'prop-types'
 import './styles.scss'
 
 const Checkbox = props => {
-  const { label, onChange, checked } = props
-  console.log('Checkbox props', props)
+  const { name, labelClassName, inputClassName, value, onChange, label } = props
   return (
-    <label className="container">
-      <input type="checkbox" onChange={onChange} checked={checked} />
-      <span className="checkmark" />
+    <label htmlFor={name} className={`checkbox ${labelClassName}`}>
       {label}
+      <input
+        type="checkbox"
+        name={name}
+        id={name}
+        value={value}
+        className={inputClassName}
+        onChange={onChange}
+      />
+      <span className="checkmark" />
     </label>
   )
 }
 
 Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.bool,
+  inputClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  checked: PropTypes.bool.isRequired,
+}
+
+Checkbox.defaultProps = {
+  value: '',
+  inputClassName: '',
+  labelClassName: '',
 }
 
 export default memo(Checkbox)

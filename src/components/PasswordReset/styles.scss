@@ -1,13 +1,6 @@
 @import '../../styles/colors.scss';
 
-@font-face {
-  font-family: 'Next Art';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-}
-
-.login-container {
+.password-reset-container {
   background-color: $black;
   height: 100%;
   width: 100%;
@@ -20,22 +13,18 @@
 .main-title {
   font-size: 42px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   font-family: 'Next Art', sans-serif;
 }
 
-.login-fields-container {
+.password-reset-fields-container {
   width: 80%;
-
-}
-
-.login-input-fields-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-input-text {
+.password-reset-input-text {
   display: flex;
   flex-direction: column;
   color: $white;
@@ -43,7 +32,7 @@
   width: 100%;
 }
 
-.login-input-field {
+.password-reset-input-field {
   margin-top: 5px;
   background: transparent;
   border: solid 1px $orange;
@@ -60,7 +49,7 @@
   }
 }
 
-.login-button {
+.reset-button {
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -70,27 +59,4 @@
   color: #3a3a3a;
   background-color: $orange;
   outline: none;
-  width: 210px;
-  height: 42px;
-}
-
-.login-links-container {
-  padding-top: 30px;
-}
-
-.login-link {
-  color: $white;
-  font-size: 15px;
-  display: block;
-  text-align: center;
-  padding: 10px 0 10px 0;
-
-  :visited {
-    color: $white;
-  }
-}
-
-.login-title {
-  text-align: left;
-  color: $white;
 }
