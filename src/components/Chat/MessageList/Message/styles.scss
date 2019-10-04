@@ -47,18 +47,28 @@
   color: #9b9b9b;
 }
 
-.message-content-text {
+.message-content-field {
   display: flex;
   flex-flow: row nowrap;
 }
 
-.message-header-content {
+.chat-message-header-content {
   display: flex;
   flex-flow: row-reverse nowrap;
   padding: 0 10px;
   margin-top: 15px;
   justify-content: space-between;
   width: 100%;
+}
+
+.message-without-header-content {
+  margin-top: 0.3em;
+}
+
+.show-date-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 34.5px -15px 24.5px;
 }
 
 .date-divider {
@@ -69,7 +79,7 @@
   display: inline-block;  
 }
 
-.date-sent-text {
+.date-divider-text {
   margin: 0 15px;
   font-family: Lato;
   font-size: 18px;
@@ -79,12 +89,6 @@
   line-height: normal;
   letter-spacing: -0.19px;
   color: #1a1a1a;
-}
-
-.show-date-content {
-  display: flex;
-  justify-content: space-between;
-  margin: 34.5px -15px 24.5px;
 }
 
 .content-sent {
@@ -98,9 +102,10 @@
   background-color: white;
   color: gray;
   border: none;
+  width: 100%
 }
 
-.chat-message-content-header {
+.chat-message-sender {
   margin-block-end: 0.3em;
   margin-block-start: 0em;
   font-family: Lato;
