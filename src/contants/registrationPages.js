@@ -6,6 +6,11 @@ const pages = {
   },
   'add-nickname': {
     current: 'add-nickname',
+    next: 'add-age-permission',
+    skippable: false,
+  },
+  'add-age-permission': {
+    current: 'add-age-permission',
     next: 'add-location',
     skippable: false,
   },

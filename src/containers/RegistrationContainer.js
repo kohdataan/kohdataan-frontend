@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { uploadProfileImage } from 'mattermost-redux/actions/users'
+import { uploadProfileImage, setDefaultProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
@@ -10,6 +10,7 @@ import StepButton from '../components/RegistrationFlow/StepButton'
 import Container from '../components/Container'
 import InfoPage from '../components/RegistrationFlow/InfoPage'
 import Nickname from '../components/RegistrationFlow/Nickname'
+import AgePermission from '../components/RegistrationFlow/AgePermission'
 import Description from '../components/RegistrationFlow/Description'
 import Picture from '../components/RegistrationFlow/Picture'
 import Location from '../components/RegistrationFlow/Location'
@@ -29,10 +30,13 @@ const RegistrationContainer = props => {
     registrationError,
   } = props
   const [nickname, setNickname] = useState('')
+  const [agePermission, setAgePermission] = useState(false)
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
+
+  console.log('agePermission', agePermission)
 
   const subpage = () => {
     switch (step) {
@@ -50,6 +54,13 @@ const RegistrationContainer = props => {
       case pages['add-location'].current:
         return (
           <Location onChange={value => setLocation(value)} value={location} />
+        )
+      case pages['add-age-permission'].current:
+        return (
+          <AgePermission
+            onChange={e => setAgePermission(e.target.checked)}
+            checked={agePermission}
+          />
         )
       case pages['add-description'].current:
         return (
@@ -73,10 +84,14 @@ const RegistrationContainer = props => {
     }
   }
 
+  // TODO: Lisää updateUseriin vaihtoehto iän näyttämiselle.
   const stepButtonActions = () => {
     switch (step) {
       case pages['add-nickname'].current: {
         return props.updateUser({ nickname, mmId: mattermostId })
+      }
+      case pages['add-age-permission'].current: {
+        return props.updateUser({ showAge: agePermission.value })
       }
       case pages['add-location'].current: {
         return props.updateUser({ location: location.value })
