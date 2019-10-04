@@ -15,10 +15,8 @@ const Chat = props => {
     currentUserId,
     members,
     handleLeaveChannel,
-    statuses
+    statuses,
   } = props
-
-  console.log(statuses)
 
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
@@ -48,11 +46,8 @@ const Chat = props => {
   }
 
   const getStatusById = id => {
-    if (id) {
-    const status = statuses[id]
-  return status
-    }
-    else return ""
+    const status = id ? statuses[id] : ''
+    return status
   }
 
   return (
@@ -88,6 +83,7 @@ Chat.propTypes = {
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Array).isRequired,
 }
 
 Chat.defaultProps = {

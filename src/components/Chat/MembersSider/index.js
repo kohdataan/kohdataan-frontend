@@ -27,11 +27,9 @@ const MembersSider = props => {
     return classNameList.join(' ')
   }
 
-  const getIconMemberStatus = userId => {
-    const statusIcon = `chat-header-${getStatusById(userId)}-status-icon`
-    return statusIcon
-  }
-  
+  const getIconMemberStatus = userId =>
+    `chat-header-${getStatusById(userId)}-status-icon`
+
   const openModal = () => setShowConfirmation(true)
   const closeModal = () => setShowConfirmation(false)
 
@@ -75,6 +73,7 @@ const MembersSider = props => {
 MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   getUserNamebyId: propTypes.func.isRequired,
+  getStatusById: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
   handleLeaveChannel: propTypes.func.isRequired,
