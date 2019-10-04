@@ -6,8 +6,9 @@ import Message from './Message'
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
 
-  let previous = '01/01/2010'
+  let previousDate = '01/01/2000'
   let firstInDate = false
+  let firstThisMinute = false
 
   return (
     <div className="chat-message-list-container chat--message-list">
@@ -16,9 +17,10 @@ const MessageList = props => {
           posts.map(post => {
             firstInDate = false
             const dateSent = new Date(post.create_at).toLocaleDateString()
+            const timeSent = new Date(post.create_at).toLocaleTimeString()
 
-            if (dateSent !== previous && post.message) {
-              previous = dateSent
+            if (dateSent !== previousDate && post.message) {
+              previousDate = dateSent
               firstInDate = true
             }
             return (
