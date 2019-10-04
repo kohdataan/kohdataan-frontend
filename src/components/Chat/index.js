@@ -30,6 +30,12 @@ const Chat = props => {
 
   const toggleSider = () => setShowSider(!showSider)
 
+  const toggleSiderClosedIfOpen = () => {
+    if (showSider) {
+      setShowSider(false)
+    }
+  }
+
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = ''
@@ -67,6 +73,7 @@ const Chat = props => {
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
           getStatusById={getStatusById}
+          toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
         />
       )}
     </div>

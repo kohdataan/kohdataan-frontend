@@ -8,6 +8,11 @@ module.exports = {
   extends: ['airbnb', 'prettier'],
   plugins: ['prettier'],
   rules: {
+    'jsx-a11y/label-has-for': [ 'error', {
+      'required': {
+        'some': [ 'nesting', 'id' ]
+      }
+    }],
     'prettier/prettier': [
       'error',
       {
