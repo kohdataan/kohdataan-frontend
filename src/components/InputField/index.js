@@ -2,12 +2,12 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const InputField = props => {
-  const { label, value, inputClassName, labelClassName, onChange } = props
+  const { label, value, inputClassName, labelClassName, onChange, type } = props
   return (
     <label htmlFor={label} className={inputClassName}>
       {label}
       <input
-        type="text"
+        type={type}
         name={label}
         id={label}
         value={value}
@@ -20,6 +20,7 @@ const InputField = props => {
 }
 
 InputField.propTypes = {
+  type: PropTypes.string,
   label: PropTypes.string.isRequired,
   value: PropTypes.string,
   inputClassName: PropTypes.string,
@@ -28,6 +29,7 @@ InputField.propTypes = {
 }
 
 InputField.defaultProps = {
+  type: 'text',
   value: '',
   inputClassName: '',
   labelClassName: '',

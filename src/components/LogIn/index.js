@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login } from 'mattermost-redux/actions/users'
+import { Link } from 'react-router-dom'
 import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
 import * as API from '../../api/user'
@@ -25,23 +26,35 @@ const LogIn = props => {
     <div className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="login-fields-container">
-        <InputField
-          label="Sähköposti"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          inputClassName="login-input-text"
-          labelClassName="login-input-field"
-        />
-        <InputField
-          label="Salasana"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          inputClassName="login-input-text"
-          labelClassName="login-input-field"
-        />
-        <ButtonContainer className="login-button" onClick={handleLogin}>
-          Sisään
-        </ButtonContainer>
+        <h2 className="login-title">KIRJAUTUMINEN</h2>
+        <div className="login-input-fields-container">
+          <InputField
+            label="Sähköposti"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            inputClassName="login-input-text"
+            labelClassName="login-input-field"
+          />
+          <InputField
+            label="Salasana"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            inputClassName="login-input-text"
+            labelClassName="login-input-field"
+            type="password"
+          />
+          <ButtonContainer className="login-button" onClick={handleLogin}>
+            Kirjaudu
+          </ButtonContainer>
+        </div>
+        <div className="login-links-container">
+          <Link className="login-link" to="/">
+            {'Olen unohtanut salasanani'}
+          </Link>
+          <Link className="login-link" to="/">
+            {'Olen uusi käyttäjä ja haluan rekisteröityä'}
+          </Link>
+        </div>
       </div>
     </div>
   )
