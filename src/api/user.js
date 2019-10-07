@@ -32,6 +32,25 @@ const userSignUp = async data => {
   }
 }
 
+// TODO: Finalize response handling
+const resetPassword = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/passwordReset`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const respJSON = await resp.json()
+    console.log('respJSON', respJSON)
+    return resp
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const getUser = async (id, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -134,6 +153,7 @@ const getInterestsByUsername = async (token, username) => {
 export {
   userLogin,
   userSignUp,
+  resetPassword,
   getUser,
   getUserByUsername,
   updateUser,
