@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/kohdataan/kohdataan-frontend.svg?style=svg)](https://circleci.com/gh/kohdataan/kohdataan-frontend)
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/maintainability)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/test_coverage)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/test_coverage)
 
@@ -204,6 +204,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/mruis"><img src="https://avatars1.githubusercontent.com/u/5878384?v=4" width="100px;" alt="Miika"/><br /><sub><b>Miika</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=mruis" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jheiska"><img src="https://avatars1.githubusercontent.com/u/22741213?v=4" width="100px;" alt="jheiska"/><br /><sub><b>jheiska</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=jheiska" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/PyryV"><img src="https://avatars0.githubusercontent.com/u/17298405?v=4" width="100px;" alt="PyryV"/><br /><sub><b>PyryV</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=PyryV" title="Code">💻</a></td>
   </tr>
 </table>
 
