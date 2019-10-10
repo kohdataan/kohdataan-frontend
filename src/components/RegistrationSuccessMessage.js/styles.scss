@@ -1,0 +1,73 @@
+@import '../../styles/colors.scss';
+
+@font-face {
+  font-family: 'Next Art';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
+}
+
+.divider {
+  border: 0.5px solid $orange;
+  margin: 2em 0;
+}
+
+.main-title {
+  font-size: 42px;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Next Art', sans-serif;
+}
+
+.problems-with-registration-link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em auto 3em;
+}
+
+.problems-with-registration-link {
+    color: $white;
+    font-size: 18px;
+}
+
+.registration-info-content {
+  font-size: 16px;
+}
+
+.registration-info-list {
+margin: 0 0 0 1em;
+padding: 0;
+letter-spacing: -0.17px;
+}
+
+li.registration-info-list {
+text-align: left;
+}
+
+.registration-success-container {
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  font-family: Lato;
+  font-size: 18px;
+  color: #fff;
+  padding: 0.2em;
+}
+
+.registration-success-content-container {
+  width: 80%;
+  margin-right: 10px;
+ }
+
+.registration-success-text {
+  color: $orange;
+  margin-top: 0;
+}
+
+.reminder-content-text {
+  padding-top: 1em;
+}
