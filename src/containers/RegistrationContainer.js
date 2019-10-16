@@ -2,10 +2,7 @@ import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  uploadProfileImage,
-  setDefaultProfileImage,
-} from 'mattermost-redux/actions/users'
+import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
