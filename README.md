@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/kohdataan/kohdataan-frontend.svg?style=svg)](https://circleci.com/gh/kohdataan/kohdataan-frontend)
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/maintainability)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9f187f6eae1c08f7f7be/test_coverage)](https://codeclimate.com/github/kohdataan/kohdataan-frontend/test_coverage)
 
@@ -191,7 +191,23 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/rovaniemi"><img src="https://avatars2.githubusercontent.com/u/21308995?v=4" width="100px;" alt="Mauri Karlin"/><br /><sub><b>Mauri Karlin</b></sub></a><br /><a href="#infra-rovaniemi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td><td align="center"><a href="https://github.com/synyker"><img src="https://avatars2.githubusercontent.com/u/1566005?v=4" width="100px;" alt="Jonne Airaksinen"/><br /><sub><b>Jonne Airaksinen</b></sub></a><br /><a href="#infra-synyker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#projectManagement-synyker" title="Project Management">📆</a></td><td align="center"><a href="https://github.com/Pninja"><img src="https://avatars0.githubusercontent.com/u/23714794?v=4" width="100px;" alt="Pinja Kuosmanen"/><br /><sub><b>Pinja Kuosmanen</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Code">💻</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/eevajonnapanula"><img src="https://avatars0.githubusercontent.com/u/28345294?v=4" width="100px;" alt="Eeva-Jonna"/><br /><sub><b>Eeva-Jonna</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=eevajonnapanula" title="Code">💻</a></td></tr></table>
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/rovaniemi"><img src="https://avatars2.githubusercontent.com/u/21308995?v=4" width="100px;" alt="Mauri Karlin"/><br /><sub><b>Mauri Karlin</b></sub></a><br /><a href="#infra-rovaniemi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/synyker"><img src="https://avatars2.githubusercontent.com/u/1566005?v=4" width="100px;" alt="Jonne Airaksinen"/><br /><sub><b>Jonne Airaksinen</b></sub></a><br /><a href="#infra-synyker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#projectManagement-synyker" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/Pninja"><img src="https://avatars0.githubusercontent.com/u/23714794?v=4" width="100px;" alt="Pinja Kuosmanen"/><br /><sub><b>Pinja Kuosmanen</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Code">💻</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=Pninja" title="Documentation">📖</a> <a href="#review-Pninja" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/eevajonnapanula"><img src="https://avatars0.githubusercontent.com/u/28345294?v=4" width="100px;" alt="Eeva-Jonna"/><br /><sub><b>Eeva-Jonna</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=eevajonnapanula" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/emmalait"><img src="https://avatars1.githubusercontent.com/u/32375566?v=4" width="100px;" alt="Emma Laitinen"/><br /><sub><b>Emma Laitinen</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=emmalait" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/KaroliinaM"><img src="https://avatars1.githubusercontent.com/u/22050953?v=4" width="100px;" alt="KaroliinaM"/><br /><sub><b>KaroliinaM</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=KaroliinaM" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/larenala"><img src="https://avatars2.githubusercontent.com/u/33627243?v=4" width="100px;" alt="larenala"/><br /><sub><b>larenala</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=larenala" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/mruis"><img src="https://avatars1.githubusercontent.com/u/5878384?v=4" width="100px;" alt="Miika"/><br /><sub><b>Miika</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=mruis" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jheiska"><img src="https://avatars1.githubusercontent.com/u/22741213?v=4" width="100px;" alt="jheiska"/><br /><sub><b>jheiska</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=jheiska" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/PyryV"><img src="https://avatars0.githubusercontent.com/u/17298405?v=4" width="100px;" alt="PyryV"/><br /><sub><b>PyryV</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=PyryV" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TerriFin"><img src="https://avatars0.githubusercontent.com/u/32302869?v=4" width="100px;" alt="TerriFin"/><br /><sub><b>TerriFin</b></sub></a><br /><a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=TerriFin" title="Code">💻</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=TerriFin" title="Documentation">📖</a></td>
+  </tr>
+</table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
