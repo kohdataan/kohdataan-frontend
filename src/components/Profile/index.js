@@ -64,7 +64,7 @@ const Profile = props => {
   }
 
   return (
-    <div className="profile-container">
+    <main className="profile-container">
       <div className="profile-header-container">
         {!editProfile && <ProfileImage userId={user.id} />}
         {editProfile && <EditProfileImage onChange={setImg} />}
@@ -111,7 +111,7 @@ const Profile = props => {
         interestOptions={interestOptions}
       />
       <Instructions closeModal={closeModal} showModals={showModals} />
-    </div>
+    </main>
   )
 }
 

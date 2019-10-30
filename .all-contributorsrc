@@ -31,7 +31,8 @@
       "profile": "https://github.com/Pninja",
       "contributions": [
         "code",
-        "doc"
+        "doc",
+        "review"
       ]
     },
     {
@@ -41,6 +42,70 @@
       "profile": "https://github.com/eevajonnapanula",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "emmalait",
+      "name": "Emma Laitinen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/32375566?v=4",
+      "profile": "https://github.com/emmalait",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "KaroliinaM",
+      "name": "KaroliinaM",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22050953?v=4",
+      "profile": "https://github.com/KaroliinaM",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "larenala",
+      "name": "larenala",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/33627243?v=4",
+      "profile": "https://github.com/larenala",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mruis",
+      "name": "Miika",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5878384?v=4",
+      "profile": "https://github.com/mruis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jheiska",
+      "name": "jheiska",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/22741213?v=4",
+      "profile": "https://github.com/jheiska",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PyryV",
+      "name": "PyryV",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17298405?v=4",
+      "profile": "https://github.com/PyryV",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "TerriFin",
+      "name": "TerriFin",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32302869?v=4",
+      "profile": "https://github.com/TerriFin",
+      "contributions": [
+        "code",
+        "doc"
       ]
     }
   ],

@@ -4,6 +4,7 @@ import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { init } from 'mattermost-redux/actions/websocket'
+import { loadMe, login } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -15,11 +16,8 @@ import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
-import {
-  signUpAndSignIn,
-  addUserToStateAndMattermostLogin,
-} from './store/user/userAction'
 import getInterestsAction from './store/interest/interestAction'
+import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
 
 class App extends Component {
@@ -27,17 +25,15 @@ class App extends Component {
     const {
       history,
       init: pInit,
-      addUserToStateAndMattermostLogin: pAddUserToStateAndMattermostLogin,
       getInterestsAction: pGetInterestsAction,
-      signUpAndSignIn: pSignUpAndSignIn,
+      addUserToState: pAddUserToState,
     } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
-      await pSignUpAndSignIn()
-      history.push('/registration/info')
+      history.push('/login')
     } else {
-      await pAddUserToStateAndMattermostLogin()
+      await pAddUserToState()
     }
     await pGetInterestsAction()
   }
@@ -47,19 +43,18 @@ class App extends Component {
     const {
       history,
       init: pInit,
-      addUserToStateAndMattermostLogin: pAddUserToStateAndMattermostLogin,
       getInterestsAction: pGetInterestsAction,
-      signUpAndSignIn: pSignUpAndSignIn,
+      addUserToState: pAddUserToState,
+      loadMe: pLoadMe,
       user: pUser,
     } = this.props
     return !(
-      nextProps.addUserToStateAndMattermostLogin ===
-        pAddUserToStateAndMattermostLogin &&
       nextProps.getInterestsAction === pGetInterestsAction &&
+      nextProps.addUserToState === pAddUserToState &&
       nextProps.init === pInit &&
       nextProps.history === history &&
-      nextProps.signUpAndSignIn === pSignUpAndSignIn &&
-      nextProps.user === pUser
+      nextProps.user === pUser &&
+      nextProps.loadMe === pLoadMe
     )
   }
 
@@ -85,25 +80,29 @@ class App extends Component {
 App.propTypes = {
   init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  signUpAndSignIn: PropTypes.func.isRequired,
-  addUserToStateAndMattermostLogin: PropTypes.func.isRequired,
   getInterestsAction: PropTypes.func.isRequired,
+  addUserToState: PropTypes.func.isRequired,
+  loadMe: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  login: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       init,
-      signUpAndSignIn,
-      addUserToStateAndMattermostLogin,
+      addUserToState,
+      loadMe,
       getInterestsAction,
+      login,
     },
     dispatch
   )
 
 const mapStateToProps = store => {
-  return { user: store.user }
+  return {
+    user: store.user,
+  }
 }
 
 // export default App
