@@ -2,9 +2,17 @@
 @import './colors.scss';
 @import './normalize.scss';
 @import './colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 html {
   height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+.main-title {
+  font-size: 42px;
+  color: #fff;
 }
 
 #root {
@@ -17,9 +25,9 @@ html {
 
 h1 {
   color: $black;
-  font-family: 'Paytone One', sans-serif;
+  font-family: 'Fjalla One', sans-serif;
   font-size: 22px;
-  letter-spacing: -0.1px;
+  letter-spacing: 11px;
   text-transform: uppercase;
 }
 
