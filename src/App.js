@@ -89,7 +89,6 @@ App.propTypes = {
   addUserToState: PropTypes.func.isRequired,
   loadMe: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  login: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
