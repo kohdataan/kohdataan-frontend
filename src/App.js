@@ -16,6 +16,7 @@ import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import RegistrationSuccessContainer from './containers/RegistrationSuccessContainer'
 import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
+import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
 import getInterestsAction from './store/interest/interestAction'
@@ -71,6 +72,10 @@ class App extends Component {
         />
         <Route path="/messagesent" component={ThankYouMessageContainer} />
         <Route path="/createaccount" component={CreateAccountContainer} />
+        <Route
+          path="/registrationproblem"
+          component={RegistrationProblemContainer}
+        />
         <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute exact path="/" component={GroupsContainer} />
         <PrivateRoute
