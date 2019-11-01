@@ -48,14 +48,12 @@ const Message = props => {
 
   return (
     <>
-      {showDate ? (
+      {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
           <span className="date-divider-text">{dateText}</span>
           <div className="date-divider" />
         </div>
-      ) : (
-        <></>
       )}
       <div className={messageWrapperClassList.join(' ')}>
         <div>

@@ -6,8 +6,8 @@ import Message from './Message'
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
 
-  let previousDate = 'not_defined'
-  let previousTime = 'not_defined'
+  let previousDate = null
+  let previousTime = null
 
   return (
     <div className="chat-message-list-container chat--message-list">
@@ -21,7 +21,7 @@ const MessageList = props => {
               minute: '2-digit',
               hour12: false,
             })
-            if (previousTime === 'not_defined') previousTime = timeSent
+            if (previousTime === null) previousTime = timeSent
 
             if (dateSent === previousDate && previousTime === timeSent) {
               timeSent = ''
