@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import RegistrationSuccessMessage from '../components/RegistrationSuccessMessage.js'
+import RegistrationSuccessMessage from '../components/RegistrationSuccessMessage'
 
 const RegistrationSuccessContainer = () => {
   return <RegistrationSuccessMessage />

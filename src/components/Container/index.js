@@ -4,7 +4,6 @@ import './styles.scss'
 
 const Container = props => {
   const { className, children } = props
-  console.log('children ', children)
   return <div className={className}>{children}</div>
 }
 
