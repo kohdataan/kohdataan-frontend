@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { login } from 'mattermost-redux/actions/users'
 import LogIn from '../components/LogIn'
 import * as API from '../api/user'
-import { addUserToState } from '../store/user/userAction'
 
 const LogInContainer = props => {
   const { login: matterMostLogin } = props
@@ -26,7 +25,6 @@ const LogInContainer = props => {
       console.error(e)
     }
   }
-
   return <LogIn handleLogin={handleLogin} />
 }
 
@@ -42,14 +40,12 @@ const shouldComponentUpdate = (props, prevProps) => {
 
 LogInContainer.propTypes = {
   login: PropTypes.func.isRequired,
-  addUserToState: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       login,
-      addUserToState,
     },
     dispatch
   )

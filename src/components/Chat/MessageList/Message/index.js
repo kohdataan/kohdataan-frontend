@@ -3,7 +3,21 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const Message = props => {
-  const { sender, text, currentUserId, senderId, iconColor, type } = props
+  const {
+    sender,
+    text,
+    currentUserId,
+    senderId,
+    iconColor,
+    type,
+    timeSent,
+    dateSent,
+    showDate,
+  } = props
+
+  // Adds the text to be used for the date divider
+  const today = new Date().toLocaleDateString()
+  const dateText = dateSent === today ? 'Tänään' : dateSent
 
   // Checks if message is system message
   const isSystemMessage = () =>
@@ -33,20 +47,42 @@ const Message = props => {
   ]
 
   return (
-    <div className={messageWrapperClassList.join(' ')}>
-      {currentUserId !== senderId && (
-        <div className={senderIconClassList.join(' ')}>
-          <i aria-hidden="true" title={sender[0]} />
-          <span className="label">{sender[0]}</span>
+    <>
+      {showDate ? (
+        <div className="show-date-content">
+          <div className="date-divider" />
+          <span className="date-divider-text">{dateText}</span>
+          <div className="date-divider" />
         </div>
+      ) : (
+        <></>
       )}
-      <div className={messageContentClassList.join(' ')}>
+      <div className={messageWrapperClassList.join(' ')}>
+        <div>
+          {timeSent !== '' ? (
+            <div className="chat-message-header-content">
+              <span className="chat-message-timestamp">{timeSent}</span>
+              {currentUserId !== senderId && (
+                <h3 className="chat-message-sender">{sender}</h3>
+              )}
+            </div>
+          ) : (
+            <div className="message-without-header-content" />
+          )}
+          <div className="chat-message-content-field">
+            <div className={messageContentClassList.join(' ')}>
+              <p className="chat-message-content-text">{text}</p>
+            </div>
+          </div>
+        </div>
         {currentUserId !== senderId && (
-          <h3 className="chat-message-content-header">{sender}</h3>
+          <div className={senderIconClassList.join(' ')}>
+            <i aria-hidden="true" title={sender[0]} />
+            <span className="label">{sender[0]}</span>
+          </div>
         )}
-        <p className="chat-message-content-text">{text}</p>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -62,6 +98,9 @@ Message.propTypes = {
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,
+  timeSent: propTypes.string.isRequired,
+  dateSent: propTypes.string.isRequired,
+  showDate: propTypes.bool.isRequired,
 }
 
 export default memo(Message)
