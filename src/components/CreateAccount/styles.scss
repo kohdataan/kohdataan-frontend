@@ -1,11 +1,5 @@
 @import '../../styles/colors.scss';
 
-@font-face {
-    font-family: 'Next Art';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-  }
 
 .create-account-container {
   background-color: $black;
@@ -13,13 +7,6 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
-}
-
-.main-title {
-  font-size: 42px;
-  color: #fff;
-  font-weight: 700;
-  font-family: 'Next Art', sans-serif;
 }
 
 .create-account-text {

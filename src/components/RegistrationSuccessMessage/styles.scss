@@ -1,0 +1,50 @@
+@import '../../styles/colors.scss';
+
+.divider {
+  border: 0.5px solid $orange;
+  margin: 1em 0;
+}
+
+.problems-with-registration-link {
+    color: $white;
+    font-size: 17px;
+}
+
+.registration-info-content {
+  font-size: 16px;
+}
+
+.registration-info-list {
+  margin: 0 0 0 1em;
+  padding: 0;
+  letter-spacing: -0.17px;
+}
+
+li.registration-info-list {
+  text-align: left;
+}
+
+.registration-success-container {
+  background-color: $black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  font-size: 18px;
+  color: #fff;
+  padding: 0.2em;
+}
+
+.registration-success-content-container {
+  width: 80%;
+ }
+
+.registration-success-text {
+  color: $orange;
+  margin-top: 0;
+}
+
+.reminder-content-text {
+  padding-top: 1em;
+}
