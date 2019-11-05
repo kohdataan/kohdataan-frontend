@@ -1,0 +1,100 @@
+@import '../../styles/colors.scss';
+
+@font-face {
+  font-family: 'Next Art';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
+}
+
+.registration-problem-container {
+  background-color: $black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.registration-problem-content-container {
+  width: 80%;
+}
+
+.registration-problem-main-title {
+  font-size: 42px;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Next Art', sans-serif;
+}
+
+.registration-problem-text {
+  color: #fff;
+}
+
+.registration-problem-input-fields-container {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.registration-problem-input-text {
+  display: flex;
+  flex-direction: column;
+  color: $white;
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+.registration-problem-input-field {
+  margin-top: 5px;
+  background: transparent;
+  border: solid 1px $orange;
+  border-radius: 25px;
+  padding: 10px 0 10px 10px;
+  color: $white;
+  &::placeholder {
+    color: $white;
+    text-align: left;
+  }
+
+  &:focus {
+    outline: none;
+    border: solid 1px $white;
+  }
+}
+
+.registration-problem-button {
+  padding: 10px 50px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: right;
+  font-size: 0.875rem;
+  transition: all 0.15s ease-in-out;
+  color: #3a3a3a;
+  background-color: $orange;
+  outline: none;
+  width: 210px;
+  height: 42px;
+}
+
+.registration-problem-links-container {
+  padding-top: 30px;
+}
+
+.registration-problem-link {
+  color: $white;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  padding: 10px 0 10px 0;
+
+  :visited {
+    color: $white;
+  }
+}
+
+.divider {
+  border: 0.5px solid $orange;
+}
