@@ -6,31 +6,41 @@ import Message from './Message'
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
 
-  let previousDate = 'not_defined'
-  let previousTime = 'not_defined'
+  let previousDate = null
+  let previousTime = null
+
+  const setTimeStampValues = post => {
+    let showDate = false
+    let showTime = true
+    const dateSent = new Date(post.create_at).toLocaleDateString()
+    const timeSent = new Date(post.create_at).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    })
+    if (previousTime === null && previousTime !== '') previousTime = timeSent
+
+    if (dateSent === previousDate && previousTime === timeSent) {
+      showTime = false
+    }
+    previousTime = timeSent
+    if (dateSent !== previousDate) {
+      previousDate = dateSent
+      showDate = true
+    }
+    return {
+      sendTime: showTime ? timeSent : '',
+      sendDate: dateSent,
+      show: showDate,
+    }
+  }
 
   return (
     <div className="chat-message-list-container chat--message-list">
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts.map(post => {
-            let showDate = false
-            const dateSent = new Date(post.create_at).toLocaleDateString()
-            let timeSent = new Date(post.create_at).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            })
-            if (previousTime === 'not_defined') previousTime = timeSent
-
-            if (dateSent === previousDate && previousTime === timeSent) {
-              timeSent = ''
-            }
-            previousTime = timeSent
-            if (dateSent !== previousDate) {
-              previousDate = dateSent
-              showDate = true
-            }
+            const timestampValues = setTimeStampValues(post)
             return (
               <Message
                 key={post.id}
@@ -40,9 +50,9 @@ const MessageList = props => {
                 senderId={post.user_id}
                 currentUserId={currentUserId}
                 iconColor={getIconColor(post.user_id)}
-                timeSent={timeSent}
-                dateSent={dateSent}
-                showDate={showDate}
+                timeSent={timestampValues.sendTime}
+                dateSent={timestampValues.sendDate}
+                showDate={timestampValues.show}
               />
             )
           })}
