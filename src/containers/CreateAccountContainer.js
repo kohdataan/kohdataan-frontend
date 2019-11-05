@@ -1,11 +1,13 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
 import * as API from '../api/user'
 import InfoPage from '../components/RegistrationFlow/InfoPage'
 import RegistrationContainer from './RegistrationContainer'
 
-const CreateAccountContainer = () => {
+const CreateAccountContainer = props => {
+  const { history } = props
   const handleAccountCreation = async (
     firstname,
     lastname,
@@ -32,8 +34,9 @@ const CreateAccountContainer = () => {
         password,
         rulesAccepted,
       }
-      if (user.rulesAccepted) {
+      if (user && user.rulesAccepted) {
         await API.userSignUp(user)
+        history.push('/registration-success')
       } else {
         console.log('Sinun on hyväksyttävä palvelun säännöt.')
       }
@@ -51,6 +54,10 @@ const shouldComponentUpdate = (props, prevProps) => {
   const { match: pMatch, ...prest } = prevProps
   const { match, ...rest } = props
   return JSON.stringify(rest) === JSON.stringify(prest)
+}
+
+CreateAccountContainer.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(CreateAccountContainer, shouldComponentUpdate)
