@@ -6,8 +6,8 @@ import Message from './Message'
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
 
-  let previousDate = null
   let previousTime = null
+  let previousDate = null
 
   const setTimeStampValues = post => {
     let showDate = false
