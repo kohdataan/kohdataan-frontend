@@ -6,22 +6,22 @@ import Message from './Message'
 const MessageList = props => {
   const { posts, currentUserId, getUserNamebyId, getIconColor } = props
 
-  let previousTime = null
   let previousDate = null
+  let previousTime = null
 
   const setTimeStampValues = post => {
     let showDate = false
+    let showTime = true
     const dateSent = new Date(post.create_at).toLocaleDateString()
-    let timeSent = new Date(post.create_at).toLocaleTimeString([], {
+    const timeSent = new Date(post.create_at).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
     })
-
-    if (previousTime === null) previousTime = timeSent
+    if (previousTime === null && previousTime !== '') previousTime = timeSent
 
     if (dateSent === previousDate && previousTime === timeSent) {
-      timeSent = ''
+      showTime = false
     }
     previousTime = timeSent
     if (dateSent !== previousDate) {
@@ -29,7 +29,7 @@ const MessageList = props => {
       showDate = true
     }
     return {
-      sendTime: timeSent,
+      sendTime: showTime ? timeSent : '',
       sendDate: dateSent,
       show: showDate,
     }
@@ -40,7 +40,7 @@ const MessageList = props => {
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts.map(post => {
-            const timevalues = setTimeStampValues(post)
+            const timestampValues = setTimeStampValues(post)
             return (
               <Message
                 key={post.id}
@@ -50,9 +50,9 @@ const MessageList = props => {
                 senderId={post.user_id}
                 currentUserId={currentUserId}
                 iconColor={getIconColor(post.user_id)}
-                timeSent={timevalues.sendTime}
-                dateSent={timevalues.sendDate}
-                showDate={timevalues.show}
+                timeSent={timestampValues.sendTime}
+                dateSent={timestampValues.sendDate}
+                showDate={timestampValues.show}
               />
             )
           })}
@@ -69,4 +69,3 @@ MessageList.propTypes = {
 }
 
 export default memo(MessageList)
-
