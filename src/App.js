@@ -14,6 +14,7 @@ import ChatContainer from './containers/ChatContainer'
 import LogInContainer from './containers/LogInContainer'
 import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
+import RegistrationSuccessContainer from './containers/RegistrationSuccessContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
@@ -64,6 +65,10 @@ class App extends Component {
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
         <Route path="/reset-password" component={PasswordResetContainer} />
+        <Route
+          path="/registration-message"
+          component={RegistrationSuccessContainer}
+        />
         <Route path="/createaccount" component={CreateAccountContainer} />
         <Route
           path="/registrationproblem"
@@ -89,7 +94,6 @@ App.propTypes = {
   addUserToState: PropTypes.func.isRequired,
   loadMe: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  login: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
