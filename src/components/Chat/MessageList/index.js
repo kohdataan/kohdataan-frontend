@@ -11,32 +11,6 @@ const MessageList = props => {
 
   const setTimeStampValues = post => {
     let showDate = false
-    const dateSent = new Date(post.create_at).toLocaleDateString()
-    let timeSent = new Date(post.create_at).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    })
-
-    if (previousTime === null) previousTime = timeSent
-
-    if (dateSent === previousDate && previousTime === timeSent) {
-      timeSent = ''
-    }
-    previousTime = timeSent
-    if (dateSent !== previousDate) {
-      previousDate = dateSent
-      showDate = true
-    }
-    return {
-      sendTime: timeSent,
-      sendDate: dateSent,
-      show: showDate,
-    }
-  }
-
-  const setTimeStampValues = post => {
-    let showDate = false
     let showTime = true
     const dateSent = new Date(post.create_at).toLocaleDateString()
     const timeSent = new Date(post.create_at).toLocaleTimeString([], {
