@@ -1,12 +1,5 @@
 @import '../../styles/colors.scss';
 
-@font-face {
-  font-family: 'Next Art';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-}
-
 .registration-problem-container {
   background-color: $black;
   height: 100%;
