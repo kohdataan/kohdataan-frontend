@@ -1,0 +1,39 @@
+@import '../../styles/colors.scss';
+
+.thankyou-message-container {
+    background-color: $black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    font-size: 18px;
+    color: #fff;
+    padding: 0.2em;
+    min-height: 100vh;
+  }
+
+  .thankyou-message-content-container {
+    width: 80%;
+  }
+
+  .problems-with-registration-link {
+    color: $white;
+    font-size: 17px;
+}
+
+.registration-problem-links-container {
+    padding-top: 30px;
+  }
+  
+  .registration-problem-link {
+    color: $white;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    padding: 10px 0 10px 0;
+  
+    :visited {
+      color: $white;
+    }
+  }
