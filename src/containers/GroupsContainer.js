@@ -19,6 +19,7 @@ import GroupSuggestions from '../components/GroupSuggestions'
 
 const GroupsContainer = props => {
   const {
+    history,
     channels,
     teams,
     loadMe,
@@ -103,7 +104,9 @@ const GroupsContainer = props => {
 
   const handleJoinChannel = channelId => () => {
     const currentTeamId = Object.keys(teams)[0]
-    joinChannel(currentUserId, currentTeamId, channelId)
+    joinChannel(currentUserId, currentTeamId, channelId).then(
+      history.push(`/chat/${channelId}`)
+    )
   }
 
   // Get unread count by channel id
@@ -138,6 +141,7 @@ const GroupsContainer = props => {
 }
 
 GroupsContainer.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
