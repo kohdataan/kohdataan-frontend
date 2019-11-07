@@ -7,8 +7,10 @@ const ThankYouMessage = () => {
     <div className="thankyou-message-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="thankyou-message-content-container">
-        <p className="registration-success-text">Kiitos viestistä.</p>
-        <p>Vastaamme sinulle sähköpostilla mahdollisimman pian.</p>
+        <div>
+          <p className="registration-success-text">Kiitos viestistä.</p>
+          <p>Vastaamme sinulle sähköpostilla mahdollisimman pian.</p>
+        </div>
         <div className="registration-problem-links-container">
           <Link className="registration-problem-link" to="/login">
             {'Olen vanha käyttäjä ja haluan kirjautua sisään.'}
