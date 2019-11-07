@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
+import ErrorNotification from '../RegistrationFlow/ErrorNotification'
 import getIcon from '../../utils/getIcon'
 
 const EditInterestsContainer = props => {
@@ -57,12 +58,12 @@ const EditInterestsContainer = props => {
       removeFromSelected(id)
     }
   }
-
   return (
     <div className="interests-grid">
+      <ErrorNotification errorMessage="virhe" />
       {sortedOptions.map(interest => (
         <ButtonContainer
-          key={interest.name}
+          key={interest.id}
           className={`${
             interests.includes(interest.id)
               ? 'interests-grid-item-selected'
