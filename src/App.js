@@ -34,7 +34,7 @@ class App extends Component {
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
-      history.push('/login')
+      // history.push('/login')
     } else {
       await pAddUserToState()
     }
@@ -70,10 +70,7 @@ class App extends Component {
           path="/registration-success"
           component={RegistrationSuccessContainer}
         />
-        <Route
-          path="/thankyou"
-          component={ThankYouMessageContainer}
-        />
+        <Route path="/messagesent" component={ThankYouMessageContainer} />
         <Route path="/createaccount" component={CreateAccountContainer} />
         <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute exact path="/" component={GroupsContainer} />
