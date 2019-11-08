@@ -35,7 +35,7 @@ class App extends Component {
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
-      // history.push('/login')
+      history.push('/login')
     } else {
       await pAddUserToState()
     }
