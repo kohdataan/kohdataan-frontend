@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
-import ErrorNotification from '../RegistrationFlow/ErrorNotification'
 import getIcon from '../../utils/getIcon'
 
 const EditInterestsContainer = props => {
@@ -60,7 +59,6 @@ const EditInterestsContainer = props => {
   }
   return (
     <div className="interests-grid">
-      <ErrorNotification errorMessage="virhe" />
       {sortedOptions.map(interest => (
         <ButtonContainer
           key={interest.id}
