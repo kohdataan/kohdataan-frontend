@@ -11,11 +11,8 @@ const ShowAge = props => {
   return (
     <ShadowBox>
       <div className="add-user-show-age-container">
-        <div className="add-user-show-age-text-container">
-          <span>
-            <span className="add-user-show-age-title">IKÄSI: </span>
-            18 vuotta
-          </span>
+        <div className="profile-creation-title-container">
+          <h3 className="profile-creation-title">IKÄSI: <span className="add-user-show-age-value">18 vuotta</span></h3>
           <span className="profile-creation-step-text">2/6</span>
         </div>
         <RadioButton

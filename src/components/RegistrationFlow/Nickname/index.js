@@ -3,17 +3,22 @@ import PropTypes from 'prop-types'
 import ShadowBox from '../../ShadowBox'
 import InputField from '../../InputField'
 import './styles.scss'
+import '../styles.scss'
 
 const Nickname = props => {
   const { onChange, value } = props
   return (
     <ShadowBox>
       <div className="add-user-nickname-container">
-        <h3 className="add-user-nickname-title">Kerro kuka olet</h3>
+        <div className="profile-creation-title-container">
+          <h3 className="profile-creation-title">Kerro kuka olet</h3>
+          <span className="profile-creation-step-text">1/6</span>
+        </div>
         <InputField
           inputClassName="add-user-nickname-text"
           labelClassName="add-user-nickname-field"
           label="Kutsumanimi"
+          showLabel={false}
           onChange={onChange}
           value={value}
         />
