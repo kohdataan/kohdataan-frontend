@@ -5,12 +5,23 @@ import './styles.scss'
 
 const StepButton = props => {
   const {
-    params: { skippable, next, last },
+    params: { skippable, next, previous, last },
     onClick,
   } = props
 
   return (
     <div className="step-button-container">
+      {previous && (
+        <Link
+          className={`${
+            !skippable ? 'next-step-button-extra' : ''
+          } next-step-button`}
+          to={`/registration/${previous}`}
+          onClick={onClick}
+        >
+          Edellinen
+        </Link>
+      )}
       {next && (
         <Link
           className={`${
@@ -22,11 +33,6 @@ const StepButton = props => {
           Seuraava
         </Link>
       )}
-      {skippable && next && (
-        <Link className="skip-button" to={`/registration/${next}`}>
-          ohita
-        </Link>
-      )}
       {last && (
         <Link
           className={`${
@@ -35,7 +41,7 @@ const StepButton = props => {
           to="/profiili"
           onClick={onClick}
         >
-          Seuraava
+          Tallenna
         </Link>
       )}
       {skippable && last && (

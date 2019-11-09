@@ -2,8 +2,8 @@
 
 .step-button-container {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-evenly;
+  flex-direction: row;
   align-items: center;
   height: 33%;
   min-height: 80px;
@@ -13,10 +13,9 @@
 }
 
 .next-step-button {
-  padding: 10px 50px;
+  padding: 10px 30px;
   text-transform: uppercase;
   white-space: nowrap;
-  vertical-align: middle;
   font-size: 0.875rem;
   color: white;
   background-color: black;
