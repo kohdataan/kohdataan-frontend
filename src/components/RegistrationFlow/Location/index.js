@@ -69,7 +69,7 @@ const Location = props => {
         />
         <RadioButton
           label="Näytä asuinpaikka muille"
-          name="locationermission"
+          name="locationPermission"
           value="showLocation"
           onChange={() => setShowLocation(true)}
         />
