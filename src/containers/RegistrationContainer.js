@@ -32,6 +32,7 @@ const RegistrationContainer = props => {
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState(false)
   const [location, setLocation] = useState('')
+  const [showLocation, setShowLocation] = useState(false)
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
@@ -51,7 +52,11 @@ const RegistrationContainer = props => {
         )
       case pages['add-location'].current:
         return (
-          <Location onChange={value => setLocation(value)} value={location} />
+          <Location
+            onChange={value => setLocation(value)}
+            value={location}
+            setShowLocation={setShowLocation}
+          />
         )
       case pages['add-show-age'].current:
         return <ShowAge setShowAge={setShowAge} />
@@ -86,7 +91,10 @@ const RegistrationContainer = props => {
         return props.updateUser({ showAge: showAge.value })
       }
       case pages['add-location'].current: {
-        return props.updateUser({ location: location.value })
+        return props.updateUser({
+          location: location.value,
+          showLocation: showLocation.value,
+        })
       }
       case pages['add-description'].current: {
         return props.updateUser({ description })
