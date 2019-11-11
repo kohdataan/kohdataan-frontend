@@ -12,6 +12,7 @@ import {
   addUserInterests as addUserInterestsAction,
   getUserInterests as getUserInterestsAction,
   updateUser as updateUserAction,
+  addUserToState as addUserToStateAction,
 } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
 import { getInterestsByUsername, getUserByUsername } from '../api/user'
@@ -43,6 +44,7 @@ const ProfileContainer = props => {
   // TODO: Get other user's interests for other user profile
   useEffect(() => {
     getMe()
+    props.addUserToStateAction()
     props.getInterestsAction()
   }, [])
 
@@ -60,6 +62,7 @@ const ProfileContainer = props => {
         username,
         localStorage.getItem('authToken')
       )
+
       if (userInfo) {
         setOtherUserInfo(userInfo)
       }
@@ -160,6 +163,7 @@ ProfileContainer.propTypes = {
   uploadProfileImage: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  addUserToStateAction: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
@@ -186,6 +190,7 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage: uploadProfileImageAction,
       createDirectChannel: createDirectChannelAction,
       getInterestsAction,
+      addUserToStateAction,
     },
     dispatch
   )
