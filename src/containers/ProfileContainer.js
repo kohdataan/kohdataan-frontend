@@ -6,6 +6,7 @@ import {
   getProfilesByUsernames as getProfilesByUsernamesAction,
   uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
+import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,
@@ -31,7 +32,9 @@ const ProfileContainer = props => {
     getUserInterests,
     updateUser,
     myUserInfo,
+    history,
     uploadProfileImage,
+    createDirectChannel,
   } = props
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
@@ -94,6 +97,11 @@ const ProfileContainer = props => {
     }
   }
 
+  async function startDirectChannel() {
+    const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
+    history.push(`/chat/${newChannel.data.id}`)
+  }
+
   return (
     <>
       {!username && (
@@ -115,6 +123,7 @@ const ProfileContainer = props => {
           userInterests={interests}
           interestOptions={interestOptions}
           myUserInfo={otherUserInfo}
+          startDirect={startDirectChannel}
         />
       )}
     </>
@@ -152,6 +161,8 @@ ProfileContainer.propTypes = {
   getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
+  createDirectChannel: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
   addUserToStateAction: PropTypes.func.isRequired,
 }
 
@@ -177,6 +188,7 @@ const mapDispatchToProps = dispatch =>
       getUserInterests: getUserInterestsAction,
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
+      createDirectChannel: createDirectChannelAction,
       getInterestsAction,
       addUserToStateAction,
     },

@@ -17,6 +17,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
+import { getUserByUsername } from '../api/user'
 import Chat from '../components/Chat'
 
 const ChatContainer = props => {
@@ -111,6 +112,7 @@ const ChatContainer = props => {
           currentUserId={currentUserId}
           members={currentMembers}
           handleLeaveChannel={handleLeaveChannel}
+          getUserByUsername={getUserByUsername}
         />
       )}
     </>

@@ -4,7 +4,13 @@ import propTypes from 'prop-types'
 import Message from './Message'
 
 const MessageList = props => {
-  const { posts, currentUserId, getUserNamebyId, getIconColor } = props
+  const {
+    posts,
+    currentUserId,
+    getUserNamebyId,
+    getIconColor,
+    directChannel,
+  } = props
 
   let previousDate = null
   let previousTime = null
@@ -50,6 +56,7 @@ const MessageList = props => {
                 senderId={post.user_id}
                 currentUserId={currentUserId}
                 iconColor={getIconColor(post.user_id)}
+                directChannel={directChannel}
                 timeSent={timestampValues.sendTime}
                 dateSent={timestampValues.sendDate}
                 showDate={timestampValues.show}
@@ -66,6 +73,7 @@ MessageList.propTypes = {
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
+  directChannel: propTypes.bool.isRequired,
 }
 
 export default memo(MessageList)
