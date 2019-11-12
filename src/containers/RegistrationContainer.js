@@ -37,31 +37,19 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [valid, setValid] = useState(false)
-
-  const checkValid = (value, current) => {
-    if (value.length < 1) {
-      pages[current].valid = false
-      return false
-    }
-    return true
-  }
+  const [choiceMade, setChoiceMade] = useState(false)
+  const [locationChosen, setLocationChosen] = useState(false)
 
   const handleNicknameChange = e => {
     setNickname(e.target.value)
-    const check = checkValid(e.target.value, 'add-nickname')
-    if (check) {
+    if (e.target.value.length < 1) {
+      pages['add-nickname'].valid = false
+    } else {
       pages['add-nickname'].valid = true
     }
   }
 
-  const handleLocationChange = value => {
-    setLocation(value)
-    if (value) {
-      pages['add-location'].valid = true
-    }
-  }
-
-  const setInterestsPageValid = () => {
+  const checkInterestsPageValid = () => {
     if (valid) {
       pages['add-interests'].valid = true
     } else {
@@ -69,6 +57,21 @@ const RegistrationContainer = props => {
     }
   }
 
+  const checkAgePageValid = () => {
+    if (choiceMade) {
+      pages['add-show-age'].valid = true
+    } else {
+      pages['add-show-age'].valid = false
+    }
+  }
+
+  const checkLocationPageValid = () => {
+    if (locationChosen && location) {
+      pages['add-location'].valid = true
+    } else {
+      pages['add-location'].valid = false
+    }
+  }
   const subpage = () => {
     switch (step) {
       case pages.info.current:
@@ -78,13 +81,14 @@ const RegistrationContainer = props => {
       case pages['add-location'].current:
         return (
           <Location
-            onChange={value => handleLocationChange(value)}
+            onChange={value => setLocation(value)}
             value={location}
             setShowLocation={setShowLocation}
+            setLocationChosen={setLocationChosen}
           />
         )
       case pages['add-show-age'].current:
-        return <ShowAge setShowAge={setShowAge} />
+        return <ShowAge setShowAge={setShowAge} setChoiceMade={setChoiceMade} />
       case pages['add-description'].current:
         return (
           <Description
@@ -107,7 +111,9 @@ const RegistrationContainer = props => {
         return undefined
     }
   }
-  setInterestsPageValid()
+  checkInterestsPageValid()
+  checkAgePageValid()
+  checkLocationPageValid()
 
   const stepButtonActions = () => {
     switch (step) {

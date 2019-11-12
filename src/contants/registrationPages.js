@@ -17,7 +17,7 @@ const pages = {
     next: 'add-location',
     previous: 'add-nickname',
     skippable: false,
-    valid: true,
+    valid: false,
   },
   'add-location': {
     current: 'add-location',
