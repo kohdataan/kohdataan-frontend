@@ -38,7 +38,7 @@ const StepButton = props => {
           className={`${
             !skippable ? 'next-step-button-extra' : ''
           } next-step-button`}
-          to="/profiili"
+          to={valid ? '/profiili' : `/registration/${current}`}
           onClick={onClick}
         >
           Tallenna

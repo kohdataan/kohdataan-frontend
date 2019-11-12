@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import EditInterestsContainer from '../../EditInterestsContainer'
 
 const Interests = props => {
-  const { options, interests, setInterests } = props
+  const { options, interests, setInterests, setInterestsValid } = props
 
   return (
     <div className="add-user-interests-container">
@@ -15,6 +15,7 @@ const Interests = props => {
         options={options}
         interests={interests}
         setInterests={setInterests}
+        setInterestsValid={setInterestsValid}
       />
     </div>
   )
@@ -24,6 +25,7 @@ Interests.propTypes = {
   interests: propTypes.instanceOf(Array).isRequired,
   setInterests: propTypes.func.isRequired,
   options: propTypes.instanceOf(Array).isRequired,
+  setInterestsValid: propTypes.func.isRequired,
 }
 
 export default memo(Interests)

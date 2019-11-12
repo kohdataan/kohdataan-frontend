@@ -36,6 +36,7 @@ const RegistrationContainer = props => {
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
+  const [valid, setValid] = useState(false)
 
   const checkValid = (value, current) => {
     if (value.length < 1) {
@@ -48,13 +49,23 @@ const RegistrationContainer = props => {
   const handleNicknameChange = e => {
     setNickname(e.target.value)
     const check = checkValid(e.target.value, 'add-nickname')
-    if (check) pages['add-nickname'].valid = true
+    if (check) {
+      pages['add-nickname'].valid = true
+    }
   }
 
   const handleLocationChange = value => {
     setLocation(value)
     if (value) {
       pages['add-location'].valid = true
+    }
+  }
+
+  const setInterestsPageValid = () => {
+    if (valid) {
+      pages['add-interests'].valid = true
+    } else {
+      pages['add-interests'].valid = false
     }
   }
 
@@ -89,12 +100,14 @@ const RegistrationContainer = props => {
             options={interestOptions}
             interests={interests}
             setInterests={setInterests}
+            setInterestsValid={setValid}
           />
         )
       default:
         return undefined
     }
   }
+  setInterestsPageValid()
 
   const stepButtonActions = () => {
     switch (step) {

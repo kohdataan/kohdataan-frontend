@@ -45,7 +45,7 @@ const pages = {
     previous: 'add-image',
     last: true,
     skippable: false,
-    valid: true,
+    valid: false,
   },
 }
 

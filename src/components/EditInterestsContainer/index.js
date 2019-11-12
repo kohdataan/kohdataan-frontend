@@ -5,7 +5,7 @@ import ButtonContainer from '../ButtonContainer'
 import getIcon from '../../utils/getIcon'
 
 const EditInterestsContainer = props => {
-  const { options, interests, setInterests } = props
+  const { options, interests, setInterests, setInterestsValid } = props
   const [sortedOptions, setSortedOptions] = useState(options)
   const itemIsSelected = id => interests.includes(id)
 
@@ -36,6 +36,8 @@ const EditInterestsContainer = props => {
       const interestsArr = [...interests]
       interestsArr.push(key)
       setInterests(interestsArr)
+      setInterestsValid(true)
+      if (interestsArr.length < 3) setInterestsValid(false)
     }
   }
 
@@ -47,6 +49,7 @@ const EditInterestsContainer = props => {
       interestsArr.splice(indx, 1)
       setInterests(interestsArr)
     }
+    if (interestsArr.length < 3) setInterestsValid(false)
   }
 
   // Toggle selection
@@ -85,6 +88,7 @@ EditInterestsContainer.propTypes = {
   interests: propTypes.instanceOf(Array).isRequired,
   setInterests: propTypes.func.isRequired,
   options: propTypes.instanceOf(Array).isRequired,
+  setInterestsValid: propTypes.func.isRequired,
 }
 
 export default memo(EditInterestsContainer)
