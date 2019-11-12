@@ -37,23 +37,37 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
 
+  const checkValid = (value, current) => {
+    if (value.length < 1) {
+      pages[current].valid = false
+      return false
+    }
+    return true
+  }
+
+  const handleNicknameChange = e => {
+    setNickname(e.target.value)
+    const check = checkValid(e.target.value, 'add-nickname')
+    if (check) pages['add-nickname'].valid = true
+  }
+
+  const handleLocationChange = value => {
+    setLocation(value)
+    if (value) {
+      pages['add-location'].valid = true
+    }
+  }
+
   const subpage = () => {
     switch (step) {
       case pages.info.current:
         return <InfoPage />
       case pages['add-nickname'].current:
-        return (
-          <Nickname
-            value={nickname}
-            onChange={e => {
-              setNickname(e.target.value)
-            }}
-          />
-        )
+        return <Nickname value={nickname} onChange={handleNicknameChange} />
       case pages['add-location'].current:
         return (
           <Location
-            onChange={value => setLocation(value)}
+            onChange={value => handleLocationChange(value)}
             value={location}
             setShowLocation={setShowLocation}
           />
