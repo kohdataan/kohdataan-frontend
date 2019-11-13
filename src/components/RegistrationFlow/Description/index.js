@@ -10,7 +10,7 @@ const Description = props => {
   const { onChange, value } = props
   return (
     <ShadowBox>
-      <div className="add-user-description-container">
+      <main role="main" className="add-user-description-container">
         <h3 className="add-user-description-title">Kerro itsestäsi</h3>
         <p className="add-user-description-limit">
           {`${value.length} / ${MAX_LENGTH}`}
@@ -24,7 +24,7 @@ const Description = props => {
           maxLength={MAX_LENGTH}
         />
         <p className="add-user-description-title">Tämä kuvaus näkyy muille</p>
-      </div>
+      </main>
     </ShadowBox>
   )
 }

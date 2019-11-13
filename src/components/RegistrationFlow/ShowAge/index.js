@@ -18,7 +18,7 @@ const ShowAge = props => {
   // TODO: Show real age once date of birth is implemented.
   return (
     <ShadowBox>
-      <div className="add-user-show-age-container">
+      <main role="main" className="add-user-show-age-container">
         <div className="profile-creation-title-container">
           <h3 className="profile-creation-title">
             Ikäsi:
@@ -38,7 +38,7 @@ const ShowAge = props => {
           value="hideAge"
           onChange={() => handleChange(false)}
         />
-      </div>
+      </main>
     </ShadowBox>
   )
 }

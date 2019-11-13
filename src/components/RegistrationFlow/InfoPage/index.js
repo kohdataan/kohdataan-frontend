@@ -3,7 +3,7 @@ import './styles.scss'
 
 const InfoPage = () => {
   return (
-    <div className="registration-info-container ">
+    <main role="main" className="registration-info-container ">
       <h2 className="registration-description">
         Tervetuloa tutustumaan uusiin ihmisiin!
       </h2>
@@ -14,7 +14,7 @@ const InfoPage = () => {
           muokata kaikkia vastauksia myöhemmin omassa profiilissa.
         </p>
       </div>
-    </div>
+    </main>
   )
 }
 

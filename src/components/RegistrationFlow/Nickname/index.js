@@ -8,7 +8,7 @@ const Nickname = props => {
   const { onChange, value } = props
   return (
     <ShadowBox>
-      <div className="add-user-nickname-container">
+      <main role="main" className="add-user-nickname-container">
         <div className="profile-creation-title-container">
           <h3 className="profile-creation-title">Kerro kuka olet</h3>
           <span className="profile-creation-step-text">1/6</span>
@@ -22,7 +22,7 @@ const Nickname = props => {
           value={value}
         />
         <p className="add-user-nickname-title">Tämä nimi näkyy muille</p>
-      </div>
+      </main>
     </ShadowBox>
   )
 }

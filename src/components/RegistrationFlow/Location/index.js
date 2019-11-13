@@ -60,7 +60,7 @@ const Location = props => {
 
   return (
     <ShadowBox>
-      <div className="add-user-location-container">
+      <main role="main" className="add-user-location-container">
         <div className="profile-creation-title-container">
           <h3 className="profile-creation-title">Asuinpaikkasi</h3>
           <span className="profile-creation-step-text">3/6</span>
@@ -89,7 +89,7 @@ const Location = props => {
           value="hideLocation"
           onChange={() => handleChange(false)}
         />
-      </div>
+      </main>
     </ShadowBox>
   )
 }

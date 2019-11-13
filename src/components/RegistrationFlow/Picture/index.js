@@ -7,7 +7,7 @@ const Picture = props => {
   const { onChange } = props
 
   return (
-    <div className="add-user-picture-container">
+    <main role="main" className="add-user-picture-container">
       <h3 className="add-user-picture-title">Valitse oma kuvake</h3>
       <Avatar
         width={200}
@@ -15,7 +15,7 @@ const Picture = props => {
         label="Valitse tiedosto"
         onCrop={onChange}
       />
-    </div>
+    </main>
   )
 }
 
