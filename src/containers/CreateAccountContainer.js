@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
 import * as API from '../api/user'
-import InfoPage from '../components/RegistrationFlow/InfoPage'
-import RegistrationContainer from './RegistrationContainer'
 
 const CreateAccountContainer = props => {
   const { history } = props
@@ -13,6 +11,7 @@ const CreateAccountContainer = props => {
     lastname,
     birthdate,
     email,
+    phoneNumber,
     password,
     rulesAccepted
   ) => {
@@ -30,12 +29,14 @@ const CreateAccountContainer = props => {
         lastname,
         birthdate,
         email,
+        phoneNumber,
         username,
         password,
         rulesAccepted,
       }
-      if (user && user.rulesAccepted) {
-        await API.userSignUp(user)
+      if (user) {
+        console.log('user ', user)
+        //await API.userSignUp(user)
         history.push('/registration-success')
       } else {
         console.log('Sinun on hyväksyttävä palvelun säännöt.')

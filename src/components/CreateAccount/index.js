@@ -2,7 +2,6 @@ import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField'
-import Checkbox from '../Checkbox'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
@@ -11,21 +10,18 @@ const CreateAccount = ({ handleAccountCreation }) => {
   const [lastname, setLastname] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
-  const [rulesAccepted, setRulesAccepted] = useState(false)
 
   return (
-    <div className="create-account-container">
+    <main role="main" className="create-account-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="create-account-content-container">
-        <p className="create-account-text">
-          Tervetuloa Kohdataan-palveluun! Palvelussa voit tutustua uusiin
-          ihmisiin ja löytää uusia ystäviä. Palvelun ikäraja on 15 vuotta.
-        </p>
-        <hr className="divider" />
-        <h2 className="create-account-title">REKISTERÖITYMINEN</h2>
+        <h2 className="create-account-title">Rekisteröityminen</h2>
         <h3 className="create-account-text">Omat tiedot</h3>
-        <p className="create-account-text">Nämä tiedot näkyvät vain sinulle</p>
+        <p className="create-account-text">
+          Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.
+        </p>
         <div className="create-account-input-content-container">
           <InputField
             label="Etunimi"
@@ -59,6 +55,13 @@ const CreateAccount = ({ handleAccountCreation }) => {
             labelClassName="create-account-input-field"
           />
           <InputField
+            label="Puhelinnumero"
+            value={phoneNumber}
+            onChange={e => setPhoneNumber(e.target.value)}
+            inputClassName="create-account-input-text"
+            labelClassName="create-account-input-field"
+          />
+          <InputField
             label="Salasana"
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -67,49 +70,30 @@ const CreateAccount = ({ handleAccountCreation }) => {
             labelClassName="create-account-input-field"
           />
           <p className="create-account-text">
-            Tutustu palvelun
-            {` `}
             <Link className="create-account-link" to="/createaccount">
-              {'sääntöihin'}
+              {'Hyväksy palvelun säännöt'}
             </Link>
-            {` `}
-            ennen rekisteröitymistä.
           </p>
-          <Checkbox
-            name="rules"
-            checked={rulesAccepted}
-            onChange={e => {
-              setRulesAccepted(e.target.checked)
-            }}
-            label="Olen lukenut palvelun säännöt ja sitoudun noudattamaan niitä"
-            labelClassName="create-account-text"
-          />
           <ButtonContainer
             className="create-account-button"
-            onClick={() =>
-              handleAccountCreation(
-                firstname,
-                lastname,
-                birthdate,
-                email,
-                password,
-                rulesAccepted
-              )
-            }
+            onClick={handleAccountCreation}
           >
             Rekisteröidy
           </ButtonContainer>
         </div>
         <div className="create-account-links-container">
           <Link className="create-account-link-block" to="/login">
-            {'Kirjaudu sisään'}
+            {'Olen vanha käyttäjä ja haluan kirjautua sisään.'}
+          </Link>
+          <Link className="create-account-link-block" to="/registrationproblem">
+            {'Tarvitsen apua rekisteröitymisessä.'}
           </Link>
           <Link className="create-account-link-block" to="/createaccount">
-            {'Tutustu tietosuojaselosteeseen'}
+            {'Tutustu tietosuojaselosteeseen.'}
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
