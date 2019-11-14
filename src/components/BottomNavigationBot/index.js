@@ -35,7 +35,7 @@ const BottomNavigationBot = () => {
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-shield-check modal-icon" />
+            <i className="fas fa-check-square modal-icon" />
             Palvelun säännöt
           </div>
           <hr />
