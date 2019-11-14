@@ -1,57 +1,27 @@
-import React, { memo } from 'react'
-import Modal from 'react-modal'
+import React, { useState, memo } from 'react'
+import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
 
-Modal.setAppElement('#root')
+const BottomNavigationBot = () => {
+  const [showBot, setShowBot] = useState(false)
+  const openModal = () => setShowBot(true)
+  const closeModal = () => setShowBot(false)
 
-class BottomNavigationBot extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      showModal: false,
-    }
-    this.handleOpenModal = this.handleOpenModal.bind(this)
-    this.handleCloseModal = this.handleCloseModal.bind(this)
-  }
-
-  handleOpenModal() {
-    this.setState({ showModal: true })
-  }
-
-  handleCloseModal() {
-    this.setState({ showModal: false })
-  }
-
-  render() {
-    const { showModal } = this.state
-    return (
-      <div className="nav-bot">
-        <button
-          type="button"
-          className="button-image"
-          onClick={this.handleOpenModal}
-        >
-          <img src={botIcon} alt="Botti" />
-        </button>
-        <Modal
-          isOpen={showModal}
-          contentLabel="Botti"
-          className="modal"
-          style={{
-            overlay: {
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            },
-          }}
-        >
+  return (
+    <div className="nav-bot">
+      <button type="button" className="button-image" onClick={openModal}>
+        <img src={botIcon} alt="Botti" />
+      </button>
+      <ModalContainer
+        modalIsOpen={showBot}
+        closeModal={closeModal}
+        label="Botti"
+      >
+        <div className="modal-content">
           <div className="modal-item">
             <i className="fas fa-question-circle modal-icon" />
-            <div className="modal-text">Mitä tällä sivulla voi tehdä</div>
+            Mitä tällä sivulla voi tehdä
           </div>
           <hr />
           <div className="modal-item">
@@ -61,11 +31,11 @@ class BottomNavigationBot extends React.Component {
           <hr />
           <div className="modal-item">
             <i className="fas fa-life-ring modal-icon" />
-            <div className="modal-text">Lähetä moderaattorille viesti</div>
+            Lähetä moderaattorille viesti
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-check-square modal-icon" />
+            <i className="fas fa-shield-check modal-icon" />
             Palvelun säännöt
           </div>
           <hr />
@@ -76,19 +46,15 @@ class BottomNavigationBot extends React.Component {
           <hr />
           <div className="modal-item">
             <i className="fas fa-cog modal-icon" />
-            Rekisteröitymistiedot
+            Rekisteröitymis&shy;tiedot
           </div>
-          <button
-            type="button"
-            className="button-close"
-            onClick={this.handleCloseModal}
-          >
-            Sulje
-          </button>
-        </Modal>
-      </div>
-    )
-  }
+        </div>
+        <button type="button" className="button-close" onClick={closeModal}>
+          Sulje
+        </button>
+      </ModalContainer>
+    </div>
+  )
 }
 
 export default memo(BottomNavigationBot)
