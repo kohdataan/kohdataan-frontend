@@ -30,14 +30,11 @@ class App extends Component {
       history,
       init: pInit,
       getInterestsAction: pGetInterestsAction,
-      addUserToState: pAddUserToState,
     } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
       history.push('/login')
-    } else {
-      await pAddUserToState()
     }
     await pGetInterestsAction()
   }
