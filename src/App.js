@@ -26,11 +26,7 @@ import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const {
-      history,
-      init: pInit,
-      getInterestsAction: pGetInterestsAction,
-    } = this.props
+    const { init: pInit, getInterestsAction: pGetInterestsAction } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pGetInterestsAction()

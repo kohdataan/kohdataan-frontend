@@ -60,6 +60,7 @@ const EditInterestsContainer = props => {
   }
   return (
     <div className="interests-grid">
+      <ErrorNotification errorMessage="virhe" />
       {sortedOptions.map(interest => (
         <ButtonContainer
           key={interest.id}
