@@ -145,7 +145,7 @@ const RegistrationContainer = props => {
 
   return (
     <Container className="registration-container">
-      {step !== pages['add-interests'].current && <RegistrationTitle />}
+      <RegistrationTitle />
       {subpage()}
       {!registrationError && (
         <StepButton params={pages[step]} onClick={stepButtonActions} />
