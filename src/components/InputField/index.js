@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = props => {
+const InputField = React.forwardRef((props, ref) => {
   const {
     label,
     showLabel,
@@ -17,6 +17,7 @@ const InputField = props => {
       <input
         type={type}
         name={label}
+        ref={ref}
         id={label}
         aria-label={label}
         value={value}
@@ -26,7 +27,7 @@ const InputField = props => {
       />
     </label>
   )
-}
+})
 
 InputField.propTypes = {
   type: PropTypes.string,
