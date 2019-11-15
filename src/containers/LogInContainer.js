@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { login } from 'mattermost-redux/actions/users'
 import LogIn from '../components/LogIn'
 import * as API from '../api/user'
-import { addUserToState } from '../store/user/userAction'
 
 const LogInContainer = props => {
   const { login: matterMostLogin } = props

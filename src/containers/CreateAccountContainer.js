@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
 import * as API from '../api/user'
-import InfoPage from '../components/RegistrationFlow/InfoPage'
-import RegistrationContainer from './RegistrationContainer'
 
 const CreateAccountContainer = props => {
   const { history } = props
