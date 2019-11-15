@@ -91,6 +91,9 @@ const CreateAccount = ({ handleAccountCreation }) => {
           <Link className="create-account-link-block" to="/createaccount">
             {'Tutustu tietosuojaselosteeseen.'}
           </Link>
+          <Link className="create-account-link-block" to="/">
+            {'Tutustu saavutettavuusselosteeseen.'}
+          </Link>
         </div>
       </div>
     </main>
