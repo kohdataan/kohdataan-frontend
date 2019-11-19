@@ -7,25 +7,17 @@ import InfoCircleIconPath from '../../assets/info-circle-solid-orange.svg'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [birthdate, setBirthdate] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const { register, handleSubmit, errors, watch } = useForm()
 
-  const { register, handleSubmit, errors } = useForm()
   const onSubmit = data => {
-    /* handleAccountCreation(
-      firstname,
-      lastname,
-      birthdate,
-      email,
-      phoneNumber,
-      password
-    ) */
-    alert(JSON.stringify(data))
+    handleAccountCreation(
+      data.firstname,
+      data.lastname,
+      data.birthdate,
+      data.email,
+      data.phoneNumber,
+      data.password
+    )
   }
 
   return (
@@ -44,8 +36,13 @@ const CreateAccount = ({ handleAccountCreation }) => {
           <div className="formfield-container">
             <ValidatedInputField
               label="Etunimi"
-              name={firstname}
-              ref={register({ required: true, maxlength: 2 })}
+              name="firstname"
+              ref={register({
+                required: true,
+                minLength: 2,
+                maxLength: 20,
+                pattern: /^[\D\d-]+$/i,
+              })}
               ariaInvalid={!!errors.Etunimi}
               ariaDescribedby="firstNameError"
               inputClassName="create-account-input-text"
@@ -56,15 +53,29 @@ const CreateAccount = ({ handleAccountCreation }) => {
               }
             />
             <div className="error-text">
-              {errors.Etunimi && 'Kirjoita etunimi'}
+              {errors.firstname &&
+                errors.firstname.type === 'required' &&
+                'Kirjoita etunimi'}
+              {errors.firstname &&
+                (errors.firstname.type === 'minLength' ||
+                  errors.firstname.type === 'maxLength') &&
+                'Etunimen tulee olla 2-20 merkkiä pitkä.'}
+              {errors.firstname &&
+                errors.firstname.type === 'pattern' &&
+                'Tarkista, että kirjoitit etunimen oikein.'}
             </div>
           </div>
 
           <div className="formfield-container">
             <ValidatedInputField
               label="Sukunimi"
-              name={lastname}
-              ref={register({ required: true })}
+              name="lastname"
+              ref={register({
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+                pattern: /^[\D\d-]+$/i,
+              })}
               autocomplete
               inputClassName="create-account-input-text"
               labelClassName={
@@ -74,17 +85,24 @@ const CreateAccount = ({ handleAccountCreation }) => {
               }
             />
             <div className="error-text">
-              {errors.Sukunimi && 'Kirjoita sukunimi'}
+              {errors.lastname &&
+                errors.lastname.type === 'required' &&
+                'Kirjoita sukunimi'}
+              {errors.lastname &&
+                (errors.lastname.type === 'minLength' ||
+                  errors.lastname.type === 'maxLength') &&
+                'Sukunimen tulee olla 2-30 merkkiä pitkä.'}
+              {errors.lastname &&
+                errors.lastname.type === 'pattern' &&
+                'Tarkista, että kirjoitit sukunimen oikein.'}
             </div>
           </div>
 
           <div className="formfield-container">
             <ValidatedInputField
               label="Syntymäaika"
-              value={birthdate}
-              name={birthdate}
+              name="birthdate"
               ref={register({ required: true })}
-              onChange={e => setBirthdate(e.target.value)}
               type="date"
               inputClassName="create-account-input-text"
               labelClassName={
@@ -94,15 +112,18 @@ const CreateAccount = ({ handleAccountCreation }) => {
               }
             />
             <div className="error-text">
-              {errors.Syntymäaika && 'Valitse syntymäaika'}
+              {errors.birthdate && 'Valitse syntymäaika'}
             </div>
           </div>
 
           <div className="formfield-container">
             <ValidatedInputField
               label="Sähköposti"
-              name={email}
-              ref={register({ required: true, maxlength: 20 })}
+              name="email"
+              ref={register({
+                required: true,
+                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              })}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.Sähköposti
@@ -111,7 +132,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
               }
             />
             <div className="error-text">
-              {errors.Sähköposti && 'Kirjoita sähköposti'}
+              {errors.email &&
+                errors.email.type === 'required' &&
+                'Kirjoita sähköpostiosoite.'}
+              {errors.email &&
+                errors.email.type === 'pattern' &&
+                'Tarkista sähköpostiosoite.'}
             </div>
           </div>
 
@@ -119,11 +145,11 @@ const CreateAccount = ({ handleAccountCreation }) => {
             <div className="info-circle-line">
               <ValidatedInputField
                 label="Puhelinnumero"
-                name={phoneNumber}
-                ref={register({ required: true, minlength: 20 })}
+                name="phoneNumber"
+                ref={register({ required: true, minLength: 5 })}
                 inputClassName="create-account-input-text"
                 labelClassName={
-                  errors.Puhelinnumero
+                  errors.phoneNumber
                     ? 'create-account-errors-field'
                     : 'create-account-input-field'
                 }
@@ -134,7 +160,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
             </div>
 
             <div className="error-text">
-              {errors.Puhelinnumero && 'Kirjoita puhelinnumero'}
+              {errors.phoneNumber && 'Kirjoita puhelinnumero'}
             </div>
           </div>
 
@@ -142,12 +168,17 @@ const CreateAccount = ({ handleAccountCreation }) => {
             <div className="info-circle-line">
               <ValidatedInputField
                 label="Salasana"
-                name={password}
-                ref={register({ required: true, minlength: 2 })}
+                name="password"
+                ref={register({
+                  required: true,
+                  maxLength: 30,
+                  // password must contain lower and upper case letters and numbers
+                  pattern: /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}$/,
+                })}
                 type="password"
                 inputClassName="create-account-input-text"
                 labelClassName={
-                  errors.Salasana
+                  errors.password
                     ? 'create-account-errors-field'
                     : 'create-account-input-field'
                 }
@@ -157,15 +188,28 @@ const CreateAccount = ({ handleAccountCreation }) => {
               </div>
             </div>
             <div className="error-text">
-              {errors.Salasana && 'Kirjoita salasana'}
+              {errors.password &&
+                errors.password.type === 'required' &&
+                'Kirjoita salasana'}
+              {errors.password &&
+                errors.password.type === 'pattern' &&
+                'Salasanan on oltava vähintään 8 merkkiä pitkä ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.'}
+              {errors.password &&
+                errors.password.type === 'maxLength' &&
+                'Salasanan on oltava enintään 30 merkkiä pitkä.'}
             </div>
           </div>
 
           <div className="formfield-container">
             <ValidatedInputField
               label="Salasana uudestaan"
-              name={passwordConfirm}
-              ref={register({ required: true, minlength: 2 })}
+              name="passwordConfirm"
+              ref={register({
+                required: true,
+                validate: value => {
+                  return value === watch('password')
+                },
+              })}
               type="password"
               inputClassName="create-account-input-text"
               labelClassName={
@@ -175,11 +219,16 @@ const CreateAccount = ({ handleAccountCreation }) => {
               }
             />
             <div className="error-text">
-              {errors.Salasana && 'Salasanojen eivät ole samat'}
+              {errors.passwordConfirm &&
+                errors.passwordConfirm.type === 'required' &&
+                'Kirjoita salasana uudestaan'}
+              {errors.passwordConfirm &&
+                errors.passwordConfirm.type === 'validate' &&
+                'Salasanat eivät ole samat'}
             </div>
           </div>
 
-          <p className="create-account-text">
+          <p className="create-account-text"> 
             <Link className="create-account-link" to="/createaccount">
               {'Hyväksy palvelun säännöt'}
             </Link>

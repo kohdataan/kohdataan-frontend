@@ -12,8 +12,7 @@ const CreateAccountContainer = props => {
     birthdate,
     email,
     phoneNumber,
-    password,
-    rulesAccepted
+    password
   ) => {
     // create unique username for Mattermost
     // Mattermot username must begin with a letter and contain between 3 and 22 characters
@@ -23,6 +22,7 @@ const CreateAccountContainer = props => {
     if (username.length > 22) {
       username = username.slice(0, 22)
     }
+    let nickname = username
     try {
       const user = {
         firstname,
@@ -31,12 +31,12 @@ const CreateAccountContainer = props => {
         email,
         phoneNumber,
         username,
+        nickname,
         password,
-        rulesAccepted,
       }
       if (user) {
-        console.log('user ', user)
-        //await API.userSignUp(user)
+        console.log(user)
+        await API.userSignUp(user)
         history.push('/registration-success')
       } else {
         console.log('Sinun on hyväksyttävä palvelun säännöt.')

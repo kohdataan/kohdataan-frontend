@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 const ValidatedInputField = React.forwardRef((props, ref) => {
   const {
     label,
+    name,
     showLabel,
     ariaInvalid,
     ariaDescribedBy,
@@ -16,7 +17,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
       {showLabel && label}
       <input
         type={type}
-        name={label}
+        name={name}
         ref={ref}
         id={label}
         aria-label={label}
@@ -32,6 +33,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
 ValidatedInputField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
   ariaDescribedBy: PropTypes.string,
