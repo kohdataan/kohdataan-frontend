@@ -61,7 +61,6 @@
   }
   &:focus {
     outline: none;
-    border: solid 1px $white;
   }
 }
 
@@ -111,6 +110,27 @@
 
 .error-text {
   color: #ff868f;
-  margin-top: -10px;
+  font-size: 0.8em;
+  margin: -15px 0 0;
   text-align: left;
+}
+
+.formfield-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.info-circle {
+  width: 2em;
+  height: 2em;
+  margin-left: 15px;
+  margin-top: 5px;
+  align-self: center;
+}
+
+.info-circle-line {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
