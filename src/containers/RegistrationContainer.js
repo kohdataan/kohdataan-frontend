@@ -30,66 +30,99 @@ const RegistrationContainer = props => {
     registrationError,
   } = props
   const [nickname, setNickname] = useState('')
-  const [showAge, setShowAge] = useState(false)
+  const [showAge, setShowAge] = useState(null)
   const [location, setLocation] = useState('')
-  const [showLocation, setShowLocation] = useState(false)
+  const [showLocation, setShowLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
-  const [valid, setValid] = useState(false)
-  const [choiceMade, setChoiceMade] = useState(false)
-  const [locationChosen, setLocationChosen] = useState(false)
+  const [nextButtonActive, setNextButtonActive] = useState(true)
 
   const handleNicknameChange = e => {
     setNickname(e.target.value)
     if (e.target.value.length < 1) {
-      pages['add-nickname'].valid = false
-    } else {
-      pages['add-nickname'].valid = true
+      if (nextButtonActive) {
+        setNextButtonActive(false)
+      }
+    } else if (!nextButtonActive) {
+      setNextButtonActive(true)
     }
   }
 
-  const checkInterestsPageValid = () => {
-    if (valid) {
-      pages['add-interests'].valid = true
-    } else {
-      pages['add-interests'].valid = false
+  const checkNicknamePageValid = () => {
+    if (nickname.length > 0) {
+      if (!nextButtonActive) {
+        setNextButtonActive(true)
+      }
+    } else if (nextButtonActive) {
+      setNextButtonActive(false)
+    }
+  }
+
+  const handleShowAgeChange = value => {
+    setShowAge(value)
+    if (!nextButtonActive) {
+      setNextButtonActive(true)
     }
   }
 
   const checkAgePageValid = () => {
-    if (choiceMade) {
-      pages['add-show-age'].valid = true
-    } else {
-      pages['add-show-age'].valid = false
+    if (showAge === true || showAge === false) {
+      if (!nextButtonActive) {
+        setNextButtonActive(true)
+      }
+    } else if (nextButtonActive) {
+      setNextButtonActive(false)
     }
   }
 
   const checkLocationPageValid = () => {
-    if (locationChosen && location) {
-      pages['add-location'].valid = true
-    } else {
-      pages['add-location'].valid = false
+    if (location && (showLocation === true || showLocation === false)) {
+      if (!nextButtonActive) {
+        setNextButtonActive(true)
+      }
+    } else if (nextButtonActive) {
+      setNextButtonActive(false)
     }
   }
+
+  const checkInterestsPageValid = () => {
+    if (interests.length > 2 && interests.length < 5) {
+      if (!nextButtonActive) {
+        setNextButtonActive(true)
+      }
+    } else if (nextButtonActive) {
+      setNextButtonActive(false)
+    }
+  }
+
   const subpage = () => {
     switch (step) {
       case pages.info.current:
+        if (!nextButtonActive) {
+          setNextButtonActive(true)
+        }
         return <InfoPage />
       case pages['add-nickname'].current:
+        checkNicknamePageValid()
         return <Nickname value={nickname} onChange={handleNicknameChange} />
+      case pages['add-show-age'].current:
+        checkAgePageValid()
+        return <ShowAge onChange={handleShowAgeChange} showAge={showAge} />
       case pages['add-location'].current:
+        checkLocationPageValid()
         return (
           <Location
             onChange={value => setLocation(value)}
             value={location}
             setShowLocation={setShowLocation}
-            setLocationChosen={setLocationChosen}
+            showLocation={showLocation}
           />
         )
-      case pages['add-show-age'].current:
-        return <ShowAge setShowAge={setShowAge} setChoiceMade={setChoiceMade} />
       case pages['add-description'].current:
+        if (!nextButtonActive) {
+          setNextButtonActive(true)
+        }
         return (
           <Description
             value={description}
@@ -97,23 +130,23 @@ const RegistrationContainer = props => {
           />
         )
       case pages['add-image'].current:
+        if (!nextButtonActive) {
+          setNextButtonActive(true)
+        }
         return <Picture onChange={p => setImg(p)} />
       case pages['add-interests'].current:
+        checkInterestsPageValid()
         return (
           <Interests
             options={interestOptions}
             interests={interests}
             setInterests={setInterests}
-            setInterestsValid={setValid}
           />
         )
       default:
         return undefined
     }
   }
-  checkInterestsPageValid()
-  checkAgePageValid()
-  checkLocationPageValid()
 
   const stepButtonActions = () => {
     switch (step) {
@@ -148,7 +181,11 @@ const RegistrationContainer = props => {
       <RegistrationTitle />
       {subpage()}
       {!registrationError && (
-        <StepButton params={pages[step]} onClick={stepButtonActions} />
+        <StepButton
+          params={pages[step]}
+          onClick={stepButtonActions}
+          nextButtonActive={nextButtonActive}
+        />
       )}
       {registrationError && (
         <ErrorNotification errorMessage={registrationError} />

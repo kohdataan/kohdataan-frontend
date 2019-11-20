@@ -5,16 +5,8 @@ import RadioButton from '../../RadioButton'
 import './styles.scss'
 
 const ShowAge = props => {
-  const { setShowAge, setChoiceMade } = props
-  setChoiceMade(false)
-  const handleChange = value => {
-    setShowAge(value)
-    if (value !== null) {
-      setChoiceMade(true)
-    } else {
-      setChoiceMade(false)
-    }
-  }
+  const { onChange, showAge } = props
+
   // TODO: Show real age once date of birth is implemented.
   return (
     <ShadowBox>
@@ -30,13 +22,15 @@ const ShowAge = props => {
           label="Näytä ikä muille"
           name="agePermission"
           value="showAge"
-          onChange={() => handleChange(true)}
+          onChange={() => onChange(true)}
+          checked={showAge}
         />
         <RadioButton
           label="Älä näytä ikää muille"
           name="agePermission"
           value="hideAge"
-          onChange={() => handleChange(false)}
+          onChange={() => onChange(false)}
+          checked={showAge === false}
         />
       </main>
     </ShadowBox>
@@ -44,8 +38,8 @@ const ShowAge = props => {
 }
 
 ShowAge.propTypes = {
-  setShowAge: PropTypes.func.isRequired,
-  setChoiceMade: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  showAge: PropTypes.bool.isRequired,
 }
 
 export default memo(ShowAge)
