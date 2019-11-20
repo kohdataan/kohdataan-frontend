@@ -1,0 +1,26 @@
+@import '../../../styles/colors.scss';
+
+.add-user-show-age-container {
+  margin: 20px;
+  flex-direction: column;
+}
+
+.add-user-show-age-text-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.add-user-show-age-text {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+.add-user-show-age-title {
+  font-size: 18px;
+  font-weight: bold;
+}

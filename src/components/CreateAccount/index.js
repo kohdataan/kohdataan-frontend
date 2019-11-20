@@ -1,19 +1,18 @@
 import React, { useState, memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import InputField from '../InputField'
 import Checkbox from '../Checkbox'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const CreateAccount = () => {
+const CreateAccount = ({ handleAccountCreation }) => {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [birthdate, setBirthdate] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [rulesAccepted, setRulesAccepted] = useState('')
-
-  const handleAccountCreation = async () => {}
+  const [rulesAccepted, setRulesAccepted] = useState(false)
 
   return (
     <div className="create-account-container">
@@ -31,6 +30,8 @@ const CreateAccount = () => {
           <InputField
             label="Etunimi"
             value={firstname}
+            required
+            autocomplete
             onChange={e => setFirstname(e.target.value)}
             inputClassName="create-account-input-text"
             labelClassName="create-account-input-field"
@@ -76,14 +77,25 @@ const CreateAccount = () => {
           </p>
           <Checkbox
             name="rules"
-            value={rulesAccepted}
-            onChange={e => setRulesAccepted(e.target.value)}
+            checked={rulesAccepted}
+            onChange={e => {
+              setRulesAccepted(e.target.checked)
+            }}
             label="Olen lukenut palvelun säännöt ja sitoudun noudattamaan niitä"
             labelClassName="create-account-text"
           />
           <ButtonContainer
             className="create-account-button"
-            onClick={handleAccountCreation}
+            onClick={() =>
+              handleAccountCreation(
+                firstname,
+                lastname,
+                birthdate,
+                email,
+                password,
+                rulesAccepted
+              )
+            }
           >
             Rekisteröidy
           </ButtonContainer>
@@ -99,6 +111,10 @@ const CreateAccount = () => {
       </div>
     </div>
   )
+}
+
+CreateAccount.propTypes = {
+  handleAccountCreation: PropTypes.func.isRequired,
 }
 
 export default memo(CreateAccount)

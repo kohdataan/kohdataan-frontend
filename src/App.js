@@ -66,7 +66,7 @@ class App extends Component {
         <Route path="/login" component={LogInContainer} />
         <Route path="/reset-password" component={PasswordResetContainer} />
         <Route
-          path="/registration-message"
+          path="/registration-success"
           component={RegistrationSuccessContainer}
         />
         <Route path="/createaccount" component={CreateAccountContainer} />

@@ -2,48 +2,38 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-const Checkbox = props => {
-  const {
-    name,
-    labelClassName,
-    inputClassName,
-    value,
-    onChange,
-    label,
-    checked,
-  } = props
+const RadioButton = props => {
+  const { name, labelClassName, inputClassName, value, onChange, label } = props
+
   return (
-    <label htmlFor={name} className={`checkbox ${labelClassName}`}>
+    <label htmlFor={label} className={`radio-button ${labelClassName}`}>
       {label}
       <input
-        type="checkbox"
+        type="radio"
         name={name}
-        id={name}
+        id={label}
         value={value}
-        checked={checked}
-        className={inputClassName}
         onChange={onChange}
+        className={inputClassName}
       />
-      <span className="checkmark" />
+      <span className="radio-button-checkmark" />
     </label>
   )
 }
 
-Checkbox.propTypes = {
+RadioButton.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
-  checked: PropTypes.bool,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 
-Checkbox.defaultProps = {
+RadioButton.defaultProps = {
   value: '',
-  checked: false,
   inputClassName: '',
   labelClassName: '',
 }
 
-export default memo(Checkbox)
+export default memo(RadioButton)
