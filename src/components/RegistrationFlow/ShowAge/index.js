@@ -23,14 +23,14 @@ const ShowAge = props => {
           name="agePermission"
           value="showAge"
           onChange={() => onChange(true)}
-          checked={showAge}
+          checked={showAge === 'true'}
         />
         <RadioButton
           label="Älä näytä ikää muille"
           name="agePermission"
           value="hideAge"
           onChange={() => onChange(false)}
-          checked={showAge === false}
+          checked={showAge === 'false'}
         />
       </main>
     </ShadowBox>
@@ -39,7 +39,7 @@ const ShowAge = props => {
 
 ShowAge.propTypes = {
   onChange: PropTypes.func.isRequired,
-  showAge: PropTypes.bool.isRequired,
+  showAge: PropTypes.string.isRequired,
 }
 
 export default memo(ShowAge)

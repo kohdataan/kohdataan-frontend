@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ShadowBox from '../../ShadowBox'
 import InputField from '../../InputField'
 import './styles.scss'
-import '../styles.scss'
 
 const Nickname = props => {
   const { onChange, value } = props

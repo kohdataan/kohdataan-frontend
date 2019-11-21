@@ -72,14 +72,14 @@ const Location = props => {
           name="locationPermission"
           value="showLocation"
           onChange={() => setShowLocation(true)}
-          checked={showLocation}
+          checked={showLocation === 'true'}
         />
         <RadioButton
           label="Älä näytä asuinpaikkaa muille"
           name="locationPermission"
           value="hideLocation"
           onChange={() => setShowLocation(false)}
-          checked={showLocation === false}
+          checked={showLocation === 'false'}
         />
       </main>
     </ShadowBox>
@@ -93,7 +93,7 @@ Location.propTypes = {
   ]).isRequired,
   onChange: PropTypes.func.isRequired,
   setShowLocation: PropTypes.func.isRequired,
-  showLocation: PropTypes.bool.isRequired,
+  showLocation: PropTypes.string.isRequired,
 }
 
 export default memo(Location)

@@ -92,7 +92,7 @@ const RegistrationContainer = props => {
         )
       case pages['add-show-age'].current:
         checkInputValidity('add-show-age')
-        return <ShowAge onChange={setShowAge} showAge={showAge} />
+        return <ShowAge onChange={setShowAge} showAge={showAge.toString()} />
       case pages['add-location'].current:
         checkInputValidity('add-location')
         return (
@@ -100,7 +100,7 @@ const RegistrationContainer = props => {
             onChange={value => setLocation(value)}
             value={location}
             setShowLocation={setShowLocation}
-            showLocation={showLocation}
+            showLocation={showLocation.toString()}
           />
         )
       case pages['add-description'].current:
