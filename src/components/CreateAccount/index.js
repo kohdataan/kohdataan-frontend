@@ -48,13 +48,13 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 required: true,
                 minLength: 2,
                 maxLength: 20,
-                pattern: /^[\D\d-]+$/i,
+                pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
               })}
               ariaInvalid={!!errors.Etunimi}
               ariaDescribedby="firstNameError"
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.Etunimi
+                errors.firstname
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -81,12 +81,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 required: true,
                 minLength: 2,
                 maxLength: 30,
-                pattern: /^[\D\d-]+$/i,
+                pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
               })}
               autocomplete
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.Sukunimi
+                errors.lastname
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -112,7 +112,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
               ref={register({ required: true })}
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.Syntymäaika
+                errors.birthdate
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -132,7 +132,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
               })}
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.Sähköposti
+                errors.email
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
