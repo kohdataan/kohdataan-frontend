@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
 import ValidatedInputField from '../ValidatedInputField'
+import DateSelectField from '../DateSelectField'
 import InfoCircleIconPath from '../../assets/info-circle-solid-orange.svg'
 import './styles.scss'
 
@@ -10,10 +11,16 @@ const CreateAccount = ({ handleAccountCreation }) => {
   const { register, handleSubmit, errors, watch } = useForm()
 
   const onSubmit = data => {
+    console.log("Data", data)
+    var birthdate = data.day.toString()
+    birthdate = birthdate.concat("-")
+    birthdate = birthdate.concat(data.month.toString())
+    birthdate = birthdate.concat("-")
+    birthdate = birthdate.concat(data.year.toString())
     handleAccountCreation(
       data.firstname,
       data.lastname,
-      data.birthdate,
+      birthdate,
       data.email,
       data.phoneNumber,
       data.password
@@ -99,11 +106,10 @@ const CreateAccount = ({ handleAccountCreation }) => {
           </div>
 
           <div className="formfield-container">
-            <ValidatedInputField
+            <DateSelectField
               label="Syntymäaika"
               name="birthdate"
               ref={register({ required: true })}
-              type="date"
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.Syntymäaika
