@@ -19,6 +19,7 @@ import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
+import FriendsContainer from './containers/FriendsContainer'
 import getInterestsAction from './store/interest/interestAction'
 import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
@@ -78,6 +79,7 @@ class App extends Component {
         />
         <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute exact path="/" component={GroupsContainer} />
+        <PrivateRoute exact path="/friends/" component={FriendsContainer} />
         <PrivateRoute
           path="/profiili/:username?"
           component={ProfileContainer}
