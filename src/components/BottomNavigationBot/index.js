@@ -2,6 +2,7 @@ import React, { useState, memo } from 'react'
 import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
+import ButtonContainer from '../ButtonContainer'
 
 const BottomNavigationBot = () => {
   const [showBot, setShowBot] = useState(false)
@@ -10,9 +11,9 @@ const BottomNavigationBot = () => {
 
   return (
     <div className="nav-bot">
-      <button type="button" className="button-image" onClick={openModal}>
+      <ButtonContainer className="button-image" onClick={openModal}>
         <img src={botIcon} alt="Botti" />
-      </button>
+      </ButtonContainer>
       <ModalContainer
         modalIsOpen={showBot}
         closeModal={closeModal}
@@ -20,38 +21,41 @@ const BottomNavigationBot = () => {
       >
         <div className="modal-content">
           <div className="modal-item">
-            <i className="fas fa-question-circle modal-icon" />
+            <i
+              className="fas fa-question-circle modal-icon"
+              aria-hidden="true"
+            />
             Mitä tällä sivulla voi tehdä
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-flag modal-icon" />
+            <i className="fas fa-flag modal-icon" aria-hidden="true" />
             Ilmianna asiaton viesti
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-life-ring modal-icon" />
+            <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
             Lähetä moderaattorille viesti
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-check-square modal-icon" />
+            <i className="fas fa-check-square modal-icon" aria-hidden="true" />
             Palvelun säännöt
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-info-circle modal-icon" />
+            <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
             Yleiset ohjeet
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-cog modal-icon" />
+            <i className="fas fa-cog modal-icon" aria-hidden="true" />
             Rekisteröitymis&shy;tiedot
           </div>
         </div>
-        <button type="button" className="button-close" onClick={closeModal}>
+        <ButtonContainer className="button-close" onClick={closeModal}>
           Sulje
-        </button>
+        </ButtonContainer>
       </ModalContainer>
     </div>
   )
