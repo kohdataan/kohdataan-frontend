@@ -35,7 +35,6 @@ const CreateAccountContainer = props => {
         password,
       }
       if (user) {
-        console.log(user)
         await API.userSignUp(user)
         history.push('/registration-success')
       } else {
