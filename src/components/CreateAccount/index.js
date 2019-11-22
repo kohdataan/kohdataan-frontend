@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
@@ -43,8 +43,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 maxLength: 20,
                 pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
               })}
-              ariaInvalid={!!errors.Etunimi}
-              ariaDescribedby="firstNameError"
+              ariaInvalid={!!errors.firstname}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.firstname
@@ -77,6 +76,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
               })}
               autocomplete
+              ariaInvalid={!!errors.lastname}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.lastname
@@ -104,6 +104,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
               name="birthdate"
               ref={register({ required: true })}
               type="date"
+              ariaInvalid={!!errors.birthdate}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.birthdate
@@ -124,6 +125,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 required: true,
                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               })}
+              ariaInvalid={!!errors.email}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.email
@@ -146,7 +148,13 @@ const CreateAccount = ({ handleAccountCreation }) => {
               <ValidatedInputField
                 label="Puhelinnumero"
                 name="phoneNumber"
-                ref={register({ required: true, minLength: 5 })}
+                ref={register({
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern: /^[0-9- ]*$/i,
+                })}
+                ariaInvalid={!!errors.phoneNumber}
                 inputClassName="create-account-input-text"
                 labelClassName={
                   errors.phoneNumber
@@ -160,7 +168,14 @@ const CreateAccount = ({ handleAccountCreation }) => {
             </div>
 
             <div className="error-text">
-              {errors.phoneNumber && 'Kirjoita puhelinnumero'}
+              {errors.phoneNumber &&
+                errors.phoneNumber.type === 'required' &&
+                'Kirjoita puhelinnumero'}
+              {errors.phoneNumber &&
+                (errors.phoneNumber.type === 'pattern' ||
+                  errors.phoneNumber.type === 'minLength' ||
+                  errors.phoneNumber.type === 'maxLength') &&
+                'Tarkista puhelinnumero'}
             </div>
           </div>
 
@@ -173,9 +188,10 @@ const CreateAccount = ({ handleAccountCreation }) => {
                   required: true,
                   maxLength: 30,
                   // password must contain lower and upper case letters and numbers
-                  pattern: /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}$/,
+                  pattern: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
                 })}
                 type="password"
+                ariaInvalid={!!errors.password}
                 inputClassName="create-account-input-text"
                 labelClassName={
                   errors.password
@@ -193,7 +209,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Kirjoita salasana'}
               {errors.password &&
                 errors.password.type === 'pattern' &&
-                'Salasanan on oltava vähintään 8 merkkiä pitkä ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.'}
+                'Salasanan on oltava vähintään 10 merkkiä pitkä ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.'}
               {errors.password &&
                 errors.password.type === 'maxLength' &&
                 'Salasanan on oltava enintään 30 merkkiä pitkä.'}
@@ -211,9 +227,10 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 },
               })}
               type="password"
+              ariaInvalid={!!errors.passwordConfirm}
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.Salasana
+                errors.passwordConfirm
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -228,8 +245,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
             </div>
           </div>
 
-          <p className="create-account-text"> 
-            <Link className="create-account-link" to="/createaccount">
+          <p className="create-account-text">
+            <Link
+              className="create-account-link"
+              id="accept-rules-link"
+              to="/createaccount"
+            >
               {'Hyväksy palvelun säännöt'}
             </Link>
           </p>
