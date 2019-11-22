@@ -5,16 +5,14 @@ import RadioButton from '../../RadioButton'
 import './styles.scss'
 
 const ShowAge = props => {
-  const { setShowAge } = props
+  const { setShowAge, age } = props
 
-  // TODO: Show real age once date of birth is implemented.
   return (
     <ShadowBox>
       <div className="add-user-show-age-container">
         <div className="add-user-show-age-text-container">
           <span>
-            <span className="add-user-show-age-title">IKÄSI: </span>
-            18 vuotta
+            <span className="add-user-show-age-title">IKÄSI:</span> {age} vuotta
           </span>
           <span className="profile-creation-step-text">2/6</span>
         </div>
@@ -37,6 +35,7 @@ const ShowAge = props => {
 
 ShowAge.propTypes = {
   setShowAge: PropTypes.func.isRequired,
+  age: PropTypes.string.isRequired,
 }
 
 export default memo(ShowAge)
