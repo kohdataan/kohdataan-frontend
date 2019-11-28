@@ -15,7 +15,7 @@
   margin-top: 5px;
   background: transparent;
   border: solid 1px $black;
-  padding: 10px 0 10px 10px;
+  padding: 14px 0 14px 14px;
   &::placeholder {
     color: $text-gray;
   }
@@ -23,4 +23,5 @@
 
 .add-user-nickname-title {
   font-weight: 500;
+  margin-top: -10px;
 }

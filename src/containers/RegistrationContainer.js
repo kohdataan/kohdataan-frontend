@@ -30,32 +30,81 @@ const RegistrationContainer = props => {
     registrationError,
   } = props
   const [nickname, setNickname] = useState('')
-  const [showAge, setShowAge] = useState(false)
+  const [showAge, setShowAge] = useState('')
   const [location, setLocation] = useState('')
+  const [showLocation, setShowLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
+  const [nextButtonActive, setNextButtonActive] = useState(true)
+
+  // Change nextButtonActive value only if new value is different
+  const setNextButtonStatus = value => {
+    if (value === true && !nextButtonActive) {
+      setNextButtonActive(true)
+    } else if (value === false && nextButtonActive) {
+      setNextButtonActive(false)
+    }
+  }
+
+  const checkInputValidity = page => {
+    if (page === 'add-nickname') {
+      if (nickname.length < 1) {
+        setNextButtonStatus(false)
+      } else {
+        setNextButtonStatus(true)
+      }
+    } else if (page === 'add-show-age') {
+      if (showAge === '') {
+        setNextButtonStatus(false)
+      } else {
+        setNextButtonStatus(true)
+      }
+    } else if (page === 'add-location') {
+      if (location === '' || showLocation === '') {
+        setNextButtonStatus(false)
+      } else {
+        setNextButtonStatus(true)
+      }
+    } else if (page === 'add-interests') {
+      if (interests.length < 3 || interests.length > 5) {
+        setNextButtonStatus(false)
+      } else {
+        setNextButtonStatus(true)
+      }
+    } else {
+      setNextButtonStatus(true)
+    }
+  }
 
   const subpage = () => {
     switch (step) {
       case pages.info.current:
+        checkInputValidity('info')
         return <InfoPage />
       case pages['add-nickname'].current:
+        checkInputValidity('add-nickname')
         return (
           <Nickname
             value={nickname}
-            onChange={e => {
-              setNickname(e.target.value)
-            }}
+            onChange={e => setNickname(e.target.value)}
           />
         )
-      case pages['add-location'].current:
-        return (
-          <Location onChange={value => setLocation(value)} value={location} />
-        )
       case pages['add-show-age'].current:
-        return <ShowAge setShowAge={setShowAge} />
+        checkInputValidity('add-show-age')
+        return <ShowAge onChange={setShowAge} showAge={showAge.toString()} />
+      case pages['add-location'].current:
+        checkInputValidity('add-location')
+        return (
+          <Location
+            onChange={value => setLocation(value)}
+            value={location}
+            setShowLocation={setShowLocation}
+            showLocation={showLocation.toString()}
+          />
+        )
       case pages['add-description'].current:
+        checkInputValidity('add-description')
         return (
           <Description
             value={description}
@@ -63,8 +112,10 @@ const RegistrationContainer = props => {
           />
         )
       case pages['add-image'].current:
+        checkInputValidity('add-image')
         return <Picture onChange={p => setImg(p)} />
       case pages['add-interests'].current:
+        checkInputValidity('add-interests')
         return (
           <Interests
             options={interestOptions}
@@ -86,7 +137,10 @@ const RegistrationContainer = props => {
         return props.updateUser({ showAge: showAge.value })
       }
       case pages['add-location'].current: {
-        return props.updateUser({ location: location.value })
+        return props.updateUser({
+          location: location.value,
+          showLocation: showLocation.value,
+        })
       }
       case pages['add-description'].current: {
         return props.updateUser({ description })
@@ -109,10 +163,14 @@ const RegistrationContainer = props => {
 
   return (
     <Container className="registration-container">
-      {step !== pages['add-interests'].current && <RegistrationTitle />}
+      <RegistrationTitle />
       {subpage()}
       {!registrationError && (
-        <StepButton params={pages[step]} onClick={stepButtonActions} />
+        <StepButton
+          params={pages[step]}
+          onClick={stepButtonActions}
+          nextButtonActive={nextButtonActive}
+        />
       )}
       {registrationError && (
         <ErrorNotification errorMessage={registrationError} />

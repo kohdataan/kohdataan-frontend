@@ -3,9 +3,18 @@ import './styles.scss'
 
 const InfoPage = () => {
   return (
-    <p className="registration-info-page">
-      Jotta muut voivat tutustua sinuun, kysymme muutaman kysymyksen
-    </p>
+    <main role="main" className="registration-info-container ">
+      <h2 className="registration-description">
+        Tervetuloa tutustumaan uusiin ihmisiin!
+      </h2>
+
+      <div className="registration-info-text-container">
+        <p className="registration-info-text">
+          Kysymme muutaman kysymyksen, jotta muut voivat tutustua sinuun. Voit
+          muokata kaikkia vastauksia myöhemmin omassa profiilissa.
+        </p>
+      </div>
+    </main>
   )
 }
 
