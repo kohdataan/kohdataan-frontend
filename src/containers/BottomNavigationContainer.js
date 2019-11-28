@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import BottomNavigation from '../components/BottomNavigation'
 import BottomNavigationLink from '../components/BottomNavigationLink'
+import BottomNavigationBot from '../components/BottomNavigationBot'
 
 const BottomNavigationContainer = props => {
   const {
@@ -27,13 +28,14 @@ const BottomNavigationContainer = props => {
       <BottomNavigationLink
         title="Kaverit"
         route="/friends"
-        icon="fas fa-user-circle"
+        icon="fas fa-comment-dots"
       />
       <BottomNavigationLink
         title="Ryhmät"
         route="/"
         icon="fas fa-user-friends"
       />
+      <BottomNavigationBot />
     </BottomNavigation>
   )
 }
