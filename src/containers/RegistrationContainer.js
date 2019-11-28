@@ -77,7 +77,7 @@ const RegistrationContainer = props => {
     }
   }
 
-  const stepButtonActions = () => {
+  const profileCreationAction = () => {
     switch (step) {
       case pages['add-nickname'].current: {
         return props.updateUser({ nickname, mmId: mattermostId })
@@ -100,6 +100,11 @@ const RegistrationContainer = props => {
       default:
         return undefined
     }
+  }
+
+  const stepButtonActions = () => {
+    if (pages[step].last) props.updateUser({ profileReady: true })
+    profileCreationAction()
   }
 
   return (
