@@ -10,7 +10,7 @@ const Interests = props => {
     <div className="add-user-interests-container">
       <h1 className="add-user-interests-title">Kerro kiinnostuksistasi</h1>
       <p>Käytämme näitä kun suosittelemme sinulle uusia ryhmiä.</p>
-      <h3>Valitse 1 - 5</h3>
+      <h3>Valitse 3-5</h3>
       <EditInterestsContainer
         options={options}
         interests={interests}

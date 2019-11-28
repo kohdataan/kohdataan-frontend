@@ -15,28 +15,20 @@ import LogInContainer from './containers/LogInContainer'
 import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import RegistrationSuccessContainer from './containers/RegistrationSuccessContainer'
+import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
+import FriendsContainer from './containers/FriendsContainer'
 import getInterestsAction from './store/interest/interestAction'
 import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const {
-      history,
-      init: pInit,
-      getInterestsAction: pGetInterestsAction,
-      addUserToState: pAddUserToState,
-    } = this.props
+    const { init: pInit, getInterestsAction: pGetInterestsAction } = this.props
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
-    if (!localStorage.getItem('authToken')) {
-      history.push('/login')
-    } else {
-      await pAddUserToState()
-    }
     await pGetInterestsAction()
   }
 
@@ -66,16 +58,21 @@ class App extends Component {
         <Route path="/login" component={LogInContainer} />
         <Route path="/reset-password" component={PasswordResetContainer} />
         <Route
-          path="/registration-message"
+          path="/registration-success"
           component={RegistrationSuccessContainer}
         />
+        <Route path="/messagesent" component={ThankYouMessageContainer} />
         <Route path="/createaccount" component={CreateAccountContainer} />
         <Route
           path="/registrationproblem"
           component={RegistrationProblemContainer}
         />
-        <Route path="/registration/:step" component={RegistrationContainer} />
+        <PrivateRoute
+          path="/registration/:step"
+          component={RegistrationContainer}
+        />
         <PrivateRoute exact path="/" component={GroupsContainer} />
+        <PrivateRoute exact path="/friends/" component={FriendsContainer} />
         <PrivateRoute
           path="/profiili/:username?"
           component={ProfileContainer}

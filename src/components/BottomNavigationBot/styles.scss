@@ -1,0 +1,48 @@
+@import '../../styles/colors.scss';
+
+.nav-bot {
+  margin-top: -13px;
+  padding: 0 0.75rem 0 0.75rem;
+}
+
+.button-image {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.modal-content {
+  text-align: left;
+}
+
+.modal-item {
+  padding: 5px 0 5px 0;
+}
+
+.modal-icon {
+  float: left;
+  font-size: 21px;
+  color: $orange;
+  width: 36px;
+  height: 40px; /* for text to align nicely in iPhone 5/SE sized screens */
+  margin-top: -2px;
+}
+
+hr {
+  margin-left: 36px;
+  border: solid 1px #e5e5e6;
+}
+
+.button-close {
+  display: block;
+  margin: 30px auto 0 auto;
+  padding: 10px 50px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: #3a3a3a;
+  border: solid 1px #f5a623;
+  background-color: #fff2e7;
+  outline: none;
+  width: 145px;
+  height: 42px;
+}

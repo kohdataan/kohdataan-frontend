@@ -1,0 +1,26 @@
+@import '../../styles/colors.scss';
+
+.friends-wrapper {
+  overflow-y: auto;
+}
+
+.friends-header {
+  text-align: center;
+  & h1 {
+    font-size: 32px;
+    color: $orange;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: condensed;
+    line-height: normal;
+    letter-spacing: 1.02px;
+  }
+}
+
+.friends-boxes {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 70px;
+}

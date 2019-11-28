@@ -10,6 +10,7 @@ import StepButton from '../components/RegistrationFlow/StepButton'
 import Container from '../components/Container'
 import InfoPage from '../components/RegistrationFlow/InfoPage'
 import Nickname from '../components/RegistrationFlow/Nickname'
+import ShowAge from '../components/RegistrationFlow/ShowAge'
 import Description from '../components/RegistrationFlow/Description'
 import Picture from '../components/RegistrationFlow/Picture'
 import Location from '../components/RegistrationFlow/Location'
@@ -29,6 +30,7 @@ const RegistrationContainer = props => {
     registrationError,
   } = props
   const [nickname, setNickname] = useState('')
+  const [showAge, setShowAge] = useState(false)
   const [location, setLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
@@ -51,6 +53,8 @@ const RegistrationContainer = props => {
         return (
           <Location onChange={value => setLocation(value)} value={location} />
         )
+      case pages['add-show-age'].current:
+        return <ShowAge setShowAge={setShowAge} />
       case pages['add-description'].current:
         return (
           <Description
@@ -73,10 +77,13 @@ const RegistrationContainer = props => {
     }
   }
 
-  const stepButtonActions = () => {
+  const profileCreationAction = () => {
     switch (step) {
       case pages['add-nickname'].current: {
         return props.updateUser({ nickname, mmId: mattermostId })
+      }
+      case pages['add-show-age'].current: {
+        return props.updateUser({ showAge: showAge.value })
       }
       case pages['add-location'].current: {
         return props.updateUser({ location: location.value })
@@ -93,6 +100,11 @@ const RegistrationContainer = props => {
       default:
         return undefined
     }
+  }
+
+  const stepButtonActions = () => {
+    if (pages[step].last) props.updateUser({ profileReady: true })
+    profileCreationAction()
   }
 
   return (

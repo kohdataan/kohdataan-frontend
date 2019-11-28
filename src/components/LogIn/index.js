@@ -38,7 +38,7 @@ const LogIn = props => {
           </ButtonContainer>
         </div>
         <div className="login-links-container">
-          <Link className="login-link" to="/">
+          <Link className="login-link" to="/reset-password">
             {'Olen unohtanut salasanani'}
           </Link>
           <Link className="login-link" to="/createaccount">

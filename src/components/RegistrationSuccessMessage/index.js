@@ -36,7 +36,10 @@ const RegistrationSuccessMessage = () => {
         </div>
         <hr className="divider" />
         <div className="problems-with-registration-link-container">
-          <Link className="problems-with-registration-link" to="/profiili">
+          <Link
+            className="problems-with-registration-link"
+            to="/registrationproblem"
+          >
             {'Tarvitsen apua rekisteröitymisessä.'}
           </Link>
         </div>
