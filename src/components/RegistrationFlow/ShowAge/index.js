@@ -5,7 +5,7 @@ import RadioButton from '../../RadioButton'
 import './styles.scss'
 
 const ShowAge = props => {
-  const { onChange, age } = props
+  const { onChange, showAge, age } = props
 
   return (
     <ShadowBox>
@@ -39,6 +39,7 @@ const ShowAge = props => {
 
 ShowAge.propTypes = {
   onChange: PropTypes.func.isRequired,
+  showAge: PropTypes.string.isRequired,
   age: PropTypes.string.isRequired,
 }
 

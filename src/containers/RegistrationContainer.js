@@ -85,6 +85,7 @@ const RegistrationContainer = props => {
     const dateDiff = now.diff(birthdate)
     const dateDiffDuration = moment.duration(dateDiff)
     const age = dateDiffDuration.years()
+    console.log('age', age)
     return age
   }
 
@@ -103,7 +104,13 @@ const RegistrationContainer = props => {
         )
       case pages['add-show-age'].current:
         checkInputValidity('add-show-age')
-        return <ShowAge onChange={setShowAge} showAge={showAge.toString()} />
+        return (
+          <ShowAge
+            onChange={setShowAge}
+            age={getAge()}
+            showAge={showAge.toString()}
+          />
+        )
       case pages['add-location'].current:
         checkInputValidity('add-location')
         return (
@@ -114,8 +121,6 @@ const RegistrationContainer = props => {
             showLocation={showLocation.toString()}
           />
         )
-      case pages['add-show-age'].current:
-        return <ShowAge setShowAge={setShowAge} age={getAge()} />
       case pages['add-description'].current:
         checkInputValidity('add-description')
         return (
