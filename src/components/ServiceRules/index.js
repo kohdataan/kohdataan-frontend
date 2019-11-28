@@ -20,8 +20,8 @@ const ServiceRules = ({ setRulesAccepted }) => {
   }
 
   return (
-    <div className="service-rules-container">
-      <p className="create-account-text">
+    <div id="service-rules-container">
+      <div className="service-rules-content">
         <ButtonContainer className="accept-rules-link" onClick={openModal}>
           {'Hyväksy palvelun säännöt'}
         </ButtonContainer>
@@ -31,7 +31,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
           label="accept-rules-dialog"
         >
           <h2>Palvelun säännöt</h2>
-          <div>
+          <div className="service-rules-text">
             <p>
               Tässä kerrotaan palvelun säännöistä! Lorem ipsum dolor sit amet,
               nam no soleat putant albucius, ullum exerci honestatis nec no. Et
@@ -82,7 +82,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
             Hyväksy
           </ButtonContainer>
         </ModalContainer>
-      </p>
+      </div>
     </div>
   )
 }
