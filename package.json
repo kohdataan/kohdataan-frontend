@@ -9,6 +9,7 @@
     "localforage": "^1.7.3",
     "localforage-observable": "^1.4.0",
     "mattermost-redux": "^5.9.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

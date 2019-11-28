@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
 import StepButton from '../components/RegistrationFlow/StepButton'
@@ -28,6 +29,7 @@ const RegistrationContainer = props => {
     mattermostId,
     interestOptions,
     registrationError,
+    userBirthdate,
   } = props
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState('')
@@ -77,6 +79,15 @@ const RegistrationContainer = props => {
     }
   }
 
+  const getAge = () => {
+    const birthdate = moment(userBirthdate)
+    const now = moment()
+    const dateDiff = now.diff(birthdate)
+    const dateDiffDuration = moment.duration(dateDiff)
+    const age = dateDiffDuration.years()
+    return age
+  }
+
   const subpage = () => {
     switch (step) {
       case pages.info.current:
@@ -103,6 +114,8 @@ const RegistrationContainer = props => {
             showLocation={showLocation.toString()}
           />
         )
+      case pages['add-show-age'].current:
+        return <ShowAge setShowAge={setShowAge} age={getAge()} />
       case pages['add-description'].current:
         checkInputValidity('add-description')
         return (
@@ -187,6 +200,7 @@ RegistrationContainer.propTypes = {
   interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
+  userBirthdate: PropTypes.string.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
@@ -210,6 +224,7 @@ const mapStateToProps = state => {
     mattermostId: state.entities.users.currentUserId,
     interestOptions: state.interests.results,
     registrationError: state.user.errorMessage,
+    userBirthdate: state.user.birthdate,
   }
 }
 
