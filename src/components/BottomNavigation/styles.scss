@@ -5,7 +5,7 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 64px;
   background-color: $black;
   border-top: 1px solid $orange;
   box-shadow: 0 5px 0px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.26);
@@ -17,7 +17,7 @@
 .bottom-navigation-container {
   width: 100%;
   position: fixed;
-  height: 70px;
+  height: 64px;
   bottom: 0;
   left: 0;
   display: flex;

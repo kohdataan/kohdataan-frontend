@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="65px" viewBox="0 0 64 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>5025B26B-D73A-4797-9F46-4634B762F38F</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="profiili-pop-3" transform="translate(-292.000000, -594.000000)" fill-rule="nonzero">
+            <g id="Group" transform="translate(290.000000, 595.000000)">
+                <circle id="Oval" stroke="#F59023" fill="#1C1C1C" cx="34" cy="31.5" r="31.5"></circle>
+                <path d="M34,15 L34,10" id="Line-8" stroke="#F5F5F5" stroke-linecap="square"></path>
+                <circle id="Oval" stroke="#FFFFFF" fill="#F59023" cx="33.5" cy="35" r="20"></circle>
+                <path d="M24.6109337,23.2284303 C27.9810384,22.4094768 30.9440605,22 33.5,22 C36.0559409,22 39.0189648,22.4094772 42.3890719,23.2284317 L42.3890708,23.228436 C45.975319,24.0999139 48.5,27.3115803 48.5,31.0021968 L48.5,31.0058159 C48.5,34.3163124 45.8163124,37 42.5058159,37 L24.4941841,37 C21.1836876,37 18.5,34.3163124 18.5,31.0058159 L18.5000018,31.0021939 C18.5000018,27.3115759 21.024684,24.0999083 24.6109337,23.2284303 Z" id="Rectangle" fill="#1C1C1C"></path>
+                <circle id="Oval" fill="#FFFFFF" cx="25.5" cy="31" r="2"></circle>
+                <circle id="Oval-Copy-2" fill="#FFFFFF" cx="39.5" cy="31" r="2"></circle>
+                <circle id="Oval" fill="#F5F5F5" cx="33.5" cy="7" r="3"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
