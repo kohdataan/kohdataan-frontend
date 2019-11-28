@@ -1,25 +1,30 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
+import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import InfoCircleIconPath from '../../assets/info-circle-solid-orange.svg'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
   const { register, handleSubmit, errors, watch } = useForm()
+  const [rulesAccepted, setRulesAccepted] = useState(false)
 
   const onSubmit = data => {
-    handleAccountCreation(
-      data.firstname,
-      data.lastname,
-      data.birthdate,
-      data.email,
-      data.phoneNumber,
-      data.password
-    )
+    if (rulesAccepted) {
+      handleAccountCreation(
+        data.firstname.trim(),
+        data.lastname.trim(),
+        data.birthdate,
+        data.email.trim().toLowerCase(),
+        data.phoneNumber,
+        data.password
+      )
+    } else {
+      alert('Sinun on hyväksyttävä palvelun säännöt.')
+    }
   }
-
   return (
     <main role="main" className="create-account-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -41,7 +46,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 required: true,
                 minLength: 2,
                 maxLength: 20,
-                pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
+                pattern: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
               })}
               ariaInvalid={!!errors.firstname}
               inputClassName="create-account-input-text"
@@ -73,7 +78,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 required: true,
                 minLength: 2,
                 maxLength: 30,
-                pattern: /^[a-zA-ZäöüßÄÖÜ'-]+$/i,
+                pattern: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
               })}
               autocomplete
               ariaInvalid={!!errors.lastname}
@@ -152,7 +157,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                   required: true,
                   minLength: 6,
                   maxLength: 20,
-                  pattern: /^[0-9- ]*$/i,
+                  pattern: /^(\+358|00358|358|04|050)[0-9- ]{4,14}$/i,
                 })}
                 ariaInvalid={!!errors.phoneNumber}
                 inputClassName="create-account-input-text"
@@ -244,16 +249,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Salasanat eivät ole samat'}
             </div>
           </div>
-
-          <p className="create-account-text">
-            <Link
-              className="create-account-link"
-              id="accept-rules-link"
-              to="/createaccount"
-            >
-              {'Hyväksy palvelun säännöt'}
-            </Link>
-          </p>
+          <ServiceRulesContainer setRulesAccepted={setRulesAccepted}/>
           <button type="submit" className="create-account-button">
             {'Rekisteröidy '}
           </button>
@@ -265,7 +261,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
           <Link className="create-account-link-block" to="/registrationproblem">
             {'Tarvitsen apua rekisteröitymisessä.'}
           </Link>
-          <Link className="create-account-link-block" to="/createaccount">
+          <Link className="create-account-link-block" to="/">
             {'Tutustu tietosuojaselosteeseen.'}
           </Link>
           <Link className="create-account-link-block" to="/">

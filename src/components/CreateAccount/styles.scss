@@ -1,7 +1,13 @@
 @import '../../styles/colors.scss';
 
-#accept-rules-link {
-  font-size: 1.2em;
+.accept-rules-link {
+  font: 1.2em Verdana, sans-serif;
+  color: white;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  text-transform: none;
+  margin-bottom: 1em;
 }
 
 .create-account-container {

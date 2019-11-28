@@ -32,6 +32,7 @@ const ModalContainer = props => {
       onRequestClose={closeModal}
       contentLabel={label}
       style={customStyles}
+      role="dialog"
     >
       {children}
     </Modal>
