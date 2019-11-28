@@ -5,36 +5,40 @@ import RadioButton from '../../RadioButton'
 import './styles.scss'
 
 const ShowAge = props => {
-  const { setShowAge, age } = props
+  const { onChange, age } = props
 
   return (
     <ShadowBox>
-      <div className="add-user-show-age-container">
-        <div className="add-user-show-age-text-container">
-          <span>
-            <span className="add-user-show-age-title">IKÄSI:</span> {age} vuotta
-          </span>
+      <main role="main" className="add-user-show-age-container">
+        <div className="profile-creation-title-container">
+          <h3 className="profile-creation-title">
+            Ikäsi:
+            <span className="add-user-show-age-value"> {age} vuotta</span>
+          </h3>
+
           <span className="profile-creation-step-text">2/6</span>
         </div>
         <RadioButton
           label="Näytä ikä muille"
           name="agePermission"
           value="showAge"
-          onChange={() => setShowAge(true)}
+          onChange={() => onChange(true)}
+          checked={showAge === 'true'}
         />
         <RadioButton
           label="Älä näytä ikää muille"
           name="agePermission"
           value="hideAge"
-          onChange={() => setShowAge(false)}
+          onChange={() => onChange(false)}
+          checked={showAge === 'false'}
         />
-      </div>
+      </main>
     </ShadowBox>
   )
 }
 
 ShowAge.propTypes = {
-  setShowAge: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   age: PropTypes.string.isRequired,
 }
 

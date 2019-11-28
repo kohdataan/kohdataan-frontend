@@ -12,8 +12,8 @@ const MessageList = props => {
     directChannel,
   } = props
 
-  let previousDate = null
   let previousTime = null
+  let previousDate = null
 
   const setTimeStampValues = post => {
     let showDate = false

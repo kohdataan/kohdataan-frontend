@@ -57,12 +57,11 @@ const EditInterestsContainer = props => {
       removeFromSelected(id)
     }
   }
-
   return (
     <div className="interests-grid">
       {sortedOptions.map(interest => (
         <ButtonContainer
-          key={interest.name}
+          key={interest.id}
           className={`${
             interests.includes(interest.id)
               ? 'interests-grid-item-selected'

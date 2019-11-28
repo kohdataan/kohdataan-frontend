@@ -33,7 +33,16 @@ const shouldComponentUpdate = (props, prevProps) => {
   const { match: pMatch, ...prest } = prevProps
   const { match, ...rest } = props
   if (localStorage.getItem('authToken')) {
-    props.history.push('/profiili')
+    API.getUser(
+      localStorage.getItem('userId'),
+      localStorage.getItem('authToken')
+    ).then(loggedUser => {
+      if (loggedUser.profileReady) {
+        props.history.push('/profiili')
+      } else {
+        props.history.push('/registration/info')
+      }
+    })
   }
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
