@@ -5,7 +5,7 @@ import './styles.scss'
 
 const StepButton = props => {
   const {
-    params: { skippable, next, previous, last },
+    params: { next, previous, last },
     onClick,
     nextButtonActive,
   } = props
@@ -14,9 +14,7 @@ const StepButton = props => {
     <div className="step-button-container">
       {previous && (
         <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
+          className="next-step-button"
           to={`/registration/${previous}`}
           onClick={onClick}
         >
@@ -25,9 +23,7 @@ const StepButton = props => {
       )}
       {next && nextButtonActive && (
         <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
+          className="next-step-button"
           to={`/registration/${next}`}
           onClick={onClick}
         >
@@ -40,13 +36,7 @@ const StepButton = props => {
       )}
 
       {last && nextButtonActive && (
-        <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
-          to="/profiili"
-          onClick={onClick}
-        >
+        <Link className="next-step-button" to="/profiili" onClick={onClick}>
           Tallenna
         </Link>
       )}
