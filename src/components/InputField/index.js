@@ -2,7 +2,15 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 const InputField = props => {
-  const { label, value, inputClassName, labelClassName, onChange, type } = props
+  const {
+    label,
+    value,
+    inputClassName,
+    labelClassName,
+    showPlaceholder,
+    onChange,
+    type,
+  } = props
   return (
     <label htmlFor={label} className={inputClassName}>
       {label}
@@ -11,7 +19,7 @@ const InputField = props => {
         name={label}
         id={label}
         value={value}
-        placeholder={label}
+        placeholder={showPlaceholder ? label : ''}
         className={labelClassName}
         onChange={onChange}
       />
@@ -25,6 +33,7 @@ InputField.propTypes = {
   value: PropTypes.string,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
+  showPlaceholder: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 }
 
@@ -33,6 +42,7 @@ InputField.defaultProps = {
   value: '',
   inputClassName: '',
   labelClassName: '',
+  showPlaceholder: true,
 }
 
 export default memo(InputField)

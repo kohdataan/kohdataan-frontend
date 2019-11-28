@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import '../../../styles/colors.scss';
 
 .password-reset-container {
   background-color: $black;
@@ -8,10 +8,23 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+  color: $white;
 }
 
-.password-reset-fields-container {
+.password-reset-container h2,p {
+  color: $white;
+}
+
+.password-reset-container h2 {
+  text-transform: uppercase;
+}
+
+.password-reset-content-container {
   width: 80%;
+  height: 100%;
+}
+
+.password-reset-input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +35,7 @@
   flex-direction: column;
   color: $white;
   margin: 0 0 20px 0;
+  font-size: 1.2em;
   width: 100%;
 }
 
@@ -47,9 +61,26 @@
   text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
+  margin: auto;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
-  color: #3a3a3a;
+  color: $black;
   background-color: $orange;
   outline: none;
+}
+
+.password-reset-link-container {
+  padding-top: 30px;
+}
+
+.password-reset-link {
+  color: $white;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  padding: 10px 0 10px 0;
+
+  :visited {
+    color: $white;
+  }
 }
