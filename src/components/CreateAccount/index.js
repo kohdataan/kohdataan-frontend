@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
-import ToolTipModalContainer from '../../containers/ToolTipModalContainer.js'
+import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
   const { register, handleSubmit, errors, watch } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
+  const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
+  const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
 
   const onSubmit = data => {
     if (rulesAccepted) {
@@ -25,9 +27,6 @@ const CreateAccount = ({ handleAccountCreation }) => {
       alert('Sinun on hyväksyttävä palvelun säännöt.')
     }
   }
-
-  const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
-  const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
 
   const closeModal = () => {
     setPhoneNumberModalIsOpen(false)
