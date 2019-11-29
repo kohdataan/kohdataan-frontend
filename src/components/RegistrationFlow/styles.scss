@@ -1,0 +1,29 @@
+.profile-creation-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+}
+
+.profile-creation-title {
+    font-family: Poppins;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profile-creation-step-text {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.17px;
+    color: #6c6c6c;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    display: block;
+}
+

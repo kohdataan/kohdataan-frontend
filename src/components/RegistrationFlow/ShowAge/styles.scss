@@ -1,16 +1,6 @@
-@import '../../../styles/colors.scss';
-
 .add-user-show-age-container {
-  margin: 20px;
+  margin: 10px;
   flex-direction: column;
-}
-
-.add-user-show-age-text-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
 }
 
 .add-user-show-age-text {
@@ -20,7 +10,7 @@
   width: 100%;
 }
 
-.add-user-show-age-title {
-  font-size: 18px;
-  font-weight: bold;
+.add-user-show-age-value {
+  font-weight: normal;
+  text-transform: none;
 }

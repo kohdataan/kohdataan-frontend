@@ -32,29 +32,63 @@ const RegistrationContainer = props => {
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState(false)
   const [location, setLocation] = useState('')
+  const [showLocation, setShowLocation] = useState(false)
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
+  const [valid, setValid] = useState(false)
+  const [choiceMade, setChoiceMade] = useState(false)
+  const [locationChosen, setLocationChosen] = useState(false)
 
+  const handleNicknameChange = e => {
+    setNickname(e.target.value)
+    if (e.target.value.length < 1) {
+      pages['add-nickname'].valid = false
+    } else {
+      pages['add-nickname'].valid = true
+    }
+  }
+
+  const checkInterestsPageValid = () => {
+    if (valid) {
+      pages['add-interests'].valid = true
+    } else {
+      pages['add-interests'].valid = false
+    }
+  }
+
+  const checkAgePageValid = () => {
+    if (choiceMade) {
+      pages['add-show-age'].valid = true
+    } else {
+      pages['add-show-age'].valid = false
+    }
+  }
+
+  const checkLocationPageValid = () => {
+    if (locationChosen && location) {
+      pages['add-location'].valid = true
+    } else {
+      pages['add-location'].valid = false
+    }
+  }
   const subpage = () => {
     switch (step) {
       case pages.info.current:
         return <InfoPage />
       case pages['add-nickname'].current:
-        return (
-          <Nickname
-            value={nickname}
-            onChange={e => {
-              setNickname(e.target.value)
-            }}
-          />
-        )
+        return <Nickname value={nickname} onChange={handleNicknameChange} />
       case pages['add-location'].current:
         return (
-          <Location onChange={value => setLocation(value)} value={location} />
+          <Location
+            onChange={value => setLocation(value)}
+            value={location}
+            setShowLocation={setShowLocation}
+            setLocationChosen={setLocationChosen}
+          />
         )
       case pages['add-show-age'].current:
-        return <ShowAge setShowAge={setShowAge} />
+        return <ShowAge setShowAge={setShowAge} setChoiceMade={setChoiceMade} />
       case pages['add-description'].current:
         return (
           <Description
@@ -70,12 +104,16 @@ const RegistrationContainer = props => {
             options={interestOptions}
             interests={interests}
             setInterests={setInterests}
+            setInterestsValid={setValid}
           />
         )
       default:
         return undefined
     }
   }
+  checkInterestsPageValid()
+  checkAgePageValid()
+  checkLocationPageValid()
 
   const stepButtonActions = () => {
     switch (step) {
@@ -86,7 +124,10 @@ const RegistrationContainer = props => {
         return props.updateUser({ showAge: showAge.value })
       }
       case pages['add-location'].current: {
-        return props.updateUser({ location: location.value })
+        return props.updateUser({
+          location: location.value,
+          showLocation: showLocation.value,
+        })
       }
       case pages['add-description'].current: {
         return props.updateUser({ description })

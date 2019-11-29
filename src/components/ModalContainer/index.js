@@ -16,6 +16,7 @@ const customStyles = {
     border: 'none',
     borderRadius: '5px',
     textAlign: 'center',
+    maxHeight: '100vh',
   },
   overlay: {
     position: 'fixed',
@@ -26,12 +27,15 @@ const customStyles = {
 
 const ModalContainer = props => {
   const { children, modalIsOpen, closeModal, label } = props
+
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       contentLabel={label}
       style={customStyles}
+      role="dialog"
+      aria-labelledby={label}
     >
       {children}
     </Modal>

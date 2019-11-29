@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
 import * as API from '../api/user'
-import InfoPage from '../components/RegistrationFlow/InfoPage'
-import RegistrationContainer from './RegistrationContainer'
 
 const CreateAccountContainer = props => {
   const { history } = props
@@ -13,32 +11,45 @@ const CreateAccountContainer = props => {
     lastname,
     birthdate,
     email,
-    password,
-    rulesAccepted
+    phoneNumber,
+    password
   ) => {
+    // Remove empty spaces and potential country code
+    let number = phoneNumber.replace(/ /g, '')
+    if (number.startsWith('+358')) {
+      number = number.replace('+358', '0')
+    } else if (number.startsWith('358')) {
+      number = number.replace('358', '0')
+    } else if (number.startsWith('00358')) {
+      number = number.replace('00358', '0')
+    }
     // create unique username for Mattermost
     // Mattermot username must begin with a letter and contain between 3 and 22 characters
     // including numbers, lowercase letters, and the symbols ".", "-", and "_".
-    let username = `${uniqid.process()}`.concat(email.split('@')[0])
 
+    let username = `${uniqid.process()}`.concat(email.split('@')[0])
     if (username.length > 22) {
       username = username.slice(0, 22)
     }
+
+    // Nickname cannot be const because it's changed in the profile creation flow.
+    // eslint-disable-next-line prefer-const
+    let nickname = username
+
     try {
       const user = {
         firstname,
         lastname,
         birthdate,
         email,
+        phoneNumber,
         username,
+        nickname,
         password,
-        rulesAccepted,
       }
-      if (user && user.rulesAccepted) {
+      if (user) {
         await API.userSignUp(user)
         history.push('/registration-success')
-      } else {
-        console.log('Sinun on hyväksyttävä palvelun säännöt.')
       }
     } catch (e) {
       // eslint-disable-next-line no-console

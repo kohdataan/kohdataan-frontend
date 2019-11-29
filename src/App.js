@@ -15,6 +15,8 @@ import LogInContainer from './containers/LogInContainer'
 import CreateAccountContainer from './containers/CreateAccountContainer'
 import RegistrationContainer from './containers/RegistrationContainer'
 import RegistrationSuccessContainer from './containers/RegistrationSuccessContainer'
+import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
+import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
@@ -35,7 +37,7 @@ class App extends Component {
     await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
     await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
     if (!localStorage.getItem('authToken')) {
-      history.push('/login')
+      // history.push('/login')
     } else {
       await pAddUserToState()
     }
@@ -79,7 +81,12 @@ class App extends Component {
           path="/registration-success"
           component={RegistrationSuccessContainer}
         />
+        <Route path="/messagesent" component={ThankYouMessageContainer} />
         <Route path="/createaccount" component={CreateAccountContainer} />
+        <Route
+          path="/registrationproblem"
+          component={RegistrationProblemContainer}
+        />
         <Route path="/registration/:step" component={RegistrationContainer} />
         <PrivateRoute exact path="/" component={GroupsContainer} />
         <PrivateRoute exact path="/friends/" component={FriendsContainer} />
