@@ -31,7 +31,11 @@ const CreateAccountContainer = props => {
     if (username.length > 22) {
       username = username.slice(0, 22)
     }
+
+    // Nickname cannot be const because it's changed in the profile creation flow.
+    // eslint-disable-next-line prefer-const
     let nickname = username
+
     try {
       const user = {
         firstname,
