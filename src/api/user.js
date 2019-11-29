@@ -16,6 +16,22 @@ const userLogin = async data => {
   }
 }
 
+const userLogout = async token => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const userSignUp = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -152,6 +168,7 @@ const getInterestsByUsername = async (token, username) => {
 
 export {
   userLogin,
+  userLogout,
   userSignUp,
   resetPassword,
   getUser,
