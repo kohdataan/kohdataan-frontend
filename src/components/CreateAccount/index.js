@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
-import InfoCircleIconPath from '../../assets/info-circle-solid-orange.svg'
+import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
   const { register, handleSubmit, errors, watch } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
+  const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
+  const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
 
   const onSubmit = data => {
     if (rulesAccepted) {
@@ -25,6 +27,20 @@ const CreateAccount = ({ handleAccountCreation }) => {
       alert('Sinun on hyväksyttävä palvelun säännöt.')
     }
   }
+
+  const closeModal = () => {
+    setPhoneNumberModalIsOpen(false)
+    setPasswordModalIsOpen(false)
+  }
+
+  const openPhoneNumberModal = () => {
+    setPhoneNumberModalIsOpen(true)
+  }
+
+  const openPasswordModal = () => {
+    setPasswordModalIsOpen(true)
+  }
+
   return (
     <main role="main" className="create-account-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -167,11 +183,22 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     : 'create-account-input-field'
                 }
               />
+
               <div className="info-circle">
-                <img src={InfoCircleIconPath} alt="info" />
+                <button
+                  type="button"
+                  onClick={openPhoneNumberModal}
+                  className="info-circle-button"
+                  aria-labelledby="phonenumber-info"
+                />
               </div>
             </div>
-
+            <ToolTipModalContainer
+              modalIsOpen={phoneNumberModalIsOpen}
+              closeModal={closeModal}
+              label="show-phonenumber-info-dialog"
+              content="Jos unohdat salasanan, voit vaihtaa sen puhelinnumeron avulla."
+            />
             <div className="error-text">
               {errors.phoneNumber &&
                 errors.phoneNumber.type === 'required' &&
@@ -205,8 +232,20 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 }
               />
               <div className="info-circle">
-                <img src={InfoCircleIconPath} alt="info" />
+                <button
+                  type="button"
+                  onClick={openPasswordModal}
+                  className="info-circle-button"
+                  aria-labelledby="password-info"
+                />
               </div>
+              <ToolTipModalContainer
+                modalIsOpen={passwordModalIsOpen}
+                closeModal={closeModal}
+                label="show-password-info-dialog"
+                content="Salasanassa tulee olla vähintään 10 merkkiä, ja siinä pitää
+                olla isoja kirjaimia, pieniä kirjaimia ja numeroita."
+              />
             </div>
             <div className="error-text">
               {errors.password &&
@@ -249,7 +288,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Salasanat eivät ole samat'}
             </div>
           </div>
-          <ServiceRulesContainer setRulesAccepted={setRulesAccepted}/>
+          <ServiceRulesContainer setRulesAccepted={setRulesAccepted} />
           <button type="submit" className="create-account-button">
             {'Rekisteröidy '}
           </button>
