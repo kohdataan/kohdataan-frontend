@@ -71,7 +71,10 @@ class App extends Component {
           path="/reset-password-info"
           component={PasswordResetInfoContainer}
         />
-        <Route path="/reset-password/:uuid" component={PasswordResetPageContainer} />
+        <Route
+          path="/reset-password/:uuid"
+          component={PasswordResetPageContainer}
+        />
         <Route
           path="/registration-success"
           component={RegistrationSuccessContainer}

@@ -37,14 +37,16 @@ const PasswordReset = () => {
             labelClassName="password-reset-input-field"
             showPlaceholder={false}
           />
-          <InputField
-            label="Puhelinnumero"
-            value={phoneNumber}
-            onChange={e => setPhoneNumber(e.target.value)}
-            inputClassName="password-reset-input-text"
-            labelClassName="password-reset-input-field"
-            showPlaceholder={false}
-          />
+          <div className="hidden-field">
+            <InputField
+              label="Puhelinnumero"
+              value={email}
+              onChange={e => setPhoneNumber(e.target.value)}
+              inputClassName="password-reset-input-text"
+              labelClassName="password-reset-input-field"
+              showPlaceholder={false}
+            />
+          </div>
           <ButtonContainer className="reset-button" onClick={handleReset}>
             Lähetä
           </ButtonContainer>

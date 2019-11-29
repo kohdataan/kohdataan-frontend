@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PasswordResetPage from '../components/PasswordResetFlow/ResetPage'
 
-const PasswordResetInfoContainer = () => {
+const PasswordResetPageContainer = () => {
   return <PasswordResetPage />
 }
 
@@ -12,4 +12,4 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-export default memo(PasswordResetInfoContainer, shouldComponentUpdate)
+export default memo(PasswordResetPageContainer, shouldComponentUpdate)
