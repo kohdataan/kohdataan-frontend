@@ -27,9 +27,13 @@ export const updateUser = data => {
       if (
         data.nickname ||
         data.showAge ||
+        data.showAge === false ||
         data.location ||
         data.showLocation ||
-        data.description
+        data.showLocation === false ||
+        data.description ||
+        data.profileReady ||
+        data.tutorialWatched
       ) {
         await API.updateUser(data, id, token)
         dispatch({

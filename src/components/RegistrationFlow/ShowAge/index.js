@@ -40,7 +40,7 @@ const ShowAge = props => {
 ShowAge.propTypes = {
   onChange: PropTypes.func.isRequired,
   showAge: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
 }
 
 export default memo(ShowAge)

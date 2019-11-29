@@ -26,12 +26,15 @@ const customStyles = {
 
 const ModalContainer = props => {
   const { children, modalIsOpen, closeModal, label } = props
+
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       contentLabel={label}
       style={customStyles}
+      role="dialog"
+      aria-labelledby={label}
     >
       {children}
     </Modal>

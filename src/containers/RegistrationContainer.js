@@ -1,10 +1,18 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { uploadProfileImage } from 'mattermost-redux/actions/users'
+import {
+  getMe as getMeAction,
+  uploadProfileImage,
+} from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import {
+  addUserToState as addUserToStateAction,
+  updateUser,
+  addUserInterests,
+} from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
 import StepButton from '../components/RegistrationFlow/StepButton'
@@ -17,7 +25,6 @@ import Picture from '../components/RegistrationFlow/Picture'
 import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
-import { updateUser, addUserInterests } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 
@@ -29,6 +36,7 @@ const RegistrationContainer = props => {
     mattermostId,
     interestOptions,
     registrationError,
+    getMe,
     userBirthdate,
   } = props
   const [nickname, setNickname] = useState('')
@@ -39,6 +47,11 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
+
+  useEffect(() => {
+    getMe()
+    props.addUserToStateAction()
+  }, [])
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
@@ -85,7 +98,6 @@ const RegistrationContainer = props => {
     const dateDiff = now.diff(birthdate)
     const dateDiffDuration = moment.duration(dateDiff)
     const age = dateDiffDuration.years()
-    console.log('age', age)
     return age
   }
 
@@ -152,12 +164,12 @@ const RegistrationContainer = props => {
         return props.updateUser({ nickname, mmId: mattermostId })
       }
       case pages['add-show-age'].current: {
-        return props.updateUser({ showAge: showAge.value })
+        return props.updateUser({ showAge })
       }
       case pages['add-location'].current: {
         return props.updateUser({
           location: location.value,
-          showLocation: showLocation.value,
+          showLocation,
         })
       }
       case pages['add-description'].current: {
@@ -205,12 +217,15 @@ RegistrationContainer.propTypes = {
   interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
-  userBirthdate: PropTypes.string.isRequired,
+  getMe: PropTypes.func.isRequired,
+  addUserToStateAction: PropTypes.func.isRequired,
+  userBirthdate: PropTypes.string,
 }
 
 RegistrationContainer.defaultProps = {
   registrationError: null,
   interestOptions: [],
+  userBirthdate: '',
 }
 
 const mapDispatchToProps = dispatch =>
@@ -220,6 +235,8 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage,
       addUserInterests,
       getInterestsAction,
+      addUserToStateAction,
+      getMe: getMeAction,
     },
     dispatch
   )
