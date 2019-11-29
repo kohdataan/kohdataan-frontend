@@ -1,111 +1,183 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import Select from 'react-select'
+import './styles.scss'
 
 const DateSelectField = React.forwardRef((props, ref) => {
   const {
     label,
-    name,
     showLabel,
     ariaInvalid,
     ariaDescribedBy,
     inputClassName,
-    labelClassName,
   } = props
+
+  const years = []
+  let year = new Date().getFullYear()
+  const months = [
+    { value: 1, label: 'Tammi' },
+    { value: 2, label: 'Helmi' },
+    { value: 3, label: 'Maalis' },
+    { value: 4, label: 'Huhti' },
+    { value: 5, label: 'Touko' },
+    { value: 6, label: 'Kesä' },
+    { value: 7, label: 'Heinä' },
+    { value: 8, label: 'Elo' },
+    { value: 9, label: 'Syys' },
+    { value: 10, label: 'Loka' },
+    { value: 11, label: 'Marras' },
+    { value: 12, label: 'Joulu' },
+  ]
+  const days = []
+  let day = 1
+
+  const customStyles = {
+    container: provided => ({
+      ...provided,
+      width: '33%',
+    }),
+    menu: provided => ({
+      ...provided,
+      border: '2px solid #f59023',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: 'white',
+      background: state.isSelected ? 'grey' : '#1c1c1c',
+    }),
+    control: provided => ({
+      ...provided,
+      borderRadius: 25,
+      border: '1px solid #f59023',
+      boxShadow: 'none',
+      background: '#1c1c1c',
+      color: 'white',
+    }),
+    input: () => ({
+      color: 'white',
+    }),
+    singleValue: () => ({
+      color: 'white',
+    }),
+    dropdownIndicator: provided => ({
+      ...provided,
+      color: '#f59023',
+    }),
+  }
+
+  while (year >= 1900) {
+    years.push({ value: year, label: year })
+    year -= 1
+  }
+
+  while (day <= 31) {
+    days.push({ value: day, label: day })
+    day += 1
+  }
+
   return (
-    <label htmlFor={label} className={inputClassName}>
-      {showLabel && label}
-      <select
-        name={"day"}
+    <div>
+      <label htmlFor={label} className={inputClassName}>
+        {showLabel && label}
+      </label>
+      {/* 
+      <input
+        type="number"
+        list="day"
+        name="day"
+        min="1"
+        max="31"
         ref={ref}
         id={label}
         aria-label={label}
         aria-invalid={ariaInvalid}
         aria-describedby={ariaDescribedBy}
-        placeholder={"day"}
-        className={labelClassName}
-      >
-        <option value={0} disabled selected> Päivä </option>
-        {paivat.map(paiva => (
-            <option value={paiva}>{paiva}</option>            
+        placeholder="Päivä"
+        className="day-select-field"
+      />
+      <datalist id="day">
+        {days.map(d => (
+          <option value={d}>{d}</option>
         ))}
-      </select>
-      <select
-        name={"month"}
+      </datalist>
+
+      <input
+        type="text"
+        list="month"
+        name="month"
+        ref={ref}
+        aria-label={label}
+        aria-invalid={ariaInvalid}
+        aria-describedby={ariaDescribedBy}
+        placeholder="Kuukausi"
+        className="month-select-field"
+      />
+      <datalist id="month">
+        {months.map(month => (
+          <option value={month.value} className="month-option">
+            {month.label}
+          </option>
+        ))}
+      </datalist>
+      */}
+      <div className="birthdate-selections">
+        <Select
+          name="day"
+          options={days}
+          isSearchable
+          placeholder="Päivä"
+          styles={customStyles}
+          backspaceRemovesValue="true"
+        />
+
+        <Select
+          name="month"
+          options={months}
+          isSearchable
+          placeholder="Kuukausi"
+          styles={customStyles}
+          backspaceRemovesValue="true"
+        />
+        <Select
+          name="year"
+          options={years}
+          isSearchable
+          placeholder="Vuosi"
+          styles={customStyles}
+          backspaceRemovesValue="true"
+        />
+      </div>
+      {/* 
+      <input
+        type="number"
+        min="1900"
+        max="2100"
+        list="years"
+        name="year"
         ref={ref}
         id={label}
         aria-label={label}
         aria-invalid={ariaInvalid}
         aria-describedby={ariaDescribedBy}
-        placeholder={"month"}
-        className={labelClassName}
-      >
-        <option value="" disabled selected> Kuukausi </option>
-        {kuukaudet.map(kuukausi => ( 
-            <option value={kuukausi.kuukausi}>{kuukausi.nimi}</option>            
+        placeholder="Vuosi"
+        className="year-select-field"
+      />
+      <datalist id="years">
+        {years.map(y => (
+          <option value={y}>{y}</option>
         ))}
-      </select>
-      <select
-        name={"year"}
-        ref={ref}
-        id={label}
-        aria-label={label}
-        aria-invalid={ariaInvalid}
-        aria-describedby={ariaDescribedBy}
-        placeholder={"year"}
-        className={labelClassName}
-      >
-        <option value={0} disabled selected> Vuosi </option>
-        {vuodet.map(vuosi => (
-            <option value={vuosi}>{vuosi}</option>            
-        ))}
-      </select> 
-  </label>
+      </datalist>
+      */}
+    </div>
   )
 })
 
-const kuukaudet = [
-  {kuukausi: 1, nimi: "Tammikuu"},
-  {kuukausi: 2, nimi: "Helmikuu"},
-  {kuukausi: 3, nimi: "Maaliskuu"},
-  {kuukausi: 4, nimi: "Huhtikuu"},
-  {kuukausi: 5, nimi:  "Toukokuu"},
-  {kuukausi: 6, nimi:  "Kesäkuu"},
-  {kuukausi: 7, nimi:  "Heinäkuu"},
-  {kuukausi: 8, nimi:  "Elokuu"},
-  {kuukausi: 9, nimi:  "Syyskuu"},
-  {kuukausi: 10, nimi:  "Lokakuu"},
-  {kuukausi: 11, nimi:  "Marraskuu"},
-  {kuukausi: 12, nimi:  "Joulukuu"}
-]
-
-var vuodet = []
-
-var vuosi = new Date().getFullYear();
-
-while (vuosi >= 1900)
-{
-  vuodet.push(vuosi)
-  vuosi--
-}
-
-var paivat = []
-var paiva = 1
-while (paiva <= 31)
-{
-  paivat.push(paiva)
-  paiva++
-}
-
-
-
 DateSelectField.propTypes = {
   label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
   ariaDescribedBy: PropTypes.string,
   inputClassName: PropTypes.string,
-  labelClassName: PropTypes.string,
 }
 
 DateSelectField.defaultProps = {
@@ -113,7 +185,6 @@ DateSelectField.defaultProps = {
   ariaInvalid: false,
   ariaDescribedBy: '',
   inputClassName: '',
-  labelClassName: ''
 }
 
 export default memo(DateSelectField)

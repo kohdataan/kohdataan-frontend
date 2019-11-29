@@ -46,6 +46,13 @@ const Location = props => {
       ...provided,
       color: '#f59023',
     }),
+    indicatorSeparator: () => ({
+      border: 0,
+    }),
+    placeholder: provided => ({
+      ...provided,
+      color: 'white',
+    }),
   }
 
   const handleChange = val => {

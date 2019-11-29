@@ -1,5 +1,21 @@
 @import '../../styles/colors.scss';
 
+.accept-rules-link {
+  font: 1.2em Verdana, sans-serif;
+  color: white;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  text-transform: none;
+  margin-bottom: 1em;
+}
+
+.close-modal-button {
+  width: 1,2em;
+  height:  1,2em;
+  border: 1px solid black;
+  border-radius: 50%;
+}
 
 .create-account-container {
   background-color: $black;
@@ -120,9 +136,12 @@
   margin-bottom: 20px;
 }
 
-.info-circle {
+.info-circle-button {
   width: 2em;
   height: 2em;
+  background-color: black;
+  background-image: url('../../assets/info-circle-solid-orange.svg');
+  border: none;
   margin-left: 15px;
   margin-top: 5px;
   align-self: center;
