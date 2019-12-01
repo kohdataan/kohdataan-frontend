@@ -3,7 +3,15 @@ import PropTypes from 'prop-types'
 import './styles.scss'
 
 const RadioButton = props => {
-  const { name, labelClassName, inputClassName, value, onChange, label, checked } = props
+  const {
+    name,
+    labelClassName,
+    inputClassName,
+    value,
+    onChange,
+    label,
+    checked,
+  } = props
 
   return (
     <label htmlFor={label} className={`radio-button ${labelClassName}`}>
