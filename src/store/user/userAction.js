@@ -24,23 +24,11 @@ export const updateUser = data => {
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
-      if (
-        data.nickname ||
-        data.showAge ||
-        data.showAge === false ||
-        data.location ||
-        data.showLocation ||
-        data.showLocation === false ||
-        data.description ||
-        data.profileReady ||
-        data.tutorialWatched
-      ) {
-        await API.updateUser(data, id, token)
-        dispatch({
-          type: types.UPDATE_USER,
-          user: data,
-        })
-      }
+      await API.updateUser(data, id, token)
+      dispatch({
+        type: types.UPDATE_USER,
+        user: data,
+      })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
