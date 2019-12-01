@@ -16,6 +16,8 @@ const RadioButton = props => {
         onChange={onChange}
         className={inputClassName}
         checked={checked}
+        onKeyPress={onChange}
+        tabIndex={0}
       />
       <span className="radio-button-checkmark" />
     </label>
