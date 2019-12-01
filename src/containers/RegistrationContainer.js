@@ -55,9 +55,9 @@ const RegistrationContainer = props => {
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
-    if (value === true && !nextButtonActive) {
+    if (value && !nextButtonActive) {
       setNextButtonActive(true)
-    } else if (value === false && nextButtonActive) {
+    } else if (!value && nextButtonActive) {
       setNextButtonActive(false)
     }
   }
