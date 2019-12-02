@@ -1,14 +1,14 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = props => {
+const ValidatedInputField = React.forwardRef((props, ref) => {
   const {
     label,
+    name,
     showLabel,
-    value,
+    ariaInvalid,
     inputClassName,
     labelClassName,
-    onChange,
     type,
   } = props
   return (
@@ -16,34 +16,34 @@ const InputField = props => {
       {showLabel && label}
       <input
         type={type}
-        name={label}
+        name={name}
+        ref={ref}
         id={label}
         aria-label={label}
-        value={value}
+        aria-invalid={ariaInvalid}
         placeholder={label}
         className={labelClassName}
-        onChange={onChange}
       />
     </label>
   )
-}
+})
 
-InputField.propTypes = {
+ValidatedInputField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   showLabel: PropTypes.bool,
-  value: PropTypes.string,
+  ariaInvalid: PropTypes.bool,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
 }
 
-InputField.defaultProps = {
+ValidatedInputField.defaultProps = {
   type: 'text',
   showLabel: true,
-  value: '',
+  ariaInvalid: false,
   inputClassName: '',
   labelClassName: '',
 }
 
-export default memo(InputField)
+export default memo(ValidatedInputField)
