@@ -118,6 +118,7 @@ const addUserInterests = async (data, token) => {
       throw new Error(e)
     }
   }
+  return null
 }
 
 const getUserInterest = async token => {
