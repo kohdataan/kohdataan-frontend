@@ -4,11 +4,11 @@ import './styles.scss'
 
 const ResetInfo = () => {
   return (
-    <div className="password-reset-container">
+    <main role="main" className="password-reset-container">
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="password-reset-content-container">
-        <h2>Salasanan vaihtaminen</h2>
+        <h2 className="password-reset-title">Salasanan vaihtaminen</h2>
         <p>
           Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan
           salasanan.
@@ -39,14 +39,14 @@ const ResetInfo = () => {
             </p>
           </div>
           <div className="divider" aria-hidden="true" />
-          <div className="problems-with-password-reset-link-container">
-            <Link className="problems-with-password-reset-link" to="/">
+          <div className="password-reset-link-container">
+            <Link className="password-reset-link" to="/">
               {'Tarvitsen apua salasanan vaihtamisessa.'}
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

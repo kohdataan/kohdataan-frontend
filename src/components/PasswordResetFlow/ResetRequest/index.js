@@ -22,7 +22,7 @@ const PasswordReset = () => {
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="password-reset-content-container">
-        <h2>Salasanan vaihtaminen</h2>
+        <h2 className="password-reset-title">Salasanan vaihtaminen</h2>
         <p>Anna sähköpostiosoitteesi tai puhelinnumerosi.</p>
         <p>
           Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan.
@@ -47,7 +47,10 @@ const PasswordReset = () => {
               showPlaceholder={false}
             />
           </div>
-          <ButtonContainer className="reset-button" onClick={handleReset}>
+          <ButtonContainer
+            className="password-reset-button"
+            onClick={handleReset}
+          >
             Lähetä
           </ButtonContainer>
 

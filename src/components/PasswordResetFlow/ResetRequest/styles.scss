@@ -1,5 +1,9 @@
 @import '../../../styles/colors.scss';
 
+.hidden-field {
+  display: none;
+}
+
 .password-reset-container {
   background-color: $black;
   height: 100%;
@@ -7,21 +11,17 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   color: $white;
 }
 
-.password-reset-container h2,p {
-  color: $white;
-}
-
-.password-reset-container h2 {
+.password-reset-title {
   text-transform: uppercase;
+  color: white;
 }
 
 .password-reset-content-container {
   width: 80%;
-  height: 100%;
 }
 
 .password-reset-input-container {
@@ -56,7 +56,7 @@
   }
 }
 
-.reset-button {
+.password-reset-button {
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -78,7 +78,7 @@
   font-size: 15px;
   display: block;
   text-align: center;
-  padding: 10px 0 10px 0;
+  padding: 10px 0 20px 0;
 
   :visited {
     color: $white;
