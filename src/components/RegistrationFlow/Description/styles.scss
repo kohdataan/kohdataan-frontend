@@ -2,7 +2,6 @@
 
 .add-user-description-container {
   margin: 10px;
-  position: relative;
 }
 
 .add-user-description-text {
@@ -23,13 +22,12 @@
   }
 }
 
-.add-user-description-limit {
-  position: absolute;
-  right: 0;
-  top: 25px;
-  font-weight: 700;
+.add-user-description-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.add-user-description-title {
-  font-weight: 500;
+.add-user-description-limit {
+  color: $text-medium-gray;
 }

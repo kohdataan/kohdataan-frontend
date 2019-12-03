@@ -21,6 +21,7 @@ const Profile = props => {
     addUserInterests,
     updateProfilePicture,
     updateUser,
+    startDirect,
     setImg,
   } = props
   const { location, description, tutorialWatched, nickname } = myUserInfo
@@ -64,7 +65,7 @@ const Profile = props => {
   }
 
   return (
-    <div className="profile-container">
+    <main className="profile-container">
       <div className="profile-header-container">
         {!editProfile && <ProfileImage userId={user.id} />}
         {editProfile && <EditProfileImage onChange={setImg} />}
@@ -72,6 +73,8 @@ const Profile = props => {
           <ProfileHeader
             nickname={nickname || user.username}
             location={location}
+            startDirect={startDirect}
+            currentUser={currentUser}
           />
         )}
 
@@ -111,7 +114,7 @@ const Profile = props => {
         interestOptions={interestOptions}
       />
       <Instructions closeModal={closeModal} showModals={showModals} />
-    </div>
+    </main>
   )
 }
 
@@ -122,6 +125,7 @@ Profile.propTypes = {
   interestOptions: propTypes.instanceOf(Array).isRequired,
   addUserInterests: propTypes.func,
   updateProfilePicture: propTypes.func,
+  startDirect: propTypes.func,
   currentUser: propTypes.instanceOf(Object),
   updateUser: propTypes.func,
   setImg: propTypes.func,
@@ -133,6 +137,7 @@ Profile.defaultProps = {
   addUserInterests: null,
   updateProfilePicture: null,
   setImg: null,
+  startDirect: null,
 }
 
 export default memo(Profile)

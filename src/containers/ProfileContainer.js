@@ -6,11 +6,13 @@ import {
   getProfilesByUsernames as getProfilesByUsernamesAction,
   uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
+import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,
   getUserInterests as getUserInterestsAction,
   updateUser as updateUserAction,
+  addUserToState as addUserToStateAction,
 } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
 import { getInterestsByUsername, getUserByUsername } from '../api/user'
@@ -30,7 +32,9 @@ const ProfileContainer = props => {
     getUserInterests,
     updateUser,
     myUserInfo,
+    history,
     uploadProfileImage,
+    createDirectChannel,
   } = props
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
@@ -40,6 +44,7 @@ const ProfileContainer = props => {
   // TODO: Get other user's interests for other user profile
   useEffect(() => {
     getMe()
+    props.addUserToStateAction()
     props.getInterestsAction()
   }, [])
 
@@ -57,6 +62,7 @@ const ProfileContainer = props => {
         username,
         localStorage.getItem('authToken')
       )
+
       if (userInfo) {
         setOtherUserInfo(userInfo)
       }
@@ -91,6 +97,11 @@ const ProfileContainer = props => {
     }
   }
 
+  async function startDirectChannel() {
+    const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
+    history.push(`/chat/${newChannel.data.id}`)
+  }
+
   return (
     <>
       {!username && (
@@ -112,6 +123,7 @@ const ProfileContainer = props => {
           userInterests={interests}
           interestOptions={interestOptions}
           myUserInfo={otherUserInfo}
+          startDirect={startDirectChannel}
         />
       )}
     </>
@@ -149,6 +161,9 @@ ProfileContainer.propTypes = {
   getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
+  createDirectChannel: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  addUserToStateAction: PropTypes.func.isRequired,
 }
 
 ProfileContainer.defaultProps = {
@@ -173,7 +188,9 @@ const mapDispatchToProps = dispatch =>
       getUserInterests: getUserInterestsAction,
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
+      createDirectChannel: createDirectChannelAction,
       getInterestsAction,
+      addUserToStateAction,
     },
     dispatch
   )
