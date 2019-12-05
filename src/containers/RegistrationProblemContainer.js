@@ -10,8 +10,13 @@ const RegistrationProblemContainer = props => {
       email,
       message,
     }
-    await API.sendEmail(msg)
-    props.history.push('/messagesent')
+    const resp = await API.sendEmail(msg)
+    console.log(resp)
+    if (resp.ok) {
+      props.history.push('/messagesent')
+    } else {
+      alert('Viestin lähetys ei onnistunut')
+    }
   }
   return <RegistrationProblem handleEmailSending={handleEmailSending} />
 }
