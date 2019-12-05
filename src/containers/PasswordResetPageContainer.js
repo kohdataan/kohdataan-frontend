@@ -9,6 +9,7 @@ const PasswordResetPageContainer = props => {
     },
   } = props
 
+  console.log('uuid', uuid)
   return <PasswordResetPage />
 }
 

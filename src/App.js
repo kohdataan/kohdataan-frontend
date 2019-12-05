@@ -69,6 +69,7 @@ class App extends Component {
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
         <Route
+          exact
           path="/reset-password"
           component={PasswordResetRequestContainer}
         />
