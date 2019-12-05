@@ -8,7 +8,7 @@ const PasswordResetRequestContainer = props => {
 
   const handleReset = async resetInfo => {
     await API.resetPassword(resetInfo).then(resp => {
-      console.log(resp)
+      console.log('resp', resp)
       if (resp.success) {
         history.push('/reset-password-info')
       } else {
@@ -20,15 +20,15 @@ const PasswordResetRequestContainer = props => {
   return <ResetRequest handleReset={handleReset} />
 }
 
+PasswordResetRequestContainer.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+}
+
 // TODO: refactor
 const shouldComponentUpdate = (props, prevProps) => {
   const { match: pMatch, ...prest } = prevProps
   const { match, ...rest } = props
   return JSON.stringify(rest) === JSON.stringify(prest)
-}
-
-PasswordResetRequestContainer.propTypes = {
-  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(PasswordResetRequestContainer, shouldComponentUpdate)

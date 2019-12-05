@@ -6,12 +6,11 @@ import * as API from '../../../api/user'
 import './styles.scss'
 
 const ResetPage = () => {
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordAgain, setPasswordAgain] = useState('')
 
-  const handleReset = async () => {
-    const resetEmail = { email }
-    await API.resetPassword(resetEmail).then(e => {
+  const handleNewPW = async () => {
+    await API.setNewPassword(password).then(e => {
       console.log(e)
     })
   }
@@ -22,31 +21,25 @@ const ResetPage = () => {
 
       <div className="password-reset-content-container">
         <h2>Salasanan vaihtaminen</h2>
-        <p>
-          Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan salasanan.
-        </p>
-        <p>
-          Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan.
-        </p>
 
         <div className="password-reset-input-container">
           <InputField
-            label="Sähköpostiosoite"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            label="Uusi salasana"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             inputClassName="password-reset-input-text"
             labelClassName="password-reset-input-field"
             showPlaceholder={false}
           />
           <InputField
-            label="Puhelinnumero"
-            value={email}
-            onChange={e => setPhoneNumber(e.target.value)}
+            label="Uusi salasana uudelleen"
+            value={passwordAgain}
+            onChange={e => setPasswordAgain(e.target.value)}
             inputClassName="password-reset-input-text"
             labelClassName="password-reset-input-field"
             showPlaceholder={false}
           />
-          <ButtonContainer className="reset-button" onClick={handleReset}>
+          <ButtonContainer className="reset-button" onClick={handleNewPW}>
             Lähetä
           </ButtonContainer>
 

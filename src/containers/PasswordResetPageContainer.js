@@ -1,8 +1,19 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import PasswordResetPage from '../components/PasswordResetFlow/ResetPage'
 
-const PasswordResetPageContainer = () => {
+const PasswordResetPageContainer = props => {
+  const {
+    match: {
+      params: { uuid },
+    },
+  } = props
+
   return <PasswordResetPage />
+}
+
+PasswordResetPageContainer.propTypes = {
+  match: PropTypes.instanceOf(Object).isRequired,
 }
 
 // TODO: refactor
