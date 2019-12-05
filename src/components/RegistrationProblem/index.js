@@ -45,7 +45,7 @@ const RegistrationProblem = ({ handleEmailSending }) => {
             onChange={e => setMessage(e.target.value)}
             inputClassName="registration-problem-input-text"
             labelClassName="registration-problem-input-field"
-            rows="3"
+            rows={3}
           />
           <ButtonContainer
             className="registration-problem-button"
