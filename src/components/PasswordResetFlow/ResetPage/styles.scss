@@ -22,7 +22,7 @@
 
 .password-reset-content-container {
   width: 80%;
-  line-height: 1.3em;
+  height: 100%;
 }
 
 .password-reset-input-container {
@@ -41,7 +41,7 @@
 }
 
 .password-reset-input-field {
-  margin-top: 10px;
+  margin-top: 5px;
   background: transparent;
   border: solid 1px $orange;
   border-radius: 25px;
@@ -62,7 +62,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
-  margin: 20px auto;
+  margin: auto;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
   color: $black;

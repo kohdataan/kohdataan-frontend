@@ -7,7 +7,7 @@ import './styles.scss'
 
 const ResetPage = () => {
   const [password, setPassword] = useState('')
-  const [passwordAgain, setPasswordAgain] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
 
   const handleNewPW = async () => {
     await API.setNewPassword(password).then(e => {
@@ -20,7 +20,7 @@ const ResetPage = () => {
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="password-reset-content-container">
-        <h2>Salasanan vaihtaminen</h2>
+        <h2 className="password-reset-title">Salasanan vaihtaminen</h2>
 
         <div className="password-reset-input-container">
           <InputField
@@ -32,14 +32,17 @@ const ResetPage = () => {
             showPlaceholder={false}
           />
           <InputField
-            label="Uusi salasana uudelleen"
-            value={passwordAgain}
-            onChange={e => setPasswordAgain(e.target.value)}
+            label="Uusi salasana uudestaan"
+            value={passwordConfirm}
+            onChange={e => setPasswordConfirm(e.target.value)}
             inputClassName="password-reset-input-text"
             labelClassName="password-reset-input-field"
             showPlaceholder={false}
           />
-          <ButtonContainer className="reset-button" onClick={handleNewPW}>
+          <ButtonContainer
+            className="password-reset-button"
+            onClick={handleNewPW}
+          >
             Lähetä
           </ButtonContainer>
 
