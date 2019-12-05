@@ -7,7 +7,7 @@ import './styles.scss'
 
 const LogIn = props => {
   const { handleLogin } = props
-  const { register, handleSubmit, errors, setError } = useForm()
+  const { register, handleSubmit, errors, setError, clearError } = useForm()
 
   const onSubmit = async data => {
     try {
@@ -15,12 +15,12 @@ const LogIn = props => {
       if (!response) {
         setError(
           'email',
-          'pattern',
-          'Tarkista, että kirjoitit käyttäjätunnuksen oikein.'
+          'loginError',
+          'Tarkista, että kirjoitit sähköpostin oikein.'
         )
         setError(
           'password',
-          'pattern',
+          'loginError',
           'Tarkista, että kirjoitit salasanan oikein.'
         )
       }
@@ -42,9 +42,9 @@ const LogIn = props => {
             <ValidatedInputField
               label="Sähköposti"
               name="email"
+              onChange={() => clearError()}
               ref={register({
                 required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               })}
               ariaInvalid={!!errors.email}
               inputClassName="create-account-input-text"
@@ -59,8 +59,8 @@ const LogIn = props => {
                 errors.email.type === 'required' &&
                 'Kirjoita sähköpostiosoite.'}
               {errors.email &&
-                errors.email.type === 'pattern' &&
-                'Tarkista, että kirjoitit käyttäjätunnuksen oikein.'}
+                errors.email.type === 'loginError' &&
+                'Tarkista, että kirjoitit sähköpostin oikein.'}
             </div>
           </div>
 
@@ -68,11 +68,9 @@ const LogIn = props => {
             <ValidatedInputField
               label="Salasana"
               name="password"
+              onChange={() => clearError()}
               ref={register({
                 required: true,
-                maxLength: 30,
-                // password must contain lower and upper case letters and numbers
-                pattern: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
               })}
               type="password"
               ariaInvalid={!!errors.password}
@@ -86,10 +84,9 @@ const LogIn = props => {
             <div className="error-text">
               {errors.password &&
                 errors.password.type === 'required' &&
-                'Kirjoita salasana'}
+                'Kirjoita salasana.'}
               {errors.password &&
-                (errors.password.type === 'pattern' ||
-                  errors.password.type === 'maxLength') &&
+                errors.password.type === 'loginError' &&
                 'Tarkista, että kirjoitit salasanan oikein.'}
             </div>
           </div>

@@ -6,6 +6,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
     label,
     name,
     showLabel,
+    onChange,
     ariaInvalid,
     inputClassName,
     labelClassName,
@@ -19,6 +20,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
         name={name}
         ref={ref}
         id={label}
+        onChange={onChange}
         aria-label={label}
         aria-invalid={ariaInvalid}
         placeholder={label}
@@ -32,6 +34,8 @@ ValidatedInputField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  onChange: PropTypes.func,
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
   inputClassName: PropTypes.string,
