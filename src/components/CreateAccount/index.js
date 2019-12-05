@@ -2,10 +2,10 @@ import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
+import moment from 'moment'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import DateSelectField from '../DateSelectField'
-import InfoCircleIconPath from '../../assets/info-circle-solid-orange.svg'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
@@ -14,9 +14,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
   const [rulesAccepted, setRulesAccepted] = useState(false)
   const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
+  const [birthday, setBirthday] = useState('')
+  const [birthmonth, setBirthmonth] = useState('')
+  const [birthyear, setBirthyear] = useState('')
 
   const onSubmit = data => {
-    const birthdate = new Date(Date.UTC(data.year, data.month - 1, data.day))
+    const birthdate = moment(data.year, data.month - 1, data.day)
     if (rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
@@ -124,11 +127,56 @@ const CreateAccount = ({ handleAccountCreation }) => {
 
           <div className="formfield-container">
             <DateSelectField
-              label="Syntymäaika"
-              name="birthdate"
+              label="Päivä"
+              name="day"
               ref={register({ required: true })}
-              type="date"
               ariaInvalid={!!errors.birthdate}
+              value={birthday}
+              onChange={value => setBirthday(value.value)}
+              inputClassName="create-account-input-text"
+              labelClassName={
+                errors.birthdate
+                  ? 'create-account-errors-field'
+                  : 'create-account-input-field'
+              }
+            />
+            <div className="error-text">
+              {errors.birthdate && 'Valitse syntymäaika'}
+            </div>
+          </div>
+
+          <div className="formfield-container">
+            <DateSelectField
+              label="Kuukausi"
+              name="month"
+              ref={register({ required: true })}
+              ariaInvalid={!!errors.birthdate}
+              value={birthmonth}
+              onChange={value => {
+                setBirthmonth(value.value)
+              }}
+              inputClassName="create-account-input-text"
+              labelClassName={
+                errors.birthdate
+                  ? 'create-account-errors-field'
+                  : 'create-account-input-field'
+              }
+            />
+            <div className="error-text">
+              {errors.birthdate && 'Valitse syntymäaika'}
+            </div>
+          </div>
+
+          <div className="formfield-container">
+            <DateSelectField
+              label="Vuosi"
+              name="year"
+              ref={register({ required: true })}
+              ariaInvalid={!!errors.birthdate}
+              value={birthyear}
+              onChange={value => {
+                setBirthyear(value.value)
+              }}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.birthdate
@@ -292,13 +340,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
             </div>
           </div>
           <ServiceRulesContainer setRulesAccepted={setRulesAccepted} />
-
-          <p className="create-account-text">
-            <Link className="create-account-link" to="/createaccount">
-              {'Hyväksy palvelun säännöt'}
-            </Link>
-          </p>
-          <button type="submit" className="create-account-button">
+          <button
+            type="submit"
+            className="create-account-button"
+            onKeyPress={handleSubmit(onSubmit)}
+            tabIndex="0"
+          >
             {'Rekisteröidy '}
           </button>
         </form>

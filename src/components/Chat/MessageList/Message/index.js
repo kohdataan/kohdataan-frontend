@@ -13,6 +13,7 @@ const Message = props => {
     timeSent,
     dateSent,
     showDate,
+    directChannel,
   } = props
 
   // Adds the text to be used for the date divider
@@ -60,7 +61,7 @@ const Message = props => {
           {timeSent !== '' ? (
             <div className="chat-message-header-content">
               <span className="chat-message-timestamp">{timeSent}</span>
-              {currentUserId !== senderId && (
+              {currentUserId !== senderId && !directChannel && (
                 <h3 className="chat-message-sender">{sender}</h3>
               )}
             </div>
@@ -96,6 +97,7 @@ Message.propTypes = {
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,
+  directChannel: propTypes.bool.isRequired,
   timeSent: propTypes.string.isRequired,
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,

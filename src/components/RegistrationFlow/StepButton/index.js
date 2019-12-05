@@ -5,44 +5,44 @@ import './styles.scss'
 
 const StepButton = props => {
   const {
-    params: { skippable, next, previous, last, valid, current },
+    params: { next, previous, last },
     onClick,
+    nextButtonActive,
   } = props
 
   return (
     <div className="step-button-container">
       {previous && (
         <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
+          className="next-step-button"
           to={`/registration/${previous}`}
           onClick={onClick}
         >
           Edellinen
         </Link>
       )}
-      {next && (
+      {next && nextButtonActive && (
         <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
-          to={valid ? `/registration/${next}` : `/registration/${current}`}
+          className="next-step-button"
+          to={`/registration/${next}`}
           onClick={onClick}
         >
           Seuraava
         </Link>
       )}
-      {last && (
-        <Link
-          className={`${
-            !skippable ? 'next-step-button-extra' : ''
-          } next-step-button`}
-          to={valid ? '/profiili' : `/registration/${current}`}
-          onClick={onClick}
-        >
+
+      {next && !nextButtonActive && (
+        <div className="next-step-button-inactive">Seuraava</div>
+      )}
+
+      {last && nextButtonActive && (
+        <Link className="next-step-button" to="/profiili" onClick={onClick}>
           Tallenna
         </Link>
+      )}
+
+      {last && !nextButtonActive && (
+        <div className="next-step-button-inactive">Tallenna</div>
       )}
     </div>
   )
@@ -51,6 +51,7 @@ const StepButton = props => {
 StepButton.propTypes = {
   params: PropTypes.instanceOf(Object).isRequired,
   onClick: PropTypes.func.isRequired,
+  nextButtonActive: PropTypes.bool.isRequired,
 }
 
 export default memo(StepButton)

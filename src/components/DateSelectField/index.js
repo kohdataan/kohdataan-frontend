@@ -10,6 +10,9 @@ const DateSelectField = React.forwardRef((props, ref) => {
     ariaInvalid,
     ariaDescribedBy,
     inputClassName,
+    name,
+    onChange,
+    value,
   } = props
 
   const years = []
@@ -30,6 +33,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
   ]
   const days = []
   let day = 1
+  let options = []
 
   const customStyles = {
     container: provided => ({
@@ -75,99 +79,38 @@ const DateSelectField = React.forwardRef((props, ref) => {
     day += 1
   }
 
+  switch (name) {
+    case 'day':
+      options = days
+      break
+    case 'month':
+      options = months
+      break
+    case 'year':
+      options = years
+      break
+    default:
+  }
+
   return (
     <div>
       <label htmlFor={label} className={inputClassName}>
         {showLabel && label}
+        <Select
+          id={label}
+          name={name}
+          ref={ref}
+          options={options}
+          isSearchable
+          placeholder={label}
+          aria-label={label}
+          aria-invalid={ariaInvalid}
+          aria-describedby={ariaDescribedBy}
+          styles={customStyles}
+          onChange={onChange}
+          value={value.label}
+        />
       </label>
-      {/* 
-      <input
-        type="number"
-        list="day"
-        name="day"
-        min="1"
-        max="31"
-        ref={ref}
-        id={label}
-        aria-label={label}
-        aria-invalid={ariaInvalid}
-        aria-describedby={ariaDescribedBy}
-        placeholder="Päivä"
-        className="day-select-field"
-      />
-      <datalist id="day">
-        {days.map(d => (
-          <option value={d}>{d}</option>
-        ))}
-      </datalist>
-
-      <input
-        type="text"
-        list="month"
-        name="month"
-        ref={ref}
-        aria-label={label}
-        aria-invalid={ariaInvalid}
-        aria-describedby={ariaDescribedBy}
-        placeholder="Kuukausi"
-        className="month-select-field"
-      />
-      <datalist id="month">
-        {months.map(month => (
-          <option value={month.value} className="month-option">
-            {month.label}
-          </option>
-        ))}
-      </datalist>
-      */}
-      <div className="birthdate-selections">
-        <Select
-          name="day"
-          options={days}
-          isSearchable
-          placeholder="Päivä"
-          styles={customStyles}
-          backspaceRemovesValue="true"
-        />
-
-        <Select
-          name="month"
-          options={months}
-          isSearchable
-          placeholder="Kuukausi"
-          styles={customStyles}
-          backspaceRemovesValue="true"
-        />
-        <Select
-          name="year"
-          options={years}
-          isSearchable
-          placeholder="Vuosi"
-          styles={customStyles}
-          backspaceRemovesValue="true"
-        />
-      </div>
-      {/* 
-      <input
-        type="number"
-        min="1900"
-        max="2100"
-        list="years"
-        name="year"
-        ref={ref}
-        id={label}
-        aria-label={label}
-        aria-invalid={ariaInvalid}
-        aria-describedby={ariaDescribedBy}
-        placeholder="Vuosi"
-        className="year-select-field"
-      />
-      <datalist id="years">
-        {years.map(y => (
-          <option value={y}>{y}</option>
-        ))}
-      </datalist>
-      */}
     </div>
   )
 })
@@ -178,6 +121,9 @@ DateSelectField.propTypes = {
   ariaInvalid: PropTypes.bool,
   ariaDescribedBy: PropTypes.string,
   inputClassName: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 }
 
 DateSelectField.defaultProps = {

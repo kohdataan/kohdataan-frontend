@@ -39,10 +39,12 @@ const SuggestionBox = props => {
             <i aria-hidden="true" className="fas fa-times" title="Älä Liity" />
             Älä liity
           </Link>
-          <Link
-            to="/"
+          <div
+            role="link"
+            tabIndex="-1"
             className="suggestion-button join"
             onClick={handleJoinChannel(channel.id)}
+            onKeyPress={handleJoinChannel(channel.id)}
           >
             <i
               aria-hidden="true"
@@ -50,7 +52,7 @@ const SuggestionBox = props => {
               title="Liity"
             />
             Liity
-          </Link>
+          </div>
         </div>
       </div>
     </div>
