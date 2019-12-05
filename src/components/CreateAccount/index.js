@@ -19,7 +19,14 @@ const CreateAccount = ({ handleAccountCreation }) => {
   const [birthyear, setBirthyear] = useState('')
 
   const onSubmit = data => {
-    const birthdate = moment(data.year, data.month - 1, data.day)
+    const birthdate = moment
+      .utc({
+        year: birthyear,
+        month: birthmonth - 1,
+        day: birthday,
+      })
+      .format()
+    console.log(birthdate)
     if (rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
