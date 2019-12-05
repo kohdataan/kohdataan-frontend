@@ -132,9 +132,8 @@ const addUserInterests = async (data, token) => {
     } catch (e) {
       throw new Error(e)
     }
-  } else {
-    alert('Valitse vähintään kolme kiinnostuksen kohdetta.')
   }
+  return null
 }
 
 const getUserInterest = async token => {

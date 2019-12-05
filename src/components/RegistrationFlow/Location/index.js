@@ -8,7 +8,7 @@ import './styles.scss'
 
 const Location = props => {
   const [locations, setLocations] = useState([])
-  const { value, onChange, setShowLocation, setLocationChosen } = props
+  const { value, onChange, setShowLocation, showLocation } = props
 
   useEffect(() => {
     async function fetchLocations() {
@@ -48,16 +48,6 @@ const Location = props => {
     }),
   }
 
-  const handleChange = val => {
-    setShowLocation(val)
-    setLocationChosen(false)
-    if (val !== null) {
-      setLocationChosen(true)
-    } else {
-      setLocationChosen(false)
-    }
-  }
-
   return (
     <ShadowBox>
       <main role="main" className="add-user-location-container">
@@ -81,13 +71,15 @@ const Location = props => {
           label="Näytä asuinpaikka muille"
           name="locationPermission"
           value="showLocation"
-          onChange={() => handleChange(true)}
+          onChange={() => setShowLocation(true)}
+          checked={showLocation === 'true'}
         />
         <RadioButton
           label="Älä näytä asuinpaikkaa muille"
           name="locationPermission"
           value="hideLocation"
-          onChange={() => handleChange(false)}
+          onChange={() => setShowLocation(false)}
+          checked={showLocation === 'false'}
         />
       </main>
     </ShadowBox>
@@ -101,7 +93,7 @@ Location.propTypes = {
   ]).isRequired,
   onChange: PropTypes.func.isRequired,
   setShowLocation: PropTypes.func.isRequired,
-  setLocationChosen: PropTypes.func.isRequired,
+  showLocation: PropTypes.string.isRequired,
 }
 
 export default memo(Location)
