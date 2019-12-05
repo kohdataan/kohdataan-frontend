@@ -152,6 +152,22 @@ const getInterestsByUsername = async (token, username) => {
   }
 }
 
+const sendEmail = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/sendMail/problem`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return resp
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
   userSignUp,
@@ -162,4 +178,5 @@ export {
   getUserInterest,
   addUserInterests,
   getInterestsByUsername,
+  sendEmail,
 }
