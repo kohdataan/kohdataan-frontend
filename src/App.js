@@ -18,7 +18,7 @@ import RegistrationSuccessContainer from './containers/RegistrationSuccessContai
 import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
-import PasswordResetContainer from './containers/PasswordResetContainer'
+import PasswordResetRequestContainer from './containers/PasswordResetRequestContainer'
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
 import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
 import FriendsContainer from './containers/FriendsContainer'
@@ -68,7 +68,10 @@ class App extends Component {
     return (
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
-        <Route path="/reset-password" component={PasswordResetContainer} />
+        <Route
+          path="/reset-password"
+          component={PasswordResetRequestContainer}
+        />
         <Route
           path="/reset-password-info"
           component={PasswordResetInfoContainer}

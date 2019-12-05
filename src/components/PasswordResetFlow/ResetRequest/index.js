@@ -1,21 +1,14 @@
 import React, { useState, memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import InputField from '../../InputField'
 import ButtonContainer from '../../ButtonContainer'
-import * as API from '../../../api/user'
 import './styles.scss'
 
-const PasswordReset = () => {
+const ResetRequest = props => {
+  const { handleReset } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
-
-  const handleReset = async () => {
-    const resetInfo = { email, phoneNumber }
-    console.log('resetInfo', resetInfo)
-    await API.resetPassword(resetInfo).then(e => {
-      console.log(e)
-    })
-  }
 
   return (
     <div className="password-reset-container">
@@ -23,7 +16,7 @@ const PasswordReset = () => {
 
       <div className="password-reset-content-container">
         <h2 className="password-reset-title">Salasanan vaihtaminen</h2>
-        <p>Anna sähköpostiosoitteesi tai puhelinnumerosi.</p>
+        <p>Anna sähköpostiosoitteesi.</p>
         <p>
           Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan.
         </p>
@@ -49,7 +42,7 @@ const PasswordReset = () => {
           </div>
           <ButtonContainer
             className="password-reset-button"
-            onClick={handleReset}
+            onClick={() => handleReset({ email, phoneNumber })}
           >
             Lähetä
           </ButtonContainer>
@@ -65,4 +58,8 @@ const PasswordReset = () => {
   )
 }
 
-export default memo(PasswordReset)
+ResetRequest.propTypes = {
+  handleReset: PropTypes.func.isRequired,
+}
+
+export default memo(ResetRequest)
