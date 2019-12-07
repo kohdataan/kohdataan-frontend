@@ -9,7 +9,7 @@ const ResetPage = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
-  const handleNewPW = async () => {
+  const handleNewPassword = async () => {
     await API.setNewPassword(password).then(e => {
       console.log(e)
     })
@@ -41,7 +41,7 @@ const ResetPage = () => {
           />
           <ButtonContainer
             className="password-reset-button"
-            onClick={handleNewPW}
+            onClick={handleNewPassword}
           >
             Lähetä
           </ButtonContainer>
