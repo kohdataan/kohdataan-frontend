@@ -35,7 +35,7 @@ const userSignUp = async data => {
 const resetPassword = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
-    const resp = await fetch(`${uri}/passwordReset`, {
+    const resp = await fetch(`${uri}/auth/forgot`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -52,8 +52,8 @@ const resetPassword = async data => {
 const setNewPassword = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
-    const resp = await fetch(`${uri}/passwordReset`, {
-      method: 'PATCH',
+    const resp = await fetch(`${uri}/auth/reset`, {
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',

@@ -13,10 +13,6 @@ const ResetInfo = () => {
           Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan
           salasanan.
         </p>
-        <p>
-          Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen
-          salasanan.
-        </p>
 
         <div className="password-reset-input-container">
           <div className="password-reset-info-content">

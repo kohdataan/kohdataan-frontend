@@ -8,11 +8,10 @@ const PasswordResetRequestContainer = props => {
 
   const handleReset = async resetInfo => {
     await API.resetPassword(resetInfo).then(resp => {
-      console.log('resp', resp)
       if (resp.success) {
         history.push('/reset-password-info')
       } else {
-        alert('Sähköpostia ei löytynyt')
+        alert('Sähköpostia ei löytynyt.')
       }
     })
   }

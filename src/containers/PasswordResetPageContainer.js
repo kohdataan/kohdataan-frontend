@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import * as API from '../api/user'
 import PasswordResetPage from '../components/PasswordResetFlow/ResetPage'
 
 const PasswordResetPageContainer = props => {
@@ -7,14 +8,27 @@ const PasswordResetPageContainer = props => {
     match: {
       params: { uuid },
     },
+    history,
   } = props
 
-  console.log('uuid', uuid)
-  return <PasswordResetPage />
+  const handleNewPassword = async password => {
+    const data = { uuid, password: password.password }
+    await API.setNewPassword(data).then(resp => {
+      if (!resp.success) {
+        alert('Resetointilinkki on joko vanhentunut, käytetty tai väärä.')
+      } else {
+        alert('Salasana vaihdettu onnistuneesti.')
+        history.push('/')
+      }
+    })
+  }
+
+  return <PasswordResetPage handleNewPassword={handleNewPassword} />
 }
 
 PasswordResetPageContainer.propTypes = {
   match: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 // TODO: refactor
