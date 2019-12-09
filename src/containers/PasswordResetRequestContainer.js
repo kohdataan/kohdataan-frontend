@@ -6,7 +6,7 @@ import ResetRequest from '../components/PasswordResetFlow/ResetRequest'
 const PasswordResetRequestContainer = props => {
   const { history } = props
 
-  const handleReset = async resetInfo => {
+  const handleResetRequest = async resetInfo => {
     await API.resetPassword(resetInfo).then(resp => {
       if (resp.success) {
         history.push('/reset-password-info')
@@ -16,7 +16,7 @@ const PasswordResetRequestContainer = props => {
     })
   }
 
-  return <ResetRequest handleReset={handleReset} />
+  return <ResetRequest handleReset={handleResetRequest} />
 }
 
 PasswordResetRequestContainer.propTypes = {

@@ -6,7 +6,7 @@ import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const ResetRequest = props => {
-  const { handleReset } = props
+  const { handleResetRequest } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -42,7 +42,7 @@ const ResetRequest = props => {
           </div>
           <ButtonContainer
             className="password-reset-button"
-            onClick={() => handleReset({ email, phoneNumber })}
+            onClick={() => handleResetRequest({ email, phoneNumber })}
           >
             Lähetä
           </ButtonContainer>
@@ -59,7 +59,7 @@ const ResetRequest = props => {
 }
 
 ResetRequest.propTypes = {
-  handleReset: PropTypes.func.isRequired,
+  handleResetRequest: PropTypes.func.isRequired,
 }
 
 export default memo(ResetRequest)
