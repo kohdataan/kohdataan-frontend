@@ -47,7 +47,7 @@ ValidatedInputField.defaultProps = {
   ariaInvalid: false,
   inputClassName: '',
   labelClassName: '',
-  onChange: '',
+  onChange: null,
 }
 
 export default memo(ValidatedInputField)
