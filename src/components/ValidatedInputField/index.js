@@ -34,7 +34,6 @@ ValidatedInputField.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
   onChange: PropTypes.func,
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
@@ -48,6 +47,7 @@ ValidatedInputField.defaultProps = {
   ariaInvalid: false,
   inputClassName: '',
   labelClassName: '',
+  onChange: '',
 }
 
 export default memo(ValidatedInputField)
