@@ -28,8 +28,12 @@ const Picture = props => {
     <ShadowBox>
       <main role="main" className="add-user-picture-container">
         <div className="add-user-picture-title-container">
-          <h2 className="profile-creation-title add-user add-user-picture-title-text">Valitse oma kuva</h2>
-          <span className="profile-creation-step-text add-user-picture-step-text">5/6</span>
+          <h2 className="profile-creation-title add-user add-user-picture-title-text">
+            Valitse oma kuva
+          </h2>
+          <span className="profile-creation-step-text add-user-picture-step-text">
+            5/6
+          </span>
         </div>
 
         <div className="add-user-picture-content-container">

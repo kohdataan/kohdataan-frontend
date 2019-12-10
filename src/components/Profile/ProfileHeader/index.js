@@ -7,7 +7,7 @@ const Header = props => {
 
   return (
     <div className="profile-header-item">
-      <h1>{nickname}</h1>
+      <h3>{nickname}</h3>
       {!currentUser && (
         <ButtonContainer onClick={startDirect} className="profile-dm-button">
           Aloita keskustelu

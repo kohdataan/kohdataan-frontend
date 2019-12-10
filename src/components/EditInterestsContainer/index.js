@@ -27,7 +27,8 @@ const EditInterestsContainer = props => {
   }
 
   useEffect(() => {
-    setSortedOptions(sortOptions())
+    const sorted = sortOptions()
+    setSortedOptions(sorted)
   }, [])
 
   // Select item if less than 5 items are selected

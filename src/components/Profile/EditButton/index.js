@@ -16,12 +16,7 @@ const EditButton = props => {
         onClick={toggleEditProfile}
         className={classNameList.join(' ')}
       >
-        <i
-          aria-hidden="true"
-          className="fas fa-user-edit"
-          title="Muokkaa profiilia"
-        />
-        <span className="sr-only">Muokkaa profiilia</span>
+        Muokkaa
       </ButtonContainer>
     </div>
   )
