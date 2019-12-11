@@ -8,14 +8,14 @@ import ButtonContainer from '../ButtonContainer'
 
 const EditInterests = props => {
   const { currentInterestIds, handleInterestEditReady, interestOptions } = props
-  const [newInterests, setNewInterests] = useState([])
+  const [newInterests, setNewInterests] = useState([...currentInterestIds])
 
   return (
     <div className="interests-container">
       <EditTitle text="Muokkaa profiiliasi" />
       <Interests
         options={interestOptions}
-        interests={currentInterestIds}
+        interests={newInterests}
         setInterests={setNewInterests}
       />
       <div style={{ marginBottom: '100px', textAlign: 'center' }}>

@@ -10,7 +10,6 @@ const EditInterestsContainer = props => {
   const { userInterests, interestOptions, addUserInterests } = props
 
   const handleEditReady = ids => {
-    console.log(ids)
     addUserInterests({ userInterests: ids })
   }
 
