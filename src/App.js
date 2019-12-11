@@ -20,6 +20,7 @@ import PasswordResetContainer from './containers/PasswordResetContainer'
 import FriendsContainer from './containers/FriendsContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import InterestsContainer from './containers/InterestsContainer'
+import FullScreenLoading from './components/FullScreenLoading'
 import {
   rootStartUp as rootStartUpAction,
   rootLoading as rootLoadingAction,
@@ -53,9 +54,9 @@ class App extends Component {
 
   render() {
     const { loading } = this.props
-    if (loading.root) {
+    if (loading.root && localStorage.getItem('authToken')) {
       // TODO: Nice spashscreen
-      return <div>Loading!</div>
+      return <FullScreenLoading />
     }
 
     return (
