@@ -6,7 +6,7 @@ import './styles.scss'
 import CameraIconPath from '../../../assets/camera-add-solid.svg'
 
 const Picture = props => {
-  const { onChange } = props
+  const { onChange, hideStep } = props
 
   const customLabelStyle = {
     fontSize: '115',
@@ -22,6 +22,7 @@ const Picture = props => {
     border: '1px solid #000000',
     borderStyle: 'solid',
     borderRadius: '50%',
+    margin: '10px',
   }
 
   return (
@@ -31,9 +32,11 @@ const Picture = props => {
           <h2 className="profile-creation-title add-user add-user-picture-title-text">
             Valitse oma kuva
           </h2>
-          <span className="profile-creation-step-text add-user-picture-step-text">
-            5/6
-          </span>
+          {!hideStep && (
+            <span className="profile-creation-step-text add-user-picture-step-text">
+              5/6
+            </span>
+          )}
         </div>
 
         <div className="add-user-picture-content-container">
@@ -46,7 +49,6 @@ const Picture = props => {
             onCrop={onChange}
             className="add-user-picture-picker"
           />
-
           <p>
             Tämä kuva näkyy muille.
             <br />
@@ -60,6 +62,11 @@ const Picture = props => {
 
 Picture.propTypes = {
   onChange: PropTypes.func.isRequired,
+  hideStep: PropTypes.bool,
+}
+
+Picture.defaultProps = {
+  hideStep: false,
 }
 
 export default memo(Picture)

@@ -2,6 +2,7 @@
 
 .profile-container {
   overflow: auto;
+  margin-bottom: 100px;
 }
 
 .profile-header-container {
@@ -11,13 +12,13 @@
   justify-content: space-between;
   background-color: $background-gray;
   width: 100%;
+  padding: 1rem;
 }
 
 .profile-header-item {
   margin: 0;
   display: inline-block;
   white-space: nowrap;
-  padding: 0.85rem 0.75rem;
 }
 
 .profile-modal-header {
@@ -33,4 +34,13 @@
   background-color: $orange;
   border: none;
   font-size: 13px;
+}
+
+.interests-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin: 1rem 0;
 }

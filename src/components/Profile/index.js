@@ -52,14 +52,19 @@ const Profile = props => {
         )}
       </div>
       <Description text={description} />
-      {ownProfile && (
-        <Link className="" to="/edit-interests">
-          <EditButton isHighlighted={false} />
-        </Link>
-      )}
+
       <div className="interests-container">
+        <div className="interests-header">
+          <h2>Minua kiinnostaa</h2>
+          {ownProfile && (
+            <Link className="" to="/edit-interests">
+              <EditButton isHighlighted={false} />
+            </Link>
+          )}
+        </div>
         <InterestsGrid interestList={userInterests} />
       </div>
+
       <Instructions closeModal={closeModal} showModals={showModals} />
     </main>
   )

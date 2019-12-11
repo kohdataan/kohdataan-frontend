@@ -25,8 +25,6 @@ const EditProfileContainer = props => {
     }
   }
 
-  console.log(myUserInfo)
-
   const handleEditReady = (
     newDescription,
     newNickname,
@@ -43,7 +41,6 @@ const EditProfileContainer = props => {
       showLocation,
       location,
     }
-    console.log(newUserInfo)
     updateUser(newUserInfo)
   }
 
