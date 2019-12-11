@@ -1,17 +1,10 @@
 import React, { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getMe as getMeAction,
-  getProfilesByUsernames as getProfilesByUsernamesAction,
-} from 'mattermost-redux/actions/users'
+import { getProfilesByUsernames as getProfilesByUsernamesAction } from 'mattermost-redux/actions/users'
 import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import {
-  addUserInterests as addUserInterestsAction,
-  getUserInterests as getUserInterestsAction,
-  addUserToState as addUserToStateAction,
-} from '../store/user/userAction'
+import { addUserInterests as addUserInterestsAction } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
 import { getInterestsByUsername, getUserByUsername } from '../api/user'
 import Profile from '../components/Profile'
@@ -22,7 +15,6 @@ const OtherUserProfileContainer = props => {
     currentUser,
     username,
     getProfilesByUsernames,
-    getMe,
     userInterests,
     interestOptions,
     addUserInterests,
@@ -33,13 +25,6 @@ const OtherUserProfileContainer = props => {
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
-
-  // TODO: Get other user's interests for other user profile
-  useEffect(() => {
-    getMe()
-    props.addUserToStateAction()
-    props.getInterestsAction()
-  }, [])
 
   const fetchOtherUser = async () => {
     try {
@@ -116,18 +101,15 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 OtherUserProfileContainer.propTypes = {
-  getMe: PropTypes.func.isRequired,
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   getProfilesByUsernames: PropTypes.func.isRequired,
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
-  getInterestsAction: PropTypes.func.isRequired,
   addUserInterests: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  addUserToStateAction: PropTypes.func.isRequired,
 }
 
 OtherUserProfileContainer.defaultProps = {
@@ -146,13 +128,10 @@ const shouldComponentUpdate = (props, prevProps) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getMe: getMeAction,
       getProfilesByUsernames: getProfilesByUsernamesAction,
       addUserInterests: addUserInterestsAction,
-      getUserInterests: getUserInterestsAction,
       createDirectChannel: createDirectChannelAction,
       getInterestsAction,
-      addUserToStateAction,
     },
     dispatch
   )

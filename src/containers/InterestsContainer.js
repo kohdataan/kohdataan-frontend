@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -8,9 +8,7 @@ import {
 import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,
-  getUserInterests as getUserInterestsAction,
   updateUser as updateUserAction,
-  addUserToState as addUserToStateAction,
 } from '../store/user/userAction'
 import getInterestsAction from '../store/interest/interestAction'
 import dataUriToBlob from '../utils/dataUriToBlob'
@@ -31,27 +29,12 @@ const EditInterestsContainer = props => {
 
   const [img, setImg] = useState(null)
 
-  // Get current user mmuser info
-  useEffect(() => {
-    props.addUserToStateAction()
-    props.getInterestsAction()
-  }, [])
-
-  // Get current user interests
-  useEffect(() => {
-    if (!username) {
-      getUserInterests()
-    }
-  }, [currentUser])
-
   // Update profile picture
   const updateProfilePicture = () => {
     if (currentUser && img) {
       uploadProfileImage(currentUser.id, dataUriToBlob(img))
     }
   }
-
-  console.log('HALOO')
 
   return <EditInterests />
 }
@@ -80,12 +63,10 @@ EditInterestsContainer.propTypes = {
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
-  getInterestsAction: PropTypes.func.isRequired,
   addUserInterests: PropTypes.func.isRequired,
   getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
-  addUserToStateAction: PropTypes.func.isRequired,
 }
 
 EditInterestsContainer.defaultProps = {
@@ -106,11 +87,9 @@ const mapDispatchToProps = dispatch =>
     {
       getProfilesByUsernames: getProfilesByUsernamesAction,
       addUserInterests: addUserInterestsAction,
-      getUserInterests: getUserInterestsAction,
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
       getInterestsAction,
-      addUserToStateAction,
     },
     dispatch
   )

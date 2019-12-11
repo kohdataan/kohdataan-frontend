@@ -8,7 +8,6 @@ import {
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import getChannelInvitationsAction from '../store/channels/channelAction'
 import { getChannelInvitationMembers } from '../api/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
@@ -24,17 +23,11 @@ const GroupsContainer = props => {
     myChannels,
     joinChannel,
     channelSuggestions,
-    getChannelInvitations,
     getChannelMembers,
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   // TODO REFACTOR
-
-  // Get user profiles and current user's teams at initial render
-  useEffect(() => {
-    getChannelInvitations()
-  }, [])
 
   // Get only those channels suggestions that user has not yet joined
   const getFilteredChannelSuggestions = () => {
@@ -52,10 +45,13 @@ const GroupsContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
+  }, [teams, users])
+
+  useEffect(() => {
     if (myChannels) {
       setFilteredSuggestions(getFilteredChannelSuggestions())
     }
-  }, [teams, users])
+  }, [myChannels])
 
   // Get only group channels
   // (filter direct messages and default channels out)
@@ -70,6 +66,8 @@ const GroupsContainer = props => {
   }
 
   const getMembersByChannelId = async (channelId, signal) => {
+    // TODO: Refactor this to have channel members in redux store
+    // together with current channel invitations
     try {
       const res = await getChannelInvitationMembers(
         localStorage.getItem('authToken'),
@@ -92,6 +90,7 @@ const GroupsContainer = props => {
     const myCurrentChannels = Object.values(channels).filter(channel =>
       Object.keys(myChannels).includes(channel.id)
     )
+    console.log(myCurrentChannels)
     return myCurrentChannels
   }
 
@@ -116,6 +115,7 @@ const GroupsContainer = props => {
     }
     return 0
   }
+  console.log(filteredSuggestions)
 
   return (
     <>
@@ -143,7 +143,6 @@ GroupsContainer.propTypes = {
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
-  getChannelInvitations: PropTypes.func.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
 }
 
@@ -185,7 +184,6 @@ const mapDispatchToProps = dispatch =>
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getProfilesInChannel: getProfilesInChannelAction,
       joinChannel: joinChannelAction,
-      getChannelInvitations: getChannelInvitationsAction,
       getChannelMembers: getChannelMembersAction,
     },
     dispatch

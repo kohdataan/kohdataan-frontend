@@ -12,11 +12,12 @@ const LogInContainer = props => {
     try {
       const user = { email, password }
       let loginSuccess = false
-      await API.userLogin(user).then(res => {
+      const res = await API.userLogin(user)
+      if (res) {
         localStorage.setItem('userId', res.user.id)
         localStorage.setItem('authToken', res.token)
         loginSuccess = true
-      })
+      }
       if (loginSuccess) {
         await matterMostLogin(email, password)
       }
@@ -38,7 +39,7 @@ const shouldComponentUpdate = (props, prevProps) => {
       localStorage.getItem('authToken')
     ).then(loggedUser => {
       if (loggedUser.profileReady) {
-        props.history.push('/profiili')
+        props.history.push('/me')
       } else {
         props.history.push('/registration/info')
       }

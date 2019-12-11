@@ -1,18 +1,11 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getMe as getMeAction,
-  uploadProfileImage,
-} from 'mattermost-redux/actions/users'
+import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import {
-  addUserToState as addUserToStateAction,
-  updateUser,
-  addUserInterests,
-} from '../store/user/userAction'
+import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
 import StepButton from '../components/RegistrationFlow/StepButton'
@@ -36,7 +29,6 @@ const RegistrationContainer = props => {
     mattermostId,
     interestOptions,
     registrationError,
-    getMe,
     userBirthdate,
   } = props
   const [nickname, setNickname] = useState('')
@@ -47,11 +39,6 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
-
-  useEffect(() => {
-    getMe()
-    props.addUserToStateAction()
-  }, [])
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
@@ -222,8 +209,6 @@ RegistrationContainer.propTypes = {
   interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
-  getMe: PropTypes.func.isRequired,
-  addUserToStateAction: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
 }
 
@@ -240,8 +225,6 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage,
       addUserInterests,
       getInterestsAction,
-      addUserToStateAction,
-      getMe: getMeAction,
     },
     dispatch
   )
