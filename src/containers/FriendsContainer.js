@@ -33,7 +33,7 @@ const FriendsContainer = props => {
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
-    loadMe()
+    // loadMe()
   }, [])
 
   // Get channels and members based on team id

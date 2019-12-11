@@ -2,7 +2,6 @@ import React, { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  getMe as getMeAction,
   getProfilesByUsernames as getProfilesByUsernamesAction,
   uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
@@ -21,7 +20,6 @@ const EditProfileContainer = props => {
   const {
     currentUser,
     username,
-    getMe,
     userInterests,
     interestOptions,
     addUserInterests,
@@ -35,7 +33,6 @@ const EditProfileContainer = props => {
 
   // Get current user mmuser info
   useEffect(() => {
-    getMe()
     props.addUserToStateAction()
     props.getInterestsAction()
   }, [])
@@ -76,7 +73,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditProfileContainer.propTypes = {
-  getMe: PropTypes.func.isRequired,
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
@@ -106,7 +102,6 @@ const shouldComponentUpdate = (props, prevProps) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getMe: getMeAction,
       getProfilesByUsernames: getProfilesByUsernamesAction,
       addUserInterests: addUserInterestsAction,
       getUserInterests: getUserInterestsAction,

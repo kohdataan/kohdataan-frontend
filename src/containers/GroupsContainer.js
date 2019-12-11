@@ -1,11 +1,7 @@
 import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  loadMe as loadMeAction,
-  getProfiles as getProfilesAction,
-  getProfilesInChannel as getProfilesInChannelAction,
-} from 'mattermost-redux/actions/users'
+import { getProfilesInChannel as getProfilesInChannelAction } from 'mattermost-redux/actions/users'
 import {
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
@@ -22,8 +18,6 @@ const GroupsContainer = props => {
     history,
     channels,
     teams,
-    loadMe,
-    getProfiles,
     fetchMyChannelsAndMembers,
     users,
     currentUserId,
@@ -35,11 +29,10 @@ const GroupsContainer = props => {
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
+  // TODO REFACTOR
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
-    getProfiles()
-    loadMe()
     getChannelInvitations()
   }, [])
 
@@ -146,8 +139,6 @@ GroupsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
-  loadMe: PropTypes.func.isRequired,
-  getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
@@ -192,9 +183,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
-      getProfiles: getProfilesAction,
       getProfilesInChannel: getProfilesInChannelAction,
-      loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelInvitations: getChannelInvitationsAction,
       getChannelMembers: getChannelMembersAction,

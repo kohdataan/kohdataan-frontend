@@ -38,19 +38,26 @@ class App extends Component {
     const {
       history,
       user: pUser,
+      loading: pLoading,
       rootLoading: pRootLoading,
       rootStartUp: pRootStartUp,
     } = this.props
     return !(
       nextProps.rootLoading === pRootLoading &&
       nextProps.rootStartUp === pRootStartUp &&
+      nextProps.loading === pLoading &&
       nextProps.history === history &&
       nextProps.user === pUser
     )
   }
 
   render() {
-    console.log('app rendering')
+    const { loading } = this.props
+    if (loading.root) {
+      // TODO: Nice spashscreen
+      return <div>Loading!</div>
+    }
+
     return (
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
@@ -93,6 +100,7 @@ App.propTypes = {
   rootLoading: PropTypes.func.isRequired,
   rootStartUp: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -107,6 +115,7 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = store => {
   return {
     user: store.user,
+    loading: store.loading,
   }
 }
 

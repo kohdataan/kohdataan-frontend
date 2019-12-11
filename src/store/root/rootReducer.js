@@ -6,7 +6,7 @@ const defaultState = {
 
 export default function loading(state = defaultState, action) {
   switch (action.type) {
-    case types.ROOT_LOADING_COMPLETED:
+    case types.ROOT_LOADING_READY:
       return {
         ...state,
         root: false,
