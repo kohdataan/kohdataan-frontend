@@ -1,16 +1,10 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const SuggestionBox = props => {
-  const { channel, handleJoinChannel, getMembersByChannelId } = props
-  const [members, setMembers] = useState([])
-
-  useEffect(() => {
-    getMembersByChannelId(channel.id).then(res => setMembers(res))
-  }, [])
-
+  const { channel, handleJoinChannel, members } = props
   return (
     <div className="group-box suggestions-box">
       <div className="group-box-content">
@@ -62,7 +56,7 @@ const SuggestionBox = props => {
 SuggestionBox.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   handleJoinChannel: propTypes.func.isRequired,
-  getMembersByChannelId: propTypes.func.isRequired,
+  members: propTypes.instanceOf(Array).isRequired,
 }
 
 export default memo(SuggestionBox)

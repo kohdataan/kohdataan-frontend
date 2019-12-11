@@ -8,9 +8,9 @@ import {
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getChannelInvitationMembers } from '../api/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
+import FullScreenLoading from '../components/FullScreenLoading'
 
 const GroupsContainer = props => {
   const {
@@ -18,12 +18,14 @@ const GroupsContainer = props => {
     channels,
     teams,
     fetchMyChannelsAndMembers,
+    channelSuggestionMembers,
     users,
     currentUserId,
     myChannels,
     joinChannel,
     channelSuggestions,
     getChannelMembers,
+    loading,
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
@@ -65,26 +67,6 @@ const GroupsContainer = props => {
     return filteredChannels
   }
 
-  const getMembersByChannelId = async (channelId, signal) => {
-    // TODO: Refactor this to have channel members in redux store
-    // together with current channel invitations
-    try {
-      const res = await getChannelInvitationMembers(
-        localStorage.getItem('authToken'),
-        channelId,
-        signal
-      )
-      if (res.userDetails) {
-        return res.userDetails
-      }
-      return []
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-      return []
-    }
-  }
-
   // Get channel objects based on myChannels
   const getChannelInfoForMyChannels = () => {
     const myCurrentChannels = Object.values(channels).filter(channel =>
@@ -115,12 +97,15 @@ const GroupsContainer = props => {
     return 0
   }
 
+  if (loading) {
+    return <FullScreenLoading />
+  }
   return (
     <>
       <GroupSuggestions
         channels={filteredSuggestions}
         handleJoinChannel={handleJoinChannel}
-        getMembersByChannelId={getMembersByChannelId}
+        channelMembers={channelSuggestionMembers}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
@@ -142,6 +127,8 @@ GroupsContainer.propTypes = {
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  channelSuggestionMembers: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -160,10 +147,13 @@ const mapStateToProps = state => {
   const myChannels = state.entities.channels.myMembers
   const { user } = state
   const channelSuggestions = state.channels.found
+  const { loading } = state.channels
+  const channelSuggestionMembers = state.channels.members
 
   return {
     currentUserId,
     channelSuggestions,
+    channelSuggestionMembers,
     users,
     user,
     mmUser,
@@ -173,6 +163,7 @@ const mapStateToProps = state => {
     channels,
     members,
     myChannels,
+    loading,
   }
 }
 

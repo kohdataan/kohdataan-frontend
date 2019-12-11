@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import SuggestionBox from './SuggestionBox'
 
 const GroupSuggestions = props => {
-  const { channels, handleJoinChannel, getMembersByChannelId } = props
+  const { channels, handleJoinChannel, channelMembers } = props
   return (
     <div className="group-suggestions">
       <h1>Ehdotetut ryhmät</h1>
@@ -18,7 +18,7 @@ const GroupSuggestions = props => {
               key={channel.id}
               channel={channel}
               handleJoinChannel={handleJoinChannel}
-              getMembersByChannelId={getMembersByChannelId}
+              members={channelMembers[channel.id]}
             />
           ))}
       </div>
@@ -29,7 +29,7 @@ const GroupSuggestions = props => {
 GroupSuggestions.propTypes = {
   channels: propTypes.instanceOf(Array).isRequired,
   handleJoinChannel: propTypes.func.isRequired,
-  getMembersByChannelId: propTypes.func.isRequired,
+  channelMembers: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(GroupSuggestions)
