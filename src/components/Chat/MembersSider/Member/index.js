@@ -13,7 +13,7 @@ const Member = props => {
       {currentUserId !== userId && (
         <Link
           className="members-sider-profile-link"
-          to={`/profiili/${userName}`}
+          to={`/profile/${userName}`}
         >
           {userName}
         </Link>

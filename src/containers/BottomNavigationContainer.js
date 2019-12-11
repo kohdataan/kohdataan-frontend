@@ -22,7 +22,7 @@ const BottomNavigationContainer = props => {
     <BottomNavigation>
       <BottomNavigationLink
         title="Profiili"
-        route="/profiili"
+        route="/me"
         icon="fas fa-user-circle"
       />
       <BottomNavigationLink

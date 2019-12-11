@@ -1,9 +1,9 @@
 import React, { useState, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import Interests from '../../RegistrationFlow/Interests'
-import EditTitle from '../EditTitle'
-import ButtonContainer from '../../ButtonContainer'
+import Interests from '../RegistrationFlow/Interests'
+import EditTitle from '../EditProfile/EditTitle'
+import ButtonContainer from '../ButtonContainer'
 
 const EditInterests = props => {
   const { currentInterestIds, handleInterestEditReady, interestOptions } = props

@@ -18,11 +18,14 @@ import RegistrationSuccessContainer from './containers/RegistrationSuccessContai
 import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
+import OtherUserProfileContainer from './containers/OtherUserProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
 import FriendsContainer from './containers/FriendsContainer'
 import getInterestsAction from './store/interest/interestAction'
 import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
+import EditProfileContainer from './containers/EditProfileContainer'
+import EditInterestsContainer from './containers/EditInterestsContainer'
 
 class App extends Component {
   async componentDidMount() {
@@ -74,10 +77,16 @@ class App extends Component {
         <PrivateRoute exact path="/" component={GroupsContainer} />
         <PrivateRoute exact path="/friends/" component={FriendsContainer} />
         <PrivateRoute
-          path="/profiili/:username?"
-          component={ProfileContainer}
+          path="/profile/:username"
+          component={OtherUserProfileContainer}
         />
+        <PrivateRoute path="/me" component={ProfileContainer} />
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
+        <PrivateRoute path="/me/edit" component={EditProfileContainer} />
+        <PrivateRoute
+          path="/me/edit-interests"
+          component={EditInterestsContainer}
+        />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )
