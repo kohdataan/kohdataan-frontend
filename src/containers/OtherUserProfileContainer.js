@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux'
 import { getProfilesByUsernames as getProfilesByUsernamesAction } from 'mattermost-redux/actions/users'
 import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { addUserInterests as addUserInterestsAction } from '../store/user/userAction'
-import getInterestsAction from '../store/interest/interestAction'
 import { getInterestsByUsername, getUserByUsername } from '../api/user'
 import Profile from '../components/Profile'
 
@@ -15,9 +13,6 @@ const OtherUserProfileContainer = props => {
     currentUser,
     username,
     getProfilesByUsernames,
-    userInterests,
-    interestOptions,
-    addUserInterests,
     myUserInfo,
     history,
     createDirectChannel,
@@ -50,6 +45,11 @@ const OtherUserProfileContainer = props => {
     }
   }
 
+  const startDirectChannel = async () => {
+    const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
+    history.push(`/chat/${newChannel.data.id}`)
+  }
+
   // If username is given, get other user's info
   useEffect(() => {
     if (username) {
@@ -62,22 +62,13 @@ const OtherUserProfileContainer = props => {
     }
   }, [username])
 
-  const startDirectChannel = async () => {
-    const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
-    history.push(`/chat/${newChannel.data.id}`)
-  }
-
   return (
     <Profile
-      user={currentUser}
-      currentUser={currentUser}
-      userInterests={userInterests}
-      interestOptions={interestOptions}
-      addUserInterests={addUserInterests}
+      user={otherUserInfo}
+      mmuser={mmuser}
+      userInterests={interests}
       myUserInfo={myUserInfo}
       startDirectChannel={startDirectChannel}
-      interests={interests}
-      otherUserInfo={otherUserInfo}
     />
   )
 }
@@ -86,7 +77,6 @@ const mapStateToProps = (state, ownProps) => {
   const { currentUserId } = state.entities.users
   const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
-  const userInterests = state.user.interests
   const interestOptions = state.interests.results
   const myUserInfo = state.user
 
@@ -94,7 +84,6 @@ const mapStateToProps = (state, ownProps) => {
     currentUserId,
     currentUser,
     username,
-    userInterests,
     interestOptions,
     myUserInfo,
   }
@@ -105,9 +94,6 @@ OtherUserProfileContainer.propTypes = {
   username: PropTypes.string,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   getProfilesByUsernames: PropTypes.func.isRequired,
-  userInterests: PropTypes.instanceOf(Array),
-  interestOptions: PropTypes.instanceOf(Array),
-  addUserInterests: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 }
@@ -115,8 +101,6 @@ OtherUserProfileContainer.propTypes = {
 OtherUserProfileContainer.defaultProps = {
   currentUser: {},
   username: '',
-  userInterests: [],
-  interestOptions: [],
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
@@ -129,9 +113,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getProfilesByUsernames: getProfilesByUsernamesAction,
-      addUserInterests: addUserInterestsAction,
       createDirectChannel: createDirectChannelAction,
-      getInterestsAction,
     },
     dispatch
   )

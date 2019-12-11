@@ -8,9 +8,17 @@ import InterestsGrid from './InterestsGrid'
 import ProfileHeader from './ProfileHeader'
 import Instructions from './Instructions'
 import EditButton from './EditButton'
+import ButtonContainer from '../ButtonContainer'
 
 const Profile = props => {
-  const { mmuser, myUserInfo, ownProfile, userInterests, updateUser } = props
+  const {
+    mmuser,
+    myUserInfo,
+    ownProfile,
+    userInterests,
+    updateUser,
+    startDirectChannel,
+  } = props
 
   // Extended user info from node backend
   const { location, description, tutorialWatched, nickname } = myUserInfo
@@ -42,13 +50,21 @@ const Profile = props => {
           <ProfileHeader
             nickname={nickname || mmuser.username}
             location={location}
-            currentUser={mmuser}
           />
         )}
         {ownProfile && (
           <Link className="" to="/edit-me">
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
+        )}
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            secondary
+            onClick={startDirectChannel}
+            className="profile-dm-button"
+          >
+            Keskustele
+          </ButtonContainer>
         )}
       </div>
       <Description text={description} />
@@ -76,11 +92,13 @@ Profile.propTypes = {
   userInterests: propTypes.instanceOf(Array).isRequired,
   ownProfile: propTypes.bool,
   updateUser: propTypes.func,
+  startDirectChannel: propTypes.func,
 }
 
 Profile.defaultProps = {
   updateUser: null,
   ownProfile: false,
+  startDirectChannel: null,
 }
 
 export default memo(Profile)
