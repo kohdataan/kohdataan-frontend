@@ -1,6 +1,7 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
 import { loadMe, getProfiles } from 'mattermost-redux/actions/users'
+import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'
@@ -26,6 +27,7 @@ export const rootStartUp = () => {
     if (token) {
       await init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
       await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
+      await dispatch(setServerVersion('3.7.0'))
       await dispatch(addUserToState())
       await dispatch(loadMe())
       await dispatch(getProfiles())
