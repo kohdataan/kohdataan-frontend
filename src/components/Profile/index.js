@@ -54,7 +54,7 @@ const Profile = props => {
       <Description text={description} />
       {ownProfile && (
         <Link className="" to="/edit-interests">
-          <EditButton />
+          <EditButton isHighlighted={false} />
         </Link>
       )}
       <div className="interests-container">

@@ -23,6 +23,7 @@ const EditInterests = props => {
           <ButtonContainer
             secondary
             onClick={() => handleInterestEditReady(newInterests)}
+            className="save-interests-button"
           >
             Tallenna
           </ButtonContainer>

@@ -41,7 +41,7 @@ ShowAge.propTypes = {
   onChange: PropTypes.func.isRequired,
   showAge: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
-  hideStep: PropTypes.func,
+  hideStep: PropTypes.bool,
 }
 
 ShowAge.defaultProps = {

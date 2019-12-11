@@ -1,5 +1,7 @@
-import React, { memo } from 'react'
+import React, { useState, memo } from 'react'
 import propTypes from 'prop-types'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
 import Picture from '../RegistrationFlow/Picture'
 import Description from '../RegistrationFlow/Description'
 import Nickname from '../RegistrationFlow/Nickname'
@@ -10,20 +12,43 @@ import EditTitle from './EditTitle'
 import './styles.scss'
 
 const EditProfile = props => {
-  const {
-    myUserInfo,
-    user,
-    currentUser,
-    userInterests,
-    interestOptions,
-    addUserInterests,
-    updateProfilePicture,
-    updateUser,
-    handleEditReady,
-    newNickname,
-    setNewNickname,
-    setImg,
-  } = props
+  const { myUserInfo, updateProfilePicture, handleEditReady } = props
+
+  const [newDescription, setNewDescription] = useState(
+    myUserInfo.description || ''
+  )
+  const [newNickname, setNewNickname] = useState(myUserInfo.nickname)
+  const [newShowAge, setNewShowAge] = useState(myUserInfo.showAge)
+  const [newShowLocation, setNewShowLocation] = useState(
+    myUserInfo.showLocation
+  )
+  const [newLocation, setNewLocation] = useState({
+    label: myUserInfo.location,
+    value: myUserInfo.location,
+  })
+  const [img, setImg] = useState(null)
+
+  const handleSave = () => {
+    handleEditReady(
+      newDescription,
+      newNickname,
+      newShowAge,
+      newShowLocation,
+      newLocation.value
+    )
+    if (img) {
+      updateProfilePicture(img)
+    }
+  }
+
+  const getAge = () => {
+    const birthdate = moment(myUserInfo.birthdate)
+    const now = moment()
+    const dateDiff = now.diff(birthdate)
+    const dateDiffDuration = moment.duration(dateDiff)
+    const age = dateDiffDuration.years()
+    return age
+  }
 
   return (
     <main className="profile-edit-container">
@@ -35,26 +60,47 @@ const EditProfile = props => {
         <div className="edit-nickname">
           <Nickname
             hideStep
-            value={newNickname || myUserInfo.nickname}
+            value={newNickname}
             onChange={e => setNewNickname(e.target.value)}
           />
         </div>
         <div className="edit-nickname">
-          <ShowAge hideStep showAge={myUserInfo.showAge.toString()} />
+          <ShowAge
+            hideStep
+            showAge={newShowAge.toString()}
+            age={getAge()}
+            onChange={setNewShowAge}
+          />
         </div>
         <div className="edit-nickname">
-          <Location hideStep />
+          <Location
+            hideStep
+            showLocation={newShowLocation.toString()}
+            value={newLocation}
+            setShowLocation={setNewShowLocation}
+            onChange={value => setNewLocation(value)}
+          />
         </div>
         <div className="edit-nickname">
-          <Description hideStep />
+          <Description
+            value={newDescription}
+            hideStep
+            onChange={e => setNewDescription(e.target.value)}
+          />
         </div>
         <div
           className="save-profile-button"
           style={{ marginBottom: '100px', textAlign: 'center' }}
         >
-          <ButtonContainer secondary onClick={handleEditReady}>
-            Tallenna
-          </ButtonContainer>
+          <Link to="/me">
+            <ButtonContainer
+              secondary
+              className="save-profile-button"
+              onClick={handleSave}
+            >
+              Tallenna
+            </ButtonContainer>
+          </Link>
         </div>
       </div>
     </main>
@@ -62,23 +108,9 @@ const EditProfile = props => {
 }
 
 EditProfile.propTypes = {
-  user: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
-  userInterests: propTypes.instanceOf(Array).isRequired,
-  interestOptions: propTypes.instanceOf(Array).isRequired,
-  addUserInterests: propTypes.func,
-  updateProfilePicture: propTypes.func,
-  currentUser: propTypes.instanceOf(Object),
-  updateUser: propTypes.func,
-  setImg: propTypes.func,
-}
-
-EditProfile.defaultProps = {
-  updateUser: null,
-  currentUser: null,
-  addUserInterests: null,
-  updateProfilePicture: null,
-  setImg: null,
+  updateProfilePicture: propTypes.func.isRequired,
+  handleEditReady: propTypes.func.isRequired,
 }
 
 export default memo(EditProfile)

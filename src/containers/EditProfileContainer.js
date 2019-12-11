@@ -3,19 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { uploadProfileImage as uploadProfileImageAction } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
-import {
-  addUserInterests as addUserInterestsAction,
-  updateUser as updateUserAction,
-} from '../store/user/userAction'
+import { updateUser as updateUserAction } from '../store/user/userAction'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import EditProfile from '../components/EditProfile'
 
 const EditProfileContainer = props => {
   const {
+    mmuserId,
     currentUser,
     userInterests,
     interestOptions,
-    addUserInterests,
     updateUser,
     myUserInfo,
     uploadProfileImage,
@@ -28,14 +25,35 @@ const EditProfileContainer = props => {
     }
   }
 
+  console.log(myUserInfo)
+
+  const handleEditReady = (
+    newDescription,
+    newNickname,
+    showAge,
+    showLocation,
+    location
+  ) => {
+    const newUserInfo = {
+      ...myUserInfo,
+      mmid: mmuserId,
+      description: newDescription,
+      nickname: newNickname,
+      showAge,
+      showLocation,
+      location,
+    }
+    console.log(newUserInfo)
+    updateUser(newUserInfo)
+  }
+
   return (
     <EditProfile
       myUserInfo={myUserInfo}
-      updateUser={updateUser}
       updateProfilePicture={updatePicture}
       userInterests={userInterests}
-      addUserInterests={addUserInterests}
       interestOptions={interestOptions}
+      handleEditReady={handleEditReady}
     />
   )
 }
@@ -48,7 +66,7 @@ const mapStateToProps = state => {
   const myUserInfo = state.user
 
   return {
-    currentUserId,
+    mmuserId: currentUserId,
     currentUser,
     userInterests,
     interestOptions,
@@ -58,12 +76,12 @@ const mapStateToProps = state => {
 
 EditProfileContainer.propTypes = {
   currentUser: PropTypes.instanceOf(Object).isRequired,
-  myUserInfo: PropTypes.instanceOf(Object).isRequired.isRequired,
+  myUserInfo: PropTypes.instanceOf(Object).isRequired,
   userInterests: PropTypes.instanceOf(Array).isRequired,
   interestOptions: PropTypes.instanceOf(Array).isRequired,
-  addUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
+  mmuserId: PropTypes.string.isRequired,
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
@@ -75,7 +93,6 @@ const shouldComponentUpdate = (props, prevProps) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      addUserInterests: addUserInterestsAction,
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
     },
