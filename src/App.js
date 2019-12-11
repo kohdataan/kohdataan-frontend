@@ -84,11 +84,8 @@ class App extends Component {
         />
         <PrivateRoute path="/me" component={ProfileContainer} />
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
-        <PrivateRoute path="/me/edit" component={EditProfileContainer} />
-        <PrivateRoute
-          path="/me/edit-interests"
-          component={InterestsContainer}
-        />
+        <PrivateRoute path="/edit-me" component={EditProfileContainer} />
+        <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )

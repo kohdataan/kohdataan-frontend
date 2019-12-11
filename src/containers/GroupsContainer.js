@@ -90,7 +90,6 @@ const GroupsContainer = props => {
     const myCurrentChannels = Object.values(channels).filter(channel =>
       Object.keys(myChannels).includes(channel.id)
     )
-    console.log(myCurrentChannels)
     return myCurrentChannels
   }
 
@@ -115,7 +114,6 @@ const GroupsContainer = props => {
     }
     return 0
   }
-  console.log(filteredSuggestions)
 
   return (
     <>

@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import Interests from '../RegistrationFlow/Interests'
 import EditTitle from '../EditProfile/EditTitle'
 import ButtonContainer from '../ButtonContainer'
@@ -18,12 +19,14 @@ const EditInterests = props => {
         setInterests={setNewInterests}
       />
       <div style={{ marginBottom: '100px', textAlign: 'center' }}>
-        <ButtonContainer
-          secondary
-          onClick={() => handleInterestEditReady(newInterests)}
-        >
-          Tallenna
-        </ButtonContainer>
+        <Link to="/me">
+          <ButtonContainer
+            secondary
+            onClick={() => handleInterestEditReady(newInterests)}
+          >
+            Tallenna
+          </ButtonContainer>
+        </Link>
       </div>
     </div>
   )

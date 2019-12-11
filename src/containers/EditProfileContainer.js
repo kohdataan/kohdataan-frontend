@@ -1,10 +1,7 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getProfilesByUsernames as getProfilesByUsernamesAction,
-  uploadProfileImage as uploadProfileImageAction,
-} from 'mattermost-redux/actions/users'
+import { uploadProfileImage as uploadProfileImageAction } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import {
   addUserInterests as addUserInterestsAction,
@@ -16,31 +13,35 @@ import EditProfile from '../components/EditProfile'
 const EditProfileContainer = props => {
   const {
     currentUser,
-    username,
     userInterests,
     interestOptions,
     addUserInterests,
-    getUserInterests,
     updateUser,
     myUserInfo,
     uploadProfileImage,
   } = props
 
-  const [img, setImg] = useState(null)
-
   // Update profile picture
-  const updateProfilePicture = () => {
+  const updatePicture = img => {
     if (currentUser && img) {
       uploadProfileImage(currentUser.id, dataUriToBlob(img))
     }
   }
 
-  return <EditProfile setImg={setImg} />
+  return (
+    <EditProfile
+      myUserInfo={myUserInfo}
+      updateUser={updateUser}
+      updateProfilePicture={updatePicture}
+      userInterests={userInterests}
+      addUserInterests={addUserInterests}
+      interestOptions={interestOptions}
+    />
+  )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
-  const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.interests
   const interestOptions = state.interests.results
@@ -49,7 +50,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUserId,
     currentUser,
-    username,
     userInterests,
     interestOptions,
     myUserInfo,
@@ -57,22 +57,13 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditProfileContainer.propTypes = {
-  currentUser: PropTypes.instanceOf(Object),
-  username: PropTypes.string,
-  myUserInfo: PropTypes.instanceOf(Object).isRequired,
-  userInterests: PropTypes.instanceOf(Array),
-  interestOptions: PropTypes.instanceOf(Array),
+  currentUser: PropTypes.instanceOf(Object).isRequired,
+  myUserInfo: PropTypes.instanceOf(Object).isRequired.isRequired,
+  userInterests: PropTypes.instanceOf(Array).isRequired,
+  interestOptions: PropTypes.instanceOf(Array).isRequired,
   addUserInterests: PropTypes.func.isRequired,
-  getUserInterests: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
-}
-
-EditProfileContainer.defaultProps = {
-  currentUser: {},
-  username: '',
-  userInterests: [],
-  interestOptions: [],
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
@@ -84,7 +75,6 @@ const shouldComponentUpdate = (props, prevProps) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getProfilesByUsernames: getProfilesByUsernamesAction,
       addUserInterests: addUserInterestsAction,
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
