@@ -1,10 +1,7 @@
 import React, { useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  loadMe as loadMeAction,
-  getProfiles as getProfilesAction,
-} from 'mattermost-redux/actions/users'
+import { getProfiles as getProfilesAction } from 'mattermost-redux/actions/users'
 import {
   fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
@@ -19,7 +16,6 @@ const FriendsContainer = props => {
   const {
     channels,
     teams,
-    loadMe,
     getProfiles,
     fetchMyChannelsAndMembers,
     users,
@@ -33,7 +29,6 @@ const FriendsContainer = props => {
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
-    // loadMe()
   }, [])
 
   // Get channels and members based on team id
@@ -121,7 +116,6 @@ FriendsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   users: PropTypes.instanceOf(Object).isRequired,
-  loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
@@ -163,7 +157,6 @@ const mapDispatchToProps = dispatch =>
     {
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getProfiles: getProfilesAction,
-      loadMe: loadMeAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
       getPosts: getPostsAction,

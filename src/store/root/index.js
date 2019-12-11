@@ -1,6 +1,6 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
-import { getMe, loadMe, getProfiles } from 'mattermost-redux/actions/users'
+import { loadMe, getProfiles } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'

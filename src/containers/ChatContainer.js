@@ -6,7 +6,6 @@ import {
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
 import {
-  loadMe as loadMeAction,
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
 } from 'mattermost-redux/actions/users'
@@ -25,7 +24,6 @@ const ChatContainer = props => {
     posts,
     profiles,
     createPost,
-    loadMe,
     getProfiles,
     currentUserId,
     channels,
@@ -45,7 +43,6 @@ const ChatContainer = props => {
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
-    loadMe()
   }, [])
 
   // Get team related channels and members
@@ -126,7 +123,6 @@ ChatContainer.propTypes = {
   teams: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
-  loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
@@ -166,7 +162,6 @@ const mapDispatchToProps = dispatch =>
       getProfiles: getProfilesAction,
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
-      loadMe: loadMeAction,
       viewChannel: viewChannelAction,
     },
     dispatch

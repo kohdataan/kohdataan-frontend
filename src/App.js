@@ -100,7 +100,7 @@ App.propTypes = {
   rootLoading: PropTypes.func.isRequired,
   rootStartUp: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  loading: PropTypes.bool.isRequired,
+  loading: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
