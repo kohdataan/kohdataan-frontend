@@ -61,14 +61,18 @@ const Profile = props => {
             currentUser={user}
           />
         )}
-        <Link className="" to="/me/edit">
-          <EditButton isHighlighted={showModals[1] && !showModals[2]} />
-        </Link>
+        {ownProfile && (
+          <Link className="" to="/me/edit">
+            <EditButton isHighlighted={showModals[1] && !showModals[2]} />
+          </Link>
+        )}
       </div>
       <Description text={description} />
-      <Link className="" to="/me/edit-interests">
-        <EditButton />
-      </Link>
+      {ownProfile && (
+        <Link className="" to="/me/edit-interests">
+          <EditButton />
+        </Link>
+      )}
       <div className="interests-container">
         <Interests
           userInterests={userInterests}

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
-import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { init } from 'mattermost-redux/actions/websocket'
-import { loadMe, login } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -21,41 +18,39 @@ import ProfileContainer from './containers/ProfileContainer'
 import OtherUserProfileContainer from './containers/OtherUserProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
 import FriendsContainer from './containers/FriendsContainer'
-import getInterestsAction from './store/interest/interestAction'
-import { addUserToState } from './store/user/userAction'
-import './styles/defaults.scss'
 import EditProfileContainer from './containers/EditProfileContainer'
-import EditInterestsContainer from './containers/EditInterestsContainer'
+import InterestsContainer from './containers/InterestsContainer'
+import {
+  rootStartUp as rootStartUpAction,
+  rootLoading as rootLoadingAction,
+} from './store/root'
+import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const { init: pInit, getInterestsAction: pGetInterestsAction } = this.props
-    await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-    await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
-    await pGetInterestsAction()
+    const { rootLoading, rootStartUp } = this.props
+    await rootLoading()
+    await rootStartUp()
   }
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
     const {
       history,
-      init: pInit,
-      getInterestsAction: pGetInterestsAction,
-      addUserToState: pAddUserToState,
-      loadMe: pLoadMe,
       user: pUser,
+      rootLoading: pRootLoading,
+      rootStartUp: pRootStartUp,
     } = this.props
     return !(
-      nextProps.getInterestsAction === pGetInterestsAction &&
-      nextProps.addUserToState === pAddUserToState &&
-      nextProps.init === pInit &&
+      nextProps.rootLoading === pRootLoading &&
+      nextProps.rootStartUp === pRootStartUp &&
       nextProps.history === history &&
-      nextProps.user === pUser &&
-      nextProps.loadMe === pLoadMe
+      nextProps.user === pUser
     )
   }
 
   render() {
+    console.log('app rendering')
     return (
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
@@ -85,7 +80,7 @@ class App extends Component {
         <PrivateRoute path="/me/edit" component={EditProfileContainer} />
         <PrivateRoute
           path="/me/edit-interests"
-          component={EditInterestsContainer}
+          component={InterestsContainer}
         />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
@@ -94,22 +89,17 @@ class App extends Component {
 }
 
 App.propTypes = {
-  init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  getInterestsAction: PropTypes.func.isRequired,
-  addUserToState: PropTypes.func.isRequired,
-  loadMe: PropTypes.func.isRequired,
+  rootLoading: PropTypes.func.isRequired,
+  rootStartUp: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      init,
-      addUserToState,
-      loadMe,
-      getInterestsAction,
-      login,
+      rootLoading: rootLoadingAction,
+      rootStartUp: rootStartUpAction,
     },
     dispatch
   )

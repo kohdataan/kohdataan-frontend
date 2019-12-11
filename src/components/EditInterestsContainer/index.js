@@ -27,9 +27,8 @@ const EditInterestsContainer = props => {
   }
 
   useEffect(() => {
-    const sorted = sortOptions()
-    setSortedOptions(sorted)
-  }, [])
+    setSortedOptions(sortOptions())
+  }, [options])
 
   // Select item if less than 5 items are selected
   const addToSelected = key => {
@@ -58,6 +57,7 @@ const EditInterestsContainer = props => {
       removeFromSelected(id)
     }
   }
+
   return (
     <div className="interests-grid">
       {sortedOptions.map(interest => (
