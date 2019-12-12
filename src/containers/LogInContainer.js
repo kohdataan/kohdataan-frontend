@@ -19,7 +19,9 @@ const LogInContainer = props => {
         loginSuccess = true
       }
       if (loginSuccess) {
-        await matterMostLogin(email, password)
+        console.log('mattermost login')
+        const mmres = await matterMostLogin(email, password)
+        console.log(mmres)
       }
     } catch (e) {
       // eslint-disable-next-line no-console

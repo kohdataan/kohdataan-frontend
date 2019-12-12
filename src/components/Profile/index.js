@@ -20,6 +20,8 @@ const Profile = props => {
     startDirectChannel,
   } = props
 
+  console.log(mmuser)
+
   // Extended user info from node backend
   const { location, description, tutorialWatched, nickname } = myUserInfo
 

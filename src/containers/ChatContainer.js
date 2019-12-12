@@ -59,7 +59,7 @@ const ChatContainer = props => {
       getPosts(currentChannelId)
       viewChannel(currentChannelId)
     }
-  }, [teams])
+  }, [teams, posts])
 
   // Filter posts by channel id
   const filterPostsByChannelId = channelId => {

@@ -19,7 +19,6 @@ const GroupsContainer = props => {
     teams,
     fetchMyChannelsAndMembers,
     channelSuggestionMembers,
-    users,
     currentUserId,
     myChannels,
     joinChannel,
@@ -29,7 +28,6 @@ const GroupsContainer = props => {
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
-  // TODO REFACTOR
 
   // Get only those channels suggestions that user has not yet joined
   const getFilteredChannelSuggestions = () => {
@@ -40,14 +38,12 @@ const GroupsContainer = props => {
   }
 
   // Get channels and members based on team id
-  // & When user joins a channel, users props is changed and
-  // channels need to be fetched again
   useEffect(() => {
     const teamId = Object.keys(teams)[0]
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-  }, [teams, users])
+  }, [])
 
   useEffect(() => {
     if (myChannels) {
@@ -121,7 +117,6 @@ GroupsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
-  users: PropTypes.instanceOf(Object).isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
@@ -154,7 +149,6 @@ const mapStateToProps = state => {
     currentUserId,
     channelSuggestions,
     channelSuggestionMembers,
-    users,
     user,
     mmUser,
     profiles,
