@@ -21,16 +21,12 @@ import FriendsContainer from './containers/FriendsContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import InterestsContainer from './containers/InterestsContainer'
 import FullScreenLoading from './components/FullScreenLoading'
-import {
-  rootStartUp as rootStartUpAction,
-  rootLoading as rootLoadingAction,
-} from './store/root'
+import { rootStartUp as rootStartUpAction } from './store/root'
 import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const { rootLoading, rootStartUp } = this.props
-    await rootLoading()
+    const { rootStartUp } = this.props
     await rootStartUp()
   }
 
@@ -83,7 +79,6 @@ class App extends Component {
 
 App.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
-  rootLoading: PropTypes.func.isRequired,
   rootStartUp: PropTypes.func.isRequired,
   loading: PropTypes.instanceOf(Object).isRequired,
 }
@@ -91,7 +86,6 @@ App.propTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      rootLoading: rootLoadingAction,
       rootStartUp: rootStartUpAction,
     },
     dispatch

@@ -35,8 +35,12 @@ const mapStateToProps = state => {
 ProfileContainer.propTypes = {
   mmuser: PropTypes.instanceOf(Object).isRequired,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
-  userInterests: PropTypes.instanceOf(Array).isRequired,
+  userInterests: PropTypes.instanceOf(Array),
   updateUser: PropTypes.func.isRequired,
+}
+
+ProfileContainer.defaultProps = {
+  userInterests: [],
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

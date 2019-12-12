@@ -20,15 +20,20 @@ export const rootLoadingReady = () => {
   }
 }
 
+export const initMattermostReduxClient = () => {
+  return async dispatch => {
+    await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
+    await dispatch(init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`))
+    await dispatch(setServerVersion('5.9.0'))
+  }
+}
+
 export const rootStartUp = () => {
   return async dispatch => {
+    dispatch(initMattermostReduxClient())
     const token = localStorage.getItem('authToken')
     if (token) {
-      await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-      await dispatch(
-        init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
-      )
-      await dispatch(setServerVersion('5.9.0'))
+      await dispatch(rootLoading())
       await dispatch(addUserToState())
       await dispatch(getInterestsAction())
       await dispatch(getUserInterests())
