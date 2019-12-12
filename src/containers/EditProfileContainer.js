@@ -11,7 +11,6 @@ const EditProfileContainer = props => {
   const {
     mmuserId,
     currentUser,
-    userInterests,
     interestOptions,
     updateUser,
     myUserInfo,
@@ -48,7 +47,6 @@ const EditProfileContainer = props => {
     <EditProfile
       myUserInfo={myUserInfo}
       updateProfilePicture={updatePicture}
-      userInterests={userInterests}
       interestOptions={interestOptions}
       handleEditReady={handleEditReady}
     />
@@ -74,7 +72,6 @@ const mapStateToProps = state => {
 EditProfileContainer.propTypes = {
   currentUser: PropTypes.instanceOf(Object).isRequired,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
-  userInterests: PropTypes.instanceOf(Array).isRequired,
   interestOptions: PropTypes.instanceOf(Array).isRequired,
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,

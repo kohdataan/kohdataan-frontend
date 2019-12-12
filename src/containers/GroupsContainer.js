@@ -8,7 +8,7 @@ import {
 import PropTypes from 'prop-types'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
-import FullScreenLoading from '../components/FullScreenLoading'
+import BulletListLoader from '../components/BulletListLoader'
 import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
@@ -89,7 +89,7 @@ const GroupsContainer = props => {
   }
 
   if (loading) {
-    return <FullScreenLoading />
+    return <BulletListLoader />
   }
   return (
     <>

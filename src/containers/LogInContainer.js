@@ -41,7 +41,7 @@ const shouldComponentUpdate = (props, prevProps) => {
       localStorage.getItem('authToken')
     ).then(loggedUser => {
       if (loggedUser.profileReady) {
-        props.history.push('/me')
+        props.history.push('/')
       } else {
         props.history.push('/registration/info')
       }

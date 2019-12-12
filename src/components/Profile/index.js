@@ -88,7 +88,7 @@ const Profile = props => {
 Profile.propTypes = {
   mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
-  userInterests: propTypes.instanceOf(Array).isRequired,
+  userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
   updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
@@ -98,6 +98,7 @@ Profile.defaultProps = {
   updateUser: null,
   ownProfile: false,
   startDirectChannel: null,
+  userInterests: [],
 }
 
 export default memo(Profile)

@@ -36,20 +36,8 @@ class App extends Component {
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
-    const {
-      history,
-      user: pUser,
-      loading: pLoading,
-      rootLoading: pRootLoading,
-      rootStartUp: pRootStartUp,
-    } = this.props
-    return !(
-      nextProps.rootLoading === pRootLoading &&
-      nextProps.rootStartUp === pRootStartUp &&
-      nextProps.loading === pLoading &&
-      nextProps.history === history &&
-      nextProps.user === pUser
-    )
+    const { history, loading: pLoading } = this.props
+    return !(nextProps.loading === pLoading && nextProps.history === history)
   }
 
   render() {
@@ -97,7 +85,6 @@ App.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   rootLoading: PropTypes.func.isRequired,
   rootStartUp: PropTypes.func.isRequired,
-  user: PropTypes.instanceOf(Object).isRequired,
   loading: PropTypes.instanceOf(Object).isRequired,
 }
 
