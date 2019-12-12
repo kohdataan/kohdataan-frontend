@@ -59,7 +59,6 @@ export const getChannelInvitationsAction = () => {
 
 export const fetchChannelsAndInvitations = () => {
   // Fetch groups related channel data
-  console.log('priii')
   return async (dispatch, getState) => {
     dispatch(startGroupPageFetching())
     const { teams } = getState().entities.teams

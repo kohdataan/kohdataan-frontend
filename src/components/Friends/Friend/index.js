@@ -18,7 +18,7 @@ const Friend = props => {
   const [otherUser, setOtherUser] = useState({})
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
-  console.log(user)
+
   const imageUri = `http://${
     process.env.REACT_APP_MATTERMOST_URL
   }/api/v4/users/${user.id}/image`

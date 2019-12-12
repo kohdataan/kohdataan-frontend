@@ -52,15 +52,8 @@ class App extends Component {
     )
   }
 
-  componentDidUpdate(props, prevProps) {
-    console.log(props)
-  }
-
   render() {
-    const { loading, user } = this.props
-    console.log('RENDERING')
-    console.log(loading.root)
-    console.log(user)
+    const { loading } = this.props
     if (loading.root && localStorage.getItem('authToken')) {
       // TODO: Nice spashscreen
       return <FullScreenLoading />
