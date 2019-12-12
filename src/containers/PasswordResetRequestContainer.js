@@ -16,7 +16,7 @@ const PasswordResetRequestContainer = props => {
     })
   }
 
-  return <ResetRequest handleReset={handleResetRequest} />
+  return <ResetRequest handleResetRequest={handleResetRequest} />
 }
 
 PasswordResetRequestContainer.propTypes = {
