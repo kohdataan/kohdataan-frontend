@@ -5,6 +5,7 @@ import getIcon from '../../../utils/getIcon'
 
 const InterestsGrid = props => {
   const { interestList } = props
+
   const sortedInterestsList = [...interestList].sort((a, b) =>
     a.name > b.name ? 1 : -1
   )

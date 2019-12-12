@@ -11,35 +11,24 @@ import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import { getUserByUsername } from '../api/user'
 import Friends from '../components/Friends'
+import FullScreenLoading from '../components/FullScreenLoading'
+import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
 
 const FriendsContainer = props => {
   const {
     channels,
-    teams,
-    getProfiles,
-    fetchMyChannelsAndMembers,
-    users,
     currentUserId,
     myChannels,
     profiles,
     getPosts,
     getChannelMembers,
+    fetchFriendsPageData,
+    loading,
   } = props
 
-  // Get user profiles and current user's teams at initial render
   useEffect(() => {
-    getProfiles()
+    fetchFriendsPageData()
   }, [])
-
-  // Get channels and members based on team id
-  // & When user joins a channel, users props is changed and
-  // channels need to be fetched again
-  useEffect(() => {
-    const teamId = Object.keys(teams)[0]
-    if (teamId) {
-      fetchMyChannelsAndMembers(teamId)
-    }
-  }, [teams, users])
 
   // Get only direct channels
   const getDirectChannels = allChannels => {
@@ -96,6 +85,9 @@ const FriendsContainer = props => {
     return null
   }
 
+  if (loading) {
+    return <FullScreenLoading />
+  }
   return (
     <>
       <Friends
@@ -114,19 +106,16 @@ const FriendsContainer = props => {
 FriendsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
-  teams: PropTypes.instanceOf(Object).isRequired,
-  users: PropTypes.instanceOf(Object).isRequired,
-  getProfiles: PropTypes.func.isRequired,
-  fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
+  fetchFriendsPageData: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
-  const { teams } = state.entities.teams
   const { channels } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
@@ -136,19 +125,19 @@ const mapStateToProps = state => {
   const myChannels = state.entities.channels.myMembers
   const { user } = state
   const channelSuggestions = state.channels.found
+  const { loading } = state.friends
 
   return {
     currentUserId,
     channelSuggestions,
-    users,
     user,
     mmUser,
     profiles,
-    teams,
     posts,
     channels,
     members,
     myChannels,
+    loading,
   }
 }
 
@@ -160,6 +149,7 @@ const mapDispatchToProps = dispatch =>
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
       getPosts: getPostsAction,
+      fetchFriendsPageData: fetchFriendsPageDataAction,
     },
     dispatch
   )

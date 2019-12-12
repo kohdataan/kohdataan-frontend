@@ -36,7 +36,7 @@ const GroupsContainer = props => {
     return mySuggestions
   }
 
-  // Get channels and members based on team id
+  // Get group realated data
   useEffect(() => {
     fetchChannelsAndInvitations()
   }, [])
@@ -67,11 +67,10 @@ const GroupsContainer = props => {
     return myCurrentChannels
   }
 
-  const handleJoinChannel = channelId => () => {
+  const handleJoinChannel = channelId => async () => {
     const currentTeamId = Object.keys(teams)[0]
-    joinChannel(currentUserId, currentTeamId, channelId).then(
-      history.push(`/chat/${channelId}`)
-    )
+    await joinChannel(currentUserId, currentTeamId, channelId)
+    history.push(`/chat/${channelId}`)
   }
 
   // Get unread count by channel id
@@ -88,7 +87,7 @@ const GroupsContainer = props => {
     }
     return 0
   }
-  console.log(loading)
+
   if (loading) {
     return <FullScreenLoading />
   }

@@ -30,10 +30,10 @@ export const rootStartUp = () => {
       )
       await dispatch(setServerVersion('5.9.0'))
       await dispatch(addUserToState())
+      await dispatch(getInterestsAction())
+      await dispatch(getUserInterests())
       await dispatch(loadMe())
       await dispatch(getProfiles())
-      await dispatch(getUserInterests())
-      await dispatch(getInterestsAction())
       await dispatch(rootLoadingReady())
     }
   }

@@ -52,8 +52,15 @@ class App extends Component {
     )
   }
 
+  componentDidUpdate(props, prevProps) {
+    console.log(props)
+  }
+
   render() {
-    const { loading } = this.props
+    const { loading, user } = this.props
+    console.log('RENDERING')
+    console.log(loading.root)
+    console.log(user)
     if (loading.root && localStorage.getItem('authToken')) {
       // TODO: Nice spashscreen
       return <FullScreenLoading />
@@ -78,7 +85,7 @@ class App extends Component {
           component={RegistrationContainer}
         />
         <PrivateRoute exact path="/" component={GroupsContainer} />
-        <PrivateRoute exact path="/friends/" component={FriendsContainer} />
+        <PrivateRoute exact path="/friends" component={FriendsContainer} />
         <PrivateRoute
           path="/profile/:username"
           component={OtherUserProfileContainer}
@@ -112,7 +119,6 @@ const mapDispatchToProps = dispatch =>
 
 const mapStateToProps = store => {
   return {
-    user: store.user,
     loading: store.loading,
   }
 }
