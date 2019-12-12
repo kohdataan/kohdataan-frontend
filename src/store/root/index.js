@@ -26,7 +26,9 @@ export const rootStartUp = () => {
     const token = localStorage.getItem('authToken')
     if (token) {
       await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-      await init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
+      await dispatch(
+        init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
+      )
       await dispatch(setServerVersion('5.9.0'))
       await dispatch(addUserToState())
       await dispatch(loadMe())
