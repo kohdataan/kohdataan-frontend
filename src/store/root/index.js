@@ -5,7 +5,6 @@ import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'
-import { getChannelInvitationsAction } from '../channels/channelAction'
 
 export const rootLoading = () => {
   return async dispatch => {
@@ -35,7 +34,6 @@ export const rootStartUp = () => {
       await dispatch(getProfiles())
       await dispatch(getUserInterests())
       await dispatch(getInterestsAction())
-      await dispatch(getChannelInvitationsAction())
       await dispatch(rootLoadingReady())
     }
   }

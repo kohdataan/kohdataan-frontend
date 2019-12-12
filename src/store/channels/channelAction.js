@@ -1,5 +1,18 @@
+import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels'
+
+export const startGroupPageFetching = () => {
+  return async dispatch => {
+    dispatch({ type: types.START_INVITATION_FETCHING })
+  }
+}
+
+export const groupPageFetchingReady = () => {
+  return async dispatch => {
+    dispatch({ type: types.INVITATION_FETCHING_READY })
+  }
+}
 
 export const getMembersByChannelIdAction = channelId => {
   return async dispatch => {
@@ -21,9 +34,9 @@ export const getMembersByChannelIdAction = channelId => {
 }
 
 export const getChannelInvitationsAction = () => {
+  // Fetch channel invitations and related channel members
   const token = localStorage.getItem('authToken')
   return async dispatch => {
-    dispatch({ type: types.START_INVITATION_FETCHING })
     try {
       const data = await API.getChannelInvitations(token)
       dispatch({
@@ -37,10 +50,21 @@ export const getChannelInvitationsAction = () => {
         })
       }
       await Promise.all(promises)
-      dispatch({ type: types.INVITATION_FETCHING_READY })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
     }
+  }
+}
+
+export const fetchChannelsAndInvitations = () => {
+  // Fetch groups related channel data
+  return async (dispatch, getState) => {
+    dispatch(startGroupPageFetching())
+    const { teams } = getState().entities.teams
+    const teamId = Object.keys(teams)[0]
+    await dispatch(fetchMyChannelsAndMembers(teamId))
+    await dispatch(getChannelInvitationsAction())
+    dispatch(groupPageFetchingReady())
   }
 }

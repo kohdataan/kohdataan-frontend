@@ -1,9 +1,7 @@
 import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProfilesInChannel as getProfilesInChannelAction } from 'mattermost-redux/actions/users'
 import {
-  fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
@@ -11,13 +9,13 @@ import PropTypes from 'prop-types'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 import FullScreenLoading from '../components/FullScreenLoading'
+import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
   const {
     history,
     channels,
     teams,
-    fetchMyChannelsAndMembers,
     channelSuggestionMembers,
     currentUserId,
     myChannels,
@@ -25,6 +23,7 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelMembers,
     loading,
+    fetchChannelsAndInvitations,
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
@@ -39,10 +38,7 @@ const GroupsContainer = props => {
 
   // Get channels and members based on team id
   useEffect(() => {
-    const teamId = Object.keys(teams)[0]
-    if (teamId) {
-      fetchMyChannelsAndMembers(teamId)
-    }
+    fetchChannelsAndInvitations()
   }, [])
 
   useEffect(() => {
@@ -92,7 +88,7 @@ const GroupsContainer = props => {
     }
     return 0
   }
-
+  console.log(loading)
   if (loading) {
     return <FullScreenLoading />
   }
@@ -117,13 +113,13 @@ GroupsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
-  fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object).isRequired,
+  fetchChannelsAndInvitations: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -164,10 +160,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
-      getProfilesInChannel: getProfilesInChannelAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
+      fetchChannelsAndInvitations: fetchChannelsAndInvitationsAction,
     },
     dispatch
   )
