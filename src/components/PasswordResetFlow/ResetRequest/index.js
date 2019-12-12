@@ -15,7 +15,7 @@ const ResetRequest = props => {
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="password-reset-content-container">
-        <h2 className="password-reset-title">Salasanan vaihtaminen</h2>
+        <h2 className="password-reset-title">Salasanan palautus</h2>
         <p>Anna sähköpostiosoitteesi.</p>
         <p>
           Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan.

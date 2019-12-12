@@ -49,6 +49,7 @@ const ResetPage = props => {
                     ? 'create-account-errors-field'
                     : 'create-account-input-field'
                 }
+                showPlaceholder={false}
               />
               <div className="info-circle">
                 <button
@@ -97,6 +98,7 @@ const ResetPage = props => {
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
+              showPlaceholder={false}
             />
             <div className="error-text">
               {errors.passwordConfirm &&
