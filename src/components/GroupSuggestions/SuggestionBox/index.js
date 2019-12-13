@@ -12,7 +12,7 @@ const SuggestionBox = props => {
           <h2>{channel.display_name}</h2>
         </div>
         <p>{`Yhteistä: ${channel.display_name}`}</p>
-        {members && (
+        {channel && members && (
           <div className="suggestion-members-wrapper">
             <p>{`${members.length} jäsentä`}</p>
             <div className="suggestion-members-info">

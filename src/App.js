@@ -32,14 +32,19 @@ class App extends Component {
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
-    const { history, loading: pLoading } = this.props
-    return !(nextProps.loading === pLoading && nextProps.history === history)
+    const { history, rootStartUp, user: pUser, loading } = this.props
+    return !(
+      nextProps.history === history &&
+      nextProps.user === pUser &&
+      nextProps.loading === loading &&
+      nextProps.rootStartUp === rootStartUp
+    )
   }
 
   render() {
     const { loading } = this.props
     if (loading.root && localStorage.getItem('authToken')) {
-      // TODO: Nice spashscreen
+      // TODO: Nice spashscree
       return <FullScreenLoading />
     }
 
@@ -81,6 +86,7 @@ App.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   rootStartUp: PropTypes.func.isRequired,
   loading: PropTypes.instanceOf(Object).isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -94,6 +100,7 @@ const mapDispatchToProps = dispatch =>
 const mapStateToProps = store => {
   return {
     loading: store.loading,
+    user: store.user,
   }
 }
 

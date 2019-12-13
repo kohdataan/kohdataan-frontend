@@ -1,6 +1,6 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
-import { loadMe, getProfiles } from 'mattermost-redux/actions/users'
+import { loadMe } from 'mattermost-redux/actions/users'
 import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
@@ -28,18 +28,23 @@ export const initMattermostReduxClient = () => {
   }
 }
 
-export const rootStartUp = () => {
+export const initUser = () => {
   return async dispatch => {
-    dispatch(initMattermostReduxClient())
     const token = localStorage.getItem('authToken')
     if (token) {
-      await dispatch(rootLoading())
       await dispatch(addUserToState())
-      await dispatch(getInterestsAction())
       await dispatch(getUserInterests())
       await dispatch(loadMe())
-      await dispatch(getProfiles())
-      await dispatch(rootLoadingReady())
     }
+  }
+}
+
+export const rootStartUp = () => {
+  return async dispatch => {
+    await dispatch(rootLoading())
+    await dispatch(initMattermostReduxClient())
+    await dispatch(getInterestsAction())
+    await dispatch(initUser())
+    await dispatch(rootLoadingReady())
   }
 }

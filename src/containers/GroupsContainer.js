@@ -8,7 +8,6 @@ import {
 import PropTypes from 'prop-types'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
-import BulletListLoader from '../components/BulletListLoader'
 import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
@@ -27,7 +26,6 @@ const GroupsContainer = props => {
   } = props
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
-
   // Get only those channels suggestions that user has not yet joined
   const getFilteredChannelSuggestions = () => {
     const mySuggestions = channelSuggestions.filter(
@@ -87,10 +85,11 @@ const GroupsContainer = props => {
     }
     return 0
   }
-
   if (loading) {
-    return <BulletListLoader />
+    // TODO: Better loader
+    return <h1>Ladataan...</h1>
   }
+
   return (
     <>
       <GroupSuggestions
@@ -117,12 +116,13 @@ GroupsContainer.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  channelSuggestionMembers: PropTypes.instanceOf(Object).isRequired,
+  channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
   channelSuggestions: [],
+  channelSuggestionMembers: {},
 }
 
 const mapStateToProps = state => {
