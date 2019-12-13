@@ -72,9 +72,7 @@ const FriendsContainer = props => {
 
   const getLatestMessage = posts => {
     const postMap = posts && Object.values(posts)[1]
-    console.log(postMap)
     if (postMap) {
-      console.log('HERE')
       const postsArray = Object.values(postMap)
       postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
       const messageObj = postsArray[0]
