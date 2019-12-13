@@ -19,9 +19,12 @@ const Friend = props => {
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
 
-  const imageUri = `http://${
-    process.env.REACT_APP_MATTERMOST_URL
-  }/api/v4/users/${user.id}/image`
+  const imageUri =
+    user && user.id
+      ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${
+          user.id
+        }/image`
+      : null
   const message = getLatestMessage(posts)
 
   useEffect(() => {
@@ -53,7 +56,9 @@ const Friend = props => {
     <Link className="friend-box" to={`/chat/${channel.id}`}>
       <div className="friend-box-content">
         <div className="friend-icon-box">
-          <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+          {imageUri && (
+            <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+          )}
         </div>
         <div className="friend-text-content">
           <div className="friend-header">

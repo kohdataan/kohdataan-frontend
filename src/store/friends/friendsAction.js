@@ -17,11 +17,11 @@ export const friendsPageFetchingReady = () => {
 export const fetchFriendsPageData = () => {
   // Fetch groups related channel data
   return async (dispatch, getState) => {
-    dispatch(startFriendsPageFetching())
+    await dispatch(startFriendsPageFetching())
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
-    dispatch(getProfiles())
-    dispatch(friendsPageFetchingReady())
+    await dispatch(getProfiles())
+    await dispatch(friendsPageFetchingReady())
   }
 }

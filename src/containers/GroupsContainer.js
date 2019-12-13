@@ -89,7 +89,7 @@ const GroupsContainer = props => {
     // TODO: Better loader
     return <h1>Ladataan...</h1>
   }
-
+  // TODO: Refactor channel member fetching
   return (
     <>
       <GroupSuggestions

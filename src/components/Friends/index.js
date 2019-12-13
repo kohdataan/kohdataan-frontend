@@ -13,25 +13,26 @@ const Friends = props => {
     getPosts,
     getLatestMessage,
   } = props
-
+  console.log(channels)
   return (
     <div className="friends-wrapper">
       <div className="friends-header">
         <h1>Kaverit</h1>
       </div>
       <div className="friends-boxes">
-        {Object.values(channels).map(channel => (
-          <Friend
-            key={channel.id}
-            channel={channel}
-            getMembers={getMembers}
-            unreadCount={getUnreadCount(channel.id)}
-            getUserByUsername={getUserByUsername}
-            getUsername={getUsername}
-            getPosts={getPosts}
-            getLatestMessage={getLatestMessage}
-          />
-        ))}
+        {channels &&
+          Object.values(channels).map(channel => (
+            <Friend
+              key={channel.id}
+              channel={channel}
+              getMembers={getMembers}
+              unreadCount={getUnreadCount(channel.id)}
+              getUserByUsername={getUserByUsername}
+              getUsername={getUsername}
+              getPosts={getPosts}
+              getLatestMessage={getLatestMessage}
+            />
+          ))}
       </div>
     </div>
   )

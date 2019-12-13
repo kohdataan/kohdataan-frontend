@@ -1,9 +1,7 @@
 import React, { useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getProfiles as getProfilesAction } from 'mattermost-redux/actions/users'
 import {
-  fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
@@ -11,7 +9,6 @@ import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import { getUserByUsername } from '../api/user'
 import Friends from '../components/Friends'
-import FullScreenLoading from '../components/FullScreenLoading'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
 
 const FriendsContainer = props => {
@@ -48,11 +45,11 @@ const FriendsContainer = props => {
 
   const getUsername = members => {
     if (members.length > 0) {
-      const friendid = members.find(member => member.user_id !== currentUserId)
-        .user_id
-      const friendInfo = Object.values(profiles).find(
-        profile => profile.id === friendid
-      )
+      const friend = members.find(member => member.user_id)
+      const friendId = friend && friend.user_id
+      const friendInfo =
+        friendId &&
+        Object.values(profiles).find(profile => profile.id === friendId)
       return friendInfo
     }
     return null
@@ -74,19 +71,23 @@ const FriendsContainer = props => {
   }
 
   const getLatestMessage = posts => {
-    const postMap = Object.values(posts)[1]
+    const postMap = posts && Object.values(posts)[1]
+    console.log(postMap)
     if (postMap) {
+      console.log('HERE')
       const postsArray = Object.values(postMap)
       postsArray.sort((a, b) => a.create_at - b.create_at).reverse()
       const messageObj = postsArray[0]
-      const senderInfo = messageObj.user_id === currentUserId ? 'Sinä: ' : ''
-      return `${senderInfo}${postsArray[0].message}`
+      const senderInfo =
+        messageObj && messageObj.user_id === currentUserId ? 'Sinä: ' : ''
+      return messageObj ? `${senderInfo}${postsArray[0].message}` : null
     }
     return null
   }
 
   if (loading) {
-    return <FullScreenLoading />
+    // TODO: Better loader
+    return <h1>Ladataan...</h1>
   }
   return (
     <>
@@ -144,8 +145,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
-      getProfiles: getProfilesAction,
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
       getPosts: getPostsAction,
