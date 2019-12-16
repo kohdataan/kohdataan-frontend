@@ -13,7 +13,6 @@ const OtherUserProfileContainer = props => {
     currentUser,
     username,
     getProfilesByUsernames,
-    myUserInfo,
     history,
     createDirectChannel,
   } = props
@@ -64,10 +63,9 @@ const OtherUserProfileContainer = props => {
 
   return (
     <Profile
-      user={otherUserInfo}
       mmuser={mmuser}
       userInterests={interests}
-      myUserInfo={myUserInfo}
+      myUserInfo={otherUserInfo}
       startDirectChannel={startDirectChannel}
     />
   )
@@ -92,7 +90,6 @@ const mapStateToProps = (state, ownProps) => {
 OtherUserProfileContainer.propTypes = {
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
-  myUserInfo: PropTypes.instanceOf(Object).isRequired,
   getProfilesByUsernames: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,

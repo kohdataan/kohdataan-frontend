@@ -13,8 +13,13 @@ const Header = props => {
 }
 
 Header.propTypes = {
-  nickname: propTypes.string.isRequired,
-  location: propTypes.string.isRequired,
+  nickname: propTypes.string,
+  location: propTypes.string,
+}
+
+Header.defaultProps = {
+  nickname: '',
+  location: '',
 }
 
 export default memo(Header)

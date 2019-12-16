@@ -83,8 +83,9 @@ const Chat = props => {
       {showSider && !directChannel && (
         <MembersSider
           members={members}
+          profiles={profiles}
           currentUserId={currentUserId}
-          getUserNamebyId={getNicknameById}
+          getNickNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
