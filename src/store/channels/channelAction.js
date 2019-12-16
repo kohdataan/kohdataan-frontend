@@ -1,6 +1,7 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels'
+import { initUser } from '../root/index'
 
 export const startGroupPageFetching = () => {
   return async dispatch => {
@@ -60,11 +61,12 @@ export const getChannelInvitationsAction = () => {
 export const fetchChannelsAndInvitations = () => {
   // Fetch groups related channel data
   return async (dispatch, getState) => {
-    dispatch(startGroupPageFetching())
+    await dispatch(startGroupPageFetching())
+    await dispatch(initUser())
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
     await dispatch(getChannelInvitationsAction())
-    dispatch(groupPageFetchingReady())
+    await dispatch(groupPageFetchingReady())
   }
 }

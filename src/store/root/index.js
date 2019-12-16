@@ -41,7 +41,6 @@ export const initUser = () => {
 
 export const rootStartUp = () => {
   return async dispatch => {
-    console.log('in ROOT STARTUP')
     await dispatch(rootLoading())
     await dispatch(initMattermostReduxClient())
     await dispatch(getInterestsAction())
