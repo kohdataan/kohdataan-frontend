@@ -55,40 +55,45 @@ const RegistrationContainer = props => {
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
-    if (value === true && !nextButtonActive) {
+    if (value && !nextButtonActive) {
       setNextButtonActive(true)
-    } else if (value === false && nextButtonActive) {
+    } else if (!value && nextButtonActive) {
       setNextButtonActive(false)
     }
   }
 
   const checkInputValidity = page => {
-    if (page === 'add-nickname') {
-      if (nickname.length < 1) {
-        setNextButtonStatus(false)
-      } else {
+    switch (page) {
+      case 'add-nickname':
+        if (nickname.length < 1) {
+          setNextButtonStatus(false)
+        } else {
+          setNextButtonStatus(true)
+        }
+        break
+      case 'add-show-age':
+        if (showAge === '') {
+          setNextButtonStatus(false)
+        } else {
+          setNextButtonStatus(true)
+        }
+        break
+      case 'add-location':
+        if (location === '' || showLocation === '') {
+          setNextButtonStatus(false)
+        } else {
+          setNextButtonStatus(true)
+        }
+        break
+      case 'add-interests':
+        if (interests.length < 3 || interests.length > 5) {
+          setNextButtonStatus(false)
+        } else {
+          setNextButtonStatus(true)
+        }
+        break
+      default:
         setNextButtonStatus(true)
-      }
-    } else if (page === 'add-show-age') {
-      if (showAge === '') {
-        setNextButtonStatus(false)
-      } else {
-        setNextButtonStatus(true)
-      }
-    } else if (page === 'add-location') {
-      if (location === '' || showLocation === '') {
-        setNextButtonStatus(false)
-      } else {
-        setNextButtonStatus(true)
-      }
-    } else if (page === 'add-interests') {
-      if (interests.length < 3 || interests.length > 5) {
-        setNextButtonStatus(false)
-      } else {
-        setNextButtonStatus(true)
-      }
-    } else {
-      setNextButtonStatus(true)
     }
   }
 

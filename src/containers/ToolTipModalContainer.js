@@ -53,6 +53,8 @@ const ToolTipModalContainer = props => {
           type="button"
           className="close-modal-button"
           onClick={closeModal}
+          onKeyPress={closeModal}
+          tabIndex="0"
           style={closeModalBtnStyle}
           aria-label="close-dialog"
         >

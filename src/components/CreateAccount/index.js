@@ -289,7 +289,12 @@ const CreateAccount = ({ handleAccountCreation }) => {
             </div>
           </div>
           <ServiceRulesContainer setRulesAccepted={setRulesAccepted} />
-          <button type="submit" className="create-account-button">
+          <button
+            type="submit"
+            className="create-account-button"
+            onKeyPress={handleSubmit(onSubmit)}
+            tabIndex="0"
+          >
             {'Rekisteröidy '}
           </button>
         </form>
