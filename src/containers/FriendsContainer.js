@@ -9,6 +9,7 @@ import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import { getUserByUsername } from '../api/user'
 import Friends from '../components/Friends'
+import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
 
 const FriendsContainer = props => {
@@ -85,7 +86,7 @@ const FriendsContainer = props => {
 
   if (loading) {
     // TODO: Better loader
-    return <h1>Ladataan...</h1>
+    return <BouncingLoader />
   }
   return (
     <>

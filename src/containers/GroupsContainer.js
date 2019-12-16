@@ -8,6 +8,7 @@ import {
 import PropTypes from 'prop-types'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
+import BouncingLoader from '../components/BouncingLoader'
 import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
@@ -87,7 +88,7 @@ const GroupsContainer = props => {
   }
   if (loading) {
     // TODO: Better loader
-    return <h1>Ladataan...</h1>
+    return <BouncingLoader />
   }
   // TODO: Refactor channel member fetching
   return (
