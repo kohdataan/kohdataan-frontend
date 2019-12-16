@@ -25,7 +25,7 @@ const FriendsContainer = props => {
 
   useEffect(() => {
     fetchFriendsPageData()
-  }, [])
+  }, [fetchFriendsPageData])
 
   // Get only direct channels
   const getDirectChannels = allChannels => {

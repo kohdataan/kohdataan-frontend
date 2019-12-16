@@ -27,23 +27,23 @@ const GroupsContainer = props => {
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   // Get only those channels suggestions that user has not yet joined
-  const getFilteredChannelSuggestions = () => {
-    const mySuggestions = channelSuggestions.filter(
-      channel => !Object.keys(myChannels).includes(channel.id)
-    )
-    return mySuggestions
-  }
 
   // Get group realated data
   useEffect(() => {
     fetchChannelsAndInvitations()
-  }, [])
+  }, [fetchChannelsAndInvitations])
 
   useEffect(() => {
+    const getFilteredChannelSuggestions = () => {
+      const mySuggestions = channelSuggestions.filter(
+        channel => !Object.keys(myChannels).includes(channel.id)
+      )
+      return mySuggestions
+    }
     if (myChannels) {
       setFilteredSuggestions(getFilteredChannelSuggestions())
     }
-  }, [myChannels])
+  }, [myChannels, channelSuggestions])
 
   // Get only group channels
   // (filter direct messages and default channels out)

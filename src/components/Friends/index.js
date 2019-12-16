@@ -13,7 +13,7 @@ const Friends = props => {
     getPosts,
     getLatestMessage,
   } = props
-  console.log(channels)
+
   return (
     <div className="friends-wrapper">
       <div className="friends-header">

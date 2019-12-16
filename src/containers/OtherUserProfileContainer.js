@@ -20,30 +20,6 @@ const OtherUserProfileContainer = props => {
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
 
-  const fetchOtherUser = async () => {
-    try {
-      const res = await getInterestsByUsername(
-        localStorage.getItem('authToken'),
-        username
-      )
-      if (res.result[0]) {
-        const data = res.result[0].interests
-        setInterests(data)
-      }
-      const userInfo = await getUserByUsername(
-        username,
-        localStorage.getItem('authToken')
-      )
-
-      if (userInfo) {
-        setOtherUserInfo(userInfo)
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  }
-
   const startDirectChannel = async () => {
     const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
     history.push(`/chat/${newChannel.data.id}`)
@@ -51,6 +27,29 @@ const OtherUserProfileContainer = props => {
 
   // If username is given, get other user's info
   useEffect(() => {
+    const fetchOtherUser = async () => {
+      try {
+        const res = await getInterestsByUsername(
+          localStorage.getItem('authToken'),
+          username
+        )
+        if (res.result[0]) {
+          const data = res.result[0].interests
+          setInterests(data)
+        }
+        const userInfo = await getUserByUsername(
+          username,
+          localStorage.getItem('authToken')
+        )
+
+        if (userInfo) {
+          setOtherUserInfo(userInfo)
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e)
+      }
+    }
     if (username) {
       getProfilesByUsernames([username])
         .then(data => setmmUser(data.data[0]))
@@ -59,7 +58,7 @@ const OtherUserProfileContainer = props => {
       // TODO: Get other users info from node backend (location, description)
       fetchOtherUser()
     }
-  }, [username])
+  }, [username, getProfilesByUsernames])
 
   return (
     <Profile

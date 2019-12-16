@@ -21,15 +21,13 @@ const Friend = props => {
 
   const imageUri =
     user && user.id
-      ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${
-          user.id
-        }/image`
+      ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image`
       : null
   const message = getLatestMessage(posts)
 
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
-  }, [])
+  }, [getMembers, channel])
 
   useEffect(() => {
     if (members) {
@@ -44,13 +42,13 @@ const Friend = props => {
           .catch(error => console.log(error))
       }
     }
-  }, [members])
+  }, [members, getUserByUsername, getUsername])
 
   useEffect(() => {
     if (channel) {
       getPosts(channel.id).then(data => setPosts(data.data))
     }
-  }, [channel])
+  }, [channel, getPosts])
 
   return (
     <Link className="friend-box" to={`/chat/${channel.id}`}>

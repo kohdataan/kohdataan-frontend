@@ -43,7 +43,7 @@ const ChatContainer = props => {
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
-  }, [])
+  }, [getProfiles])
 
   // Get team related channels and members
   useEffect(() => {
@@ -51,7 +51,7 @@ const ChatContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-  }, [teams])
+  }, [teams, fetchMyChannelsAndMembers])
 
   // Get posts for current channel and view channel
   useEffect(() => {
@@ -59,15 +59,7 @@ const ChatContainer = props => {
       getPosts(currentChannelId)
       viewChannel(currentChannelId)
     }
-  }, [teams, posts])
-
-  // Filter posts by channel id
-  const filterPostsByChannelId = channelId => {
-    const filteredPosts = Object.values(posts).filter(
-      post => post.channel_id === channelId
-    )
-    return filteredPosts
-  }
+  }, [teams, posts, getPosts, viewChannel, currentChannelId])
 
   // Get current channel members
   useEffect(() => {
@@ -76,14 +68,7 @@ const ChatContainer = props => {
         setCurrentMembers(data.data)
       )
     }
-  }, [channels])
-
-  // Sort posts based on created timestamp
-  const sortPosts = allPosts => {
-    const postsArr = Object.values(allPosts)
-    postsArr.sort((a, b) => a.create_at - b.create_at)
-    return postsArr
-  }
+  }, [channels, currentChannelId, getChannelMembers])
 
   // Remove current user from channel
   const handleLeaveChannel = () =>
@@ -91,12 +76,25 @@ const ChatContainer = props => {
 
   // Filter and sort posts after fetching
   useEffect(() => {
+    // Filter posts by channel id
+    const filterPostsByChannelId = channelId => {
+      const filteredPosts = Object.values(posts).filter(
+        post => post.channel_id === channelId
+      )
+      return filteredPosts
+    }
+    // Sort posts based on created timestamp
+    const sortPosts = allPosts => {
+      const postsArr = Object.values(allPosts)
+      postsArr.sort((a, b) => a.create_at - b.create_at)
+      return postsArr
+    }
     if (currentChannelId) {
       const filteredPosts = filterPostsByChannelId(currentChannelId)
       const sorted = sortPosts(filteredPosts)
       setCurrentPosts(sorted)
     }
-  }, [posts, teams])
+  }, [posts, teams, currentChannelId])
 
   return (
     <>

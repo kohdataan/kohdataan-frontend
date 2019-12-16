@@ -9,7 +9,7 @@ const Group = props => {
 
   useEffect(() => {
     getMembers(channel.id).then(data => setMembers(data.data))
-  }, [])
+  }, [channel, getMembers])
 
   return (
     <Link
