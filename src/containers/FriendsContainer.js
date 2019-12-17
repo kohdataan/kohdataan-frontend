@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -24,25 +24,25 @@ const FriendsContainer = props => {
     loading,
   } = props
 
+  const [directChannels, setDirectChannels] = useState([])
+
   useEffect(() => {
     fetchFriendsPageData()
   }, [fetchFriendsPageData])
 
-  // Get only direct channels
-  const getDirectChannels = allChannels => {
-    const filteredChannels = Object.values(allChannels).filter(
-      channel => channel.type === 'D'
-    )
-    return filteredChannels
-  }
-
-  // Get channel objects based on myChannels
-  const getChannelInfoForMyChannels = () => {
-    const myCurrentChannels = Object.values(channels).filter(channel =>
-      Object.keys(myChannels).includes(channel.id)
-    )
-    return myCurrentChannels
-  }
+  useEffect(() => {
+    // Get channel objects based on myChannels
+    const getChannelInfoForMyChannels = () =>
+      Object.values(channels).filter(channel =>
+        Object.keys(myChannels).includes(channel.id)
+      )
+    // Get only direct channels
+    const getDirectChannels = allChannels =>
+      Object.values(allChannels).filter(channel => channel.type === 'D')
+    const channelInfo = getChannelInfoForMyChannels()
+    // Set direct channel info
+    setDirectChannels(getDirectChannels(channelInfo))
+  }, [channels, myChannels])
 
   const getUsername = members => {
     if (members.length > 0) {
@@ -85,13 +85,12 @@ const FriendsContainer = props => {
   }
 
   if (loading) {
-    // TODO: Better loader
     return <BouncingLoader />
   }
   return (
     <>
       <Friends
-        channels={getDirectChannels(getChannelInfoForMyChannels())}
+        channels={directChannels}
         getMembers={getChannelMembers}
         getUnreadCount={getUnreadCountByChannelId}
         getUserByUsername={getUserByUsername}
@@ -124,12 +123,10 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
-  const channelSuggestions = state.channels.found
   const { loading } = state.friends
 
   return {
     currentUserId,
-    channelSuggestions,
     user,
     mmUser,
     profiles,

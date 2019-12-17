@@ -40,7 +40,12 @@ const RegistrationSuccessMessage = () => {
             className="problems-with-registration-link"
             to="/registrationproblem"
           >
-            {'Tarvitsen apua rekisteröitymisessä.'}
+            Tarvitsen apua rekisteröitymisessä
+          </Link>
+        </div>
+        <div className="problems-with-registration-link-container">
+          <Link className="problems-with-registration-link" to="/login">
+            Kirjaudu sisään
           </Link>
         </div>
       </div>

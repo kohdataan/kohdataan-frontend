@@ -26,28 +26,43 @@ const Friend = props => {
   const message = getLatestMessage(posts)
 
   useEffect(() => {
-    getMembers(channel.id).then(data => setMembers(data.data))
+    const getPrivateChannelMembers = async () => {
+      const pMembers = await getMembers(channel.id)
+      if (pMembers && pMembers.data) {
+        setMembers(pMembers.data)
+      }
+    }
+    // getMembers(channel.id).then(data => setMembers(data.data))
+    getPrivateChannelMembers()
   }, [getMembers, channel])
 
   useEffect(() => {
-    if (members) {
-      const userObj = getUsername(members)
-      if (userObj) {
-        setUser(userObj)
-        getUserByUsername(userObj.username, localStorage.getItem('authToken'))
-          .then(data => {
-            setOtherUser(data)
-          })
-          // eslint-disable-next-line no-console
-          .catch(error => console.log(error))
+    const getUserInfo = async () => {
+      if (members) {
+        const userObj = getUsername(members)
+        if (userObj && userObj.username) {
+          setUser(userObj)
+          const otherUserData = await getUserByUsername(
+            userObj.username,
+            localStorage.getItem('authToken')
+          )
+          if (otherUserData) {
+            setOtherUser(otherUserData)
+          }
+        }
       }
     }
+    getUserInfo()
   }, [members, getUserByUsername, getUsername])
 
   useEffect(() => {
-    if (channel) {
-      getPosts(channel.id).then(data => setPosts(data.data))
+    const fetchPosts = async () => {
+      if (channel && channel.id) {
+        const channelPosts = await getPosts(channel.id)
+        setPosts(channelPosts.data)
+      }
     }
+    fetchPosts()
   }, [channel, getPosts])
 
   return (
