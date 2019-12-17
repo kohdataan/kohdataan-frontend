@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ButtonContainer from '../../ButtonContainer'
 
 const SuggestionBox = props => {
   const { channel, handleJoinChannel, handleSkipChannel, members } = props
@@ -25,28 +26,18 @@ const SuggestionBox = props => {
           </div>
         )}
         <div className="suggestion-buttons-wrapper">
-          <Link
-            to="/"
-            className="suggestion-button cancel"
-            onClick={() => handleSkipChannel()}
-          >
-            <i aria-hidden="true" className="fas fa-times" title="Älä Liity" />
-            Älä liity
+          <Link to="/" onClick={() => handleSkipChannel()}>
+            <ButtonContainer className="skip-suggestion-button">
+              Ohita
+            </ButtonContainer>
           </Link>
-          <div
-            role="link"
-            tabIndex="-1"
-            className="suggestion-button join"
+          <ButtonContainer
             onClick={handleJoinChannel(channel.id)}
-            onKeyPress={handleJoinChannel(channel.id)}
+            className="join-suggestion-button"
+            secondary
           >
-            <i
-              aria-hidden="true"
-              className="far fa-check-circle"
-              title="Liity"
-            />
             Liity
-          </div>
+          </ButtonContainer>
         </div>
       </div>
     </div>

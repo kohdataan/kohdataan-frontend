@@ -7,25 +7,16 @@
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
   }
+  animation: bounceInRight 300ms;
 }
 
 .suggestion-buttons-wrapper {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-}
-
-.suggestion-button {
-  background: none;
-  border: none;
-  text-decoration: none;
-  color: $darkblue;
-  border-radius: 0px;
-  text-transform: none;
-  font-weight: normal;
-  padding: 30px 0 10px 0;
-  & i {
-    padding: 0 10px 0 0;
+  padding: 10px 0;
+  button {
+    padding: 10px 35px;
   }
 }
 
@@ -48,14 +39,15 @@
   margin: 0 10px 0 0;
 }
 
-.join {
-  & i {
-    color: green;
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
+      3px -27px 0px -13px rgba(255, 255, 255, 1);
   }
-}
-
-.cancel {
-  & i {
-    color: red;
+  100% {
+    opacity: 1;
+    box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
+      3px -27px 0px -13px rgba(255, 255, 255, 1);
   }
 }
