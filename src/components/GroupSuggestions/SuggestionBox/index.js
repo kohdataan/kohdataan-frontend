@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const SuggestionBox = props => {
-  const { channel, handleJoinChannel, members } = props
+  const { channel, handleJoinChannel, handleSkipChannel, members } = props
   return (
     <div className="group-box suggestions-box">
       <div className="group-box-content">
@@ -28,7 +28,7 @@ const SuggestionBox = props => {
           <Link
             to="/"
             className="suggestion-button cancel"
-            onClick={() => console.log('clicked')}
+            onClick={() => handleSkipChannel()}
           >
             <i aria-hidden="true" className="fas fa-times" title="Älä Liity" />
             Älä liity
@@ -56,6 +56,7 @@ const SuggestionBox = props => {
 SuggestionBox.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   handleJoinChannel: propTypes.func.isRequired,
+  handleSkipChannel: propTypes.func.isRequired,
   members: propTypes.instanceOf(Array).isRequired,
 }
 

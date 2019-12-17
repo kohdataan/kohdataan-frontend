@@ -1,6 +1,8 @@
 @import '../../../styles/colors.scss';
 
 .suggestions-box {
+  box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
+    3px -27px 0px -13px rgba(255, 255, 255, 1);
   & p {
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
