@@ -22,17 +22,21 @@ const GroupsContainer = props => {
     joinChannel,
     channelSuggestions,
     getChannelMembers,
-    loading,
     fetchChannelsAndInvitations,
   } = props
 
+  const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [visibleSuggestion, setVisibleSuggestion] = useState({})
   // Get only those channels suggestions that user has not yet joined
 
-  // Get group realated data
+  // Get all group realated data at once
   useEffect(() => {
-    fetchChannelsAndInvitations()
+    const initialize = async () => {
+      await fetchChannelsAndInvitations()
+      setIsInitialized(true)
+    }
+    initialize()
   }, [fetchChannelsAndInvitations])
 
   useEffect(() => {
@@ -100,7 +104,7 @@ const GroupsContainer = props => {
     }
     return 0
   }
-  if (loading) {
+  if (!isInitialized) {
     return <BouncingLoader />
   }
   // TODO: Refactor channel member fetching
@@ -131,7 +135,6 @@ GroupsContainer.propTypes = {
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
 }
@@ -153,7 +156,6 @@ const mapStateToProps = state => {
   const myChannels = state.entities.channels.myMembers
   const { user } = state
   const channelSuggestions = state.channels.found
-  const { loading } = state.channels
   const channelSuggestionMembers = state.channels.members
 
   return {
@@ -168,7 +170,6 @@ const mapStateToProps = state => {
     channels,
     members,
     myChannels,
-    loading,
   }
 }
 
