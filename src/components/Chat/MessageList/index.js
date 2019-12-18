@@ -50,7 +50,9 @@ const MessageList = props => {
             return (
               <Message
                 key={post.id}
+                files={post.file_ids}
                 type={post.type}
+                url={post.url}
                 sender={getUserNamebyId(post.user_id)}
                 text={post.message}
                 senderId={post.user_id}

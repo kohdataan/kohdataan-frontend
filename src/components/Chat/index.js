@@ -12,6 +12,8 @@ const Chat = props => {
     posts,
     profiles,
     createPost,
+    uploadFile,
+    getFilesForPost,
     currentUserId,
     members,
     handleLeaveChannel,
@@ -74,12 +76,20 @@ const Chat = props => {
       />
       <MessageList
         posts={posts}
+        getFilesForPost={getFilesForPost}
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
         directChannel={directChannel}
       />
-      {channel.id && <UserInput channel={channel} createPost={createPost} />}
+      {channel.id && (
+        <UserInput
+          channel={channel}
+          createPost={createPost}
+          uploadFile={uploadFile}
+          currentUserId={currentUserId}
+        />
+      )}
       {showSider && !directChannel && (
         <MembersSider
           members={members}
@@ -100,6 +110,8 @@ Chat.propTypes = {
   profiles: PropTypes.instanceOf(Object).isRequired,
   members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   createPost: PropTypes.func.isRequired,
+  getFilesForPost: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
 }
