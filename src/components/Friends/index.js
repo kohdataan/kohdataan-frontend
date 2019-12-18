@@ -6,12 +6,11 @@ import './styles.scss'
 const Friends = props => {
   const {
     channels,
-    getMembers,
     getUnreadCount,
-    getUserByUsername,
     getUsername,
     getPosts,
     getLatestMessage,
+    membersInChannel,
   } = props
 
   return (
@@ -25,12 +24,11 @@ const Friends = props => {
             <Friend
               key={channel.id}
               channel={channel}
-              getMembers={getMembers}
               unreadCount={getUnreadCount(channel.id)}
-              getUserByUsername={getUserByUsername}
               getUsername={getUsername}
               getPosts={getPosts}
               getLatestMessage={getLatestMessage}
+              membersInChannel={membersInChannel}
             />
           ))}
       </div>
@@ -40,12 +38,11 @@ const Friends = props => {
 
 Friends.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
-  getMembers: PropTypes.func.isRequired,
   getUnreadCount: PropTypes.func.isRequired,
-  getUserByUsername: PropTypes.func.isRequired,
   getUsername: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
   getLatestMessage: PropTypes.func.isRequired,
+  membersInChannel: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friends)

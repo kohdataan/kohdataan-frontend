@@ -1,13 +1,8 @@
 import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  joinChannel as joinChannelAction,
-  getChannelMembers as getChannelMembersAction,
-} from 'mattermost-redux/actions/channels'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
-import { getUserByUsername } from '../api/user'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
@@ -19,15 +14,19 @@ const FriendsContainer = props => {
     myChannels,
     profiles,
     getPosts,
-    getChannelMembers,
     fetchFriendsPageData,
-    loading,
+    membersInChannel,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
+  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    fetchFriendsPageData()
+    const initialFetch = async () => {
+      await fetchFriendsPageData()
+      setIsInitialized(true)
+    }
+    initialFetch()
   }, [fetchFriendsPageData])
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const FriendsContainer = props => {
 
   const getUsername = members => {
     if (members.length > 0) {
-      const friend = members.find(member => member.user_id)
+      const friend = members.find(member => member.user_id !== currentUserId)
       const friendId = friend && friend.user_id
       const friendInfo =
         friendId &&
@@ -84,19 +83,18 @@ const FriendsContainer = props => {
     return null
   }
 
-  if (loading) {
+  if (!isInitialized || !directChannels.length) {
     return <BouncingLoader />
   }
   return (
     <>
       <Friends
         channels={directChannels}
-        getMembers={getChannelMembers}
         getUnreadCount={getUnreadCountByChannelId}
-        getUserByUsername={getUserByUsername}
         getUsername={getUsername}
         getPosts={getPosts}
         getLatestMessage={getLatestMessage}
+        membersInChannel={membersInChannel}
       />
     </>
   )
@@ -106,16 +104,16 @@ FriendsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
-  getChannelMembers: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  membersInChannel: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
   const { channels } = state.entities.channels
+  const { membersInChannel } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
   const { profiles } = state.entities.users
@@ -123,7 +121,6 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
-  const { loading } = state.friends
 
   return {
     currentUserId,
@@ -134,15 +131,13 @@ const mapStateToProps = state => {
     channels,
     members,
     myChannels,
-    loading,
+    membersInChannel,
   }
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      joinChannel: joinChannelAction,
-      getChannelMembers: getChannelMembersAction,
       getPosts: getPostsAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
     },

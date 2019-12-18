@@ -6,16 +6,13 @@ import { Link } from 'react-router-dom'
 const Friend = props => {
   const {
     channel,
-    getMembers,
     unreadCount,
-    getUserByUsername,
     getUsername,
     getPosts,
     getLatestMessage,
+    membersInChannel,
   } = props
 
-  const [members, setMembers] = useState([])
-  const [otherUser, setOtherUser] = useState({})
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
 
@@ -26,36 +23,19 @@ const Friend = props => {
   const message = getLatestMessage(posts)
 
   useEffect(() => {
-    const getPrivateChannelMembers = async () => {
-      const pMembers = await getMembers(channel.id)
-      if (pMembers && pMembers.data) {
-        setMembers(pMembers.data)
-      }
-    }
-    // getMembers(channel.id).then(data => setMembers(data.data))
-    getPrivateChannelMembers()
-  }, [getMembers, channel])
-
-  useEffect(() => {
+    // get member userinfo
+    const members = Object.values(membersInChannel[channel.id])
     const getUserInfo = async () => {
-      if (members) {
-        const userObj = getUsername(members)
-        if (userObj && userObj.username) {
-          setUser(userObj)
-          const otherUserData = await getUserByUsername(
-            userObj.username,
-            localStorage.getItem('authToken')
-          )
-          if (otherUserData) {
-            setOtherUser(otherUserData)
-          }
-        }
+      const userObj = getUsername(members)
+      if (userObj) {
+        setUser(userObj)
       }
     }
     getUserInfo()
-  }, [members, getUserByUsername, getUsername])
+  }, [getUsername, membersInChannel, channel])
 
   useEffect(() => {
+    // Get channel posts
     const fetchPosts = async () => {
       if (channel && channel.id) {
         const channelPosts = await getPosts(channel.id)
@@ -75,7 +55,7 @@ const Friend = props => {
         </div>
         <div className="friend-text-content">
           <div className="friend-header">
-            <h2>{otherUser.nickname}</h2>
+            <h2>{user.nickname}</h2>
             {unreadCount > 0 && (
               <mark className="unread-badge">{unreadCount}</mark>
             )}
@@ -89,12 +69,11 @@ const Friend = props => {
 
 Friend.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
-  getMembers: propTypes.func.isRequired,
   unreadCount: propTypes.number.isRequired,
-  getUserByUsername: propTypes.func.isRequired,
   getUsername: propTypes.func.isRequired,
   getPosts: propTypes.func.isRequired,
   getLatestMessage: propTypes.func.isRequired,
+  membersInChannel: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friend)

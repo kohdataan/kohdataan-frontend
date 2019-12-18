@@ -1,5 +1,8 @@
 import { getProfiles } from 'mattermost-redux/actions/users'
-import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
+import {
+  fetchMyChannelsAndMembers,
+  getChannelMembers,
+} from 'mattermost-redux/actions/channels'
 import * as types from '../../contants/actionTypes'
 import { initUser } from '../root/index'
 
@@ -15,6 +18,17 @@ export const friendsPageFetchingReady = () => {
   }
 }
 
+export const fetchDirectChannelMembers = () => {
+  return async (dispatch, getState) => {
+    const { channels } = getState().entities.channels
+    const promises = []
+    Object.values(channels).forEach(channel => {
+      promises.push(dispatch(getChannelMembers(channel.id)))
+    })
+    await Promise.all(promises)
+  }
+}
+
 export const fetchFriendsPageData = () => {
   // Fetch groups related channel data
   return async (dispatch, getState) => {
@@ -23,6 +37,7 @@ export const fetchFriendsPageData = () => {
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
+    await dispatch(fetchDirectChannelMembers())
     await dispatch(getProfiles())
     await dispatch(friendsPageFetchingReady())
   }
