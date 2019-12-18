@@ -10,11 +10,15 @@
   animation: bounceInRight 300ms;
 }
 
+.group-suggestion-box {
+  padding: 20px;
+}
+
 .suggestion-buttons-wrapper {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  padding: 10px 0;
+  margin: 30px 0;
   button {
     padding: 10px 35px;
   }

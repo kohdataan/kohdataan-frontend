@@ -23,6 +23,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-select": "^2.4.3",
+    "react-swipy": "0.0.6",
     "react-test-renderer": "^16.12.0",
     "redux": "^4.0.4",
     "redux-persist": "4.10.2",

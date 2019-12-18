@@ -6,22 +6,16 @@ import { Link } from 'react-router-dom'
 const Group = props => {
   const { channel, getMembers, unreadCount } = props
   const [members, setMembers] = useState([])
-  console.log('rendering')
 
   useEffect(() => {
     const getMemberData = async () => {
       if (channel && channel.id) {
-        console.log('here')
         const memberData = await getMembers(channel.id)
         setMembers(memberData.data)
       }
     }
     getMemberData()
   }, [channel, getMembers])
-
-  useEffect(() => {
-    console.log('members changing')
-  }, [members])
 
   return (
     <Link

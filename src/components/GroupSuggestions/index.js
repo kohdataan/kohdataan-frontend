@@ -11,6 +11,7 @@ const GroupSuggestions = props => {
     channelMembers,
     visibleSuggestion,
   } = props
+
   return (
     <div className="group-suggestions">
       <h1>Ehdotetut ryhmät</h1>

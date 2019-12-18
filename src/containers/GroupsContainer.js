@@ -43,7 +43,7 @@ const GroupsContainer = props => {
       return mySuggestions
     }
     if (myChannels) {
-      setFilteredSuggestions(getFilteredChannelSuggestions())
+      setFilteredSuggestions([...getFilteredChannelSuggestions()])
     }
   }, [myChannels, channelSuggestions])
 
@@ -81,9 +81,7 @@ const GroupsContainer = props => {
   const handleSkipChannel = () => {
     // Cycle suggestions array
     const currentIndex = filteredSuggestions.indexOf(visibleSuggestion)
-    console.log('current index', currentIndex)
     const nextIndex = (currentIndex + 1) % filteredSuggestions.length
-    console.log('next index', nextIndex)
     const nextItem = filteredSuggestions[nextIndex]
     setVisibleSuggestion(nextItem)
   }

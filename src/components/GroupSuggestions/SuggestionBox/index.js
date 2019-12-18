@@ -1,36 +1,23 @@
 import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import Swipeable from 'react-swipy'
 import ButtonContainer from '../../ButtonContainer'
 
 const SuggestionBox = props => {
   const { channel, handleJoinChannel, handleSkipChannel, members } = props
   return (
-    <div className="group-box suggestions-box">
-      <div className="group-box-content">
-        <div className="group-header">
-          <h2>{channel.display_name}</h2>
-        </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
-        {channel && members && (
-          <div className="suggestion-members-wrapper">
-            <p>{`${members.length} jäsentä`}</p>
-            <div className="suggestion-members-info">
-              {members.map(member => (
-                <p className="suggestion-member" key={member.id}>
-                  {member.nickname || member.username}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
+    <Swipeable
+      buttons={({ left }) => (
         <div className="suggestion-buttons-wrapper">
-          <Link to="/" onClick={() => handleSkipChannel()}>
-            <ButtonContainer className="skip-suggestion-button">
-              Ohita
-            </ButtonContainer>
-          </Link>
+          <ButtonContainer
+            className="skip-suggestion-button"
+            onClick={() => {
+              left()
+            }}
+          >
+            Ohita
+          </ButtonContainer>
           <ButtonContainer
             onClick={handleJoinChannel(channel.id)}
             className="join-suggestion-button"
@@ -39,8 +26,30 @@ const SuggestionBox = props => {
             Liity
           </ButtonContainer>
         </div>
+      )}
+      onAfterSwipe={handleSkipChannel}
+    >
+      <div className="group-box group-suggestion-box">
+        <div className="group-box-content">
+          <div className="group-header">
+            <h2>{channel.display_name}</h2>
+          </div>
+          <p>{`Yhteistä: ${channel.display_name}`}</p>
+          {channel && members && (
+            <div className="suggestion-members-wrapper">
+              <p>{`${members.length} jäsentä`}</p>
+              <div className="suggestion-members-info">
+                {members.map(member => (
+                  <p className="suggestion-member" key={member.id}>
+                    {member.nickname || member.username}
+                  </p>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Swipeable>
   )
 }
 
