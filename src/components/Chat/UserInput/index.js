@@ -1,10 +1,10 @@
 import React, { useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
+import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import ImagePreview from '../ImagePreview'
 import './styles.scss'
-import ButtonContainer from '../../ButtonContainer'
 
 const UserInput = props => {
   const { createPost, channel, uploadFile } = props

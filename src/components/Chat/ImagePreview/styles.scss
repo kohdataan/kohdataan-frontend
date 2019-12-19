@@ -1,17 +1,5 @@
 @import '../../../styles/colors.scss';
 
-.image-preview-content {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-around;
-  height: 100%;
-  width: 100%;
-}
-
-.image-preview-modal-button {
-  width: 50%;
-}
-
 .image-preview-user-input-content {
   display: flex;
   flex-direction: row;
@@ -27,7 +15,7 @@
   border-radius: 15px;
   margin: 0 5px;
   padding: 10px;
-  min-width: 60%;
+  min-width: 80%;
 }
 
 .preview-image {
