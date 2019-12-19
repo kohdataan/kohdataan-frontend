@@ -6,7 +6,6 @@ const Message = props => {
   const {
     sender,
     text,
-    url,
     currentUserId,
     senderId,
     iconColor,
@@ -71,12 +70,12 @@ const Message = props => {
           )}
           <div className="chat-message-content-field">
             <div className={messageContentClassList.join(' ')}>
-              {!url && <p className="chat-message-content-text">{text}</p>}
-              {url && (
+              <p className="chat-message-content-text">{text}</p>
+              {files && (
                 <img
                   src={`http://${
                     process.env.REACT_APP_MATTERMOST_URL
-                  }/api/v4/files/${files[0]}/preview`}
+                  }/api/v4/files/${files[0]}/thumbnail`}
                   alt="attachment"
                 />
               )}
@@ -98,6 +97,7 @@ Message.defaultProps = {
   type: '',
   url: false,
   senderId: '',
+  files: null,
 }
 
 Message.propTypes = {
@@ -112,7 +112,7 @@ Message.propTypes = {
   timeSent: propTypes.string.isRequired,
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
-  files: propTypes.instanceOf(Array).isRequired,
+  files: propTypes.instanceOf(Array),
 }
 
 export default memo(Message)

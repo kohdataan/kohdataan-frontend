@@ -1,0 +1,35 @@
+@import '../../../styles/colors.scss';
+
+.image-preview-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
+
+.image-preview-modal-button {
+  width: 50%;
+}
+
+.image-preview-user-input-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px auto;
+  width: 100%;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.image-preview-user-input-text-field {
+  border: 1px solid $black;
+  border-radius: 15px;
+  margin: 0 5px;
+  padding: 10px;
+  min-width: 60%;
+}
+
+.preview-image {
+  margin: auto;
+}

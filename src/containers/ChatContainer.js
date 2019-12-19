@@ -47,7 +47,6 @@ const ChatContainer = props => {
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
-  const [files, setFiles] = useState([])
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -70,7 +69,6 @@ const ChatContainer = props => {
     }
   }, [teams])
 
-  
   // Filter posts by channel id
   const filterPostsByChannelId = channelId => {
     const filteredPosts = Object.values(posts).filter(
@@ -154,7 +152,6 @@ const mapStateToProps = (state, ownProps) => {
   const user = state.entities.users.profiles[currentUserId]
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
-  // const { files } = state.entities.files
   const currentChannelId = ownProps.match.params.id
 
   return {

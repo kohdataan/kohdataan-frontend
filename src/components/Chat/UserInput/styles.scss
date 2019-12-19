@@ -30,9 +30,36 @@
   min-width: 70%;
 }
 
+.send-image-attachment-button {
+  width: 1.8em;
+  height: 1.8em;
+  background-image: url('../../../assets/image-light.svg');
+  background-repeat: no-repeat;
+  border: none;
+  margin-left: 15px;
+  margin-top: 5px;
+  align-self: center;
+}
+
+.send-image-attachment-button:active {
+  width: 1.9em;
+  height: 1.9em;
+}
+
+.send-voice-attachment-button {
+  width: 1.8em;
+  height: 1.8em;
+  background-repeat: no-repeat;
+  background-image: url('../../../assets/microphone-light.svg');
+  border: none;
+  margin-left: 15px;
+  margin-top: 5px;
+  align-self: center;
+}
+
 .send-message-button {
-  height: 2.5em;
-  width: 2.5em;
+  height: 2em;
+  width: 2em;
   background-color: #f59023;
   display: inline-flex;
   justify-content: center;
