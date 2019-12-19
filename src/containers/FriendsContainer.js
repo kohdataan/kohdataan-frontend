@@ -71,6 +71,7 @@ const FriendsContainer = props => {
   }
 
   const getLatestMessage = posts => {
+    // TODO: Even better posts loading
     const postMap = posts && Object.values(posts)[1]
     if (postMap) {
       const postsArray = Object.values(postMap)

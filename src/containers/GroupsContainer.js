@@ -27,7 +27,6 @@ const GroupsContainer = props => {
 
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
-  const [visibleSuggestion, setVisibleSuggestion] = useState({})
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group realated data at once
@@ -50,11 +49,6 @@ const GroupsContainer = props => {
       setFilteredSuggestions([...getFilteredChannelSuggestions()])
     }
   }, [myChannels, channelSuggestions])
-
-  useEffect(() => {
-    // initially take first suggestion from array
-    setVisibleSuggestion(filteredSuggestions[0])
-  }, [filteredSuggestions])
 
   // Get only group channels
   // (filter direct messages and default channels out)
@@ -82,14 +76,6 @@ const GroupsContainer = props => {
     history.push(`/chat/${channelId}`)
   }
 
-  const handleSkipChannel = () => {
-    // Cycle suggestions array
-    const currentIndex = filteredSuggestions.indexOf(visibleSuggestion)
-    const nextIndex = (currentIndex + 1) % filteredSuggestions.length
-    const nextItem = filteredSuggestions[nextIndex]
-    setVisibleSuggestion(nextItem)
-  }
-
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
@@ -113,9 +99,7 @@ const GroupsContainer = props => {
       <GroupSuggestions
         channels={filteredSuggestions}
         handleJoinChannel={handleJoinChannel}
-        handleSkipChannel={handleSkipChannel}
         channelMembers={channelSuggestionMembers}
-        visibleSuggestion={visibleSuggestion}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}

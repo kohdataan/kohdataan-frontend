@@ -1,17 +1,13 @@
 @import '../../../styles/colors.scss';
 
-.suggestions-box {
-  box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
-    3px -27px 0px -13px rgba(255, 255, 255, 1);
-  & p {
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
-  }
-  animation: bounceInRight 300ms;
-}
-
 .group-suggestion-box {
   padding: 20px;
+}
+
+.hidden-box {
+  position: absolute;
+  height: 72%;
+  top: -10px;
 }
 
 .suggestion-buttons-wrapper {
@@ -41,17 +37,4 @@
 
 .suggestion-member {
   margin: 0 10px 0 0;
-}
-
-@keyframes bounceInRight {
-  0% {
-    opacity: 0;
-    box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
-      3px -27px 0px -13px rgba(255, 255, 255, 1);
-  }
-  100% {
-    opacity: 1;
-    box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5),
-      3px -27px 0px -13px rgba(255, 255, 255, 1);
-  }
 }
