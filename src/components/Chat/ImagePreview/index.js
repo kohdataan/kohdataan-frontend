@@ -8,7 +8,7 @@ const ImagePreview = props => {
   const { handleSubmit, message, handleChange, fileId, closeModal } = props
 
   return (
-    <div className="image-preview-content">
+    <main className="image-preview-content">
       <div>
         <img
           className="preview-image"
@@ -35,6 +35,7 @@ const ImagePreview = props => {
               placeholder="Kirjoita viesti"
               maxRows={3}
               rows={1}
+              aria-label="message text"
             />
             <input type="submit" value="➤" className="send-message-button" />
           </form>
@@ -43,14 +44,14 @@ const ImagePreview = props => {
           Palaa
         </ButtonContainer>
       </div>
-    </div>
+    </main>
   )
 }
 
 ImagePreview.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   message: PropTypes.string,
-  setMessage: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
   fileId: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
 }

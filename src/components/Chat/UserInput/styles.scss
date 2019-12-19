@@ -30,14 +30,17 @@
   min-width: 70%;
 }
 
+.icon-btn {
+  background: transparent;
+  border: none;
+}
+
 .send-image-attachment-button {
   width: 1.8em;
   height: 1.8em;
   background-image: url('../../../assets/image-light.svg');
   background-repeat: no-repeat;
   border: none;
-  margin-left: 15px;
-  margin-top: 5px;
   align-self: center;
 }
 
@@ -52,8 +55,6 @@
   background-repeat: no-repeat;
   background-image: url('../../../assets/microphone-light.svg');
   border: none;
-  margin-left: 15px;
-  margin-top: 5px;
   align-self: center;
 }
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ModalContainer from '../../ModalContainer'
 import ImagePreview from '../ImagePreview'
 import './styles.scss'
+import ButtonContainer from '../../ButtonContainer'
 
 const UserInput = props => {
   const { createPost, channel, uploadFile } = props
@@ -65,6 +66,7 @@ const UserInput = props => {
           placeholder="Kirjoita viesti"
           maxRows={3}
           rows={1}
+          aria-label="add message"
         />
         <input
           style={{ display: 'none' }}
@@ -72,14 +74,20 @@ const UserInput = props => {
           accept="image/*"
           onChange={addImage}
           ref={fileInput}
+          aria-label="add image"
         />
-        <icon
-          onClick={clickFileInput}
-          className="send-image-attachment-button"
-          aria-labelledby="send-image-button"
+        <ButtonContainer className="icon-btn" onClick={clickFileInput}>
+          <div className="send-image-attachment-button" />
+        </ButtonContainer>
+        <ButtonContainer className="icon-btn">
+          <div className="send-voice-attachment-button" />
+        </ButtonContainer>
+        <input
+          type="submit"
+          value="➤"
+          className="send-message-button"
+          tabIndex="0"
         />
-        <icon className="send-voice-attachment-button" />
-        <input type="submit" value="➤" className="send-message-button" />
       </form>
       <ModalContainer
         modalIsOpen={modalIsOpen}
