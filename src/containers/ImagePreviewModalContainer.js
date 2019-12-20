@@ -16,16 +16,19 @@ const customStyles = {
     border: 'none',
     borderRadius: '5px',
     textAlign: 'center',
-    maxHeight: '100vh',
+    maxHeight: '95vh',
+    maxWidth: '80vh',
+    minWidth: '50vh',
+    minHeight: '60vh',
   },
   overlay: {
     position: 'fixed',
     zIndex: '2000',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
 }
 
-const ModalContainer = props => {
+const ImagePreviewModalContainer = props => {
   const { children, modalIsOpen, closeModal, label } = props
 
   return (
@@ -42,7 +45,7 @@ const ModalContainer = props => {
   )
 }
 
-ModalContainer.propTypes = {
+ImagePreviewModalContainer.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Array),
@@ -53,4 +56,4 @@ ModalContainer.propTypes = {
   label: PropTypes.string.isRequired,
 }
 
-export default memo(ModalContainer)
+export default memo(ImagePreviewModalContainer)

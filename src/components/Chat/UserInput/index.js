@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
-import ModalContainer from '../../ModalContainer'
+import ImagePreviewModalContainer from '../../../containers/ImagePreviewModalContainer'
 import ImagePreview from '../ImagePreview'
 import './styles.scss'
 
@@ -89,7 +89,7 @@ const UserInput = props => {
           tabIndex="0"
         />
       </form>
-      <ModalContainer
+      <ImagePreviewModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         label="image-preview-dialog"
@@ -105,7 +105,7 @@ const UserInput = props => {
           fileId={fileId}
           closeModal={closeModal}
         />
-      </ModalContainer>
+      </ImagePreviewModalContainer>
     </div>
   )
 }
