@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const Member = props => {
-  const { userId, nickName, currentUserId, iconClassNameList, profiles } = props
+  const {
+    userId,
+    nickName,
+    currentUserId,
+    iconClassNameList,
+    profiles,
+    iconMemberStatus,
+  } = props
   const userFirstLetter = nickName[0]
   const getUsername = () =>
     profiles && profiles[userId] && profiles[userId].username
@@ -13,6 +20,7 @@ const Member = props => {
     <div className="chat-header-members-sider-member">
       <i aria-hidden="true" title={userFirstLetter} />
       <span className={iconClassNameList}>{userFirstLetter}</span>
+      <span className={iconMemberStatus} />
       {currentUserId !== userId && (
         <Link
           className="members-sider-profile-link"
@@ -37,6 +45,7 @@ Member.propTypes = {
   currentUserId: propTypes.string.isRequired,
   iconClassNameList: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  iconMemberStatus: propTypes.string.isRequired,
 }
 
 export default memo(Member)

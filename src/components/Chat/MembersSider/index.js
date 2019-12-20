@@ -11,6 +11,7 @@ const MembersSider = props => {
     members,
     profiles,
     getNickNamebyId,
+    getStatusById,
     getIconColor,
     currentUserId,
     handleLeaveChannel,
@@ -26,6 +27,9 @@ const MembersSider = props => {
     ]
     return classNameList.join(' ')
   }
+
+  const getIconMemberStatus = userId =>
+    `chat-header-${getStatusById(userId)}-status-icon`
 
   const openModal = () => setShowConfirmation(true)
   const closeModal = () => setShowConfirmation(false)
@@ -48,6 +52,7 @@ const MembersSider = props => {
             nickName={getNickNamebyId(member.user_id)}
             currentUserId={currentUserId}
             iconClassNameList={getIconClassNameList(member.user_id)}
+            iconMemberStatus={getIconMemberStatus(member.user_id)}
           />
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
@@ -71,6 +76,7 @@ MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   getNickNamebyId: propTypes.func.isRequired,
+  getStatusById: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
   handleLeaveChannel: propTypes.func.isRequired,
