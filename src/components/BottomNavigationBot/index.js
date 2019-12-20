@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react'
+import PropTypes from 'prop-types'
 import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
@@ -58,7 +59,7 @@ const BottomNavigationBot = props => {
           <div
             className="modal-item"
             role="link"
-            tabIndex={-1}
+            tabIndex={0}
             onClick={() => {
               handleLogout()
               closeModal()
@@ -69,7 +70,7 @@ const BottomNavigationBot = props => {
             }}
           >
             <i className="fas fa-cog modal-icon" aria-hidden="true" />
-            Logout
+            Kirjaudu ulos
           </div>
         </div>
         <ButtonContainer className="button-close" onClick={closeModal}>
@@ -78,6 +79,10 @@ const BottomNavigationBot = props => {
       </ModalContainer>
     </div>
   )
+}
+
+BottomNavigationBot.propTypes = {
+  handleLogout: PropTypes.func.isRequired,
 }
 
 export default memo(BottomNavigationBot)
