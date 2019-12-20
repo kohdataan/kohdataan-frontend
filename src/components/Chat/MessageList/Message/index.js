@@ -95,7 +95,6 @@ const Message = props => {
 
 Message.defaultProps = {
   type: '',
-  url: false,
   senderId: '',
   files: null,
 }
@@ -104,7 +103,6 @@ Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
   type: propTypes.string,
-  url: propTypes.bool,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,

@@ -10,7 +10,9 @@
   width: 100%;
   height: 10%;
   margin: 0 auto;
-  position: absolute;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   background-color: $background-gray;
 }
 
@@ -20,6 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .chat-user-input-text-field {
@@ -27,7 +30,8 @@
   border-radius: 15px;
   margin: 0 5px;
   padding: 10px;
-  min-width: 70%;
+  min-width: 60%;
+  max-width: 80%;
 }
 
 .icon-btn {
@@ -36,8 +40,8 @@
 }
 
 .send-image-attachment-button {
-  width: 1.8em;
-  height: 1.8em;
+  width: 1.7em;
+  height: 1.7em;
   background-image: url('../../../assets/image-light.svg');
   background-repeat: no-repeat;
   border: none;
@@ -45,26 +49,28 @@
 }
 
 .send-image-attachment-button:active {
-  width: 1.9em;
-  height: 1.9em;
+  width: 1.8em;
+  height: 1.8em;
 }
 
 .send-voice-attachment-button {
-  width: 1.8em;
-  height: 1.8em;
+  width: 1.7em;
+  height: 1.7em;
   background-repeat: no-repeat;
   background-image: url('../../../assets/microphone-light.svg');
   border: none;
   align-self: center;
+  margin-right: -2px;
 }
 
 .send-message-button {
-  height: 2em;
+  height: 1.8em;
   width: 2em;
   background-color: #f59023;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  padding: 0px 12px;
   border: 0;
 }
