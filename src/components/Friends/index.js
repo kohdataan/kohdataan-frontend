@@ -19,7 +19,7 @@ const Friends = props => {
         <h1>Kaverit</h1>
       </div>
       <div className="friends-boxes">
-        {channels &&
+        {channels && channels.length > 0 ? (
           Object.values(channels).map(channel => (
             <Friend
               key={channel.id}
@@ -30,7 +30,13 @@ const Friends = props => {
               getLatestMessage={getLatestMessage}
               membersInChannel={membersInChannel}
             />
-          ))}
+          ))
+        ) : (
+          <h3 style={{ textAlign: 'center' }}>
+            Sinulla ei ole vielä yksityisviestejä. Löydät uusia kavereita
+            Ryhmät-välilehdeltä!
+          </h3>
+        )}
       </div>
     </div>
   )
