@@ -17,6 +17,7 @@ const EditInterests = props => {
         options={interestOptions}
         interests={newInterests}
         setInterests={setNewInterests}
+        hideStep
       />
       <div style={{ marginBottom: '100px', textAlign: 'center' }}>
         <Link to="/me">

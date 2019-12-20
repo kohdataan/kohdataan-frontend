@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import EditInterestsContainer from '../../EditInterestsContainer'
 
 const Interests = props => {
-  const { options, interests, setInterests } = props
+  const { options, interests, setInterests, hideStep } = props
 
   return (
     <main role="main" className="add-user-interests-container">
@@ -15,7 +15,7 @@ const Interests = props => {
       </p>
       <div className="profile-creation-title-container">
         <h3 className="profile-creation-title">Valitse 3-5</h3>
-        <span className="profile-creation-step-text">6/6</span>
+        {!hideStep && <span className="profile-creation-step-text">6/6</span>}
       </div>
 
       <EditInterestsContainer
@@ -31,6 +31,11 @@ Interests.propTypes = {
   interests: propTypes.instanceOf(Array).isRequired,
   setInterests: propTypes.func.isRequired,
   options: propTypes.instanceOf(Array).isRequired,
+  hideStep: propTypes.bool,
+}
+
+Interests.defaultProps = {
+  hideStep: false,
 }
 
 export default memo(Interests)
