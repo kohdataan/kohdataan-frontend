@@ -147,7 +147,7 @@ const mapStateToProps = (state, ownProps) => {
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
-  const { statuses } = state.entities.users.statuses
+  const { statuses } = state.entities.users
 
   return {
     currentUserId,
