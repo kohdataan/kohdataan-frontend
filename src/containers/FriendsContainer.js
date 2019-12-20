@@ -84,7 +84,7 @@ const FriendsContainer = props => {
     return null
   }
 
-  if (!isInitialized || !directChannels.length) {
+  if (!isInitialized) {
     return <BouncingLoader />
   }
   return (
