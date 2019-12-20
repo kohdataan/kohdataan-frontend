@@ -1,54 +1,107 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { login } from 'mattermost-redux/actions/users'
 import { Link } from 'react-router-dom'
-import InputField from '../InputField'
-import ButtonContainer from '../ButtonContainer'
-import * as API from '../../api/user'
+import useForm from 'react-hook-form'
+import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 const LogIn = props => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { login: matterMostLogin } = props
+  const { handleLogin } = props
+  const { register, handleSubmit, errors, setError, clearError } = useForm()
 
-  const handleLogin = async () => {
-    const user = { email, password }
-    await API.userLogin(user).then(e => {
-      console.log(e)
-    })
-    await matterMostLogin(email, password)
+  const onSubmit = async data => {
+    try {
+      const response = await handleLogin(data.email.trim(), data.password)
+      if (!response) {
+        setError(
+          'email',
+          'loginError',
+          'Tarkista, että kirjoitit sähköpostin oikein.'
+        )
+        setError(
+          'password',
+          'loginError',
+          'Tarkista, että kirjoitit salasanan oikein.'
+        )
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error)
+    }
   }
 
   return (
-    <div className="login-container">
+    <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="login-fields-container">
         <h2 className="login-title">KIRJAUTUMINEN</h2>
-        <div className="login-input-fields-container">
-          <InputField
-            label="Sähköposti"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            inputClassName="login-input-text"
-            labelClassName="login-input-field"
-          />
-          <InputField
-            label="Salasana"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            inputClassName="login-input-text"
-            labelClassName="login-input-field"
-            type="password"
-          />
-          <ButtonContainer className="login-button" onClick={handleLogin}>
-            Kirjaudu
-          </ButtonContainer>
-        </div>
+        <form
+          className="login-input-fields-container"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="formfield-container">
+            <ValidatedInputField
+              label="Sähköposti"
+              name="email"
+              onChange={() => clearError()}
+              ref={register({
+                required: true,
+              })}
+              ariaInvalid={!!errors.email}
+              inputClassName="create-account-input-text"
+              labelClassName={
+                errors.email
+                  ? 'create-account-errors-field'
+                  : 'create-account-input-field'
+              }
+            />
+            <div className="error-text">
+              {errors.email &&
+                errors.email.type === 'required' &&
+                'Kirjoita sähköpostiosoite.'}
+              {errors.email &&
+                errors.email.type === 'loginError' &&
+                'Tarkista, että kirjoitit sähköpostin oikein.'}
+            </div>
+          </div>
+
+          <div className="formfield-container">
+            <ValidatedInputField
+              label="Salasana"
+              name="password"
+              onChange={() => clearError()}
+              ref={register({
+                required: true,
+              })}
+              type="password"
+              ariaInvalid={!!errors.password}
+              inputClassName="create-account-input-text"
+              labelClassName={
+                errors.password
+                  ? 'create-account-errors-field'
+                  : 'create-account-input-field'
+              }
+            />
+            <div className="error-text">
+              {errors.password &&
+                errors.password.type === 'required' &&
+                'Kirjoita salasana.'}
+              {errors.password &&
+                errors.password.type === 'loginError' &&
+                'Tarkista, että kirjoitit salasanan oikein.'}
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="create-account-button"
+            onKeyPress={handleSubmit(onSubmit)}
+            tabIndex="0"
+          >
+            {'Kirjaudu'}
+          </button>
+        </form>
         <div className="login-links-container">
-          <Link className="login-link" to="/">
+          <Link className="login-link" to="/reset-password">
             {'Olen unohtanut salasanani'}
           </Link>
           <Link className="login-link" to="/createaccount">
@@ -56,23 +109,12 @@ const LogIn = props => {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 
 LogIn.propTypes = {
-  login: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      login,
-    },
-    dispatch
-  )
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(memo(LogIn))
+export default memo(LogIn)

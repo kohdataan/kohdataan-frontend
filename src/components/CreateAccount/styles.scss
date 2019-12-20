@@ -1,11 +1,21 @@
 @import '../../styles/colors.scss';
 
-@font-face {
-    font-family: 'Next Art';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-  }
+.accept-rules-link {
+  font: 1.2em Verdana, sans-serif;
+  color: white;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  text-transform: none;
+  margin-bottom: 1em;
+}
+
+.close-modal-button {
+  width: 1,2em;
+  height:  1,2em;
+  border: 1px solid black;
+  border-radius: 50%;
+}
 
 .create-account-container {
   background-color: $black;
@@ -13,13 +23,6 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
-}
-
-.main-title {
-  font-size: 42px;
-  color: #fff;
-  font-weight: 700;
-  font-family: 'Next Art', sans-serif;
 }
 
 .create-account-text {
@@ -59,6 +62,21 @@
   &:focus {
     outline: none;
     border: solid 1px $white;
+  }
+}
+
+.create-account-errors-field {
+  margin-top: 5px;
+  background: transparent;
+  border: solid 1px #ff5c69;
+  border-radius: 25px;
+  padding: 10px 0 10px 10px;
+  color: $white;
+  &::placeholder {
+    color: $white;
+  }
+  &:focus {
+    outline: none;
   }
 }
 
@@ -102,9 +120,36 @@
 
 .create-account-title {
   text-align: left;
+  text-transform: uppercase;
   color: $white;
 }
 
-.divider {
-    border: 0.5px solid $orange;
+.error-text {
+  color: #ff868f;
+  font-size: 0.8em;
+  margin: -15px 0 0;
+  text-align: left;
+}
+
+.formfield-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.info-circle-button {
+  width: 2em;
+  height: 2em;
+  background-color: black;
+  background-image: url('../../assets/info-circle-solid-orange.svg');
+  border: none;
+  margin-left: 15px;
+  margin-top: 5px;
+  align-self: center;
+}
+
+.info-circle-line {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }

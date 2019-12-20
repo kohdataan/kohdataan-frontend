@@ -5,15 +5,18 @@ import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 
 const Header = props => {
-  const { channel, toggleSider } = props
+  const { channel, toggleSider, otherUser } = props
+  const header = otherUser || channel.display_name
+
   return (
     <div className="chat-header">
-      <Link className="chat-header-item chat-header-nav-back-button" to="/">
+      <Link
+        className="chat-header-item chat-header-nav-back-button"
+        to={channel.type === 'D' ? '/friends' : '/'}
+      >
         {'< Takaisin'}
       </Link>
-      <h1 className="chat-header-item chat-header-channel-name">
-        {channel.display_name}
-      </h1>
+      <h1 className="chat-header-item chat-header-channel-name">{header}</h1>
       <div className="chat-header-item">
         <ButtonContainer
           className=" chat-header-group-img-button"
@@ -36,6 +39,11 @@ Header.defaultProps = {
 Header.propTypes = {
   channel: propTypes.instanceOf(Object),
   toggleSider: propTypes.func.isRequired,
+  otherUser: propTypes.instanceOf(Object),
+}
+
+Header.defaultProps = {
+  otherUser: null,
 }
 
 export default memo(Header)

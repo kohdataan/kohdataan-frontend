@@ -1,12 +1,5 @@
 @import '../../styles/colors.scss';
 
-@font-face {
-  font-family: 'Next Art';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Next Art'), url('./../../assets/fonts/NextArtSemiBold.otf') format('otf');
-}
-
 .login-container {
   background-color: $black;
   height: 100%;
@@ -17,16 +10,8 @@
   justify-content: space-evenly;
 }
 
-.main-title {
-  font-size: 42px;
-  color: #fff;
-  font-weight: 600;
-  font-family: 'Next Art', sans-serif;
-}
-
 .login-fields-container {
   width: 80%;
-
 }
 
 .login-input-fields-container {

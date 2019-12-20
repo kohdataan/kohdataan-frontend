@@ -16,6 +16,22 @@ const userLogin = async data => {
   }
 }
 
+const userLogout = async token => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const userSignUp = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -103,19 +119,22 @@ const updateUser = async (data, id, token) => {
 
 const addUserInterests = async (data, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
-  try {
-    const resp = await fetch(`${uri}/userInterest`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return handleFetchErrors(resp)
-  } catch (e) {
-    throw new Error(e)
+  if (data.userInterests.length >= 3) {
+    try {
+      const resp = await fetch(`${uri}/userInterest`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      return handleFetchErrors(resp)
+    } catch (e) {
+      throw new Error(e)
+    }
   }
+  return null
 }
 
 const getUserInterest = async token => {
@@ -150,8 +169,25 @@ const getInterestsByUsername = async (token, username) => {
   }
 }
 
+const sendEmail = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/sendMail/problem`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return resp
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
+  userLogout,
   userSignUp,
   resetPassword,
   getUser,
@@ -160,4 +196,5 @@ export {
   getUserInterest,
   addUserInterests,
   getInterestsByUsername,
+  sendEmail,
 }

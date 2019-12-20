@@ -17,6 +17,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
+import { getUserByUsername } from '../api/user'
 import Chat from '../components/Chat'
 
 const ChatContainer = props => {
@@ -35,7 +36,7 @@ const ChatContainer = props => {
     getChannelMembers,
     removeChannelMember,
     viewChannel,
-    statuses
+    statuses,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -113,6 +114,7 @@ const ChatContainer = props => {
           members={currentMembers}
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
+          getUserByUsername={getUserByUsername}
         />
       )}
     </>
@@ -134,7 +136,7 @@ ChatContainer.propTypes = {
   currentChannelId: PropTypes.string.isRequired,
   removeChannelMember: PropTypes.func.isRequired,
   viewChannel: PropTypes.func.isRequired,
-  statuses: PropTypes.instanceOf(Object).isRequired
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -145,7 +147,7 @@ const mapStateToProps = (state, ownProps) => {
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
-  const statuses = state.entities.users.statuses
+  const { statuses } = state.entities.users.statuses
 
   return {
     currentUserId,
@@ -155,7 +157,7 @@ const mapStateToProps = (state, ownProps) => {
     teams,
     posts,
     channels,
-    statuses
+    statuses,
   }
 }
 

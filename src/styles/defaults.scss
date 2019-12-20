@@ -2,9 +2,17 @@
 @import './colors.scss';
 @import './normalize.scss';
 @import './colors.scss';
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 html {
   height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+.main-title {
+  font-size: 42px;
+  color: #fff;
 }
 
 #root {
@@ -17,9 +25,9 @@ html {
 
 h1 {
   color: $black;
-  font-family: 'Paytone One', sans-serif;
-  font-size: 22px;
-  letter-spacing: -0.1px;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 2em;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -32,7 +40,6 @@ h2 {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
   font-size: 16px;
   letter-spacing: -0.2px;
   height: 100%;
@@ -91,4 +98,30 @@ textarea {
 
 #react-select-2-input {
   font-size: 16px !important;
+}
+
+.profile-creation-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.profile-creation-title {
+  font-family: Poppins;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.profile-creation-step-text {
+  font-family: Lato;
+  font-size: 16px;
+  letter-spacing: -0.17px;
+  color: $text-medium-gray;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  display: block;
 }

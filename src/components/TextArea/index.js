@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const Textarea = props => {
+const TextArea = props => {
   const {
     label,
+    showLabel,
     value,
     inputClassName,
     labelClassName,
@@ -13,7 +14,7 @@ const Textarea = props => {
   } = props
   return (
     <label htmlFor={label} className={inputClassName}>
-      {label}
+      {showLabel && label}
       <textarea
         type="text"
         name={label}
@@ -29,8 +30,9 @@ const Textarea = props => {
   )
 }
 
-Textarea.propTypes = {
+TextArea.propTypes = {
   label: PropTypes.string.isRequired,
+  showLabel: PropTypes.bool,
   value: PropTypes.string,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
@@ -39,7 +41,8 @@ Textarea.propTypes = {
   rows: PropTypes.number,
 }
 
-Textarea.defaultProps = {
+TextArea.defaultProps = {
+  showLabel: true,
   value: '',
   inputClassName: '',
   labelClassName: '',
@@ -47,4 +50,4 @@ Textarea.defaultProps = {
   rows: 4,
 }
 
-export default memo(Textarea)
+export default memo(TextArea)
