@@ -11,12 +11,7 @@ const EditButton = props => {
   ]
   return (
     <div className="profile-header-item">
-      <ButtonContainer
-        onClick={() => {
-          console.log('editing')
-        }}
-        className={classNameList.join(' ')}
-      >
+      <ButtonContainer onClick={() => {}} className={classNameList.join(' ')}>
         Muokkaa
       </ButtonContainer>
     </div>
