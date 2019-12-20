@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
 
@@ -72,12 +73,14 @@ const Message = props => {
             <div className={messageContentClassList.join(' ')}>
               <p className="chat-message-content-text">{text}</p>
               {files && (
-                <img
-                  src={`http://${
-                    process.env.REACT_APP_MATTERMOST_URL
-                  }/api/v4/files/${files[0]}/thumbnail`}
-                  alt="attachment"
-                />
+                <Link to={`view-image/${files[0]}`}>
+                  <img
+                    src={`http://${
+                      process.env.REACT_APP_MATTERMOST_URL
+                    }/api/v4/files/${files[0]}/thumbnail`}
+                    alt="attachment"
+                  />
+                </Link>
               )}
             </div>
           </div>
@@ -95,7 +98,6 @@ const Message = props => {
 
 Message.defaultProps = {
   type: '',
-  url: false,
   senderId: '',
   files: null,
 }
@@ -104,7 +106,6 @@ Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
   type: propTypes.string,
-  url: propTypes.bool,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
   iconColor: propTypes.string.isRequired,

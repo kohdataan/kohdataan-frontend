@@ -9,7 +9,13 @@ const ImagePreview = props => {
 
   return (
     <main className="image-preview-content">
-      <div>
+      <div className="image">
+        <ButtonContainer
+          className="image-preview-close-modal-button"
+          onClick={closeModal}
+        >
+          x
+        </ButtonContainer>
         <img
           className="preview-image"
           src={`http://${
@@ -20,7 +26,7 @@ const ImagePreview = props => {
           height="100%"
         />
       </div>
-      <div>
+      <div className="image-preview-form">
         <div className="image-preview-user-input-wrapper">
           <form
             onSubmit={handleSubmit}
@@ -40,9 +46,6 @@ const ImagePreview = props => {
             <input type="submit" value="➤" className="send-message-button" />
           </form>
         </div>
-        <ButtonContainer className="profile-modal-button" onClick={closeModal}>
-          Palaa
-        </ButtonContainer>
       </div>
     </main>
   )

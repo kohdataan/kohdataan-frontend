@@ -20,6 +20,7 @@ import RegistrationProblemContainer from './containers/RegistrationProblemContai
 import ProfileContainer from './containers/ProfileContainer'
 import PasswordResetContainer from './containers/PasswordResetContainer'
 import FriendsContainer from './containers/FriendsContainer'
+import ViewImageContainer from './containers/ViewImageContainer'
 import getInterestsAction from './store/interest/interestAction'
 import { addUserToState } from './store/user/userAction'
 import './styles/defaults.scss'
@@ -78,6 +79,7 @@ class App extends Component {
           component={ProfileContainer}
         />
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
+        <Route path="/chat/view-image/:fileId" component={ViewImageContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )

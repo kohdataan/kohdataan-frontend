@@ -20,6 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 12px;
 }
 
 .chat-user-input-text-field {
@@ -59,12 +60,13 @@
 }
 
 .send-message-button {
-  height: 2em;
+  height: 1.9em;
   width: 2em;
   background-color: #f59023;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  padding: 0px 12px;
   border: 0;
 }
