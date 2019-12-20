@@ -35,6 +35,31 @@
   border-radius: 50%;
 }
 
+.chat-header-online-status-icon {
+  background-color: green;
+  border: solid 1px var(--white);
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.chat-header-offline-status-icon {
+  background-color: grey;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.chat-header-away-status-icon {
+  background-color: yellow;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
 .members-sider-leave-group-button {
   position: absolute;
   padding: 10px 28px;

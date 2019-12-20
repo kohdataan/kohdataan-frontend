@@ -15,7 +15,9 @@ const Chat = props => {
     currentUserId,
     members,
     handleLeaveChannel,
+    statuses,
   } = props
+
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
@@ -44,6 +46,11 @@ const Chat = props => {
     return visibleName
   }
 
+  const getStatusById = id => {
+    const status = id ? statuses[id] : ''
+    return status
+  }
+
   const getOtherUserName = () => {
     if (directChannel) {
       const otherUser = members.find(member => member.user_id !== currentUserId)
@@ -52,9 +59,7 @@ const Chat = props => {
           <>
             <img
               className="friend-icon"
-              src={`http://${
-                process.env.REACT_APP_MATTERMOST_URL
-              }/api/v4/users/${otherUser.user_id}/image`}
+              src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
             {getNicknameById(otherUser.user_id)}
@@ -87,6 +92,7 @@ const Chat = props => {
           getUserNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
+          getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
         />
       )}
@@ -102,6 +108,7 @@ Chat.propTypes = {
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Array).isRequired,
 }
 
 Chat.defaultProps = {
