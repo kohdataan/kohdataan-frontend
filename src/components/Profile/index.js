@@ -52,7 +52,7 @@ const Profile = props => {
           />
         )}
         {ownProfile && (
-          <Link className="" to="/edit-me">
+          <Link className="edit-me-link" to="/edit-me">
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
         )}
@@ -72,7 +72,7 @@ const Profile = props => {
         <div className="interests-header">
           <h2>Minua kiinnostaa</h2>
           {ownProfile && (
-            <Link className="" to="/edit-interests">
+            <Link className="edit-interests-link" to="/edit-interests">
               <EditButton isHighlighted={false} />
             </Link>
           )}
