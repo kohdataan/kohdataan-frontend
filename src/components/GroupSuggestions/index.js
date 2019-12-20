@@ -25,6 +25,7 @@ const GroupSuggestions = props => {
                 i === cards.length - 1 ? (
                   <Swipeable
                     key={card.id}
+                    min={80}
                     buttons={({ left }) => (
                       <div className="suggestion-buttons-wrapper">
                         <ButtonContainer

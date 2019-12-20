@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { TextLine } from '../../ContentLoader'
 
 const Friend = props => {
   const {
@@ -49,9 +50,7 @@ const Friend = props => {
     <Link className="friend-box" to={`/chat/${channel.id}`}>
       <div className="friend-box-content">
         <div className="friend-icon-box">
-          {imageUri && (
-            <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
-          )}
+          <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
         </div>
         <div className="friend-text-content">
           <div className="friend-header">
@@ -60,7 +59,7 @@ const Friend = props => {
               <mark className="unread-badge">{unreadCount}</mark>
             )}
           </div>
-          {message && <>{message}</>}
+          {message ? <>{message}</> : <TextLine />}
         </div>
       </div>
     </Link>
