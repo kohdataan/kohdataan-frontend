@@ -32,7 +32,7 @@ const Friends = props => {
             />
           ))
         ) : (
-          <h3 style={{ textAlign: 'center' }}>
+          <h3 className="no-friends-yet-header">
             Sinulla ei ole vielä yksityisviestejä. Löydät uusia kavereita
             Ryhmät-välilehdeltä!
           </h3>
