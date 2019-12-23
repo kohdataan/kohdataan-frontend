@@ -109,7 +109,7 @@ Chat.propTypes = {
   createPost: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
-  statuses: PropTypes.instanceOf(Array).isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {
