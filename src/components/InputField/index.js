@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 const InputField = props => {
   const {
     label,
+    labelClassName,
+    showPlaceholder,
     showLabel,
     value,
     inputClassName,
-    labelClassName,
     onChange,
     type,
   } = props
@@ -20,7 +21,7 @@ const InputField = props => {
         id={label}
         aria-label={label}
         value={value}
-        placeholder={label}
+        placeholder={showPlaceholder ? label : ''}
         className={labelClassName}
         onChange={onChange}
       />
@@ -35,6 +36,7 @@ InputField.propTypes = {
   value: PropTypes.string,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
+  showPlaceholder: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 }
 
@@ -44,6 +46,7 @@ InputField.defaultProps = {
   value: '',
   inputClassName: '',
   labelClassName: '',
+  showPlaceholder: true,
 }
 
 export default memo(InputField)
