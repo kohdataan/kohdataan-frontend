@@ -1,4 +1,8 @@
-@import '../../styles/colors.scss';
+@import '../../../styles/colors.scss';
+
+.hidden-field {
+  display: none;
+}
 
 .password-reset-container {
   background-color: $black;
@@ -7,14 +11,25 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  color: $white;
 }
 
-.password-reset-fields-container {
+.password-reset-title {
+  text-transform: uppercase;
+  color: white;
+}
+
+.password-reset-content-container {
   width: 80%;
+  height: 100%;
+}
+
+.password-reset-input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .password-reset-input-text {
@@ -22,6 +37,7 @@
   flex-direction: column;
   color: $white;
   margin: 0 0 20px 0;
+  font-size: 1.2em;
   width: 100%;
 }
 
@@ -42,14 +58,31 @@
   }
 }
 
-.reset-button {
+.password-reset-button {
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
+  margin: auto;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
-  color: #3a3a3a;
+  color: $black;
   background-color: $orange;
   outline: none;
+}
+
+.password-reset-link-container {
+  padding-top: 30px;
+}
+
+.password-reset-link {
+  color: $white;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  padding: 10px 0 20px 0;
+
+  :visited {
+    color: $white;
+  }
 }
