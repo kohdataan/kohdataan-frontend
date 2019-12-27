@@ -2,10 +2,7 @@ import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  uploadProfileImage,
-  updateMe as updateMMUserAction,
-} from 'mattermost-redux/actions/users'
+import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
@@ -33,7 +30,6 @@ const RegistrationContainer = props => {
     interestOptions,
     registrationError,
     userBirthdate,
-    updateMMUser,
   } = props
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState('')
@@ -148,9 +144,7 @@ const RegistrationContainer = props => {
   const profileCreationAction = () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        // Update both mmuser nickname and node-user nickname
-        updateMMUser({ nickname })
-        return props.updateUser({ nickname, mmId: mattermostId })
+        return props.updateUser({ nickname, mmid: mattermostId })
       }
       case pages['add-show-age'].current: {
         return props.updateUser({ showAge })
@@ -207,7 +201,6 @@ RegistrationContainer.propTypes = {
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
-  updateMMUser: PropTypes.func.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
@@ -223,7 +216,6 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage,
       addUserInterests,
       getInterestsAction,
-      updateMMUser: updateMMUserAction,
     },
     dispatch
   )
