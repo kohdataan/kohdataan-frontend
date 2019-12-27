@@ -27,7 +27,7 @@ const LogInContainer = props => {
     await addUserToState()
   }
 
-  return <LogIn handleLogin={handleLogin} />
+  return <LogIn handleLogin={handleLogin} user={user} />
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
