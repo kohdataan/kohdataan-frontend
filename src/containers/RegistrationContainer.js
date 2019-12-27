@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
@@ -20,6 +19,7 @@ import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import getInterestsAction from '../store/interest/interestAction'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
+import getAge from '../utils/getAge'
 
 const RegistrationContainer = props => {
   const {
@@ -84,15 +84,6 @@ const RegistrationContainer = props => {
     }
   }
 
-  const getAge = () => {
-    const birthdate = moment(userBirthdate)
-    const now = moment()
-    const dateDiff = now.diff(birthdate)
-    const dateDiffDuration = moment.duration(dateDiff)
-    const age = dateDiffDuration.years()
-    return age
-  }
-
   const subpage = () => {
     switch (step) {
       case pages.info.current:
@@ -111,7 +102,7 @@ const RegistrationContainer = props => {
         return (
           <ShowAge
             onChange={setShowAge}
-            age={getAge()}
+            age={getAge({ birthdate: userBirthdate })}
             showAge={showAge.toString()}
           />
         )

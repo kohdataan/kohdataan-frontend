@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react'
 import propTypes from 'prop-types'
-import moment from 'moment'
 import { Link } from 'react-router-dom'
 import Picture from '../RegistrationFlow/Picture'
 import Description from '../RegistrationFlow/Description'
@@ -9,6 +8,7 @@ import ShowAge from '../RegistrationFlow/ShowAge'
 import Location from '../RegistrationFlow/Location'
 import ButtonContainer from '../ButtonContainer'
 import EditTitle from './EditTitle'
+import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const EditProfile = props => {
@@ -41,15 +41,6 @@ const EditProfile = props => {
     }
   }
 
-  const getAge = () => {
-    const birthdate = moment(myUserInfo.birthdate)
-    const now = moment()
-    const dateDiff = now.diff(birthdate)
-    const dateDiffDuration = moment.duration(dateDiff)
-    const age = dateDiffDuration.years()
-    return age
-  }
-
   return (
     <main className="profile-edit-container">
       <EditTitle text="Muokkaa profiiliasi" />
@@ -68,7 +59,7 @@ const EditProfile = props => {
           <ShowAge
             hideStep
             showAge={newShowAge.toString()}
-            age={getAge()}
+            age={getAge(myUserInfo)}
             onChange={setNewShowAge}
           />
         </div>

@@ -21,7 +21,15 @@ const Profile = props => {
   } = props
 
   // Extended user info from node backend
-  const { location, description, tutorialWatched, nickname } = myUserInfo
+  const {
+    location,
+    description,
+    tutorialWatched,
+    nickname,
+    birthdate,
+    showAge,
+    showLocation,
+  } = myUserInfo
   // Decide whether to show modals
   const getShowModals = () => {
     return !!(!tutorialWatched && ownProfile)
@@ -49,6 +57,9 @@ const Profile = props => {
           <ProfileHeader
             nickname={nickname || mmuser.username}
             location={location}
+            birthdate={birthdate}
+            showAge={showAge}
+            showLocation={showLocation}
           />
         )}
         {ownProfile && (
