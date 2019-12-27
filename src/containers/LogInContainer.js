@@ -1,66 +1,65 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { login } from 'mattermost-redux/actions/users'
 import LogIn from '../components/LogIn'
-import * as API from '../api/user'
+import {
+  userLogin as userLoginAction,
+  addUserToState as addUserToStateAction,
+} from '../store/user/userAction'
 
 const LogInContainer = props => {
-  const { login: matterMostLogin } = props
-  const handleLogin = async (email, password) => {
-    try {
-      const user = { email, password }
-      let loginSuccess = false
-      const res = await API.userLogin(user)
-      if (res) {
-        localStorage.setItem('userId', res.user.id)
-        localStorage.setItem('authToken', res.token)
-        loginSuccess = true
+  const { userLogin, addUserToState, user, history } = props
+
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      if (user.profileReady) {
+        history.push('/')
+      } else {
+        history.push('/registration/info')
       }
-      if (loginSuccess) {
-        await matterMostLogin(email, password)
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
     }
+  }, [user, history])
+
+  const handleLogin = async (email, password) => {
+    const userData = { email, password }
+    await userLogin(userData)
+    await addUserToState()
   }
+
   return <LogIn handleLogin={handleLogin} />
 }
 
-// TODO: refactor
 const shouldComponentUpdate = (props, prevProps) => {
   const { match: pMatch, ...prest } = prevProps
   const { match, ...rest } = props
-  if (localStorage.getItem('authToken')) {
-    API.getUser(
-      localStorage.getItem('userId'),
-      localStorage.getItem('authToken')
-    ).then(loggedUser => {
-      if (loggedUser.profileReady) {
-        props.history.push('/')
-      } else {
-        props.history.push('/registration/info')
-      }
-    })
-  }
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
 LogInContainer.propTypes = {
-  login: PropTypes.func.isRequired,
+  userLogin: PropTypes.func.isRequired,
+  addUserToState: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+}
+
+const mapStateToProps = state => {
+  const { user } = state
+  return {
+    user,
+  }
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      login,
+      userLogin: userLoginAction,
+      addUserToState: addUserToStateAction,
     },
     dispatch
   )
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(memo(LogInContainer, shouldComponentUpdate))
