@@ -194,7 +194,7 @@ const sendEmail = async data => {
         'Content-Type': 'application/json',
       },
     })
-    return resp
+    return await resp.json()
   } catch (e) {
     throw new Error(e)
   }

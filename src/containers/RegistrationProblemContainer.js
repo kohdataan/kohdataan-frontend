@@ -12,7 +12,7 @@ const RegistrationProblemContainer = props => {
     }
     const resp = await API.sendEmail(msg)
     console.log(resp)
-    if (resp.ok) {
+    if (resp && resp.success) {
       props.history.push('/messagesent')
     } else {
       alert('Viestin lähetys ei onnistunut')
