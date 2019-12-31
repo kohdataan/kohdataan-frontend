@@ -6,7 +6,7 @@ describe('Channel api service tests', () => {
     fetch.resetMocks()
   })
 
-  it('Get channel calls correct url once and returns data', async () => {
+  it('Get channel invitations calls correct url once and returns data', async () => {
     const mockResponse = {
       success: true,
       message: 'Channels',
@@ -57,7 +57,7 @@ describe('Channel api service tests', () => {
     expect(fetch.mock.calls[0][0]).toEqual(`${uri}/channelInvitation`)
   })
 
-  it('Rejected api call throws an error', async () => {
+  it('Rejected call for get channel invitations throws an error', async () => {
     fetch.mockRejectOnce(new Error('Failed for some reason'))
 
     await expect(API.getChannelInvitations()).rejects.toThrow(
@@ -65,5 +65,46 @@ describe('Channel api service tests', () => {
     )
     expect(fetch.mock.calls.length).toEqual(1)
     expect(fetch.mock.calls[0][0]).toEqual(`${uri}/channelInvitation`)
+  })
+
+  it('Get channel invitation members calls correct url once and returns data', async () => {
+    const mockResponse = {
+      success: true,
+      message: 'Channel users fetched',
+      userDetails: [
+        {
+          id: 'rphkr19ta7yftehrc5xaop8dph',
+          username: 'dev',
+          email: 'dev@kohdataan.fi',
+          nickname: '',
+        },
+        {
+          id: 'nymx4hn1bbffikk7mqmwfakj6o',
+          username: 'k41897owkaija',
+          email: 'kaija@test.fi',
+          nickname: 'KaijaKoo',
+        },
+      ],
+    }
+    const channelId = 1
+    const token = 'mockToken'
+    fetch.mockResponseOnce(JSON.stringify(mockResponse))
+
+    const resp = await API.getChannelInvitationMembers(token, channelId)
+    expect(resp).toEqual(mockResponse)
+    expect(fetch.mock.calls.length).toEqual(1)
+    expect(fetch.mock.calls[0][0]).toEqual(
+      `${uri}/channel/members/${channelId}`
+    )
+  })
+
+  it('Rejected call for get channel invitation members throws an error', async () => {
+    fetch.mockRejectOnce(new Error('Failed for some reason'))
+
+    await expect(API.getChannelInvitationMembers()).rejects.toThrow(
+      'Failed for some reason'
+    )
+    expect(fetch.mock.calls.length).toEqual(1)
+    expect(fetch.mock.calls[0][0]).toEqual(`${uri}/channel/members/undefined`)
   })
 })
