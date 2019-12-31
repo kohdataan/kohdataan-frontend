@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { getProfilesByUsernames as getProfilesByUsernamesAction } from 'mattermost-redux/actions/users'
 import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getInterestsByUsername, getUserByUsername } from '../api/user'
+import { getInterestsByUsername, getUserByUsername } from '../api/user/user'
 import Profile from '../components/Profile'
 
 const OtherUserProfileContainer = props => {

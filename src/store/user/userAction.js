@@ -1,6 +1,6 @@
 import { login as matterMostLogin } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/user'
+import * as API from '../../api/user/user'
 
 export const userLogin = user => {
   return async dispatch => {
