@@ -1,6 +1,6 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/channels'
+import * as API from '../../api/channels/channels'
 import { initUser } from '../root/index'
 
 export const startGroupPageFetching = () => {
