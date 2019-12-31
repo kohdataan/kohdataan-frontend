@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import ShadowBox from '../../ShadowBox'
 import RadioButton from '../../RadioButton'
-import getLocations from '../../../api/location'
+import getLocations from '../../../api/location/location'
 import './styles.scss'
 
 const Location = props => {
