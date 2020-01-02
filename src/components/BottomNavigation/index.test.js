@@ -1,13 +1,13 @@
 import React from 'react'
 import { create } from 'react-test-renderer'
-import ButtonContainer from './index'
+import BottomNavigation from './index'
 
-describe('Button container', () => {
+describe('Bottom navigation', () => {
   test('it matches the snapshot', () => {
     const component = create(
-      <ButtonContainer onClick={() => {}} className="test">
-        Test
-      </ButtonContainer>
+      <BottomNavigation>
+        <p>Navigation</p>
+      </BottomNavigation>
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
