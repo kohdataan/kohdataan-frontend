@@ -21,7 +21,7 @@ export const userLogin = user => {
       console.error(e)
       dispatch({
         type: types.USER_LOGIN_FAILURE,
-        payload: e.message,
+        payload: e,
         error: true,
       })
     }

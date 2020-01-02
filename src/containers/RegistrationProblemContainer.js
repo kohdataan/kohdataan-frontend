@@ -11,7 +11,6 @@ const RegistrationProblemContainer = props => {
       message,
     }
     const resp = await API.sendEmail(msg)
-    console.log(resp)
     if (resp && resp.success) {
       props.history.push('/messagesent')
     } else {
