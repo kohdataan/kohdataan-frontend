@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea it matches the snapshot 1`] = `
+<label
+  className=""
+  htmlFor="test"
+>
+  test
+  <textarea
+    className=""
+    id="test"
+    maxLength={1000}
+    name="test"
+    onChange={[Function]}
+    placeholder="test"
+    rows={4}
+    type="text"
+    value=""
+  />
+</label>
+`;
