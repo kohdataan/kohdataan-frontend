@@ -19,7 +19,11 @@ export const userLogin = user => {
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
-      dispatch({ type: types.USER_LOGIN_FAILURE, payload: e, error: true })
+      dispatch({
+        type: types.USER_LOGIN_FAILURE,
+        payload: e.message,
+        error: true,
+      })
     }
   }
 }
