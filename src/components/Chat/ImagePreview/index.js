@@ -18,9 +18,7 @@ const ImagePreview = props => {
         </ButtonContainer>
         <img
           className="preview-image"
-          src={`http://${
-            process.env.REACT_APP_MATTERMOST_URL
-          }/api/v4/files/${fileId}`}
+          src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
           alt="attachment"
           width="100%"
           height="100%"

@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
-import ImagePreviewModalContainer from '../../../containers/ImagePreviewModalContainer'
+import ModalContainer from '../../ModalContainer'
 import ImagePreview from '../ImagePreview'
 import './styles.scss'
 
@@ -18,6 +18,7 @@ const UserInput = props => {
     setMessage('')
   }
   const fileInput = React.createRef()
+
   const isEmpty = str => {
     return str.replace(/^\s+|\s+$/g, '').length === 0
   }
@@ -89,10 +90,11 @@ const UserInput = props => {
           tabIndex="0"
         />
       </form>
-      <ImagePreviewModalContainer
+      <ModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         label="image-preview-dialog"
+        isLong
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
@@ -105,7 +107,7 @@ const UserInput = props => {
           fileId={fileId}
           closeModal={closeModal}
         />
-      </ImagePreviewModalContainer>
+      </ModalContainer>
     </div>
   )
 }
