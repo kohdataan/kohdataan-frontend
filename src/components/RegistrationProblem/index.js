@@ -1,14 +1,20 @@
 import React, { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import InputField from '../InputField'
 import TextArea from '../TextArea'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const RegistrationProblem = () => {
+const RegistrationProblem = ({ handleEmailSending }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+
+  const handleSubmit = () => {
+    handleEmailSending(name, email, message)
+  }
+
   return (
     <main className="registration-problem-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -39,13 +45,11 @@ const RegistrationProblem = () => {
             onChange={e => setMessage(e.target.value)}
             inputClassName="registration-problem-input-text"
             labelClassName="registration-problem-input-field"
-            rows="3"
+            rows={3}
           />
           <ButtonContainer
             className="registration-problem-button"
-            onClick={() =>
-              console.log(`message ${message} from user ${name} ${email} sent`)
-            }
+            onClick={handleSubmit}
           >
             lähetä viesti
           </ButtonContainer>
@@ -64,6 +68,10 @@ const RegistrationProblem = () => {
       </div>
     </main>
   )
+}
+
+RegistrationProblem.propTypes = {
+  handleEmailSending: PropTypes.func.isRequired,
 }
 
 export default memo(RegistrationProblem)

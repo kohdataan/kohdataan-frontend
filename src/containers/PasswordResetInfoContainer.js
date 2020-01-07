@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import PasswordReset from '../components/PasswordReset'
+import PasswordResetInfo from '../components/PasswordResetFlow/ResetInfo'
 
-const PasswordResetContainer = () => {
-  return <PasswordReset />
+const PasswordResetInfoContainer = () => {
+  return <PasswordResetInfo />
 }
 
 // TODO: refactor
@@ -12,4 +12,4 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-export default memo(PasswordResetContainer, shouldComponentUpdate)
+export default memo(PasswordResetInfoContainer, shouldComponentUpdate)
