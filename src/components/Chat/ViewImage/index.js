@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const ViewImage = ({ history, match}) => {
-  console.log('props ', history)
+const ViewImage = ({ history, match }) => {
   const { fileId } = match.params
-  const goBack = e => {
-    console.log(e)
+  const goBack = () => {
     history.goBack()
   }
 
@@ -19,9 +17,7 @@ const ViewImage = ({ history, match}) => {
         </ButtonContainer>
         <img
           className="view-image"
-          src={`http://${
-            process.env.REACT_APP_MATTERMOST_URL
-          }/api/v4/files/${fileId}`}
+          src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
           alt="attachment"
           width="100%"
           height="100%"

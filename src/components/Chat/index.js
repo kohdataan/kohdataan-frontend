@@ -19,7 +19,6 @@ const Chat = props => {
     handleLeaveChannel,
     statuses,
   } = props
-
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
@@ -86,6 +85,7 @@ const Chat = props => {
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
         directChannel={directChannel}
+        channelId={channel.id}
       />
       {channel.id && (
         <UserInput

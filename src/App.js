@@ -92,8 +92,8 @@ class App extends Component {
           path="/profiili/:username?"
           component={ProfileContainer}
         />
-        <PrivateRoute path="/chat/:id" component={ChatContainer} />
-        <Route path="/chat/view-image/:fileId" component={ViewImageContainer} />
+        <PrivateRoute exact path="/chat/:id" component={ChatContainer} />
+        <Route path="/chat/:id/:fileId" component={ViewImageContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )

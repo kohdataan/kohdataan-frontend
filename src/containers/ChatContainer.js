@@ -48,6 +48,7 @@ const ChatContainer = props => {
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
+
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -106,7 +107,6 @@ const ChatContainer = props => {
       setCurrentPosts(sorted)
     }
   }, [posts, teams])
-
   return (
     <>
       {currentChannel && (

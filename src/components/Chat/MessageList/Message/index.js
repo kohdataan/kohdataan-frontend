@@ -16,12 +16,13 @@ const Message = props => {
     showDate,
     directChannel,
     files,
+    channelId,
   } = props
 
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
- 
+
   // Checks if message is system message
   const isSystemMessage = () =>
     type === 'system_join_channel' || type === 'system_leave_channel'
@@ -73,11 +74,9 @@ const Message = props => {
             <div className={messageContentClassList.join(' ')}>
               <p className="chat-message-content-text">{text}</p>
               {files && (
-                <Link to={`view-image/${files[0]}`}>
+                <Link to={`${channelId}/${files[0]}`}>
                   <img
-                    src={`http://${
-                      process.env.REACT_APP_MATTERMOST_URL
-                    }/api/v4/files/${files[0]}/thumbnail`}
+                    src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                     alt="attachment"
                   />
                 </Link>
@@ -114,6 +113,7 @@ Message.propTypes = {
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
   files: propTypes.instanceOf(Array),
+  channelId: propTypes.string.isRequired,
 }
 
 export default memo(Message)

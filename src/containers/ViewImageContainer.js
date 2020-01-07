@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ViewImage from '../components/Chat/ViewImage'
 
 const ViewImageContainer = props => {
-  console.log('props at container ', props)
   const { history, match } = props
   return <ViewImage history={history} match={match} />
 }
