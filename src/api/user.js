@@ -16,6 +16,22 @@ const userLogin = async data => {
   }
 }
 
+const userLogout = async token => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const userSignUp = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -32,11 +48,10 @@ const userSignUp = async data => {
   }
 }
 
-// TODO: Finalize response handling
 const resetPassword = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
-    const resp = await fetch(`${uri}/passwordReset`, {
+    const resp = await fetch(`${uri}/auth/forgot`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -44,8 +59,24 @@ const resetPassword = async data => {
       },
     })
     const respJSON = await resp.json()
-    console.log('respJSON', respJSON)
-    return resp
+    return respJSON
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const setNewPassword = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/reset`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const respJSON = await resp.json()
+    return respJSON
   } catch (e) {
     throw new Error(e)
   }
@@ -153,14 +184,33 @@ const getInterestsByUsername = async (token, username) => {
   }
 }
 
+const sendEmail = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/sendMail/problem`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return resp
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
+  userLogout,
   userSignUp,
   resetPassword,
+  setNewPassword,
   getUser,
   getUserByUsername,
   updateUser,
   getUserInterest,
   addUserInterests,
   getInterestsByUsername,
+  sendEmail,
 }

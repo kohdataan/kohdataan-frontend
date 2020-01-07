@@ -42,6 +42,7 @@ const ChatContainer = props => {
     viewChannel,
     uploadFile,
     getFilesForPost,
+    statuses,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -119,6 +120,7 @@ const ChatContainer = props => {
           currentUserId={currentUserId}
           members={currentMembers}
           handleLeaveChannel={handleLeaveChannel}
+          statuses={statuses}
           getUserByUsername={getUserByUsername}
         />
       )}
@@ -143,6 +145,7 @@ ChatContainer.propTypes = {
   currentChannelId: PropTypes.string.isRequired,
   removeChannelMember: PropTypes.func.isRequired,
   viewChannel: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -153,6 +156,7 @@ const mapStateToProps = (state, ownProps) => {
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
+  const { statuses } = state.entities.users
 
   return {
     currentUserId,
@@ -162,6 +166,7 @@ const mapStateToProps = (state, ownProps) => {
     teams,
     posts,
     channels,
+    statuses,
   }
 }
 

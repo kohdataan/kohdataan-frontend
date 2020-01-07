@@ -18,7 +18,9 @@ import RegistrationSuccessContainer from './containers/RegistrationSuccessContai
 import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
-import PasswordResetContainer from './containers/PasswordResetContainer'
+import PasswordResetRequestContainer from './containers/PasswordResetRequestContainer'
+import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
+import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
 import FriendsContainer from './containers/FriendsContainer'
 import ViewImageContainer from './containers/ViewImageContainer'
 import getInterestsAction from './store/interest/interestAction'
@@ -57,7 +59,19 @@ class App extends Component {
     return (
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
-        <Route path="/reset-password" component={PasswordResetContainer} />
+        <Route
+          exact
+          path="/reset-password"
+          component={PasswordResetRequestContainer}
+        />
+        <Route
+          path="/reset-password-info"
+          component={PasswordResetInfoContainer}
+        />
+        <Route
+          path="/reset-password/:uuid"
+          component={PasswordResetPageContainer}
+        />
         <Route
           path="/registration-success"
           component={RegistrationSuccessContainer}
