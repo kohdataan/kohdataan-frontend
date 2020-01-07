@@ -9,12 +9,12 @@ import './styles.scss'
 const UserInput = props => {
   const { createPost, channel, uploadFile } = props
   const [message, setMessage] = useState('')
-  const [fileId, setFileId] = useState(null)
+  const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
-    setFileId(null)
+    setFileId('')
     setMessage('')
   }
   const fileInput = React.createRef()
@@ -27,11 +27,11 @@ const UserInput = props => {
     const post = {
       channel_id: channel.id,
       message,
-      file_ids: fileId ? [fileId] : null,
+      file_ids: fileId !== '' ? [fileId] : null,
     }
-    if ((message && !isEmpty(message)) || fileId) {
+    if ((message && !isEmpty(message)) || fileId !== '') {
       await createPost(post)
-      setFileId(null)
+      setFileId('')
     }
     setMessage('')
     setModalIsOpen(false)
