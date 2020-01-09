@@ -1,0 +1,67 @@
+@import '../../styles/colors.scss';
+
+.birthdate-selections {
+    display: flex;
+}
+
+.year-select-field {
+    margin-top: 5px;
+    background: transparent;
+    border: solid 1px $orange;
+    border-radius: 25px;
+    padding: 10px 0 10px 10px;
+    color: $white;
+    &::placeholder {
+      color: $white;
+    }
+  
+    &:focus {
+      outline: none;
+      border: solid 1px $white;
+    }
+  }
+
+  .month-select-field {
+    margin-top: 5px;
+    background: transparent;
+    border: solid 1px $orange;
+    border-radius: 25px;
+    padding: 10px 0 10px 10px;
+    color: $white;
+    &::placeholder {
+      color: $white;
+    }
+  
+    &:focus {
+      outline: none;
+      border: solid 1px $white;
+    }
+  }
+
+  .month-option {
+    color: white;
+    background-color: black;
+    border-radius: 25px;
+  }
+
+  .datalist {
+    color: white;
+    background-color: black;
+  }
+
+  .day-select-field {
+    margin-top: 5px;
+    background: transparent;
+    border: solid 1px $orange;
+    border-radius: 25px;
+    padding: 10px 0 10px 10px;
+    color: $white;
+    &::placeholder {
+      color: $white;
+    }
+  
+    &:focus {
+      outline: none;
+      border: solid 1px $white;
+    }
+  }

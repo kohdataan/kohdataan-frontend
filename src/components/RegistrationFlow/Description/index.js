@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import ShadowBox from '../../ShadowBox'
-import Textarea from '../../TextField'
+import TextArea from '../../TextArea'
 import './styles.scss'
 
 const MAX_LENGTH = 200
@@ -11,19 +11,31 @@ const Description = props => {
   return (
     <ShadowBox>
       <main role="main" className="add-user-description-container">
-        <h3 className="add-user-description-title">Kerro itsestäsi</h3>
-        <p className="add-user-description-limit">
-          {`${value.length} / ${MAX_LENGTH}`}
-        </p>
-        <Textarea
+        <div className="profile-creation-title-container">
+          <h2 className="profile-creation-title">Kerro itsestäsi</h2>
+          <span className="profile-creation-step-text">4/6</span>
+        </div>
+
+        <TextArea
           inputClassName="add-user-description-text"
           labelClassName="add-user-description-field"
           label="Kuvaus"
+          showLabel={false}
           onChange={onChange}
           value={value}
           maxLength={MAX_LENGTH}
         />
-        <p className="add-user-description-title">Tämä kuvaus näkyy muille</p>
+
+        <div className="add-user-description-details-container">
+          <div>
+            Tämä kuvaus näkyy muille.
+            <br />
+            Voit lisätä kuvauksen myöhemmin.
+          </div>
+          <div className="add-user-description-limit">
+            {`${value.length}/${MAX_LENGTH}`}
+          </div>
+        </div>
       </main>
     </ShadowBox>
   )
