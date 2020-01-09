@@ -7,6 +7,13 @@
   flex-shrink: 0;
 }
 
+.react-h5-audio-player {
+  .rhap_repeat-button,
+  .rhap_volume-button {
+    display: none;
+  }
+}
+
 .wrapper-received {
   justify-content: flex-end;
 }

@@ -28,7 +28,12 @@ const UserInput = props => {
       channel_id: channel.id,
       message,
       file_ids: fileId !== '' ? [fileId] : null,
+      props: {
+        fileId: '',
+        duration: 0,
+      },
     }
+    console.log('post ', post)
     if ((message && !isEmpty(message)) || fileId !== '') {
       await createPost(post)
       setFileId('')
@@ -53,6 +58,10 @@ const UserInput = props => {
 
   const clickFileInput = () => {
     fileInput.current.click()
+  }
+
+  const addVoiceMessage = e => {
+    console.log(e)
   }
 
   return (
@@ -80,7 +89,7 @@ const UserInput = props => {
         <ButtonContainer className="icon-btn" onClick={clickFileInput}>
           <div className="send-image-attachment-button" />
         </ButtonContainer>
-        <ButtonContainer className="icon-btn">
+        <ButtonContainer className="icon-btn" onClick={addVoiceMessage}>
           <div className="send-voice-attachment-button" />
         </ButtonContainer>
         <input

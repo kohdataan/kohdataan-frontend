@@ -40,7 +40,6 @@ const MessageList = props => {
       show: showDate,
     }
   }
-
   return (
     <div className="chat-message-list-container chat--message-list">
       <div className="chat--message-list--container">
@@ -62,6 +61,7 @@ const MessageList = props => {
                 timeSent={timestampValues.sendTime}
                 dateSent={timestampValues.sendDate}
                 showDate={timestampValues.show}
+                voiceFileInfo={post.props}
               />
             )
           })}

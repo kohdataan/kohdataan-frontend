@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import AudioPlayer from 'react-h5-audio-player'
 
 const Message = props => {
   const {
@@ -15,6 +16,7 @@ const Message = props => {
     showDate,
     directChannel,
     files,
+    voiceFileInfo,
   } = props
 
   // Adds the text to be used for the date divider
@@ -73,10 +75,14 @@ const Message = props => {
               <p className="chat-message-content-text">{text}</p>
               {files && (
                 <img
-                  src={`http://${
-                    process.env.REACT_APP_MATTERMOST_URL
-                  }/api/v4/files/${files[0]}/thumbnail`}
+                  src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                   alt="attachment"
+                />
+              )}
+              {type === 'custom_voice' && (
+                <AudioPlayer
+                  className="react-h5-audio-player"
+                  src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${voiceFileInfo.fileId}`}
                 />
               )}
             </div>
@@ -97,6 +103,7 @@ Message.defaultProps = {
   type: '',
   senderId: '',
   files: null,
+  voiceFileInfo: null,
 }
 
 Message.propTypes = {
@@ -111,6 +118,7 @@ Message.propTypes = {
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
   files: propTypes.instanceOf(Array),
+  voiceFileInfo: propTypes.instanceOf(Object),
 }
 
 export default memo(Message)
