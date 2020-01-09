@@ -10,6 +10,22 @@
   margin-bottom: 1em;
 }
 
+.birthdate-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.birthdate-content-label {
+  color: white;
+  margin-bottom: 8px;
+  margin-left: 5px;
+  align-self: flex-start;
+}
+
 .close-modal-button {
   width: 1,2em;
   height:  1,2em;
@@ -122,6 +138,13 @@
   text-align: left;
   text-transform: uppercase;
   color: $white;
+}
+
+
+.date-select-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 30%;
 }
 
 .error-text {

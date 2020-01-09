@@ -38,7 +38,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
   const customStyles = {
     container: provided => ({
       ...provided,
-      width: '33%',
+      width: '100%',
     }),
     menu: provided => ({
       ...provided,
@@ -127,7 +127,7 @@ DateSelectField.propTypes = {
 }
 
 DateSelectField.defaultProps = {
-  showLabel: true,
+  showLabel: false,
   ariaInvalid: false,
   ariaDescribedBy: '',
   inputClassName: '',

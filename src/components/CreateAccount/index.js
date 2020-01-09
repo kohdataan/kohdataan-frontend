@@ -26,7 +26,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
         day: birthday,
       })
       .format()
-    console.log(birthdate)
+
     if (rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
@@ -131,69 +131,68 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Tarkista, että kirjoitit sukunimen oikein.'}
             </div>
           </div>
+          <span className="birthdate-content-label">Syntymäaika:</span>
+          <div className="birthdate-container">
+            <div className="form-field-container">
+              <DateSelectField
+                label="Päivä"
+                name="day"
+                ref={register({ required: true, minLength: 1 })}
+                ariaInvalid={!!errors.day}
+                value={birthday}
+                onChange={value => setBirthday(value.value)}
+                inputClassName="create-account-input-date"
+                labelClassName={
+                  errors.day
+                    ? 'create-account-errors-field'
+                    : 'create-account-input-date'
+                }
+              />
+            </div>
 
-          <div className="formfield-container">
-            <DateSelectField
-              label="Päivä"
-              name="day"
-              ref={register({ required: true })}
-              ariaInvalid={!!errors.birthdate}
-              value={birthday}
-              onChange={value => setBirthday(value.value)}
-              inputClassName="create-account-input-text"
-              labelClassName={
-                errors.birthdate
-                  ? 'create-account-errors-field'
-                  : 'create-account-input-field'
-              }
-            />
-            <div className="error-text">
-              {errors.birthdate && 'Valitse syntymäaika'}
+            <div className="formfield-container">
+              <DateSelectField
+                label="Kuukausi"
+                name="month"
+                ref={register({
+                  required: true,
+                  minLength: 2,
+                })}
+                ariaInvalid={!!errors.birthdate}
+                value={birthmonth}
+                onChange={value => {
+                  setBirthmonth(value.value)
+                }}
+                inputClassName="create-account-input-date"
+                labelClassName={
+                  errors.month
+                    ? 'create-account-errors-field'
+                    : 'create-account-input-field'
+                }
+              />
+            </div>
+
+            <div className="formfield-container">
+              <DateSelectField
+                label="Vuosi"
+                name="year"
+                ref={register({ required: true })}
+                ariaInvalid={!!errors.year}
+                value={birthyear}
+                onChange={value => {
+                  setBirthyear(value.value)
+                }}
+                inputClassName="create-account-input-date"
+                labelClassName={
+                  errors.year
+                    ? 'create-account-errors-field'
+                    : 'create-account-input-field'
+                }
+              />
             </div>
           </div>
-
-          <div className="formfield-container">
-            <DateSelectField
-              label="Kuukausi"
-              name="month"
-              ref={register({ required: true })}
-              ariaInvalid={!!errors.birthdate}
-              value={birthmonth}
-              onChange={value => {
-                setBirthmonth(value.value)
-              }}
-              inputClassName="create-account-input-text"
-              labelClassName={
-                errors.birthdate
-                  ? 'create-account-errors-field'
-                  : 'create-account-input-field'
-              }
-            />
-            <div className="error-text">
-              {errors.birthdate && 'Valitse syntymäaika'}
-            </div>
-          </div>
-
-          <div className="formfield-container">
-            <DateSelectField
-              label="Vuosi"
-              name="year"
-              ref={register({ required: true })}
-              ariaInvalid={!!errors.birthdate}
-              value={birthyear}
-              onChange={value => {
-                setBirthyear(value.value)
-              }}
-              inputClassName="create-account-input-text"
-              labelClassName={
-                errors.birthdate
-                  ? 'create-account-errors-field'
-                  : 'create-account-input-field'
-              }
-            />
-            <div className="error-text">
-              {errors.birthdate && 'Valitse syntymäaika'}
-            </div>
+          <div className="error-text">
+            {(errors.day || errors.month || errors.year) && 'Anna syntymäaika'}
           </div>
 
           <div className="formfield-container">
@@ -358,16 +357,16 @@ const CreateAccount = ({ handleAccountCreation }) => {
         </form>
         <div className="create-account-links-container">
           <Link className="create-account-link-block" to="/login">
-            {'Olen vanha käyttäjä ja haluan kirjautua sisään.'}
+            Olen vanha käyttäjä ja haluan kirjautua sisään.
           </Link>
           <Link className="create-account-link-block" to="/registrationproblem">
-            {'Tarvitsen apua rekisteröitymisessä.'}
+            Tarvitsen apua rekisteröitymisessä.
           </Link>
           <Link className="create-account-link-block" to="/">
-            {'Tutustu tietosuojaselosteeseen.'}
+            Tutustu tietosuojaselosteeseen.
           </Link>
           <Link className="create-account-link-block" to="/">
-            {'Tutustu saavutettavuusselosteeseen.'}
+            Tutustu saavutettavuusselosteeseen.
           </Link>
         </div>
       </div>

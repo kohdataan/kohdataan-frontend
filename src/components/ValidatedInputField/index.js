@@ -13,6 +13,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
   } = props
   return (
     <label htmlFor={label} className={inputClassName}>
+      {showLabel && label}
       <input
         type={type}
         name={name}
@@ -39,7 +40,7 @@ ValidatedInputField.propTypes = {
 
 ValidatedInputField.defaultProps = {
   type: 'text',
-  showLabel: true,
+  showLabel: false,
   ariaInvalid: false,
   inputClassName: '',
   labelClassName: '',
