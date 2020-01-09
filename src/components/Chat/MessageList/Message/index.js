@@ -72,7 +72,6 @@ const Message = props => {
           )}
           <div className="chat-message-content-field">
             <div className={messageContentClassList.join(' ')}>
-              <p className="chat-message-content-text">{text}</p>
               {files && (
                 <Link to={`${channelId}/${files[0]}`}>
                   <img
@@ -81,6 +80,7 @@ const Message = props => {
                   />
                 </Link>
               )}
+              <p className="chat-message-content-text">{text}</p>
             </div>
           </div>
         </div>
