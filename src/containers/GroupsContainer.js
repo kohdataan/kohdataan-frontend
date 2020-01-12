@@ -13,7 +13,10 @@ import {
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import getChannelInvitationsAction from '../store/channels/channelAction'
-import { getChannelInvitationMembers } from '../api/channels'
+import {
+  getChannelInvitationMembers,
+  addUserInterestsToChannelPurpose,
+} from '../api/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 
@@ -102,11 +105,20 @@ const GroupsContainer = props => {
     return myCurrentChannels
   }
 
-  const handleJoinChannel = channelId => () => {
-    const currentTeamId = Object.keys(teams)[0]
-    joinChannel(currentUserId, currentTeamId, channelId).then(
-      history.push(`/chat/${channelId}`)
-    )
+  const handleJoinChannel = channelId => async () => {
+    try {
+      await addUserInterestsToChannelPurpose(
+        localStorage.getItem('authToken'),
+        channelId
+      )
+      const currentTeamId = Object.keys(teams)[0]
+      joinChannel(currentUserId, currentTeamId, channelId).then(
+        history.push(`/chat/${channelId}`)
+      )
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
   }
 
   // Get unread count by channel id

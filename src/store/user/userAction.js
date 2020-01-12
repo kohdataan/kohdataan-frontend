@@ -1,5 +1,6 @@
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/user'
+import * as channelAPI from '../../api/channels'
 
 export const addUserToState = () => {
   return async dispatch => {
@@ -60,6 +61,7 @@ export const addUserInterests = interests => {
     try {
       const data = { userId: id, ...interests }
       await API.addUserInterests(data, token)
+      await channelAPI.handleUserChangingInterestToChannelsPurposes(token)
       await dispatch(getUserInterests())
     } catch (e) {
       // eslint-disable-next-line no-console
