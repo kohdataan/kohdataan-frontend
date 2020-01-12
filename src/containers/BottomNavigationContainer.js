@@ -25,10 +25,10 @@ const BottomNavigationContainer = props => {
 
   const handleLogout = async () => {
     try {
-      localStorage.removeItem('userId')
-      localStorage.removeItem('authToken')
       await API.userLogout(localStorage.getItem('authToken'))
       await matterMostLogout()
+      localStorage.removeItem('userId')
+      localStorage.removeItem('authToken')
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
