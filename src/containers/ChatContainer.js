@@ -5,6 +5,10 @@ import {
   getPosts as getPostsAction,
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
+import { 
+  uploadFile as uploadFileAction,
+  getFilesForPost as getFilesForPostAction,
+} from 'mattermost-redux/actions/files'
 import {
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
@@ -34,13 +38,14 @@ const ChatContainer = props => {
     getChannelMembers,
     removeChannelMember,
     viewChannel,
+    uploadFile,
+    getFilesForPost,
     statuses,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
-
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -105,6 +110,8 @@ const ChatContainer = props => {
           posts={currentPosts}
           profiles={profiles}
           createPost={createPost}
+          getFilesForPost={getFilesForPost}
+          uploadFile={uploadFile}
           currentUserId={currentUserId}
           members={currentMembers}
           handleLeaveChannel={handleLeaveChannel}
@@ -123,6 +130,12 @@ ChatContainer.propTypes = {
   teams: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+<<<<<<< HEAD
+=======
+  getFilesForPost: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  loadMe: PropTypes.func.isRequired,
+>>>>>>> development
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
@@ -160,6 +173,8 @@ const mapDispatchToProps = dispatch =>
     {
       getPosts: getPostsAction,
       createPost: createPostAction,
+      getFilesForPost: getFilesForPostAction,
+      uploadFile: uploadFileAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getChannelMembers: getChannelMembersAction,
       getProfiles: getProfilesAction,
