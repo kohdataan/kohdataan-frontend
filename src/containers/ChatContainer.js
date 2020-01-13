@@ -132,7 +132,6 @@ ChatContainer.propTypes = {
   createPost: PropTypes.func.isRequired,
   getFilesForPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
-  loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
