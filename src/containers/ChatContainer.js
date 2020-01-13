@@ -5,7 +5,7 @@ import {
   getPosts as getPostsAction,
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
-import { 
+import {
   uploadFile as uploadFileAction,
   getFilesForPost as getFilesForPostAction,
 } from 'mattermost-redux/actions/files'
@@ -130,12 +130,9 @@ ChatContainer.propTypes = {
   teams: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
-<<<<<<< HEAD
-=======
   getFilesForPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
   loadMe: PropTypes.func.isRequired,
->>>>>>> development
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
