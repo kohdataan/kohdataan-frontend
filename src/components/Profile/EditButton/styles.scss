@@ -1,28 +1,11 @@
 @import '../../../styles/colors.scss';
 
 .user-edit-button {
-  color: $black;
-  background: none;
-  border: none;
-  padding: 10px 15px;
-  & i {
-    font-size: 22px;
-  }
-}
-
-.user-edit-button-active {
-  background-color: $black;
-  border-radius: 5px;
-  color: white;
-  & i {
-    font-size: 22px;
-  }
+  padding: 5px 10px;
 }
 
 .user-edit-button-highlight {
-  border-radius: 50%;
   background: $background-gray;
-  padding: 15px 15px;
   z-index: 4000;
   position: relative;
 }

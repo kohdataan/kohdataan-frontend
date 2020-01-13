@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import getIcon from '../../../../utils/getIcon'
+import getIcon from '../../../utils/getIcon'
 
 const InterestsGrid = props => {
   const { interestList } = props
+
   const sortedInterestsList = [...interestList].sort((a, b) =>
     a.name > b.name ? 1 : -1
   )

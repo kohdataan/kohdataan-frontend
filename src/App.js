@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
-import { Client4 } from 'mattermost-redux/client'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { init } from 'mattermost-redux/actions/websocket'
-import { loadMe, login } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -18,43 +15,41 @@ import RegistrationSuccessContainer from './containers/RegistrationSuccessContai
 import ThankYouMessageContainer from './containers/ThankYouMessageContainer'
 import RegistrationProblemContainer from './containers/RegistrationProblemContainer'
 import ProfileContainer from './containers/ProfileContainer'
+import OtherUserProfileContainer from './containers/OtherUserProfileContainer'
 import PasswordResetRequestContainer from './containers/PasswordResetRequestContainer'
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
 import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
 import FriendsContainer from './containers/FriendsContainer'
-import getInterestsAction from './store/interest/interestAction'
-import { addUserToState } from './store/user/userAction'
+import EditProfileContainer from './containers/EditProfileContainer'
+import InterestsContainer from './containers/InterestsContainer'
+import FullScreenLoading from './components/FullScreenLoading'
+import { rootStartUp as rootStartUpAction } from './store/root'
 import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
-    const { init: pInit, getInterestsAction: pGetInterestsAction } = this.props
-    await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-    await pInit('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`)
-    await pGetInterestsAction()
+    const { rootStartUp } = this.props
+    await rootStartUp()
   }
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
-    const {
-      history,
-      init: pInit,
-      getInterestsAction: pGetInterestsAction,
-      addUserToState: pAddUserToState,
-      loadMe: pLoadMe,
-      user: pUser,
-    } = this.props
+    const { history, rootStartUp, user: pUser, loading } = this.props
     return !(
-      nextProps.getInterestsAction === pGetInterestsAction &&
-      nextProps.addUserToState === pAddUserToState &&
-      nextProps.init === pInit &&
       nextProps.history === history &&
       nextProps.user === pUser &&
-      nextProps.loadMe === pLoadMe
+      nextProps.loading === loading &&
+      nextProps.rootStartUp === rootStartUp
     )
   }
 
   render() {
+    const { loading } = this.props
+    if (loading.root && localStorage.getItem('authToken')) {
+      // TODO: Nice spashscree
+      return <FullScreenLoading />
+    }
+
     return (
       <Container className="main-container">
         <Route path="/login" component={LogInContainer} />
@@ -86,12 +81,15 @@ class App extends Component {
           component={RegistrationContainer}
         />
         <PrivateRoute exact path="/" component={GroupsContainer} />
-        <PrivateRoute exact path="/friends/" component={FriendsContainer} />
+        <PrivateRoute exact path="/friends" component={FriendsContainer} />
         <PrivateRoute
-          path="/profiili/:username?"
-          component={ProfileContainer}
+          path="/profile/:username"
+          component={OtherUserProfileContainer}
         />
+        <PrivateRoute path="/me" component={ProfileContainer} />
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
+        <PrivateRoute path="/edit-me" component={EditProfileContainer} />
+        <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )
@@ -99,34 +97,26 @@ class App extends Component {
 }
 
 App.propTypes = {
-  init: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  getInterestsAction: PropTypes.func.isRequired,
-  addUserToState: PropTypes.func.isRequired,
-  loadMe: PropTypes.func.isRequired,
+  rootStartUp: PropTypes.func.isRequired,
+  loading: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      init,
-      addUserToState,
-      loadMe,
-      getInterestsAction,
-      login,
+      rootStartUp: rootStartUpAction,
     },
     dispatch
   )
 
 const mapStateToProps = store => {
   return {
+    loading: store.loading,
     user: store.user,
   }
 }
 
 // export default App
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(App))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))

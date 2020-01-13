@@ -36,7 +36,7 @@ const StepButton = props => {
       )}
 
       {last && nextButtonActive && (
-        <Link className="next-step-button" to="/profiili" onClick={onClick}>
+        <Link className="next-step-button" to="/me" onClick={onClick}>
           Tallenna
         </Link>
       )}

@@ -98,8 +98,9 @@ const Chat = props => {
       {showSider && !directChannel && (
         <MembersSider
           members={members}
+          profiles={profiles}
           currentUserId={currentUserId}
-          getUserNamebyId={getNicknameById}
+          getNickNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
           getStatusById={getStatusById}
@@ -120,7 +121,7 @@ Chat.propTypes = {
   uploadFile: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
-  statuses: PropTypes.instanceOf(Array).isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {
