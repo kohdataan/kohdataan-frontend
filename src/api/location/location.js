@@ -1,9 +1,9 @@
-import handleFetchErrors from './errors'
+import handleFetchErrors from '../errors'
 
-const getInterests = async token => {
+const getLocations = async token => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
-    const resp = await fetch(`${uri}/interest`, {
+    const resp = await fetch(`${uri}/location/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -16,4 +16,4 @@ const getInterests = async token => {
   }
 }
 
-export default getInterests
+export default getLocations

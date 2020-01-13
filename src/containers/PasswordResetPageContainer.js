@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import * as API from '../api/user'
+import * as API from '../api/user/user'
 import PasswordResetPage from '../components/PasswordResetFlow/ResetPage'
 
 const PasswordResetPageContainer = props => {

@@ -1,14 +1,10 @@
 import React from 'react'
 import { create } from 'react-test-renderer'
-import ButtonContainer from './index'
+import ValidatedInputField from './index'
 
 describe('Button container', () => {
   test('it matches the snapshot', () => {
-    const component = create(
-      <ButtonContainer onClick={() => {}} className="test">
-        Test
-      </ButtonContainer>
-    )
+    const component = create(<ValidatedInputField label="test" name="test" />)
     expect(component.toJSON()).toMatchSnapshot()
   })
 })

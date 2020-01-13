@@ -1,6 +1,5 @@
 import * as types from '../../contants/actionTypes'
-// import * as API from '../../api/interest'
-import getInterests from '../../api/interest'
+import getInterests from '../../api/interests/interest'
 
 const getInterestsAction = () => {
   // const id = localStorage.getItem('userId')

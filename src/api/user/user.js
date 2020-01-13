@@ -1,4 +1,4 @@
-import handleFetchErrors from './errors'
+import handleFetchErrors from '../errors'
 
 const userLogin = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
@@ -194,7 +194,7 @@ const sendEmail = async data => {
         'Content-Type': 'application/json',
       },
     })
-    return resp
+    return await resp.json()
   } catch (e) {
     throw new Error(e)
   }

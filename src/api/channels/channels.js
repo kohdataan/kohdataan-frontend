@@ -1,4 +1,4 @@
-import handleFetchErrors from './errors'
+import handleFetchErrors from '../errors'
 
 const getChannelInvitations = async token => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL

@@ -20,7 +20,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getUserByUsername } from '../api/user'
+import { getUserByUsername } from '../api/user/user'
 import Chat from '../components/Chat'
 
 const ChatContainer = props => {

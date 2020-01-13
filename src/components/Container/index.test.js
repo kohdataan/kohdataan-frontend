@@ -1,13 +1,14 @@
 import React from 'react'
 import { create } from 'react-test-renderer'
-import ButtonContainer from './index'
+import Container from './index'
 
-describe('Button container', () => {
+describe('Container', () => {
   test('it matches the snapshot', () => {
     const component = create(
-      <ButtonContainer onClick={() => {}} className="test">
-        Test
-      </ButtonContainer>
+      <Container className="test">
+        <p>Test</p>
+        <p>Test</p>
+      </Container>
     )
     expect(component.toJSON()).toMatchSnapshot()
   })

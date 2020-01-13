@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button container it matches the snapshot 1`] = `
+<label
+  className="radio-button "
+  htmlFor="test"
+>
+  test
+  <input
+    checked={false}
+    className=""
+    id="test"
+    name="test"
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    tabIndex={0}
+    type="radio"
+    value=""
+  />
+  <span
+    className="radio-button-checkmark"
+  />
+</label>
+`;

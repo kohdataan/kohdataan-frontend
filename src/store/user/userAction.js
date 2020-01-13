@@ -1,6 +1,6 @@
 import { login as matterMostLogin } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/user'
+import * as API from '../../api/user/user'
 
 export const userLogin = user => {
   return async dispatch => {
@@ -19,7 +19,11 @@ export const userLogin = user => {
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
-      dispatch({ type: types.USER_LOGIN_FAILURE, payload: e, error: true })
+      dispatch({
+        type: types.USER_LOGIN_FAILURE,
+        payload: e,
+        error: true,
+      })
     }
   }
 }
