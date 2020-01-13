@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
@@ -6,6 +6,8 @@ import * as API from '../api/user/user'
 
 const CreateAccountContainer = props => {
   const { history } = props
+  const [errors, setErrors] = useState(null)
+
   const handleAccountCreation = async (
     firstname,
     lastname,
@@ -44,8 +46,11 @@ const CreateAccountContainer = props => {
         password,
       }
       if (user) {
-        await API.userSignUp(user)
-        history.push('/registration-success')
+        const res = await API.userSignUp(user)
+        if (res && res.success) {
+          history.push('/registration-success')
+        }
+        setErrors(res.error)
       }
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -53,7 +58,12 @@ const CreateAccountContainer = props => {
     }
   }
 
-  return <CreateAccount handleAccountCreation={handleAccountCreation} />
+  return (
+    <CreateAccount
+      handleAccountCreation={handleAccountCreation}
+      apiErrors={errors}
+    />
+  )
 }
 
 // TODO: refactor

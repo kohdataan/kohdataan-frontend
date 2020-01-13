@@ -7,7 +7,7 @@ import ValidatedInputField from '../ValidatedInputField'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
-const CreateAccount = ({ handleAccountCreation }) => {
+const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const { register, handleSubmit, errors, watch } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
   const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
@@ -149,7 +149,8 @@ const CreateAccount = ({ handleAccountCreation }) => {
               ariaInvalid={!!errors.email}
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.email
+                errors.email ||
+                (apiErrors && apiErrors.fields && apiErrors.fields.email)
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -161,6 +162,9 @@ const CreateAccount = ({ handleAccountCreation }) => {
               {errors.email &&
                 errors.email.type === 'pattern' &&
                 'Tarkista sähköpostiosoite.'}
+              {apiErrors && apiErrors.fields && apiErrors.fields.email && (
+                <p>Sähköpostiosoite on jo olemassa.</p>
+              )}
             </div>
           </div>
 
@@ -300,16 +304,16 @@ const CreateAccount = ({ handleAccountCreation }) => {
         </form>
         <div className="create-account-links-container">
           <Link className="create-account-link-block" to="/login">
-            {'Olen vanha käyttäjä ja haluan kirjautua sisään.'}
+            Olen vanha käyttäjä ja haluan kirjautua sisään.
           </Link>
           <Link className="create-account-link-block" to="/registrationproblem">
-            {'Tarvitsen apua rekisteröitymisessä.'}
+            Tarvitsen apua rekisteröitymisessä.
           </Link>
           <Link className="create-account-link-block" to="/">
-            {'Tutustu tietosuojaselosteeseen.'}
+            Tutustu tietosuojaselosteeseen.
           </Link>
           <Link className="create-account-link-block" to="/">
-            {'Tutustu saavutettavuusselosteeseen.'}
+            Tutustu saavutettavuusselosteeseen.
           </Link>
         </div>
       </div>
@@ -319,6 +323,15 @@ const CreateAccount = ({ handleAccountCreation }) => {
 
 CreateAccount.propTypes = {
   handleAccountCreation: PropTypes.func.isRequired,
+  apiErrors: PropTypes.shape({
+    name: PropTypes.string,
+    errors: PropTypes.array,
+    fields: PropTypes.object,
+  }),
+}
+
+CreateAccount.defaultProps = {
+  apiErrors: { name: '', errors: [], fields: {} },
 }
 
 export default memo(CreateAccount)
