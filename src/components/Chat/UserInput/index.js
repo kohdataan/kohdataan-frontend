@@ -33,7 +33,6 @@ const UserInput = props => {
         duration: 0,
       },
     }
-    console.log('post ', post)
     if ((message && !isEmpty(message)) || fileId !== '') {
       await createPost(post)
       setFileId('')
@@ -60,8 +59,8 @@ const UserInput = props => {
     fileInput.current.click()
   }
 
-  const addVoiceMessage = e => {
-    console.log(e)
+  const addVoiceMessage = () => {
+    props.recordVoiceMessage(channel.id)
   }
 
   return (
@@ -125,6 +124,7 @@ UserInput.propTypes = {
   createPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
   channel: PropTypes.instanceOf(Object).isRequired,
+  recordVoiceMessage: PropTypes.func.isRequired,
 }
 
 export default memo(UserInput)

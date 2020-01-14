@@ -16,3 +16,12 @@ export const GET_CHANNEL_INVITATIONS = 'GET_CHANNEL_INVITATIONS'
 
 // Mattermost
 export const STORE_REHYDRATION_FAILED = 'STORE_REHYDRATION_FAILED'
+
+// Voice plugin
+export const OPEN_RECORDING_MODAL = '_open_recording_modal'
+export const CLOSE_RECORDING_MODAL = '_close_recording_modal'
+export const START_RECORDING = '_start_recording'
+export const STOP_RECORDING = '_stop_recording'
+export const UPDATE_RECORDING = '_update_recording'
+export const CANCEL_RECORDING = '_cancel_recording'
+export const SEND_RECORDING = '_send_recording'

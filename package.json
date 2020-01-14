@@ -24,9 +24,11 @@
     "react-scripts": "2.1.8",
     "react-select": "^2.4.3",
     "react-test-renderer": "^16.8.6",
+    "recorder-js": "^1.0.7",
     "redux": "^4.0.1",
     "redux-persist": "4.10.2",
     "redux-thunk": "^2.3.0",
+    "superagent": "^5.2.1",
     "uniqid": "^5.0.3",
     "zen-observable": "^0.8.14"
   },

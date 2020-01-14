@@ -18,6 +18,7 @@ const Chat = props => {
     members,
     handleLeaveChannel,
     statuses,
+    recordVoiceMessage,
   } = props
 
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
@@ -93,6 +94,7 @@ const Chat = props => {
           createPost={createPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
+          recordVoiceMessage={recordVoiceMessage}
         />
       )}
       {showSider && !directChannel && (
@@ -112,7 +114,7 @@ const Chat = props => {
 
 Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
-  posts: PropTypes.instanceOf(Array).isRequired,
+  posts: PropTypes.instanceOf(Object).isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   createPost: PropTypes.func.isRequired,
@@ -120,7 +122,8 @@ Chat.propTypes = {
   uploadFile: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
-  statuses: PropTypes.instanceOf(Array).isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
+  recordVoiceMessage: PropTypes.func.isRequired,
 }
 
 Chat.defaultProps = {

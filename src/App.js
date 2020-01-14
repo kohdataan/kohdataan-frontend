@@ -126,7 +126,4 @@ const mapStateToProps = store => {
 }
 
 // export default App
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(App))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))
