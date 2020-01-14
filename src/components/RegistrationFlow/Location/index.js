@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import ShadowBox from '../../ShadowBox'
 import RadioButton from '../../RadioButton'
-import getLocations from '../../../api/location'
+import getLocations from '../../../api/location/location'
 import './styles.scss'
 
 const Location = props => {
   const [locations, setLocations] = useState([])
-  const { value, onChange, setShowLocation, showLocation } = props
+  const { value, onChange, setShowLocation, showLocation, hideStep } = props
 
   useEffect(() => {
     async function fetchLocations() {
@@ -53,7 +53,7 @@ const Location = props => {
       <main role="main" className="add-user-location-container">
         <div className="profile-creation-title-container">
           <h3 className="profile-creation-title">Asuinpaikkasi</h3>
-          <span className="profile-creation-step-text">3/6</span>
+          {!hideStep && <span className="profile-creation-step-text">3/6</span>}
         </div>
         <Select
           className="basic-single"
@@ -94,6 +94,11 @@ Location.propTypes = {
   onChange: PropTypes.func.isRequired,
   setShowLocation: PropTypes.func.isRequired,
   showLocation: PropTypes.string.isRequired,
+  hideStep: PropTypes.bool,
+}
+
+Location.defaultProps = {
+  hideStep: false,
 }
 
 export default memo(Location)

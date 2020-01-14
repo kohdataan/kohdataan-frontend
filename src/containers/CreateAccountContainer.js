@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
-import * as API from '../api/user'
+import * as API from '../api/user/user'
 
 const CreateAccountContainer = props => {
   const { history } = props

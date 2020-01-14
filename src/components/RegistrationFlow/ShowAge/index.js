@@ -5,7 +5,7 @@ import RadioButton from '../../RadioButton'
 import './styles.scss'
 
 const ShowAge = props => {
-  const { onChange, showAge, age } = props
+  const { onChange, showAge, age, hideStep } = props
 
   return (
     <ShadowBox>
@@ -13,10 +13,10 @@ const ShowAge = props => {
         <div className="profile-creation-title-container">
           <h3 className="profile-creation-title">
             Ikäsi:
-            <span className="add-user-show-age-value"> {age} vuotta</span>
+            <span className="add-user-show-age-value">{` ${age} vuotta`}</span>
           </h3>
 
-          <span className="profile-creation-step-text">2/6</span>
+          {!hideStep && <span className="profile-creation-step-text">2/6</span>}
         </div>
         <RadioButton
           label="Näytä ikä muille"
@@ -41,6 +41,11 @@ ShowAge.propTypes = {
   onChange: PropTypes.func.isRequired,
   showAge: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
+  hideStep: PropTypes.bool,
+}
+
+ShowAge.defaultProps = {
+  hideStep: false,
 }
 
 export default memo(ShowAge)

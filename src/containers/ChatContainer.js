@@ -5,12 +5,11 @@ import {
   getPosts as getPostsAction,
   createPost as createPostAction,
 } from 'mattermost-redux/actions/posts'
-import { 
+import {
   uploadFile as uploadFileAction,
   getFilesForPost as getFilesForPostAction,
 } from 'mattermost-redux/actions/files'
 import {
-  loadMe as loadMeAction,
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
 } from 'mattermost-redux/actions/users'
@@ -22,7 +21,7 @@ import {
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import { recordVoiceMessage as recordVoiceMessageAction } from '../store/voiceMessage/voiceMessageAction'
-import { getUserByUsername } from '../api/user'
+import { getUserByUsername } from '../api/user/user'
 import Chat from '../components/Chat'
 
 const ChatContainer = props => {
@@ -30,7 +29,6 @@ const ChatContainer = props => {
     posts,
     profiles,
     createPost,
-    loadMe,
     getProfiles,
     currentUserId,
     channels,
@@ -53,8 +51,7 @@ const ChatContainer = props => {
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
-    loadMe()
-  }, [])
+  }, [getProfiles])
 
   // Get team related channels and members
   useEffect(() => {
@@ -62,7 +59,7 @@ const ChatContainer = props => {
     if (teamId) {
       fetchMyChannelsAndMembers(teamId)
     }
-  }, [teams])
+  }, [teams, fetchMyChannelsAndMembers])
 
   // Get posts for current channel and view channel
   useEffect(() => {
@@ -70,15 +67,7 @@ const ChatContainer = props => {
       getPosts(currentChannelId)
       viewChannel(currentChannelId)
     }
-  }, [teams])
-
-  // Filter posts by channel id
-  const filterPostsByChannelId = channelId => {
-    const filteredPosts = Object.values(posts).filter(
-      post => post.channel_id === channelId
-    )
-    return filteredPosts
-  }
+  }, [teams, posts, getPosts, viewChannel, currentChannelId])
 
   // Get current channel members
   useEffect(() => {
@@ -87,14 +76,7 @@ const ChatContainer = props => {
         setCurrentMembers(data.data)
       )
     }
-  }, [channels])
-
-  // Sort posts based on created timestamp
-  const sortPosts = allPosts => {
-    const postsArr = Object.values(allPosts)
-    postsArr.sort((a, b) => a.create_at - b.create_at)
-    return postsArr
-  }
+  }, [channels, currentChannelId, getChannelMembers])
 
   // Remove current user from channel
   const handleLeaveChannel = () =>
@@ -102,12 +84,25 @@ const ChatContainer = props => {
 
   // Filter and sort posts after fetching
   useEffect(() => {
+    // Filter posts by channel id
+    const filterPostsByChannelId = channelId => {
+      const filteredPosts = Object.values(posts).filter(
+        post => post.channel_id === channelId
+      )
+      return filteredPosts
+    }
+    // Sort posts based on created timestamp
+    const sortPosts = allPosts => {
+      const postsArr = Object.values(allPosts)
+      postsArr.sort((a, b) => a.create_at - b.create_at)
+      return postsArr
+    }
     if (currentChannelId) {
       const filteredPosts = filterPostsByChannelId(currentChannelId)
       const sorted = sortPosts(filteredPosts)
       setCurrentPosts(sorted)
     }
-  }, [posts, teams])
+  }, [posts, teams, currentChannelId])
 
   return (
     <>
@@ -140,7 +135,6 @@ ChatContainer.propTypes = {
   createPost: PropTypes.func.isRequired,
   getFilesForPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
-  loadMe: PropTypes.func.isRequired,
   getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
@@ -186,7 +180,6 @@ const mapDispatchToProps = dispatch =>
       getProfiles: getProfilesAction,
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
-      loadMe: loadMeAction,
       viewChannel: viewChannelAction,
       recordVoiceMessage: recordVoiceMessageAction,
     },

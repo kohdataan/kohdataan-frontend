@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shadowbox it matches the snapshot 1`] = `
+<div
+  className="shadow-box-container"
+>
+  <p>
+    Test
+  </p>
+</div>
+`;

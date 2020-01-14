@@ -7,7 +7,7 @@ import { logout } from 'mattermost-redux/actions/users'
 import BottomNavigation from '../components/BottomNavigation'
 import BottomNavigationLink from '../components/BottomNavigationLink'
 import BottomNavigationBot from '../components/BottomNavigationBot'
-import * as API from '../api/user'
+import * as API from '../api/user/user'
 
 const BottomNavigationContainer = props => {
   const {
@@ -39,7 +39,7 @@ const BottomNavigationContainer = props => {
     <BottomNavigation>
       <BottomNavigationLink
         title="Profiili"
-        route="/profiili"
+        route="/me"
         icon="fas fa-user-circle"
       />
       <BottomNavigationLink
