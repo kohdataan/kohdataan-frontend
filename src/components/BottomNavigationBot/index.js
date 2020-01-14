@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
@@ -52,8 +53,10 @@ const BottomNavigationBot = props => {
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-cog modal-icon" aria-hidden="true" />
-            Rekisteröitymis&shy;tiedot
+            <Link to="/account" onClick={() => closeModal()}>
+              <i className="fas fa-cog modal-icon" aria-hidden="true" />
+              Rekisteröitymis&shy;tiedot
+            </Link>
           </div>
           <hr />
           <div

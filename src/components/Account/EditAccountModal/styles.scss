@@ -1,0 +1,65 @@
+@import '../../../styles/colors.scss';
+
+.edit-account-input-field {
+  margin-top: 5px;
+  width: 100%;
+  background: transparent;
+  border: solid 1px black;
+  border-radius: 25px;
+  padding: 10px 0 10px 10px;
+  color: black;
+  &::placeholder {
+    color: gray;
+  }
+
+  .edit-account-input-text {
+    display: flex;
+    flex-direction: column;
+    color: $black;
+    margin: 0 0 20px 0;
+    width: 100%;
+  }
+
+  &:focus {
+    outline: none;
+    border: solid 1px $orange;
+  }
+}
+
+.edit-account-errors-field {
+  margin-top: 5px;
+  width: 100%;
+  background: transparent;
+  border: solid 1px #ff5c69;
+  border-radius: 25px;
+  padding: 10px 0 10px 10px;
+  color: black;
+  &::placeholder {
+    color: $white;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.edit-account-error-text {
+  color: #ff868f;
+  font-size: 0.8em;
+  margin: 5px 0 0;
+  text-align: left;
+}
+
+.edit-account-button {
+  padding: 10px 50px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  font-size: 0.875rem;
+  transition: all 0.15s ease-in-out;
+  color: #3a3a3a;
+  background-color: $orange;
+  outline: none;
+  width: 200px;
+  height: 42px;
+  margin: 30px 0;
+}

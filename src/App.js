@@ -25,6 +25,7 @@ import InterestsContainer from './containers/InterestsContainer'
 import FullScreenLoading from './components/FullScreenLoading'
 import { rootStartUp as rootStartUpAction } from './store/root'
 import './styles/defaults.scss'
+import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 
 class App extends Component {
   async componentDidMount() {
@@ -90,6 +91,7 @@ class App extends Component {
         <PrivateRoute path="/chat/:id" component={ChatContainer} />
         <PrivateRoute path="/edit-me" component={EditProfileContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
+        <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
       </Container>
     )

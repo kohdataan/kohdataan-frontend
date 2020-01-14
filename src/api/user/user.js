@@ -83,6 +83,23 @@ const setNewPassword = async data => {
   }
 }
 
+const updatePassword = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/update-password`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const respJSON = await resp.json()
+    return respJSON
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const getUser = async (id, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -214,4 +231,5 @@ export {
   addUserInterests,
   getInterestsByUsername,
   sendEmail,
+  updatePassword,
 }
