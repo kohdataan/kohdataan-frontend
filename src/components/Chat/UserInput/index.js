@@ -5,18 +5,27 @@ import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import ImagePreview from '../ImagePreview'
 import './styles.scss'
+import AudioRecorder from '../../AudioRecorder'
 
 const UserInput = props => {
   const { createPost, channel, uploadFile } = props
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [audioModalIsOpen, setAudioModalIsOpen] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
     setFileId('')
     setMessage('')
   }
+
+  const closeAudioModal = () => {
+    setAudioModalIsOpen(false)
+    setFileId('')
+    setMessage('')
+  }
+
   const fileInput = React.createRef()
 
   const isEmpty = str => {
@@ -60,7 +69,8 @@ const UserInput = props => {
   }
 
   const addVoiceMessage = () => {
-    props.recordVoiceMessage(channel.id)
+    // props.recordVoiceMessage(channel.id)
+    setModalIsOpen(true)
   }
 
   return (
@@ -116,6 +126,15 @@ const UserInput = props => {
           closeModal={closeModal}
         />
       </ModalContainer>
+      <ModalContainer
+        modalIsOpen={audioModalIsOpen}
+        closeModal={closeAudioModal}
+        label="image-preview-dialog"
+        className="image-preview-modal"
+        overlayClassName="image-preview-modal-overlay"
+      >
+        <AudioRecorder channel={channel} closeModal={closeAudioModal} />
+      </ModalContainer>
     </div>
   )
 }
@@ -124,7 +143,6 @@ UserInput.propTypes = {
   createPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
   channel: PropTypes.instanceOf(Object).isRequired,
-  recordVoiceMessage: PropTypes.func.isRequired,
 }
 
 export default memo(UserInput)

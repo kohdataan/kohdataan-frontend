@@ -20,7 +20,6 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { recordVoiceMessage as recordVoiceMessageAction } from '../store/voiceMessage/voiceMessageAction'
 import { getUserByUsername } from '../api/user/user'
 import Chat from '../components/Chat'
 
@@ -42,7 +41,6 @@ const ChatContainer = props => {
     uploadFile,
     getFilesForPost,
     statuses,
-    recordVoiceMessage,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -119,7 +117,6 @@ const ChatContainer = props => {
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}
-          recordVoiceMessage={recordVoiceMessage}
         />
       )}
     </>
@@ -143,7 +140,6 @@ ChatContainer.propTypes = {
   removeChannelMember: PropTypes.func.isRequired,
   viewChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
-  recordVoiceMessage: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -181,7 +177,6 @@ const mapDispatchToProps = dispatch =>
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
-      recordVoiceMessage: recordVoiceMessageAction,
     },
     dispatch
   )
