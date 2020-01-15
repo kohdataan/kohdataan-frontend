@@ -1,9 +1,8 @@
-import React, { memo, useRef } from 'react'
+import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import useForm from 'react-hook-form'
 import ValidatedInputField from '../../ValidatedInputField'
 import ModalContainer from '../../ModalContainer'
-import useOutsideClick from '../../../hooks/useOutsideClick'
 import './styles.scss'
 
 const labels = {
@@ -26,14 +25,10 @@ const messages = {
 const EditAccountModal = props => {
   const { showModal, updateUser, field, closeModal } = props
   const { register, handleSubmit, errors, watch } = useForm()
-  const ref = useRef()
+
   const onSubmit = data => {
     updateUser(data)
   }
-
-  useOutsideClick(ref, () => {
-    closeModal()
-  })
 
   return (
     <div className="leave-channel-modal-wrapper">
@@ -43,7 +38,6 @@ const EditAccountModal = props => {
         closeModal={closeModal}
       >
         <form
-          ref={ref}
           className="edit-account-input-content-container"
           onSubmit={handleSubmit(onSubmit)}
         >

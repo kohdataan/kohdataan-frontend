@@ -34,6 +34,7 @@ const Account = props => {
     }
     closeModal()
   }
+  // TODO: Jos sähköpostin päivittäminen epäonnistuu --> Error handlays
 
   return (
     <div className="account-update-container">
