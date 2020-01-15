@@ -163,7 +163,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 errors.email.type === 'pattern' &&
                 'Tarkista sähköpostiosoite.'}
               {apiErrors && apiErrors.fields && apiErrors.fields.email && (
-                <p>Sähköpostiosoite on jo olemassa.</p>
+                <p>Tähän sähköpostiin on liitetty jo käyttäjä.</p>
               )}
             </div>
           </div>
