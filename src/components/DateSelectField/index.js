@@ -15,22 +15,21 @@ const DateSelectField = React.forwardRef((props, ref) => {
     onChange,
     value,
   } = props
-
   const years = []
   let year = new Date().getFullYear()
   const months = [
-    { value: 1, label: 'Tammi' },
-    { value: 2, label: 'Helmi' },
-    { value: 3, label: 'Maalis' },
-    { value: 4, label: 'Huhti' },
-    { value: 5, label: 'Touko' },
-    { value: 6, label: 'Kesä' },
-    { value: 7, label: 'Heinä' },
-    { value: 8, label: 'Elo' },
-    { value: 9, label: 'Syys' },
-    { value: 10, label: 'Loka' },
-    { value: 11, label: 'Marras' },
-    { value: 12, label: 'Joulu' },
+    { value: '01', label: 'Tammi' },
+    { value: '02', label: 'Helmi' },
+    { value: '03', label: 'Maalis' },
+    { value: '04', label: 'Huhti' },
+    { value: '05', label: 'Touko' },
+    { value: '06', label: 'Kesä' },
+    { value: '07', label: 'Heinä' },
+    { value: '08', label: 'Elo' },
+    { value: '09', label: 'Syys' },
+    { value: '10', label: 'Loka' },
+    { value: '11', label: 'Marras' },
+    { value: '12', label: 'Joulu' },
   ]
   const days = [
     { value: 1, label: '01' },
@@ -61,9 +60,13 @@ const DateSelectField = React.forwardRef((props, ref) => {
       color: 'white',
       fontSize: '15px',
     }),
-    indicatorContainer: provided => ({
+    clearIndicator: provided => ({
       ...provided,
-      paddingRight: '0px',
+      display: 'none',
+    }),
+    dropdownIndicator: provided => ({
+      ...provided,
+      padding: '1px',
     }),
     indicatorSeparator: provided => ({
       ...provided,
@@ -77,11 +80,11 @@ const DateSelectField = React.forwardRef((props, ref) => {
     control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
-      border: state.isFocused ? '1.3px solid white' : 'none',
+      border: state.isFocused ? '1.5px solid white' : 'none',
       boxShadow: 'none',
       background: '#3a3a3a',
       color: 'white',
-      minWidth: '21vw',
+      minWidth: '20vw',
       margin: '0',
     }),
     input: () => ({
@@ -124,6 +127,8 @@ const DateSelectField = React.forwardRef((props, ref) => {
         options={options}
         ref={ref}
         isSearchable
+        isClearable
+        isRequired
         placeholder={label}
         aria-label={label}
         aria-invalid={ariaInvalid}

@@ -16,6 +16,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
     errors,
     watch,
     setValue,
+    setError,
     clearError,
   } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
@@ -33,18 +34,46 @@ const CreateAccount = ({ handleAccountCreation }) => {
         day: birthday,
       })
       .format()
-
-    if (rulesAccepted) {
-      handleAccountCreation(
+    const getAge = () => {
+      const usersBirthdate = moment(birthdate)
+      const now = moment()
+      const dateDiff = now.diff(usersBirthdate)
+      const dateDiffDuration = moment.duration(dateDiff)
+      const age = dateDiffDuration.years()
+      console.log('age ', age)
+      return age
+    }
+    if (!rulesAccepted) {
+      alert('Sinun on hyväksyttävä palvelun säännöt.')
+    }
+    const ageAccepted = getAge() >= 15
+    if (!ageAccepted) {
+      setError(
+        'day',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+      setError(
+        'month',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+      setError(
+        'year',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+    }
+    if (ageAccepted && rulesAccepted) {
+      /*handleAccountCreation(
         data.firstname.trim(),
         data.lastname.trim(),
         birthdate,
         data.email.trim().toLowerCase(),
         data.phoneNumber,
         data.password
-      )
-    } else {
-      alert('Sinun on hyväksyttävä palvelun säännöt.')
+      )*/
+      console.log('success')
     }
   }
 
@@ -138,7 +167,14 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Tarkista, että kirjoitit sukunimen oikein.'}
             </div>
           </div>
-          <div className="select-birthdate-container">
+          <div
+            className={
+              errors.year && errors.year.type === 'registrationError'
+                ? 'select-birthdate-error-container'
+                : 'select-birthdate-container'
+            }
+            aria-invalid={false}
+          >
             <span className="birthdate-content-label">Syntymäaika:</span>
             <div className="birthdate-container">
               <div className="form-field-container">
@@ -151,7 +187,8 @@ const CreateAccount = ({ handleAccountCreation }) => {
                       {
                         required: true,
                       }
-                    )}
+                    )
+                  }
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
                   onChange={selected => {
@@ -162,7 +199,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     setValue('day', selected ? selected.value : null)
                   }}
                   inputClassName={
-                    errors.day
+                    errors.day && errors.day.type === 'required'
                       ? 'create-birthdate-errors-field'
                       : 'create-account-input-date'
                   }
@@ -179,7 +216,8 @@ const CreateAccount = ({ handleAccountCreation }) => {
                       {
                         required: true,
                       }
-                    )}
+                    )
+                  }
                   ariaInvalid={!!errors.birthdate}
                   value={String(birthmonth)}
                   onChange={selected => {
@@ -190,7 +228,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     setValue('month', selected ? selected.value : null)
                   }}
                   inputClassName={
-                    errors.month
+                    errors.month && errors.month.type === 'required'
                       ? 'create-birthdate-errors-field'
                       : 'create-account-input-date'
                   }
@@ -207,7 +245,8 @@ const CreateAccount = ({ handleAccountCreation }) => {
                       {
                         required: true,
                       }
-                  )}
+                    )
+                  }
                   ariaInvalid={!!errors.year}
                   value={String(birthyear)}
                   onChange={selected => {
@@ -218,7 +257,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     setValue('year', selected ? selected.value : null)
                   }}
                   inputClassName={
-                    errors.year
+                    errors.year && errors.year.type === 'required'
                       ? 'create-birthdate-errors-field'
                       : 'create-account-input-date'
                   }
@@ -226,8 +265,14 @@ const CreateAccount = ({ handleAccountCreation }) => {
               </div>
             </div>
             <div className="birthdate-error-text">
-              {(errors.day || errors.month || errors.year) &&
+              {((errors.day && errors.day.type === 'required') ||
+                (errors.month && errors.month.type === 'required') ||
+                (errors.year && errors.year.type === 'required')) &&
                 'Anna syntymäaika'}
+              {((errors.day && errors.day.type === 'registrationError') ||
+                (errors.month && errors.month.type === 'registrationError') ||
+                (errors.year && errors.year.type === 'registrationError')) &&
+                'Voit käyttää palvelua, jos olet yli 15-vuotias.'}
             </div>
           </div>
           <div className="formfield-container">
