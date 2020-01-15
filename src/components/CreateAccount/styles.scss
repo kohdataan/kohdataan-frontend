@@ -17,13 +17,21 @@
   flex-wrap: nowrap;
   justify-content: space-around;
   margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .birthdate-content-label {
   color: white;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   margin-left: 5px;
   align-self: flex-start;
+}
+
+.birthdate-error-text {
+  color: #ff868f;
+  font-size: 0.8em;
+  margin: -40px 0 10px;
+  text-align: left;
 }
 
 .close-modal-button {
@@ -48,6 +56,26 @@
 .create-account-content-container {
   width: 80%;
 
+}
+
+.create-account-input-date {
+  background: transparent;
+  border: solid 1.4px $orange;
+  border-radius: 25px;
+  padding: 0;
+  color: $white;
+}
+
+.create-birthdate-errors-field {
+  margin: 0;
+  background: transparent;
+  border: solid 1.4px #ff5c69;
+  border-radius: 25px;
+  padding: 0;
+  color: $white;
+  &:focus {
+    outline: none;
+  }
 }
 
 .create-account-input-content-container {
@@ -175,4 +203,9 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.select-birthdate-container {
+  width: 100%;
+  margin-bottom: 10px;
 }

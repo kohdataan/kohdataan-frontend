@@ -10,7 +10,14 @@ import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
-  const { register, handleSubmit, errors, watch } = useForm()
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    setValue,
+    clearError,
+  } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
   const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
@@ -131,70 +138,98 @@ const CreateAccount = ({ handleAccountCreation }) => {
                 'Tarkista, että kirjoitit sukunimen oikein.'}
             </div>
           </div>
-          <span className="birthdate-content-label">Syntymäaika:</span>
-          <div className="birthdate-container">
-            <div className="form-field-container">
-              <DateSelectField
-                label="Päivä"
-                name="day"
-                ref={register({ required: true, minLength: 1 })}
-                ariaInvalid={!!errors.day}
-                value={birthday}
-                onChange={value => setBirthday(value.value)}
-                inputClassName="create-account-input-date"
-                labelClassName={
-                  errors.day
-                    ? 'create-account-errors-field'
-                    : 'create-account-input-date'
-                }
-              />
-            </div>
+          <div className="select-birthdate-container">
+            <span className="birthdate-content-label">Syntymäaika:</span>
+            <div className="birthdate-container">
+              <div className="form-field-container">
+                <DateSelectField
+                  label="Päivä"
+                  name="day"
+                  ref={() =>
+                    register(
+                      { name: 'day', type: 'custom' },
+                      {
+                        required: true,
+                      }
+                    )}
+                  ariaInvalid={!!errors.day}
+                  value={String(birthday)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('day')
+                      setBirthday(selected.value)
+                    }
+                    setValue('day', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.day
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
 
-            <div className="formfield-container">
-              <DateSelectField
-                label="Kuukausi"
-                name="month"
-                ref={register({
-                  required: true,
-                  minLength: 2,
-                })}
-                ariaInvalid={!!errors.birthdate}
-                value={birthmonth}
-                onChange={value => {
-                  setBirthmonth(value.value)
-                }}
-                inputClassName="create-account-input-date"
-                labelClassName={
-                  errors.month
-                    ? 'create-account-errors-field'
-                    : 'create-account-input-field'
-                }
-              />
-            </div>
+              <div className="formfield-container">
+                <DateSelectField
+                  label="Kuukausi"
+                  name="month"
+                  ref={() =>
+                    register(
+                      { name: 'month' },
+                      {
+                        required: true,
+                      }
+                    )}
+                  ariaInvalid={!!errors.birthdate}
+                  value={String(birthmonth)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('month')
+                      setBirthmonth(selected.value)
+                    }
+                    setValue('month', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.month
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
 
-            <div className="formfield-container">
-              <DateSelectField
-                label="Vuosi"
-                name="year"
-                ref={register({ required: true })}
-                ariaInvalid={!!errors.year}
-                value={birthyear}
-                onChange={value => {
-                  setBirthyear(value.value)
-                }}
-                inputClassName="create-account-input-date"
-                labelClassName={
-                  errors.year
-                    ? 'create-account-errors-field'
-                    : 'create-account-input-field'
-                }
-              />
+              <div className="formfield-container">
+                <DateSelectField
+                  label="Vuosi"
+                  name="year"
+                  ref={() =>
+                    register(
+                      { name: 'year' },
+                      {
+                        required: true,
+                      }
+                  )}
+                  ariaInvalid={!!errors.year}
+                  value={String(birthyear)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('year')
+                      setBirthyear(selected.value)
+                    }
+                    setValue('year', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.year
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
+            </div>
+            <div className="birthdate-error-text">
+              {(errors.day || errors.month || errors.year) &&
+                'Anna syntymäaika'}
             </div>
           </div>
-          <div className="error-text">
-            {(errors.day || errors.month || errors.year) && 'Anna syntymäaika'}
-          </div>
-
           <div className="formfield-container">
             <ValidatedInputField
               label="Sähköposti"

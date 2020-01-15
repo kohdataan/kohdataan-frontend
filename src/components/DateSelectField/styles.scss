@@ -4,31 +4,6 @@
     display: flex;
 }
 
-// The following styles (beginning with .css-) override styles from moment 
-
-.css-151xaom-placeholder {
-  color: white !important;
-  font-size: 15px;
-}
-
-.css-1ghk0jl-control {
-  min-width: 21vw;
-  margin: 0 4px;
-  background: #3a3a3a !important;
-}
-
-.css-bgvzuu-indicatorSeparator {
-  display: none;
-}
-
-.css-rgzio4-control {
-  min-width: 23vw;
-}
-
-.css-xt3mbu-indicatorContainer {
-  padding: 8px 6px 8px 0px !important;
-}
-
 .year-select-field {
     margin-top: 5px;
     background: transparent;
@@ -42,7 +17,7 @@
   
     &:focus {
       outline: none;
-      border: solid 1px $white;
+      border: none;
     }
   }
 
@@ -59,7 +34,7 @@
   
     &:focus {
       outline: none;
-      border: solid 1px $white;
+      border: none;
     }
   }
 
@@ -88,7 +63,7 @@
   
     &:focus {
       outline: none;
-      border: solid 1px $white;
+      border: none;
       min-width: 20vw;
     }
   }

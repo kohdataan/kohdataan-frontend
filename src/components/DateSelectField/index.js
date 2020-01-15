@@ -10,6 +10,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
     ariaInvalid,
     ariaDescribedBy,
     inputClassName,
+    labelClassName,
     name,
     onChange,
     value,
@@ -31,41 +32,63 @@ const DateSelectField = React.forwardRef((props, ref) => {
     { value: 11, label: 'Marras' },
     { value: 12, label: 'Joulu' },
   ]
-  const days = []
-  let day = 1
+  const days = [
+    { value: 1, label: '01' },
+    { value: 2, label: '02' },
+    { value: 3, label: '03' },
+    { value: 4, label: '04' },
+    { value: 5, label: '05' },
+    { value: 6, label: '06' },
+    { value: 7, label: '07' },
+    { value: 8, label: '08' },
+    { value: 9, label: '09' },
+  ]
+  let day = 10
   let options = []
 
   const customStyles = {
     container: provided => ({
       ...provided,
       width: '100%',
+      marginLeft: '5px',
     }),
     menu: provided => ({
       ...provided,
       border: '2px solid #f59023',
     }),
+    placeholder: provided => ({
+      ...provided,
+      color: 'white',
+      fontSize: '15px',
+    }),
+    indicatorContainer: provided => ({
+      ...provided,
+      paddingRight: '0px',
+    }),
+    indicatorSeparator: provided => ({
+      ...provided,
+      display: 'none',
+    }),
     option: (provided, state) => ({
       ...provided,
       color: 'white',
-      background: state.isSelected ? 'grey' : '#1c1c1c',
+      background: state.isFocused ? 'grey' : '#1c1c1c',
     }),
-    control: provided => ({
+    control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
-      border: '1px solid #f59023',
+      border: state.isFocused ? '1.3px solid white' : 'none',
       boxShadow: 'none',
-      background: '#1c1c1c',
+      background: '#3a3a3a',
       color: 'white',
+      minWidth: '21vw',
+      margin: '0',
     }),
     input: () => ({
       color: 'white',
     }),
     singleValue: () => ({
       color: 'white',
-    }),
-    dropdownIndicator: provided => ({
-      ...provided,
-      color: '#f59023',
     }),
   }
 
@@ -93,25 +116,24 @@ const DateSelectField = React.forwardRef((props, ref) => {
   }
 
   return (
-    <div>
-      <label htmlFor={label} className={inputClassName}>
-        {showLabel && label}
-        <Select
-          id={label}
-          name={name}
-          ref={ref}
-          options={options}
-          isSearchable
-          placeholder={label}
-          aria-label={label}
-          aria-invalid={ariaInvalid}
-          aria-describedby={ariaDescribedBy}
-          styles={customStyles}
-          onChange={onChange}
-          value={value.label}
-        />
-      </label>
-    </div>
+    <label htmlFor={label} className={labelClassName}>
+      {showLabel && label}
+      <Select
+        id={label}
+        name={name}
+        options={options}
+        ref={ref}
+        isSearchable
+        placeholder={label}
+        aria-label={label}
+        aria-invalid={ariaInvalid}
+        aria-describedby={ariaDescribedBy}
+        styles={customStyles}
+        onChange={onChange}
+        className={inputClassName}
+        value={value.label}
+      />
+    </label>
   )
 })
 
@@ -121,6 +143,7 @@ DateSelectField.propTypes = {
   ariaInvalid: PropTypes.bool,
   ariaDescribedBy: PropTypes.string,
   inputClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
@@ -131,6 +154,7 @@ DateSelectField.defaultProps = {
   ariaInvalid: false,
   ariaDescribedBy: '',
   inputClassName: '',
+  labelClassName: '',
 }
 
 export default memo(DateSelectField)
