@@ -47,18 +47,18 @@ const DateSelectField = React.forwardRef((props, ref) => {
   let options = []
 
   const getBorderStyle = isFocused => {
-    let borderStyle = '1px solid #f59023'
+    let border = '1px solid #f59023'
     if (isFocused) {
-      borderStyle = '1px solid white'
+      border = '1px solid white'
     } else if (
       errors &&
       (errors.ref.name === 'day' ||
         errors.ref.name === 'month' ||
         errors.ref.name === 'year')
     ) {
-      borderStyle = '1px solid #ff5c69'
+      border = '1px solid #ff5c69'
     }
-    return borderStyle
+    return border
   }
 
   const customStyles = {
