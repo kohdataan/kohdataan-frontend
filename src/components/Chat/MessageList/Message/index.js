@@ -20,7 +20,7 @@ const Message = props => {
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
- 
+
   // Checks if message is system message
   const isSystemMessage = () =>
     type === 'system_join_channel' || type === 'system_leave_channel'
@@ -73,9 +73,7 @@ const Message = props => {
               <p className="chat-message-content-text">{text}</p>
               {files && (
                 <img
-                  src={`http://${
-                    process.env.REACT_APP_MATTERMOST_URL
-                  }/api/v4/files/${files[0]}/thumbnail`}
+                  src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                   alt="attachment"
                 />
               )}

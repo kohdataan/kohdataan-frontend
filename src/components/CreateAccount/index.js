@@ -10,7 +10,7 @@ import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import getAge from '../../utils/getAge'
 import './styles.scss'
 
-const CreateAccount = ({ handleAccountCreation }) => {
+const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const {
     register,
     handleSubmit,
@@ -281,7 +281,8 @@ const CreateAccount = ({ handleAccountCreation }) => {
               ariaInvalid={!!errors.email}
               inputClassName="create-account-input-text"
               labelClassName={
-                errors.email
+                errors.email ||
+                (apiErrors && apiErrors.fields && apiErrors.fields.email)
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -293,6 +294,9 @@ const CreateAccount = ({ handleAccountCreation }) => {
               {errors.email &&
                 errors.email.type === 'pattern' &&
                 'Tarkista sähköpostiosoite.'}
+              {apiErrors && apiErrors.fields && apiErrors.fields.email && (
+                <p>Tähän sähköpostiin on liitetty jo käyttäjä.</p>
+              )}
             </div>
           </div>
 
@@ -451,6 +455,15 @@ const CreateAccount = ({ handleAccountCreation }) => {
 
 CreateAccount.propTypes = {
   handleAccountCreation: PropTypes.func.isRequired,
+  apiErrors: PropTypes.shape({
+    name: PropTypes.string,
+    errors: PropTypes.array,
+    fields: PropTypes.object,
+  }),
+}
+
+CreateAccount.defaultProps = {
+  apiErrors: { name: '', errors: [], fields: {} },
 }
 
 export default memo(CreateAccount)
