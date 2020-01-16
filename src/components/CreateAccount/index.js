@@ -10,11 +10,7 @@ import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import getAge from '../../utils/getAge'
 import './styles.scss'
 
-<<<<<<< HEAD
 const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
-  const { register, handleSubmit, errors, watch } = useForm()
-=======
-const CreateAccount = ({ handleAccountCreation }) => {
   const {
     register,
     handleSubmit,
@@ -24,7 +20,6 @@ const CreateAccount = ({ handleAccountCreation }) => {
     setError,
     clearError,
   } = useForm()
->>>>>>> development
   const [rulesAccepted, setRulesAccepted] = useState(false)
   const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
