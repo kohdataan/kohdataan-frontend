@@ -36,11 +36,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
       .format()
     const getAge = () => {
       const usersBirthdate = moment(birthdate)
-      const now = moment()
-      const dateDiff = now.diff(usersBirthdate)
-      const dateDiffDuration = moment.duration(dateDiff)
-      const age = dateDiffDuration.years()
-      console.log('age ', age)
+      const age = moment().diff(usersBirthdate, 'years')
       return age
     }
     if (!rulesAccepted) {
@@ -65,14 +61,14 @@ const CreateAccount = ({ handleAccountCreation }) => {
       )
     }
     if (ageAccepted && rulesAccepted) {
-      /*handleAccountCreation(
+      handleAccountCreation(
         data.firstname.trim(),
         data.lastname.trim(),
         birthdate,
         data.email.trim().toLowerCase(),
         data.phoneNumber,
         data.password
-      )*/
+      )
       console.log('success')
     }
   }
