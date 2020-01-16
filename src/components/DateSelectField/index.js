@@ -49,7 +49,6 @@ const DateSelectField = React.forwardRef((props, ref) => {
     container: provided => ({
       ...provided,
       width: '100%',
-      marginLeft: '5px',
     }),
     menu: provided => ({
       ...provided,
@@ -80,9 +79,9 @@ const DateSelectField = React.forwardRef((props, ref) => {
     control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
-      border: state.isFocused ? '1.5px solid white' : 'none',
+      border: 'none',
       boxShadow: 'none',
-      background: '#3a3a3a',
+      background: state.isFocused ? '#3a3a3a' : '#2a2a2a',
       color: 'white',
       minWidth: '20vw',
       margin: '0',

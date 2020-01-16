@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 20px;
   margin-top: 5px;
 }
@@ -60,10 +60,16 @@
 
 .create-account-input-date {
   background: transparent;
-  border: solid 1.4px $orange;
+  border: solid 1px $orange;
   border-radius: 25px;
   padding: 0;
   color: $white;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
 
 .create-birthdate-errors-field {
@@ -75,6 +81,7 @@
   color: $white;
   &:focus {
     outline: none;
+    border: none;
   }
 }
 
@@ -121,6 +128,7 @@
   }
   &:focus {
     outline: none;
+    border: solid 1px $white;
   }
 }
 
@@ -136,6 +144,10 @@
   outline: none;
   width: 210px;
   height: 42px;
+  &:focus {
+    outline: none;
+    border: solid 1px $white;
+  }
 }
 
 %create-account-link-shared {

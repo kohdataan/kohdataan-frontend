@@ -69,7 +69,6 @@ const CreateAccount = ({ handleAccountCreation }) => {
         data.phoneNumber,
         data.password
       )
-      console.log('success')
     }
   }
 
