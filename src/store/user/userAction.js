@@ -1,5 +1,32 @@
+import { login as matterMostLogin } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/user'
+import * as API from '../../api/user/user'
+
+export const userLogin = user => {
+  return async dispatch => {
+    try {
+      let loginSuccess = false
+      const res = await API.userLogin(user)
+      if (res) {
+        localStorage.setItem('userId', res.user.id)
+        localStorage.setItem('authToken', res.token)
+        loginSuccess = true
+      }
+      if (loginSuccess) {
+        const { email, password } = user
+        await dispatch(matterMostLogin(email, password))
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      dispatch({
+        type: types.USER_LOGIN_FAILURE,
+        payload: e,
+        error: true,
+      })
+    }
+  }
+}
 
 export const addUserToState = () => {
   return async dispatch => {
@@ -71,11 +98,7 @@ export const addUserInterests = interests => {
 // eslint-disable-next-line import/prefer-default-export
 export function clearUserCookie() {
   document.cookie = 'MMUSERID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/'
-  document.cookie = `MMUSERID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${
-    window.location.hostname
-  };path=/`
+  document.cookie = `MMUSERID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${window.location.hostname};path=/`
   document.cookie = 'MMCSRF=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/'
-  document.cookie = `MMCSRF=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${
-    window.location.hostname
-  };path=/`
+  document.cookie = `MMCSRF=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=${window.location.hostname};path=/`
 }

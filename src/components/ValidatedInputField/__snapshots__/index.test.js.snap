@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button container it matches the snapshot 1`] = `
+<label
+  className=""
+  htmlFor="test"
+>
+  test
+  <input
+    aria-invalid={false}
+    aria-label="test"
+    className=""
+    id="test"
+    name="test"
+    onChange={null}
+    placeholder="test"
+    type="text"
+  />
+</label>
+`;

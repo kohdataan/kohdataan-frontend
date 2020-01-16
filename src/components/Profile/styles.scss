@@ -1,8 +1,8 @@
 @import '../../styles/colors.scss';
 
 .profile-container {
-  height: 100vh;
   overflow: auto;
+  margin-bottom: 100px;
 }
 
 .profile-header-container {
@@ -12,13 +12,13 @@
   justify-content: space-between;
   background-color: $background-gray;
   width: 100%;
+  padding: 1rem;
 }
 
 .profile-header-item {
   margin: 0;
   display: inline-block;
   white-space: nowrap;
-  padding: 0.85rem 0.75rem;
 }
 
 .profile-modal-header {
@@ -36,3 +36,20 @@
   font-size: 13px;
 }
 
+.interests-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin: 1rem 0;
+}
+
+.profile-dm-button {
+  padding: 10px 15px;
+}
+
+.edit-me-link {
+  align-self: flex-start;
+  margin-block-start: 1em;
+}

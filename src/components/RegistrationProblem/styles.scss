@@ -2,8 +2,8 @@
 
 .registration-problem-container {
   background-color: $black;
-  height: 100%;
   width: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -14,12 +14,33 @@
   width: 80%;
 }
 
+.registration-problem-errors-field {
+  margin-top: 5px;
+  background: transparent;
+  border: solid 1px #ff5c69;
+  border-radius: 25px;
+  padding: 10px 0 10px 10px;
+  color: $white;
+  &::placeholder {
+    color: $white;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.registration-problem-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .registration-problem-text {
   color: #fff;
 }
 
 .registration-problem-input-fields-container {
-  padding-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,6 +84,11 @@
   outline: none;
   width: 210px;
   height: 42px;
+  margin-top: 20px;
+  &:focus {
+    outline: none;
+    border: solid 1px $white;
+  }
 }
 
 .registration-problem-links-container {
@@ -81,6 +107,9 @@
   }
 }
 
-.divider {
+.registration-problem-divider {
+  width: 100%;
+  height: 0.1px;
   border: 0.5px solid $orange;
+  margin: 1em 0;
 }

@@ -7,13 +7,13 @@ import './styles.scss'
 const MAX_LENGTH = 200
 
 const Description = props => {
-  const { onChange, value } = props
+  const { onChange, value, hideStep } = props
   return (
     <ShadowBox>
       <main role="main" className="add-user-description-container">
         <div className="profile-creation-title-container">
           <h2 className="profile-creation-title">Kerro itsestäsi</h2>
-          <span className="profile-creation-step-text">4/6</span>
+          {!hideStep && <span className="profile-creation-step-text">4/6</span>}
         </div>
 
         <TextArea
@@ -44,10 +44,12 @@ const Description = props => {
 Description.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  hideStep: PropTypes.bool,
 }
 
 Description.defaultProps = {
   value: '',
+  hideStep: false,
 }
 
 export default memo(Description)

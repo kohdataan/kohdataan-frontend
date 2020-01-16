@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
@@ -7,28 +7,31 @@ import getIcon from '../../utils/getIcon'
 const EditInterestsContainer = props => {
   const { options, interests, setInterests } = props
   const [sortedOptions, setSortedOptions] = useState(options)
+  // Use ref of interests, because we don't want to sort each
+  // time interests are changed, only on mount
+  const interestsOnMount = useRef(interests)
   const itemIsSelected = id => interests.includes(id)
 
-  const sortOptions = () => {
-    const sorted = Object.values(options).sort((a, b) => {
-      if (itemIsSelected(a.id)) {
-        // Sort by selection
-        if (itemIsSelected(b.id)) {
-          return a.name > b.name ? 1 : -1
-        }
-        return -1
-      }
-      if (itemIsSelected(b.id)) {
-        return 1
-      }
-      return a.name > b.name ? 1 : -1
-    })
-    return sorted
-  }
-
   useEffect(() => {
+    const sortOptions = () => {
+      const sorted = Object.values(options).sort((a, b) => {
+        if (interestsOnMount.current.includes(a.id)) {
+          // Sort by selection
+          if (interestsOnMount.current.includes(b.id)) {
+            return a.name > b.name ? 1 : -1
+          }
+          return -1
+        }
+        if (interestsOnMount.current.includes(b.id)) {
+          return 1
+        }
+        // Sort by name
+        return a.name > b.name ? 1 : -1
+      })
+      return sorted
+    }
     setSortedOptions(sortOptions())
-  }, [])
+  }, [options])
 
   // Select item if less than 5 items are selected
   const addToSelected = key => {
@@ -57,6 +60,7 @@ const EditInterestsContainer = props => {
       removeFromSelected(id)
     }
   }
+
   return (
     <div className="interests-grid">
       {sortedOptions.map(interest => (
