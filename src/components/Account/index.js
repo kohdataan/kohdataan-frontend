@@ -2,11 +2,15 @@ import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
 import EditAccountModal from './EditAccountModal'
+import DeleteAccountModal from './DeleteAccountModal'
+import * as API from '../../api/user/user'
 import './styles.scss'
 
 const Account = props => {
-  const { nodeUser, mmuser, updateUser, updatePassword } = props
+  const { nodeUser, mmuser, updateUser, updatePassword, history } = props
   const [showModal, setShowModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteError, setDeleteError] = useState(null)
   const [field, setField] = useState('')
 
   const openModal = fieldName => {
@@ -16,6 +20,25 @@ const Account = props => {
 
   const closeModal = () => {
     setShowModal(false)
+  }
+
+  const handleDeleteUser = async () => {
+    try {
+      const data = { mmid: mmuser.id }
+      const id = localStorage.getItem('userId')
+      const token = localStorage.getItem('authToken')
+      const res = await API.deleteUser(data, id, token)
+      if (res && res.success) {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('authToken')
+        history.push('/')
+      } else if (res && res.message) {
+        setDeleteError(res.message)
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
   }
 
   const updateAccountInfo = data => {
@@ -35,6 +58,7 @@ const Account = props => {
     closeModal()
   }
   // TODO: Jos sähköpostin päivittäminen epäonnistuu --> Error handlays
+  // TODO: Merkitse ryhmä ja privachatteihin ja profiiliin harmaaksi tms jos käyttäjällä on prop delete_at muu kuin 0
 
   return (
     <div className="account-update-container">
@@ -89,11 +113,34 @@ const Account = props => {
             </div>
           )}
       </div>
+      <div className="account-box-outer">
+        <div className="account-box-inner">
+          <div className="account-label-text delete-text">
+            Poista käyttäjätili
+          </div>
+          <ButtonContainer
+            className="account-delete-button"
+            onClick={() => setShowDeleteModal(true)}
+          >
+            Poista
+          </ButtonContainer>
+        </div>
+        <div className="account-box">
+          Poista tili pysyvästi. Et voi enää palauttaa tiliäsi poistamisen
+          jälkeen.
+        </div>
+      </div>
       <EditAccountModal
         showModal={showModal}
         updateUser={updateAccountInfo}
         closeModal={closeModal}
         field={field}
+      />
+      <DeleteAccountModal
+        showModal={showDeleteModal}
+        closeModal={() => setShowDeleteModal(false)}
+        deleteUser={handleDeleteUser}
+        deleteError={deleteError}
       />
     </div>
   )
@@ -109,6 +156,7 @@ Account.propTypes = {
     .isRequired,
   updateUser: propTypes.func.isRequired,
   updatePassword: propTypes.func.isRequired,
+  history: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Account)

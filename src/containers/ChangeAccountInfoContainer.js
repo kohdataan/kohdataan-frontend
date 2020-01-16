@@ -9,7 +9,7 @@ import {
 } from '../store/user/userAction'
 
 const ChangeAccountInfoContainer = props => {
-  const { myUserInfo, currentUser, updateUser, updatePassword } = props
+  const { myUserInfo, currentUser, updateUser, updatePassword, history } = props
 
   return (
     <Account
@@ -17,6 +17,7 @@ const ChangeAccountInfoContainer = props => {
       mmuser={currentUser}
       updateUser={updateUser}
       updatePassword={updatePassword}
+      history={history}
     />
   )
 }
@@ -58,6 +59,7 @@ ChangeAccountInfoContainer.propTypes = {
   }).isRequired,
   updateUser: PropTypes.func.isRequired,
   updatePassword: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default connect(

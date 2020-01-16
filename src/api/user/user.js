@@ -218,6 +218,23 @@ const sendEmail = async data => {
   }
 }
 
+const deleteUser = async (data, id, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return await resp.json()
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
   userLogout,
@@ -232,4 +249,5 @@ export {
   getInterestsByUsername,
   sendEmail,
   updatePassword,
+  deleteUser,
 }
