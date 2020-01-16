@@ -28,7 +28,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
   const [birthyear, setBirthyear] = useState('')
 
   const onSubmit = data => {
-    const birthdate = moment
+    const usersBirthdate = moment
       .utc({
         year: birthyear,
         month: birthmonth - 1,
@@ -39,7 +39,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
     if (!rulesAccepted) {
       alert('Sinun on hyväksyttävä palvelun säännöt.')
     }
-    const ageAccepted = getAge() >= 15
+    const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
     if (!ageAccepted) {
       setError(
         'day',
@@ -61,7 +61,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
       handleAccountCreation(
         data.firstname.trim(),
         data.lastname.trim(),
-        birthdate,
+        usersBirthdate,
         data.email.trim().toLowerCase(),
         data.phoneNumber,
         data.password
