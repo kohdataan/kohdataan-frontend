@@ -45,24 +45,40 @@ const Friend = props => {
     }
     fetchPosts()
   }, [channel, getPosts])
-
+  if (user.delete_at === 0) {
+    return (
+      <Link className="friend-box" to={`/chat/${channel.id}`}>
+        <div className="friend-box-content">
+          <div className="friend-icon-box">
+            <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+          </div>
+          <div className="friend-text-content">
+            <div className="friend-header">
+              <h2>{user.nickname}</h2>
+              {unreadCount > 0 && (
+                <mark className="unread-badge">{unreadCount}</mark>
+              )}
+            </div>
+            {message ? <>{message}</> : <TextLine />}
+          </div>
+        </div>
+      </Link>
+    )
+  }
   return (
-    <Link className="friend-box" to={`/chat/${channel.id}`}>
+    <div className="friend-box">
       <div className="friend-box-content">
         <div className="friend-icon-box">
           <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
         </div>
         <div className="friend-text-content">
           <div className="friend-header">
-            <h2>{user.nickname}</h2>
-            {unreadCount > 0 && (
-              <mark className="unread-badge">{unreadCount}</mark>
-            )}
+            <h2 className="deleted-user-nickname">{user.nickname}</h2>
           </div>
-          {message ? <>{message}</> : <TextLine />}
+          <>Käyttäjä on poistunut palvelusta</>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }
 

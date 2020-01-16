@@ -57,8 +57,6 @@ const Account = props => {
     }
     closeModal()
   }
-  // TODO: Jos sähköpostin päivittäminen epäonnistuu --> Error handlays
-  // TODO: Merkitse ryhmä ja privachatteihin ja profiiliin harmaaksi tms jos käyttäjällä on prop delete_at muu kuin 0
 
   return (
     <div className="account-update-container">
@@ -126,8 +124,7 @@ const Account = props => {
           </ButtonContainer>
         </div>
         <div className="account-box">
-          Poista tili pysyvästi. Et voi enää palauttaa tiliäsi poistamisen
-          jälkeen.
+          Et voi enää palauttaa tiliäsi poistamisen jälkeen.
         </div>
       </div>
       <EditAccountModal

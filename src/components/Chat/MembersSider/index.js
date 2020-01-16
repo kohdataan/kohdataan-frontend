@@ -44,17 +44,23 @@ const MembersSider = props => {
     <div className="chat-header-members-sider" id="members-sider" ref={ref}>
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
-        {members.map(member => (
-          <Member
-            key={member.user_id}
-            userId={member.user_id}
-            profiles={profiles}
-            nickName={getNickNamebyId(member.user_id)}
-            currentUserId={currentUserId}
-            iconClassNameList={getIconClassNameList(member.user_id)}
-            iconMemberStatus={getIconMemberStatus(member.user_id)}
-          />
-        ))}
+        {members
+          .filter(
+            member =>
+              profiles[member.user_id] &&
+              profiles[member.user_id].delete_at === 0
+          )
+          .map(member => (
+            <Member
+              key={member.user_id}
+              userId={member.user_id}
+              profiles={profiles}
+              nickName={getNickNamebyId(member.user_id)}
+              currentUserId={currentUserId}
+              iconClassNameList={getIconClassNameList(member.user_id)}
+              iconMemberStatus={getIconMemberStatus(member.user_id)}
+            />
+          ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
         <ButtonContainer
           onClick={openModal}

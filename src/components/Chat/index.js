@@ -40,12 +40,15 @@ const Chat = props => {
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = ''
-    if (user && user.nickname) {
-      visibleName = user.nickname
-    } else if (user) {
-      visibleName = user.username
+    if (user && user.delete_at === 0) {
+      if (user && user.nickname) {
+        visibleName = user.nickname
+      } else if (user) {
+        visibleName = user.username
+      }
+      return visibleName
     }
-    return visibleName
+    return 'Käyttäjä poistunut'
   }
 
   const getStatusById = id => {

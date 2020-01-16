@@ -15,13 +15,25 @@ const DeleteAccountModal = props => {
         closeModal={closeModal}
       >
         <p>
-          Poista käyttäjätili pysyvästi. Tämän jälkeen et voi enää palauttaa
-          tiliäsi.
+          Valittuasi poista käyttäjätili et voi enää palauttaa tiliäsi. Haluatko
+          varmasti poistaa käyttäjätilin lopullisesti?
         </p>
+        <div className="account-delete-buttons-wrapper">
+          <ButtonContainer
+            className="account-cancel-delete-button"
+            onClick={closeModal}
+            secondary
+          >
+            Peruuta
+          </ButtonContainer>
 
-        <ButtonContainer className="account-delete-button" onClick={deleteUser}>
-          Poista käyttäjätili
-        </ButtonContainer>
+          <ButtonContainer
+            className="account-delete-button"
+            onClick={deleteUser}
+          >
+            Poista käyttäjätili
+          </ButtonContainer>
+        </div>
         {deleteError && (
           <p
             className="edit-account-error-text"

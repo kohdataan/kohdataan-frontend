@@ -76,7 +76,7 @@
   height: 1px;
   background: #1c1c1c;
   margin: 10px 2px;
-  display: inline-block;  
+  display: inline-block;
 }
 
 .date-divider-text {
@@ -102,7 +102,7 @@
   background-color: white;
   color: gray;
   border: none;
-  width: 100%
+  width: 100%;
 }
 
 .chat-message-sender {
@@ -117,6 +117,10 @@
   letter-spacing: -0.19px;
   color: #1a1a1a;
   margin-bottom: 4px;
+}
+
+.chat-message-sender-unknown {
+  color: gray;
 }
 
 .chat-message-sender-icon {

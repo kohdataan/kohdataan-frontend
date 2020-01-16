@@ -8,6 +8,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  button {
+    width: 150px;
+    height: 40px;
+  }
 }
 
 .account-box-outer {
