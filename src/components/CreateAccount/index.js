@@ -2,29 +2,75 @@ import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
+import moment from 'moment'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
+import DateSelectField from '../DateSelectField'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
+import getAge from '../../utils/getAge'
 import './styles.scss'
 
+<<<<<<< HEAD
 const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const { register, handleSubmit, errors, watch } = useForm()
+=======
+const CreateAccount = ({ handleAccountCreation }) => {
+  const {
+    register,
+    handleSubmit,
+    errors,
+    watch,
+    setValue,
+    setError,
+    clearError,
+  } = useForm()
+>>>>>>> development
   const [rulesAccepted, setRulesAccepted] = useState(false)
   const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
+  const [birthday, setBirthday] = useState('')
+  const [birthmonth, setBirthmonth] = useState('')
+  const [birthyear, setBirthyear] = useState('')
 
   const onSubmit = data => {
-    if (rulesAccepted) {
+    const usersBirthdate = moment
+      .utc({
+        year: birthyear,
+        month: birthmonth - 1,
+        day: birthday,
+      })
+      .format()
+
+    if (!rulesAccepted) {
+      alert('Sinun on hyväksyttävä palvelun säännöt.')
+    }
+    const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
+    if (!ageAccepted) {
+      setError(
+        'day',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+      setError(
+        'month',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+      setError(
+        'year',
+        'registrationError',
+        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
+      )
+    }
+    if (ageAccepted && rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
         data.lastname.trim(),
-        data.birthdate,
+        usersBirthdate,
         data.email.trim().toLowerCase(),
         data.phoneNumber,
         data.password
       )
-    } else {
-      alert('Sinun on hyväksyttävä palvelun säännöt.')
     }
   }
 
@@ -118,26 +164,117 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Tarkista, että kirjoitit sukunimen oikein.'}
             </div>
           </div>
+          <div
+            className={
+              errors.year && errors.year.type === 'registrationError'
+                ? 'select-birthdate-error-container'
+                : 'select-birthdate-container'
+            }
+            aria-invalid={false}
+          >
+            <span className="birthdate-content-label">Syntymäaika:</span>
+            <div className="birthdate-container">
+              <div className="form-field-container">
+                <DateSelectField
+                  label="Päivä"
+                  name="day"
+                  ref={() =>
+                    register(
+                      { name: 'day', type: 'custom' },
+                      {
+                        required: true,
+                      }
+                    )
+                  }
+                  errors={errors.day}
+                  ariaInvalid={!!errors.day}
+                  value={String(birthday)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('day')
+                      setBirthday(selected.value)
+                    }
+                    setValue('day', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.day && errors.day.type === 'required'
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
 
-          <div className="formfield-container">
-            <ValidatedInputField
-              label="Syntymäaika"
-              name="birthdate"
-              ref={register({ required: true })}
-              type="date"
-              ariaInvalid={!!errors.birthdate}
-              inputClassName="create-account-input-text"
-              labelClassName={
-                errors.birthdate
-                  ? 'create-account-errors-field'
-                  : 'create-account-input-field'
-              }
-            />
-            <div className="error-text">
-              {errors.birthdate && 'Valitse syntymäaika'}
+              <div className="formfield-container">
+                <DateSelectField
+                  label="Kuukausi"
+                  name="month"
+                  ref={() =>
+                    register(
+                      { name: 'month' },
+                      {
+                        required: true,
+                      }
+                    )
+                  }
+                  ariaInvalid={!!errors.birthdate}
+                  errors={errors.month}
+                  value={String(birthmonth)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('month')
+                      setBirthmonth(selected.value)
+                    }
+                    setValue('month', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.month && errors.month.type === 'required'
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
+
+              <div className="formfield-container">
+                <DateSelectField
+                  label="Vuosi"
+                  name="year"
+                  ref={() =>
+                    register(
+                      { name: 'year' },
+                      {
+                        required: true,
+                      }
+                    )
+                  }
+                  ariaInvalid={!!errors.year}
+                  errors={errors.year}
+                  value={String(birthyear)}
+                  onChange={selected => {
+                    if (selected) {
+                      clearError('year')
+                      setBirthyear(selected.value)
+                    }
+                    setValue('year', selected ? selected.value : null)
+                  }}
+                  inputClassName={
+                    errors.year && errors.year.type === 'required'
+                      ? 'create-birthdate-errors-field'
+                      : 'create-account-input-date'
+                  }
+                />
+              </div>
+            </div>
+            <div className="birthdate-error-text">
+              {((errors.day && errors.day.type === 'required') ||
+                (errors.month && errors.month.type === 'required') ||
+                (errors.year && errors.year.type === 'required')) &&
+                'Anna syntymäaika'}
+              {((errors.day && errors.day.type === 'registrationError') ||
+                (errors.month && errors.month.type === 'registrationError') ||
+                (errors.year && errors.year.type === 'registrationError')) &&
+                'Voit käyttää palvelua, jos olet yli 15-vuotias.'}
             </div>
           </div>
-
           <div className="formfield-container">
             <ValidatedInputField
               label="Sähköposti"

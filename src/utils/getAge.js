@@ -2,10 +2,7 @@ import moment from 'moment'
 
 const getAge = user => {
   const birthdate = moment(user.birthdate)
-  const now = moment()
-  const dateDiff = now.diff(birthdate)
-  const dateDiffDuration = moment.duration(dateDiff)
-  const age = dateDiffDuration.years()
+  const age = moment().diff(birthdate, 'years')
   return age
 }
 
