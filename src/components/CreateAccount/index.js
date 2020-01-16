@@ -181,6 +181,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                       }
                     )
                   }
+                  errors={errors.day}
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
                   onChange={selected => {
@@ -211,6 +212,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     )
                   }
                   ariaInvalid={!!errors.birthdate}
+                  errors={errors.month}
                   value={String(birthmonth)}
                   onChange={selected => {
                     if (selected) {
@@ -240,6 +242,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
                     )
                   }
                   ariaInvalid={!!errors.year}
+                  errors={errors.year}
                   value={String(birthyear)}
                   onChange={selected => {
                     if (selected) {

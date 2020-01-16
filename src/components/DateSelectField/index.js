@@ -8,6 +8,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
     label,
     showLabel,
     ariaInvalid,
+    errors,
     ariaDescribedBy,
     inputClassName,
     labelClassName,
@@ -45,6 +46,21 @@ const DateSelectField = React.forwardRef((props, ref) => {
   let day = 10
   let options = []
 
+  const getBorderStyle = isFocused => {
+    let borderStyle = '1px solid #f59023'
+    if (isFocused) {
+      borderStyle = '1px solid white'
+    } else if (
+      errors &&
+      (errors.ref.name === 'day' ||
+        errors.ref.name === 'month' ||
+        errors.ref.name === 'year')
+    ) {
+      borderStyle = '1px solid #ff5c69'
+    }
+    return borderStyle
+  }
+
   const customStyles = {
     container: provided => ({
       ...provided,
@@ -79,9 +95,9 @@ const DateSelectField = React.forwardRef((props, ref) => {
     control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
-      border: 'none',
+      border: state.isFocused ? getBorderStyle(true) : getBorderStyle(false),
       boxShadow: 'none',
-      background: state.isFocused ? '#3a3a3a' : '#2a2a2a',
+      background: '#3a3a3a',
       color: 'white',
       minWidth: '20vw',
       margin: '0',
@@ -145,6 +161,7 @@ DateSelectField.propTypes = {
   label: PropTypes.string.isRequired,
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
+  errors: PropTypes.instanceOf(Object),
   ariaDescribedBy: PropTypes.string,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
@@ -156,6 +173,7 @@ DateSelectField.propTypes = {
 DateSelectField.defaultProps = {
   showLabel: false,
   ariaInvalid: false,
+  errors: null,
   ariaDescribedBy: '',
   inputClassName: '',
   labelClassName: '',
