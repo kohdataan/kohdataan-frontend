@@ -17,8 +17,8 @@ export default function user(state = {}, action) {
     case types.UPDATE_USER_FAILURE: {
       return { ...state, errorMessage: action.payload.message }
     }
-    case types.ADD_USER_INTERESTS: {
-      return { ...state, ...action.userInterests }
+    case types.USER_LOGIN_FAILURE: {
+      return { ...state, errorMessage: action.payload.message }
     }
     case types.GET_USER_INTERESTS: {
       return { ...state, ...action.userInterests }

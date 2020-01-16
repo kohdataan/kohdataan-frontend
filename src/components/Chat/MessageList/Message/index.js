@@ -14,12 +14,13 @@ const Message = props => {
     dateSent,
     showDate,
     directChannel,
+    files,
   } = props
 
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
-
+ 
   // Checks if message is system message
   const isSystemMessage = () =>
     type === 'system_join_channel' || type === 'system_leave_channel'
@@ -41,7 +42,6 @@ const Message = props => {
     currentUserId === senderId ? 'content-sent' : 'content-received',
     isSystemCombinedUserActivity() ? 'content-system-combined' : '',
   ]
-
   const senderIconClassList = [
     'chat-message-sender-icon',
     `chat-${iconColor}-icon`,
@@ -71,6 +71,14 @@ const Message = props => {
           <div className="chat-message-content-field">
             <div className={messageContentClassList.join(' ')}>
               <p className="chat-message-content-text">{text}</p>
+              {files && (
+                <img
+                  src={`http://${
+                    process.env.REACT_APP_MATTERMOST_URL
+                  }/api/v4/files/${files[0]}/thumbnail`}
+                  alt="attachment"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -88,6 +96,7 @@ const Message = props => {
 Message.defaultProps = {
   type: '',
   senderId: '',
+  files: null,
 }
 
 Message.propTypes = {
@@ -101,6 +110,7 @@ Message.propTypes = {
   timeSent: propTypes.string.isRequired,
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
+  files: propTypes.instanceOf(Array),
 }
 
 export default memo(Message)

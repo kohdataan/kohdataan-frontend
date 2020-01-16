@@ -6,12 +6,11 @@ import './styles.scss'
 const Friends = props => {
   const {
     channels,
-    getMembers,
     getUnreadCount,
-    getUserByUsername,
     getUsername,
     getPosts,
     getLatestMessage,
+    membersInChannel,
   } = props
 
   return (
@@ -20,18 +19,24 @@ const Friends = props => {
         <h1>Kaverit</h1>
       </div>
       <div className="friends-boxes">
-        {Object.values(channels).map(channel => (
-          <Friend
-            key={channel.id}
-            channel={channel}
-            getMembers={getMembers}
-            unreadCount={getUnreadCount(channel.id)}
-            getUserByUsername={getUserByUsername}
-            getUsername={getUsername}
-            getPosts={getPosts}
-            getLatestMessage={getLatestMessage}
-          />
-        ))}
+        {channels && channels.length > 0 ? (
+          Object.values(channels).map(channel => (
+            <Friend
+              key={channel.id}
+              channel={channel}
+              unreadCount={getUnreadCount(channel.id)}
+              getUsername={getUsername}
+              getPosts={getPosts}
+              getLatestMessage={getLatestMessage}
+              membersInChannel={membersInChannel}
+            />
+          ))
+        ) : (
+          <h3 className="no-friends-yet-header">
+            Sinulla ei ole vielä yksityisviestejä. Löydät uusia kavereita
+            Ryhmät-välilehdeltä!
+          </h3>
+        )}
       </div>
     </div>
   )
@@ -39,12 +44,11 @@ const Friends = props => {
 
 Friends.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
-  getMembers: PropTypes.func.isRequired,
   getUnreadCount: PropTypes.func.isRequired,
-  getUserByUsername: PropTypes.func.isRequired,
   getUsername: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
   getLatestMessage: PropTypes.func.isRequired,
+  membersInChannel: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friends)

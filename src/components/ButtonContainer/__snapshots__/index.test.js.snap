@@ -2,8 +2,12 @@
 
 exports[`Button container it matches the snapshot 1`] = `
 <button
-  className="button-container undefined"
+  className="button-container  test"
+  onClick={[Function]}
+  onKeyPress={[Function]}
   tabIndex="0"
   type="button"
-/>
+>
+  Test
+</button>
 `;

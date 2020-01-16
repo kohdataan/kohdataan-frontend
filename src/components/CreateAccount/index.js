@@ -7,6 +7,7 @@ import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import DateSelectField from '../DateSelectField'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
+import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const CreateAccount = ({ handleAccountCreation }) => {
@@ -34,11 +35,7 @@ const CreateAccount = ({ handleAccountCreation }) => {
         day: birthday,
       })
       .format()
-    const getAge = () => {
-      const usersBirthdate = moment(birthdate)
-      const age = moment().diff(usersBirthdate, 'years')
-      return age
-    }
+
     if (!rulesAccepted) {
       alert('Sinun on hyväksyttävä palvelun säännöt.')
     }

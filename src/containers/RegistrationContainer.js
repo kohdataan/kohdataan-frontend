@@ -1,18 +1,10 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getMe as getMeAction,
-  uploadProfileImage,
-} from 'mattermost-redux/actions/users'
+import { uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-import {
-  addUserToState as addUserToStateAction,
-  updateUser,
-  addUserInterests,
-} from '../store/user/userAction'
+import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
 import StepButton from '../components/RegistrationFlow/StepButton'
@@ -27,6 +19,7 @@ import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import getInterestsAction from '../store/interest/interestAction'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
+import getAge from '../utils/getAge'
 
 const RegistrationContainer = props => {
   const {
@@ -36,7 +29,6 @@ const RegistrationContainer = props => {
     mattermostId,
     interestOptions,
     registrationError,
-    getMe,
     userBirthdate,
   } = props
   const [nickname, setNickname] = useState('')
@@ -47,11 +39,6 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
-
-  useEffect(() => {
-    getMe()
-    props.addUserToStateAction()
-  }, [])
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
@@ -97,12 +84,6 @@ const RegistrationContainer = props => {
     }
   }
 
-  const getAge = () => {
-    const birthdate = moment(userBirthdate)
-    const age = moment().diff(birthdate, 'years')
-    return age
-  }
-
   const subpage = () => {
     switch (step) {
       case pages.info.current:
@@ -121,7 +102,7 @@ const RegistrationContainer = props => {
         return (
           <ShowAge
             onChange={setShowAge}
-            age={getAge()}
+            age={getAge({ birthdate: userBirthdate })}
             showAge={showAge.toString()}
           />
         )
@@ -163,7 +144,7 @@ const RegistrationContainer = props => {
   const profileCreationAction = () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        return props.updateUser({ nickname, mmId: mattermostId })
+        return props.updateUser({ nickname, mmid: mattermostId })
       }
       case pages['add-show-age'].current: {
         return props.updateUser({ showAge })
@@ -219,8 +200,6 @@ RegistrationContainer.propTypes = {
   interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
-  getMe: PropTypes.func.isRequired,
-  addUserToStateAction: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
 }
 
@@ -237,8 +216,6 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage,
       addUserInterests,
       getInterestsAction,
-      addUserToStateAction,
-      getMe: getMeAction,
     },
     dispatch
   )
