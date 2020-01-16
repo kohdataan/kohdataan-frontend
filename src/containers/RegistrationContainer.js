@@ -99,10 +99,7 @@ const RegistrationContainer = props => {
 
   const getAge = () => {
     const birthdate = moment(userBirthdate)
-    const now = moment()
-    const dateDiff = now.diff(birthdate)
-    const dateDiffDuration = moment.duration(dateDiff)
-    const age = dateDiffDuration.years()
+    const age = moment().diff(birthdate, 'years')
     return age
   }
 
