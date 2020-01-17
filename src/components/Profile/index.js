@@ -1,65 +1,50 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import ProfileImage from './ProfileImage'
 import Description from './Description'
-import Interests from './Interests'
-import EditButton from './EditButton'
+import InterestsGrid from './InterestsGrid'
 import ProfileHeader from './ProfileHeader'
-import DescriptionTextEdit from './DescriptionTextEdit'
 import Instructions from './Instructions'
-import EditProfileImage from './EditProfileImage'
-import EditNickname from './EditNickname'
+import EditButton from './EditButton'
+import ButtonContainer from '../ButtonContainer'
 
 const Profile = props => {
   const {
-    user,
+    mmuser,
     myUserInfo,
-    currentUser,
+    ownProfile,
     userInterests,
-    interestOptions,
-    addUserInterests,
-    updateProfilePicture,
     updateUser,
-    startDirect,
-    setImg,
+    startDirectChannel,
   } = props
-  const { location, description, tutorialWatched, nickname } = myUserInfo
+
+  // Extended user info from node backend
+  const {
+    location,
+    description,
+    tutorialWatched,
+    nickname,
+    birthdate,
+    showAge,
+    showLocation,
+  } = myUserInfo
+  // Decide whether to show modals
   const getShowModals = () => {
-    return !!(!tutorialWatched && currentUser)
+    return !!(!tutorialWatched && ownProfile)
   }
-  const [editProfile, setEditProfile] = useState(false)
+
   const [showModals, setShowModals] = useState({
     1: getShowModals(),
     2: getShowModals(),
   })
-  const [currentInterestIds, setCurrentInterestsIds] = useState([])
-  const [newNickname, setNewNickname] = useState('')
-
-  useEffect(() => {
-    setCurrentInterestsIds(userInterests.map(item => item.id))
-  }, [userInterests])
-
-  const [updatedDescription, setUpdatedDescription] = useState(description)
-
-  const toggleEditProfile = () => setEditProfile(!editProfile)
-
-  const handleEditReady = () => {
-    updateUser({
-      description: updatedDescription,
-      nickname: newNickname || nickname,
-      mmid: currentUser.id,
-    })
-    addUserInterests({ userInterests: currentInterestIds })
-    updateProfilePicture()
-    toggleEditProfile()
-  }
 
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
-    if (modal === 2 && currentUser) {
+    if (modal === 2 && ownProfile) {
       updateUser({ tutorialWatched: true })
     }
   }
@@ -67,77 +52,64 @@ const Profile = props => {
   return (
     <main className="profile-container">
       <div className="profile-header-container">
-        {!editProfile && <ProfileImage userId={user.id} />}
-        {editProfile && <EditProfileImage onChange={setImg} />}
-        {user && myUserInfo && !editProfile && (
+        <ProfileImage userId={mmuser.id} />
+        {mmuser && myUserInfo && (
           <ProfileHeader
-            nickname={nickname || user.username}
+            nickname={nickname || mmuser.username}
             location={location}
-            startDirect={startDirect}
-            currentUser={currentUser}
+            birthdate={birthdate}
+            showAge={showAge}
+            showLocation={showLocation}
           />
         )}
-
-        {editProfile && (
-          <EditNickname
-            value={newNickname}
-            onChange={e => {
-              setNewNickname(e.target.value)
-            }}
-          />
+        {ownProfile && (
+          <Link className="edit-me-link" to="/edit-me">
+            <EditButton isHighlighted={showModals[1] && !showModals[2]} />
+          </Link>
         )}
-        {currentUser && (
-          <EditButton
-            toggleEditProfile={toggleEditProfile}
-            isActive={editProfile}
-            isHighlighted={!showModals[2] && showModals[1]}
-          />
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            secondary
+            onClick={startDirectChannel}
+            className="profile-dm-button"
+          >
+            Keskustele
+          </ButtonContainer>
         )}
       </div>
-      {!editProfile && <Description text={description} />}
-      {editProfile && (
-        <DescriptionTextEdit
-          currentText={
-            typeof updatedDescription === 'string'
-              ? updatedDescription
-              : description || ''
-          }
-          onChange={setUpdatedDescription}
-        />
-      )}
-      <Interests
-        editProfile={editProfile}
-        handleEditReady={handleEditReady}
-        userInterests={userInterests}
-        currentInterestIds={currentInterestIds}
-        setCurrentInterestsIds={setCurrentInterestsIds}
-        interestOptions={interestOptions}
-      />
+      <Description text={description} />
+
+      <div className="interests-container">
+        <div className="interests-header">
+          <h2>Minua kiinnostaa</h2>
+          {ownProfile && (
+            <Link className="edit-interests-link" to="/edit-interests">
+              <EditButton isHighlighted={false} />
+            </Link>
+          )}
+        </div>
+        <InterestsGrid interestList={userInterests} />
+      </div>
+
       <Instructions closeModal={closeModal} showModals={showModals} />
     </main>
   )
 }
 
 Profile.propTypes = {
-  user: propTypes.instanceOf(Object).isRequired,
+  mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
-  userInterests: propTypes.instanceOf(Array).isRequired,
-  interestOptions: propTypes.instanceOf(Array).isRequired,
-  addUserInterests: propTypes.func,
-  updateProfilePicture: propTypes.func,
-  startDirect: propTypes.func,
-  currentUser: propTypes.instanceOf(Object),
+  userInterests: propTypes.instanceOf(Array),
+  ownProfile: propTypes.bool,
   updateUser: propTypes.func,
-  setImg: propTypes.func,
+  startDirectChannel: propTypes.func,
 }
 
 Profile.defaultProps = {
   updateUser: null,
-  currentUser: null,
-  addUserInterests: null,
-  updateProfilePicture: null,
-  setImg: null,
-  startDirect: null,
+  ownProfile: false,
+  startDirectChannel: null,
+  userInterests: [],
 }
 
 export default memo(Profile)

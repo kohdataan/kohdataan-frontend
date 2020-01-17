@@ -3,11 +3,13 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const ButtonContainer = props => {
-  const { className, children, onClick } = props
+  const { className, children, secondary, onClick } = props
   return (
     <button
       type="button"
-      className={`button-container ${className}`}
+      className={`button-container ${
+        secondary ? `button-secondary` : ``
+      } ${className}`}
       onClick={onClick}
       onKeyPress={onClick}
       tabIndex="0"
@@ -25,6 +27,11 @@ ButtonContainer.propTypes = {
     propTypes.node,
   ]).isRequired,
   onClick: propTypes.func.isRequired,
+  secondary: propTypes.bool,
+}
+
+ButtonContainer.defaultProps = {
+  secondary: false,
 }
 
 export default memo(ButtonContainer)

@@ -9,7 +9,9 @@ import useOutsideClick from '../../../hooks/useOutsideClick'
 const MembersSider = props => {
   const {
     members,
-    getUserNamebyId,
+    profiles,
+    getNickNamebyId,
+    getStatusById,
     getIconColor,
     currentUserId,
     handleLeaveChannel,
@@ -25,6 +27,9 @@ const MembersSider = props => {
     ]
     return classNameList.join(' ')
   }
+
+  const getIconMemberStatus = userId =>
+    `chat-header-${getStatusById(userId)}-status-icon`
 
   const openModal = () => setShowConfirmation(true)
   const closeModal = () => setShowConfirmation(false)
@@ -43,9 +48,11 @@ const MembersSider = props => {
           <Member
             key={member.user_id}
             userId={member.user_id}
-            userName={getUserNamebyId(member.user_id)}
+            profiles={profiles}
+            nickName={getNickNamebyId(member.user_id)}
             currentUserId={currentUserId}
             iconClassNameList={getIconClassNameList(member.user_id)}
+            iconMemberStatus={getIconMemberStatus(member.user_id)}
           />
         ))}
         <h4 className="chat-header-members-sider-title">Yhteistä</h4>
@@ -67,7 +74,9 @@ const MembersSider = props => {
 
 MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
-  getUserNamebyId: propTypes.func.isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
+  getNickNamebyId: propTypes.func.isRequired,
+  getStatusById: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
   handleLeaveChannel: propTypes.func.isRequired,

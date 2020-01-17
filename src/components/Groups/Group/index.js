@@ -8,8 +8,14 @@ const Group = props => {
   const [members, setMembers] = useState([])
 
   useEffect(() => {
-    getMembers(channel.id).then(data => setMembers(data.data))
-  }, [])
+    const getMemberData = async () => {
+      if (channel && channel.id) {
+        const memberData = await getMembers(channel.id)
+        setMembers(memberData.data)
+      }
+    }
+    getMemberData()
+  }, [channel, getMembers])
 
   return (
     <Link

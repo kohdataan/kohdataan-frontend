@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'

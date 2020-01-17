@@ -12,10 +12,14 @@ const Chat = props => {
     posts,
     profiles,
     createPost,
+    uploadFile,
+    getFilesForPost,
     currentUserId,
     members,
     handleLeaveChannel,
+    statuses,
   } = props
+
   const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
@@ -44,6 +48,11 @@ const Chat = props => {
     return visibleName
   }
 
+  const getStatusById = id => {
+    const status = id ? statuses[id] : ''
+    return status
+  }
+
   const getOtherUserName = () => {
     if (directChannel) {
       const otherUser = members.find(member => member.user_id !== currentUserId)
@@ -52,9 +61,7 @@ const Chat = props => {
           <>
             <img
               className="friend-icon"
-              src={`http://${
-                process.env.REACT_APP_MATTERMOST_URL
-              }/api/v4/users/${otherUser.user_id}/image`}
+              src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
             {getNicknameById(otherUser.user_id)}
@@ -74,19 +81,29 @@ const Chat = props => {
       />
       <MessageList
         posts={posts}
+        getFilesForPost={getFilesForPost}
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
         directChannel={directChannel}
       />
-      {channel.id && <UserInput channel={channel} createPost={createPost} />}
+      {channel.id && (
+        <UserInput
+          channel={channel}
+          createPost={createPost}
+          uploadFile={uploadFile}
+          currentUserId={currentUserId}
+        />
+      )}
       {showSider && !directChannel && (
         <MembersSider
           members={members}
+          profiles={profiles}
           currentUserId={currentUserId}
-          getUserNamebyId={getNicknameById}
+          getNickNamebyId={getNicknameById}
           getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
+          getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
         />
       )}
@@ -100,8 +117,11 @@ Chat.propTypes = {
   profiles: PropTypes.instanceOf(Object).isRequired,
   members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   createPost: PropTypes.func.isRequired,
+  getFilesForPost: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {
