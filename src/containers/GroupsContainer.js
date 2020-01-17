@@ -78,9 +78,8 @@ const GroupsContainer = props => {
         channelId
       )
       const currentTeamId = Object.keys(teams)[0]
-      joinChannel(currentUserId, currentTeamId, channelId).then(
-        history.push(`/chat/${channelId}`)
-      )
+      await joinChannel(currentUserId, currentTeamId, channelId)
+      history.push(`/chat/${channelId}`)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(e)
