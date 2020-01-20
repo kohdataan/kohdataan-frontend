@@ -52,7 +52,7 @@ const BottomNavigationContainer = props => {
         route="/"
         icon="fas fa-user-friends"
       />
-      <BottomNavigationBot handleLogout={handleLogout} />
+      <BottomNavigationBot handleLogout={handleLogout} pathname={pathname} />
     </BottomNavigation>
   )
 }
