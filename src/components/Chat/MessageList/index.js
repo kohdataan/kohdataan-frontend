@@ -14,7 +14,6 @@ const MessageList = props => {
 
   let previousTime = null
   let previousDate = null
-  console.log(posts)
 
   const setTimeStampValues = post => {
     let showDate = false
