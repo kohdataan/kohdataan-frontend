@@ -7,14 +7,14 @@ import botIcon from '../../assets/bot.svg'
 import ButtonContainer from '../ButtonContainer'
 
 const BottomNavigationBot = props => {
-  const { handleLogout } = props
+  const { handleLogout, inChat } = props
 
   const [showBot, setShowBot] = useState(false)
   const openModal = () => setShowBot(true)
   const closeModal = () => setShowBot(false)
 
   return (
-    <div className="nav-bot">
+    <div className={inChat ? 'nav-bot-chat' : 'nav-bot'}>
       <ButtonContainer className="button-image" onClick={openModal}>
         <img src={botIcon} alt="Botti" />
       </ButtonContainer>
@@ -86,6 +86,11 @@ const BottomNavigationBot = props => {
 
 BottomNavigationBot.propTypes = {
   handleLogout: PropTypes.func.isRequired,
+  inChat: PropTypes.bool,
+}
+
+BottomNavigationBot.defaultProps = {
+  inChat: false,
 }
 
 export default memo(BottomNavigationBot)

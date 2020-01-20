@@ -13,26 +13,15 @@ const Header = props => {
     <div className="chat-header">
       <Link
         className="chat-header-item chat-header-nav-back-button"
-        to={channel.type === 'D' ? '/friends' : '/'}
+        to={direct ? '/friends' : '/'}
       >
         {'< Takaisin'}
       </Link>
-      <h1 className="chat-header-item chat-header-channel-name">{header}</h1>
+      <ButtonContainer onClick={toggleSider} className="channel-name-button">
+        <h1 className="chat-header-item chat-header-channel-name">{header}</h1>
+      </ButtonContainer>
       <div className="chat-header-item">
-        {!direct ? (
-          <ButtonContainer
-            className=" chat-header-group-img-button"
-            onClick={toggleSider}
-          >
-            <i
-              aria-hidden="true"
-              className="fas fa-users"
-              title="Group Members"
-            />
-          </ButtonContainer>
-        ) : (
-          <BottomNavigationBot handleLogout={handleLogout} />
-        )}
+        <BottomNavigationBot handleLogout={handleLogout} inChat />
       </div>
     </div>
   )
