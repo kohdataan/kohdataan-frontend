@@ -139,7 +139,7 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
-  const channelSuggestions = state.channels.found
+  const channelSuggestions = state.channels.channels
   const channelSuggestionMembers = state.channels.members
 
   return {
