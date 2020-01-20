@@ -20,7 +20,17 @@ const Chat = props => {
     statuses,
   } = props
 
-  const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
+  const iconColors = [
+    'orange',
+    'darkblue',
+    'maroon',
+    '#ffe9d9',
+    'green',
+    'red',
+    'lightblue',
+    'gray',
+  ]
+
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
 

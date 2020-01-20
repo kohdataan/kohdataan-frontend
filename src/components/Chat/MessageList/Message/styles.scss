@@ -95,6 +95,14 @@
   border-radius: 20px 20px 0px 20px;
   background-color: $orange;
   border: none;
+}
+
+.message-icon-and-content {
+  display: flex;
+}
+
+.message-icon-and-content-sent {
+  display: flex;
   justify-content: flex-end;
 }
 
@@ -131,26 +139,6 @@
   color: white;
   font-weight: bold;
   border-radius: 50%;
-}
-
-.chat-darkblue-icon {
-  background-color: $darkblue;
-}
-
-.chat-orange-icon {
-  background-color: $orange;
-}
-
-.chat-maroon-icon {
-  background-color: $maroon;
-}
-
-.chat-beige-icon {
-  background-color: $beige;
-}
-
-.chat-green-icon {
-  background-color: $green;
 }
 
 .chat-message-content-text {

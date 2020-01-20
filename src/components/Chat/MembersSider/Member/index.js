@@ -8,9 +8,9 @@ const Member = props => {
     userId,
     nickName,
     currentUserId,
-    iconClassNameList,
     profiles,
     iconMemberStatus,
+    iconColor,
   } = props
   const userFirstLetter = nickName[0]
   const getUsername = () =>
@@ -19,7 +19,12 @@ const Member = props => {
   return (
     <div className="chat-header-members-sider-member">
       <i aria-hidden="true" title={userFirstLetter} />
-      <span className={iconClassNameList}>{userFirstLetter}</span>
+      <span
+        className="chat-header-members-icon"
+        style={{ backgroundColor: iconColor }}
+      >
+        {userFirstLetter}
+      </span>
       <span className={iconMemberStatus} />
       {currentUserId !== userId && (
         <Link
@@ -43,9 +48,9 @@ Member.propTypes = {
   userId: propTypes.string.isRequired,
   nickName: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
-  iconClassNameList: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
+  iconColor: propTypes.string.isRequired,
 }
 
 export default memo(Member)

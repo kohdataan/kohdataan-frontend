@@ -49,7 +49,8 @@ const MessageList = props => {
             const timestampValues = setTimeStampValues(post)
             return (
               post &&
-              post.user_id && (
+              post.user_id &&
+              !post.type.includes('system') && (
                 <Message
                   key={post.id}
                   files={post.file_ids}

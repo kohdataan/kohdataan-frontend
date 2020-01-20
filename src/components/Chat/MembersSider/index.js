@@ -20,14 +20,6 @@ const MembersSider = props => {
 
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  const getIconClassNameList = userId => {
-    const classNameList = [
-      'chat-header-members-icon',
-      `sider-${getIconColor(userId)}-icon`,
-    ]
-    return classNameList.join(' ')
-  }
-
   const getIconMemberStatus = userId =>
     `chat-header-${getStatusById(userId)}-status-icon`
 
@@ -57,7 +49,7 @@ const MembersSider = props => {
               profiles={profiles}
               nickName={getNickNamebyId(member.user_id)}
               currentUserId={currentUserId}
-              iconClassNameList={getIconClassNameList(member.user_id)}
+              iconColor={getIconColor(member.user_id)}
               iconMemberStatus={getIconMemberStatus(member.user_id)}
             />
           ))}
