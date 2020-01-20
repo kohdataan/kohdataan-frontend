@@ -176,7 +176,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           >
             <span className="birthdate-content-label">Syntymäaika:</span>
             <div className="birthdate-container">
-              <div className="form-field-container">
+              <div className="formfield-container">
                 <DateSelectField
                   label="Päivä"
                   name="day"

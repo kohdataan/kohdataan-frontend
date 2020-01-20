@@ -35,8 +35,8 @@
 }
 
 .close-modal-button {
-  width: 1,2em;
-  height:  1,2em;
+  width: 1, 2em;
+  height: 1, 2em;
   border: 1px solid black;
   border-radius: 50%;
 }
@@ -47,15 +47,15 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+  height: 100%;
 }
 
 .create-account-text {
-    color: #fff;
+  color: #fff;
 }
 
 .create-account-content-container {
   width: 80%;
-
 }
 
 .create-account-input-date {
@@ -158,18 +158,18 @@
 }
 
 .create-account-link {
-    @extend %create-account-link-shared;
+  @extend %create-account-link-shared;
 }
 
 .create-account-link-block {
-    @extend %create-account-link-shared;
-    display: block;
-    text-align: center;
-    padding: 10px 0 10px 0;
+  @extend %create-account-link-shared;
+  display: block;
+  text-align: center;
+  padding: 10px 0 10px 0;
 }
 
 .create-account-links-container {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .create-account-title {
@@ -177,7 +177,6 @@
   text-transform: uppercase;
   color: $white;
 }
-
 
 .date-select-container {
   display: flex;
