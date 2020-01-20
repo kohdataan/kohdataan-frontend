@@ -18,6 +18,7 @@ const Chat = props => {
     members,
     handleLeaveChannel,
     statuses,
+    handleLogout,
   } = props
 
   const iconColors = [
@@ -91,6 +92,8 @@ const Chat = props => {
         channel={channel}
         toggleSider={toggleSider}
         otherUser={getOtherUserName()}
+        direct={directChannel}
+        handleLogout={handleLogout}
       />
       <MessageList
         posts={posts}
@@ -135,6 +138,7 @@ Chat.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
+  handleLogout: PropTypes.func.isRequired,
 }
 
 Chat.defaultProps = {

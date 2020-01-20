@@ -12,6 +12,7 @@ import {
 import {
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
+  logout as matterMostLogoutAction,
 } from 'mattermost-redux/actions/users'
 import {
   removeChannelMember as removeChannelMemberAction,
@@ -20,7 +21,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getUserByUsername } from '../api/user/user'
+import { getUserByUsername, userLogout } from '../api/user/user'
 import Chat from '../components/Chat'
 
 const ChatContainer = props => {
@@ -41,6 +42,7 @@ const ChatContainer = props => {
     uploadFile,
     getFilesForPost,
     statuses,
+    matterMostLogout,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -102,6 +104,18 @@ const ChatContainer = props => {
     }
   }, [posts, teams, currentChannelId])
 
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem('userId')
+      localStorage.removeItem('authToken')
+      await userLogout(localStorage.getItem('authToken'))
+      await matterMostLogout()
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+
   return (
     <>
       {currentChannel && (
@@ -117,6 +131,7 @@ const ChatContainer = props => {
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}
+          handleLogout={handleLogout}
         />
       )}
     </>
@@ -140,6 +155,7 @@ ChatContainer.propTypes = {
   removeChannelMember: PropTypes.func.isRequired,
   viewChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
+  matterMostLogout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -177,6 +193,7 @@ const mapDispatchToProps = dispatch =>
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
+      matterMostLogout: matterMostLogoutAction,
     },
     dispatch
   )
