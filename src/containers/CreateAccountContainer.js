@@ -48,6 +48,8 @@ const CreateAccountContainer = props => {
       if (user) {
         const res = await API.userSignUp(user)
         if (res && res.success) {
+          const emailAddress = { email }
+          await API.sendVerifyEmailLink(emailAddress)
           history.push('/registration-success')
         }
         setErrors(res.error)
