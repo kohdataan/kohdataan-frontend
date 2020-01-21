@@ -235,6 +235,38 @@ const deleteUser = async (data, id, token) => {
   }
 }
 
+const sendVerifyEmailLink = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/emailverification/req`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const verifyEmail = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/emailverification/ver`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return await resp.json()
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 export {
   userLogin,
   userLogout,
@@ -250,4 +282,6 @@ export {
   sendEmail,
   updatePassword,
   deleteUser,
+  sendVerifyEmailLink,
+  verifyEmail,
 }

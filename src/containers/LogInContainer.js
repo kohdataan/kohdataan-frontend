@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -7,9 +7,21 @@ import {
   userLogin as userLoginAction,
   addUserToState as addUserToStateAction,
 } from '../store/user/userAction'
+import * as API from '../api/user/user'
 
 const LogInContainer = props => {
-  const { userLogin, addUserToState, user, history } = props
+  const {
+    match: {
+      params: { uuid },
+    },
+    userLogin,
+    addUserToState,
+    user,
+    history,
+  } = props
+
+  const [uuidValid, setUuidValid] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem('authToken')) {
@@ -18,6 +30,15 @@ const LogInContainer = props => {
       } else {
         history.push('/registration/info')
       }
+    } else if (uuid) {
+      API.verifyEmail({ uuid }).then(response => {
+        if (response.ok) {
+          setUuidValid(true)
+        } else {
+          setUuidValid(false)
+          setError(true)
+        }
+      })
     }
   }, [user, history])
 
@@ -27,7 +48,14 @@ const LogInContainer = props => {
     await addUserToState()
   }
 
-  return <LogIn handleLogin={handleLogin} user={user} />
+  return (
+    <LogIn
+      handleLogin={handleLogin}
+      user={user}
+      uuid={uuidValid}
+      linkError={error}
+    />
+  )
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
@@ -37,10 +65,15 @@ const shouldComponentUpdate = (props, prevProps) => {
 }
 
 LogInContainer.propTypes = {
+  match: PropTypes.instanceOf(Object),
   userLogin: PropTypes.func.isRequired,
   addUserToState: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+}
+
+LogInContainer.defaultProps = {
+  match: null,
 }
 
 const mapStateToProps = state => {
