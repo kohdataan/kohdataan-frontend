@@ -23,7 +23,7 @@ const RegistrationProblem = ({ handleEmailSending }) => {
       <h1 className="main-title">Kohdataan</h1>
       <div className="registration-problem-content-container">
         <div className="registration-problem-text">
-          <p>Kerro millainen ongelma sinulla on.</p>
+          <p>Kerro mitä apua tarvitset.</p>
           <p>Vastaamme sinulle sähköpostilla mahdollisimman pian.</p>
           <hr className="registration-problem-divider" />
         </div>

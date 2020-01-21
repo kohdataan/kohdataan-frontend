@@ -13,11 +13,19 @@
   font: inherit;
   text-transform: inherit;
   display: inline;
+  padding: 0;
+  white-space: normal;
+  max-width: 80%;
+  text-align: left;
 }
 
 .button-image {
   background: rgba(0, 0, 0, 0);
   border: none;
+}
+
+.inactive-item {
+  color: #a9a9a9;
 }
 
 .modal-content {

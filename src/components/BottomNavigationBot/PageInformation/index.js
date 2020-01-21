@@ -6,11 +6,12 @@ import ButtonContainer from '../../ButtonContainer'
 const PageInformation = props => {
   const { handleClick, path } = props
   let text = ''
+  const friendsProfile = (path.indexOf('/profile/') != 0) ? 
 
   switch (path) {
     case '/me':
       text = `Tämä on oma profiilisi. Täällä näet omat profiilitietosi. Nämä tiedot näkyvät muille käyttäjille.
-        Täältä pääset muokkaamaan tietojasi ja kiinnostuksesi kohteita. Jos haluat muokata tietojasi, valitse "Muokkaa". 
+        \nTäältä pääset muokkaamaan tietojasi ja kiinnostuksesi kohteita. Jos haluat muokata tietojasi, valitse "Muokkaa". 
         \nJos haluat muokata kiinnostuksesi kohteita, valitse "Minua kiinnostaa".`
       break
     case '/edit-me':
@@ -20,24 +21,20 @@ const PageInformation = props => {
       break
     case '/friends':
       text = `Täällä näet kaikki sinun kaverisi. Saat kavereita, kun lähetät ryhmän jäsenelle yksityisen viestin ja hän vastaa siihen.  
-        \n Voit myös etsiä kavereita. Kirjoita kaverin nimi harmaaseen kenttään.
-        \n Täällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä. 
-        \n Jos et halua saada viestejä kaverilta, voit estää hänet. Valitse kaverin nimen vieressä olevat kolme 
-        pistettä, ja valitse estä.`
+        \nVoit myös etsiä kavereita. Kirjoita kaverin nimi harmaaseen kenttään.
+        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä. 
+        \nJos et halua saada viestejä kaverilta, voit estää hänet. Valitse kaverin nimen vieressä olevat kolme pistettä, ja valitse estä.`
       break
     case '/edit-interests':
-      text = `Täällä voit muokata kiinnostuksesi kohteita. Voit lisätä uuden tai poistaa vanhan kohteen. 
-        Voit valita 3-5 kohdetta.
-        \n Jos sinulla on jo viisi kiinnostuksen kohdetta ja haluat uuden, sinun pitää poistaa ainakin yksi kohde.
-        \n Muista tallentaa muutokset!`
+      text = `Täällä voit muokata kiinnostuksesi kohteita. Voit lisätä uuden tai poistaa vanhan kohteen. Voit valita 3-5 kohdetta.
+        \nJos sinulla on jo viisi kiinnostuksen kohdetta ja haluat uuden, sinun pitää poistaa ainakin yksi kohde.
+        \nMuista tallentaa muutokset!`
       break
     case '/':
       text = `Täällä näet kaikki ryhmät, joihin sinä kuulut. Täällä näet myös, kun me ehdotamme sinulle uutta ryhmää.
         \nJos haluat liittyä uuteen ryhmään, valitse Liity. Jos et halua liittyä ryhmään, valitse "Älä liity".
-        \nVoit kuulua korkeintaan viiteen
-        ryhmään.
-        \nJos kuulut jo viiteen ryhmään ja haluat päästä uuteen ryhmään, sinun pitää ensin
-        poistua jostain ryhmästä. Jos poistut ryhmästä, et voi liittyä siihen enää uudelleen.
+        \nVoit kuulua korkeintaan viiteen ryhmään.
+        \nJos kuulut jo viiteen ryhmään ja haluat päästä uuteen ryhmään, sinun pitää ensin poistua jostain ryhmästä. Jos poistut ryhmästä, et voi liittyä siihen enää uudelleen.
         \nPääset ryhmään, kun valitset ryhmän kuvakkeen.`
       break
     case '/groupchat':
@@ -58,7 +55,7 @@ const PageInformation = props => {
   }
 
   return (
-    <div className="page-information">
+    <div className="page-information-container">
       <div className="page-info-text-content">{text}</div>
       <ButtonContainer
         className="button-close"

@@ -1,8 +1,11 @@
 .page-info-text-content {
   white-space: pre-wrap;
-  align-content: left;
+  text-align: left;
 } 
 
-.page-information {
-  min-height: 60vh;
+.page-information-container {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

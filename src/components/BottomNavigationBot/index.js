@@ -44,17 +44,14 @@ const BottomNavigationBot = props => {
               className="fas fa-question-circle modal-icon"
               aria-hidden="true"
             />
-            <div
+            <ButtonContainer
               className="bot-link"
               role="link"
               tabIndex={0}
               onClick={openPageInformationModal}
-              onKeyDown={() => {
-                openPageInformationModal()
-              }}
             >
               Mitä tällä sivulla voi tehdä
-            </div>
+            </ButtonContainer>
             <ModalContainer
               modalIsOpen={showPageInformation}
               closeModal={() => closeModal(setShowPageInformation)}
@@ -68,27 +65,22 @@ const BottomNavigationBot = props => {
           </div>
           <hr />
           <div className="modal-item">
-            <i className="fas fa-flag modal-icon" aria-hidden="true" />
-            Ilmianna asiaton viesti
-          </div>
-          <hr />
-          <div className="modal-item">
             <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
             <Link
               className="bot-link"
               to="/registrationproblem"
               onClick={() => setShowBot(false)}
             >
-              Lähetä moderaattorille viesti
+              Lähetä valvojalle viesti
             </Link>
           </div>
           <hr />
-          <div className="modal-item">
+          <div className="modal-item inactive-item">
             <i className="fas fa-check-square modal-icon" aria-hidden="true" />
             Palvelun säännöt
           </div>
           <hr />
-          <div className="modal-item">
+          <div className="modal-item inactive-item">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
             Yleiset ohjeet
           </div>
@@ -98,22 +90,18 @@ const BottomNavigationBot = props => {
             Rekisteröitymis&shy;tiedot
           </div>
           <hr />
-          <div
-            className="modal-item"
+          <ButtonContainer
+            className="bot-link"
             role="link"
             tabIndex={0}
             onClick={() => {
               handleLogout()
               closeModal(setShowBot)
             }}
-            onKeyDown={() => {
-              handleLogout()
-              closeModal(setShowBot)
-            }}
           >
             <i className="fas fa-cog modal-icon" aria-hidden="true" />
             Kirjaudu ulos
-          </div>
+          </ButtonContainer>
         </div>
         <ButtonContainer
           className="button-close"
