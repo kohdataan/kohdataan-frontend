@@ -123,9 +123,7 @@ const Account = props => {
             Poista
           </ButtonContainer>
         </div>
-        <div className="account-box">
-          Et voi enää palauttaa tiliäsi poistamisen jälkeen.
-        </div>
+        <div className="account-box">Aloita käyttäjätilin poistaminen.</div>
       </div>
       <EditAccountModal
         showModal={showModal}

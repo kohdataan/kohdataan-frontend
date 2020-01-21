@@ -15,8 +15,10 @@ const DeleteAccountModal = props => {
         closeModal={closeModal}
       >
         <p>
-          Valittuasi poista käyttäjätili et voi enää palauttaa tiliäsi. Haluatko
-          varmasti poistaa käyttäjätilin lopullisesti?
+          Ajastamme käyttäjätilisi poiston viikon päähän. Voit peruuttaa tilin
+          poistamisen kunnes viikon varoaika on mennyt umpeen. Tämän jälkeen
+          tili poistetaan pysyvästi, etkä voi enää palauttaa tiliäsi. Menetät
+          pysyvästi profiilisi, sekä siihen liittyvät keskustelut.
         </p>
         <div className="account-delete-buttons-wrapper">
           <ButtonContainer

@@ -26,6 +26,9 @@ export default function user(state = {}, action) {
     case types.GET_USER_INTERESTS: {
       return { ...state, ...action.userInterests }
     }
+    case types.RESTORE_USER: {
+      return { ...state, deleteAt: null }
+    }
     default:
       return state
   }

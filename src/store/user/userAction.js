@@ -88,6 +88,25 @@ export const updateUserPassword = data => {
   }
 }
 
+export const restoreUserAccount = () => {
+  const id = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
+  return async dispatch => {
+    try {
+      const resp = await API.restoreUser(id, token)
+      if (resp && resp.success && resp.restored) {
+        dispatch({
+          type: types.RESTORE_USER,
+        })
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      dispatch({ type: types.UPDATE_USER_FAILURE, payload: e, error: true })
+    }
+  }
+}
+
 export const getUserInterests = () => {
   const token = localStorage.getItem('authToken')
   return async dispatch => {
