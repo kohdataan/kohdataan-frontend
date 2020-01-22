@@ -23,6 +23,7 @@ import {
 import PropTypes from 'prop-types'
 import { getUserByUsername, userLogout } from '../api/user/user'
 import Chat from '../components/Chat'
+import logoutHandler from '../utils/userLogout'
 
 const ChatContainer = props => {
   const {
@@ -104,17 +105,7 @@ const ChatContainer = props => {
     }
   }, [posts, teams, currentChannelId])
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('userId')
-      localStorage.removeItem('authToken')
-      await userLogout(localStorage.getItem('authToken'))
-      await matterMostLogout()
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  }
+  const handleLogout = () => logoutHandler(userLogout, matterMostLogout)
 
   return (
     <>
