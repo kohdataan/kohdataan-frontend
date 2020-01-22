@@ -9,17 +9,23 @@ const labels = {
   email: 'Uusi sähköpostiosoite',
   phoneNumber: 'Uusi puhelinnumero',
   password: 'Uusi salasana',
+  firstname: 'Uusi etunimi',
+  lastname: 'Uusi sukunimi',
 }
 const patterns = {
   email: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
   phoneNumber: /^(\+358|00358|358|04|050)[0-9- ]{4,14}$/i,
   password: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
+  firstname: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
+  lastname: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
 }
 const messages = {
   email: 'Tarkista sähköpostiosoite.',
   phoneNumber: 'Tarkista puhelinnumero',
   password:
     'Salasanassa tulee olla vähintään 10 merkkiä, ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.',
+  firstname: 'Etunimen tulee olla 2-20 merkkiä pitkä.',
+  lastname: 'Sukunimen tulee olla 2-30 merkkiä pitkä.',
 }
 
 const EditAccountModal = props => {

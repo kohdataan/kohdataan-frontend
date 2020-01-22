@@ -46,6 +46,10 @@ const Account = props => {
       updateUser({ mmid: mmuser.id, email: data.email.trim().toLowerCase() })
     } else if (field === 'phoneNumber') {
       updateUser({ phoneNumber: data.phoneNumber })
+    } else if (field === 'firstname') {
+      updateUser({ first_name: data.firstname })
+    } else if (field === 'lastname') {
+      updateUser({ last_name: data.lastname })
     } else if (field === 'password') {
       updatePassword({
         mmid: mmuser.id,
@@ -67,6 +71,30 @@ const Account = props => {
         <h3>
           Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.
         </h3>
+      </div>
+      <div className="account-box-outer">
+        <div className="account-box-inner">
+          <div className="account-label-text">Etunimi</div>
+          <ButtonContainer
+            className="account-edit-button"
+            onClick={() => openModal('firstname')}
+          >
+            Muokkaa
+          </ButtonContainer>
+        </div>
+        <div className="account-box">{nodeUser.first_name}</div>
+      </div>
+      <div className="account-box-outer">
+        <div className="account-box-inner">
+          <div className="account-label-text">Sukunimi</div>
+          <ButtonContainer
+            className="account-edit-button"
+            onClick={() => openModal('lastname')}
+          >
+            Muokkaa
+          </ButtonContainer>
+        </div>
+        <div className="account-box">{nodeUser.last_name}</div>
       </div>
       <div className="account-box-outer">
         <div className="account-box-inner">
@@ -123,7 +151,9 @@ const Account = props => {
             Poista
           </ButtonContainer>
         </div>
-        <div className="account-box">Aloita käyttäjätilin poistaminen.</div>
+        <div className="account-box delete-box">
+          Aloita käyttäjätilin poistaminen.
+        </div>
       </div>
       <EditAccountModal
         showModal={showModal}
@@ -146,6 +176,8 @@ Account.propTypes = {
     id: propTypes.number,
     phoneNumber: propTypes.string,
     errorMessage: propTypes.string,
+    first_name: propTypes.string,
+    last_name: propTypes.string,
   }).isRequired,
   mmuser: propTypes.shape({ id: propTypes.string, email: propTypes.string })
     .isRequired,
