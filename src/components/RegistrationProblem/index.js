@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import useForm from 'react-hook-form'
@@ -7,7 +7,6 @@ import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 const RegistrationProblem = ({ handleEmailSending }) => {
-
   const { register, handleSubmit, errors, clearError } = useForm()
 
   const onSubmit = async data => {

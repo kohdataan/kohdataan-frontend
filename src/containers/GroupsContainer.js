@@ -6,6 +6,7 @@ import {
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
+import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 import BouncingLoader from '../components/BouncingLoader'
@@ -71,9 +72,18 @@ const GroupsContainer = props => {
   }
 
   const handleJoinChannel = channelId => async () => {
-    const currentTeamId = Object.keys(teams)[0]
-    await joinChannel(currentUserId, currentTeamId, channelId)
-    history.push(`/chat/${channelId}`)
+    try {
+      await addUserInterestsToChannelPurpose(
+        localStorage.getItem('authToken'),
+        channelId
+      )
+      const currentTeamId = Object.keys(teams)[0]
+      await joinChannel(currentUserId, currentTeamId, channelId)
+      history.push(`/chat/${channelId}`)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
   }
 
   // Get unread count by channel id

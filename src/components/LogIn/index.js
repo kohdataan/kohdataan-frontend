@@ -6,7 +6,7 @@ import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 const LogIn = props => {
-  const { handleLogin, user } = props
+  const { handleLogin, user, uuid, linkError } = props
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
   useEffect(() => {
@@ -31,6 +31,8 @@ const LogIn = props => {
   return (
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
+      {uuid && <p id="message-text">Kiitos sähköpostin vahvistamisesta.</p>}
+      {linkError && <p id="message-text">Tarkasta linkki.</p>}
       <div className="login-fields-container">
         <h2 className="login-title">KIRJAUTUMINEN</h2>
         <form
@@ -112,8 +114,15 @@ const LogIn = props => {
 }
 
 LogIn.propTypes = {
+  uuid: PropTypes.bool,
   handleLogin: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  linkError: PropTypes.bool,
+}
+
+LogIn.defaultProps = {
+  uuid: false,
+  linkError: false,
 }
 
 export default memo(LogIn)
