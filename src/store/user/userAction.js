@@ -1,5 +1,6 @@
 import { login as matterMostLogin } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
+import * as channelAPI from '../../api/channels/channels'
 import * as API from '../../api/user/user'
 
 export const userLogin = user => {
@@ -87,6 +88,7 @@ export const addUserInterests = interests => {
     try {
       const data = { userId: id, ...interests }
       await API.addUserInterests(data, token)
+      await channelAPI.handleUserChangingInterestToChannelsPurposes(token)
       await dispatch(getUserInterests())
     } catch (e) {
       // eslint-disable-next-line no-console
