@@ -58,6 +58,7 @@ describe('User actions', () => {
     fetch
       .once(JSON.stringify({ result: [1, 2, 3] }))
       .once(JSON.stringify({ result: [1, 2, 3] }))
+      .once(JSON.stringify({ result: [1, 2, 3] }))
     const expectedActions = [
       {
         type: 'KOHDATAAN_GET_USER_INTERESTS',

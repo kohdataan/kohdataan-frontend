@@ -22,6 +22,7 @@ import {
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
 import { getUserByUsername, userLogout } from '../api/user/user'
+import { removeUserInterestsFromChannelPurpose } from '../api/channels/channels'
 import Chat from '../components/Chat'
 import logoutHandler from '../utils/userLogout'
 
@@ -80,8 +81,18 @@ const ChatContainer = props => {
   }, [channels, currentChannelId, getChannelMembers])
 
   // Remove current user from channel
-  const handleLeaveChannel = () =>
-    removeChannelMember(currentChannelId, currentUserId)
+  const handleLeaveChannel = async () => {
+    try {
+      await removeUserInterestsFromChannelPurpose(
+        localStorage.getItem('authToken'),
+        currentChannelId
+      )
+      removeChannelMember(currentChannelId, currentUserId)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error)
+    }
+  }
 
   // Filter and sort posts after fetching
   useEffect(() => {
