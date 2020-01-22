@@ -17,7 +17,7 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
-    wrap: 'no-wrap',
+    minWidth: '40vh',
   },
   overlay: {
     position: 'fixed',

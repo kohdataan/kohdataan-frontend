@@ -6,8 +6,13 @@ import ButtonContainer from '../../ButtonContainer'
 const PageInformation = props => {
   const { handleClick, path } = props
   let text = ''
-
-  switch (path) {
+  const profileRegex = /\/profile\/[a-z0-9.-]+/i
+  if (profileRegex.test(path)) {
+    text = '/friends-profile'
+  } else {
+    text = path
+  }
+  switch (text) {
     case '/me':
       text = `Tämä on oma profiilisi. Täällä näet omat profiilitietosi. Nämä tiedot näkyvät muille käyttäjille.
         \nTäältä pääset muokkaamaan tietojasi ja kiinnostuksesi kohteita. Jos haluat muokata tietojasi, valitse "Muokkaa". 
@@ -50,6 +55,10 @@ const PageInformation = props => {
         Mieti siis tarkasti, haluatko poistua ryhmästä. Jos haluat poistua ryhmästä, valitse "Poistu
         ryhmästä".`
       break
+    case '/friends-profile':
+      text = `Tämä on kaverisi profiili. Näet profiilista hänen julkiset tietonsa. 
+      Pääset takaisin keskusteluun ruudun vasemmasta yläkulmasta.`
+    break
     default:
   }
 
