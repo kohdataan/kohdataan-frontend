@@ -26,6 +26,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
         aria-invalid={ariaInvalid}
         placeholder={showPlaceholder ? label : ''}
         className={labelClassName}
+        tabIndex="0"
       />
     </label>
   )

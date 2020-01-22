@@ -6,7 +6,6 @@ import ButtonContainer from '../../ButtonContainer'
 const PageInformation = props => {
   const { handleClick, path } = props
   let text = ''
-  const friendsProfile = (path.indexOf('/profile/') != 0) ? 
 
   switch (path) {
     case '/me':

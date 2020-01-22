@@ -13,13 +13,13 @@ const ThankYouMessage = () => {
         </div>
         <div className="registration-problem-links-container">
           <Link className="registration-problem-link" to="/login">
-            {'Olen vanha käyttäjä ja haluan kirjautua sisään.'}
+            Olen vanha käyttäjä ja haluan kirjautua sisään.
           </Link>
           <Link className="registration-problem-link" to="/createaccount">
-            {'Olen uusi käyttäjä ja haluan rekisteröityä.'}
+            Olen uusi käyttäjä ja haluan rekisteröityä.
           </Link>
           <Link className="registration-problem-link" to="/">
-            {'Olen unohtanut salasanani.'}
+            Olen unohtanut salasanani.
           </Link>
         </div>
       </div>

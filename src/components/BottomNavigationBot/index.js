@@ -5,6 +5,7 @@ import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
 import ButtonContainer from '../ButtonContainer'
+import RegistrationProblemContainer from '../../containers/RegistrationProblemContainer'
 import PageInformation from './PageInformation'
 
 const BottomNavigationBot = props => {
@@ -12,6 +13,7 @@ const BottomNavigationBot = props => {
 
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
+  const [showSendMessage, setShowSendMessage] = useState(false)
   const openModal = setter => setter(true)
   const closeModal = setter => setter(false)
 
@@ -23,6 +25,16 @@ const BottomNavigationBot = props => {
   const closePageInformationModal = () => {
     setShowPageInformation(false)
     closeModal(setShowPageInformation)
+  }
+
+  const openSendMessageModal = () => {
+    setShowSendMessage(true)
+    openModal(setShowSendMessage)
+  }
+
+  const closeSendMessageModal = () => {
+    setShowSendMessage(false)
+    closeModal(setShowSendMessage)
   }
 
   return (
@@ -50,7 +62,7 @@ const BottomNavigationBot = props => {
               tabIndex={0}
               onClick={openPageInformationModal}
             >
-              Mitä tällä sivulla voi tehdä
+              Mitä tällä sivulla tehdään
             </ButtonContainer>
             <ModalContainer
               modalIsOpen={showPageInformation}
@@ -64,15 +76,28 @@ const BottomNavigationBot = props => {
             </ModalContainer>
           </div>
           <hr />
-          <div className="modal-item">
-            <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
-            <Link
-              className="bot-link"
-              to="/registrationproblem"
-              onClick={() => setShowBot(false)}
-            >
-              Lähetä valvojalle viesti
-            </Link>
+          <div className="modal-content">
+            <div className="modal-item">
+              <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
+              <ButtonContainer
+                className="bot-link"
+                role="link"
+                tabIndex={0}
+                onClick={openSendMessageModal}
+              >
+                Lähetä valvojalle viesti
+              </ButtonContainer>
+              <ModalContainer
+                modalIsOpen={showSendMessage}
+                isLong
+                closeModal={() => closeModal(setShowSendMessage)}
+                label="SendMessage"
+              >
+                <RegistrationProblemContainer
+                  handleClick={closeSendMessageModal}
+                />
+              </ModalContainer>
+            </div>
           </div>
           <hr />
           <div className="modal-item inactive-item">
