@@ -114,7 +114,7 @@
 }
 
 .chat-message-sender {
-  margin-block-end: 0.3em;
+  margin-block-end: 0em;
   margin-block-start: 0em;
   font-family: Lato;
   font-size: 18px;
@@ -124,7 +124,7 @@
   line-height: normal;
   letter-spacing: -0.19px;
   color: #1a1a1a;
-  margin-bottom: 4px;
+  margin: 0 5px 4px 0;
 }
 
 .chat-message-sender-unknown {
