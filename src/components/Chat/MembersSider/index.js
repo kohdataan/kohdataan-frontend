@@ -10,6 +10,7 @@ const MembersSider = props => {
   const {
     members,
     profiles,
+    channel,
     getNickNamebyId,
     getStatusById,
     getIconColor,
@@ -31,6 +32,21 @@ const MembersSider = props => {
   useOutsideClick(ref, () => {
     toggleSiderClosedIfOpen()
   })
+
+  if (channel.name === 'town-square') {
+    return (
+      <div className="chat-header-members-sider" id="members-sider" ref={ref}>
+        <div className="chat-header-members-sider-content">
+          <p>Tämä ryhmä on Kohdataan-somen pilottivaihetta varten.</p>
+          <p>
+            Tänne voit kirjoittaa vapaamuotoisesti palautetta palveluun
+            liittyen.
+          </p>
+          <p>Kaikki käyttäjät ovat automaatisesti tämän ryhmän jäseniä.</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="chat-header-members-sider" id="members-sider" ref={ref}>
@@ -73,6 +89,7 @@ const MembersSider = props => {
 MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  channel: propTypes.instanceOf(Object).isRequired,
   getNickNamebyId: propTypes.func.isRequired,
   getStatusById: propTypes.func.isRequired,
   getIconColor: propTypes.func.isRequired,

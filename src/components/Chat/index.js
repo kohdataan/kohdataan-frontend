@@ -134,6 +134,7 @@ const Chat = props => {
           handleLeaveChannel={handleLeaveChannel}
           getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
+          channel={channel}
         />
       )}
     </div>

@@ -32,12 +32,18 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
-          <h2>{channel.display_name}</h2>
+          <h2>
+            {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
+          </h2>
           {members && (
             <p className="groups-num-members">{`${getActiveMembersCount()} jäsentä`}</p>
           )}
         </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
+        {channel.name !== 'town-square' ? (
+          <p>{`Yhteistä: ${channel.display_name}`}</p>
+        ) : (
+          <p>Tämä kanava on yleistä palautetta varten.</p>
+        )}
       </div>
       {unreadCount > 0 && (
         <div className="group-unreads-text">

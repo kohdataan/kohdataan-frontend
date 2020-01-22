@@ -14,7 +14,13 @@ const Header = props => {
     handleLogout,
     otherUserName,
   } = props
+
   const header = otherUser || channel.display_name
+  const getHeader = () => {
+    if (otherUser) return otherUser
+    if (channel.name === 'town-square') return 'Palaute'
+    return channel.display_name
+  }
 
   return (
     <div className="chat-header">
@@ -27,7 +33,7 @@ const Header = props => {
       {!direct && (
         <ButtonContainer onClick={toggleSider} className="channel-name-button">
           <h1 className="chat-header-item chat-header-channel-name">
-            {header}
+            {getHeader()}
           </h1>
         </ButtonContainer>
       )}
