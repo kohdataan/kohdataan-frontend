@@ -23,6 +23,7 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelMembers,
     fetchChannelsAndInvitations,
+    profiles,
   } = props
 
   const [isInitialized, setIsInitialized] = useState(false)
@@ -104,6 +105,7 @@ const GroupsContainer = props => {
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
+        profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
       />
     </>
@@ -121,6 +123,7 @@ GroupsContainer.propTypes = {
   getChannelMembers: PropTypes.func.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {

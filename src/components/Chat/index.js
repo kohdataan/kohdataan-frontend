@@ -86,12 +86,25 @@ const Chat = props => {
     return null
   }
 
+  const getOtherUser = () => {
+    if (directChannel) {
+      const friend = members.find(member => member.user_id !== currentUserId)
+      const mmid = friend && friend.user_id
+      const mmProfile = Object.values(profiles).find(
+        profile => profile.id === mmid
+      )
+      return mmProfile && mmProfile.username
+    }
+    return null
+  }
+
   return (
     <div className="chat-wrapper" id="chat">
       <ChatHeader
         channel={channel}
         toggleSider={toggleSider}
         otherUser={getOtherUserName()}
+        otherUserName={getOtherUser()}
         direct={directChannel}
         handleLogout={handleLogout}
       />

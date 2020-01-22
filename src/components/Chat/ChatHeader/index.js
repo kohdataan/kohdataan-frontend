@@ -6,7 +6,14 @@ import ButtonContainer from '../../ButtonContainer'
 import BottomNavigationBot from '../../BottomNavigationBot'
 
 const Header = props => {
-  const { channel, toggleSider, otherUser, direct, handleLogout } = props
+  const {
+    channel,
+    toggleSider,
+    otherUser,
+    direct,
+    handleLogout,
+    otherUserName,
+  } = props
   const header = otherUser || channel.display_name
 
   return (
@@ -17,9 +24,21 @@ const Header = props => {
       >
         {'< Takaisin'}
       </Link>
-      <ButtonContainer onClick={toggleSider} className="channel-name-button">
-        <h1 className="chat-header-item chat-header-channel-name">{header}</h1>
-      </ButtonContainer>
+      {!direct && (
+        <ButtonContainer onClick={toggleSider} className="channel-name-button">
+          <h1 className="chat-header-item chat-header-channel-name">
+            {header}
+          </h1>
+        </ButtonContainer>
+      )}
+      {direct && (
+        <Link to={`/profile/${otherUserName}`} className="channel-name-link">
+          {' '}
+          <h1 className="chat-header-item chat-header-channel-name">
+            {header}
+          </h1>
+        </Link>
+      )}
       <div className="chat-header-item">
         <BottomNavigationBot handleLogout={handleLogout} inChat />
       </div>
@@ -36,10 +55,12 @@ Header.propTypes = {
   otherUser: propTypes.instanceOf(Object),
   handleLogout: propTypes.func.isRequired,
   direct: propTypes.bool.isRequired,
+  otherUserName: propTypes.string,
 }
 
 Header.defaultProps = {
   otherUser: null,
+  otherUserName: null,
 }
 
 export default memo(Header)

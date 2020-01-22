@@ -75,7 +75,9 @@ const Friend = props => {
           <div className="friend-header">
             <h2 className="deleted-user-nickname">{user.nickname}</h2>
           </div>
-          <>Käyttäjä on poistunut palvelusta</>
+          <div className="deleted-user-message">
+            Käyttäjä on poistunut palvelusta
+          </div>
         </div>
       </div>
     </div>
