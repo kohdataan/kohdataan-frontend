@@ -51,6 +51,16 @@ const Profile = props => {
 
   return (
     <main className="profile-container">
+      <div className="go-back-button-container">
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            onClick={startDirectChannel}
+            className="profile-modal-header-button"
+          >
+            {'< Palaa'} 
+          </ButtonContainer>
+        )}
+      </div>
       <div className="profile-header-container">
         <ProfileImage userId={mmuser.id} />
         {mmuser && myUserInfo && (
@@ -67,15 +77,6 @@ const Profile = props => {
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
         )}
-        {!ownProfile && startDirectChannel && (
-          <ButtonContainer
-            secondary
-            onClick={startDirectChannel}
-            className="profile-dm-button"
-          >
-            Keskustele
-          </ButtonContainer>
-        )}
       </div>
       <Description text={description} />
 
@@ -90,7 +91,16 @@ const Profile = props => {
         </div>
         <InterestsGrid interestList={userInterests} />
       </div>
-
+      <div className="start-conversation-button">
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            onClick={startDirectChannel}
+            className="profile-dm-button"
+          >
+            Lähetä viesti
+          </ButtonContainer>
+        )}
+      </div>
       <Instructions closeModal={closeModal} showModals={showModals} />
     </main>
   )

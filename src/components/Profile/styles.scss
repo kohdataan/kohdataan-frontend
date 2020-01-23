@@ -3,20 +3,22 @@
 .profile-container {
   overflow: auto;
   margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-header-container {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: $background-gray;
   width: 100%;
-  padding: 1rem;
+  padding: 0;
 }
 
 .profile-header-item {
-  margin: 0;
+  margin: 20px;
   display: inline-block;
   white-space: nowrap;
 }
@@ -27,6 +29,15 @@
   color: $darkblue;
   font-weight: normal;
   padding: 0 1rem;
+}
+
+.profile-modal-header-button {
+  background: none;
+  border: none;
+  text-transform: none;
+  font-weight: normal;
+  align-self: flex-start;
+  font-size: 18px;
 }
 
 .profile-modal-button {
@@ -47,9 +58,21 @@
 
 .profile-dm-button {
   padding: 10px 15px;
+  align-self: center;
 }
 
 .edit-me-link {
   align-self: flex-start;
   margin-block-start: 1em;
+}
+
+.go-back-button-container {
+  text-align: left;
+  background:  $background-gray;
+  padding-top: 20px;
+}
+
+.start-conversation-button {
+  text-align: center;
+  padding-top: 10px;
 }
