@@ -20,6 +20,7 @@ import PasswordResetRequestContainer from './containers/PasswordResetRequestCont
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
 import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
 import FriendsContainer from './containers/FriendsContainer'
+import ViewImageContainer from './containers/ViewImageContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import InterestsContainer from './containers/InterestsContainer'
 import FullScreenLoading from './components/FullScreenLoading'
@@ -90,8 +91,9 @@ class App extends Component {
           component={OtherUserProfileContainer}
         />
         <PrivateRoute path="/me" component={ProfileContainer} />
-        <PrivateRoute path="/chat/:id" component={ChatContainer} />
         <PrivateRoute path="/edit-me" component={EditProfileContainer} />
+        <PrivateRoute exact path="/chat/:id" component={ChatContainer} />
+        <PrivateRoute path="/chat/:id/:fileId" component={ViewImageContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
