@@ -27,14 +27,24 @@ const SuggestionBox = props => {
           />
           <h2>{channel.display_name}</h2>
         </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
+        <div className="group-in-common">
+          {Object.keys(channel.purpose) &&
+          Object.keys(channel.purpose).length > 0 ? (
+            <p className="group-in-common-text">
+              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose).join(
+                ' '
+              )}`}
+            </p>
+          ) : (
+            <p>Ei vielä yhdistäviä kinnostuksenkohteita</p>
+          )}
+        </div>
         {channel && members && (
           <div className="suggestion-members-wrapper">
-            <p>{`${members.length} jäsentä`}</p>
             <div className="suggestion-members-info">
               {members.map(member => (
                 <p className="suggestion-member" key={member.id}>
-                  {member.nickname || member.username}
+                  {member.nickname}
                 </p>
               ))}
             </div>

@@ -7,6 +7,7 @@ import groupNameColors from '../../../assets/groupColors'
 const Group = props => {
   const { channel, getMembers, unreadCount, profiles } = props
   const [members, setMembers] = useState([])
+  const [activeMembers, setActiveMembers] = useState('')
 
   useEffect(() => {
     const getMemberData = async () => {
@@ -18,13 +19,30 @@ const Group = props => {
     getMemberData()
   }, [channel, getMembers])
 
-  const getActiveMembersCount = () => {
-    const activeMembers = members.filter(
-      member =>
-        profiles[member.user_id] && profiles[member.user_id].delete_at === 0
-    )
-    return activeMembers && activeMembers.length
-  }
+  useEffect(() => {
+    const getActiveMembers = () => {
+      const activeMembersArr = members
+        .filter(
+          member =>
+            profiles[member.user_id] && profiles[member.user_id].delete_at === 0
+        )
+        .map(member => profiles[member.user_id])
+      if (activeMembersArr && activeMembersArr.length > 5) {
+        setActiveMembers(
+          activeMembersArr
+            .map(member => member.nickname)
+            .slice(0, 5)
+            .join(' ')
+            .push('...')
+        )
+      } else {
+        setActiveMembers(
+          activeMembersArr.map(member => member.nickname).join(' ')
+        )
+      }
+    }
+    getActiveMembers()
+  }, [members, setActiveMembers])
 
   return (
     <Link
@@ -49,12 +67,9 @@ const Group = props => {
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
-          {members && (
-            <p className="groups-num-members">{`${getActiveMembersCount()} jäsentä`}</p>
-          )}
         </div>
         {channel.name !== 'town-square' ? (
-          <p>{`Yhteistä: ${channel.display_name}`}</p>
+          <p>{activeMembers}</p>
         ) : (
           <p>Tämä kanava on yleistä palautetta varten.</p>
         )}

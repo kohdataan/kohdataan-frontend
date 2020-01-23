@@ -13,9 +13,13 @@ const GroupSuggestions = props => {
 
   return (
     <div className="group-suggestions">
-      <h1>Ehdotetut ryhmät</h1>
-      {!channels && (
-        <div>Saat lisää ehdotuksia vastaamalla päivän kysymyksiin.</div>
+      <h1>Uudet ryhmät</h1>
+      {cards && cards.length > 0 ? (
+        <div className="group-suggestion-info">
+          Kiinnostaako sinua seuraava ryhmä?
+        </div>
+      ) : (
+        <div>Sinulle ehdotetaan uusia rymiä kiinnostusten mukaan.</div>
       )}
       <div className="group-suggestion-boxes">
         {cards && cards.length > 0 && (
