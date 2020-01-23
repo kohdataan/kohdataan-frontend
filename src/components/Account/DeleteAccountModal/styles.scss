@@ -1,0 +1,10 @@
+.account-delete-buttons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  button {
+    width: 250px;
+    height: 40px;
+    margin: 10px 0;
+  }
+}

@@ -20,6 +20,10 @@
   text-align: left;
 }
 
+.nav-bot-chat {
+  margin-top: 5px;
+}
+
 .button-image {
   background: rgba(0, 0, 0, 0);
   border: none;
@@ -35,6 +39,10 @@
 
 .modal-item {
   padding: 5px 0 5px 0;
+  a {
+    text-decoration: none;
+    color: $gray;
+  }
 }
 
 .modal-icon {

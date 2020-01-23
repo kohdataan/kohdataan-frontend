@@ -8,6 +8,7 @@ import BottomNavigation from '../components/BottomNavigation'
 import BottomNavigationLink from '../components/BottomNavigationLink'
 import BottomNavigationBot from '../components/BottomNavigationBot'
 import * as API from '../api/user/user'
+import logoutHandler from '../utils/userLogout'
 
 const BottomNavigationContainer = props => {
   const {
@@ -23,17 +24,7 @@ const BottomNavigationContainer = props => {
     return <div />
   }
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('userId')
-      localStorage.removeItem('authToken')
-      await API.userLogout(localStorage.getItem('authToken'))
-      await matterMostLogout()
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  }
+  const handleLogout = () => logoutHandler(API.userLogout, matterMostLogout)
 
   return (
     <BottomNavigation>
