@@ -21,7 +21,7 @@
 }
 
 .group-box-content {
-  padding: 15px 20px;
+  padding: 15px 10px;
 }
 
 .group-header {
@@ -66,4 +66,10 @@
   padding: 15px 15px;
   height: 55px;
   width: 55px;
+}
+
+.group-feedback-icon {
+  font-size: 45px;
+  color: $orange;
+  margin-right: 15px;
 }

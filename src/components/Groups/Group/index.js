@@ -51,7 +51,7 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
-          {channel.name !== 'town-square' && (
+          {channel.name !== 'town-square' ? (
             <div
               className="group-color-icon"
               style={{
@@ -63,6 +63,11 @@ const Group = props => {
                 }`,
               }}
             />
+          ) : (
+            <i
+              className="far fa-comment-dots group-feedback-icon"
+              aria-hidden="true"
+            />
           )}
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
@@ -71,7 +76,7 @@ const Group = props => {
         {channel.name !== 'town-square' ? (
           <p>{activeMembers}</p>
         ) : (
-          <p>Tämä kanava on yleistä palautetta varten.</p>
+          <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
       </div>
       {unreadCount > 0 && (
