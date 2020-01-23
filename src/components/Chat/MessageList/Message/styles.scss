@@ -76,7 +76,7 @@
   height: 1px;
   background: #1c1c1c;
   margin: 10px 2px;
-  display: inline-block;  
+  display: inline-block;
 }
 
 .date-divider-text {
@@ -95,6 +95,14 @@
   border-radius: 20px 20px 0px 20px;
   background-color: $orange;
   border: none;
+}
+
+.message-icon-and-content {
+  display: flex;
+}
+
+.message-icon-and-content-sent {
+  display: flex;
   justify-content: flex-end;
 }
 
@@ -102,11 +110,11 @@
   background-color: white;
   color: gray;
   border: none;
-  width: 100%
+  width: 100%;
 }
 
 .chat-message-sender {
-  margin-block-end: 0.3em;
+  margin-block-end: 0em;
   margin-block-start: 0em;
   font-family: Lato;
   font-size: 18px;
@@ -116,7 +124,12 @@
   line-height: normal;
   letter-spacing: -0.19px;
   color: #1a1a1a;
-  margin-bottom: 4px;
+  margin: 0 5px 4px 0;
+}
+
+.chat-message-sender-unknown {
+  color: #9b9b9b;
+  font-size: 16px;
 }
 
 .chat-message-sender-icon {
@@ -127,26 +140,6 @@
   color: white;
   font-weight: bold;
   border-radius: 50%;
-}
-
-.chat-darkblue-icon {
-  background-color: $darkblue;
-}
-
-.chat-orange-icon {
-  background-color: $orange;
-}
-
-.chat-maroon-icon {
-  background-color: $maroon;
-}
-
-.chat-beige-icon {
-  background-color: $beige;
-}
-
-.chat-green-icon {
-  background-color: $green;
 }
 
 .chat-message-content-text {

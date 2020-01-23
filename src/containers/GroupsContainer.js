@@ -24,6 +24,7 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelMembers,
     fetchChannelsAndInvitations,
+    profiles,
   } = props
 
   const [isInitialized, setIsInitialized] = useState(false)
@@ -55,10 +56,7 @@ const GroupsContainer = props => {
   // (filter direct messages and default channels out)
   const getGroupChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel =>
-        channel.type !== 'D' &&
-        channel.name !== 'off-topic' &&
-        channel.name !== 'town-square'
+      channel => channel.type !== 'D' && channel.name !== 'off-topic'
     )
     return filteredChannels
   }
@@ -114,6 +112,7 @@ const GroupsContainer = props => {
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
+        profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
       />
     </>
@@ -131,6 +130,7 @@ GroupsContainer.propTypes = {
   getChannelMembers: PropTypes.func.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {

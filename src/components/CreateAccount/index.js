@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
@@ -26,6 +26,13 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthday, setBirthday] = useState('')
   const [birthmonth, setBirthmonth] = useState('')
   const [birthyear, setBirthyear] = useState('')
+  const [currentApiErrors, setCurrentApiErrors] = useState({})
+
+  useEffect(() => {
+    if (apiErrors && apiErrors.fields) {
+      setCurrentApiErrors(apiErrors)
+    }
+  }, [apiErrors, setCurrentApiErrors])
 
   const onSubmit = data => {
     const usersBirthdate = moment
@@ -169,7 +176,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           >
             <span className="birthdate-content-label">Syntymäaika:</span>
             <div className="birthdate-container">
-              <div className="form-field-container">
+              <div className="formfield-container">
                 <DateSelectField
                   label="Päivä"
                   name="day"
@@ -278,11 +285,19 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 required: true,
                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               })}
+              onChange={selected => {
+                if (selected) {
+                  clearError('email')
+                  setCurrentApiErrors({})
+                }
+              }}
               ariaInvalid={!!errors.email}
               inputClassName="create-account-input-text"
               labelClassName={
                 errors.email ||
-                (apiErrors && apiErrors.fields && apiErrors.fields.email)
+                (currentApiErrors &&
+                  currentApiErrors.fields &&
+                  currentApiErrors.fields.email)
                   ? 'create-account-errors-field'
                   : 'create-account-input-field'
               }
@@ -294,9 +309,11 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               {errors.email &&
                 errors.email.type === 'pattern' &&
                 'Tarkista sähköpostiosoite.'}
-              {apiErrors && apiErrors.fields && apiErrors.fields.email && (
-                <p>Tähän sähköpostiin on liitetty jo käyttäjä.</p>
-              )}
+              {currentApiErrors &&
+                currentApiErrors.fields &&
+                currentApiErrors.fields.email && (
+                  <p>Tähän sähköpostiin on liitetty jo käyttäjä.</p>
+                )}
             </div>
           </div>
 

@@ -83,6 +83,23 @@ const setNewPassword = async data => {
   }
 }
 
+const updatePassword = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/update-password`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const respJSON = await resp.json()
+    return respJSON
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const getUser = async (id, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -201,6 +218,56 @@ const sendEmail = async data => {
   }
 }
 
+const deleteUser = async (data, id, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return await resp.json()
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const deleteUserNow = async (data, id, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/deletenow/${id}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return await resp.json()
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const restoreUser = async (id, token) => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/restore/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return await resp.json()
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const sendVerifyEmailLink = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -227,7 +294,7 @@ const verifyEmail = async data => {
         'Content-Type': 'application/json',
       },
     })
-    return resp
+    return await resp.json()
   } catch (e) {
     throw new Error(e)
   }
@@ -246,6 +313,10 @@ export {
   addUserInterests,
   getInterestsByUsername,
   sendEmail,
+  updatePassword,
+  deleteUser,
+  restoreUser,
+  deleteUserNow,
   sendVerifyEmailLink,
   verifyEmail,
 }

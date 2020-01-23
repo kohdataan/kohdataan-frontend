@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const Group = props => {
-  const { channel, getMembers, unreadCount } = props
+  const { channel, getMembers, unreadCount, profiles } = props
   const [members, setMembers] = useState([])
 
   useEffect(() => {
@@ -17,6 +17,14 @@ const Group = props => {
     getMemberData()
   }, [channel, getMembers])
 
+  const getActiveMembersCount = () => {
+    const activeMembers = members.filter(
+      member =>
+        profiles[member.user_id] && profiles[member.user_id].delete_at === 0
+    )
+    return activeMembers && activeMembers.length
+  }
+
   return (
     <Link
       className={`${unreadCount > 0 ? 'group-box-unreads' : ''} group-box`}
@@ -24,12 +32,18 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
-          <h2>{channel.display_name}</h2>
+          <h2>
+            {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
+          </h2>
           {members && (
-            <p className="groups-num-members">{`${members.length} jäsentä`}</p>
+            <p className="groups-num-members">{`${getActiveMembersCount()} jäsentä`}</p>
           )}
         </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
+        {channel.name !== 'town-square' ? (
+          <p>{`Yhteistä: ${channel.display_name}`}</p>
+        ) : (
+          <p>Tämä kanava on yleistä palautetta varten.</p>
+        )}
       </div>
       {unreadCount > 0 && (
         <div className="group-unreads-text">
@@ -49,6 +63,7 @@ Group.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   getMembers: propTypes.func.isRequired,
   unreadCount: propTypes.number.isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Group)

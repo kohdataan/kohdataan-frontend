@@ -1,0 +1,55 @@
+@import '../../styles/colors.scss';
+
+.account-update-container {
+  margin: 30px 35px;
+}
+
+.account-box-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  button {
+    width: 150px;
+    height: 40px;
+  }
+}
+
+.account-box-outer {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  padding: 2em 0;
+  border-bottom: 1px solid black;
+}
+
+.account-label-text {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.account-header {
+  text-align: center;
+  & h1 {
+    font-size: 32px;
+    color: $orange;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: condensed;
+    line-height: normal;
+    letter-spacing: 1.02px;
+  }
+}
+
+.account-delete-button {
+  color: red;
+}
+
+.delete-text {
+  color: red;
+}
+
+.delete-box {
+  margin-bottom: 50px;
+}
