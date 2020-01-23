@@ -37,7 +37,7 @@ export const getMembersByChannelIdAction = channelId => {
   }
 }
 
-export const getChannelInvitationsAction = () => {
+export const getChannelInvitationsAction = timestamp => {
   // Fetch channel invitations and related channel members
   const token = localStorage.getItem('authToken')
   return async dispatch => {
@@ -54,7 +54,9 @@ export const getChannelInvitationsAction = () => {
         })
       }
       await Promise.all(promises)
-      await dispatch(updateUser({ channelInvitationsAt: Date.now() }))
+      await dispatch(
+        updateUser({ channelInvitationsAt: timestamp || Date.now() })
+      )
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)

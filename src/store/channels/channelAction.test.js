@@ -29,11 +29,13 @@ describe('Channel actions', () => {
 
   it('dispatches requests for getChannelInvitation action and for each found channel getMembers action', async () => {
     const invitations = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    const now = Date.now()
     fetch
       .once(JSON.stringify({ found: [...invitations] }))
       .once(JSON.stringify({ userDetails: ['prii1', 'prää1'] }))
       .once(JSON.stringify({ userDetails: ['prii2', 'prää2'] }))
       .once(JSON.stringify({ userDetails: ['prii3', 'prää3'] }))
+      .once(JSON.stringify({ success: true }))
 
     const expectedActions = [
       {
@@ -55,10 +57,14 @@ describe('Channel actions', () => {
         members: ['prii3', 'prää3'],
         type: 'KOHDATAAN_GET_CHANNEL_INVITATION_MEMBERS',
       },
+      {
+        type: 'KOHDATAAN_UPDATE_USER',
+        user: { channelInvitationsAt: now },
+      },
     ]
     const store = mockStore({})
 
-    await store.dispatch(getChannelInvitationsAction())
+    await store.dispatch(getChannelInvitationsAction(now))
     return expect(store.getActions()).toEqual(expectedActions)
   })
 
