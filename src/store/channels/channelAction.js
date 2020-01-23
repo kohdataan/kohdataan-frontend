@@ -1,7 +1,9 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
 import { getProfiles } from 'mattermost-redux/actions/users'
+import moment from 'moment'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels/channels'
+import { updateUser } from '../user/userAction'
 import { initUser } from '../root/index'
 
 export const startGroupPageFetching = () => {
@@ -52,6 +54,23 @@ export const getChannelInvitationsAction = () => {
         })
       }
       await Promise.all(promises)
+      await dispatch(updateUser({ channelInvitationsAt: Date.now() }))
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+}
+
+export const timedGetChannelInvitationsAction = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { user } = getState()
+      const lastInvitationsTimestamp = user && user.channelInvitationsAt
+      const hoursSince = moment().diff(lastInvitationsTimestamp, 'hours')
+      if (hoursSince >= 24) {
+        await dispatch(getChannelInvitationsAction())
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -67,7 +86,7 @@ export const fetchChannelsAndInvitations = () => {
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
-    await dispatch(getChannelInvitationsAction())
+    await dispatch(timedGetChannelInvitationsAction())
     await dispatch(getProfiles())
     await dispatch(groupPageFetchingReady())
   }

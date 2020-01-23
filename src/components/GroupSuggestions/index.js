@@ -19,7 +19,9 @@ const GroupSuggestions = props => {
           Kiinnostaako sinua seuraava ryhmä?
         </div>
       ) : (
-        <div>Sinulle ehdotetaan uusia rymiä kiinnostusten mukaan.</div>
+        <div>
+          Sinulle ehdotetaan uusia rymiä päivittäin kiinnostusten mukaan.
+        </div>
       )}
       <div className="group-suggestion-boxes">
         {cards && cards.length > 0 && (
