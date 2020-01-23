@@ -45,6 +45,7 @@ const Group = props => {
           <div className="group-current-members">
             {activeMembers.map(member => (
               <Member
+                key={`group-${member.id}`}
                 iconColor={getIconColor(member.id, members)}
                 nickname={member.nickname || member.username}
                 currentUserId={currentUserId}

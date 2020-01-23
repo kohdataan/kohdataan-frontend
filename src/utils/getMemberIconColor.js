@@ -11,6 +11,8 @@ const iconColors = [
 ]
 
 export default (userId, members) => {
-  const index = members.findIndex(member => member.user_id === userId)
+  const index = members.findIndex(
+    member => member.user_id === userId || member.id === userId
+  )
   return iconColors[index] || ''
 }

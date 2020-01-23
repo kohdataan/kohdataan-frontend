@@ -20,15 +20,6 @@
   }
 }
 
-.suggestion-members-wrapper {
-  & p {
-    font-size: 13px;
-    color: $gray;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-}
-
 .suggestion-members-info {
   display: flex;
   flex-flow: row wrap;
@@ -47,7 +38,7 @@
 }
 
 .group-in-common {
-  margin: 0 0 10px 0;
+  margin: 0 0 25px 0;
 }
 
 .group-suggestion-info {
