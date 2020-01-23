@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import groupNameColors from '../../../assets/groupColors'
 
 const Group = props => {
   const { channel, getMembers, unreadCount, profiles } = props
@@ -32,6 +33,19 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
+          {channel.name !== 'town-square' && (
+            <div
+              className="group-color-icon"
+              style={{
+                backgroundColor: groupNameColors[channel.display_name],
+                border: `${
+                  channel.display_name.toLowerCase().includes('valkoiset')
+                    ? '1px solid grey'
+                    : 'none'
+                }`,
+              }}
+            />
+          )}
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
