@@ -5,6 +5,7 @@ import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
 import LeaveChannelModal from './LeaveChannelModal'
 import useOutsideClick from '../../../hooks/useOutsideClick'
+import getIconColor from '../../../utils/getMemberIconColor'
 
 const MembersSider = props => {
   const {
@@ -13,7 +14,6 @@ const MembersSider = props => {
     channel,
     getNickNamebyId,
     getStatusById,
-    getIconColor,
     currentUserId,
     handleLeaveChannel,
     toggleSiderClosedIfOpen,
@@ -65,7 +65,7 @@ const MembersSider = props => {
               profiles={profiles}
               nickName={getNickNamebyId(member.user_id)}
               currentUserId={currentUserId}
-              iconColor={getIconColor(member.user_id)}
+              iconColor={getIconColor(member.user_id, members)}
               iconMemberStatus={getIconMemberStatus(member.user_id)}
             />
           ))}
@@ -92,7 +92,6 @@ MembersSider.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   getNickNamebyId: propTypes.func.isRequired,
   getStatusById: propTypes.func.isRequired,
-  getIconColor: propTypes.func.isRequired,
   currentUserId: propTypes.string.isRequired,
   handleLeaveChannel: propTypes.func.isRequired,
   toggleSiderClosedIfOpen: propTypes.func.isRequired,

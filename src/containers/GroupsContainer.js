@@ -115,6 +115,7 @@ const GroupsContainer = props => {
         getMembers={getChannelMembers}
         profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
+        currentUserId={currentUserId}
       />
     </>
   )

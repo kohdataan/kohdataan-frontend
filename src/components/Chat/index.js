@@ -21,24 +21,8 @@ const Chat = props => {
     handleLogout,
   } = props
 
-  const iconColors = [
-    'orange',
-    'darkblue',
-    'maroon',
-    '#ffe9d9',
-    'green',
-    'red',
-    'lightblue',
-    'gray',
-  ]
-
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
-
-  const getIconColor = userId => {
-    const index = members.findIndex(member => member.user_id === userId)
-    return iconColors[index] || ''
-  }
 
   const toggleSider = () => setShowSider(!showSider)
 
@@ -113,8 +97,8 @@ const Chat = props => {
         getFilesForPost={getFilesForPost}
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
-        getIconColor={getIconColor}
         directChannel={directChannel}
+        members={members}
       />
       {channel.id && (
         <UserInput
@@ -130,7 +114,6 @@ const Chat = props => {
           profiles={profiles}
           currentUserId={currentUserId}
           getNickNamebyId={getNicknameById}
-          getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
           getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}

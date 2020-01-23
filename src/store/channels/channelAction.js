@@ -1,4 +1,5 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
+import { getProfiles } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels/channels'
 import { initUser } from '../root/index'
@@ -67,6 +68,7 @@ export const fetchChannelsAndInvitations = () => {
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
     await dispatch(getChannelInvitationsAction())
+    await dispatch(getProfiles())
     await dispatch(groupPageFetchingReady())
   }
 }

@@ -2,12 +2,13 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import groupNameColors from '../../../assets/groupColors'
+import Member from './Member'
+import getIconColor from '../../../utils/getMemberIconColor'
 
 const Group = props => {
-  const { channel, getMembers, unreadCount, profiles } = props
+  const { channel, getMembers, unreadCount, profiles, currentUserId } = props
   const [members, setMembers] = useState([])
-  const [activeMembers, setActiveMembers] = useState('')
+  const [activeMembers, setActiveMembers] = useState([])
 
   useEffect(() => {
     const getMemberData = async () => {
@@ -22,27 +23,12 @@ const Group = props => {
   useEffect(() => {
     const getActiveMembers = () => {
       const activeMembersArr = members
-        .filter(
-          member =>
-            profiles[member.user_id] && profiles[member.user_id].delete_at === 0
-        )
         .map(member => profiles[member.user_id])
-      if (activeMembersArr && activeMembersArr.length > 5) {
-        setActiveMembers(
-          activeMembersArr
-            .map(member => member.nickname)
-            .slice(0, 5)
-            .join(' ')
-            .push('...')
-        )
-      } else {
-        setActiveMembers(
-          activeMembersArr.map(member => member.nickname).join(' ')
-        )
-      }
+        .filter(member => member.delete_at === 0)
+      setActiveMembers(activeMembersArr)
     }
     getActiveMembers()
-  }, [members, setActiveMembers])
+  }, [members, profiles, setActiveMembers])
 
   return (
     <Link
@@ -51,30 +37,21 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
-          {channel.name !== 'town-square' ? (
-            <div
-              className="group-color-icon"
-              style={{
-                backgroundColor: groupNameColors[channel.display_name],
-                border: `${
-                  channel.display_name.toLowerCase().includes('valkoiset')
-                    ? '1px solid grey'
-                    : 'none'
-                }`,
-              }}
-            />
-          ) : (
-            <i
-              className="far fa-comment-dots group-feedback-icon"
-              aria-hidden="true"
-            />
-          )}
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
         </div>
         {channel.name !== 'town-square' ? (
-          <p>{activeMembers}</p>
+          <div className="group-current-members">
+            {activeMembers.map(member => (
+              <Member
+                iconColor={getIconColor(member.id, members)}
+                nickname={member.nickname || member.username}
+                currentUserId={currentUserId}
+                userId={member.id}
+              />
+            ))}
+          </div>
         ) : (
           <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
@@ -98,6 +75,7 @@ Group.propTypes = {
   getMembers: propTypes.func.isRequired,
   unreadCount: propTypes.number.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  currentUserId: propTypes.string.isRequired,
 }
 
 export default memo(Group)
