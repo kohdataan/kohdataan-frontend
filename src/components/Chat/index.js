@@ -99,7 +99,6 @@ const Chat = props => {
         getUserNamebyId={getNicknameById}
         directChannel={directChannel}
         members={members}
-        channelId={channel.id}
       />
       {channel.id && (
         <UserInput

@@ -11,7 +11,6 @@ const MessageList = props => {
     getUserNamebyId,
     directChannel,
     members,
-    channelId,
   } = props
 
   let previousTime = null
@@ -82,7 +81,6 @@ MessageList.propTypes = {
   getUserNamebyId: propTypes.func.isRequired,
   members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
-  channelId: propTypes.string.isRequired,
 }
 
 export default memo(MessageList)
