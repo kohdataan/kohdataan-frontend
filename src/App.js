@@ -20,13 +20,15 @@ import PasswordResetRequestContainer from './containers/PasswordResetRequestCont
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
 import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
 import FriendsContainer from './containers/FriendsContainer'
+import ViewImageContainer from './containers/ViewImageContainer'
 import EditProfileContainer from './containers/EditProfileContainer'
 import InterestsContainer from './containers/InterestsContainer'
 import FullScreenLoading from './components/FullScreenLoading'
 import { rootStartUp as rootStartUpAction } from './store/root'
-import './styles/defaults.scss'
 import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 import RestoreAccountContainer from './containers/RestoreAccountContainer'
+import AccountLocked from './components/AccountLocked'
+import './styles/defaults.scss'
 
 class App extends Component {
   async componentDidMount() {
@@ -46,10 +48,13 @@ class App extends Component {
   }
 
   render() {
-    const { loading, user: pUser } = this.props
+    const { loading, user: pUser, mmuser } = this.props
+
     if (loading.root && localStorage.getItem('authToken')) {
-      // TODO: Nice spashscree
       return <FullScreenLoading />
+    }
+    if (!loading.root && localStorage.getItem('authToken') && !mmuser) {
+      return <AccountLocked />
     }
 
     return (
@@ -90,8 +95,9 @@ class App extends Component {
           component={OtherUserProfileContainer}
         />
         <PrivateRoute path="/me" component={ProfileContainer} />
-        <PrivateRoute path="/chat/:id" component={ChatContainer} />
         <PrivateRoute path="/edit-me" component={EditProfileContainer} />
+        <PrivateRoute exact path="/chat/:id" component={ChatContainer} />
+        <PrivateRoute path="/chat/:id/:fileId" component={ViewImageContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
@@ -108,6 +114,11 @@ App.propTypes = {
   rootStartUp: PropTypes.func.isRequired,
   loading: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  mmuser: PropTypes.instanceOf(Object),
+}
+
+App.defaultProps = {
+  mmuser: null,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -119,9 +130,20 @@ const mapDispatchToProps = dispatch =>
   )
 
 const mapStateToProps = store => {
+  const currentUserId =
+    store &&
+    store.entities &&
+    store.entities.users &&
+    store.entities.users.currentUserId
+  const profiles =
+    store &&
+    store.entities &&
+    store.entities.users &&
+    store.entities.users.profiles
   return {
     loading: store.loading,
     user: store.user,
+    mmuser: profiles[currentUserId],
   }
 }
 

@@ -115,6 +115,7 @@ const Chat = props => {
         getUserNamebyId={getNicknameById}
         getIconColor={getIconColor}
         directChannel={directChannel}
+        channelId={channel.id}
       />
       {channel.id && (
         <UserInput

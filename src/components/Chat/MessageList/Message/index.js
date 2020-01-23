@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
 
@@ -15,6 +16,7 @@ const Message = props => {
     showDate,
     directChannel,
     files,
+    channelId,
   } = props
 
   // Adds the text to be used for the date divider
@@ -87,11 +89,13 @@ const Message = props => {
               <div className={messageContentClassList.join(' ')}>
                 {files && (
                   <>
-                    <img
-                      className="message-image"
-                      src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                      alt="attachment"
-                    />
+                    <Link to={`${channelId}/${files[0]}`}>
+                      <img
+                        className="message-image"
+                        src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                        alt="attachment"
+                      />
+                    </Link>
                     <p className="image-message-content-text chat-message-content-text">
                       {text}
                     </p>
@@ -125,6 +129,7 @@ Message.propTypes = {
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
   files: propTypes.instanceOf(Array),
+  channelId: propTypes.string.isRequired,
 }
 
 export default memo(Message)
