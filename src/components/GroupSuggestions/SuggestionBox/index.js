@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import groupNameColors from '../../../assets/groupColors'
 
 const SuggestionBox = props => {
   const { channel, members, hidden, top } = props
@@ -13,6 +14,17 @@ const SuggestionBox = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
+          <div
+            className="group-color-icon"
+            style={{
+              backgroundColor: groupNameColors[channel.display_name],
+              border: `${
+                channel.display_name.toLowerCase().includes('valkoiset')
+                  ? '1px solid grey'
+                  : 'none'
+              }`,
+            }}
+          />
           <h2>{channel.display_name}</h2>
         </div>
         <p>{`Yhteistä: ${channel.display_name}`}</p>

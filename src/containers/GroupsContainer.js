@@ -43,7 +43,8 @@ const GroupsContainer = props => {
   useEffect(() => {
     const getFilteredChannelSuggestions = () => {
       const mySuggestions = channelSuggestions.filter(
-        channel => !Object.keys(myChannels).includes(channel.id)
+        channel =>
+          channel && channel.id && !Object.keys(myChannels).includes(channel.id)
       )
       return mySuggestions
     }
