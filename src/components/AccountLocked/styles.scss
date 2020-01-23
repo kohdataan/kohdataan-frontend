@@ -1,7 +1,9 @@
+@import '../../styles/colors.scss';
+
 .account-locked-container {
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: $black;
   text-align: center;
   h3 {
     color: lightgrey;

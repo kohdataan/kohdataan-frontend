@@ -1,10 +1,12 @@
-import React, { memo } from 'react'
-// import { Link } from 'react-router-dom'
-// import * as API from '../../api/user/user'
-// import handleLogout from '../../utils/userLogout'
+import React, { memo, useEffect } from 'react'
 import './styles.scss'
 
 const AccountLocked = () => {
+  useEffect(() => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('authToken')
+  })
+
   return (
     <div className="account-locked-container">
       <h1 className="account-locked-text">Kohdataan</h1>
