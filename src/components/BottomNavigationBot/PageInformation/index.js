@@ -4,7 +4,7 @@ import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
 const PageInformation = props => {
-  const { handleClick, path, direct, inChat } = props
+  const { handleClick, path, direct, inChat, previousPath } = props
   let text = ''
   let page
   const profileRegex = /\/profile\/[a-z0-9.-]+/i
@@ -14,6 +14,8 @@ const PageInformation = props => {
     page = '/private-chat'
   } else if (inChat && !direct) {
     page = '/group-chat'
+  } else if (previousPath === '/') {
+    page = path
   } else {
     page = path
   }
@@ -45,7 +47,7 @@ const PageInformation = props => {
         \nPääset ryhmään, kun valitset ryhmän kuvakkeen.`
       break
     case '/group-chat':
-      text = `Tämän on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää ääniviestejä ja kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
+      text = `Tämän on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää myös kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
         
         \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu ja milloin ryhmän jäsenet ovat olleet viimeksi paikalla. Näet myös, mitkä asiat teitä yhdistävät.
         
@@ -55,15 +57,17 @@ const PageInformation = props => {
       break
     case '/member-profile':
       text = `Tämä on ryhmäläisen profiili. Näet täällä ryhmäläisen julkiset tiedot. 
-      Voit lähettää ryhmäläiselle viestin, jos haluat ruveta kaveriksi. Teistä tulee kaverit, kun hän vastaa sinun viestiisi. `
+      \nVoit lähettää ryhmäläiselle viestin, jos haluat ruveta kaveriksi. Teistä tulee kaverit, kun hän vastaa sinun viestiisi. `
       break
     case '/private-chat':
       text = `Täällä voit lähettää yksityisviestin. Näitä viestejä eivät muut ryhmäläiset näe. Jos saat vastauksen viestiisi, teistä tulee kaverit.`
       break
     case '/account':
-      text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot ovat kaikki pakollisia. Voit muokata tietoja, jos esimerkiksi muutat toiselle paikkakunnalle, saat uuden sähköpostiosoitteen, tai sukunimesi vaihtuu. Rekisteröitymistiedot eivät näy muille käyttäjille. `
+      text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot ovat kaikki pakollisia. 
+      \nVoit muokata tietoja, jos esimerkiksi muutat toiselle paikkakunnalle, saat uuden sähköpostiosoitteen, tai sukunimesi vaihtuu. 
+      \nRekisteröitymistiedot eivät näy muille käyttäjille. `
       break
-    default: text = `Ei vielä sisältöä.`
+    default:
   }
 
   return (
@@ -85,11 +89,13 @@ PageInformation.propTypes = {
   path: PropTypes.string.isRequired,
   direct: PropTypes.bool,
   inChat: PropTypes.bool,
+  previousPath: PropTypes.string,
 }
 
 PageInformation.defaultProps = {
   direct: false,
   inChat: false,
+  previousPath: null,
 }
 
 export default memo(PageInformation)

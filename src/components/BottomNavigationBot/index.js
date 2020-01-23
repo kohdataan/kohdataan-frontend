@@ -9,7 +9,7 @@ import RegistrationProblemContainer from '../../containers/RegistrationProblemCo
 import PageInformation from './PageInformation'
 
 const BottomNavigationBot = props => {
-  const { handleLogout, pathname, inChat, direct } = props
+  const { handleLogout, pathname, inChat, direct, previousPath } = props
 
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
@@ -74,6 +74,7 @@ const BottomNavigationBot = props => {
                 handleClick={closePageInformationModal}
                 direct={direct}
                 inChat={inChat}
+                previousPath={previousPath}
               />
             </ModalContainer>
           </div>
@@ -148,11 +149,13 @@ BottomNavigationBot.propTypes = {
   pathname: PropTypes.string.isRequired,
   inChat: PropTypes.bool,
   direct: PropTypes.bool,
+  previousPath: PropTypes.string,
 }
 
 BottomNavigationBot.defaultProps = {
   inChat: false,
   direct: false,
+  previousPath: null,
 }
 
 export default memo(BottomNavigationBot)

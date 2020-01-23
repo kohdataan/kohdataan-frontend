@@ -13,6 +13,7 @@ const Header = props => {
     direct,
     handleLogout,
     otherUserName,
+    location,
   } = props
 
   const header = otherUser || channel.display_name
@@ -21,6 +22,7 @@ const Header = props => {
     if (channel.name === 'town-square') return 'Palaute'
     return channel.display_name
   }
+  const previousPath = location.pathname
 
   return (
     <div className="chat-header">
@@ -50,6 +52,7 @@ const Header = props => {
           handleLogout={handleLogout}
           inChat
           direct={direct}
+          path={previousPath}
         />
       </div>
     </div>
@@ -66,6 +69,7 @@ Header.propTypes = {
   handleLogout: propTypes.func.isRequired,
   direct: propTypes.bool.isRequired,
   otherUserName: propTypes.string,
+  location: propTypes.instanceOf(Object).isRequired,
 }
 
 Header.defaultProps = {

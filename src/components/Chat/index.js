@@ -19,6 +19,7 @@ const Chat = props => {
     handleLeaveChannel,
     statuses,
     handleLogout,
+    location,
   } = props
 
   const iconColors = [
@@ -107,6 +108,7 @@ const Chat = props => {
         otherUserName={getOtherUser()}
         direct={directChannel}
         handleLogout={handleLogout}
+        location={location}
       />
       <MessageList
         posts={posts}
