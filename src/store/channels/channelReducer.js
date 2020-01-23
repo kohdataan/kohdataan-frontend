@@ -9,6 +9,9 @@ export default function channels(state = defaultState, action) {
     case types.GET_CHANNEL_INVITATIONS: {
       return { ...state, ...action.channelInvitations }
     }
+    case types.RESET_CHANNEL_INVITATIONS: {
+      return { loading: false }
+    }
     case types.GET_CHANNEL_INVITATION_MEMBERS: {
       return {
         ...state,

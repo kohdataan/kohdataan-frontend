@@ -10,7 +10,11 @@ import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
 import BouncingLoader from '../components/BouncingLoader'
-import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
+import {
+  fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction,
+  getChannelInvitationsAction as getChannelInvitationsAgain,
+  resetChannelInvitations as resetChannelInvitationsAction,
+} from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
   const {
@@ -24,6 +28,8 @@ const GroupsContainer = props => {
     channelSuggestions,
     getChannelMembers,
     fetchChannelsAndInvitations,
+    getInvitationsAgain,
+    resetChannelInvitations,
     profiles,
   } = props
 
@@ -109,6 +115,8 @@ const GroupsContainer = props => {
         channels={filteredSuggestions}
         handleJoinChannel={handleJoinChannel}
         channelMembers={channelSuggestionMembers}
+        getChannelInvitations={getInvitationsAgain}
+        resetChannelInvitations={resetChannelInvitations}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
@@ -133,6 +141,8 @@ GroupsContainer.propTypes = {
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
+  getInvitationsAgain: PropTypes.func.isRequired,
+  resetChannelInvitations: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -175,6 +185,8 @@ const mapDispatchToProps = dispatch =>
       joinChannel: joinChannelAction,
       getChannelMembers: getChannelMembersAction,
       fetchChannelsAndInvitations: fetchChannelsAndInvitationsAction,
+      getInvitationsAgain: getChannelInvitationsAgain,
+      resetChannelInvitations: resetChannelInvitationsAction,
     },
     dispatch
   )

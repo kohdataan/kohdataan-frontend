@@ -37,7 +37,13 @@ export const getMembersByChannelIdAction = channelId => {
   }
 }
 
-export const getChannelInvitationsAction = timestamp => {
+export const updateChannelInvitationsTimestamp = () => {
+  return async dispatch => {
+    await dispatch(updateUser({ channelInvitationsAt: Date.now() }))
+  }
+}
+
+export const getChannelInvitationsAction = () => {
   // Fetch channel invitations and related channel members
   const token = localStorage.getItem('authToken')
   return async dispatch => {
@@ -54,13 +60,18 @@ export const getChannelInvitationsAction = timestamp => {
         })
       }
       await Promise.all(promises)
-      await dispatch(
-        updateUser({ channelInvitationsAt: timestamp || Date.now() })
-      )
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
     }
+  }
+}
+
+export const resetChannelInvitations = () => {
+  return async dispatch => {
+    dispatch({
+      type: types.RESET_CHANNEL_INVITATIONS,
+    })
   }
 }
 
@@ -72,6 +83,7 @@ export const timedGetChannelInvitationsAction = () => {
       const hoursSince = moment().diff(lastInvitationsTimestamp, 'hours')
       if (hoursSince >= 24) {
         await dispatch(getChannelInvitationsAction())
+        await dispatch(updateChannelInvitationsTimestamp())
       }
     } catch (e) {
       // eslint-disable-next-line no-console

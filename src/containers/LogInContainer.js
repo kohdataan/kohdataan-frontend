@@ -40,7 +40,7 @@ const LogInContainer = props => {
         }
       })
     }
-  }, [user, history])
+  }, [user, history, uuid])
 
   const handleLogin = async (email, password) => {
     const userData = { email, password }
