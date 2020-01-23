@@ -9,7 +9,7 @@ import RegistrationProblemContainer from '../../containers/RegistrationProblemCo
 import PageInformation from './PageInformation'
 
 const BottomNavigationBot = props => {
-  const { handleLogout, pathname, inChat } = props
+  const { handleLogout, pathname, inChat, direct } = props
 
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
@@ -72,6 +72,8 @@ const BottomNavigationBot = props => {
               <PageInformation
                 path={pathname}
                 handleClick={closePageInformationModal}
+                direct={direct}
+                inChat={inChat}
               />
             </ModalContainer>
           </div>
@@ -111,7 +113,7 @@ const BottomNavigationBot = props => {
           </div>
           <hr />
           <div className="modal-item">
-            <Link to="/account" onClick={() => closeModal()}>
+            <Link to="/account" onClick={() => closeModal(setShowBot)}>
               <i className="fas fa-cog modal-icon" aria-hidden="true" />
               Rekisteröitymis&shy;tiedot
             </Link>
@@ -145,10 +147,12 @@ BottomNavigationBot.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,
   inChat: PropTypes.bool,
+  direct: PropTypes.bool,
 }
 
 BottomNavigationBot.defaultProps = {
   inChat: false,
+  direct: false,
 }
 
 export default memo(BottomNavigationBot)

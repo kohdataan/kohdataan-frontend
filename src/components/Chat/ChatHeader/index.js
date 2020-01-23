@@ -46,7 +46,11 @@ const Header = props => {
         </Link>
       )}
       <div className="chat-header-item">
-        <BottomNavigationBot handleLogout={handleLogout} inChat />
+        <BottomNavigationBot
+          handleLogout={handleLogout}
+          inChat
+          direct={direct}
+        />
       </div>
     </div>
   )

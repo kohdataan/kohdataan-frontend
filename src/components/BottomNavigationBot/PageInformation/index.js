@@ -4,30 +4,33 @@ import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
 const PageInformation = props => {
-  const { handleClick, path } = props
+  const { handleClick, path, direct, inChat } = props
   let text = ''
+  let page
   const profileRegex = /\/profile\/[a-z0-9.-]+/i
   if (profileRegex.test(path)) {
-    text = '/friends-profile'
+    page = '/member-profile'
+  } else if (inChat && direct) {
+    page = '/private-chat'
+  } else if (inChat && !direct) {
+    page = '/group-chat'
   } else {
-    text = path
+    page = path
   }
-  switch (text) {
+  switch (page) {
     case '/me':
       text = `Tämä on oma profiilisi. Täällä näet omat profiilitietosi. Nämä tiedot näkyvät muille käyttäjille.
         \nTäältä pääset muokkaamaan tietojasi ja kiinnostuksesi kohteita. Jos haluat muokata tietojasi, valitse "Muokkaa". 
         \nJos haluat muokata kiinnostuksesi kohteita, valitse "Minua kiinnostaa".`
       break
     case '/edit-me':
-      text = `Täällä voit muokata profiiliasi. \nVoit vaihtaa kuvan ja voit muuttaa nimesi.
-        \nVoit valita näkyykö ikäsi ja kotikuntasi muille käyttäjille. Voit muokata itsestäsi kirjoittamaa kuvausta.  
+      text = `Täällä voit muokata profiiliasi. \nVoit vaihtaa kuvan ja voit muuttaa nimesi.
+        \nVoit valita näkyykö ikäsi ja kotikuntasi muille käyttäjille. Voit muokata itsestäsi kirjoittamaa kuvausta.
         \nMuista tallentaa muutokset!`
       break
     case '/friends':
       text = `Täällä näet kaikki sinun kaverisi. Saat kavereita, kun lähetät ryhmän jäsenelle yksityisen viestin ja hän vastaa siihen.  
-        \nVoit myös etsiä kavereita. Kirjoita kaverin nimi harmaaseen kenttään.
-        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä. 
-        \nJos et halua saada viestejä kaverilta, voit estää hänet. Valitse kaverin nimen vieressä olevat kolme pistettä, ja valitse estä.`
+        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä.`
       break
     case '/edit-interests':
       text = `Täällä voit muokata kiinnostuksesi kohteita. Voit lisätä uuden tai poistaa vanhan kohteen. Voit valita 3-5 kohdetta.
@@ -41,25 +44,26 @@ const PageInformation = props => {
         \nJos kuulut jo viiteen ryhmään ja haluat päästä uuteen ryhmään, sinun pitää ensin poistua jostain ryhmästä. Jos poistut ryhmästä, et voi liittyä siihen enää uudelleen.
         \nPääset ryhmään, kun valitset ryhmän kuvakkeen.`
       break
-    case '/groupchat':
-      text = `Tämän on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten
-        kanssa. Voit lähettää ääniviestejä ja kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
+    case '/group-chat':
+      text = `Tämän on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää ääniviestejä ja kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
         
-        \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu ja milloin ryhmän jäsenet ovat olleet
-        viimeksi paikalla. Näet myös, mitkä asiat teitä yhdistävät.
+        \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu ja milloin ryhmän jäsenet ovat olleet viimeksi paikalla. Näet myös, mitkä asiat teitä yhdistävät.
         
-        \nJos haluat nähdä ryhmäläisen profiilin, valitse ryhmäläisen nimi. Ryhmäläisen profiilissa voit lähettää 
-        hänelle yksityisviestin.
+        \nJos haluat nähdä ryhmäläisen profiilin, valitse ryhmäläisen nimi. Ryhmäläisen profiilissa voit lähettää hänelle yksityisviestin.
         
-        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi enää palata siihen takaisin. 
-        Mieti siis tarkasti, haluatko poistua ryhmästä. Jos haluat poistua ryhmästä, valitse "Poistu
-        ryhmästä".`
+        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi enää palata siihen takaisin. Mieti siis tarkasti, haluatko poistua ryhmästä. Jos haluat poistua ryhmästä, valitse "Poistu ryhmästä".`
       break
-    case '/friends-profile':
-      text = `Tämä on kaverisi profiili. Näet profiilista hänen julkiset tietonsa. 
-      Pääset takaisin keskusteluun ruudun vasemmasta yläkulmasta.`
-    break
-    default:
+    case '/member-profile':
+      text = `Tämä on ryhmäläisen profiili. Näet täällä ryhmäläisen julkiset tiedot. 
+      Voit lähettää ryhmäläiselle viestin, jos haluat ruveta kaveriksi. Teistä tulee kaverit, kun hän vastaa sinun viestiisi. `
+      break
+    case '/private-chat':
+      text = `Täällä voit lähettää yksityisviestin. Näitä viestejä eivät muut ryhmäläiset näe. Jos saat vastauksen viestiisi, teistä tulee kaverit.`
+      break
+    case '/account':
+      text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot ovat kaikki pakollisia. Voit muokata tietoja, jos esimerkiksi muutat toiselle paikkakunnalle, saat uuden sähköpostiosoitteen, tai sukunimesi vaihtuu. Rekisteröitymistiedot eivät näy muille käyttäjille. `
+      break
+    default: text = `Ei vielä sisältöä.`
   }
 
   return (
@@ -79,6 +83,13 @@ const PageInformation = props => {
 PageInformation.propTypes = {
   handleClick: PropTypes.func.isRequired,
   path: PropTypes.string.isRequired,
+  direct: PropTypes.bool,
+  inChat: PropTypes.bool,
+}
+
+PageInformation.defaultProps = {
+  direct: false,
+  inChat: false,
 }
 
 export default memo(PageInformation)

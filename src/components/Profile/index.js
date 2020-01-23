@@ -18,6 +18,7 @@ const Profile = props => {
     userInterests,
     updateUser,
     startDirectChannel,
+    history,
   } = props
 
   // Extended user info from node backend
@@ -54,10 +55,10 @@ const Profile = props => {
       <div className="go-back-button-container">
         {!ownProfile && startDirectChannel && (
           <ButtonContainer
-            onClick={startDirectChannel}
+            onClick={history.goBack}
             className="profile-modal-header-button"
           >
-            {'< Palaa'} 
+            {'< Palaa'}
           </ButtonContainer>
         )}
       </div>
@@ -113,6 +114,7 @@ Profile.propTypes = {
   ownProfile: propTypes.bool,
   updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
+  history: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
@@ -120,6 +122,7 @@ Profile.defaultProps = {
   ownProfile: false,
   startDirectChannel: null,
   userInterests: [],
+  history: null,
 }
 
 export default memo(Profile)
