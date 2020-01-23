@@ -1,29 +1,22 @@
 @import '../../../styles/colors.scss';
 
-.suggestions-box {
-  & p {
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
-  }
+.group-suggestion-box {
+  padding: 20px;
+}
+
+.hidden-box {
+  position: absolute;
+  height: 72%;
+  top: -10px;
 }
 
 .suggestion-buttons-wrapper {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-}
-
-.suggestion-button {
-  background: none;
-  border: none;
-  text-decoration: none;
-  color: $darkblue;
-  border-radius: 0px;
-  text-transform: none;
-  font-weight: normal;
-  padding: 30px 0 10px 0;
-  & i {
-    padding: 0 10px 0 0;
+  margin: 30px 0;
+  button {
+    padding: 10px 35px;
   }
 }
 
@@ -38,22 +31,10 @@
 
 .suggestion-members-info {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
 }
 
 .suggestion-member {
   margin: 0 10px 0 0;
-}
-
-.join {
-  & i {
-    color: green;
-  }
-}
-
-.cancel {
-  & i {
-    color: red;
-  }
 }

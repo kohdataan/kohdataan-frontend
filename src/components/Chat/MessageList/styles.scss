@@ -16,7 +16,8 @@
   // have to scroll to bottom with javascript when new messages come
   display: flex;
   flex-direction: column-reverse;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px 10px;
 
   &.normal {

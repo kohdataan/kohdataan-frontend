@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bottom navigation it matches the snapshot 1`] = `
+<div
+  className="bottom-navigation-container"
+>
+  <nav
+    className="bottom-navigation"
+  >
+    <p>
+      Navigation
+    </p>
+  </nav>
+</div>
+`;

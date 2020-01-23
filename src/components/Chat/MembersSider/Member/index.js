@@ -6,28 +6,37 @@ import './styles.scss'
 const Member = props => {
   const {
     userId,
-    userName,
+    nickName,
     currentUserId,
-    iconClassNameList,
+    profiles,
     iconMemberStatus,
+    iconColor,
   } = props
-  const userFirstLetter = userName[0]
+  const userFirstLetter = nickName[0]
+  const getUsername = () =>
+    profiles && profiles[userId] && profiles[userId].username
+
   return (
     <div className="chat-header-members-sider-member">
       <i aria-hidden="true" title={userFirstLetter} />
-      <span className={iconClassNameList}>{userFirstLetter}</span>
+      <span
+        className="chat-header-members-icon"
+        style={{ backgroundColor: iconColor }}
+      >
+        {userFirstLetter}
+      </span>
       <span className={iconMemberStatus} />
-      {currentUserId !== userId && (  
+      {currentUserId !== userId && (
         <Link
           className="members-sider-profile-link"
-          to={`/profiili/${userName}`}
+          to={`/profile/${getUsername()}`}
         >
-          {userName}
+          {nickName}
         </Link>
       )}
       {currentUserId === userId && (
         <>
-          <span>{userName}</span>
+          <span>{nickName}</span>
           <span className="chat-header-current-user-label">(sinä)</span>
         </>
       )}
@@ -37,10 +46,11 @@ const Member = props => {
 
 Member.propTypes = {
   userId: propTypes.string.isRequired,
-  userName: propTypes.string.isRequired,
+  nickName: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
-  iconClassNameList: propTypes.string.isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
+  iconColor: propTypes.string.isRequired,
 }
 
 export default memo(Member)

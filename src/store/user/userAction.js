@@ -1,5 +1,33 @@
+import { login as matterMostLogin } from 'mattermost-redux/actions/users'
 import * as types from '../../contants/actionTypes'
-import * as API from '../../api/user'
+import * as channelAPI from '../../api/channels/channels'
+import * as API from '../../api/user/user'
+
+export const userLogin = user => {
+  return async dispatch => {
+    try {
+      let loginSuccess = false
+      const res = await API.userLogin(user)
+      if (res) {
+        localStorage.setItem('userId', res.user.id)
+        localStorage.setItem('authToken', res.token)
+        loginSuccess = true
+      }
+      if (loginSuccess) {
+        const { email, password } = user
+        await dispatch(matterMostLogin(email, password))
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      dispatch({
+        type: types.USER_LOGIN_FAILURE,
+        payload: e,
+        error: true,
+      })
+    }
+  }
+}
 
 export const addUserToState = () => {
   return async dispatch => {
@@ -37,6 +65,49 @@ export const updateUser = data => {
   }
 }
 
+export const updateUserPassword = data => {
+  const id = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
+  return async dispatch => {
+    try {
+      const res = await API.updatePassword(data, id, token)
+      if (res && res.ok) {
+        dispatch({
+          type: types.UPDATE_USER_PASSWORD,
+        })
+      } else if (res) {
+        dispatch({
+          type: types.UPDATE_USER_PASSWORD_FAILURE,
+          payload: res.message,
+          error: true,
+        })
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+}
+
+export const restoreUserAccount = () => {
+  const id = localStorage.getItem('userId')
+  const token = localStorage.getItem('authToken')
+  return async dispatch => {
+    try {
+      const resp = await API.restoreUser(id, token)
+      if (resp && resp.success && resp.restored) {
+        dispatch({
+          type: types.RESTORE_USER,
+        })
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+      dispatch({ type: types.UPDATE_USER_FAILURE, payload: e, error: true })
+    }
+  }
+}
+
 export const getUserInterests = () => {
   const token = localStorage.getItem('authToken')
   return async dispatch => {
@@ -60,6 +131,7 @@ export const addUserInterests = interests => {
     try {
       const data = { userId: id, ...interests }
       await API.addUserInterests(data, token)
+      await channelAPI.handleUserChangingInterestToChannelsPurposes(token)
       await dispatch(getUserInterests())
     } catch (e) {
       // eslint-disable-next-line no-console

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import RegistrationProblem from '../components/RegistrationProblem'
-import * as API from '../api/user'
+import * as API from '../api/user/user'
 
 const RegistrationProblemContainer = props => {
   const handleEmailSending = async (name, email, message) => {
@@ -11,8 +11,7 @@ const RegistrationProblemContainer = props => {
       message,
     }
     const resp = await API.sendEmail(msg)
-    console.log(resp)
-    if (resp.ok) {
+    if (resp && resp.success) {
       props.history.push('/messagesent')
     } else {
       alert('Viestin lähetys ei onnistunut')

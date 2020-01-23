@@ -49,22 +49,25 @@ const MessageList = props => {
           posts.map(post => {
             const timestampValues = setTimeStampValues(post)
             return (
-              <Message
-                key={post.id}
-                files={post.file_ids}
-                type={post.type}
-                url={post.url}
-                sender={getUserNamebyId(post.user_id)}
-                text={post.message}
-                senderId={post.user_id}
-                currentUserId={currentUserId}
-                iconColor={getIconColor(post.user_id)}
-                directChannel={directChannel}
-                timeSent={timestampValues.sendTime}
-                dateSent={timestampValues.sendDate}
-                showDate={timestampValues.show}
-                channelId={channelId}
-              />
+              post &&
+              post.user_id &&
+              !post.type.includes('system') && (
+                <Message
+                  key={post.id}
+                  files={post.file_ids}
+                  type={post.type}
+                  url={post.url}
+                  sender={getUserNamebyId(post.user_id)}
+                  text={post.message}
+                  senderId={post.user_id}
+                  currentUserId={currentUserId}
+                  iconColor={getIconColor(post.user_id)}
+                  directChannel={directChannel}
+                  timeSent={timestampValues.sendTime}
+                  dateSent={timestampValues.sendDate}
+                  showDate={timestampValues.show}
+                />
+              )
             )
           })}
       </div>

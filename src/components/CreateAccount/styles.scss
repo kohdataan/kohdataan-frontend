@@ -10,9 +10,33 @@
   margin-bottom: 1em;
 }
 
+.birthdate-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+.birthdate-content-label {
+  color: white;
+  margin-bottom: 12px;
+  margin-left: 5px;
+  align-self: flex-start;
+}
+
+.birthdate-error-text {
+  color: #ff868f;
+  font-size: 0.8em;
+  margin: -30px 0 10px;
+  text-align: left;
+}
+
 .close-modal-button {
-  width: 1,2em;
-  height:  1,2em;
+  width: 1, 2em;
+  height: 1, 2em;
   border: 1px solid black;
   border-radius: 50%;
 }
@@ -26,12 +50,36 @@
 }
 
 .create-account-text {
-    color: #fff;
+  color: #fff;
 }
 
 .create-account-content-container {
   width: 80%;
+}
 
+.create-account-input-date {
+  background: transparent;
+  border-radius: 25px;
+  padding: 0;
+  color: $white;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
+
+.create-birthdate-errors-field {
+  margin: 0;
+  background: transparent;
+  border-radius: 25px;
+  padding: 0;
+  color: $white;
+  &:focus {
+    outline: none;
+    border: none;
+  }
 }
 
 .create-account-input-content-container {
@@ -77,6 +125,7 @@
   }
   &:focus {
     outline: none;
+    border: solid 1px $white;
   }
 }
 
@@ -92,6 +141,10 @@
   outline: none;
   width: 210px;
   height: 42px;
+  &:focus {
+    outline: none;
+    border: solid 1px $white;
+  }
 }
 
 %create-account-link-shared {
@@ -104,24 +157,30 @@
 }
 
 .create-account-link {
-    @extend %create-account-link-shared;
+  @extend %create-account-link-shared;
 }
 
 .create-account-link-block {
-    @extend %create-account-link-shared;
-    display: block;
-    text-align: center;
-    padding: 10px 0 10px 0;
+  @extend %create-account-link-shared;
+  display: block;
+  text-align: center;
+  padding: 10px 0 10px 0;
 }
 
 .create-account-links-container {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .create-account-title {
   text-align: left;
   text-transform: uppercase;
   color: $white;
+}
+
+.date-select-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 30%;
 }
 
 .error-text {
@@ -152,4 +211,14 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.select-birthdate-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.select-birthdate-error-container {
+  width: 100%;
+  margin-bottom: 10px;
 }

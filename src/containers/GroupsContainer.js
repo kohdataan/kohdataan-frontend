@@ -2,96 +2,63 @@ import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  loadMe as loadMeAction,
-  getProfiles as getProfilesAction,
-  getProfilesInChannel as getProfilesInChannelAction,
-} from 'mattermost-redux/actions/users'
-import {
-  fetchMyChannelsAndMembers as fetchChannelsAndMembersAction,
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import getChannelInvitationsAction from '../store/channels/channelAction'
-import { getChannelInvitationMembers } from '../api/channels'
+import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
+import BouncingLoader from '../components/BouncingLoader'
+import { fetchChannelsAndInvitations as fetchChannelsAndInvitationsAction } from '../store/channels/channelAction'
 
 const GroupsContainer = props => {
   const {
     history,
     channels,
     teams,
-    loadMe,
-    getProfiles,
-    fetchMyChannelsAndMembers,
-    users,
+    channelSuggestionMembers,
     currentUserId,
     myChannels,
     joinChannel,
     channelSuggestions,
-    getChannelInvitations,
     getChannelMembers,
+    fetchChannelsAndInvitations,
+    profiles,
   } = props
 
+  const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
-
-  // Get user profiles and current user's teams at initial render
-  useEffect(() => {
-    getProfiles()
-    loadMe()
-    getChannelInvitations()
-  }, [])
-
   // Get only those channels suggestions that user has not yet joined
-  const getFilteredChannelSuggestions = () => {
-    const mySuggestions = channelSuggestions.filter(
-      channel => !Object.keys(myChannels).includes(channel.id)
-    )
-    return mySuggestions
-  }
 
-  // Get channels and members based on team id
-  // & When user joins a channel, users props is changed and
-  // channels need to be fetched again
+  // Get all group realated data at once
   useEffect(() => {
-    const teamId = Object.keys(teams)[0]
-    if (teamId) {
-      fetchMyChannelsAndMembers(teamId)
+    const initialize = async () => {
+      await fetchChannelsAndInvitations()
+      setIsInitialized(true)
+    }
+    initialize()
+  }, [fetchChannelsAndInvitations])
+
+  useEffect(() => {
+    const getFilteredChannelSuggestions = () => {
+      const mySuggestions = channelSuggestions.filter(
+        channel => !Object.keys(myChannels).includes(channel.id)
+      )
+      return mySuggestions
     }
     if (myChannels) {
-      setFilteredSuggestions(getFilteredChannelSuggestions())
+      setFilteredSuggestions([...getFilteredChannelSuggestions()])
     }
-  }, [teams, users])
+  }, [myChannels, channelSuggestions])
 
   // Get only group channels
   // (filter direct messages and default channels out)
   const getGroupChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel =>
-        channel.type !== 'D' &&
-        channel.name !== 'off-topic' &&
-        channel.name !== 'town-square'
+      channel => channel.type !== 'D' && channel.name !== 'off-topic'
     )
     return filteredChannels
-  }
-
-  const getMembersByChannelId = async (channelId, signal) => {
-    try {
-      const res = await getChannelInvitationMembers(
-        localStorage.getItem('authToken'),
-        channelId,
-        signal
-      )
-      if (res.userDetails) {
-        return res.userDetails
-      }
-      return []
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-      return []
-    }
   }
 
   // Get channel objects based on myChannels
@@ -102,11 +69,19 @@ const GroupsContainer = props => {
     return myCurrentChannels
   }
 
-  const handleJoinChannel = channelId => () => {
-    const currentTeamId = Object.keys(teams)[0]
-    joinChannel(currentUserId, currentTeamId, channelId).then(
+  const handleJoinChannel = channelId => async () => {
+    try {
+      await addUserInterestsToChannelPurpose(
+        localStorage.getItem('authToken'),
+        channelId
+      )
+      const currentTeamId = Object.keys(teams)[0]
+      await joinChannel(currentUserId, currentTeamId, channelId)
       history.push(`/chat/${channelId}`)
-    )
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
   }
 
   // Get unread count by channel id
@@ -123,17 +98,21 @@ const GroupsContainer = props => {
     }
     return 0
   }
-
+  if (!isInitialized) {
+    return <BouncingLoader />
+  }
+  // TODO: Refactor channel member fetching
   return (
     <>
       <GroupSuggestions
         channels={filteredSuggestions}
         handleJoinChannel={handleJoinChannel}
-        getMembersByChannelId={getMembersByChannelId}
+        channelMembers={channelSuggestionMembers}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
+        profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
       />
     </>
@@ -145,19 +124,18 @@ GroupsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
-  users: PropTypes.instanceOf(Object).isRequired,
-  loadMe: PropTypes.func.isRequired,
-  getProfiles: PropTypes.func.isRequired,
-  fetchMyChannelsAndMembers: PropTypes.func.isRequired,
   joinChannel: PropTypes.func.isRequired,
   channelSuggestions: PropTypes.instanceOf(Array),
   currentUserId: PropTypes.string.isRequired,
-  getChannelInvitations: PropTypes.func.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
+  channelSuggestionMembers: PropTypes.instanceOf(Object),
+  fetchChannelsAndInvitations: PropTypes.func.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {
   channelSuggestions: [],
+  channelSuggestionMembers: {},
 }
 
 const mapStateToProps = state => {
@@ -172,11 +150,12 @@ const mapStateToProps = state => {
   const myChannels = state.entities.channels.myMembers
   const { user } = state
   const channelSuggestions = state.channels.found
+  const channelSuggestionMembers = state.channels.members
 
   return {
     currentUserId,
     channelSuggestions,
-    users,
+    channelSuggestionMembers,
     user,
     mmUser,
     profiles,
@@ -191,13 +170,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
-      getProfiles: getProfilesAction,
-      getProfilesInChannel: getProfilesInChannelAction,
-      loadMe: loadMeAction,
       joinChannel: joinChannelAction,
-      getChannelInvitations: getChannelInvitationsAction,
       getChannelMembers: getChannelMembersAction,
+      fetchChannelsAndInvitations: fetchChannelsAndInvitationsAction,
     },
     dispatch
   )
