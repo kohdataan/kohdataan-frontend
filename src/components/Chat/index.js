@@ -156,6 +156,7 @@ Chat.propTypes = {
   handleLeaveChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   handleLogout: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {

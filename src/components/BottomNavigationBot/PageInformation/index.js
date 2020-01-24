@@ -4,7 +4,7 @@ import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
 const PageInformation = props => {
-  const { handleClick, path, direct, inChat, previousPath } = props
+  const { handleClick, path, direct, inChat } = props
   let text = ''
   let page
   const profileRegex = /\/profile\/[a-z0-9.-]+/i
@@ -14,8 +14,6 @@ const PageInformation = props => {
     page = '/private-chat'
   } else if (inChat && !direct) {
     page = '/group-chat'
-  } else if (previousPath === '/') {
-    page = path
   } else {
     page = path
   }
@@ -86,16 +84,15 @@ const PageInformation = props => {
 
 PageInformation.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string,
   direct: PropTypes.bool,
   inChat: PropTypes.bool,
-  previousPath: PropTypes.string,
 }
 
 PageInformation.defaultProps = {
   direct: false,
   inChat: false,
-  previousPath: null,
+  path: null,
 }
 
 export default memo(PageInformation)

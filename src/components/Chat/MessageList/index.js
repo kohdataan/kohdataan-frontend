@@ -66,6 +66,7 @@ const MessageList = props => {
                   timeSent={timestampValues.sendTime}
                   dateSent={timestampValues.sendDate}
                   showDate={timestampValues.show}
+                  channelId={channelId}
                 />
               )
             )

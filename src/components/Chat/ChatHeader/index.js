@@ -22,7 +22,6 @@ const Header = props => {
     if (channel.name === 'town-square') return 'Palaute'
     return channel.display_name
   }
-  const previousPath = location.pathname
 
   return (
     <div className="chat-header">
@@ -52,7 +51,7 @@ const Header = props => {
           handleLogout={handleLogout}
           inChat
           direct={direct}
-          path={previousPath}
+          path={location.pathname}
         />
       </div>
     </div>
