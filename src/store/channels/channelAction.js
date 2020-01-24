@@ -81,7 +81,7 @@ export const timedGetChannelInvitationsAction = () => {
       const { user } = getState()
       const lastInvitationsTimestamp = user && user.channelInvitationsAt
       const hoursSince = moment().diff(lastInvitationsTimestamp, 'hours')
-      if (hoursSince >= 24) {
+      if (hoursSince >= 24 || !lastInvitationsTimestamp) {
         await dispatch(getChannelInvitationsAction())
         await dispatch(updateChannelInvitationsTimestamp())
       }
