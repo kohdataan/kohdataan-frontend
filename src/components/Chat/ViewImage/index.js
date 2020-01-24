@@ -18,7 +18,7 @@ const ViewImage = ({ history, match }) => {
         </ButtonContainer>
         <img
           className="view-image"
-          src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
+          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
           alt="attachment"
           width="100%"
           height="100%"
