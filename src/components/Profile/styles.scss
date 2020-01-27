@@ -21,6 +21,7 @@
   margin: 20px;
   display: inline-block;
   white-space: nowrap;
+  flex-grow: 1;
 }
 
 .profile-modal-header {
@@ -74,5 +75,5 @@
 
 .start-conversation-button {
   text-align: center;
-  padding-top: 10px;
+  padding-top: 30px;
 }
