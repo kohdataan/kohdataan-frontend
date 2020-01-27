@@ -24,6 +24,13 @@ const LogInContainer = props => {
   const [error, setError] = useState(false)
 
   useEffect(() => {
+    document.body.className = 'create-account-body'
+    return () => {
+      document.body.className = ''
+    }
+  })
+
+  useEffect(() => {
     if (localStorage.getItem('authToken')) {
       if (user.profileReady) {
         history.push('/')
