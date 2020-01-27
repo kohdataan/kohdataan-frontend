@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
@@ -7,6 +7,13 @@ import * as API from '../api/user/user'
 const CreateAccountContainer = props => {
   const { history } = props
   const [errors, setErrors] = useState(null)
+
+  useEffect(() => {
+    document.body.className = 'create-account-body'
+    return () => {
+      document.body.className = ''
+    }
+  })
 
   const handleAccountCreation = async (
     firstname,
@@ -70,6 +77,7 @@ const CreateAccountContainer = props => {
 }
 
 // TODO: refactor
+
 const shouldComponentUpdate = (props, prevProps) => {
   const { match: pMatch, ...prest } = prevProps
   const { match, ...rest } = props
