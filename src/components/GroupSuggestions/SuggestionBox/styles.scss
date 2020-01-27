@@ -1,7 +1,7 @@
 @import '../../../styles/colors.scss';
 
 .group-suggestion-box {
-  padding: 20px;
+  padding: 10px;
 }
 
 .hidden-box {
@@ -20,15 +20,6 @@
   }
 }
 
-.suggestion-members-wrapper {
-  & p {
-    font-size: 13px;
-    color: $gray;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-}
-
 .suggestion-members-info {
   display: flex;
   flex-flow: row wrap;
@@ -37,4 +28,19 @@
 
 .suggestion-member {
   margin: 0 10px 0 0;
+}
+
+.group-color-icon {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.group-in-common {
+  margin: 0 0 25px 0;
+}
+
+.group-suggestion-info {
+  margin-bottom: 40px;
 }

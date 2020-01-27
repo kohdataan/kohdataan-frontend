@@ -1,6 +1,9 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
+import { getProfiles } from 'mattermost-redux/actions/users'
+import moment from 'moment'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels/channels'
+import { updateUser } from '../user/userAction'
 import { initUser } from '../root/index'
 
 export const startGroupPageFetching = () => {
@@ -34,6 +37,12 @@ export const getMembersByChannelIdAction = channelId => {
   }
 }
 
+export const updateChannelInvitationsTimestamp = () => {
+  return async dispatch => {
+    await dispatch(updateUser({ channelInvitationsAt: Date.now() }))
+  }
+}
+
 export const getChannelInvitationsAction = () => {
   // Fetch channel invitations and related channel members
   const token = localStorage.getItem('authToken')
@@ -58,6 +67,31 @@ export const getChannelInvitationsAction = () => {
   }
 }
 
+export const resetChannelInvitations = () => {
+  return async dispatch => {
+    dispatch({
+      type: types.RESET_CHANNEL_INVITATIONS,
+    })
+  }
+}
+
+export const timedGetChannelInvitationsAction = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { user } = getState()
+      const lastInvitationsTimestamp = user && user.channelInvitationsAt
+      const hoursSince = moment().diff(lastInvitationsTimestamp, 'hours')
+      if (hoursSince >= 24 || !lastInvitationsTimestamp) {
+        await dispatch(getChannelInvitationsAction())
+        await dispatch(updateChannelInvitationsTimestamp())
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e)
+    }
+  }
+}
+
 export const fetchChannelsAndInvitations = () => {
   // Fetch groups related channel data
   return async (dispatch, getState) => {
@@ -66,7 +100,8 @@ export const fetchChannelsAndInvitations = () => {
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
-    await dispatch(getChannelInvitationsAction())
+    await dispatch(timedGetChannelInvitationsAction())
+    await dispatch(getProfiles())
     await dispatch(groupPageFetchingReady())
   }
 }

@@ -3,9 +3,7 @@ import './styles.scss'
 
 const ProfileImage = props => {
   const { userId } = props || ''
-  const imageUri = `http://${
-    process.env.REACT_APP_MATTERMOST_URL
-  }/api/v4/users/${userId}/image`
+  const imageUri = `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image`
   return (
     <div className="profile-header-item">
       {userId && (

@@ -2,10 +2,13 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Member from './Member'
+import getIconColor from '../../../utils/getMemberIconColor'
 
 const Group = props => {
-  const { channel, getMembers, unreadCount, profiles } = props
+  const { channel, getMembers, unreadCount, profiles, currentUserId } = props
   const [members, setMembers] = useState([])
+  const [activeMembers, setActiveMembers] = useState([])
 
   useEffect(() => {
     const getMemberData = async () => {
@@ -17,13 +20,15 @@ const Group = props => {
     getMemberData()
   }, [channel, getMembers])
 
-  const getActiveMembersCount = () => {
-    const activeMembers = members.filter(
-      member =>
-        profiles[member.user_id] && profiles[member.user_id].delete_at === 0
-    )
-    return activeMembers && activeMembers.length
-  }
+  useEffect(() => {
+    const getActiveMembers = () => {
+      const activeMembersArr = members
+        .map(member => profiles[member.user_id])
+        .filter(member => member.delete_at === 0)
+      setActiveMembers(activeMembersArr)
+    }
+    getActiveMembers()
+  }, [members, profiles, setActiveMembers])
 
   return (
     <Link
@@ -35,14 +40,21 @@ const Group = props => {
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
-          {members && (
-            <p className="groups-num-members">{`${getActiveMembersCount()} jäsentä`}</p>
-          )}
         </div>
         {channel.name !== 'town-square' ? (
-          <p>{`Yhteistä: ${channel.display_name}`}</p>
+          <div className="group-current-members">
+            {activeMembers.map(member => (
+              <Member
+                key={`group-${member.id}`}
+                iconColor={getIconColor(member.id, members)}
+                nickname={member.nickname || member.username}
+                currentUserId={currentUserId}
+                userId={member.id}
+              />
+            ))}
+          </div>
         ) : (
-          <p>Tämä kanava on yleistä palautetta varten.</p>
+          <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
       </div>
       {unreadCount > 0 && (
@@ -64,6 +76,7 @@ Group.propTypes = {
   getMembers: propTypes.func.isRequired,
   unreadCount: propTypes.number.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  currentUserId: propTypes.string.isRequired,
 }
 
 export default memo(Group)

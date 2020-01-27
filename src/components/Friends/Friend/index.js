@@ -19,7 +19,7 @@ const Friend = props => {
 
   const imageUri =
     user && user.id
-      ? `http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image`
+      ? `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image`
       : null
   const message = getLatestMessage(posts)
 

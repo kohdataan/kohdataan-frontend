@@ -4,7 +4,13 @@ import Group from './Group'
 import './styles.scss'
 
 const Groups = props => {
-  const { channels, getMembers, profiles, getUnreadCount } = props
+  const {
+    channels,
+    getMembers,
+    profiles,
+    getUnreadCount,
+    currentUserId,
+  } = props
 
   return (
     <div className="groups-wrapper">
@@ -19,6 +25,7 @@ const Groups = props => {
             getMembers={getMembers}
             profiles={profiles}
             unreadCount={getUnreadCount(channel.id)}
+            currentUserId={currentUserId}
           />
         ))}
       </div>
@@ -32,6 +39,7 @@ Groups.defaultProps = {
 
 Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
+  currentUserId: PropTypes.string.isRequired,
   getMembers: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object),
   getUnreadCount: PropTypes.func.isRequired,
