@@ -91,7 +91,7 @@ const Message = props => {
                 {files && (
                   <Link to={`${channelId}/${files[0]}`}>
                     <img
-                      src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                      src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                       alt="attachment"
                     />
                   </Link>

@@ -14,12 +14,10 @@
 }
 
 .view-image-go-back-button {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid gray;
-    border-radius: 50%;
-    padding: 4px 10px;
-    font-size: 1.2em;
-    position: absolute;
-    top: -15%;
-    right: 2%;
-  }
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  position: absolute;
+  top: -30%;
+  right: 2%;
+}

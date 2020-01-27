@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import ViewImage from '../components/Chat/ViewImage'
 
 const ViewImageContainer = props => {
@@ -19,4 +20,4 @@ ViewImageContainer.propTypes = {
   match: PropTypes.instanceOf(Object).isRequired,
 }
 
-export default memo(ViewImageContainer, shouldComponentUpdate)
+export default withRouter(memo(ViewImageContainer, shouldComponentUpdate))

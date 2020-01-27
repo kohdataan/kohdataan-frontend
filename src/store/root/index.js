@@ -22,8 +22,8 @@ export const rootLoadingReady = () => {
 
 export const initMattermostReduxClient = () => {
   return async dispatch => {
-    await Client4.setUrl(`http://${process.env.REACT_APP_MATTERMOST_URL}`)
-    await dispatch(init('web', `ws://${process.env.REACT_APP_MATTERMOST_URL}`))
+    await Client4.setUrl(`${process.env.REACT_APP_MATTERMOST_URL}`)
+    await dispatch(init('web', `${process.env.REACT_APP_WEBSOCKET_URL}`))
     await dispatch(setServerVersion('5.9.0'))
   }
 }

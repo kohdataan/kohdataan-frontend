@@ -29,6 +29,7 @@ describe('Channel actions', () => {
 
   it('dispatches requests for getChannelInvitation action and for each found channel getMembers action', async () => {
     const invitations = [{ id: 1 }, { id: 2 }, { id: 3 }]
+
     fetch
       .once(JSON.stringify({ found: [...invitations] }))
       .once(JSON.stringify({ userDetails: ['prii1', 'prää1'] }))

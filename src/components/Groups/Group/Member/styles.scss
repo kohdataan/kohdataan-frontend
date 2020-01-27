@@ -1,0 +1,19 @@
+.group-boxes-member {
+  display: flex;
+  flex-direction: column;
+  min-width: 55px;
+  align-items: center;
+  margin: 0 10px 0 0;
+}
+
+.group-members-icon {
+  color: white;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.group-boxes-member-icon-wrapper {
+  margin-bottom: 8px;
+}

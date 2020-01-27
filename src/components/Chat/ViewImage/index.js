@@ -13,11 +13,12 @@ const ViewImage = ({ history, match }) => {
     <main className="view-image-content">
       <div className="image">
         <ButtonContainer className="view-image-go-back-button" onClick={goBack}>
-          x
+          <span className="sr-only">Sulje</span>
+          <i className="fas fa-times-circle" aria-hidden />
         </ButtonContainer>
         <img
           className="view-image"
-          src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
+          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
           alt="attachment"
           width="100%"
           height="100%"
