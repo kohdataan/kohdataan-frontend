@@ -36,8 +36,8 @@ const CreateAccountContainer = props => {
 
     try {
       const user = {
-        firstname,
-        lastname,
+        first_name: firstname,
+        last_name: lastname,
         birthdate,
         email,
         phoneNumber,
@@ -45,6 +45,7 @@ const CreateAccountContainer = props => {
         nickname: username,
         password,
       }
+
       if (user) {
         const res = await API.userSignUp(user)
         if (res && res.success) {

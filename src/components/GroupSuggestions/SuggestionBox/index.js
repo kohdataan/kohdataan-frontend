@@ -1,6 +1,9 @@
 import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
+import groupNameColors from '../../../assets/groupColors'
+import Member from '../../Groups/Group/Member'
+import getIconColor from '../../../utils/getMemberIconColor'
 
 const SuggestionBox = props => {
   const { channel, members, hidden, top } = props
@@ -13,17 +16,41 @@ const SuggestionBox = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
+          <div
+            className="group-color-icon"
+            style={{
+              backgroundColor: groupNameColors[channel.display_name],
+              border: `${
+                channel.display_name.toLowerCase().includes('valkoiset')
+                  ? '1px solid grey'
+                  : 'none'
+              }`,
+            }}
+          />
           <h2>{channel.display_name}</h2>
         </div>
-        <p>{`Yhteistä: ${channel.display_name}`}</p>
+        <div className="group-in-common">
+          {Object.keys(channel.purpose) &&
+          Object.keys(channel.purpose).length > 0 ? (
+            <p className="group-in-common-text">
+              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose).join(
+                ', '
+              )}`}
+            </p>
+          ) : (
+            <p>Ei vielä yhdistäviä kinnostuksenkohteita</p>
+          )}
+        </div>
         {channel && members && (
           <div className="suggestion-members-wrapper">
-            <p>{`${members.length} jäsentä`}</p>
-            <div className="suggestion-members-info">
+            <div className="group-current-members">
               {members.map(member => (
-                <p className="suggestion-member" key={member.id}>
-                  {member.nickname || member.username}
-                </p>
+                <Member
+                  key={`suggestion-${member.id}`}
+                  userId={member.id}
+                  nickname={member.nickname || member.username}
+                  iconColor={getIconColor(member.id, members)}
+                />
               ))}
             </div>
           </div>

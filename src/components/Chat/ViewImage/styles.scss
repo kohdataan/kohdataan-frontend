@@ -1,0 +1,23 @@
+.view-image {
+  max-height: 70vh;
+  max-width: 100vw;
+  height: auto;
+  width: auto;
+}
+
+.view-image-content {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.view-image-go-back-button {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  position: absolute;
+  top: -30%;
+  right: 2%;
+}

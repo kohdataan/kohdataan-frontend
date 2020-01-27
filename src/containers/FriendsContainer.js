@@ -35,9 +35,11 @@ const FriendsContainer = props => {
       Object.values(channels).filter(channel =>
         Object.keys(myChannels).includes(channel.id)
       )
-    // Get only direct channels
+    // Get only direct channels with at least one message
     const getDirectChannels = allChannels =>
-      Object.values(allChannels).filter(channel => channel.type === 'D')
+      Object.values(allChannels).filter(
+        channel => channel.type === 'D' && channel.total_msg_count > 0
+      )
     const channelInfo = getChannelInfoForMyChannels()
     // Set direct channel info
     setDirectChannels(getDirectChannels(channelInfo))

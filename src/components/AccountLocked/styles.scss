@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.account-locked-container {
+  width: 100%;
+  height: 100%;
+  background-color: $black;
+  text-align: center;
+  h3 {
+    color: lightgrey;
+  }
+}
+
+.account-locked-text {
+  color: white;
+  padding-top: 50vh;
+}

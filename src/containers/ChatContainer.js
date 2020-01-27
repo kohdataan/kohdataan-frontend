@@ -12,6 +12,7 @@ import {
 import {
   getProfiles as getProfilesAction,
   getProfilesInChannel as getProfilesInChannelAction,
+  logout as matterMostLogoutAction,
 } from 'mattermost-redux/actions/users'
 import {
   removeChannelMember as removeChannelMemberAction,
@@ -20,9 +21,10 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getUserByUsername } from '../api/user/user'
+import { getUserByUsername, userLogout } from '../api/user/user'
 import { removeUserInterestsFromChannelPurpose } from '../api/channels/channels'
 import Chat from '../components/Chat'
+import logoutHandler from '../utils/userLogout'
 
 const ChatContainer = props => {
   const {
@@ -42,11 +44,13 @@ const ChatContainer = props => {
     uploadFile,
     getFilesForPost,
     statuses,
+    matterMostLogout,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
+
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
     getProfiles()
@@ -113,6 +117,8 @@ const ChatContainer = props => {
     }
   }, [posts, teams, currentChannelId])
 
+  const handleLogout = () => logoutHandler(userLogout, matterMostLogout)
+
   return (
     <>
       {currentChannel && (
@@ -128,6 +134,7 @@ const ChatContainer = props => {
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}
+          handleLogout={handleLogout}
         />
       )}
     </>
@@ -151,6 +158,7 @@ ChatContainer.propTypes = {
   removeChannelMember: PropTypes.func.isRequired,
   viewChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
+  matterMostLogout: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -188,6 +196,7 @@ const mapDispatchToProps = dispatch =>
       getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
+      matterMostLogout: matterMostLogoutAction,
     },
     dispatch
   )

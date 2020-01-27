@@ -18,16 +18,11 @@ const Chat = props => {
     members,
     handleLeaveChannel,
     statuses,
+    handleLogout,
   } = props
 
-  const iconColors = ['orange', 'darkblue', 'maroon', 'beige', 'green']
   const [showSider, setShowSider] = useState(false)
   const directChannel = channel.type === 'D'
-
-  const getIconColor = userId => {
-    const index = members.findIndex(member => member.user_id === userId)
-    return iconColors[index] || ''
-  }
 
   const toggleSider = () => setShowSider(!showSider)
 
@@ -40,12 +35,15 @@ const Chat = props => {
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = ''
-    if (user && user.nickname) {
-      visibleName = user.nickname
-    } else if (user) {
-      visibleName = user.username
+    if (user && user.delete_at === 0) {
+      if (user && user.nickname) {
+        visibleName = user.nickname
+      } else if (user) {
+        visibleName = user.username
+      }
+      return visibleName
     }
-    return visibleName
+    return 'Käyttäjä poistunut'
   }
 
   const getStatusById = id => {
@@ -61,7 +59,7 @@ const Chat = props => {
           <>
             <img
               className="friend-icon"
-              src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
+              src={`{process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
             {getNicknameById(otherUser.user_id)}
@@ -72,20 +70,35 @@ const Chat = props => {
     return null
   }
 
+  const getOtherUser = () => {
+    if (directChannel) {
+      const friend = members.find(member => member.user_id !== currentUserId)
+      const mmid = friend && friend.user_id
+      const mmProfile = Object.values(profiles).find(
+        profile => profile.id === mmid
+      )
+      return mmProfile && mmProfile.username
+    }
+    return null
+  }
+
   return (
     <div className="chat-wrapper" id="chat">
       <ChatHeader
         channel={channel}
         toggleSider={toggleSider}
         otherUser={getOtherUserName()}
+        otherUserName={getOtherUser()}
+        direct={directChannel}
+        handleLogout={handleLogout}
       />
       <MessageList
         posts={posts}
         getFilesForPost={getFilesForPost}
         currentUserId={currentUserId}
         getUserNamebyId={getNicknameById}
-        getIconColor={getIconColor}
         directChannel={directChannel}
+        members={members}
       />
       {channel.id && (
         <UserInput
@@ -101,10 +114,10 @@ const Chat = props => {
           profiles={profiles}
           currentUserId={currentUserId}
           getNickNamebyId={getNicknameById}
-          getIconColor={getIconColor}
           handleLeaveChannel={handleLeaveChannel}
           getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
+          channel={channel}
         />
       )}
     </div>
@@ -122,6 +135,7 @@ Chat.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   handleLeaveChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
+  handleLogout: PropTypes.func.isRequired,
 }
 
 Chat.defaultProps = {

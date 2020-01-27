@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
 
@@ -15,15 +16,12 @@ const Message = props => {
     showDate,
     directChannel,
     files,
+    channelId,
   } = props
 
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
-
-  // Checks if message is system message
-  const isSystemMessage = () =>
-    type === 'system_join_channel' || type === 'system_leave_channel'
 
   // Checks if message is combined user activity message
   const isSystemCombinedUserActivity = () =>
@@ -33,7 +31,6 @@ const Message = props => {
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
-    isSystemMessage() ? 'wrapper-system' : '',
   ]
 
   // Get message content classes
@@ -41,10 +38,6 @@ const Message = props => {
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
     isSystemCombinedUserActivity() ? 'content-system-combined' : '',
-  ]
-  const senderIconClassList = [
-    'chat-message-sender-icon',
-    `chat-${iconColor}-icon`,
   ]
 
   return (
@@ -57,35 +50,56 @@ const Message = props => {
         </div>
       )}
       <div className={messageWrapperClassList.join(' ')}>
-        <div>
+        <div className="message-outer">
           {timeSent !== '' ? (
             <div className="chat-message-header-content">
               <span className="chat-message-timestamp">{timeSent}</span>
               {currentUserId !== senderId && !directChannel && (
-                <h3 className="chat-message-sender">{sender}</h3>
+                <h3
+                  className={`chat-message-sender ${
+                    sender === 'Käyttäjä poistunut'
+                      ? 'chat-message-sender-unknown'
+                      : ''
+                  }`}
+                >
+                  {sender}
+                </h3>
               )}
             </div>
           ) : (
             <div className="message-without-header-content" />
           )}
-          <div className="chat-message-content-field">
-            <div className={messageContentClassList.join(' ')}>
-              <p className="chat-message-content-text">{text}</p>
-              {files && (
-                <img
-                  src={`http://${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                  alt="attachment"
-                />
-              )}
+          <div
+            className={`${
+              currentUserId === senderId
+                ? 'message-icon-and-content-sent'
+                : 'message-icon-and-content'
+            }`}
+          >
+            {currentUserId !== senderId && (
+              <div
+                className="chat-message-sender-icon"
+                style={{ backgroundColor: iconColor }}
+              >
+                <i aria-hidden="true" title={sender[0]} />
+                <span className="label">{sender[0]}</span>
+              </div>
+            )}
+            <div className="chat-message-content-field">
+              <div className={messageContentClassList.join(' ')}>
+                <p className="chat-message-content-text">{text}</p>
+                {files && (
+                  <Link to={`${channelId}/${files[0]}`}>
+                    <img
+                      src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                      alt="attachment"
+                    />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
-        {currentUserId !== senderId && (
-          <div className={senderIconClassList.join(' ')}>
-            <i aria-hidden="true" title={sender[0]} />
-            <span className="label">{sender[0]}</span>
-          </div>
-        )}
       </div>
     </>
   )
@@ -109,6 +123,7 @@ Message.propTypes = {
   dateSent: propTypes.string.isRequired,
   showDate: propTypes.bool.isRequired,
   files: propTypes.instanceOf(Array),
+  channelId: propTypes.string.isRequired,
 }
 
 export default memo(Message)
