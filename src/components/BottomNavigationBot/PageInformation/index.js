@@ -24,12 +24,13 @@ const PageInformation = props => {
         \nJos haluat muokata kiinnostuksesi kohteita, valitse "Minua kiinnostaa".`
       break
     case '/edit-me':
-      text = `Täällä voit muokata profiiliasi. \nVoit vaihtaa kuvan ja voit muuttaa nimesi.
+      text = `Täällä voit muokata profiiliasi. 
+        \nVoit vaihtaa kuvan ja voit muuttaa nimesi.
         \nVoit valita näkyykö ikäsi ja kotikuntasi muille käyttäjille. Voit muokata itsestäsi kirjoittamaa kuvausta.
         \nMuista tallentaa muutokset!`
       break
     case '/friends':
-      text = `Täällä näet kaikki sinun kaverisi. Saat kavereita, kun lähetät ryhmän jäsenelle yksityisen viestin ja hän vastaa siihen.  
+      text = `Täällä näet kaikki sinun kaverisi. Saat kavereita, kun lähetät ryhmän jäsenelle yksityisen viestin ja hän vastaa siihen.
         \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä.`
       break
     case '/edit-interests':
@@ -39,15 +40,15 @@ const PageInformation = props => {
       break
     case '/':
       text = `Täällä näet kaikki ryhmät, joihin sinä kuulut. Täällä näet myös, kun me ehdotamme sinulle uutta ryhmää.
-        \nJos haluat liittyä uuteen ryhmään, valitse Liity. Jos et halua liittyä ryhmään, valitse "Älä liity".
+        \nJos haluat liittyä uuteen ryhmään, valitse Liity. Jos et halua liittyä ryhmään, valitse "Ohita".
         \nVoit kuulua korkeintaan viiteen ryhmään.
         \nJos kuulut jo viiteen ryhmään ja haluat päästä uuteen ryhmään, sinun pitää ensin poistua jostain ryhmästä. Jos poistut ryhmästä, et voi liittyä siihen enää uudelleen.
         \nPääset ryhmään, kun valitset ryhmän kuvakkeen.`
       break
     case '/group-chat':
-      text = `Tämän on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää myös kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
+      text = `Tämä on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää myös kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
         
-        \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu ja milloin ryhmän jäsenet ovat olleet viimeksi paikalla. Näet myös, mitkä asiat teitä yhdistävät.
+        \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu. 
         
         \nJos haluat nähdä ryhmäläisen profiilin, valitse ryhmäläisen nimi. Ryhmäläisen profiilissa voit lähettää hänelle yksityisviestin.
         
@@ -58,7 +59,7 @@ const PageInformation = props => {
       \nVoit lähettää ryhmäläiselle viestin, jos haluat ruveta kaveriksi. Teistä tulee kaverit, kun hän vastaa sinun viestiisi. `
       break
     case '/private-chat':
-      text = `Täällä voit lähettää yksityisviestin. Näitä viestejä eivät muut ryhmäläiset näe. Jos saat vastauksen viestiisi, teistä tulee kaverit.`
+      text = `Täällä voit lähettää yksityisviestin. Näitä viestejä eivät muut ryhmäläiset näe.`
       break
     case '/account':
       text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot ovat kaikki pakollisia. 
