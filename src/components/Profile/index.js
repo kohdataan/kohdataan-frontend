@@ -93,16 +93,18 @@ const Profile = props => {
         </div>
         <InterestsGrid interestList={userInterests} />
       </div>
-      <div className="start-conversation-button">
-        {!ownProfile && startDirectChannel && (
+
+      {!ownProfile && startDirectChannel && (
+        <div className="start-conversation-button">
           <ButtonContainer
             onClick={startDirectChannel}
             className="profile-dm-button"
           >
             Lähetä viesti
           </ButtonContainer>
-        )}
-      </div>
+        </div>
+      )}
+
       <Instructions closeModal={closeModal} showModals={showModals} />
     </main>
   )
