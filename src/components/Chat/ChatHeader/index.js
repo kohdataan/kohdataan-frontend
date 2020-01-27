@@ -29,7 +29,7 @@ const Header = props => {
         className="chat-header-item chat-header-nav-back-button"
         to={direct ? '/friends' : '/'}
       >
-        {'< Takaisin'}
+        {direct ? '< Kaverit' : '< Ryhmät'}
       </Link>
       {!direct && (
         <ButtonContainer onClick={toggleSider} className="channel-name-button">

@@ -7,8 +7,8 @@ const PageInformation = props => {
   const { handleClick, path, direct, inChat } = props
   let text = ''
   let page
-  const profileRegex = /\/profile\/[a-z0-9.-]+/i
-  if (profileRegex.test(path)) {
+  const regexForProfileLink = /\/profile\/[a-z0-9.-]+/i
+  if (regexForProfileLink.test(path)) {
     page = '/member-profile'
   } else if (inChat && direct) {
     page = '/private-chat'

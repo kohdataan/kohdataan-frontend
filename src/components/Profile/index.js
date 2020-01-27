@@ -39,13 +39,14 @@ const Profile = props => {
   const [showModals, setShowModals] = useState({
     1: getShowModals(),
     2: getShowModals(),
+    3: getShowModals(),
   })
 
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
-    if (modal === 2 && ownProfile) {
+    if (modal === 3 && ownProfile) {
       updateUser({ tutorialWatched: true })
     }
   }
