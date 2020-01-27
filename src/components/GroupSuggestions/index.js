@@ -46,7 +46,9 @@ const GroupSuggestions = props => {
         </div>
       ) : (
         <div>
-          <p>Sinulle ehdotetaan uusia rymiä päivittäin kiinnostusten mukaan.</p>
+          <p>
+            Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
+          </p>
           <ButtonContainer
             secondary
             className="get-suggestions-again-button"
