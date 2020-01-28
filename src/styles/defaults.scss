@@ -25,6 +25,14 @@ html {
   box-sizing: border-box;
 }
 
+.go-back-button {
+  width: 1.7em;
+  height: 1.7em;
+  background-image: url('../assets/X.svg');
+  background-repeat: no-repeat;
+  border: none;
+}
+
 h1 {
   color: $black;
   font-family: 'Fjalla One', sans-serif;

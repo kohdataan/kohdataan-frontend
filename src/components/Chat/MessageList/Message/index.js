@@ -87,15 +87,21 @@ const Message = props => {
             )}
             <div className="chat-message-content-field">
               <div className={messageContentClassList.join(' ')}>
-                <p className="chat-message-content-text">{text}</p>
                 {files && (
-                  <Link to={`${channelId}/${files[0]}`}>
-                    <img
-                      src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                      alt="attachment"
-                    />
-                  </Link>
+                  <>
+                    <Link to={`${channelId}/${files[0]}`}>
+                      <img
+                        className="message-image"
+                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                        alt="attachment"
+                      />
+                    </Link>
+                    <p className="image-message-content-text chat-message-content-text">
+                      {text}
+                    </p>
+                  </>
                 )}
+                {!files && <p className="chat-message-content-text">{text}</p>}
               </div>
             </div>
           </div>

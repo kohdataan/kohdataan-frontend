@@ -11,6 +11,7 @@ const MessageList = props => {
     getUserNamebyId,
     directChannel,
     members,
+    channelId,
   } = props
 
   let previousTime = null
@@ -66,6 +67,7 @@ const MessageList = props => {
                   timeSent={timestampValues.sendTime}
                   dateSent={timestampValues.sendDate}
                   showDate={timestampValues.show}
+                  channelId={channelId}
                 />
               )
             )

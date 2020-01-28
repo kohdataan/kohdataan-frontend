@@ -5,22 +5,49 @@ import ModalContainer from '../ModalContainer'
 import './styles.scss'
 import botIcon from '../../assets/bot.svg'
 import ButtonContainer from '../ButtonContainer'
+import RegistrationProblemContainer from '../../containers/RegistrationProblemContainer'
+import PageInformation from './PageInformation'
 
 const BottomNavigationBot = props => {
-  const { handleLogout, inChat } = props
+  const { handleLogout, path, inChat, direct } = props
 
   const [showBot, setShowBot] = useState(false)
-  const openModal = () => setShowBot(true)
-  const closeModal = () => setShowBot(false)
+  const [showPageInformation, setShowPageInformation] = useState(false)
+  const [showSendMessage, setShowSendMessage] = useState(false)
+  const openModal = setter => setter(true)
+  const closeModal = setter => setter(false)
+
+  const openPageInformationModal = () => {
+    setShowPageInformation(true)
+    openModal(setShowPageInformation)
+  }
+
+  const closePageInformationModal = () => {
+    setShowPageInformation(false)
+    closeModal(setShowPageInformation)
+  }
+
+  const openSendMessageModal = () => {
+    setShowSendMessage(true)
+    openModal(setShowSendMessage)
+  }
+
+  const closeSendMessageModal = () => {
+    setShowSendMessage(false)
+    closeModal(setShowSendMessage)
+  }
 
   return (
     <div className={inChat ? 'nav-bot-chat' : 'nav-bot'}>
-      <ButtonContainer className="button-image" onClick={openModal}>
+      <ButtonContainer
+        className="button-image"
+        onClick={() => openModal(setShowBot)}
+      >
         <img src={botIcon} alt="Botti" />
       </ButtonContainer>
       <ModalContainer
         modalIsOpen={showBot}
-        closeModal={closeModal}
+        closeModal={() => closeModal(setShowBot)}
         label="Botti"
       >
         <div className="modal-content">
@@ -29,54 +56,86 @@ const BottomNavigationBot = props => {
               className="fas fa-question-circle modal-icon"
               aria-hidden="true"
             />
-            Mitä tällä sivulla voi tehdä
+            <ButtonContainer
+              className="bot-link"
+              role="link"
+              tabIndex={0}
+              onClick={openPageInformationModal}
+            >
+              Mitä tällä sivulla tehdään
+            </ButtonContainer>
+            <ModalContainer
+              modalIsOpen={showPageInformation}
+              closeModal={() => closeModal(setShowPageInformation)}
+              label="PageInformation"
+            >
+              <PageInformation
+                path={path}
+                handleClick={closePageInformationModal}
+                direct={direct}
+                inChat={inChat}
+              />
+            </ModalContainer>
           </div>
           <hr />
-          <div className="modal-item">
-            <i className="fas fa-flag modal-icon" aria-hidden="true" />
-            Ilmianna asiaton viesti
+          <div className="modal-content">
+            <div className="modal-item">
+              <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
+              <ButtonContainer
+                className="bot-link"
+                role="link"
+                tabIndex={0}
+                onClick={openSendMessageModal}
+              >
+                Lähetä valvojalle viesti
+              </ButtonContainer>
+              <ModalContainer
+                modalIsOpen={showSendMessage}
+                isLong
+                closeModal={() => closeModal(setShowSendMessage)}
+                label="SendMessage"
+              >
+                <RegistrationProblemContainer
+                  handleClick={closeSendMessageModal}
+                />
+              </ModalContainer>
+            </div>
           </div>
           <hr />
-          <div className="modal-item">
-            <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
-            Lähetä moderaattorille viesti
-          </div>
-          <hr />
-          <div className="modal-item">
+          <div className="modal-item inactive-item">
             <i className="fas fa-check-square modal-icon" aria-hidden="true" />
             Palvelun säännöt
           </div>
           <hr />
-          <div className="modal-item">
+          <div className="modal-item inactive-item">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
             Yleiset ohjeet
           </div>
           <hr />
           <div className="modal-item">
-            <Link to="/account" onClick={() => closeModal()}>
+            <Link to="/account" onClick={() => closeModal(setShowBot)}>
               <i className="fas fa-cog modal-icon" aria-hidden="true" />
               Rekisteröitymis&shy;tiedot
             </Link>
           </div>
           <hr />
-          <div
-            className="modal-item"
+          <ButtonContainer
+            className="bot-link"
             role="link"
             tabIndex={0}
             onClick={() => {
               handleLogout()
-              closeModal()
-            }}
-            onKeyDown={() => {
-              handleLogout()
-              closeModal()
+              closeModal(setShowBot)
             }}
           >
             <i className="fas fa-cog modal-icon" aria-hidden="true" />
             Kirjaudu ulos
-          </div>
+          </ButtonContainer>
         </div>
-        <ButtonContainer className="button-close" onClick={closeModal}>
+        <ButtonContainer
+          className="button-close"
+          onClick={() => closeModal(setShowBot)}
+        >
           Sulje
         </ButtonContainer>
       </ModalContainer>
@@ -86,11 +145,14 @@ const BottomNavigationBot = props => {
 
 BottomNavigationBot.propTypes = {
   handleLogout: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
   inChat: PropTypes.bool,
+  direct: PropTypes.bool,
 }
 
 BottomNavigationBot.defaultProps = {
   inChat: false,
+  direct: false,
 }
 
 export default memo(BottomNavigationBot)

@@ -12,6 +12,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
     ariaDescribedBy,
     inputClassName,
     labelClassName,
+    noOptionsMessage,
     name,
     onChange,
     value,
@@ -153,6 +154,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
         onChange={onChange}
         className={inputClassName}
         value={value.label}
+        noOptionsMessage={noOptionsMessage}
       />
     </label>
   )
@@ -169,6 +171,7 @@ DateSelectField.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  noOptionsMessage: PropTypes.func.isRequired,
 }
 
 DateSelectField.defaultProps = {
