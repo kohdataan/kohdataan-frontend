@@ -29,16 +29,9 @@
 
 .birthdate-error-text {
   color: #ff868f;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: -30px 0 10px;
   text-align: left;
-}
-
-.close-modal-button {
-  width: 1, 2em;
-  height: 1, 2em;
-  border: 1px solid black;
-  border-radius: 50%;
 }
 
 .create-account-container {
@@ -149,7 +142,7 @@
 
 %create-account-link-shared {
   color: $white;
-  font-size: 15px;
+  font-size: 1em;
 
   :visited {
     color: $white;
@@ -185,7 +178,7 @@
 
 .error-text {
   color: #ff868f;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: -15px 0 0;
   text-align: left;
 }
@@ -221,4 +214,8 @@
 .select-birthdate-error-container {
   width: 100%;
   margin-bottom: 10px;
+}
+
+.text-paragraph {
+  margin: 37px auto 20px;
 }
