@@ -19,10 +19,11 @@
 .chat-header-item {
   width: auto;
   display: flex;
+  min-width: 60px;
   align-items: center;
   text-align: right;
-  margin: 0 10px;
-  @media (max-width: 330px) {
+  margin: 0 8px;
+  @media (max-width: 360px) {
     margin: 0 7px;
   }
 }
@@ -35,7 +36,7 @@
   text-decoration: none;
   color: $gray;
   text-align: left;
-  @media (max-width: 330px) {
+  @media (max-width: 360px) {
     font-size: 14px;
   }
 }
