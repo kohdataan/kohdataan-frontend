@@ -8,6 +8,7 @@ import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
 
 const FriendsContainer = props => {
+
   const {
     channels,
     currentUserId,
@@ -16,6 +17,8 @@ const FriendsContainer = props => {
     getPosts,
     fetchFriendsPageData,
     membersInChannel,
+    user,
+    history,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
@@ -98,6 +101,8 @@ const FriendsContainer = props => {
         getPosts={getPosts}
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
+        tutorialWatched={user.tutorialWatched}
+        history={history}
       />
     </>
   )
@@ -111,6 +116,8 @@ FriendsContainer.propTypes = {
   getPosts: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = state => {

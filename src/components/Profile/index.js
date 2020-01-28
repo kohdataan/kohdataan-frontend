@@ -16,7 +16,6 @@ const Profile = props => {
     myUserInfo,
     ownProfile,
     userInterests,
-    updateUser,
     startDirectChannel,
     history,
   } = props
@@ -47,7 +46,7 @@ const Profile = props => {
     newState[modal] = false
     setShowModals(newState)
     if (modal === 3 && ownProfile) {
-      updateUser({ tutorialWatched: true })
+      history.push('/friends')
     }
   }
 
@@ -115,13 +114,11 @@ Profile.propTypes = {
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
-  updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
-  updateUser: null,
   ownProfile: false,
   startDirectChannel: null,
   userInterests: [],

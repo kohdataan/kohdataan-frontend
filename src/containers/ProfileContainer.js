@@ -6,8 +6,7 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
-  const { mmuser, userInterests, myUserInfo, updateUser } = props
-
+  const { mmuser, userInterests, myUserInfo, updateUser, history } = props
   return (
     <Profile
       mmuser={mmuser}
@@ -15,6 +14,7 @@ const ProfileContainer = props => {
       userInterests={userInterests}
       myUserInfo={myUserInfo}
       updateUser={updateUser}
+      history={history}
     />
   )
 }
@@ -37,10 +37,12 @@ ProfileContainer.propTypes = {
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   userInterests: PropTypes.instanceOf(Array),
   updateUser: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object),
 }
 
 ProfileContainer.defaultProps = {
   userInterests: [],
+  history: null,
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

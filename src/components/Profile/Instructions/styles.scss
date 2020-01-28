@@ -1,30 +1,46 @@
 .bot-instructions-arrow-down {
-  position: fixed;
+  position: absolute;
   bottom: 65px;
   right: 25px;
+  transform: rotateY(180deg);
+}
+
+.friends-instructions-arrow-down {
+  position: absolute;
+  bottom: 65px;
+  left: 20%;
+}
+
+.groups-instructions-arrow-down {
+  position: absolute;
+  bottom: 65px;
+  right: 65px;
+  transform: rotateY(180deg);
+}
+
+.instructions-arrow {
   height: 35vmax;
   width: 10vmax;
   overflow: visible;
   z-index: 4000;
-  transform: rotateY(180deg);
 }
 
 .profile-instructions-arrow-down {
   position: absolute;
   bottom: 65px;
   left: 25px;
-  height: 35vmax;
-  width: 10vmax;
-  overflow: visible;
-  z-index: 4000;
 }
 
 .profile-instructions-arrow-up {
   position: absolute;
   top: 78px;
   right: 25px;
-  height: 30vmax;
-  width: 10vmax;
-  overflow: visible;
-  z-index: 4000;
+}
+
+.profile-modal-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  color: #333333;
 }

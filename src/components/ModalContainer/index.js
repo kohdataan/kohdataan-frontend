@@ -72,7 +72,7 @@ ModalContainer.propTypes = {
     PropTypes.instanceOf(Array),
     PropTypes.node,
   ]).isRequired,
-  modalIsOpen: PropTypes.bool.isRequired,
+  modalIsOpen: PropTypes.bool,
   closeModal: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   isLong: PropTypes.bool,
@@ -80,6 +80,7 @@ ModalContainer.propTypes = {
 
 ModalContainer.defaultProps = {
   isLong: false,
+  modalIsOpen: false,
 }
 
 export default memo(ModalContainer)
