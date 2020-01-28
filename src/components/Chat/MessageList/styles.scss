@@ -9,6 +9,10 @@
   overflow-y: auto;
   margin: 0 auto;
   padding-left: 10px;
+  @media (max-width: 360px) {
+    height: 75%;
+    top: 15%;
+  }
 }
 
 .chat--message-list {
