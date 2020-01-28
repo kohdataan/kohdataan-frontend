@@ -5,6 +5,21 @@
   padding: 0 0.75rem 0 0.75rem;
 }
 
+.bot-link {
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+  font: inherit;
+  text-transform: inherit;
+  display: inline;
+  padding: 0;
+  margin: 0;
+  white-space: normal;
+  max-width: 80%;
+  text-align: left;
+}
+
 .nav-bot-chat {
   margin-top: 5px;
 }
@@ -12,6 +27,10 @@
 .button-image {
   background: rgba(0, 0, 0, 0);
   border: none;
+}
+
+.inactive-item {
+  color: #a9a9a9;
 }
 
 .modal-content {
