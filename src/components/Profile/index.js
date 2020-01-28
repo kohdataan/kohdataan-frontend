@@ -18,6 +18,7 @@ const Profile = props => {
     userInterests,
     updateUser,
     startDirectChannel,
+    history,
   } = props
 
   // Extended user info from node backend
@@ -38,19 +39,30 @@ const Profile = props => {
   const [showModals, setShowModals] = useState({
     1: getShowModals(),
     2: getShowModals(),
+    3: getShowModals(),
   })
 
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
-    if (modal === 2 && ownProfile) {
+    if (modal === 3 && ownProfile) {
       updateUser({ tutorialWatched: true })
     }
   }
 
   return (
     <main className="profile-container">
+      <div className="go-back-button-container">
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            onClick={history.goBack}
+            className="profile-modal-header-button"
+          >
+            {'< Palaa'}
+          </ButtonContainer>
+        )}
+      </div>
       <div className="profile-header-container">
         <ProfileImage userId={mmuser.id} />
         {mmuser && myUserInfo && (
@@ -67,15 +79,6 @@ const Profile = props => {
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
         )}
-        {!ownProfile && startDirectChannel && (
-          <ButtonContainer
-            secondary
-            onClick={startDirectChannel}
-            className="profile-dm-button"
-          >
-            Keskustele
-          </ButtonContainer>
-        )}
       </div>
       <Description text={description} />
 
@@ -91,6 +94,17 @@ const Profile = props => {
         <InterestsGrid interestList={userInterests} />
       </div>
 
+      {!ownProfile && startDirectChannel && (
+        <div className="start-conversation-button">
+          <ButtonContainer
+            onClick={startDirectChannel}
+            className="profile-dm-button"
+          >
+            Lähetä viesti
+          </ButtonContainer>
+        </div>
+      )}
+
       <Instructions closeModal={closeModal} showModals={showModals} />
     </main>
   )
@@ -103,6 +117,7 @@ Profile.propTypes = {
   ownProfile: propTypes.bool,
   updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
+  history: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
@@ -110,6 +125,7 @@ Profile.defaultProps = {
   ownProfile: false,
   startDirectChannel: null,
   userInterests: [],
+  history: null,
 }
 
 export default memo(Profile)

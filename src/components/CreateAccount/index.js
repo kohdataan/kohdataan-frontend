@@ -459,10 +459,10 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           <Link className="create-account-link-block" to="/registrationproblem">
             Tarvitsen apua rekisteröitymisessä.
           </Link>
-          <Link className="create-account-link-block" to="/">
+          <Link className="create-account-link-block inactive-link" to="/createaccount">
             Tutustu tietosuojaselosteeseen.
           </Link>
-          <Link className="create-account-link-block" to="/">
+          <Link className="create-account-link-block inactive-link" to="/createaccount">
             Tutustu saavutettavuusselosteeseen.
           </Link>
         </div>
