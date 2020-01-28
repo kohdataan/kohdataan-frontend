@@ -96,11 +96,12 @@ const DateSelectField = React.forwardRef((props, ref) => {
     control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
+      flexGrow: 1,
+      flexBasis: 'auto',
       border: state.isFocused ? getBorderStyle(true) : getBorderStyle(false),
       boxShadow: 'none',
       background: '#3a3a3a',
       color: 'white',
-      minWidth: '20vw',
       margin: '0',
     }),
     input: () => ({
