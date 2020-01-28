@@ -29,7 +29,9 @@
   background-color: $beige;
   width: max-content;
   max-width: 60vw;
-  //margin-top: 10px;
+  @media screen and (min-width: 960px) {
+    max-width: 700px;
+  }
 }
 
 .chat-message-timestamp {
@@ -50,6 +52,11 @@
 .message-content-field {
   display: flex;
   flex-flow: row nowrap;
+}
+
+.chat-message-content-field {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .chat-message-header-content {
