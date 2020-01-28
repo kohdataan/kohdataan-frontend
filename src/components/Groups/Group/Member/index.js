@@ -6,6 +6,14 @@ const Member = props => {
   const { nickname, iconColor, userId, currentUserId, key } = props
   const userFirstLetter = nickname[0]
 
+  const getTruncatedName = name => {
+    let visibleName = name
+    if (visibleName && visibleName.length >= 6) {
+      visibleName = `${visibleName.substring(0, 6)}...`
+    }
+    return visibleName
+  }
+
   return (
     currentUserId !== userId && (
       <div className="group-boxes-member" key={key}>
@@ -18,7 +26,7 @@ const Member = props => {
             {userFirstLetter}
           </span>
         </div>
-        <p>{nickname}</p>
+        <p>{getTruncatedName(nickname)}</p>
       </div>
     )
   )
