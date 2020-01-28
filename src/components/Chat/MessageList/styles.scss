@@ -12,12 +12,9 @@
 }
 
 .chat--message-list {
-  // With column-reverse browser will always align content to bottom so we don't
-  // have to scroll to bottom with javascript when new messages come
+  // Column reverse would be nice but Firefox did not implement scroll for it
   display: flex;
-  flex-direction: column-reverse;
-  overflow-y: auto;
-  overflow-x: hidden;
+  flex-direction: column;
   padding: 10px 10px;
 
   &.normal {
