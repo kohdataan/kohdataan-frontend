@@ -45,6 +45,7 @@ const ChatContainer = props => {
     getFilesForPost,
     statuses,
     matterMostLogout,
+    location,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -135,6 +136,7 @@ const ChatContainer = props => {
           statuses={statuses}
           getUserByUsername={getUserByUsername}
           handleLogout={handleLogout}
+          location={location}
         />
       )}
     </>
@@ -159,6 +161,7 @@ ChatContainer.propTypes = {
   viewChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   matterMostLogout: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
