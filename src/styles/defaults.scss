@@ -6,7 +6,8 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 html {
-  height: 100%;
+  height: 100vh;
+  width: 100%;
   font-family: 'Lato', sans-serif;
   overflow-x: hidden;
 }
@@ -51,8 +52,8 @@ h2 {
 body {
   font-size: 18px;
   letter-spacing: -0.2px;
-  height: 100%;
   color: $gray;
+  width: 100%;
 }
 
 h4 {

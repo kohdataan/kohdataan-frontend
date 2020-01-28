@@ -23,7 +23,6 @@
 .birthdate-content-label {
   color: white;
   margin-bottom: 12px;
-  margin-left: 5px;
   align-self: flex-start;
 }
 
@@ -34,7 +33,20 @@
   text-align: left;
 }
 
+.close-modal-button {
+  width: 1, 2em;
+  height: 1, 2em;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.create-account-body {
+  background-color: $black;
+}
+
 .create-account-container {
+  width: 100%;
+  min-height: 100%;
   background-color: $black;
   display: flex;
   align-items: center;
