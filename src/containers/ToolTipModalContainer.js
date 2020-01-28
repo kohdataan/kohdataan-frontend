@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-import ButtonContainer from '../components/ButtonContainer'
 
 Modal.setAppElement('#root')
 
@@ -56,7 +55,7 @@ const ToolTipModalContainer = props => {
           onKeyPress={closeModal}
           tabIndex="0"
         />
-        <p className="text-paragraph" >{content}</p>
+        <p className="text-paragraph">{content}</p>
       </div>
     </Modal>
   )
