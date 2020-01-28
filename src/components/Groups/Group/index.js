@@ -22,9 +22,11 @@ const Group = props => {
 
   useEffect(() => {
     const getActiveMembers = () => {
-      const activeMembersArr = members
-        .map(member => profiles[member.user_id])
-        .filter(member => member.delete_at === 0)
+      const activeMembersArr =
+        members &&
+        members
+          .map(member => profiles[member.user_id])
+          .filter(member => member.delete_at === 0)
       setActiveMembers(activeMembersArr)
     }
     getActiveMembers()

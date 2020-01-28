@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
@@ -13,6 +13,8 @@ const MessageList = props => {
     members,
     channelId,
   } = props
+
+  const ref = useRef()
 
   let previousTime = null
   let previousDate = null
@@ -43,8 +45,13 @@ const MessageList = props => {
     }
   }
 
+  useEffect(() => {
+    // TODO: implement some kind of button to scroll down when there are new messages
+    ref.current.scrollTop = ref.current.scrollHeight
+  })
+
   return (
-    <div className="chat-message-list-container chat--message-list">
+    <div className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts.map(post => {
@@ -83,6 +90,7 @@ MessageList.propTypes = {
   getUserNamebyId: propTypes.func.isRequired,
   members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
+  channelId: propTypes.string.isRequired,
 }
 
 export default memo(MessageList)

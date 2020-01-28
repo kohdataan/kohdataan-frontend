@@ -61,7 +61,7 @@ const GroupSuggestions = props => {
       <div className="group-suggestion-boxes">
         {channelsLoading && <BouncingLoader />}
         {cards && cards.length > 0 && !channelsLoading && (
-          <div style={{ height: '100%' }}>
+          <div>
             {cards.map((card, i) =>
               i === cards.length - 1 ? (
                 <Swipeable
