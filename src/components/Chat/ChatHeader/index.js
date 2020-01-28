@@ -13,6 +13,7 @@ const Header = props => {
     direct,
     handleLogout,
     otherUserName,
+    location,
   } = props
 
   const header = otherUser || channel.display_name
@@ -28,7 +29,7 @@ const Header = props => {
         className="chat-header-item chat-header-nav-back-button"
         to={direct ? '/friends' : '/'}
       >
-        {'< Takaisin'}
+        {direct ? '< Kaverit' : '< Ryhmät'}
       </Link>
       {!direct && (
         <ButtonContainer onClick={toggleSider} className="channel-name-button">
@@ -46,7 +47,12 @@ const Header = props => {
         </Link>
       )}
       <div className="chat-header-item">
-        <BottomNavigationBot handleLogout={handleLogout} inChat />
+        <BottomNavigationBot
+          handleLogout={handleLogout}
+          inChat
+          direct={direct}
+          path={location.pathname}
+        />
       </div>
     </div>
   )
@@ -62,6 +68,7 @@ Header.propTypes = {
   handleLogout: propTypes.func.isRequired,
   direct: propTypes.bool.isRequired,
   otherUserName: propTypes.string,
+  location: propTypes.instanceOf(Object).isRequired,
 }
 
 Header.defaultProps = {

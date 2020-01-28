@@ -12,6 +12,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
     ariaDescribedBy,
     inputClassName,
     labelClassName,
+    noOptionsMessage,
     name,
     onChange,
     value,
@@ -95,11 +96,12 @@ const DateSelectField = React.forwardRef((props, ref) => {
     control: (provided, state) => ({
       ...provided,
       borderRadius: 25,
+      flexGrow: 1,
+      flexBasis: 'auto',
       border: state.isFocused ? getBorderStyle(true) : getBorderStyle(false),
       boxShadow: 'none',
       background: '#3a3a3a',
       color: 'white',
-      minWidth: '20vw',
       margin: '0',
     }),
     input: () => ({
@@ -152,6 +154,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
         onChange={onChange}
         className={inputClassName}
         value={value.label}
+        noOptionsMessage={noOptionsMessage}
       />
     </label>
   )
@@ -168,6 +171,7 @@ DateSelectField.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  noOptionsMessage: PropTypes.func.isRequired,
 }
 
 DateSelectField.defaultProps = {

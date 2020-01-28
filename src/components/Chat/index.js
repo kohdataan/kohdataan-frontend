@@ -19,6 +19,7 @@ const Chat = props => {
     handleLeaveChannel,
     statuses,
     handleLogout,
+    location,
   } = props
 
   const [showSider, setShowSider] = useState(false)
@@ -91,6 +92,7 @@ const Chat = props => {
         otherUserName={getOtherUser()}
         direct={directChannel}
         handleLogout={handleLogout}
+        location={location}
       />
       <MessageList
         posts={posts}
@@ -99,6 +101,7 @@ const Chat = props => {
         getUserNamebyId={getNicknameById}
         directChannel={directChannel}
         members={members}
+        channelId={channel.id}
       />
       {channel.id && (
         <UserInput
@@ -136,6 +139,7 @@ Chat.propTypes = {
   handleLeaveChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   handleLogout: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {

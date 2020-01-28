@@ -66,6 +66,7 @@ const OtherUserProfileContainer = props => {
       userInterests={interests}
       myUserInfo={otherUserInfo}
       startDirectChannel={startDirectChannel}
+      history={history}
     />
   )
 }

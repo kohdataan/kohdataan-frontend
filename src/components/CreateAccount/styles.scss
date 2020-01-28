@@ -23,13 +23,12 @@
 .birthdate-content-label {
   color: white;
   margin-bottom: 12px;
-  margin-left: 5px;
   align-self: flex-start;
 }
 
 .birthdate-error-text {
   color: #ff868f;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: -30px 0 10px;
   text-align: left;
 }
@@ -41,7 +40,13 @@
   border-radius: 50%;
 }
 
+.create-account-body {
+  background-color: $black;
+}
+
 .create-account-container {
+  width: 100%;
+  min-height: 100%;
   background-color: $black;
   display: flex;
   align-items: center;
@@ -149,7 +154,7 @@
 
 %create-account-link-shared {
   color: $white;
-  font-size: 15px;
+  font-size: 1em;
 
   :visited {
     color: $white;
@@ -185,7 +190,7 @@
 
 .error-text {
   color: #ff868f;
-  font-size: 0.8em;
+  font-size: 1em;
   margin: -15px 0 0;
   text-align: left;
 }
@@ -193,6 +198,11 @@
 .formfield-container {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.inactive-link {
+  text-decoration: none;
+  color: #595959;
 }
 
 .info-circle-button {
@@ -221,4 +231,8 @@
 .select-birthdate-error-container {
   width: 100%;
   margin-bottom: 10px;
+}
+
+.text-paragraph {
+  margin: 37px auto 20px;
 }
