@@ -460,10 +460,10 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               label="User must accept rules modal"
             >
               <div>
-                <p className="accept-rules-modal-text">
+                <h3 className="accept-rules-modal-text">
                   Jos haluat käyttää palvelua, sinun täytyy hyväksyä
                   käyttöehdot.
-                </p>
+                </h3>
                 <ButtonContainer
                   className="icon-btn"
                   onClick={closeAcceptModal}
