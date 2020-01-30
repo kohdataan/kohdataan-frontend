@@ -30,15 +30,12 @@ const closeModalBtnStyle = {
   position: 'absolute',
   top: 5,
   right: 5,
-  padding: '5px',
-  borderRadius: '50%',
-  width: '30px',
-  height: '30px',
+  borderRadius: '0',
+  margin: '10px',
 }
 
 const ToolTipModalContainer = props => {
   const { content, modalIsOpen, closeModal, label } = props
-
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -51,16 +48,14 @@ const ToolTipModalContainer = props => {
       <div>
         <button
           type="button"
-          className="close-modal-button"
+          className="go-back-button"
           onClick={closeModal}
-          onKeyPress={closeModal}
-          tabIndex="0"
           style={closeModalBtnStyle}
           aria-label="close-dialog"
-        >
-          x
-        </button>
-        <p>{content}</p>
+          onKeyPress={closeModal}
+          tabIndex="0"
+        />
+        <p className="text-paragraph">{content}</p>
       </div>
     </Modal>
   )

@@ -68,7 +68,8 @@ const ChatContainer = props => {
   // Get posts for current channel and view channel
   useEffect(() => {
     if (currentChannelId) {
-      getPosts(currentChannelId)
+      // get maximum of 400 posts at a time
+      getPosts(currentChannelId, 0, 400)
       viewChannel(currentChannelId)
     }
   }, [teams, posts, getPosts, viewChannel, currentChannelId])

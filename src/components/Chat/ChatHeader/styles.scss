@@ -10,29 +10,43 @@
   position: absolute;
   z-index: 2000;
   border-bottom: 1px solid $orange;
+  overflow: hidden;
+  @media (max-width: 360px) {
+    height: 15%;
+  }
 }
 
 .chat-header-item {
   width: auto;
   display: flex;
+  min-width: 60px;
   align-items: center;
   text-align: right;
-  margin: 0 10px;
+  margin: 0 8px;
+  @media (max-width: 360px) {
+    margin: 0 7px;
+  }
 }
 
 .chat-header-nav-back-button {
   background: none;
   border: none;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1em;
   text-decoration: none;
   color: $gray;
   text-align: left;
+  @media (max-width: 360px) {
+    font-size: 14px;
+  }
 }
 
 .chat-header-channel-name {
   text-align: center;
-  font-size: 6vw;
+  font-size: 1.4em;
+  @media (max-width: 330px) {
+    font-size: 1.2em;
+  }
 }
 
 .channel-name-button {

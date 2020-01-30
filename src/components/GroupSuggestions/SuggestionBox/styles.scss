@@ -2,12 +2,36 @@
 
 .group-suggestion-box {
   padding: 10px;
+  @media screen and (min-width: 960px) {
+    height: 250px;
+  }
+  @media (max-width: 960px) {
+    height: 300px;
+  }
+  @media (max-width: 360px) {
+    font-size: 14px;
+    h2 {
+      font-size: 18px;
+    }
+  }
 }
 
 .hidden-box {
   position: absolute;
-  height: 72%;
+  height: 250px;
   top: -10px;
+  @media screen and (min-width: 960px) {
+    height: 250px;
+  }
+  @media (max-width: 960px) {
+    height: 300px;
+  }
+  @media (max-width: 360px) {
+    font-size: 14px;
+    h2 {
+      font-size: 18px;
+    }
+  }
 }
 
 .suggestion-buttons-wrapper {
@@ -30,11 +54,22 @@
   margin: 0 10px 0 0;
 }
 
+.suggestion-box-info {
+  font-size: 18px;
+  p {
+    margin-block-start: 1em;
+  }
+}
+
 .group-color-icon {
   height: 45px;
   width: 45px;
+  min-width: 45px;
   border-radius: 50%;
   margin-right: 15px;
+  @media (max-width: 360px) {
+    display: none;
+  }
 }
 
 .group-in-common {
