@@ -2,8 +2,13 @@ import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import ServiceRules from '../components/ServiceRules'
 
-const ServiceRulesContainer = ({ setRulesAccepted }) => {
-  return <ServiceRules setRulesAccepted={setRulesAccepted} />
+const ServiceRulesContainer = ({ setRulesAccepted, setRulesViewed }) => {
+  return (
+    <ServiceRules
+      setRulesAccepted={setRulesAccepted}
+      setRulesViewed={setRulesViewed}
+    />
+  )
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
@@ -14,6 +19,7 @@ const shouldComponentUpdate = (props, prevProps) => {
 
 ServiceRulesContainer.propTypes = {
   setRulesAccepted: propTypes.func.isRequired,
+  setRulesViewed: propTypes.func.isRequired,
 }
 
 export default memo(ServiceRulesContainer, shouldComponentUpdate)
