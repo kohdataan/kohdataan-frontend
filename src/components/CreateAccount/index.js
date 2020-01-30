@@ -29,8 +29,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthmonth, setBirthmonth] = useState('')
   const [birthyear, setBirthyear] = useState('')
   const [currentApiErrors, setCurrentApiErrors] = useState({})
-  const [openErrorModal, setOpenErrorModal] = useState(true)
-  const [rulesViewed, setRulesViewed] = useState(false)
+  const [openErrorModal, setOpenErrorModal] = useState(false)
 
   useEffect(() => {
     if (apiErrors && apiErrors.fields) {
@@ -69,6 +68,11 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         'Voit käyttää palvelua, jos olet yli 15-vuotias.'
       )
     }
+
+    if (!rulesAccepted) {
+      setOpenErrorModal(true)
+    }
+
     if (ageAccepted && rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
@@ -447,16 +451,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           </div>
           <ServiceRulesContainer
             setRulesAccepted={setRulesAccepted}
-            setRulesViewed={setRulesViewed}
+            setOpenErrorModal={setOpenErrorModal}
           />
-          {rulesViewed && !rulesAccepted && (
+          {!rulesAccepted && (
             <ModalContainer
               modalIsOpen={openErrorModal}
               closeModal={closeAcceptModal}
-              label="label"
+              label="User must accept rules modal"
             >
               <div>
-                <p className='accept-rules-modal-text'>
+                <p className="accept-rules-modal-text">
                   Jos haluat käyttää palvelua, sinun täytyy hyväksyä
                   käyttöehdot.
                 </p>
