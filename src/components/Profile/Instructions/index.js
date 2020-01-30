@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
@@ -15,6 +15,30 @@ const Instructions = props => {
     THIS_IS_FRIENDS: 4,
     THIS_IS_GROUPS: 5,
   }
+
+  const profileRef = useRef()
+  const editBtnRef = useRef()
+  const friendsRef = useRef()
+  const groupsRef = useRef()
+  const botRef = useRef()
+  const [coordinates, setCoordinates] = useState({
+    1: {},
+    2: {},
+    3: {},
+    4: {},
+    5: {},
+  })
+
+  useEffect(() => {
+    const newState = { ...coordinates }
+    newState[1] = profileRef.current.getBoundingClientRect()
+    newState[2] = editBtnRef.current.getBoundingClientRect()
+    newState[3] = botRef.current.getBoundingClientRect()
+    newState[4] = friendsRef.current.getBoundingClientRect()
+    newState[5] = groupsRef.current.getBoundingClientRect()
+    setCoordinates(newState)
+  }, [])
+
   return (
     <div className="profile-instructions">
       <ModalContainer
@@ -39,7 +63,13 @@ const Instructions = props => {
       {showModals[modals.PROFILE_INFO_IS_PUBLIC] &&
         !showModals[modals.THIS_IS_YOUR_PROFILE] &&
         showModals[modals.THIS_IS_THE_BOT] && (
-          <ArrowUp className="profile-instructions-arrow-up instructions-arrow" />
+          <ArrowUp
+            className="profile-instructions-arrow-up instructions-arrow"
+            style={{
+              bottom: coordinates[1].bottom / 2 + coordinates[2].height,
+              left: coordinates[2].right - coordinates[2].width / 2,
+            }}
+          />
         )}
       <ModalContainer
         modalIsOpen={showModals[modals.THIS_IS_YOUR_PROFILE]}
@@ -56,7 +86,13 @@ const Instructions = props => {
         </ButtonContainer>
       </ModalContainer>
       {showModals[modals.THIS_IS_YOUR_PROFILE] && (
-        <ArrowDown className="profile-instructions-arrow-down instructions-arrow" />
+        <ArrowDown
+          className="profile-instructions-arrow-down instructions-arrow"
+          style={{
+            top: coordinates[1].bottom / 2 + coordinates[1].height,
+            left: coordinates[1].left + coordinates[1].width / 2,
+          }}
+        />
       )}
       <ModalContainer
         modalIsOpen={
@@ -84,7 +120,13 @@ const Instructions = props => {
       {showModals[modals.THIS_IS_THE_BOT] &&
         !showModals[modals.THIS_IS_YOUR_PROFILE] &&
         !showModals[modals.PROFILE_INFO_IS_PUBLIC] && (
-          <ArrowDown className="bot-instructions-arrow-down instructions-arrow" />
+          <ArrowDown
+            className="bot-instructions-arrow-down instructions-arrow"
+            style={{
+              top: coordinates[3].bottom / 2 + coordinates[3].height,
+              left: coordinates[3].left + coordinates[3].width / 2,
+            }}
+          />
         )}
       <ModalContainer
         modalIsOpen={showModals[modals.THIS_IS_FRIENDS]}
@@ -103,7 +145,13 @@ const Instructions = props => {
         </ButtonContainer>
       </ModalContainer>
       {showModals[modals.THIS_IS_FRIENDS] && (
-        <ArrowDown className="friends-instructions-arrow-down instructions-arrow" />
+        <ArrowDown
+          className="friends-instructions-arrow-down instructions-arrow"
+          style={{
+            top: coordinates[4].bottom / 2 + coordinates[4].height,
+            left: coordinates[4].left - 15,
+          }}
+        />
       )}
       <ModalContainer
         modalIsOpen={showModals[modals.THIS_IS_GROUPS]}
@@ -121,8 +169,31 @@ const Instructions = props => {
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModals[modals.THIS_IS_GROUPS] &&(
-        <ArrowDown className="groups-instructions-arrow-down instructions-arrow" />
+      {showModals[modals.THIS_IS_GROUPS] && (
+        <ArrowDown
+          className="groups-instructions-arrow-down instructions-arrow"
+          style={{
+            top: coordinates[5].bottom / 2 + coordinates[5].height,
+            left: coordinates[5].left + coordinates[5].width / 2,
+          }}
+        />
+      )}
+      {(showModals[1] ||
+        showModals[2] ||
+        showModals[3] ||
+        showModals[4] ||
+        showModals[5]) && (
+        <div>
+          <div className="fake-edit-button-container" ref={editBtnRef} />
+          <div className="fake-navigation-container">
+            <div className="fake-navigation">
+              <div className="fake-nav-item profile-nav" ref={profileRef} />
+              <div className="fake-nav-item friends-nav" ref={friendsRef} />
+              <div className="fake-nav-item groups-nav" ref={groupsRef} />
+              <div className="fake-nav-item bot-nav" ref={botRef} />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

@@ -1,40 +1,99 @@
 .bot-instructions-arrow-down {
-  position: absolute;
-  bottom: 65px;
-  right: 25px;
-  transform: rotateY(180deg);
+  transform:  rotateY(180deg);
+  transform-origin: 25%;
 }
 
-.friends-instructions-arrow-down {
+.fake-edit-button-container {
   position: absolute;
-  bottom: 65px;
-  left: 20%;
+  top: 3%;
+  right: 3%;
+  background-color: transparent;
+  width: 100px;
+  height: 50px;
+}
+
+.fake-navigation {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  background-color: transparent;
+  width: 100%;
+  max-width: 960px;
+}
+
+.fake-navigation-container {
+  width: 100%;
+  position: fixed;
+  height: 64px;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 4000;
+}
+
+.fake-nav-item {
+  width: auto;
+  height: 100%;
+  flex-grow: 1;
+  flex-basis: 0;
+  display: block;
+  background-color: transparent;
 }
 
 .groups-instructions-arrow-down {
-  position: absolute;
-  bottom: 65px;
-  right: 65px;
   transform: rotateY(180deg);
 }
 
 .instructions-arrow {
-  height: 35vmax;
-  width: 10vmax;
+  position: fixed;
+  @media screen and (min-width: 960px) {
+    height: 40vh;
+    width: 6vmax;
+  }
+  @media (max-width: 960px) {
+    height: 30vmax;
+    max-height: 40vmax;
+    width: 10vmax;
+  }
+  @media (max-width: 360px) {
+    height: 25vmax;
+    width: 10vmax;
+  }
   overflow: visible;
   z-index: 4000;
 }
 
+.profile-instructions {
+  height: 100%;
+}
+
 .profile-instructions-arrow-down {
-  position: absolute;
-  bottom: 65px;
-  left: 25px;
+  @media screen and (min-width: 960px) {
+    transform: rotate(20deg);
+  }
+  @media (max-width: 960px) {
+    transform: rotate(18deg);
+  }
+  @media (max-width: 360px) {
+    transform: rotate(10deg);
+  }
+  
 }
 
 .profile-instructions-arrow-up {
-  position: absolute;
-  top: 78px;
-  right: 25px;
+  @media screen and (min-width: 960px) {
+    transform: rotate(5deg);
+  }
+  @media (max-width: 960px) {
+    transform: rotate(0deg);
+  }
+  @media (max-width: 360px) {
+    transform: rotate(10deg);
+  }
+  
 }
 
 .profile-modal-text {

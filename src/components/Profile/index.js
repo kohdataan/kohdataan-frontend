@@ -103,8 +103,9 @@ const Profile = props => {
           </ButtonContainer>
         </div>
       )}
-
-      <Instructions closeModal={closeModal} showModals={showModals} />
+      {!tutorialWatched && ownProfile && (
+        <Instructions closeModal={closeModal} showModals={showModals} />
+      )}
     </main>
   )
 }

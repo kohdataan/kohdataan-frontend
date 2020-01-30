@@ -56,7 +56,9 @@ const Friends = props => {
           </h3>
         )}
       </div>
-      <Instructions closeModal={closeModal} showModals={showModals} />
+      {!tutorialWatched && (
+        <Instructions closeModal={closeModal} showModals={showModals} />
+      )}
     </main>
   )
 }

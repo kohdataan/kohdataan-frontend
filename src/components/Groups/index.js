@@ -46,7 +46,9 @@ const Groups = props => {
           />
         ))}
       </div>
-      <Instructions closeModal={closeModal} showModals={showModals} />
+      {!tutorialWatched && (
+        <Instructions closeModal={closeModal} showModals={showModals} />
+      )}
     </div>
   )
 }
