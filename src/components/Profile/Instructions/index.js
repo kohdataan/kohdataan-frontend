@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useState, useRef } from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
@@ -7,7 +7,18 @@ import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg'
 import './styles.scss'
 
 const Instructions = props => {
-  const { showModals, closeModal } = props
+  const {
+    showModals,
+    closeModal,
+    editBtnRef,
+    botCoordinates,
+    profileCoordinates,
+    friendsCoordinates,
+    groupsCoordinates,
+  } = props
+
+  const arrowRef = useRef()
+
   const modals = {
     PROFILE_INFO_IS_PUBLIC: 1,
     THIS_IS_YOUR_PROFILE: 2,
@@ -16,11 +27,9 @@ const Instructions = props => {
     THIS_IS_GROUPS: 5,
   }
 
-  const profileRef = useRef()
-  const editBtnRef = useRef()
-  const friendsRef = useRef()
-  const groupsRef = useRef()
-  const botRef = useRef()
+  // TODO: ForwardRef
+  // TODO: Miten state säilyy eri komponenttien välillä
+
   const [coordinates, setCoordinates] = useState({
     1: {},
     2: {},
@@ -31,17 +40,26 @@ const Instructions = props => {
 
   useEffect(() => {
     const newState = { ...coordinates }
-    newState[1] = profileRef.current.getBoundingClientRect()
-    newState[2] = editBtnRef.current.getBoundingClientRect()
-    newState[3] = botRef.current.getBoundingClientRect()
-    newState[4] = friendsRef.current.getBoundingClientRect()
-    newState[5] = groupsRef.current.getBoundingClientRect()
+    newState[1] = profileCoordinates
+    newState[2] =
+      editBtnRef &&
+      editBtnRef.current &&
+      editBtnRef.current.getBoundingClientRect()
+    newState[3] = botCoordinates
+    newState[4] = friendsCoordinates
+    newState[5] = groupsCoordinates
     setCoordinates(newState)
-  }, [])
+  }, [
+    profileCoordinates,
+    botCoordinates,
+    friendsCoordinates,
+    groupsCoordinates,
+  ])
 
   return (
     <div className="profile-instructions">
       <ModalContainer
+        tutorial
         modalIsOpen={
           showModals[modals.PROFILE_INFO_IS_PUBLIC] &&
           !showModals[modals.THIS_IS_YOUR_PROFILE]
@@ -49,10 +67,10 @@ const Instructions = props => {
         closeModal={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
         label="profile-info-is-public"
       >
-        <p className="profile-modal-header">
+        <p className="profile-modal-text">
           Profiilisi tiedot näkyvät myös muille.
         </p>
-        <p className="profile-modal-header">Voit muokata tietoja täältä.</p>
+        <p className="profile-modal-text">Voit muokata tietoja täältä.</p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
@@ -64,14 +82,17 @@ const Instructions = props => {
         !showModals[modals.THIS_IS_YOUR_PROFILE] &&
         showModals[modals.THIS_IS_THE_BOT] && (
           <ArrowUp
+            ref={arrowRef}
             className="profile-instructions-arrow-up instructions-arrow"
             style={{
-              bottom: coordinates[1].bottom / 2 + coordinates[2].height,
-              left: coordinates[2].right - coordinates[2].width / 2,
+              top: coordinates[2].top + coordinates[2].height / 2,
+              left: coordinates[2].left + 40,
+              width: '80px',
             }}
           />
         )}
       <ModalContainer
+        tutorial
         modalIsOpen={showModals[modals.THIS_IS_YOUR_PROFILE]}
         closeModal={closeModal(modals.THIS_IS_YOUR_PROFILE)}
         label="this-is-your-profile"
@@ -85,16 +106,20 @@ const Instructions = props => {
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModals[modals.THIS_IS_YOUR_PROFILE] && (
-        <ArrowDown
-          className="profile-instructions-arrow-down instructions-arrow"
-          style={{
-            top: coordinates[1].bottom / 2 + coordinates[1].height,
-            left: coordinates[1].left + coordinates[1].width / 2,
-          }}
-        />
-      )}
+      {showModals[modals.THIS_IS_YOUR_PROFILE] &&
+        coordinates[1] &&
+        coordinates[1].bottom && (
+          <ArrowDown
+            className="profile-instructions-arrow-down instructions-arrow"
+            style={{
+              left: coordinates[1].left - 40,
+              bottom: coordinates[1].height * 2,
+              width: '80px',
+            }}
+          />
+        )}
       <ModalContainer
+        tutorial
         modalIsOpen={
           showModals[modals.THIS_IS_THE_BOT] &&
           !(
@@ -119,16 +144,20 @@ const Instructions = props => {
       </ModalContainer>
       {showModals[modals.THIS_IS_THE_BOT] &&
         !showModals[modals.THIS_IS_YOUR_PROFILE] &&
-        !showModals[modals.PROFILE_INFO_IS_PUBLIC] && (
+        !showModals[modals.PROFILE_INFO_IS_PUBLIC] &&
+        coordinates[3] &&
+        coordinates[3].left && (
           <ArrowDown
             className="bot-instructions-arrow-down instructions-arrow"
             style={{
-              top: coordinates[3].bottom / 2 + coordinates[3].height,
-              left: coordinates[3].left + coordinates[3].width / 2,
+              bottom: coordinates[3].height * 2,
+              left: coordinates[3].left,
+              width: '80px',
             }}
           />
         )}
       <ModalContainer
+        tutorial
         modalIsOpen={showModals[modals.THIS_IS_FRIENDS]}
         closeModal={closeModal(modals.THIS_IS_FRIENDS)}
         label="this-is-friends-page"
@@ -144,16 +173,20 @@ const Instructions = props => {
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModals[modals.THIS_IS_FRIENDS] && (
-        <ArrowDown
-          className="friends-instructions-arrow-down instructions-arrow"
-          style={{
-            top: coordinates[4].bottom / 2 + coordinates[4].height,
-            left: coordinates[4].left - 15,
-          }}
-        />
-      )}
+      {showModals[modals.THIS_IS_FRIENDS] &&
+        coordinates[4] &&
+        coordinates[4].bottom && (
+          <ArrowDown
+            className="friends-instructions-arrow-down instructions-arrow"
+            style={{
+              bottom: coordinates[4].height * 2,
+              right: coordinates[4].right + 40,
+              width: '80px',
+            }}
+          />
+        )}
       <ModalContainer
+        tutorial
         modalIsOpen={showModals[modals.THIS_IS_GROUPS]}
         closeModal={closeModal(modals.THIS_IS_GROUPS)}
         label="this-is-groups-page"
@@ -169,32 +202,18 @@ const Instructions = props => {
           Ok
         </ButtonContainer>
       </ModalContainer>
-      {showModals[modals.THIS_IS_GROUPS] && (
-        <ArrowDown
-          className="groups-instructions-arrow-down instructions-arrow"
-          style={{
-            top: coordinates[5].bottom / 2 + coordinates[5].height,
-            left: coordinates[5].left + coordinates[5].width / 2,
-          }}
-        />
-      )}
-      {(showModals[1] ||
-        showModals[2] ||
-        showModals[3] ||
-        showModals[4] ||
-        showModals[5]) && (
-        <div>
-          <div className="fake-edit-button-container" ref={editBtnRef} />
-          <div className="fake-navigation-container">
-            <div className="fake-navigation">
-              <div className="fake-nav-item profile-nav" ref={profileRef} />
-              <div className="fake-nav-item friends-nav" ref={friendsRef} />
-              <div className="fake-nav-item groups-nav" ref={groupsRef} />
-              <div className="fake-nav-item bot-nav" ref={botRef} />
-            </div>
-          </div>
-        </div>
-      )}
+      {showModals[modals.THIS_IS_GROUPS] &&
+        coordinates[5] &&
+        coordinates[5].bottom && (
+          <ArrowDown
+            className="groups-instructions-arrow-down instructions-arrow"
+            style={{
+              bottom: coordinates[5].height * 2,
+              left: coordinates[5].left - 40,
+              width: '80px',
+            }}
+          />
+        )}
     </div>
   )
 }
@@ -202,6 +221,11 @@ const Instructions = props => {
 Instructions.propTypes = {
   showModals: propTypes.instanceOf(Object).isRequired,
   closeModal: propTypes.func.isRequired,
+  editBtnRef: propTypes.instanceOf(Object).isRequired,
+  botCoordinates: propTypes.instanceOf(Object).isRequired,
+  profileCoordinates: propTypes.instanceOf(Object).isRequired,
+  friendsCoordinates: propTypes.instanceOf(Object).isRequired,
+  groupsCoordinates: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Instructions)

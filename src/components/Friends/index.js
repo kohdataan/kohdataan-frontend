@@ -13,6 +13,7 @@ const Friends = props => {
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
+    friendsCoordinates,
     history,
   } = props
 
@@ -57,7 +58,11 @@ const Friends = props => {
         )}
       </div>
       {!tutorialWatched && (
-        <Instructions closeModal={closeModal} showModals={showModals} />
+        <Instructions
+          closeModal={closeModal}
+          showModals={showModals}
+          friendsCoordinates={friendsCoordinates}
+        />
       )}
     </main>
   )
@@ -72,6 +77,7 @@ Friends.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  friendsCoordinates: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friends)

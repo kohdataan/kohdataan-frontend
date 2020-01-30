@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -18,7 +18,11 @@ const Profile = props => {
     userInterests,
     startDirectChannel,
     history,
+    botCoordinates,
+    profileCoordinates,
   } = props
+
+  const editBtnRef = useRef()
 
   // Extended user info from node backend
   const {
@@ -74,7 +78,7 @@ const Profile = props => {
           />
         )}
         {ownProfile && (
-          <Link className="edit-me-link" to="/edit-me">
+          <Link className="edit-me-link" to="/edit-me" ref={editBtnRef}>
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
         )}
@@ -104,7 +108,13 @@ const Profile = props => {
         </div>
       )}
       {!tutorialWatched && ownProfile && (
-        <Instructions closeModal={closeModal} showModals={showModals} />
+        <Instructions
+          closeModal={closeModal}
+          showModals={showModals}
+          editBtnRef={editBtnRef}
+          botCoordinates={botCoordinates}
+          profileCoordinates={profileCoordinates}
+        />
       )}
     </main>
   )
@@ -117,6 +127,8 @@ Profile.propTypes = {
   ownProfile: propTypes.bool,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
+  profileCoordinates: propTypes.instanceOf(Object).isRequired,
+  botCoordinates: propTypes.instanceOf(Object).isRequired,
 }
 
 Profile.defaultProps = {

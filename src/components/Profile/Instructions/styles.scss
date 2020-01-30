@@ -1,5 +1,5 @@
 .bot-instructions-arrow-down {
-  transform:  rotateY(180deg);
+  transform: rotateY(180deg);
   transform-origin: 25%;
 }
 
@@ -49,51 +49,13 @@
 
 .instructions-arrow {
   position: fixed;
-  @media screen and (min-width: 960px) {
-    height: 40vh;
-    width: 6vmax;
-  }
-  @media (max-width: 960px) {
-    height: 30vmax;
-    max-height: 40vmax;
-    width: 10vmax;
-  }
-  @media (max-width: 360px) {
-    height: 25vmax;
-    width: 10vmax;
-  }
   overflow: visible;
   z-index: 4000;
+  height: 30vh;
 }
 
 .profile-instructions {
   height: 100%;
-}
-
-.profile-instructions-arrow-down {
-  @media screen and (min-width: 960px) {
-    transform: rotate(20deg);
-  }
-  @media (max-width: 960px) {
-    transform: rotate(18deg);
-  }
-  @media (max-width: 360px) {
-    transform: rotate(10deg);
-  }
-  
-}
-
-.profile-instructions-arrow-up {
-  @media screen and (min-width: 960px) {
-    transform: rotate(5deg);
-  }
-  @media (max-width: 960px) {
-    transform: rotate(0deg);
-  }
-  @media (max-width: 360px) {
-    transform: rotate(10deg);
-  }
-  
 }
 
 .profile-modal-text {

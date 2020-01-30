@@ -12,6 +12,7 @@ const Groups = props => {
     getUnreadCount,
     currentUserId,
     tutorialWatched,
+    groupsCoordinates,
   } = props
 
   const getShowModals = () => {
@@ -47,7 +48,11 @@ const Groups = props => {
         ))}
       </div>
       {!tutorialWatched && (
-        <Instructions closeModal={closeModal} showModals={showModals} />
+        <Instructions
+          closeModal={closeModal}
+          showModals={showModals}
+          groupsCoordinates={groupsCoordinates}
+        />
       )}
     </div>
   )
@@ -65,6 +70,7 @@ Groups.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
+  groupsCoordinates: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Groups)
