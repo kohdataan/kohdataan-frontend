@@ -23,9 +23,10 @@ const BottomNavigationContainer = props => {
   const friendsNavRef = useRef()
   const groupsNavRef = useRef()
 
-  const saveReferences = (component, coords) => setCoords(component, coords)
+  // const saveReferences = (component, coords) => setCoords(component, coords)
 
   useEffect(() => {
+    const saveReferences = (component, coords) => setCoords(component, coords)
     const botCoord =
       botRef && botRef.current && botRef.current.getBoundingClientRect()
     const profileCoord =
@@ -52,7 +53,7 @@ const BottomNavigationContainer = props => {
     if (groupsCoord) {
       saveReferences('groupsNav', groupsCoord)
     }
-  }, [])
+  }, [setCoords])
 
   if (pathname.split('/')[1] === 'chat') {
     return <div />

@@ -53,13 +53,15 @@ ProfileContainer.propTypes = {
   userInterests: PropTypes.instanceOf(Array),
   updateUser: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object),
-  botCoordinates: PropTypes.instanceOf(Object).isRequired,
-  profileCoordinates: PropTypes.instanceOf(Object).isRequired,
+  botCoordinates: PropTypes.instanceOf(Object),
+  profileCoordinates: PropTypes.instanceOf(Object),
 }
 
 ProfileContainer.defaultProps = {
   userInterests: [],
   history: null,
+  botCoordinates: {},
+  profileCoordinates: {},
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

@@ -77,7 +77,11 @@ Friends.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object).isRequired,
+  friendsCoordinates: PropTypes.instanceOf(Object),
+}
+
+Friends.defaultProps = {
+  friendsCoordinates: {},
 }
 
 export default memo(Friends)

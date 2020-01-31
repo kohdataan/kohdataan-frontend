@@ -152,12 +152,13 @@ GroupsContainer.propTypes = {
   resetChannelInvitations: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   updateUser: PropTypes.func.isRequired,
-  groupsCoordinates: PropTypes.instanceOf(Object).isRequired,
+  groupsCoordinates: PropTypes.instanceOf(Object),
 }
 
 GroupsContainer.defaultProps = {
   channelSuggestions: [],
   channelSuggestionMembers: {},
+  groupsCoordinates: {},
 }
 
 const mapStateToProps = state => {

@@ -119,7 +119,11 @@ FriendsContainer.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object).isRequired,
+  friendsCoordinates: PropTypes.instanceOf(Object),
+}
+
+FriendsContainer.defaultProps = {
+  friendsCoordinates: {},
 }
 
 const mapStateToProps = state => {

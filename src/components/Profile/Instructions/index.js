@@ -39,7 +39,7 @@ const Instructions = props => {
   })
 
   useEffect(() => {
-    const newState = { ...coordinates }
+    const newState = {}
     newState[1] = profileCoordinates
     newState[2] =
       editBtnRef &&
@@ -54,6 +54,8 @@ const Instructions = props => {
     botCoordinates,
     friendsCoordinates,
     groupsCoordinates,
+    setCoordinates,
+    editBtnRef,
   ])
 
   return (
@@ -221,11 +223,19 @@ const Instructions = props => {
 Instructions.propTypes = {
   showModals: propTypes.instanceOf(Object).isRequired,
   closeModal: propTypes.func.isRequired,
-  editBtnRef: propTypes.instanceOf(Object).isRequired,
-  botCoordinates: propTypes.instanceOf(Object).isRequired,
-  profileCoordinates: propTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: propTypes.instanceOf(Object).isRequired,
-  groupsCoordinates: propTypes.instanceOf(Object).isRequired,
+  editBtnRef: propTypes.instanceOf(Object),
+  botCoordinates: propTypes.instanceOf(Object),
+  profileCoordinates: propTypes.instanceOf(Object),
+  friendsCoordinates: propTypes.instanceOf(Object),
+  groupsCoordinates: propTypes.instanceOf(Object),
+}
+
+Instructions.defaultProps = {
+  friendsCoordinates: {},
+  groupsCoordinates: {},
+  editBtnRef: null,
+  botCoordinates: {},
+  profileCoordinates: {},
 }
 
 export default memo(Instructions)

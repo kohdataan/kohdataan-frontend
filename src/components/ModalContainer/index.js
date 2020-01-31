@@ -38,6 +38,7 @@ const customStylesTutorial = {
     border: 'none',
     borderRadius: '5px',
     textAlign: 'center',
+    padding: '8vh',
     minHeight: '30vh',
     maxHeight: '80vh',
     width: '80vw',
