@@ -4,7 +4,7 @@ import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
 import './styles.scss'
 
-const ServiceRules = ({ setRulesAccepted }) => {
+const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const openModal = () => {
@@ -12,6 +12,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
   }
 
   const closeModal = () => {
+    setOpenErrorModal(true)
     setModalIsOpen(false)
   }
 
@@ -54,6 +55,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
 
 ServiceRules.propTypes = {
   setRulesAccepted: propTypes.func.isRequired,
+  setOpenErrorModal: propTypes.func.isRequired,
 }
 
 export default memo(ServiceRules)
