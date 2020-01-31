@@ -99,7 +99,8 @@ MessageList.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
   channelId: propTypes.string.isRequired,
-  profiles: propTypes.instanceOf(Array).isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
+  getStatusById: propTypes.func.isRequired,
 }
 
 export default memo(MessageList)

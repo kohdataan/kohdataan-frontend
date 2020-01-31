@@ -80,7 +80,7 @@ const UserInput = props => {
         <ButtonContainer className="icon-btn" onClick={clickFileInput}>
           <div className="send-image-attachment-button" />
         </ButtonContainer>
-        <ButtonContainer className="icon-btn">
+        <ButtonContainer className="icon-btn" onClick={() => {}}>
           <div className="send-voice-attachment-button" />
         </ButtonContainer>
         <input
