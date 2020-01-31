@@ -13,11 +13,7 @@ const StepButton = props => {
   return (
     <div className="step-button-container">
       {previous && (
-        <Link
-          className="next-step-button"
-          to={`/registration/${previous}`}
-          onClick={onClick}
-        >
+        <Link className="next-step-button" to={`/registration/${previous}`}>
           Edellinen
         </Link>
       )}

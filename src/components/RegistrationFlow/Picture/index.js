@@ -29,8 +29,8 @@ const Picture = props => {
     <ShadowBox>
       <main role="main" className="add-user-picture-container">
         <div className="add-user-picture-title-container">
-          <h2 className="profile-creation-title add-user add-user-picture-title-text">
-            Valitse oma kuva
+          <h2 className="profile-creation-title add-user" id="add-user-picture-title-text">
+            Valitse oma kuva.
           </h2>
           {!hideStep && (
             <span className="profile-creation-step-text add-user-picture-step-text">
@@ -49,7 +49,7 @@ const Picture = props => {
             onCrop={onChange}
             className="add-user-picture-picker"
           />
-          <p>
+          <p className="add-user-picture-text">
             Tämä kuva näkyy muille.
             <br />
             Voit lisätä kuvan myös myöhemmin.

@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
+import ModalContainer from '../ModalContainer'
 import getIcon from '../../utils/getIcon'
 
 const EditInterestsContainer = props => {
@@ -11,6 +12,7 @@ const EditInterestsContainer = props => {
   // time interests are changed, only on mount
   const interestsOnMount = useRef(interests)
   const itemIsSelected = id => interests.includes(id)
+  const [openModal, setOpenModal] = useState(false)
 
   useEffect(() => {
     const sortOptions = () => {
@@ -33,12 +35,18 @@ const EditInterestsContainer = props => {
     setSortedOptions(sortOptions())
   }, [options])
 
+  const closeModal = () => {
+    setOpenModal(false)
+  }
+
   // Select item if less than 5 items are selected
   const addToSelected = key => {
     if (interests.length < 5) {
       const interestsArr = [...interests]
       interestsArr.push(key)
       setInterests(interestsArr)
+    } else if (interests.length === 5) {
+      setOpenModal(true)
     }
   }
 
@@ -81,6 +89,25 @@ const EditInterestsContainer = props => {
           <span className="interests-grid-label">{interest.name}</span>
         </ButtonContainer>
       ))}
+      <ModalContainer
+        modalIsOpen={openModal}
+        closeModal={closeModal}
+        label="User can have five interests at most"
+      >
+        <div>
+          <h3 className="interests-modal-text">
+            Voit valita enintään viisi kiinnostavaa asiaa.
+          </h3>
+          <p>Voit poistaa valinnan,kun klikkaat sitä uudestaan.</p>
+          <ButtonContainer
+            className="icon-btn interests-icon-btn"
+            onClick={closeModal}
+          >
+            <div className="accept-rules-go-back-button go-back-button" />
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
+
     </div>
   )
 }

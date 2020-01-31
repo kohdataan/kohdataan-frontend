@@ -8,7 +8,7 @@ const Interests = props => {
 
   return (
     <main role="main" className="add-user-interests-container">
-      <h2 className="profile-creation-title">Kerro, mikä sinua kiinnostaa</h2>
+      <h2 className="profile-creation-title">Kerro, mikä sinua kiinnostaa.</h2>
       <p>
         Ehdotamme sinulle kiinnostustesi mukaan keskusteluryhmiä, joissa voit
         tutustua uusiin ihmisiin.
