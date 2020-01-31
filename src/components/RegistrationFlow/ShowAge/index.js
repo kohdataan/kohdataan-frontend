@@ -19,14 +19,14 @@ const ShowAge = props => {
           {!hideStep && <span className="profile-creation-step-text">2/6</span>}
         </div>
         <RadioButton
-          label="Näytä ikä muille"
+          label="Näytä ikä muille."
           name="agePermission"
           value="showAge"
           onChange={() => onChange(true)}
           checked={showAge === 'true'}
         />
         <RadioButton
-          label="Älä näytä ikää muille"
+          label="Älä näytä ikää muille."
           name="agePermission"
           value="hideAge"
           onChange={() => onChange(false)}

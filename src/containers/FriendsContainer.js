@@ -16,6 +16,9 @@ const FriendsContainer = props => {
     getPosts,
     fetchFriendsPageData,
     membersInChannel,
+    friendsCoordinates,
+    user,
+    history,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
@@ -98,6 +101,9 @@ const FriendsContainer = props => {
         getPosts={getPosts}
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
+        tutorialWatched={user.tutorialWatched}
+        friendsCoordinates={friendsCoordinates}
+        history={history}
       />
     </>
   )
@@ -111,6 +117,13 @@ FriendsContainer.propTypes = {
   getPosts: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
+  friendsCoordinates: PropTypes.instanceOf(Object),
+}
+
+FriendsContainer.defaultProps = {
+  friendsCoordinates: {},
 }
 
 const mapStateToProps = state => {
@@ -124,6 +137,8 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
+  const friendsCoordinates =
+    state.loading.coordinates && state.loading.coordinates.friendsNav
 
   return {
     currentUserId,
@@ -135,6 +150,7 @@ const mapStateToProps = state => {
     members,
     myChannels,
     membersInChannel,
+    friendsCoordinates,
   }
 }
 

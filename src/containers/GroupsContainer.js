@@ -15,6 +15,7 @@ import {
   getChannelInvitationsAction as getChannelInvitationsAgain,
   resetChannelInvitations as resetChannelInvitationsAction,
 } from '../store/channels/channelAction'
+import { updateUser as updateUserAction } from '../store/user/userAction'
 
 const GroupsContainer = props => {
   const {
@@ -30,7 +31,10 @@ const GroupsContainer = props => {
     fetchChannelsAndInvitations,
     getInvitationsAgain,
     resetChannelInvitations,
+    groupsCoordinates,
     profiles,
+    user,
+    updateUser,
   } = props
 
   const [isInitialized, setIsInitialized] = useState(false)
@@ -124,6 +128,9 @@ const GroupsContainer = props => {
         profiles={profiles}
         getUnreadCount={getUnreadCountByChannelId}
         currentUserId={currentUserId}
+        updateUser={updateUser}
+        tutorialWatched={user.tutorialWatched}
+        groupsCoordinates={groupsCoordinates}
       />
     </>
   )
@@ -143,11 +150,15 @@ GroupsContainer.propTypes = {
   profiles: PropTypes.instanceOf(Object).isRequired,
   getInvitationsAgain: PropTypes.func.isRequired,
   resetChannelInvitations: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+  updateUser: PropTypes.func.isRequired,
+  groupsCoordinates: PropTypes.instanceOf(Object),
 }
 
 GroupsContainer.defaultProps = {
   channelSuggestions: [],
   channelSuggestionMembers: {},
+  groupsCoordinates: {},
 }
 
 const mapStateToProps = state => {
@@ -163,6 +174,8 @@ const mapStateToProps = state => {
   const { user } = state
   const channelSuggestions = state.channels.found
   const channelSuggestionMembers = state.channels.members
+  const groupsCoordinates =
+    state.loading.coordinates && state.loading.coordinates.groupsNav
 
   return {
     currentUserId,
@@ -176,6 +189,7 @@ const mapStateToProps = state => {
     channels,
     members,
     myChannels,
+    groupsCoordinates,
   }
 }
 
@@ -187,6 +201,7 @@ const mapDispatchToProps = dispatch =>
       fetchChannelsAndInvitations: fetchChannelsAndInvitationsAction,
       getInvitationsAgain: getChannelInvitationsAgain,
       resetChannelInvitations: resetChannelInvitationsAction,
+      updateUser: updateUserAction,
     },
     dispatch
   )

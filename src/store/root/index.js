@@ -6,6 +6,12 @@ import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'
 
+export const setComponentCoordinates = (component, coordinates) => {
+  return async dispatch => {
+    dispatch({ type: types.SET_COORDINATES, component, coordinates })
+  }
+}
+
 export const rootLoading = () => {
   return async dispatch => {
     dispatch({ type: types.START_ROOT_LOADING })
