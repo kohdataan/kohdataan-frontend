@@ -19,7 +19,7 @@ const LeaveChannelModal = props => {
           onClick={closeModal}
           className="cancel-leave-channel-button"
         >
-          Peruuta
+          En
         </ButtonContainer>
         <Link className="leave-channel-link" to="/">
           <ButtonContainer

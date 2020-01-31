@@ -3,6 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
 import getIconColor from '../../../utils/getMemberIconColor'
+import getUsernameById from '../../../utils/getUsernameById'
 
 const MessageList = props => {
   const {
@@ -12,7 +13,12 @@ const MessageList = props => {
     directChannel,
     members,
     channelId,
+    profiles,
+    getStatusById,
   } = props
+
+  const getIconMemberStatus = userId =>
+    `chat-${getStatusById(userId)}-status-icon`
 
   const ref = useRef()
 
@@ -75,6 +81,8 @@ const MessageList = props => {
                   dateSent={timestampValues.sendDate}
                   showDate={timestampValues.show}
                   channelId={channelId}
+                  senderMmUsername={getUsernameById(post.user_id, profiles)}
+                  iconMemberStatus={getIconMemberStatus(post.user_id)}
                 />
               )
             )
@@ -91,6 +99,7 @@ MessageList.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
   channelId: propTypes.string.isRequired,
+  profiles: propTypes.instanceOf(Array).isRequired,
 }
 
 export default memo(MessageList)
