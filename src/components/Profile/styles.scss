@@ -1,7 +1,8 @@
 @import '../../styles/colors.scss';
 
 .profile-container {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin-bottom: 100px;
   display: flex;
   flex-direction: column;
@@ -69,7 +70,7 @@
 
 .go-back-button-container {
   text-align: left;
-  background:  $background-gray;
+  background: $background-gray;
   padding-top: 20px;
 }
 

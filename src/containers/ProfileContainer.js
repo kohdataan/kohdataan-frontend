@@ -6,8 +6,15 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
-  const { mmuser, userInterests, myUserInfo, updateUser } = props
-
+  const {
+    mmuser,
+    userInterests,
+    myUserInfo,
+    updateUser,
+    history,
+    botCoordinates,
+    profileCoordinates,
+  } = props
   return (
     <Profile
       mmuser={mmuser}
@@ -15,6 +22,9 @@ const ProfileContainer = props => {
       userInterests={userInterests}
       myUserInfo={myUserInfo}
       updateUser={updateUser}
+      history={history}
+      botCoordinates={botCoordinates}
+      profileCoordinates={profileCoordinates}
     />
   )
 }
@@ -24,11 +34,16 @@ const mapStateToProps = state => {
   const mmuser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.interests
   const myUserInfo = state.user
-
+  const botCoordinates =
+    state.loading.coordinates && state.loading.coordinates.bot
+  const profileCoordinates =
+    state.loading.coordinates && state.loading.coordinates.profileNav
   return {
     mmuser,
     userInterests,
     myUserInfo,
+    botCoordinates,
+    profileCoordinates,
   }
 }
 
@@ -37,10 +52,16 @@ ProfileContainer.propTypes = {
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   userInterests: PropTypes.instanceOf(Array),
   updateUser: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object),
+  botCoordinates: PropTypes.instanceOf(Object),
+  profileCoordinates: PropTypes.instanceOf(Object),
 }
 
 ProfileContainer.defaultProps = {
   userInterests: [],
+  history: null,
+  botCoordinates: {},
+  profileCoordinates: {},
 }
 
 const shouldComponentUpdate = (props, prevProps) => {
