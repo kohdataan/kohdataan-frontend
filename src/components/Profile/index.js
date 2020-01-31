@@ -127,8 +127,8 @@ Profile.propTypes = {
   ownProfile: propTypes.bool,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
-  profileCoordinates: propTypes.instanceOf(Object).isRequired,
-  botCoordinates: propTypes.instanceOf(Object).isRequired,
+  profileCoordinates: propTypes.instanceOf(Object),
+  botCoordinates: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
@@ -136,6 +136,8 @@ Profile.defaultProps = {
   startDirectChannel: null,
   userInterests: [],
   history: null,
+  profileCoordinates: {},
+  botCoordinates: {},
 }
 
 export default memo(Profile)
