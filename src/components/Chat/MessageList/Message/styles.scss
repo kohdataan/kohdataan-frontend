@@ -37,16 +37,13 @@
 .chat-message-timestamp {
   align-self: flex-end;
   margin-bottom: 4px;
+  margin-left: 2px;
   width: 33px;
   height: 15px;
   font-family: Silka;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
+  font-size: 16px;
   letter-spacing: -0.14px;
-  color: #9b9b9b;
+  color: #666464;
 }
 
 .message-content-field {
@@ -120,6 +117,42 @@
   width: 100%;
 }
 
+.chat-online-status-icon {
+  position: relative; 
+  bottom: 8px;
+  left: 18px;
+  background-color: green;
+  border: 1px solid $white;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.chat-offline-status-icon {
+  position: relative; 
+  bottom: 8px;
+  left: 18px;
+  border: 1px solid $white;
+  background-color: grey;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.chat-away-status-icon {
+  position: relative; 
+  bottom: 8px;
+  left: 18px;
+  background-color: yellow;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+
 .chat-message-sender {
   margin-block-end: 0em;
   margin-block-start: 0em;
@@ -140,6 +173,8 @@
 }
 
 .chat-message-sender-icon {
+  height: 30px;
+  width: 30px;
   align-self: flex-end;
   padding: 4px 8px;
   margin-right: 8px;
@@ -147,6 +182,9 @@
   color: white;
   font-weight: bold;
   border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .chat-message-content-text {

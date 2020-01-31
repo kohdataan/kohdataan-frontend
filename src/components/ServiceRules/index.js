@@ -4,7 +4,7 @@ import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
 import './styles.scss'
 
-const ServiceRules = ({ setRulesAccepted }) => {
+const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const openModal = () => {
@@ -12,6 +12,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
   }
 
   const closeModal = () => {
+    setOpenErrorModal(true)
     setModalIsOpen(false)
   }
 
@@ -36,7 +37,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
             <div className="service-rules-text">
               <p>Tänne tulee palvelun käyttöehdot.</p>
             </div>
-            <ButtonContainer className="icon-btn" onClick={closeModal}>
+            <ButtonContainer className="accept-rules-icon-btn icon-btn" onClick={closeModal}>
               <div className="accept-rules-go-back-button go-back-button" />
             </ButtonContainer>
             <ButtonContainer
@@ -54,6 +55,7 @@ const ServiceRules = ({ setRulesAccepted }) => {
 
 ServiceRules.propTypes = {
   setRulesAccepted: propTypes.func.isRequired,
+  setOpenErrorModal: propTypes.func.isRequired,
 }
 
 export default memo(ServiceRules)

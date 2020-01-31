@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ModalContainer from '../ModalContainer'
@@ -8,7 +8,7 @@ import ButtonContainer from '../ButtonContainer'
 import RegistrationProblemContainer from '../../containers/RegistrationProblemContainer'
 import PageInformation from './PageInformation'
 
-const BottomNavigationBot = props => {
+const BottomNavigationBot = forwardRef((props, ref) => {
   const { handleLogout, path, inChat, direct } = props
 
   const [showBot, setShowBot] = useState(false)
@@ -38,7 +38,7 @@ const BottomNavigationBot = props => {
   }
 
   return (
-    <div className={inChat ? 'nav-bot-chat' : 'nav-bot'}>
+    <div className={inChat ? 'nav-bot-chat' : 'nav-bot'} ref={ref}>
       <ButtonContainer
         className="button-image"
         onClick={() => openModal(setShowBot)}
@@ -141,7 +141,7 @@ const BottomNavigationBot = props => {
       </ModalContainer>
     </div>
   )
-}
+})
 
 BottomNavigationBot.propTypes = {
   handleLogout: PropTypes.func.isRequired,

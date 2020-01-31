@@ -6,6 +6,8 @@ import moment from 'moment'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import DateSelectField from '../DateSelectField'
+import ButtonContainer from '../ButtonContainer'
+import ModalContainer from '../ModalContainer'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import getAge from '../../utils/getAge'
 import './styles.scss'
@@ -27,12 +29,17 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthmonth, setBirthmonth] = useState('')
   const [birthyear, setBirthyear] = useState('')
   const [currentApiErrors, setCurrentApiErrors] = useState({})
+  const [openErrorModal, setOpenErrorModal] = useState(false)
 
   useEffect(() => {
     if (apiErrors && apiErrors.fields) {
       setCurrentApiErrors(apiErrors)
     }
   }, [apiErrors, setCurrentApiErrors])
+
+  const closeAcceptModal = () => {
+    setOpenErrorModal(false)
+  }
 
   const onSubmit = data => {
     const usersBirthdate = moment
@@ -43,9 +50,6 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
       })
       .format()
 
-    if (!rulesAccepted) {
-      alert('Sinun on hyväksyttävä palvelun säännöt.')
-    }
     const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
     if (!ageAccepted) {
       setError(
@@ -64,6 +68,11 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         'Voit käyttää palvelua, jos olet yli 15-vuotias.'
       )
     }
+
+    if (!rulesAccepted) {
+      setOpenErrorModal(true)
+    }
+
     if (ageAccepted && rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
@@ -95,7 +104,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
       <div className="create-account-content-container">
         <h2 className="create-account-title">Rekisteröityminen</h2>
         <p className="create-account-text">
-          Anna omat tiedot. Tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.
+          Anna omat tiedot. Tiedot näkyvät vain sinulle. Kaikki tiedot ovat
+          pakollisia.
         </p>
         <form
           className="create-account-input-content-container"
@@ -185,8 +195,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )
-                  }
+                    )}
                   errors={errors.day}
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
@@ -216,8 +225,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )
-                  }
+                    )}
                   ariaInvalid={!!errors.birthdate}
                   errors={errors.month}
                   value={String(birthmonth)}
@@ -247,8 +255,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )
-                  }
+                    )}
                   ariaInvalid={!!errors.year}
                   errors={errors.year}
                   value={String(birthyear)}
@@ -442,7 +449,30 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Salasanat eivät ole samat'}
             </div>
           </div>
-          <ServiceRulesContainer setRulesAccepted={setRulesAccepted} />
+          <ServiceRulesContainer
+            setRulesAccepted={setRulesAccepted}
+            setOpenErrorModal={setOpenErrorModal}
+          />
+          {!rulesAccepted && (
+            <ModalContainer
+              modalIsOpen={openErrorModal}
+              closeModal={closeAcceptModal}
+              label="User must accept rules modal"
+            >
+              <div>
+                <h3 className="accept-rules-modal-text">
+                  Jos haluat käyttää palvelua, sinun täytyy hyväksyä
+                  käyttöehdot.
+                </h3>
+                <ButtonContainer
+                  className="icon-btn"
+                  onClick={closeAcceptModal}
+                >
+                  <div className="accept-rules-go-back-button go-back-button" />
+                </ButtonContainer>
+              </div>
+            </ModalContainer>
+          )}
           <button
             type="submit"
             className="create-account-button"
@@ -459,10 +489,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           <Link className="create-account-link-block" to="/registrationproblem">
             Tarvitsen apua rekisteröitymisessä.
           </Link>
-          <Link className="create-account-link-block inactive-link" to="/createaccount">
+          <Link
+            className="create-account-link-block inactive-link"
+            to="/createaccount"
+          >
             Tutustu tietosuojaselosteeseen.
           </Link>
-          <Link className="create-account-link-block inactive-link" to="/createaccount">
+          <Link
+            className="create-account-link-block inactive-link"
+            to="/createaccount"
+          >
             Tutustu saavutettavuusselosteeseen.
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -16,10 +16,13 @@ const Profile = props => {
     myUserInfo,
     ownProfile,
     userInterests,
-    updateUser,
     startDirectChannel,
     history,
+    botCoordinates,
+    profileCoordinates,
   } = props
+
+  const editBtnRef = useRef()
 
   // Extended user info from node backend
   const {
@@ -47,7 +50,7 @@ const Profile = props => {
     newState[modal] = false
     setShowModals(newState)
     if (modal === 3 && ownProfile) {
-      updateUser({ tutorialWatched: true })
+      history.push('/friends')
     }
   }
 
@@ -75,7 +78,7 @@ const Profile = props => {
           />
         )}
         {ownProfile && (
-          <Link className="edit-me-link" to="/edit-me">
+          <Link className="edit-me-link" to="/edit-me" ref={editBtnRef}>
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
         )}
@@ -104,8 +107,15 @@ const Profile = props => {
           </ButtonContainer>
         </div>
       )}
-
-      <Instructions closeModal={closeModal} showModals={showModals} />
+      {!tutorialWatched && ownProfile && (
+        <Instructions
+          closeModal={closeModal}
+          showModals={showModals}
+          editBtnRef={editBtnRef}
+          botCoordinates={botCoordinates}
+          profileCoordinates={profileCoordinates}
+        />
+      )}
     </main>
   )
 }
@@ -115,17 +125,19 @@ Profile.propTypes = {
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
-  updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
+  profileCoordinates: propTypes.instanceOf(Object),
+  botCoordinates: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
-  updateUser: null,
   ownProfile: false,
   startDirectChannel: null,
   userInterests: [],
   history: null,
+  profileCoordinates: {},
+  botCoordinates: {},
 }
 
 export default memo(Profile)

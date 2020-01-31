@@ -59,7 +59,7 @@ const Location = props => {
     <ShadowBox>
       <main role="main" className="add-user-location-container">
         <div className="profile-creation-title-container">
-          <h3 className="profile-creation-title">Asuinpaikkasi</h3>
+          <h3 className="profile-creation-title">Asuinpaikkasi:</h3>
           {!hideStep && <span className="profile-creation-step-text">3/6</span>}
         </div>
         <Select
@@ -75,14 +75,14 @@ const Location = props => {
           styles={customStyles}
         />
         <RadioButton
-          label="Näytä asuinpaikka muille"
+          label="Näytä asuinpaikka muille."
           name="locationPermission"
           value="showLocation"
           onChange={() => setShowLocation(true)}
           checked={showLocation === 'true'}
         />
         <RadioButton
-          label="Älä näytä asuinpaikkaa muille"
+          label="Älä näytä asuinpaikkaa muille."
           name="locationPermission"
           value="hideLocation"
           onChange={() => setShowLocation(false)}

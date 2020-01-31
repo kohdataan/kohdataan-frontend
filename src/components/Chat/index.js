@@ -60,7 +60,7 @@ const Chat = props => {
           <>
             <img
               className="friend-icon"
-              src={`{process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
+              src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
             {getNicknameById(otherUser.user_id)}
@@ -102,6 +102,8 @@ const Chat = props => {
         directChannel={directChannel}
         members={members}
         channelId={channel.id}
+        profiles={profiles}
+        getStatusById={getStatusById}
       />
       {channel.id && (
         <UserInput

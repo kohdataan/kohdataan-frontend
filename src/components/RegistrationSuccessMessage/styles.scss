@@ -6,8 +6,8 @@
 }
 
 .problems-with-registration-link {
-    color: $white;
-    font-size: 17px;
+  color: $white;
+  font-size: 17px;
 }
 
 .registration-info-content {
@@ -34,11 +34,13 @@ li.registration-info-list {
   font-size: 18px;
   color: #fff;
   padding: 0.2em;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .registration-success-content-container {
   width: 80%;
- }
+}
 
 .registration-success-text {
   color: $orange;

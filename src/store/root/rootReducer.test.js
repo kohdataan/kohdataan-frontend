@@ -3,7 +3,7 @@ import * as types from '../../contants/actionTypes'
 
 describe('root reducer', () => {
   it('should return the initial state', () => {
-    expect(rootReducer(undefined, {})).toEqual({ root: true })
+    expect(rootReducer(undefined, {})).toEqual({ root: true, coordinates: {} })
   })
 
   it('should handle ROOT_LOADING_READY', () => {

@@ -69,7 +69,6 @@ const MembersSider = props => {
               iconMemberStatus={getIconMemberStatus(member.user_id)}
             />
           ))}
-        <h4 className="chat-header-members-sider-title">Yhteistä</h4>
         <ButtonContainer
           onClick={openModal}
           className="members-sider-leave-group-button"
