@@ -107,6 +107,9 @@ const LogIn = props => {
           <Link className="login-link" to="/createaccount">
             Olen uusi käyttäjä ja haluan rekisteröityä
           </Link>
+          <Link className="login-link" to="/email-verification">
+            Uudelleenlähettäkää sähköpostin verifikointi linkki
+          </Link>
         </div>
       </div>
     </main>
