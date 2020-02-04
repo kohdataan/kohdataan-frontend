@@ -102,10 +102,10 @@ const LogIn = props => {
         </form>
         <div className="login-links-container">
           <Link className="login-link" to="/reset-password">
-            Olen unohtanut salasanani
+            Olen unohtanut salasanani.
           </Link>
           <Link className="login-link" to="/createaccount">
-            Olen uusi käyttäjä ja haluan rekisteröityä
+            Olen uusi käyttäjä ja haluan rekisteröityä.
           </Link>
         </div>
       </div>

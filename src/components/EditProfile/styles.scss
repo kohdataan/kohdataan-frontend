@@ -1,5 +1,8 @@
 .save-profile-button {
   padding: 15px 20px;
+  &:hover {
+    cursor: grab;
+  }
 }
 
 .profile-edit-container {

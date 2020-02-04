@@ -10,4 +10,8 @@
   background-color: $orange;
   border: solid 1px $orange;
   border-radius: 30px;
+    &:hover {
+      cursor: pointer;
+    }
 }
+

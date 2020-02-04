@@ -128,7 +128,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               closeModal(setShowBot)
             }}
           >
-            <i className="fas fa-cog modal-icon" aria-hidden="true" />
+            <i className="fas fa-sign-out-alt modal-icon" aria-hidden="true" />
             Kirjaudu ulos
           </ButtonContainer>
         </div>

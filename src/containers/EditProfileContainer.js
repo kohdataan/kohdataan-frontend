@@ -9,6 +9,7 @@ import EditProfile from '../components/EditProfile'
 
 const EditProfileContainer = props => {
   const {
+    history,
     mmuserId,
     currentUser,
     interestOptions,
@@ -45,6 +46,7 @@ const EditProfileContainer = props => {
 
   return (
     <EditProfile
+      history={history}
       myUserInfo={myUserInfo}
       updateProfilePicture={updatePicture}
       interestOptions={interestOptions}
@@ -70,6 +72,7 @@ const mapStateToProps = state => {
 }
 
 EditProfileContainer.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
   currentUser: PropTypes.instanceOf(Object).isRequired,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   interestOptions: PropTypes.instanceOf(Array).isRequired,

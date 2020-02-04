@@ -2,11 +2,12 @@ import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import useForm from 'react-hook-form'
 import ValidatedInputField from '../../ValidatedInputField'
+import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import './styles.scss'
 
 const labels = {
-  email: 'Uusi sähköpostiosoite',
+  email: 'Uusi sähköposti',
   phoneNumber: 'Uusi puhelinnumero',
   password: 'Uusi salasana',
   firstname: 'Uusi etunimi',
@@ -23,7 +24,7 @@ const messages = {
   email: 'Tarkista sähköpostiosoite.',
   phoneNumber: 'Tarkista puhelinnumero',
   password:
-    'Salasanassa tulee olla vähintään 10 merkkiä, ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.',
+    'Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero.',
   firstname: 'Etunimen tulee olla 2-20 merkkiä pitkä.',
   lastname: 'Sukunimen tulee olla 2-30 merkkiä pitkä.',
 }
@@ -42,7 +43,14 @@ const EditAccountModal = props => {
         modalIsOpen={showModal}
         label="leaveChannelModal"
         closeModal={closeModal}
+        editModal
       >
+        <ButtonContainer
+          className="icon-btn go-back-button edit-account-close-button"
+          onClick={closeModal}
+        >
+          <span className="sr-only">Sulje</span>
+        </ButtonContainer>
         <form
           className="edit-account-input-content-container"
           onSubmit={handleSubmit(onSubmit)}

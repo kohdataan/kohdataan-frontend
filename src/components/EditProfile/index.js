@@ -12,7 +12,7 @@ import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const EditProfile = props => {
-  const { myUserInfo, updateProfilePicture, handleEditReady } = props
+  const { history, myUserInfo, updateProfilePicture, handleEditReady } = props
 
   const [newDescription, setNewDescription] = useState(
     myUserInfo.description || ''
@@ -43,7 +43,7 @@ const EditProfile = props => {
 
   return (
     <main className="profile-edit-container">
-      <EditTitle text="Muokkaa profiiliasi" />
+      <EditTitle text="Muokkaa profiiliasi" history={history} />
       <div className="edit-wrapper">
         <div className="edit-profilepic">
           <Picture hideStep onChange={setImg} />
@@ -99,6 +99,7 @@ const EditProfile = props => {
 }
 
 EditProfile.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   updateProfilePicture: propTypes.func.isRequired,
   handleEditReady: propTypes.func.isRequired,

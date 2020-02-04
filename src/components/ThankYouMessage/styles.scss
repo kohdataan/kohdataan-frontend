@@ -23,23 +23,3 @@
     margin-top: 2em;
   }
 
-  .problems-with-registration-link {
-    color: $white;
-    font-size: 17px;
-}
-
-.registration-problem-links-container {
-    padding-top: 30px;
-  }
-  
-  .registration-problem-link {
-    color: $white;
-    font-size: 15px;
-    display: block;
-    text-align: center;
-    padding: 10px 0 10px 0;
-  
-    :visited {
-      color: $white;
-    }
-  }
