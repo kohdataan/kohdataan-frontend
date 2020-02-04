@@ -13,18 +13,40 @@ const Member = props => {
     iconColor,
   } = props
   const userFirstLetter = nickName[0]
-  const getUsername = () =>
-    profiles && profiles[userId] && profiles[userId].username
+  const getUsername = () => {
+    return profiles && profiles[userId] && profiles[userId].username
+  }
 
   return (
     <div className="chat-header-members-sider-member">
-      <i aria-hidden="true" title={userFirstLetter} />
-      <span
-        className="chat-header-members-icon"
-        style={{ backgroundColor: iconColor }}
-      >
-        {userFirstLetter}
-      </span>
+      {currentUserId !== userId && (
+        <Link to={`/profile/${getUsername()}`} className="channel-name-link">
+          <i aria-hidden="true" title={userFirstLetter} />
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundColor: iconColor,
+              backgroundImage: `url(
+                ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
+              )`,
+            }}
+          />
+        </Link>
+      )}
+      {currentUserId === userId && (
+        <div>
+          <i aria-hidden="true" title={userFirstLetter} />
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundColor: iconColor,
+              backgroundImage: `url(
+                ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
+              )`,
+            }}
+          />
+        </div>
+      )}
       <span className={iconMemberStatus} />
       {currentUserId !== userId && (
         <Link

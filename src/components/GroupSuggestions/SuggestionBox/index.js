@@ -33,7 +33,7 @@ const SuggestionBox = props => {
           {Object.keys(channel.purpose) &&
           Object.keys(channel.purpose).length > 0 ? (
             <p className="group-in-common-text">
-              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose)
+              {`Kiinnostukset: ${Object.keys(channel.purpose)
                 .slice(0, 3)
                 .join(', ')}`}
             </p>

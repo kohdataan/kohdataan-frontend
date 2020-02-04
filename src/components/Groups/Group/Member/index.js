@@ -19,12 +19,17 @@ const Member = props => {
       <div className="group-boxes-member" key={key}>
         <div className="group-boxes-member-icon-wrapper">
           <i aria-hidden="true" title={userFirstLetter} />
-          <span
-            className="group-members-icon"
-            style={{ backgroundColor: iconColor }}
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundColor: iconColor,
+              backgroundImage: `url(
+                ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
+              )`,
+            }}
           >
-            {userFirstLetter}
-          </span>
+            {' '}
+          </div>
         </div>
         <p>{getTruncatedName(nickname)}</p>
       </div>
