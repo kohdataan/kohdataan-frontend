@@ -16,7 +16,6 @@ const OtherUserProfileContainer = props => {
     history,
     createDirectChannel,
   } = props
-  console.log(username)
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])

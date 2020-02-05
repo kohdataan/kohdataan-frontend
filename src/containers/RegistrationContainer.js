@@ -49,7 +49,6 @@ const RegistrationContainer = props => {
     fetchUser()
   }, [])
 
-  console.log(username)
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
     if (value && !nextButtonActive) {
@@ -152,7 +151,7 @@ const RegistrationContainer = props => {
   }
 
   const getUsername = () => {
-    const letter = nickname[0].toUpperCase()
+    const letter = nickname[0].toLowerCase()
     const updated = letter.concat(username.substr(0, 20))
     return updated
   }
