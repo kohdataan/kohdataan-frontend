@@ -9,18 +9,13 @@ const LogIn = props => {
   const { handleLogin, user, uuid, linkError } = props
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
+  // Set appropriate error given different errors
   useEffect(() => {
-    if (user && user.errorMessage) {
-      setError(
-        'email',
-        'loginError',
-        'Tarkista, että kirjoitit sähköpostin oikein.'
-      )
-      setError(
-        'password',
-        'loginError',
-        'Tarkista, että kirjoitit salasanan oikein.'
-      )
+    if (user && user.errorMessage === 'Email needs to be verified') {
+      setError('email', 'VerificationError')
+    } else if (user && user.errorMessage) {
+      setError('email', 'loginError')
+      setError('password', 'loginError')
     }
   }, [user, setError])
 
@@ -62,6 +57,9 @@ const LogIn = props => {
               {errors.email &&
                 errors.email.type === 'loginError' &&
                 'Tarkista, että kirjoitit sähköpostin oikein.'}
+              {errors.email &&
+                errors.email.type === 'VerificationError' &&
+                'Sähköposti pitää verifikoida ennen sisäänkirjautumista.'}
             </div>
           </div>
 
