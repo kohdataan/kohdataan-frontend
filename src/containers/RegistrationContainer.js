@@ -1,8 +1,8 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { uploadProfileImage } from 'mattermost-redux/actions/users'
+import { getUser, uploadProfileImage } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
@@ -39,7 +39,17 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
+  const [username, setUsername] = useState('')
 
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await props.getUser(mattermostId)
+      setUsername(user.data.username)
+    }
+    fetchUser()
+  }, [])
+
+  console.log(username)
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
     if (value && !nextButtonActive) {
@@ -141,10 +151,21 @@ const RegistrationContainer = props => {
     }
   }
 
-  const profileCreationAction = () => {
+  const getUsername = () => {
+    const letter = nickname[0].toUpperCase()
+    const updated = letter.concat(username.substr(0, 20))
+    return updated
+  }
+
+  const profileCreationAction =  () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        return props.updateUser({ nickname, mmid: mattermostId })
+        const updatedUsername = getUsername()
+        return props.updateUser({
+          nickname,
+          username: updatedUsername,
+          mmid: mattermostId,
+        })
       }
       case pages['add-show-age'].current: {
         return props.updateUser({ showAge })
@@ -201,6 +222,7 @@ RegistrationContainer.propTypes = {
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
+  getUser: PropTypes.func.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
@@ -216,6 +238,7 @@ const mapDispatchToProps = dispatch =>
       uploadProfileImage,
       addUserInterests,
       getInterestsAction,
+      getUser,
     },
     dispatch
   )

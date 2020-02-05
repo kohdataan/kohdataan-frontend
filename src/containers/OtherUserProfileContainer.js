@@ -16,6 +16,7 @@ const OtherUserProfileContainer = props => {
     history,
     createDirectChannel,
   } = props
+  console.log(username)
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
@@ -41,7 +42,6 @@ const OtherUserProfileContainer = props => {
           username,
           localStorage.getItem('authToken')
         )
-
         if (userInfo) {
           setOtherUserInfo(userInfo)
         }
