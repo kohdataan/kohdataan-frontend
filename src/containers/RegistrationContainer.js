@@ -18,6 +18,8 @@ import Location from '../components/RegistrationFlow/Location'
 import Interests from '../components/RegistrationFlow/Interests'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import getInterestsAction from '../store/interest/interestAction'
+import ModalContainer from '../components/ModalContainer'
+import ButtonContainer from '../components/ButtonContainer'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 import getAge from '../utils/getAge'
 
@@ -48,6 +50,7 @@ const RegistrationContainer = props => {
     }
     fetchUser()
   }, [])
+  const [openModal, setOpenModal] = useState(false)
 
   // Change nextButtonActive value only if new value is different
   const setNextButtonStatus = value => {
@@ -194,6 +197,10 @@ const RegistrationContainer = props => {
     profileCreationAction()
   }
 
+  const closeModal = () => {
+    setOpenModal(false)
+  }
+
   return (
     <Container className="registration-container">
       <RegistrationTitle />
@@ -203,8 +210,27 @@ const RegistrationContainer = props => {
           params={pages[step]}
           onClick={stepButtonActions}
           nextButtonActive={nextButtonActive}
+          setOpenModal={setOpenModal}
         />
       )}
+      <ModalContainer
+        modalIsOpen={openModal}
+        closeModal={closeModal}
+        label="User can have five interests at most"
+      >
+        <div>
+          <h3 className="interests-modal-text">
+            Valitse vähintään kolme kiinnostavaa asiaa.
+          </h3>
+          <p>Voit lisätä valinnan klikkaamalla.</p>
+          <ButtonContainer
+            className="icon-btn interests-icon-btn"
+            onClick={closeModal}
+          >
+            <div className="accept-rules-go-back-button go-back-button" />
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
       {registrationError && (
         <ErrorNotification errorMessage={registrationError} />
       )}
