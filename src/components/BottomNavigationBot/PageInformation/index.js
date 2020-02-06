@@ -19,52 +19,57 @@ const PageInformation = props => {
   }
   switch (page) {
     case '/me':
-      text = `Tämä on oma profiilisi. Täällä näet omat profiilitietosi. Nämä tiedot näkyvät muille käyttäjille.
-        \nTäältä pääset muokkaamaan tietojasi ja kiinnostuksesi kohteita. Jos haluat muokata tietojasi, valitse "Muokkaa". 
-        \nJos haluat muokata kiinnostuksesi kohteita, valitse "Minua kiinnostaa".`
+      text = `Tämä on oma profiilisi. 
+        \nTäällä näet omat profiilitietosi. Nämä tiedot näkyvät myös muille käyttäjille.
+        \nTäältä pääset muokkaamaan tietojasi ja kiinnostuksen kohteitasi. 
+        \nJos haluat muokata tietojasi tai kiinnostuksen kohteitasi, valitse "Muokkaa".`
       break
     case '/edit-me':
       text = `Täällä voit muokata profiiliasi. 
-        \nVoit vaihtaa kuvan ja voit muuttaa nimesi.
-        \nVoit valita näkyykö ikäsi ja kotikuntasi muille käyttäjille. Voit muokata itsestäsi kirjoittamaa kuvausta.
+        \nVoit vaihtaa oman kuvan, ja voit muuttaa nimesi ja asuinpaikkasi. Voit valita näkyykö ikäsi ja asuinpaikkasi muille käyttäjille. Voit myös muokata kuvausta, jossa kerrot itsestäsi.
         \nMuista tallentaa muutokset!`
       break
     case '/friends':
-      text = `Täällä näet kaikki sinun kaverisi. Saat kavereita, kun lähetät ryhmän jäsenelle yksityisen viestin ja hän vastaa siihen.
-        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä. Jos haluat lähettää kaverillesi viestin, valitse hänen nimensä.`
+      text = `Täällä näet kaikki kaverisi. 
+        \nKaikki käyttäjät, joiden kanssa olet viestitellyt kahdestaan, ovat kavereitasi.
+        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä.
+        \nJos et enää halua viestitellä kaverin kanssa, voit estää hänet. Klikkaa kaverin nimen vieressä olevia pisteitä, ja valitse estä. 
+        \nTäällä voit myös etsiä kavereita.`
       break
     case '/edit-interests':
-      text = `Täällä voit muokata kiinnostuksesi kohteita. Voit lisätä uuden tai poistaa vanhan kohteen. Voit valita 3-5 kohdetta.
-        \nJos sinulla on jo viisi kiinnostuksen kohdetta ja haluat uuden, sinun pitää poistaa ainakin yksi kohde.
+      text = `Täällä voit muokata kiinnostuksen kohteitasi.
+        \nVoit lisätä uusia tai poistaa vanhoja kiinnostuksen kohteita klikkaamalla niitä. 
+        \nVoit valita 3-5 kohdetta.
         \nMuista tallentaa muutokset!`
       break
     case '/':
-      text = `Täällä näet kaikki ryhmät, joihin sinä kuulut. Täällä näet myös, kun me ehdotamme sinulle uutta ryhmää.
-        \nJos haluat liittyä uuteen ryhmään, valitse Liity. Jos et halua liittyä ryhmään, valitse "Ohita".
-        \nVoit kuulua korkeintaan viiteen ryhmään.
-        \nJos kuulut jo viiteen ryhmään ja haluat päästä uuteen ryhmään, sinun pitää ensin poistua jostain ryhmästä. Jos poistut ryhmästä, et voi liittyä siihen enää uudelleen.
-        \nPääset ryhmään, kun valitset ryhmän kuvakkeen.`
+      text = `Täällä näet kaikki ryhmäsi.
+        \nTäällä näet uudet ryhmät, joita ehdotamme sinulle. Ehdotamme sinulle joka päivä uusia ryhmiä. Voit itse valita mihin ryhmiin liityt.
+        \nTäällä näet myös kaikki omat ryhmät, joihin olet jo liittynyt. Näet, onko ryhmiin tullut uusia viestejä. Pääset keskustelemaan muiden ryhmäläisten kanssa, kun klikkaat ryhmän kuvaketta.
+        \nVoit kuulua korkeintaan viiteen ryhmään. Jos kuulut jo viiteen ryhmään, ja haluat liittyä uuteen ryhmään, sinun täytyy ensin poistua jostain vanhasta ryhmästä.`
       break
     case '/group-chat':
-      text = `Tämä on ryhmän oma sivu. Täällä voit keskustella muiden ryhmän jäsenten kanssa. Voit lähettää myös kuvia. Tämän keskustelun näkevät kaikki ryhmän jäsenet.
-        
-        \nKun valitset ryhmän nimen, näet ryhmän tiedot. Näet keitä ryhmään kuuluu. 
-        
-        \nJos haluat nähdä ryhmäläisen profiilin, valitse ryhmäläisen nimi. Ryhmäläisen profiilissa voit lähettää hänelle yksityisviestin.
-        
-        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi enää palata siihen takaisin. Mieti siis tarkasti, haluatko poistua ryhmästä. Jos haluat poistua ryhmästä, valitse "Poistu ryhmästä".`
+      text = `Täällä voit keskustella muiden ryhmäläisten kanssa. 
+        \nVoit kirjoittaa ja lähettää kuvia, videoita ja ääniviestejä.       
+        \nKun klikkaat ryhmän nimeä, näet ryhmän tiedot. Näet ryhmän jäsenet, ja milloin he ovat olleet paikalla. Näet myös, mitkä asiat ryhmän jäseniä kiinnostaa.       
+        \nKun klikkaat ryhmän jäsenen nimeä, näet hänen profiilinsa. Profiilissa voit lähettää hänelle yksityisen viestin.         
+        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.`
       break
     case '/member-profile':
-      text = `Tämä on ryhmäläisen profiili. Näet täällä ryhmäläisen julkiset tiedot. 
-      \nVoit lähettää ryhmäläiselle viestin, jos haluat ruveta kaveriksi. Teistä tulee kaverit, kun hän vastaa sinun viestiisi. `
+      text = `Tämä on toisen käyttäjän profiili.
+        \nTäällä näet tiedot, jotka hän haluaa kertoa itsestään muille käyttäjille.
+        \nJos haluat jutella käyttäjän kanssa kahdestaan, voit lähettää hänelle yksityisen viestin.
+        \nKäyttäjät, joiden kanssa viestittelet kahdestaan, näkyvät Kavereissasi.`
       break
     case '/private-chat':
-      text = `Täällä voit lähettää yksityisviestin. Näitä viestejä eivät muut ryhmäläiset näe.`
+      text = `Täällä voit keskustella kaverisi kanssa kahdestaan.
+        \nVoit kirjoittaa ja lähettää kuvia, videoita ja ääniviestejä.
+        \nNäitä yksityisiä viestejä ei näe kukaan muu.`
       break
     case '/account':
-      text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot ovat kaikki pakollisia. 
-      \nVoit muokata tietoja, jos esimerkiksi muutat toiselle paikkakunnalle, saat uuden sähköpostiosoitteen, tai sukunimesi vaihtuu. 
-      \nRekisteröitymistiedot eivät näy muille käyttäjille. `
+      text = `Täällä näet omat rekisteröitymistietosi. Nämä tiedot eivät näy muille käyttäjille. 
+        \nTäällä voit muokata tietojasi, jos esimerkiksi sukunimesi, sähköpostisi tai puhelinnumerosi vaihtuu.
+        \nTäällä voit myös poistaa käyttäjätilisi kokonaan. Kun poistat käyttäjätilisi, poistamme sen palvelusta viikon päästä. Jos haluat jatkaa palvelun käyttöä, kirjaudu palveluun ennen kuin viikko on kulunut. Kun poistat käyttäjätilisi, viestisi jäävät palveluun nimettömänä.`
       break
     default:
   }
