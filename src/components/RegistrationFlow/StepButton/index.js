@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ModalContainer from '../../ModalContainer'
 import './styles.scss'
 
 const StepButton = props => {
@@ -8,6 +9,7 @@ const StepButton = props => {
     params: { next, previous, last },
     onClick,
     nextButtonActive,
+    setOpenModal,
   } = props
 
   return (
@@ -38,7 +40,7 @@ const StepButton = props => {
       )}
 
       {last && !nextButtonActive && (
-        <div className="next-step-button-inactive">Tallenna</div>
+        <button className="next-step-button-inactive" onClick={() => setOpenModal(true)}>Tallenna</button>
       )}
     </div>
   )
