@@ -53,8 +53,10 @@ const PageInformation = props => {
         \nVoit kirjoittaa ja lähettää kuvia, videoita ja ääniviestejä.       
         \nKun klikkaat ryhmän nimeä, näet ryhmän tiedot. Näet ryhmän jäsenet, ja milloin he ovat olleet paikalla. Näet myös, mitkä asiat ryhmän jäseniä kiinnostaa.       
         \nKun klikkaat ryhmän jäsenen nimeä, näet hänen profiilinsa. Profiilissa voit lähettää hänelle yksityisen viestin.         
-        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.`
-      break
+        \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.
+        \nJos huomaat keskustelussa asiattoman viestin tai viestejä, voit ilmoittaa siitä valvojalle. Valvoja voi poistaa viestin. Valvoja voi tarvittaessa myös liittyä keskusteluun. Valvojalla on pääsy kaikkiin ryhmäkeskusteluihin.`
+    
+        break
     case '/member-profile':
       text = `Tämä on toisen käyttäjän profiili.
         \nTäällä näet tiedot, jotka hän haluaa kertoa itsestään muille käyttäjille.
