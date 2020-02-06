@@ -35,7 +35,7 @@ const EditProfile = props => {
       newShowAge,
       newShowLocation,
       newLocation.value,
-      img,
+      img
     )
     if (img) {
       updateProfilePicture(img)
