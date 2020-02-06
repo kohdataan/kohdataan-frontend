@@ -66,6 +66,7 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
+      <div className="profile-header-container">
         <ProfileImage
           userId={mmuser.id}
           lastPictureUpdate={mmuser.last_picture_update}
