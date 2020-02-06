@@ -44,6 +44,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditInterestsContainer.propTypes = {
+  history: PropTypes.instanceOf(Object),
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
   addUserInterests: PropTypes.func.isRequired,
@@ -51,6 +52,7 @@ EditInterestsContainer.propTypes = {
 }
 
 EditInterestsContainer.defaultProps = {
+  history: {},
   userInterests: [],
   interestOptions: [],
 }

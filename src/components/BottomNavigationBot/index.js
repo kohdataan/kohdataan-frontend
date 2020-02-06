@@ -131,7 +131,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
             tabIndex={0}
             onClick={openLogOutModal}
           >
-            <i className="fas fa-cog modal-icon" aria-hidden="true" />
+            <i className="fas fa-sign-out-alt modal-icon" aria-hidden="true" />
             Kirjaudu ulos
           </ButtonContainer>
           <ModalContainer

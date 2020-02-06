@@ -22,6 +22,10 @@ const Account = props => {
     setShowModal(false)
   }
 
+  const closeEditPage = () => {
+    history.goBack()
+  }
+
   const handleDeleteUser = async () => {
     try {
       const data = { mmid: mmuser.id }
@@ -66,6 +70,12 @@ const Account = props => {
     <div className="account-update-container">
       <div className="account-header">
         <h1>Muokkaa tietojasi</h1>
+        <ButtonContainer
+          className="icon-btn go-back-button close-edit-btn"
+          onClick={closeEditPage}
+        >
+          <span className="sr-only">Sulje</span>
+        </ButtonContainer>
       </div>
       <div className="account-info-text">
         <h3>
@@ -155,6 +165,12 @@ const Account = props => {
           Aloita käyttäjätilin poistaminen.
         </div>
       </div>
+      <ButtonContainer
+        className="button-secondary account-save-button"
+        onClick={closeEditPage}
+      >
+        Valmis
+      </ButtonContainer>
       <EditAccountModal
         showModal={showModal}
         updateUser={updateAccountInfo}
