@@ -28,6 +28,13 @@ const EditProfileContainer = props => {
     }
   }
 
+  const getNewUsername = nickname => {
+    const letter = nickname[0].toLowerCase()
+    const firstRemoved = currentUser && currentUser.username.substr(1, 20)
+    const updated = letter.concat(firstRemoved)
+    return updated
+  }
+
   const handleEditReady = async (
     newDescription,
     newNickname,
@@ -35,6 +42,10 @@ const EditProfileContainer = props => {
     showLocation,
     location
   ) => {
+    let updatedUsername
+    if (myUserInfo.nickname !== newNickname)
+      updatedUsername = getNewUsername(newNickname)
+
     const newUserInfo = {
       ...myUserInfo,
       mmid: mmuserId,
@@ -43,6 +54,7 @@ const EditProfileContainer = props => {
       showAge,
       showLocation,
       location,
+      username: updatedUsername,
     }
     await updateUser(newUserInfo)
   }

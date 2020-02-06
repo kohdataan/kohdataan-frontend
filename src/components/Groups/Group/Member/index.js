@@ -41,7 +41,6 @@ Member.propTypes = {
   userId: propTypes.string.isRequired,
   nickname: propTypes.string.isRequired,
   currentUserId: propTypes.string,
-  iconColor: propTypes.string.isRequired,
 }
 
 Member.defaultProps = {

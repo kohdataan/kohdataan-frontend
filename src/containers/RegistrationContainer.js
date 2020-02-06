@@ -2,7 +2,11 @@ import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getUser, uploadProfileImage } from 'mattermost-redux/actions/users'
+import {
+  getUser,
+  uploadProfileImage,
+  setDefaultProfileImage as setDefaultProfileImageAction,
+} from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import { updateUser, addUserInterests } from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
@@ -32,6 +36,8 @@ const RegistrationContainer = props => {
     interestOptions,
     registrationError,
     userBirthdate,
+    mmuser,
+    setDefaultProfileImage,
   } = props
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState('')
@@ -144,13 +150,23 @@ const RegistrationContainer = props => {
     }
   }
 
-  const profileCreationAction = () => {
+  const getUsername = () => {
+    const letter = nickname[0].toLowerCase()
+    const { username } = mmuser
+    const updated = letter.concat(username.substr(0, 20))
+    return updated
+  }
+
+  const profileCreationAction = async () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        return props.updateUser({
+        const updatedUsername = getUsername()
+        await props.updateUser({
           nickname,
+          username: updatedUsername,
           mmid: mattermostId,
         })
+        return setDefaultProfileImage(mattermostId)
       }
       case pages['add-show-age'].current: {
         return props.updateUser({ showAge })
@@ -230,6 +246,8 @@ RegistrationContainer.propTypes = {
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
+  mmuser: PropTypes.shape({ username: PropTypes.string }).isRequired,
+  setDefaultProfileImage: PropTypes.func.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
@@ -246,14 +264,19 @@ const mapDispatchToProps = dispatch =>
       addUserInterests,
       getInterestsAction,
       getUser,
+      setDefaultProfileImage: setDefaultProfileImageAction,
     },
     dispatch
   )
 
 const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
+  const mmuser =
+    state.entities.users.profiles &&
+    state.entities.users.profiles[currentUserId]
   return {
     mattermostId: currentUserId,
+    mmuser,
     interestOptions: state.interests.results,
     registrationError: state.user.errorMessage,
     userBirthdate: state.user.birthdate,
