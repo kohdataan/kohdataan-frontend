@@ -1,19 +1,33 @@
 import React, { useState, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Interests from '../RegistrationFlow/Interests'
 import EditTitle from '../EditProfile/EditTitle'
 import ButtonContainer from '../ButtonContainer'
+import ModalContainer from '../ModalContainer'
 
 const EditInterests = props => {
   const {
-    history,
     currentInterestIds,
     handleInterestEditReady,
     interestOptions,
+    history,
   } = props
   const [newInterests, setNewInterests] = useState([...currentInterestIds])
+  const [showModal, setShowModal] = useState(false)
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
+  const handleSubmit = () => {
+    if (newInterests.length < 3) {
+      setShowModal(true)
+    } else {
+      handleInterestEditReady(newInterests)
+      history.push('/me')
+    }
+  }
 
   return (
     <div className="interests-container">
@@ -25,16 +39,32 @@ const EditInterests = props => {
         hideStep
       />
       <div style={{ marginBottom: '100px', textAlign: 'center' }}>
-        <Link to="/me">
-          <ButtonContainer
-            secondary
-            onClick={() => handleInterestEditReady(newInterests)}
-            className="save-interests-button"
-          >
-            Tallenna
-          </ButtonContainer>
-        </Link>
+        <ButtonContainer
+          secondary
+          onClick={handleSubmit}
+          className="save-interests-button"
+        >
+          Tallenna
+        </ButtonContainer>
       </div>
+      <ModalContainer
+        modalIsOpen={showModal}
+        closeModal={closeModal}
+        label="User must have at least 3 interests"
+      >
+        <div>
+          <h3 className="interests-modal-text">
+            Valitse ainakin kolme kiinnostavaa asiaa.
+          </h3>
+          <p>Voit lisätä valinnan klikkaamalla.</p>
+          <ButtonContainer
+            className="icon-btn interests-icon-btn"
+            onClick={closeModal}
+          >
+            <div className="accept-rules-go-back-button go-back-button" />
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
     </div>
   )
 }
@@ -44,6 +74,7 @@ EditInterests.propTypes = {
   handleInterestEditReady: propTypes.func.isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
   currentInterestIds: propTypes.instanceOf(Array).isRequired,
+  history: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(EditInterests)

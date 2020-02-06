@@ -17,7 +17,6 @@ const EditProfileContainer = props => {
     myUserInfo,
     uploadProfileImage,
   } = props
-
   // Update profile picture
   const updatePicture = img => {
     if (currentUser && img) {
