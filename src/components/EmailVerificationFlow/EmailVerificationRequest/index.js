@@ -16,12 +16,11 @@ const EmailVerificationRequest = props => {
 
       <div className="email-verification-content-container">
         <h2 className="email-verification-title">
-          Sähköposti verifikaation uudelleenlähetys
+          Sähköposti vahvistuksen uudelleenlähetys
         </h2>
         <p>Anna sähköpostiosoitteesi.</p>
         <p>
-          Lähetämme sinulle uuden linkin josta pystyt verifikoimaan
-          sähköpostisi.
+          Lähetämme sinulle uuden linkin josta pystyt vahvistamaan sähköpostisi.
         </p>
 
         <div className="email-verification-input-container">

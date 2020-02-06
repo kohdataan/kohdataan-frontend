@@ -9,7 +9,7 @@ const VerificationInfo = () => {
 
       <div className="email-verification-content-container">
         <h2 className="email-verification-title">
-          Sähköpostin verifikaatio uudelleenlähetetty
+          Sähköpostin vahvistus linkki uudelleenlähetetty
         </h2>
         <div className="email-verification-input-container">
           <div className="email-verification-info-content">
@@ -20,7 +20,7 @@ const VerificationInfo = () => {
                 ja aiheena &quot;Kirjautuminen&quot;.
               </li>
               <li>
-                Kun klikkaat viestissä olevaa linkkiä, verifikoit käyttäjäsi
+                Kun klikkaat viestissä olevaa linkkiä, vahvistat käyttäjäsi
               </li>
               <li>Kirjaudu tämän jälkeen sisään käyttäjälläsi</li>
             </ol>

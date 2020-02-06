@@ -11,7 +11,7 @@ const EmailVerificationContainer = props => {
     if (resp.success) {
       history.push('/email-verification-info')
     } else if (resp.message === 'This account is already verified') {
-      alert('Sähköposti on jo verifikoitu.')
+      alert('Sähköposti on jo vahvistettu.')
     } else {
       alert('Sähköpostia ei löytynyt.')
     }
