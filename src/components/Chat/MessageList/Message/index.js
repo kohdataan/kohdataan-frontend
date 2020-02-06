@@ -9,7 +9,6 @@ const Message = props => {
     text,
     currentUserId,
     senderId,
-    iconColor,
     type,
     timeSent,
     dateSent,
@@ -88,7 +87,6 @@ const Message = props => {
                   <div
                     className="label chat-message-sender-icon"
                     style={{
-                      backgroundColor: iconColor,
                       backgroundImage: `url(
                         ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${senderId}/image
                       )`,
@@ -99,10 +97,7 @@ const Message = props => {
               </div>
             )}
             {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
-              <div
-                className="chat-message-sender-icon"
-                style={{ backgroundColor: iconColor }}
-              >
+              <div className="chat-message-sender-icon">
                 <i aria-hidden="true" title={sender[0]} />
                 <span className="label">{sender[0]}</span>
               </div>
@@ -147,7 +142,6 @@ Message.propTypes = {
   type: propTypes.string,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
-  iconColor: propTypes.string.isRequired,
   directChannel: propTypes.bool.isRequired,
   timeSent: propTypes.string.isRequired,
   dateSent: propTypes.string.isRequired,

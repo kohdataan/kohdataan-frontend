@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -21,31 +21,11 @@ const EditProfileContainer = props => {
     uploadProfileImage,
   } = props
 
-  const [username, setUsername] = useState('')
-
-  useEffect(() => {
-    async function fetchUser() {
-      const user = await props.getUser(mmuserId)
-      setUsername(user.data.username)
-    }
-    fetchUser()
-  }, [])
-
   // Update profile picture
   const updatePicture = img => {
-    if (!img) {
-      props.setDefaultProfileImage(currentUser.id)
-    }
     if (currentUser && img) {
       uploadProfileImage(currentUser.id, dataUriToBlob(img))
     }
-  }
-
-  const changeUsername = nickname => {
-    const letter = nickname[0].toLowerCase()
-    const firstRemoved = username.substr(1, 20)
-    const updated = letter.concat(firstRemoved)
-    return updated
   }
 
   const handleEditReady = async (
@@ -53,13 +33,8 @@ const EditProfileContainer = props => {
     newNickname,
     showAge,
     showLocation,
-    location,
-    img
+    location
   ) => {
-    let updatedUsername
-    if (myUserInfo.nickname !== newNickname)
-      updatedUsername = changeUsername(newNickname)
-
     const newUserInfo = {
       ...myUserInfo,
       mmid: mmuserId,
@@ -68,12 +43,8 @@ const EditProfileContainer = props => {
       showAge,
       showLocation,
       location,
-      username: updatedUsername,
     }
     await updateUser(newUserInfo)
-    if (updatedUsername && !img) {
-      await updatePicture()
-    }
   }
 
   return (
@@ -109,8 +80,6 @@ EditProfileContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
   mmuserId: PropTypes.string.isRequired,
-  getUser: PropTypes.func.isRequired,
-  setDefaultProfileImage: PropTypes.func.isRequired,
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

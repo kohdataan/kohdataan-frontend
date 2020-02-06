@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -41,15 +41,6 @@ const RegistrationContainer = props => {
   const [img, setImg] = useState(null)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
-  const [username, setUsername] = useState('')
-
-  useEffect(() => {
-    async function fetchUser() {
-      const user = await props.getUser(mattermostId)
-      setUsername(user.data.username)
-    }
-    fetchUser()
-  }, [])
   const [openModal, setOpenModal] = useState(false)
 
   // Change nextButtonActive value only if new value is different
@@ -153,19 +144,11 @@ const RegistrationContainer = props => {
     }
   }
 
-  const getUsername = () => {
-    const letter = nickname[0].toLowerCase()
-    const updated = letter.concat(username.substr(0, 20))
-    return updated
-  }
-
-  const profileCreationAction =  () => {
+  const profileCreationAction = () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        const updatedUsername = getUsername()
         return props.updateUser({
           nickname,
-          username: updatedUsername,
           mmid: mattermostId,
         })
       }
@@ -247,7 +230,6 @@ RegistrationContainer.propTypes = {
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
   userBirthdate: PropTypes.string,
-  getUser: PropTypes.func.isRequired,
 }
 
 RegistrationContainer.defaultProps = {
@@ -269,8 +251,9 @@ const mapDispatchToProps = dispatch =>
   )
 
 const mapStateToProps = state => {
+  const { currentUserId } = state.entities.users
   return {
-    mattermostId: state.entities.users.currentUserId,
+    mattermostId: currentUserId,
     interestOptions: state.interests.results,
     registrationError: state.user.errorMessage,
     userBirthdate: state.user.birthdate,

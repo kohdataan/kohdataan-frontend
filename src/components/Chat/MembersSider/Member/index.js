@@ -4,14 +4,7 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const Member = props => {
-  const {
-    userId,
-    nickName,
-    currentUserId,
-    profiles,
-    iconMemberStatus,
-    iconColor,
-  } = props
+  const { userId, nickName, currentUserId, profiles, iconMemberStatus } = props
   const userFirstLetter = nickName[0]
   const getUsername = () => {
     return profiles && profiles[userId] && profiles[userId].username
@@ -25,7 +18,6 @@ const Member = props => {
           <div
             className="label chat-message-sender-icon"
             style={{
-              backgroundColor: iconColor,
               backgroundImage: `url(
                 ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
               )`,
@@ -39,7 +31,6 @@ const Member = props => {
           <div
             className="label chat-message-sender-icon"
             style={{
-              backgroundColor: iconColor,
               backgroundImage: `url(
                 ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
               )`,
@@ -72,7 +63,6 @@ Member.propTypes = {
   currentUserId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
-  iconColor: propTypes.string.isRequired,
 }
 
 export default memo(Member)

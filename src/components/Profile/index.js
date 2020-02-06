@@ -67,10 +67,7 @@ const Profile = props => {
         )}
       </div>
       <div className="profile-header-container">
-        <ProfileImage
-          userId={mmuser.id}
-          lastPictureUpdate={mmuser.last_picture_update}
-        />
+        <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
             nickname={nickname || mmuser.username}
