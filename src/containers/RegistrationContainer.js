@@ -214,7 +214,6 @@ const RegistrationContainer = props => {
       {registrationError && (
         <ErrorNotification errorMessage={registrationError} />
       )}
-
     </Container>
   )
 }
