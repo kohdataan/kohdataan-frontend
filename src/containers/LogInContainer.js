@@ -39,7 +39,7 @@ const LogInContainer = props => {
       }
     } else if (uuid) {
       API.verifyEmail({ uuid }).then(response => {
-        if (response.ok) {
+        if (response.success) {
           setUuidValid(true)
         } else {
           setUuidValid(false)
