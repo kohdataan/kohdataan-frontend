@@ -90,6 +90,9 @@
     outline: none;
     border: solid 1px $white;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .registration-problem-links-container {
@@ -98,7 +101,7 @@
 
 .registration-problem-link {
   color: $white;
-  font-size: 15px;
+  font-size: 1em;
   display: block;
   text-align: center;
   padding: 10px 0 10px 0;

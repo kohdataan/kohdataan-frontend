@@ -18,7 +18,7 @@ const ThankYouMessage = () => {
           <Link className="registration-problem-link" to="/createaccount">
             Olen uusi käyttäjä ja haluan rekisteröityä.
           </Link>
-          <Link className="registration-problem-link" to="/">
+          <Link className="registration-problem-link" to="/reset-password">
             Olen unohtanut salasanani.
           </Link>
         </div>

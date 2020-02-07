@@ -7,7 +7,7 @@ import getInterestsAction from '../store/interest/interestAction'
 import EditInterests from '../components/EditInterests'
 
 const EditInterestsContainer = props => {
-  const { userInterests, interestOptions, addUserInterests } = props
+  const { history, userInterests, interestOptions, addUserInterests } = props
 
   const handleEditReady = ids => {
     addUserInterests({ userInterests: ids })
@@ -19,6 +19,7 @@ const EditInterestsContainer = props => {
 
   return (
     <EditInterests
+      history={history}
       currentInterestIds={getCurrentIds()}
       handleInterestEditReady={handleEditReady}
       interestOptions={interestOptions}
@@ -43,12 +44,15 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 EditInterestsContainer.propTypes = {
+  history: PropTypes.instanceOf(Object),
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
   addUserInterests: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 EditInterestsContainer.defaultProps = {
+  history: {},
   userInterests: [],
   interestOptions: [],
 }

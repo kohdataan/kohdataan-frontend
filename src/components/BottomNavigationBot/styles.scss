@@ -18,6 +18,7 @@
   white-space: normal;
   max-width: 80%;
   text-align: left;
+  border-radius: 0;
 }
 
 .nav-bot-chat {
@@ -31,6 +32,11 @@
 
 .inactive-item {
   color: #a9a9a9;
+}
+
+.log-out-btn {
+  width: 80px;
+  margin: 10px;
 }
 
 .modal-content {

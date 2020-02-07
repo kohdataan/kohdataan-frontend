@@ -14,6 +14,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
   const [showSendMessage, setShowSendMessage] = useState(false)
+  const [logOutConfirmation, setLogOutConfirmation] = useState(false)
   const openModal = setter => setter(true)
   const closeModal = setter => setter(false)
 
@@ -35,6 +36,11 @@ const BottomNavigationBot = forwardRef((props, ref) => {
   const closeSendMessageModal = () => {
     setShowSendMessage(false)
     closeModal(setShowSendMessage)
+  }
+
+  const openLogOutModal = () => {
+    setLogOutConfirmation(true)
+    openModal(setLogOutConfirmation)
   }
 
   return (
@@ -123,14 +129,37 @@ const BottomNavigationBot = forwardRef((props, ref) => {
             className="bot-link"
             role="link"
             tabIndex={0}
-            onClick={() => {
-              handleLogout()
-              closeModal(setShowBot)
-            }}
+            onClick={openLogOutModal}
           >
-            <i className="fas fa-cog modal-icon" aria-hidden="true" />
+            <i className="fas fa-sign-out-alt modal-icon" aria-hidden="true" />
             Kirjaudu ulos
           </ButtonContainer>
+          <ModalContainer
+            modalIsOpen={logOutConfirmation}
+            closeModal={() => closeModal(setLogOutConfirmation)}
+            label="ConfirmLogout"
+          >
+            <div>
+              <h3 className="interests-modal-text">
+                Haluatko varmasti kirjautua ulos?
+              </h3>
+              <ButtonContainer
+                className="button button-secondary log-out-btn"
+                onClick={() => closeModal(setLogOutConfirmation)}
+              >
+                En
+              </ButtonContainer>
+              <ButtonContainer
+                className="button log-out-btn"
+                onClick={() => {
+                  handleLogout()
+                  closeModal(setShowBot)
+                }}
+              >
+                Kyllä
+              </ButtonContainer>
+            </div>
+          </ModalContainer>
         </div>
         <ButtonContainer
           className="button-close"

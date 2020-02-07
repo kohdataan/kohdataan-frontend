@@ -24,12 +24,33 @@ html {
   box-sizing: border-box;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: $beige;
+  border: solid 1px $orange;
+  border-radius: 30px;
+  padding: 5px 10px;
+}
+
+.button-container:hover {
+  cursor: pointer;
+}
+
 .go-back-button {
   width: 1.7em;
   height: 1.7em;
   background-image: url('../assets/X.svg');
   background-repeat: no-repeat;
   border: none;
+  border-radius: 0;
 }
 
 h1 {
@@ -63,18 +84,6 @@ h4 {
   letter-spacing: -0.1px;
   text-align: center;
   color: $gray;
-}
-
-button {
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  background-color: $beige;
-  border: solid 1px $orange;
-  border-radius: 30px;
-  padding: 5px 10px;
 }
 
 .sr-only {

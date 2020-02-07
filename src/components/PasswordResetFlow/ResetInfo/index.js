@@ -36,7 +36,7 @@ const ResetInfo = () => {
           </div>
           <div className="divider" aria-hidden="true" />
           <div className="password-reset-link-container">
-            <Link className="password-reset-link" to="/">
+            <Link className="password-reset-link" to="/registrationproblem">
               {'Tarvitsen apua salasanan vaihtamisessa.'}
             </Link>
           </div>
