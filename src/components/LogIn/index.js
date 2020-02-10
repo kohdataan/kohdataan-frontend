@@ -20,7 +20,7 @@ const LogIn = props => {
   }, [user, setError])
 
   const onSubmit = async data => {
-    await handleLogin(data.email.trim(), data.password)
+    await handleLogin(data.email.trim().toLowerCase(), data.password)
   }
 
   return (
@@ -59,7 +59,7 @@ const LogIn = props => {
                 'Tarkista, että kirjoitit sähköpostin oikein.'}
               {errors.email &&
                 errors.email.type === 'VerificationError' &&
-                'Sähköposti pitää verifikoida ennen sisäänkirjautumista.'}
+                'Sähköposti pitää varmentaa ennen sisäänkirjautumista.'}
             </div>
           </div>
 
