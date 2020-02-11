@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 
-const ResetInfo = () => {
+const EmailSmsInfo = () => {
   return (
     <main role="main" className="password-reset-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -46,4 +46,4 @@ const ResetInfo = () => {
   )
 }
 
-export default memo(ResetInfo)
+export default memo(EmailSmsInfo)

@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import PasswordResetInfo from '../components/PasswordResetFlow/ResetInfo'
+import EmailRequestInfo from '../components/EmailSmsInfo'
 
 const PasswordResetInfoContainer = () => {
-  return <PasswordResetInfo />
+  return <EmailRequestInfo />
 }
 
 // TODO: refactor

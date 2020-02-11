@@ -1,12 +1,14 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import InputField from '../../InputField'
-import ButtonContainer from '../../ButtonContainer'
+import InputField from '../InputField'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const ResetRequest = props => {
-  const { handleResetRequest } = props
+
+
+const EmailSmsForm = props => {
+  const { handleRequest } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -42,7 +44,7 @@ const ResetRequest = props => {
           </div>
           <ButtonContainer
             className="password-reset-button"
-            onClick={() => handleResetRequest({ email, phoneNumber })}
+            onClick={() => handleRequest({ email, phoneNumber })}
           >
             Lähetä
           </ButtonContainer>
@@ -58,8 +60,8 @@ const ResetRequest = props => {
   )
 }
 
-ResetRequest.propTypes = {
-  handleResetRequest: PropTypes.func.isRequired,
+EmailSmsForm.propTypes = {
+  handleRequest: PropTypes.func.isRequired,
 }
 
-export default memo(ResetRequest)
+export default memo(EmailSmsForm)

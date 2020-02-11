@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
-import ResetRequest from '../components/PasswordResetFlow/ResetRequest'
+import EmailSmsForm from '../components/EmailSmsForm'
 
 const PasswordResetRequestContainer = props => {
   const { history } = props
@@ -15,7 +15,7 @@ const PasswordResetRequestContainer = props => {
     }
   }
 
-  return <ResetRequest handleResetRequest={handleResetRequest} />
+  return <EmailSmsForm handleResetRequest={handleResetRequest} />
 }
 
 PasswordResetRequestContainer.propTypes = {
