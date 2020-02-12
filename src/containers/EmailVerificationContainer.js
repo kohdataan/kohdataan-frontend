@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
-import VerifyRequest from '../components/EmailVerificationFlow/EmailVerificationRequest'
+import EmailSmsForm from '../components/EmailSmsForm'
 
 const EmailVerificationContainer = props => {
   const { history } = props
@@ -17,7 +17,13 @@ const EmailVerificationContainer = props => {
     }
   }
 
-  return <VerifyRequest handleVerifyRequest={handleVerifyRequest} />
+  return (
+    <EmailSmsForm
+      handleRequest={handleVerifyRequest}
+      title="Sähköpostin vahvistamis linkin uudelleen lähetys"
+      description="Lähetämme sinulle linkin, josta pääset vahvistamaan sähköpostisi."
+    />
+  )
 }
 
 EmailVerificationContainer.propTypes = {

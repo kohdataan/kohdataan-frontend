@@ -108,7 +108,7 @@ const LogIn = props => {
             Olen uusi käyttäjä ja haluan rekisteröityä
           </Link>
           <Link className="login-link" to="/email-verification">
-            Minulla ei ole sähköpostin vahvistus linkkiä
+            En ole saanut sähköpostin vahvistus linkkiä
           </Link>
         </div>
       </div>
