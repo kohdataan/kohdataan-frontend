@@ -15,7 +15,13 @@ const PasswordResetRequestContainer = props => {
     }
   }
 
-  return <EmailSmsForm handleResetRequest={handleResetRequest} />
+  return (
+    <EmailSmsForm
+      handleRequest={handleResetRequest}
+      title="Salasanan palautus"
+      description="Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan."
+    />
+  )
 }
 
 PasswordResetRequestContainer.propTypes = {

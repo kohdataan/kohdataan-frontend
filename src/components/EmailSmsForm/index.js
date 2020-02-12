@@ -5,10 +5,11 @@ import InputField from '../InputField'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-
+// This component needs a function that takes in an object that contains email and phonenumber,
+// And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest } = props
+  const { handleRequest, title, description } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -17,11 +18,9 @@ const EmailSmsForm = props => {
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="password-reset-content-container">
-        <h2 className="password-reset-title">Salasanan palautus</h2>
+        <h2 className="password-reset-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
-        <p>
-          Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan.
-        </p>
+        <p>{description}</p>
 
         <div className="password-reset-input-container">
           <InputField
@@ -51,7 +50,7 @@ const EmailSmsForm = props => {
 
           <div className="password-reset-link-container">
             <Link className="password-reset-link" to="/login">
-              Olen vanha käyttäjä ja haluan kirjautua sisään
+              Takaisin sisäänkirjautumiseen
             </Link>
           </div>
         </div>
@@ -62,6 +61,8 @@ const EmailSmsForm = props => {
 
 EmailSmsForm.propTypes = {
   handleRequest: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 }
 
 export default memo(EmailSmsForm)
