@@ -7,15 +7,15 @@ const EmailSmsInfo = props => {
   const { title, description, guide } = props
 
   return (
-    <main role="main" className="password-reset-container">
+    <main role="main" className="email-sms-info-container">
       <h1 className="main-title">Kohdataan</h1>
 
-      <div className="password-reset-content-container">
-        <h2 className="password-reset-title">{title}</h2>
+      <div className="email-sms-info-content-container">
+        <h2 className="email-sms-info-title">{title}</h2>
         <p>{description}</p>
 
-        <div className="password-reset-input-container">
-          <div className="password-reset-info-content">
+        <div className="email-sms-info-input-container">
+          <div className="email-sms-info-content">
             {guide}
             <p className="reminder-content-text">
               Jos et löydä sähköpostista viestiä, muista tarkistaa myös
@@ -23,8 +23,8 @@ const EmailSmsInfo = props => {
             </p>
           </div>
           <div className="divider" aria-hidden="true" />
-          <div className="password-reset-link-container">
-            <Link className="password-reset-link" to="/">
+          <div className="email-sms-info-link-container">
+            <Link className="email-sms-info-link" to="/">
               Takaisin sisäänkirjautumiseen
             </Link>
           </div>

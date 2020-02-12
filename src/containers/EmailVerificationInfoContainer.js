@@ -3,7 +3,7 @@ import EmailSmsInfo from '../components/EmailSmsInfo'
 
 const PasswordResetInfoContainer = () => {
   const emailVerificationInfo = (
-    <ol className="password-reset-info-list">
+    <ol className="email-sms-info-list">
       <li>Avaa sähköposti.</li>
       <li>
         Olet saanut viestin, jossa on lähettäjänä &quot;Kohdataan&quot; ja

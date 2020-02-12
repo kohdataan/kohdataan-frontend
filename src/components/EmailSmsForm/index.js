@@ -14,21 +14,21 @@ const EmailSmsForm = props => {
   const [phoneNumber, setPhoneNumber] = useState('')
 
   return (
-    <div className="password-reset-container">
+    <div className="email-sms-form-container">
       <h1 className="main-title">Kohdataan</h1>
 
-      <div className="password-reset-content-container">
-        <h2 className="password-reset-title">{title}</h2>
+      <div className="email-sms-form-content-container">
+        <h2 className="email-sms-form-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
         <p>{description}</p>
 
-        <div className="password-reset-input-container">
+        <div className="email-sms-form-input-container">
           <InputField
             label="Sähköpostiosoite"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            inputClassName="password-reset-input-text"
-            labelClassName="password-reset-input-field"
+            inputClassName="email-sms-form-input-text"
+            labelClassName="email-sms-form-input-field"
             showPlaceholder={false}
           />
           <div className="hidden-field">
@@ -36,20 +36,20 @@ const EmailSmsForm = props => {
               label="Puhelinnumero"
               value={email}
               onChange={e => setPhoneNumber(e.target.value)}
-              inputClassName="password-reset-input-text"
-              labelClassName="password-reset-input-field"
+              inputClassName="email-sms-form-input-text"
+              labelClassName="email-sms-form-input-field"
               showPlaceholder={false}
             />
           </div>
           <ButtonContainer
-            className="password-reset-button"
+            className="email-sms-form-button"
             onClick={() => handleRequest({ email, phoneNumber })}
           >
             Lähetä
           </ButtonContainer>
 
-          <div className="password-reset-link-container">
-            <Link className="password-reset-link" to="/login">
+          <div className="email-sms-form-link-container">
+            <Link className="email-sms-form-link" to="/login">
               Takaisin sisäänkirjautumiseen
             </Link>
           </div>
