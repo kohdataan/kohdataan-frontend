@@ -22,12 +22,14 @@ const EditProfileContainer = props => {
     myUserInfo,
   } = props
 
+  /*
   const getNewUsername = nickname => {
     const letter = nickname[0].toLowerCase()
     const firstRemoved = currentUser && currentUser.username.substr(1, 20)
     const updated = letter.concat(firstRemoved)
     return updated
   }
+  */
 
   const updateImages = async img => {
     if (!img && !myUserInfo.imageUploaded) {
