@@ -1,7 +1,7 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Group from './Group'
-import Instructions from '../Profile/Instructions'
+import Tutorial from '../Tutorial'
 import './styles.scss'
 
 const Groups = props => {
@@ -12,23 +12,19 @@ const Groups = props => {
     getUnreadCount,
     currentUserId,
     tutorialWatched,
-    groupsCoordinates,
+    updateUser,
   } = props
 
-  const getShowModals = () => {
-    return !tutorialWatched
-  }
+  const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
-  const [showModals, setShowModals] = useState({
-    5: getShowModals(),
-  })
-
-  const closeModal = modal => async () => {
-    const newState = { ...showModals }
-    newState[modal] = false
-    setShowModals(newState)
-    await props.updateUser({ tutorialWatched: true })
-  }
+  const steps = [
+    {
+      target: '.nav-link-Ryhmät',
+      content:
+        'Voit jutella ja tutustua uusiin ihmisiin ryhmissä. Löydät ryhmät täältä.',
+      disableBeacon: true,
+    },
+  ]
 
   return (
     <div className="groups-wrapper">
@@ -48,11 +44,7 @@ const Groups = props => {
         ))}
       </div>
       {!tutorialWatched && (
-        <Instructions
-          closeModal={closeModal}
-          showModals={showModals}
-          groupsCoordinates={groupsCoordinates}
-        />
+        <Tutorial steps={steps} updateTutorialWatched={updateTutorialWatched} />
       )}
     </div>
   )
@@ -70,7 +62,6 @@ Groups.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
-  groupsCoordinates: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Groups)

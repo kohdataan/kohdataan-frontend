@@ -1,7 +1,7 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
-import Instructions from '../Profile/Instructions'
+import Tutorial from '../Tutorial'
 import './styles.scss'
 
 const Friends = props => {
@@ -13,24 +13,17 @@ const Friends = props => {
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
-    friendsCoordinates,
     history,
   } = props
 
-  const getShowModals = () => {
-    return !tutorialWatched
-  }
-
-  const [showModals, setShowModals] = useState({
-    4: getShowModals(),
-  })
-
-  const closeModal = modal => () => {
-    const newState = { ...showModals }
-    newState[modal] = false
-    setShowModals(newState)
-    history.push('/')
-  }
+  const steps = [
+    {
+      target: '.nav-link-Kaverit',
+      content:
+        'Voit viestitellä kavereiden kanssa kahdestaan. Löydät kaverit täältä.',
+      disableBeacon: true,
+    },
+  ]
 
   return (
     <main className="friends-wrapper">
@@ -57,13 +50,7 @@ const Friends = props => {
           </h3>
         )}
       </div>
-      {!tutorialWatched && (
-        <Instructions
-          closeModal={closeModal}
-          showModals={showModals}
-          friendsCoordinates={friendsCoordinates}
-        />
-      )}
+      {!tutorialWatched && <Tutorial steps={steps} history={history} />}
     </main>
   )
 }
@@ -77,11 +64,6 @@ Friends.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object),
-}
-
-Friends.defaultProps = {
-  friendsCoordinates: {},
 }
 
 export default memo(Friends)
