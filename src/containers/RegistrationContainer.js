@@ -26,6 +26,7 @@ import ModalContainer from '../components/ModalContainer'
 import ButtonContainer from '../components/ButtonContainer'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 import getAge from '../utils/getAge'
+import updateUsername from '../utils/updateUsername'
 
 const RegistrationContainer = props => {
   const {
@@ -45,6 +46,7 @@ const RegistrationContainer = props => {
   const [showLocation, setShowLocation] = useState('')
   const [description, setDescription] = useState('')
   const [img, setImg] = useState(null)
+  const [imageUploaded, setImageUploaded] = useState(false)
   const [interests, setInterests] = useState([])
   const [nextButtonActive, setNextButtonActive] = useState(true)
   const [openModal, setOpenModal] = useState(false)
@@ -56,6 +58,11 @@ const RegistrationContainer = props => {
     } else if (!value && nextButtonActive) {
       setNextButtonActive(false)
     }
+  }
+
+  const setProfileImage = i => {
+    setImg(i)
+    setImageUploaded(true)
   }
 
   const checkInputValidity = page => {
@@ -135,7 +142,7 @@ const RegistrationContainer = props => {
         )
       case pages['add-image'].current:
         checkInputValidity('add-image')
-        return <Picture onChange={p => setImg(p)} />
+        return <Picture onChange={p => setProfileImage(p)} />
       case pages['add-interests'].current:
         checkInputValidity('add-interests')
         return (
@@ -150,17 +157,10 @@ const RegistrationContainer = props => {
     }
   }
 
-  const getUsername = () => {
-    const letter = nickname[0].toLowerCase()
-    const { username } = mmuser
-    const updated = letter.concat(username.substr(0, 20))
-    return updated
-  }
-
   const profileCreationAction = async () => {
     switch (step) {
       case pages['add-nickname'].current: {
-        const updatedUsername = getUsername()
+        const updatedUsername = updateUsername(nickname, mmuser)
         await props.updateUser({
           nickname,
           username: updatedUsername,
@@ -181,6 +181,9 @@ const RegistrationContainer = props => {
         return props.updateUser({ description })
       }
       case pages['add-image'].current: {
+        await props.updateUser({
+          imageUploaded,
+        })
         return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
@@ -192,7 +195,8 @@ const RegistrationContainer = props => {
   }
 
   const stepButtonActions = () => {
-    if (pages[step].last) props.updateUser({ profileReady: true })
+    if (pages[step].last)
+      props.updateUser({ profileReady: true, imageUploaded })
     profileCreationAction()
   }
 

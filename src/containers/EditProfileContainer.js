@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import { updateUser as updateUserAction } from '../store/user/userAction'
 import dataUriToBlob from '../utils/dataUriToBlob'
 import EditProfile from '../components/EditProfile'
+import updateUsername from '../utils/updateUsername'
 
 const EditProfileContainer = props => {
   const {
@@ -18,15 +19,7 @@ const EditProfileContainer = props => {
     interestOptions,
     updateUser,
     myUserInfo,
-    uploadProfileImage,
   } = props
-
-  // Update profile picture
-  const updatePicture = img => {
-    if (currentUser && img) {
-      uploadProfileImage(currentUser.id, dataUriToBlob(img))
-    }
-  }
 
   const getNewUsername = nickname => {
     const letter = nickname[0].toLowerCase()
@@ -35,34 +28,59 @@ const EditProfileContainer = props => {
     return updated
   }
 
+  const updateImages = async img => {
+    if (!img && !myUserInfo.imageUploaded) {
+      await props.setDefaultProfileImage(mmuserId)
+    } else if (img) {
+      await props.uploadProfileImage(currentUser.id, dataUriToBlob(img))
+    }
+    return null
+  }
+
   const handleEditReady = async (
     newDescription,
     newNickname,
     showAge,
     showLocation,
-    location
+    location,
+    img
   ) => {
     let updatedUsername
-    if (myUserInfo.nickname !== newNickname)
-      updatedUsername = getNewUsername(newNickname)
-
-    const newUserInfo = {
-      ...myUserInfo,
-      mmid: mmuserId,
-      description: newDescription,
-      nickname: newNickname,
-      showAge,
-      showLocation,
-      location,
-      username: updatedUsername,
+    if (myUserInfo.nickname !== newNickname) {
+      updatedUsername = updateUsername(newNickname, currentUser)
+    }
+    let newUserInfo
+    if (img && !myUserInfo.imageUploaded) {
+      newUserInfo = {
+        ...myUserInfo,
+        mmid: mmuserId,
+        description: newDescription,
+        nickname: newNickname,
+        showAge,
+        showLocation,
+        location,
+        username: updatedUsername,
+        imageUploaded: true,
+      }
+    } else {
+      newUserInfo = {
+        ...myUserInfo,
+        mmid: mmuserId,
+        description: newDescription,
+        nickname: newNickname,
+        showAge,
+        showLocation,
+        location,
+        username: updatedUsername,
+      }
     }
     await updateUser(newUserInfo)
+    await updateImages(img)
   }
 
   return (
     <EditProfile
       myUserInfo={myUserInfo}
-      updateProfilePicture={updatePicture}
       interestOptions={interestOptions}
       handleEditReady={handleEditReady}
     />
@@ -92,6 +110,7 @@ EditProfileContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   uploadProfileImage: PropTypes.func.isRequired,
   mmuserId: PropTypes.string.isRequired,
+  setDefaultProfileImage: PropTypes.func.isRequired,
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

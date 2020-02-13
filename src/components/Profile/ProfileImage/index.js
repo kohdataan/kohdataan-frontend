@@ -4,7 +4,9 @@ import './styles.scss'
 
 const ProfileImage = props => {
   const { mmuser } = props
-  const imageUri = `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${mmuser.id}/image`
+  const imageUri = `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${
+    mmuser.id
+  }/image?${Date.now()}`
   return (
     <div className="profile-header-item">
       {mmuser.id && (

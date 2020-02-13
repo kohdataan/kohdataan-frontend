@@ -24,7 +24,9 @@ const Member = props => {
             style={{
               backgroundColor: iconColor,
               backgroundImage: `url(
-                ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${userId}/image
+                ${
+                  process.env.REACT_APP_MATTERMOST_URL
+                }/api/v4/users/${userId}/image?${Date.now()}
               )`,
             }}
           >
