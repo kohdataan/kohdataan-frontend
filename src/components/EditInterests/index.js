@@ -74,7 +74,6 @@ EditInterests.propTypes = {
   handleInterestEditReady: propTypes.func.isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
   currentInterestIds: propTypes.instanceOf(Array).isRequired,
-  history: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(EditInterests)
