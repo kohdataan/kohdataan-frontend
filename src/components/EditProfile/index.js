@@ -12,7 +12,7 @@ import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const EditProfile = props => {
-  const { myUserInfo, handleEditReady } = props
+  const { history, myUserInfo, handleEditReady } = props
   const [newDescription, setNewDescription] = useState(
     myUserInfo.description || ''
   )
