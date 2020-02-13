@@ -1,8 +1,29 @@
 import React, { memo } from 'react'
-import PasswordResetInfo from '../components/PasswordResetFlow/ResetInfo'
+import EmailSmsInfo from '../components/EmailSmsInfo'
 
 const PasswordResetInfoContainer = () => {
-  return <PasswordResetInfo />
+  const passwordResetInfo = (
+    <ol className="email-sms-info-list">
+      <li>Avaa sähköposti.</li>
+      <li>
+        Olet saanut viestin, jossa on lähettäjänä &quot;Kohdataan&quot; ja
+        aiheena &quot;Salasanan vaihtaminen&quot;.
+      </li>
+      <li>
+        Kun klikkaat viestissä olevaa linkkiä, pääset sivulle, jossa voit
+        vaihtaa salasanan.
+      </li>
+      <li>Anna sivulla uusi salasana.</li>
+      <li>Kun klikkaat &quot;Kirjaudu&quot;, olet palvelussa!</li>
+    </ol>
+  )
+  return (
+    <EmailSmsInfo
+      title="Salasanan palautus"
+      description="Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan salasanan."
+      guide={passwordResetInfo}
+    />
+  )
 }
 
 // TODO: refactor

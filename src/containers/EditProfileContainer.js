@@ -14,6 +14,7 @@ import updateUsername from '../utils/updateUsername'
 
 const EditProfileContainer = props => {
   const {
+    history,
     mmuserId,
     currentUser,
     interestOptions,
@@ -80,6 +81,7 @@ const EditProfileContainer = props => {
 
   return (
     <EditProfile
+      history={history}
       myUserInfo={myUserInfo}
       interestOptions={interestOptions}
       handleEditReady={handleEditReady}
@@ -104,6 +106,7 @@ const mapStateToProps = state => {
 }
 
 EditProfileContainer.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
   currentUser: PropTypes.instanceOf(Object).isRequired,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   interestOptions: PropTypes.instanceOf(Array).isRequired,

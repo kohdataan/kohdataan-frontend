@@ -35,6 +35,11 @@ const RegistrationSuccessMessage = () => {
           </p>
         </div>
         <hr className="divider" />
+        <div className="resend-verification-link-container">
+          <Link className="resend-verification-link" to="/email-verification">
+            Uudelleenlähettäkää kirjautumislinkki
+          </Link>
+        </div>
         <div className="problems-with-registration-link-container">
           <Link
             className="problems-with-registration-link"

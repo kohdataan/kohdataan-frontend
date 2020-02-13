@@ -1,10 +1,10 @@
-@import '../../../styles/colors.scss';
+@import '../../styles/colors.scss';
 
 .hidden-field {
   display: none;
 }
 
-.password-reset-container {
+.email-sms-form-container {
   background-color: $black;
   height: 100%;
   width: 100%;
@@ -15,24 +15,23 @@
   color: $white;
 }
 
-.password-reset-title {
+.email-sms-form-title {
   text-transform: uppercase;
   color: white;
 }
 
-.password-reset-content-container {
+.email-sms-form-content-container {
   width: 80%;
   height: 100%;
 }
 
-.password-reset-input-container {
+.email-sms-form-input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
-.password-reset-input-text {
+.email-sms-form-input-text {
   display: flex;
   flex-direction: column;
   color: $white;
@@ -41,7 +40,7 @@
   width: 100%;
 }
 
-.password-reset-input-field {
+.email-sms-form-input-field {
   margin-top: 5px;
   background: transparent;
   border: solid 1px $orange;
@@ -58,7 +57,7 @@
   }
 }
 
-.password-reset-button {
+.email-sms-form-button {
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -71,13 +70,13 @@
   outline: none;
 }
 
-.password-reset-link-container {
+.email-sms-form-link-container {
   padding-top: 30px;
 }
 
-.password-reset-link {
+.email-sms-form-link {
   color: $white;
-  font-size: 15px;
+  font-size: 1em;
   display: block;
   text-align: center;
   padding: 10px 0 20px 0;

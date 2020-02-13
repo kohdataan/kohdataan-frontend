@@ -11,7 +11,7 @@
 }
 
 .accept-rules-modal-text {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .birthdate-container {
@@ -154,6 +154,9 @@
     outline: none;
     border: solid 1px $white;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 %create-account-link-shared {
@@ -218,6 +221,9 @@
   margin-left: 15px;
   margin-top: 5px;
   align-self: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .info-circle-line {

@@ -195,11 +195,12 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )}
+                    )
+                  }
                   errors={errors.day}
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
-                  noOptionsMessage={() => 'Tarkasta päivä.'}
+                  noOptionsMessage={() => 'Tarkista päivä.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('day')
@@ -225,11 +226,12 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )}
+                    )
+                  }
                   ariaInvalid={!!errors.birthdate}
                   errors={errors.month}
                   value={String(birthmonth)}
-                  noOptionsMessage={() => 'Tarkasta kuukausi.'}
+                  noOptionsMessage={() => 'Tarkista kuukausi.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('month')
@@ -255,11 +257,12 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                       {
                         required: true,
                       }
-                    )}
+                    )
+                  }
                   ariaInvalid={!!errors.year}
                   errors={errors.year}
                   value={String(birthyear)}
-                  noOptionsMessage={() => 'Tarkasta vuosi.'}
+                  noOptionsMessage={() => 'Tarkista vuosi.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('year')
@@ -279,7 +282,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               {((errors.day && errors.day.type === 'required') ||
                 (errors.month && errors.month.type === 'required') ||
                 (errors.year && errors.year.type === 'required')) &&
-                'Anna syntymäaika'}
+                'Anna syntymäaika.'}
               {((errors.day && errors.day.type === 'registrationError') ||
                 (errors.month && errors.month.type === 'registrationError') ||
                 (errors.year && errors.year.type === 'registrationError')) &&
@@ -405,7 +408,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 modalIsOpen={passwordModalIsOpen}
                 closeModal={closeModal}
                 label="show-password-info-dialog"
-                content="Salasanassa täytyy olla vähintään 10 merkkiä, ja siinä täytyy olla isoja kirjaimia, pieniä kirjaimia ja numeroita."
+                content="Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero."
               />
             </div>
             <div className="error-text">
@@ -414,7 +417,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Kirjoita salasana'}
               {errors.password &&
                 errors.password.type === 'pattern' &&
-                'Salasanassa täytyy olla vähintään 10 merkkiä, ja siinä täytyy olla isoja kirjaimia, pieniä kirjaimia ja numeroita.'}
+                'Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero.'}
               {errors.password &&
                 errors.password.type === 'maxLength' &&
                 'Salasanan on oltava enintään 30 merkkiä pitkä.'}
@@ -460,16 +463,14 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               label="User must accept rules modal"
             >
               <div>
+                <ButtonContainer
+                  className="icon-btn go-back-button accept-rules-icon-btn"
+                  onClick={closeAcceptModal}
+                />
                 <h3 className="accept-rules-modal-text">
                   Jos haluat käyttää palvelua, sinun täytyy hyväksyä
                   käyttöehdot.
                 </h3>
-                <ButtonContainer
-                  className="icon-btn"
-                  onClick={closeAcceptModal}
-                >
-                  <div className="accept-rules-go-back-button go-back-button" />
-                </ButtonContainer>
               </div>
             </ModalContainer>
           )}

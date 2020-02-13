@@ -31,7 +31,7 @@ const EditInterests = props => {
 
   return (
     <div className="interests-container">
-      <EditTitle text="Muokkaa profiiliasi" />
+      <EditTitle text="Muokkaa profiiliasi" history={history} />
       <Interests
         options={interestOptions}
         interests={newInterests}
@@ -70,10 +70,10 @@ const EditInterests = props => {
 }
 
 EditInterests.propTypes = {
+  history: propTypes.instanceOf(Object).isRequired,
   handleInterestEditReady: propTypes.func.isRequired,
   interestOptions: propTypes.instanceOf(Array).isRequired,
   currentInterestIds: propTypes.instanceOf(Array).isRequired,
-  history: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(EditInterests)

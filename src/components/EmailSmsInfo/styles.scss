@@ -1,0 +1,62 @@
+@import '../../styles/colors.scss';
+
+.email-sms-info-content {
+  font-size: 16px;
+}
+
+.email-sms-info-list {
+  margin: 0 0 0 1em;
+  padding: 0;
+  letter-spacing: -0.17px;
+}
+
+.email-sms-info-list {
+  text-align: left;
+}
+
+.email-sms-info-container {
+  background-color: $black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  color: $white;
+}
+
+.email-sms-info-title {
+  text-transform: uppercase;
+  color: white;
+}
+
+.email-sms-info-content-container {
+  width: 80%;
+  height: 100%;
+}
+
+.email-sms-info-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reminder-content-text {
+  padding-top: 1em;
+}
+
+.email-sms-info-link-container {
+  padding-top: 30px;
+}
+
+.email-sms-info-link {
+  color: $white;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  padding: 10px 0 20px 0;
+
+  :visited {
+    color: $white;
+  }
+}
