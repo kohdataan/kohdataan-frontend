@@ -1,9 +1,23 @@
 @import '../../../styles/colors.scss';
 
+.edit-header-btn {
+  margin-right: 20px;
+}
+
 .edit-header-container {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .edit-header-text {
   color: $orange;
+  font-size: 30px;
+  flex-grow: 2;
+  @media (max-width: 330px) {
+    font-size: 26px;
+  }
 }

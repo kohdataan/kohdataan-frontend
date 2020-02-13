@@ -2,6 +2,8 @@
 
 .account-update-container {
   margin: 30px 35px;
+  display: flex;
+  flex-direction: column;
 }
 
 .account-box-inner {
@@ -31,6 +33,11 @@
 
 .account-header {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
   & h1 {
     font-size: 32px;
     color: $orange;
@@ -39,6 +46,13 @@
     font-stretch: condensed;
     line-height: normal;
     letter-spacing: 1.02px;
+    flex-grow: 2;
+    @media (max-width: 375px) {
+      font-size: 28px;
+    }
+    @media (max-width: 330px) {
+      font-size: 25px;
+    }
   }
 }
 
@@ -46,10 +60,29 @@
   color: red;
 }
 
+.account-save-button {
+  margin: 5% 0 15%;
+  width: 200px;
+  height: 42px;
+  align-self: center;
+    &:hover {
+      cursor: grab;
+    }
+}
+
+.close-edit-btn {
+  @media (max-width: 330px) {
+    margin: 0 5px 0 7px;
+  }
+  &:hover {
+    cursor: grab;
+  }
+}
+
 .delete-text {
   color: red;
 }
 
 .delete-box {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }

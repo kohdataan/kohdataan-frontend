@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -16,9 +16,13 @@ const Profile = props => {
     myUserInfo,
     ownProfile,
     userInterests,
-    updateUser,
     startDirectChannel,
+    history,
+    botCoordinates,
+    profileCoordinates,
   } = props
+
+  const editBtnRef = useRef()
 
   // Extended user info from node backend
   const {
@@ -38,19 +42,30 @@ const Profile = props => {
   const [showModals, setShowModals] = useState({
     1: getShowModals(),
     2: getShowModals(),
+    3: getShowModals(),
   })
 
   const closeModal = modal => () => {
     const newState = { ...showModals }
     newState[modal] = false
     setShowModals(newState)
-    if (modal === 2 && ownProfile) {
-      updateUser({ tutorialWatched: true })
+    if (modal === 3 && ownProfile) {
+      history.push('/friends')
     }
   }
 
   return (
     <main className="profile-container">
+      <div className="go-back-button-container">
+        {!ownProfile && startDirectChannel && (
+          <ButtonContainer
+            onClick={history.goBack}
+            className="profile-modal-header-button"
+          >
+            {'< Palaa'}
+          </ButtonContainer>
+        )}
+      </div>
       <div className="profile-header-container">
         <ProfileImage userId={mmuser.id} />
         {mmuser && myUserInfo && (
@@ -63,18 +78,9 @@ const Profile = props => {
           />
         )}
         {ownProfile && (
-          <Link className="edit-me-link" to="/edit-me">
+          <Link className="edit-me-link" to="/edit-me" ref={editBtnRef}>
             <EditButton isHighlighted={showModals[1] && !showModals[2]} />
           </Link>
-        )}
-        {!ownProfile && startDirectChannel && (
-          <ButtonContainer
-            secondary
-            onClick={startDirectChannel}
-            className="profile-dm-button"
-          >
-            Keskustele
-          </ButtonContainer>
         )}
       </div>
       <Description text={description} />
@@ -91,7 +97,25 @@ const Profile = props => {
         <InterestsGrid interestList={userInterests} />
       </div>
 
-      <Instructions closeModal={closeModal} showModals={showModals} />
+      {!ownProfile && startDirectChannel && (
+        <div className="start-conversation-button">
+          <ButtonContainer
+            onClick={startDirectChannel}
+            className="profile-dm-button"
+          >
+            Lähetä viesti
+          </ButtonContainer>
+        </div>
+      )}
+      {!tutorialWatched && ownProfile && (
+        <Instructions
+          closeModal={closeModal}
+          showModals={showModals}
+          editBtnRef={editBtnRef}
+          botCoordinates={botCoordinates}
+          profileCoordinates={profileCoordinates}
+        />
+      )}
     </main>
   )
 }
@@ -101,15 +125,19 @@ Profile.propTypes = {
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
-  updateUser: propTypes.func,
   startDirectChannel: propTypes.func,
+  history: propTypes.instanceOf(Object),
+  profileCoordinates: propTypes.instanceOf(Object),
+  botCoordinates: propTypes.instanceOf(Object),
 }
 
 Profile.defaultProps = {
-  updateUser: null,
   ownProfile: false,
   startDirectChannel: null,
   userInterests: [],
+  history: null,
+  profileCoordinates: {},
+  botCoordinates: {},
 }
 
 export default memo(Profile)

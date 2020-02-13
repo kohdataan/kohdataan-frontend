@@ -17,6 +17,8 @@ const Message = props => {
     directChannel,
     files,
     channelId,
+    senderMmUsername,
+    iconMemberStatus,
   } = props
 
   // Adds the text to be used for the date divider
@@ -76,7 +78,27 @@ const Message = props => {
                 : 'message-icon-and-content'
             }`}
           >
-            {currentUserId !== senderId && (
+            {currentUserId !== senderId && sender !== 'Käyttäjä poistunut' && (
+              <div>
+                <Link
+                  to={`/profile/${senderMmUsername}`}
+                  className="channel-name-link"
+                >
+                  <i aria-hidden="true" title={sender[0]} />
+                  <div
+                    className="label chat-message-sender-icon"
+                    style={{
+                      backgroundColor: iconColor,
+                      backgroundImage: `url(
+                        ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${senderId}/image
+                      )`,
+                    }}
+                  />
+                </Link>
+                <div className={iconMemberStatus} />
+              </div>
+            )}
+            {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
               <div
                 className="chat-message-sender-icon"
                 style={{ backgroundColor: iconColor }}
@@ -87,15 +109,21 @@ const Message = props => {
             )}
             <div className="chat-message-content-field">
               <div className={messageContentClassList.join(' ')}>
-                <p className="chat-message-content-text">{text}</p>
                 {files && (
-                  <Link to={`${channelId}/${files[0]}`}>
-                    <img
-                      src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                      alt="attachment"
-                    />
-                  </Link>
+                  <>
+                    <Link to={`${channelId}/${files[0]}`}>
+                      <img
+                        className="message-image"
+                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                        alt="attachment"
+                      />
+                    </Link>
+                    <p className="image-message-content-text chat-message-content-text">
+                      {text}
+                    </p>
+                  </>
                 )}
+                {!files && <p className="chat-message-content-text">{text}</p>}
               </div>
             </div>
           </div>
@@ -109,6 +137,8 @@ Message.defaultProps = {
   type: '',
   senderId: '',
   files: null,
+  senderMmUsername: '',
+  iconMemberStatus: '',
 }
 
 Message.propTypes = {
@@ -124,6 +154,8 @@ Message.propTypes = {
   showDate: propTypes.bool.isRequired,
   files: propTypes.instanceOf(Array),
   channelId: propTypes.string.isRequired,
+  senderMmUsername: propTypes.string,
+  iconMemberStatus: propTypes.string,
 }
 
 export default memo(Message)

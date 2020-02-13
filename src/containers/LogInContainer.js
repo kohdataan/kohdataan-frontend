@@ -24,6 +24,13 @@ const LogInContainer = props => {
   const [error, setError] = useState(false)
 
   useEffect(() => {
+    document.body.className = 'create-account-body'
+    return () => {
+      document.body.className = ''
+    }
+  })
+
+  useEffect(() => {
     if (localStorage.getItem('authToken')) {
       if (user.profileReady) {
         history.push('/')
@@ -32,7 +39,7 @@ const LogInContainer = props => {
       }
     } else if (uuid) {
       API.verifyEmail({ uuid }).then(response => {
-        if (response.ok) {
+        if (response.success) {
           setUuidValid(true)
         } else {
           setUuidValid(false)

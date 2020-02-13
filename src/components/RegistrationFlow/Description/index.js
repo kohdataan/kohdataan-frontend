@@ -12,7 +12,7 @@ const Description = props => {
     <ShadowBox>
       <main role="main" className="add-user-description-container">
         <div className="profile-creation-title-container">
-          <h2 className="profile-creation-title">Kerro itsestäsi</h2>
+          <h2 className="profile-creation-title">Kerro itsestäsi.</h2>
           {!hideStep && <span className="profile-creation-step-text">4/6</span>}
         </div>
 

@@ -6,6 +6,8 @@ import moment from 'moment'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import DateSelectField from '../DateSelectField'
+import ButtonContainer from '../ButtonContainer'
+import ModalContainer from '../ModalContainer'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import getAge from '../../utils/getAge'
 import './styles.scss'
@@ -27,12 +29,17 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthmonth, setBirthmonth] = useState('')
   const [birthyear, setBirthyear] = useState('')
   const [currentApiErrors, setCurrentApiErrors] = useState({})
+  const [openErrorModal, setOpenErrorModal] = useState(false)
 
   useEffect(() => {
     if (apiErrors && apiErrors.fields) {
       setCurrentApiErrors(apiErrors)
     }
   }, [apiErrors, setCurrentApiErrors])
+
+  const closeAcceptModal = () => {
+    setOpenErrorModal(false)
+  }
 
   const onSubmit = data => {
     const usersBirthdate = moment
@@ -43,9 +50,6 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
       })
       .format()
 
-    if (!rulesAccepted) {
-      alert('Sinun on hyväksyttävä palvelun säännöt.')
-    }
     const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
     if (!ageAccepted) {
       setError(
@@ -64,6 +68,11 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         'Voit käyttää palvelua, jos olet yli 15-vuotias.'
       )
     }
+
+    if (!rulesAccepted) {
+      setOpenErrorModal(true)
+    }
+
     if (ageAccepted && rulesAccepted) {
       handleAccountCreation(
         data.firstname.trim(),
@@ -94,9 +103,9 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
       <h1 className="main-title">Kohdataan</h1>
       <div className="create-account-content-container">
         <h2 className="create-account-title">Rekisteröityminen</h2>
-        <h3 className="create-account-text">Omat tiedot</h3>
         <p className="create-account-text">
-          Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.
+          Anna omat tiedot. Tiedot näkyvät vain sinulle. Kaikki tiedot ovat
+          pakollisia.
         </p>
         <form
           className="create-account-input-content-container"
@@ -174,7 +183,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             }
             aria-invalid={false}
           >
-            <span className="birthdate-content-label">Syntymäaika:</span>
+            <span className="birthdate-content-label">Syntymäaika</span>
             <div className="birthdate-container">
               <div className="formfield-container">
                 <DateSelectField
@@ -191,6 +200,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   errors={errors.day}
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
+                  noOptionsMessage={() => 'Tarkista päivä.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('day')
@@ -221,6 +231,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   ariaInvalid={!!errors.birthdate}
                   errors={errors.month}
                   value={String(birthmonth)}
+                  noOptionsMessage={() => 'Tarkista kuukausi.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('month')
@@ -251,6 +262,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   ariaInvalid={!!errors.year}
                   errors={errors.year}
                   value={String(birthyear)}
+                  noOptionsMessage={() => 'Tarkista vuosi.'}
                   onChange={selected => {
                     if (selected) {
                       clearError('year')
@@ -270,7 +282,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               {((errors.day && errors.day.type === 'required') ||
                 (errors.month && errors.month.type === 'required') ||
                 (errors.year && errors.year.type === 'required')) &&
-                'Anna syntymäaika'}
+                'Anna syntymäaika.'}
               {((errors.day && errors.day.type === 'registrationError') ||
                 (errors.month && errors.month.type === 'registrationError') ||
                 (errors.year && errors.year.type === 'registrationError')) &&
@@ -350,7 +362,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               modalIsOpen={phoneNumberModalIsOpen}
               closeModal={closeModal}
               label="show-phonenumber-info-dialog"
-              content="Jos unohdat salasanan, voit vaihtaa sen puhelinnumeron avulla."
+              content="Jos unohdat salasanan, voit vaihtaa sen tekstiviestin avulla."
             />
             <div className="error-text">
               {errors.phoneNumber &&
@@ -396,8 +408,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 modalIsOpen={passwordModalIsOpen}
                 closeModal={closeModal}
                 label="show-password-info-dialog"
-                content="Salasanassa tulee olla vähintään 10 merkkiä, ja siinä pitää
-                olla isoja kirjaimia, pieniä kirjaimia ja numeroita."
+                content="Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero."
               />
             </div>
             <div className="error-text">
@@ -406,7 +417,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Kirjoita salasana'}
               {errors.password &&
                 errors.password.type === 'pattern' &&
-                'Salasanan on oltava vähintään 10 merkkiä pitkä ja siinä pitää olla isoja kirjaimia, pieniä kirjaimia ja numeroita.'}
+                'Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero.'}
               {errors.password &&
                 errors.password.type === 'maxLength' &&
                 'Salasanan on oltava enintään 30 merkkiä pitkä.'}
@@ -441,7 +452,28 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Salasanat eivät ole samat'}
             </div>
           </div>
-          <ServiceRulesContainer setRulesAccepted={setRulesAccepted} />
+          <ServiceRulesContainer
+            setRulesAccepted={setRulesAccepted}
+            setOpenErrorModal={setOpenErrorModal}
+          />
+          {!rulesAccepted && (
+            <ModalContainer
+              modalIsOpen={openErrorModal}
+              closeModal={closeAcceptModal}
+              label="User must accept rules modal"
+            >
+              <div>
+                <ButtonContainer
+                  className="icon-btn go-back-button accept-rules-icon-btn"
+                  onClick={closeAcceptModal}
+                />
+                <h3 className="accept-rules-modal-text">
+                  Jos haluat käyttää palvelua, sinun täytyy hyväksyä
+                  käyttöehdot.
+                </h3>
+              </div>
+            </ModalContainer>
+          )}
           <button
             type="submit"
             className="create-account-button"
@@ -458,10 +490,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           <Link className="create-account-link-block" to="/registrationproblem">
             Tarvitsen apua rekisteröitymisessä.
           </Link>
-          <Link className="create-account-link-block" to="/">
+          <Link
+            className="create-account-link-block inactive-link"
+            to="/createaccount"
+          >
             Tutustu tietosuojaselosteeseen.
           </Link>
-          <Link className="create-account-link-block" to="/">
+          <Link
+            className="create-account-link-block inactive-link"
+            to="/createaccount"
+          >
             Tutustu saavutettavuusselosteeseen.
           </Link>
         </div>

@@ -33,25 +33,29 @@ const SuggestionBox = props => {
           {Object.keys(channel.purpose) &&
           Object.keys(channel.purpose).length > 0 ? (
             <p className="group-in-common-text">
-              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose).join(
-                ', '
-              )}`}
+              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose)
+                .slice(0, 3)
+                .join(', ')}`}
             </p>
           ) : (
-            <p>Ei vielä yhdistäviä kinnostuksenkohteita</p>
+            <div className="suggestion-box-info">
+              <p>Tässä ryhmässä ei ole vielä muita jäseniä.</p>
+              <p>Liity ryhmään ensimmäisenä</p>
+            </div>
           )}
         </div>
         {channel && members && (
           <div className="suggestion-members-wrapper">
             <div className="group-current-members">
-              {members.map(member => (
-                <Member
-                  key={`suggestion-${member.id}`}
-                  userId={member.id}
-                  nickname={member.nickname || member.username}
-                  iconColor={getIconColor(member.id, members)}
-                />
-              ))}
+              {members &&
+                members.map(member => (
+                  <Member
+                    key={`suggestion-${member.id}`}
+                    userId={member.id}
+                    nickname={member.nickname || member.username}
+                    iconColor={getIconColor(member.id, members)}
+                  />
+                ))}
             </div>
           </div>
         )}

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import EmailSmsInfo from '../components/EmailSmsInfo'
 
-const PasswordResetInfoContainer = () => {
+const EmailVerificationInfoContainer = () => {
   const emailVerificationInfo = (
     <ol className="email-sms-info-list">
       <li>Avaa sähköposti.</li>
@@ -29,4 +29,4 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-export default memo(PasswordResetInfoContainer, shouldComponentUpdate)
+export default memo(EmailVerificationInfoContainer, shouldComponentUpdate)

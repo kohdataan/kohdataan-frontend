@@ -17,6 +17,57 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
+    minWidth: '40vh',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '2000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
+const customStylesEditModal = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    textAlign: 'center',
+    padding: '7vh 5vh',
+    minHeight: '30vh',
+    maxHeight: '80vh',
+    width: '80vw',
+    maxWidth: '660px',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '2000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
+const customStylesTutorial = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    textAlign: 'center',
+    padding: '8vh',
+    minHeight: '30vh',
+    maxHeight: '80vh',
+    width: '80vw',
+    maxWidth: '960px',
   },
   overlay: {
     position: 'fixed',
@@ -49,14 +100,34 @@ const customStylesLong = {
 }
 
 const ModalContainer = props => {
-  const { children, modalIsOpen, closeModal, label, isLong } = props
+  const {
+    children,
+    modalIsOpen,
+    closeModal,
+    label,
+    isLong,
+    tutorial,
+    editModal,
+  } = props
+
+  const getStyles = () => {
+    let styles = customStyles
+    if (isLong) {
+      styles = customStylesLong
+    } else if (tutorial) {
+      styles = customStylesTutorial
+    } else if (editModal) {
+      styles = customStylesEditModal
+    }
+    return styles
+  }
 
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       contentLabel={label}
-      style={isLong ? customStylesLong : customStyles}
+      style={getStyles()}
       role="dialog"
       aria-labelledby={label}
     >
@@ -71,14 +142,19 @@ ModalContainer.propTypes = {
     PropTypes.instanceOf(Array),
     PropTypes.node,
   ]).isRequired,
-  modalIsOpen: PropTypes.bool.isRequired,
+  modalIsOpen: PropTypes.bool,
   closeModal: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   isLong: PropTypes.bool,
+  tutorial: PropTypes.bool,
+  editModal: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
   isLong: false,
+  modalIsOpen: false,
+  editModal: false,
+  tutorial: false,
 }
 
 export default memo(ModalContainer)

@@ -45,6 +45,7 @@ const ChatContainer = props => {
     getFilesForPost,
     statuses,
     matterMostLogout,
+    location,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -67,7 +68,8 @@ const ChatContainer = props => {
   // Get posts for current channel and view channel
   useEffect(() => {
     if (currentChannelId) {
-      getPosts(currentChannelId)
+      // get maximum of 400 posts at a time
+      getPosts(currentChannelId, 0, 400)
       viewChannel(currentChannelId)
     }
   }, [teams, posts, getPosts, viewChannel, currentChannelId])
@@ -135,6 +137,7 @@ const ChatContainer = props => {
           statuses={statuses}
           getUserByUsername={getUserByUsername}
           handleLogout={handleLogout}
+          location={location}
         />
       )}
     </>
@@ -159,6 +162,7 @@ ChatContainer.propTypes = {
   viewChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   matterMostLogout: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {

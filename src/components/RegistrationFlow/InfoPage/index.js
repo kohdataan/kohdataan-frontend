@@ -10,7 +10,7 @@ const InfoPage = () => {
 
       <div className="registration-info-text-container">
         <p className="registration-info-text">
-          Kysymme muutaman kysymyksen, jotta muut voivat tutustua sinuun. Voit
+          Vastaa muutamaan kysymykseen, jotta muut voivat tutustua sinuun. Voit
           muokata kaikkia vastauksia myöhemmin omassa profiilissa.
         </p>
       </div>

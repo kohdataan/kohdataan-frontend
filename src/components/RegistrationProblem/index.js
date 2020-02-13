@@ -4,16 +4,18 @@ import PropTypes from 'prop-types'
 import useForm from 'react-hook-form'
 import ValidatedTextArea from '../ValidatedTextArea'
 import ValidatedInputField from '../ValidatedInputField'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const RegistrationProblem = ({ handleEmailSending }) => {
+const RegistrationProblem = ({ handleEmailSending, handleClick, text }) => {
   const { register, handleSubmit, errors, clearError } = useForm()
 
   const onSubmit = async data => {
     await handleEmailSending(
       data.name.trim(),
       data.email.trim(),
-      data.message.trim()
+      data.message.trim(),
+      handleClick ? 'Yhteydenotto' : 'Ongelma rekisteröitymisessä'
     )
   }
 
@@ -21,11 +23,19 @@ const RegistrationProblem = ({ handleEmailSending }) => {
     <main className="registration-problem-container">
       <h1 className="main-title">Kohdataan</h1>
       <div className="registration-problem-content-container">
-        <div className="registration-problem-text">
-          <p>Kerro millainen ongelma sinulla on.</p>
-          <p>Vastaamme sinulle sähköpostilla mahdollisimman pian.</p>
-          <hr className="registration-problem-divider" />
-        </div>
+        {!text && (
+          <div className="registration-problem-text">
+            <p>Kerro mitä apua tarvitset.</p>
+            <p>Vastaamme sinulle sähköpostilla mahdollisimman pian.</p>
+            <hr className="registration-problem-divider" />
+          </div>
+        )}
+        {text && (
+          <div className="registration-problem-text">
+            <p className="registration-success-text">{text}</p>
+            <hr className="registration-problem-divider" />
+          </div>
+        )}
         <div className="registration-problem-input-fields-container">
           <form
             className="registration-problem-form"
@@ -120,18 +130,29 @@ const RegistrationProblem = ({ handleEmailSending }) => {
               lähetä viesti
             </button>
           </form>
+          {handleClick && (
+            <ButtonContainer
+              className="registration-problem-button"
+              onClick={handleClick}
+              tabIndex="0"
+            >
+              Sulje
+            </ButtonContainer>
+          )}
         </div>
-        <div className="registration-problem-links-container">
-          <Link className="registration-problem-link" to="/login">
-            Olen vanha käyttäjä ja haluan kirjautua sisään.
-          </Link>
-          <Link className="registration-problem-link" to="/createaccount">
-            Olen uusi käyttäjä ja haluan rekisteröityä.
-          </Link>
-          <Link className="registration-problem-link" to="/">
-            Olen unohtanut salasanani.
-          </Link>
-        </div>
+        {!handleClick && (
+          <div className="registration-problem-links-container">
+            <Link className="registration-problem-link" to="/login">
+              Olen vanha käyttäjä ja haluan kirjautua sisään.
+            </Link>
+            <Link className="registration-problem-link" to="/createaccount">
+              Olen uusi käyttäjä ja haluan rekisteröityä.
+            </Link>
+            <Link className="registration-problem-link" to="/reset-password">
+              Olen unohtanut salasanani.
+            </Link>
+          </div>
+        )}
       </div>
     </main>
   )
@@ -139,6 +160,13 @@ const RegistrationProblem = ({ handleEmailSending }) => {
 
 RegistrationProblem.propTypes = {
   handleEmailSending: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
+  text: PropTypes.string,
+}
+
+RegistrationProblem.defaultProps = {
+  handleClick: null,
+  text: '',
 }
 
 export default memo(RegistrationProblem)

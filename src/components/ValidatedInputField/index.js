@@ -46,7 +46,7 @@ ValidatedInputField.propTypes = {
 ValidatedInputField.defaultProps = {
   type: 'text',
   showLabel: true,
-  showPlaceholder: true,
+  showPlaceholder: false,
   ariaInvalid: false,
   inputClassName: '',
   labelClassName: '',

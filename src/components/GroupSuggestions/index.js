@@ -70,16 +70,16 @@ const GroupSuggestions = props => {
                   buttons={({ left }) => (
                     <div className="suggestion-buttons-wrapper">
                       <ButtonContainer
-                        className="skip-suggestion-button"
+                        className="suggestion-button button-skip"
                         onClick={() => {
                           left()
                         }}
                       >
-                        Ohita
+                        Älä liity
                       </ButtonContainer>
                       <ButtonContainer
                         onClick={handleJoinChannel(card.id)}
-                        className="join-suggestion-button"
+                        className="suggestion-button button-join"
                         secondary
                       >
                         Liity

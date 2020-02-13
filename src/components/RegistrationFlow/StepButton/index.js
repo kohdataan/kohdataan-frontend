@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const StepButton = props => {
@@ -8,16 +9,13 @@ const StepButton = props => {
     params: { next, previous, last },
     onClick,
     nextButtonActive,
+    setOpenModal,
   } = props
 
   return (
     <div className="step-button-container">
       {previous && (
-        <Link
-          className="next-step-button"
-          to={`/registration/${previous}`}
-          onClick={onClick}
-        >
+        <Link className="next-step-button" to={`/registration/${previous}`}>
           Edellinen
         </Link>
       )}
@@ -42,7 +40,12 @@ const StepButton = props => {
       )}
 
       {last && !nextButtonActive && (
-        <div className="next-step-button-inactive">Tallenna</div>
+        <ButtonContainer
+          className="next-step-button-inactive"
+          onClick={() => setOpenModal(true)}
+        >
+          Tallenna
+        </ButtonContainer>
       )}
     </div>
   )
@@ -52,6 +55,7 @@ StepButton.propTypes = {
   params: PropTypes.instanceOf(Object).isRequired,
   onClick: PropTypes.func.isRequired,
   nextButtonActive: PropTypes.bool.isRequired,
+  setOpenModal: PropTypes.func.isRequired,
 }
 
 export default memo(StepButton)
