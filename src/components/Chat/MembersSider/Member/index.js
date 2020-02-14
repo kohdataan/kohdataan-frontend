@@ -4,27 +4,44 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const Member = props => {
-  const {
-    userId,
-    nickName,
-    currentUserId,
-    profiles,
-    iconMemberStatus,
-    iconColor,
-  } = props
+  const { userId, nickName, currentUserId, profiles, iconMemberStatus } = props
   const userFirstLetter = nickName[0]
-  const getUsername = () =>
-    profiles && profiles[userId] && profiles[userId].username
+  const getUsername = () => {
+    return profiles && profiles[userId] && profiles[userId].username
+  }
 
   return (
     <div className="chat-header-members-sider-member">
-      <i aria-hidden="true" title={userFirstLetter} />
-      <span
-        className="chat-header-members-icon"
-        style={{ backgroundColor: iconColor }}
-      >
-        {userFirstLetter}
-      </span>
+      {currentUserId !== userId && (
+        <Link to={`/profile/${getUsername()}`} className="channel-name-link">
+          <i aria-hidden="true" title={userFirstLetter} />
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundImage: `url(
+                ${
+                  process.env.REACT_APP_MATTERMOST_URL
+                }/api/v4/users/${userId}/image?${Date.now()}
+              )`,
+            }}
+          />
+        </Link>
+      )}
+      {currentUserId === userId && (
+        <div>
+          <i aria-hidden="true" title={userFirstLetter} />
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundImage: `url(
+                ${
+                  process.env.REACT_APP_MATTERMOST_URL
+                }/api/v4/users/${userId}/image?${Date.now()}
+              )`,
+            }}
+          />
+        </div>
+      )}
       <span className={iconMemberStatus} />
       {currentUserId !== userId && (
         <Link
@@ -50,7 +67,6 @@ Member.propTypes = {
   currentUserId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
-  iconColor: propTypes.string.isRequired,
 }
 
 export default memo(Member)

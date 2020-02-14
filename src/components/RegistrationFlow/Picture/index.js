@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { memo } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
@@ -7,6 +8,13 @@ import CameraIconPath from '../../../assets/camera-add-solid.svg'
 
 const Picture = props => {
   const { onChange, hideStep } = props
+
+  const onBeforeFileLoad = e => {
+    if (e.target.files[0].size > 50000000) {
+      alert('Tiedosto on liian suuri!')
+      e.target.value = ''
+    }
+  }
 
   const customLabelStyle = {
     fontSize: '115',
@@ -49,14 +57,18 @@ const Picture = props => {
             label="&nbsp;"
             labelStyle={customLabelStyle}
             borderStyle={customBorderStyle}
+            onBeforeFileLoad={onBeforeFileLoad}
             onCrop={onChange}
             className="add-user-picture-picker"
           />
-          <p className="add-user-picture-text">
-            Tämä kuva näkyy muille.
-            <br />
-            Voit lisätä kuvan myös myöhemmin.
-          </p>
+          <div className="add-user-picture-text">
+            <p>Tämä kuva näkyy muille.</p>
+            <p>Voit lisätä kuvan myös myöhemmin.</p>
+            <p>
+              Kuva voi olla formaateissa BMP, JPG tai PNG. Tiedoston maksimikoko
+              on 50MB.
+            </p>
+          </div>
         </div>
       </main>
     </ShadowBox>

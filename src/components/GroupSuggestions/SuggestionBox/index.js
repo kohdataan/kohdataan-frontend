@@ -3,7 +3,6 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import groupNameColors from '../../../assets/groupColors'
 import Member from '../../Groups/Group/Member'
-import getIconColor from '../../../utils/getMemberIconColor'
 
 const SuggestionBox = props => {
   const { channel, members, hidden, top } = props
@@ -33,7 +32,7 @@ const SuggestionBox = props => {
           {Object.keys(channel.purpose) &&
           Object.keys(channel.purpose).length > 0 ? (
             <p className="group-in-common-text">
-              {`Kiinnostuksenkohteita: ${Object.keys(channel.purpose)
+              {`Kiinnostukset: ${Object.keys(channel.purpose)
                 .slice(0, 3)
                 .join(', ')}`}
             </p>
@@ -53,7 +52,6 @@ const SuggestionBox = props => {
                     key={`suggestion-${member.id}`}
                     userId={member.id}
                     nickname={member.nickname || member.username}
-                    iconColor={getIconColor(member.id, members)}
                   />
                 ))}
             </div>
