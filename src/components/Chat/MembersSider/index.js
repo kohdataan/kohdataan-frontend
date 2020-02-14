@@ -18,6 +18,8 @@ const MembersSider = props => {
     toggleSiderClosedIfOpen,
   } = props
 
+  const masterUserEmail = process.env.REACT_APP_MASTER_USER_EMAIL
+
   const [showConfirmation, setShowConfirmation] = useState(false)
 
   const getIconMemberStatus = userId =>
@@ -55,7 +57,8 @@ const MembersSider = props => {
           .filter(
             member =>
               profiles[member.user_id] &&
-              profiles[member.user_id].delete_at === 0
+              profiles[member.user_id].delete_at === 0 &&
+              profiles[member.user_id].email !== masterUserEmail
           )
           .map(member => (
             <Member
