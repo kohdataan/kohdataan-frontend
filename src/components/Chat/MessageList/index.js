@@ -3,6 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
 import getUsernameById from '../../../utils/getUsernameById'
+import isAdmin from '../../../utils/userIsAdmin'
 
 const MessageList = props => {
   const {
@@ -97,6 +98,7 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
+                    isAdmin={isAdmin(post.user_id, profiles)}
                   />
                 )
               )

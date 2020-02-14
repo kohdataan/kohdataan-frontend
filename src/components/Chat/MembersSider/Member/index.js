@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import isAdmin from '../../../../utils/userIsAdmin'
 import './styles.scss'
 
 const Member = props => {
@@ -10,6 +11,25 @@ const Member = props => {
     return profiles && profiles[userId] && profiles[userId].username
   }
 
+  if (isAdmin(userId, profiles)) {
+    return (
+      <div className="chat-header-members-sider-member">
+        <div>
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundColor: 'black',
+              color: 'white',
+            }}
+          >
+            K
+          </div>
+        </div>
+        <span className={iconMemberStatus} />
+        <span>Valvoja</span>
+      </div>
+    )
+  }
   return (
     <div className="chat-header-members-sider-member">
       {currentUserId !== userId && (
@@ -19,10 +39,10 @@ const Member = props => {
             className="label chat-message-sender-icon"
             style={{
               backgroundImage: `url(
-                ${
-                  process.env.REACT_APP_MATTERMOST_URL
-                }/api/v4/users/${userId}/image?${Date.now()}
-              )`,
+                  ${
+                    process.env.REACT_APP_MATTERMOST_URL
+                  }/api/v4/users/${userId}/image?${Date.now()}
+                )`,
             }}
           />
         </Link>
@@ -34,10 +54,10 @@ const Member = props => {
             className="label chat-message-sender-icon"
             style={{
               backgroundImage: `url(
-                ${
-                  process.env.REACT_APP_MATTERMOST_URL
-                }/api/v4/users/${userId}/image?${Date.now()}
-              )`,
+                  ${
+                    process.env.REACT_APP_MATTERMOST_URL
+                  }/api/v4/users/${userId}/image?${Date.now()}
+                )`,
             }}
           />
         </div>

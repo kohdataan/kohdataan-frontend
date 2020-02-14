@@ -3,6 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Member from './Member'
+import isAdmin from '../../../utils/userIsAdmin'
 
 const Group = props => {
   const { channel, getMembers, unreadCount, profiles, currentUserId } = props
@@ -26,6 +27,7 @@ const Group = props => {
         members
           .map(member => profiles[member.user_id])
           .filter(member => member.delete_at === 0)
+          .filter(member => !isAdmin(member.id, profiles))
       setActiveMembers(activeMembersArr)
     }
     getActiveMembers()

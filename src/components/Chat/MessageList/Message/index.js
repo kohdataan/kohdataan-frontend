@@ -18,6 +18,7 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
+    isAdmin,
   } = props
 
   // Adds the text to be used for the date divider
@@ -63,7 +64,7 @@ const Message = props => {
                       : ''
                   }`}
                 >
-                  {sender}
+                  {isAdmin ? 'Valvoja' : sender}
                 </h3>
               )}
             </div>
@@ -84,16 +85,28 @@ const Message = props => {
                   className="channel-name-link"
                 >
                   <i aria-hidden="true" title={sender[0]} />
-                  <div
-                    className="label chat-message-sender-icon"
-                    style={{
-                      backgroundImage: `url(
+                  {isAdmin ? (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                      }}
+                    >
+                      K
+                    </div>
+                  ) : (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundImage: `url(
                         ${
                           process.env.REACT_APP_MATTERMOST_URL
                         }/api/v4/users/${senderId}/image?${Date.now()}
                       )`,
-                    }}
-                  />
+                      }}
+                    />
+                  )}
                 </Link>
                 <div className={iconMemberStatus} />
               </div>
@@ -136,6 +149,7 @@ Message.defaultProps = {
   files: null,
   senderMmUsername: '',
   iconMemberStatus: '',
+  isAdmin: false,
 }
 
 Message.propTypes = {
@@ -152,6 +166,7 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
+  isAdmin: propTypes.bool,
 }
 
 export default memo(Message)

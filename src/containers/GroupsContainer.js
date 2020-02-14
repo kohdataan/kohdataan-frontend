@@ -121,6 +121,7 @@ const GroupsContainer = props => {
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
         resetChannelInvitations={resetChannelInvitations}
+        profiles={profiles}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
