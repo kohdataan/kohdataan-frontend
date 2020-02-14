@@ -13,8 +13,11 @@ const Friends = props => {
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
+    updateUser,
     history,
   } = props
+
+  const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const steps = [
     {
@@ -50,7 +53,13 @@ const Friends = props => {
           </h3>
         )}
       </div>
-      {!tutorialWatched && <Tutorial steps={steps} history={history} />}
+      {!tutorialWatched && (
+        <Tutorial
+          steps={steps}
+          history={history}
+          updateTutorialWatched={updateTutorialWatched}
+        />
+      )}
     </main>
   )
 }
@@ -63,6 +72,7 @@ Friends.propTypes = {
   getLatestMessage: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
+  updateUser: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
 }
 

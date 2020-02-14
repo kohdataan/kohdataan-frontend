@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
+import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
@@ -16,6 +17,7 @@ const FriendsContainer = props => {
     getPosts,
     fetchFriendsPageData,
     membersInChannel,
+    updateUser,
     user,
     history,
   } = props
@@ -101,6 +103,7 @@ const FriendsContainer = props => {
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
+        updateUser={updateUser}
         history={history}
       />
     </>
@@ -117,6 +120,7 @@ FriendsContainer.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  updateUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -149,6 +153,7 @@ const mapDispatchToProps = dispatch =>
     {
       getPosts: getPostsAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
+      updateUser: updateUserAction,
     },
     dispatch
   )

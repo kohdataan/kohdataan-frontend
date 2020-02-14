@@ -24,13 +24,22 @@ const Tutorial = props => {
     },
     buttonBack: {
       marginLeft: 'auto',
-      marginRight: 5,
-
       fontFamily: 'Poppins',
-      fontSize: '16px',
+      fontSize: '14px',
       borderRadius: '30px',
       padding: '5px 10px',
       color: 'black',
+    },
+    buttonSkip: {
+      marginLeft: 'auto',
+      fontFamily: 'Poppins',
+      fontSize: '14px',
+      borderRadius: '30px',
+      padding: '5px 10px',
+      color: 'black',
+    },
+    buttonClose: {
+      display: 'none',
     },
   }
 
@@ -57,6 +66,9 @@ const Tutorial = props => {
     ) {
       updateTutorialWatched()
     }
+    if (action === 'skip') {
+      updateTutorialWatched()
+    }
   }
 
   return (
@@ -67,6 +79,7 @@ const Tutorial = props => {
       continuous
       disableScrolling
       styles={customStyles}
+      showSkipButton
     />
   )
 }
@@ -74,12 +87,11 @@ const Tutorial = props => {
 Tutorial.propTypes = {
   history: propTypes.instanceOf(Object),
   steps: propTypes.arrayOf(propTypes.instanceOf(Object)).isRequired,
-  updateTutorialWatched: propTypes.func,
+  updateTutorialWatched: propTypes.func.isRequired,
 }
 
 Tutorial.defaultProps = {
   history: null,
-  updateTutorialWatched: null,
 }
 
 export default Tutorial

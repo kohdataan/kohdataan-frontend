@@ -17,6 +17,7 @@ const Profile = props => {
     ownProfile,
     userInterests,
     startDirectChannel,
+    updateUser,
     history,
   } = props
 
@@ -48,6 +49,8 @@ const Profile = props => {
         'Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit klikata Bottia. Löydät Botin täältä.',
     },
   ]
+
+  const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   return (
     <main className="profile-container">
@@ -103,7 +106,11 @@ const Profile = props => {
         </div>
       )}
       {!tutorialWatched && ownProfile && (
-        <Tutorial steps={steps} history={history} />
+        <Tutorial
+          steps={steps}
+          history={history}
+          updateTutorialWatched={updateTutorialWatched}
+        />
       )}
     </main>
   )
@@ -116,6 +123,7 @@ Profile.propTypes = {
   ownProfile: propTypes.bool,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
+  updateUser: propTypes.func.isRequired,
 }
 
 Profile.defaultProps = {
