@@ -15,6 +15,7 @@ const ProfileContainer = props => {
     botCoordinates,
     profileCoordinates,
   } = props
+
   return (
     <Profile
       mmuser={mmuser}

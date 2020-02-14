@@ -2,7 +2,6 @@ import React, { memo, useEffect, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
-import getIconColor from '../../../utils/getMemberIconColor'
 import getUsernameById from '../../../utils/getUsernameById'
 
 const MessageList = props => {
@@ -11,7 +10,6 @@ const MessageList = props => {
     currentUserId,
     getUserNamebyId,
     directChannel,
-    members,
     channelId,
     profiles,
     getStatusById,
@@ -92,7 +90,6 @@ const MessageList = props => {
                     text={post.message}
                     senderId={post.user_id}
                     currentUserId={currentUserId}
-                    iconColor={getIconColor(post.user_id, members)}
                     directChannel={directChannel}
                     timeSent={timestampValues.sendTime}
                     dateSent={timestampValues.sendDate}
@@ -113,7 +110,6 @@ MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
-  members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
   channelId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,

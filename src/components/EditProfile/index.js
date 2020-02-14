@@ -12,8 +12,7 @@ import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const EditProfile = props => {
-  const { history, myUserInfo, updateProfilePicture, handleEditReady } = props
-
+  const { history, myUserInfo, handleEditReady } = props
   const [newDescription, setNewDescription] = useState(
     myUserInfo.description || ''
   )
@@ -34,11 +33,9 @@ const EditProfile = props => {
       newNickname,
       newShowAge,
       newShowLocation,
-      newLocation.value
+      newLocation.value,
+      img
     )
-    if (img) {
-      updateProfilePicture(img)
-    }
   }
 
   return (
@@ -101,7 +98,6 @@ const EditProfile = props => {
 EditProfile.propTypes = {
   history: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
-  updateProfilePicture: propTypes.func.isRequired,
   handleEditReady: propTypes.func.isRequired,
 }
 
