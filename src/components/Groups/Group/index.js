@@ -13,9 +13,13 @@ const Group = props => {
 
   useEffect(() => {
     if (channel && channel.purpose) {
-      const parsed = JSON.parse(channel.purpose)
-      const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
-      setParsedPurpose(sorted)
+      try {
+        const parsed = JSON.parse(channel.purpose)
+        const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
+        setParsedPurpose(sorted)
+      } catch (e) {
+        console.log(e)
+      }
     }
   }, [channel, setParsedPurpose])
 
