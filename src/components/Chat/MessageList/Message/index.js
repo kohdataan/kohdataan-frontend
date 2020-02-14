@@ -2,9 +2,11 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
+import ButtonContainer from '../../../ButtonContainer'
 
 const Message = props => {
   const {
+    id,
     sender,
     text,
     currentUserId,
@@ -18,6 +20,7 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
+    pinPost,
   } = props
 
   // Adds the text to be used for the date divider
@@ -122,6 +125,14 @@ const Message = props => {
                 )}
                 {!files && <p className="chat-message-content-text">{text}</p>}
               </div>
+              {currentUserId !== senderId && !directChannel && (
+                <ButtonContainer
+                  className="chat-report-message-icon"
+                  onClick={() => pinPost(id)}
+                >
+                  <i className="far fa-flag" aria-hidden="true" />
+                </ButtonContainer>
+              )}
             </div>
           </div>
         </div>
@@ -152,6 +163,8 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
+  pinPost: propTypes.func.isRequired,
+  id: propTypes.string.isRequired,
 }
 
 export default memo(Message)

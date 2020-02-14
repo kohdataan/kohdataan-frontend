@@ -4,6 +4,8 @@ import MessageList from './MessageList'
 import ChatHeader from './ChatHeader'
 import UserInput from './UserInput'
 import MembersSider from './MembersSider'
+import ModalContainer from '../ModalContainer'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
 const Chat = props => {
@@ -20,9 +22,13 @@ const Chat = props => {
     statuses,
     handleLogout,
     location,
+    pinPost,
   } = props
 
   const [showSider, setShowSider] = useState(false)
+  const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
+  const [afterPinModal, setAfterPinModal] = useState(false)
+  const [pinPostId, setPinPostId] = useState(null)
   const directChannel = channel.type === 'D'
 
   const toggleSider = () => setShowSider(!showSider)
@@ -83,6 +89,26 @@ const Chat = props => {
     return null
   }
 
+  const handlePinPost = id => {
+    setPinPostModalIsOpen(true)
+    setPinPostId(id)
+  }
+
+  const closePinPostModal = () => {
+    setPinPostModalIsOpen(false)
+    setPinPostId(null)
+  }
+
+  const completePinPost = id => {
+    pinPost(id)
+    closePinPostModal()
+    setAfterPinModal(true)
+  }
+
+  const closeAfterPinModal = () => {
+    setAfterPinModal(false)
+  }
+
   return (
     <div className="chat-wrapper" id="chat">
       <ChatHeader
@@ -104,6 +130,7 @@ const Chat = props => {
         channelId={channel.id}
         profiles={profiles}
         getStatusById={getStatusById}
+        pinPost={handlePinPost}
       />
       {channel.id && (
         <UserInput
@@ -125,6 +152,46 @@ const Chat = props => {
           channel={channel}
         />
       )}
+      <ModalContainer
+        modalIsOpen={pinPostModalIsOpen}
+        closeModal={closePinPostModal}
+        label="report-message-modal"
+      >
+        <h3>Haluatko ilmoittaa tämän viestin asiattomaksi?</h3>
+        <div className="report-message-buttons-wrapper">
+          <ButtonContainer
+            secondary
+            onClick={() => closePinPostModal()}
+            className="report-message-button"
+          >
+            <p>En</p>
+          </ButtonContainer>
+          <ButtonContainer
+            onClick={() => completePinPost(pinPostId)}
+            className="report-message-button"
+          >
+            <p>Haluan</p>
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
+      <ModalContainer
+        modalIsOpen={afterPinModal}
+        closeModal={closeAfterPinModal}
+        label="report-message-finish-modal"
+      >
+        <i
+          className="fas fa-check-circle"
+          aria-hidden="true"
+          style={{ color: 'green', fontSize: '30px' }}
+        />
+        <h3>Kiitos! Viesti on nyt ilmoitettu asiattomaksi.</h3>
+        <ButtonContainer
+          className="report-message-finish-button"
+          onClick={closeAfterPinModal}
+        >
+          Valmis
+        </ButtonContainer>
+      </ModalContainer>
     </div>
   )
 }
@@ -142,6 +209,7 @@ Chat.propTypes = {
   statuses: PropTypes.instanceOf(Object).isRequired,
   handleLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
+  pinPost: PropTypes.func.isRequired,
 }
 
 Chat.defaultProps = {
