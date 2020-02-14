@@ -114,6 +114,7 @@
 .no-unread-messages {
   width: 30px;
   height: 30px;
+  margin: 0 10px;
 }
 
 .text-content {
@@ -129,7 +130,7 @@
     width: 250px;
   }
   @media (max-width: 415px) {
-    width: 210px;
+    width: 200px;
   }
   @media (max-width: 335px) {
     width: 180px;

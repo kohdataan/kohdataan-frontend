@@ -104,6 +104,7 @@ const FriendsContainer = props => {
         tutorialWatched={user.tutorialWatched}
         friendsCoordinates={friendsCoordinates}
         history={history}
+        myUserInfo={user}
       />
     </>
   )

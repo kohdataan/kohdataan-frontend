@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import { TextLine } from '../../ContentLoader'
+import {
+  addUserToBlocked,
+  removeUserFromBlocked,
+} from '../../../api/blocking/blocked_user'
+
 
 const Friend = props => {
   const {
@@ -14,11 +19,12 @@ const Friend = props => {
     getPosts,
     getLatestMessage,
     membersInChannel,
+    myUserInfo,
   } = props
 
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
-  const [blockedFriends, setBlockedFriends] = useState([])
+  const [blockedFriends, setBlockedFriends] = useState(myUserInfo.blockedUsers)
   const [blocked, setBlocked] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -51,13 +57,27 @@ const Friend = props => {
     fetchPosts()
   }, [channel, getPosts])
 
-  const toggleBlockedStatus = () => {
+  useEffect(() => {
+    const checkUserBlockedStatus = async () => {
+      if (blockedFriends.indexOf(user.id) !== -1) {
+        setBlocked(true)
+      }
+    }
+    checkUserBlockedStatus()
+  }, [user])
+
+  const toggleBlockedStatus = async () => {
     const { id } = user
+    const token = localStorage.getItem('authToken')
     if (blockedFriends.indexOf(id) !== -1) {
       setBlockedFriends(blockedFriends.filter(foundId => foundId !== id))
+      const data = { unblockedUser: user.id }
+      await removeUserFromBlocked(data, token)
       setBlocked(false)
     } else {
       setBlockedFriends(blockedFriends.concat(id))
+      const data = { blockedUser: user.id }
+      await addUserToBlocked(data, token)
       setBlocked(true)
     }
     setShowModal(false)
@@ -71,7 +91,7 @@ const Friend = props => {
             {!blocked && (
               <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
             )}
-            {blocked && <i className="fas fa-ban fa-lg banned-icon" />}
+            {blocked && <i className="fas fa-ban fa-lg blocked-icon" />}
           </div>
           <div className="friend-messages-content">
             <Link
@@ -136,7 +156,7 @@ const Friend = props => {
             <p>
               {blocked
                 ? 'Voit taas viestitellä kaverin kanssa.'
-                : 'Kaveri ei enää näe profiiliasi eikä voi lähettää sinulle yksityisviestejä.'}
+                : 'Estetty kaveri ei voi enää lähettää sinulle yksityisviestejä.'}
             </p>
             <ButtonContainer
               onClick={() => setShowModal(false)}
@@ -181,6 +201,7 @@ Friend.propTypes = {
   getPosts: propTypes.func.isRequired,
   getLatestMessage: propTypes.func.isRequired,
   membersInChannel: propTypes.instanceOf(Object).isRequired,
+  myUserInfo: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friend)
