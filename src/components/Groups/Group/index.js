@@ -3,7 +3,6 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Member from './Member'
-import getIconColor from '../../../utils/getMemberIconColor'
 
 const Group = props => {
   const { channel, getMembers, unreadCount, profiles, currentUserId } = props
@@ -66,7 +65,6 @@ const Group = props => {
             {activeMembers.map(member => (
               <Member
                 key={`group-${member.id}`}
-                iconColor={getIconColor(member.id, members)}
                 nickname={member.nickname || member.username}
                 currentUserId={currentUserId}
                 userId={member.id}

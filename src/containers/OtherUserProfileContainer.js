@@ -41,7 +41,6 @@ const OtherUserProfileContainer = props => {
           username,
           localStorage.getItem('authToken')
         )
-
         if (userInfo) {
           setOtherUserInfo(userInfo)
         }

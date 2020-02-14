@@ -5,7 +5,6 @@ import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
 import LeaveChannelModal from './LeaveChannelModal'
 import useOutsideClick from '../../../hooks/useOutsideClick'
-import getIconColor from '../../../utils/getMemberIconColor'
 
 const MembersSider = props => {
   const {
@@ -65,7 +64,6 @@ const MembersSider = props => {
               profiles={profiles}
               nickName={getNickNamebyId(member.user_id)}
               currentUserId={currentUserId}
-              iconColor={getIconColor(member.user_id, members)}
               iconMemberStatus={getIconMemberStatus(member.user_id)}
             />
           ))}
