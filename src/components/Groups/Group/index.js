@@ -17,6 +17,7 @@ const Group = props => {
         const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
         setParsedPurpose(sorted)
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e)
       }
     }
