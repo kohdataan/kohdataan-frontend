@@ -1,5 +1,47 @@
 @import '../../../styles/colors.scss';
 
+.blocked-icon {
+  margin-right: 10px;
+}
+.block-user-icon {
+  height: 100%;
+  color: #3a3a3a;
+}
+.blocked-friend-text-content {
+  color: grey;
+}
+.cancel-button {
+  background-color: $orange;
+}
+.block-user-modal-btn {
+  margin: 20px 10px;
+  color: $gray;
+  padding: 8px 20px;
+  font-size: 13px;
+  width: 100px;
+}
+.blocked-friend-header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  & h2 {
+    margin-bottom: 5px;
+    color: grey;
+  }  
+}
+.friend-box-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
 .friend-box {
   width: 100%;
   height: 100%;
@@ -7,10 +49,11 @@
   box-shadow: none;
   background-color: white;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-decoration: none;
-  align-items: stretch;
+  justify-content: space-between;
   text-align: left;
+  flex-grow: 5;
 }
 .friend-icon {
   background-color: gray;
@@ -23,25 +66,27 @@
 .friend-icon-box {
   text-align: right;
   width: 55px;
-  padding: 23px 15px;
-  flex: 0;
+  margin-right: 10px;
+  flex-shrink: 1;
 }
 .friend-box-content {
   padding-top: 15px;
-  display: flex;
-  flex-flow: row nowrap;
   & h2 {
     font-weight: bold;
   }
 }
+.friend-messages-content {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  border-bottom: 1px solid #9a9a9a;
+}
 .friend-text-content {
-  padding-bottom: 15px;
-  padding-left: 10px;
   font-family: Lato;
   font-size: 18px;
   color: $black;
-  flex: 10;
-  border-bottom: 1px solid #9a9a9a;
 }
 
 .friend-header {
@@ -49,6 +94,13 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
+  & h2 {
+    margin-bottom: 5px;
+  }  
+}
+
+.icon-btn {
+  flex-grow: 1;
 }
 
 .deleted-user-nickname {
@@ -59,11 +111,37 @@
   color: gray;
 }
 
+.no-unread-messages {
+  width: 30px;
+  height: 30px;
+}
+
+.text-content {
+  width: 650px; 
+  height: 40px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  @media (max-width: 800px) {
+    width: 350px;
+  }
+  @media (max-width: 600px) {
+    width: 250px;
+  }
+  @media (max-width: 415px) {
+    width: 210px;
+  }
+  @media (max-width: 335px) {
+    width: 180px;
+  }
+}
+
 .unread-badge {
   width: 30px;
   height: 30px;
   border-radius: 8px;
   padding-top: 5px;
+  margin: 0 10px;
   text-align: center;
   color: white;
   box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.2);
@@ -73,4 +151,17 @@
     font-size: 18px;
     color: white;
   }
+}
+
+.unread-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  justify-content: center;
+  flex-grow: 1;
 }

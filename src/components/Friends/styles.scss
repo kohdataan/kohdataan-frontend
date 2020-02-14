@@ -23,6 +23,9 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 70px;
+  @media (max-width: 375px) {
+    padding: 0 10px;
+  }
 }
 
 .no-friends-yet-header {

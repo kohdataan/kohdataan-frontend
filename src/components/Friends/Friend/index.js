@@ -2,6 +2,8 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ButtonContainer from '../../ButtonContainer'
+import ModalContainer from '../../ModalContainer'
 import { TextLine } from '../../ContentLoader'
 
 const Friend = props => {
@@ -16,6 +18,9 @@ const Friend = props => {
 
   const [user, setUser] = useState({})
   const [posts, setPosts] = useState({})
+  const [blockedFriends, setBlockedFriends] = useState([])
+  const [blocked, setBlocked] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const imageUri =
     user && user.id
@@ -45,24 +50,109 @@ const Friend = props => {
     }
     fetchPosts()
   }, [channel, getPosts])
+
+  const toggleBlockedStatus = () => {
+    const { id } = user
+    if (blockedFriends.indexOf(id) !== -1) {
+      setBlockedFriends(blockedFriends.filter(foundId => foundId !== id))
+      setBlocked(false)
+    } else {
+      setBlockedFriends(blockedFriends.concat(id))
+      setBlocked(true)
+    }
+    setShowModal(false)
+  }
+
   if (user.delete_at === 0) {
     return (
-      <Link className="friend-box" to={`/chat/${channel.id}`}>
-        <div className="friend-box-content">
+      <div>
+        <div className="friend-box-container">
           <div className="friend-icon-box">
-            <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+            {!blocked && (
+              <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+            )}
+            {blocked && <i className="fas fa-ban fa-lg banned-icon" />}
           </div>
-          <div className="friend-text-content">
-            <div className="friend-header">
-              <h2>{user.nickname}</h2>
-              {unreadCount > 0 && (
+          <div className="friend-messages-content">
+            <Link
+              className="friend-box"
+              to={blocked ? `/friends` : `/chat/${channel.id}`}
+            >
+              <div className="friend-box-content">
+                <div
+                  className={
+                    blocked ? 'blocked-friend-header' : 'friend-header'
+                  }
+                >
+                  <h2>{user.nickname}</h2>
+                </div>
+                <div
+                  className={
+                    blocked
+                      ? 'blocked-friend-text-content text-content'
+                      : 'friend-text-content text-content'
+                  }
+                >
+                  {message && !blocked ? (
+                    <>{message}</>
+                  ) : (
+                    <TextLine className="text-content" />
+                  )}
+                </div>
+              </div>
+            </Link>
+            <Link 
+              className="unread-box"
+              to={blocked ? `/friends` : `/chat/${channel.id}`}
+            >
+              {unreadCount > 0 && !blocked ? (
                 <mark className="unread-badge">{unreadCount}</mark>
+              ) : (
+                <div className="no-unread-messages">{}</div>
               )}
-            </div>
-            {message ? <>{message}</> : <TextLine />}
+            </Link>
+            <ButtonContainer
+              className="icon-btn"
+              onClick={() => setShowModal(true)}
+            >
+              <i
+                className="fas fa-ellipsis-v fa-lg block-user-icon"
+                aria-hidden="true"
+              />
+            </ButtonContainer>
           </div>
         </div>
-      </Link>
+        <ModalContainer
+          modalIsOpen={showModal}
+          closeModal={() => setShowModal(false)}
+          label="Change user block status"
+        >
+          <div className="block-user-modal-content">
+            <h3 className="interests-modal-text">
+              {blocked
+                ? 'Haluatko poistaa kaverin estetyistä?'
+                : 'Oletko varma, että haluat estää tämän kaverin?'}
+            </h3>
+            <p>
+              {blocked
+                ? 'Voit taas viestitellä kaverin kanssa.'
+                : 'Kaveri ei enää näe profiiliasi eikä voi lähettää sinulle yksityisviestejä.'}
+            </p>
+            <ButtonContainer
+              onClick={() => setShowModal(false)}
+              className="cancel-button block-user-modal-btn"
+            >
+              En
+            </ButtonContainer>
+            <ButtonContainer
+              onClick={toggleBlockedStatus}
+              className="confirm-button block-user-modal-btn"
+            >
+              Kyllä
+            </ButtonContainer>
+          </div>
+        </ModalContainer>
+      </div>
     )
   }
   return (
