@@ -35,11 +35,7 @@ const SuggestionBox = props => {
         <div className="group-in-common">
           {channel.purpose && Object.keys(channel.purpose).length > 0 ? (
             <p className="group-in-common-text">
-<<<<<<< HEAD
               {`Kiinnostukset: ${sortPurpose(channel.purpose)
-=======
-              {`Kiinnostukset: ${Object.keys(channel.purpose)
->>>>>>> development
                 .slice(0, 3)
                 .join(', ')}`}
             </p>
