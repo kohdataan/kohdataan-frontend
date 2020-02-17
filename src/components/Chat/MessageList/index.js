@@ -2,7 +2,6 @@ import React, { memo, useEffect, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
-import getIconColor from '../../../utils/getMemberIconColor'
 import getUsernameById from '../../../utils/getUsernameById'
 
 const MessageList = props => {
@@ -11,10 +10,10 @@ const MessageList = props => {
     currentUserId,
     getUserNamebyId,
     directChannel,
-    members,
     channelId,
     profiles,
     getStatusById,
+    pinPost,
   } = props
 
   const getIconMemberStatus = userId =>
@@ -85,6 +84,7 @@ const MessageList = props => {
                 !post.type.includes('system') && (
                   <Message
                     key={post.id}
+                    id={post.id}
                     files={post.file_ids}
                     type={post.type}
                     url={post.url}
@@ -92,7 +92,6 @@ const MessageList = props => {
                     text={post.message}
                     senderId={post.user_id}
                     currentUserId={currentUserId}
-                    iconColor={getIconColor(post.user_id, members)}
                     directChannel={directChannel}
                     timeSent={timestampValues.sendTime}
                     dateSent={timestampValues.sendDate}
@@ -100,6 +99,7 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
+                    pinPost={pinPost}
                   />
                 )
               )
@@ -113,11 +113,11 @@ MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
-  members: propTypes.instanceOf(Object).isRequired,
   directChannel: propTypes.bool.isRequired,
   channelId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
+  pinPost: propTypes.func.isRequired,
 }
 
 export default memo(MessageList)

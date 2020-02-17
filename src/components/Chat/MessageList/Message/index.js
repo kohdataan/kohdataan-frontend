@@ -2,14 +2,15 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
+import ButtonContainer from '../../../ButtonContainer'
 
 const Message = props => {
   const {
+    id,
     sender,
     text,
     currentUserId,
     senderId,
-    iconColor,
     type,
     timeSent,
     dateSent,
@@ -19,6 +20,7 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
+    pinPost,
   } = props
 
   // Adds the text to be used for the date divider
@@ -88,9 +90,10 @@ const Message = props => {
                   <div
                     className="label chat-message-sender-icon"
                     style={{
-                      backgroundColor: iconColor,
                       backgroundImage: `url(
-                        ${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${senderId}/image
+                        ${
+                          process.env.REACT_APP_MATTERMOST_URL
+                        }/api/v4/users/${senderId}/image?${Date.now()}
                       )`,
                     }}
                   />
@@ -99,10 +102,7 @@ const Message = props => {
               </div>
             )}
             {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
-              <div
-                className="chat-message-sender-icon"
-                style={{ backgroundColor: iconColor }}
-              >
+              <div className="chat-message-sender-icon">
                 <i aria-hidden="true" title={sender[0]} />
                 <span className="label">{sender[0]}</span>
               </div>
@@ -125,6 +125,14 @@ const Message = props => {
                 )}
                 {!files && <p className="chat-message-content-text">{text}</p>}
               </div>
+              {currentUserId !== senderId && !directChannel && (
+                <ButtonContainer
+                  className="chat-report-message-icon"
+                  onClick={() => pinPost(id)}
+                >
+                  <i className="far fa-flag" aria-hidden="true" />
+                </ButtonContainer>
+              )}
             </div>
           </div>
         </div>
@@ -147,7 +155,6 @@ Message.propTypes = {
   type: propTypes.string,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,
-  iconColor: propTypes.string.isRequired,
   directChannel: propTypes.bool.isRequired,
   timeSent: propTypes.string.isRequired,
   dateSent: propTypes.string.isRequired,
@@ -156,6 +163,8 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
+  pinPost: propTypes.func.isRequired,
+  id: propTypes.string.isRequired,
 }
 
 export default memo(Message)

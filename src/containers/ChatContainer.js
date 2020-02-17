@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import {
   getPosts as getPostsAction,
   createPost as createPostAction,
+  pinPost as pinPostAction,
 } from 'mattermost-redux/actions/posts'
 import {
   uploadFile as uploadFileAction,
@@ -46,6 +47,7 @@ const ChatContainer = props => {
     statuses,
     matterMostLogout,
     location,
+    pinPost,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -138,6 +140,7 @@ const ChatContainer = props => {
           getUserByUsername={getUserByUsername}
           handleLogout={handleLogout}
           location={location}
+          pinPost={pinPost}
         />
       )}
     </>
@@ -163,6 +166,7 @@ ChatContainer.propTypes = {
   statuses: PropTypes.instanceOf(Object).isRequired,
   matterMostLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
+  pinPost: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -201,6 +205,7 @@ const mapDispatchToProps = dispatch =>
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
       matterMostLogout: matterMostLogoutAction,
+      pinPost: pinPostAction,
     },
     dispatch
   )

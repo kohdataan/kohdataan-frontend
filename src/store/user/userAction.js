@@ -6,21 +6,23 @@ import * as API from '../../api/user/user'
 export const userLogin = user => {
   return async dispatch => {
     try {
-      let loginSuccess = false
       const res = await API.userLogin(user)
-      if (res) {
+      if (res && res.user && res.token) {
         localStorage.setItem('userId', res.user.id)
         localStorage.setItem('authToken', res.token)
-        loginSuccess = true
-      }
-      if (loginSuccess) {
         const { email, password } = user
         await dispatch(matterMostLogin(email, password))
+      } else {
+        await dispatch({
+          type: types.USER_LOGIN_FAILURE,
+          payload: res,
+          error: true,
+        })
       }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
-      dispatch({
+      await dispatch({
         type: types.USER_LOGIN_FAILURE,
         payload: e,
         error: true,
@@ -34,11 +36,13 @@ export const addUserToState = () => {
     const id = localStorage.getItem('userId')
     const token = localStorage.getItem('authToken')
     try {
-      const user = await API.getUser(id, token)
-      dispatch({
-        type: types.ADD_USER_TO_STATE,
-        user,
-      })
+      if (token) {
+        const user = await API.getUser(id, token)
+        dispatch({
+          type: types.ADD_USER_TO_STATE,
+          user,
+        })
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('e')

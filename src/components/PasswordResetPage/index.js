@@ -2,11 +2,11 @@ import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
-import ValidatedInputField from '../../ValidatedInputField'
-import ToolTipModalContainer from '../../../containers/ToolTipModalContainer'
+import ValidatedInputField from '../ValidatedInputField'
+import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
-const ResetPage = props => {
+const PasswordResetPage = props => {
   const { handleNewPassword } = props
   const { register, handleSubmit, errors, watch } = useForm()
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
@@ -129,8 +129,8 @@ const ResetPage = props => {
   )
 }
 
-ResetPage.propTypes = {
+PasswordResetPage.propTypes = {
   handleNewPassword: PropTypes.func.isRequired,
 }
 
-export default memo(ResetPage)
+export default memo(PasswordResetPage)

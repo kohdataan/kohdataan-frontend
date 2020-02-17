@@ -48,7 +48,6 @@ EditInterestsContainer.propTypes = {
   userInterests: PropTypes.instanceOf(Array),
   interestOptions: PropTypes.instanceOf(Array),
   addUserInterests: PropTypes.func.isRequired,
-  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 EditInterestsContainer.defaultProps = {

@@ -10,7 +10,7 @@ const userLogin = async data => {
         'Content-Type': 'application/json',
       },
     })
-    return handleFetchErrors(resp)
+    return await resp.json()
   } catch (e) {
     throw new Error(e)
   }
@@ -278,7 +278,7 @@ const sendVerifyEmailLink = async data => {
         'Content-Type': 'application/json',
       },
     })
-    return handleFetchErrors(resp)
+    return await resp.json()
   } catch (e) {
     throw new Error(e)
   }

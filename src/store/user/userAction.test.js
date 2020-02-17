@@ -11,10 +11,16 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('User actions', () => {
-  it('should not dispatch login actions if there is not response data for user', async () => {
+  it('should dispatch LoginFailureAction with error message when there is a problem', async () => {
     const mockUser = { user: { email: 'test@test.fi', password: '123' } }
-    fetch.once(false)
-    const expectedActions = []
+    fetch.once(JSON.stringify({ message: 'error happened' }))
+    const expectedActions = [
+      {
+        error: true,
+        payload: { message: 'error happened' },
+        type: 'KOHDATAAN_USER_LOGIN_FAILURE',
+      },
+    ]
     const store = mockStore({})
 
     await store.dispatch(userLogin(mockUser))
