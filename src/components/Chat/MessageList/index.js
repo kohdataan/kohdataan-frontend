@@ -100,11 +100,8 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
-<<<<<<< HEAD
                     isAdmin={isAdmin(post.user_id, profiles)}
-=======
                     pinPost={pinPost}
->>>>>>> development
                   />
                 )
               )

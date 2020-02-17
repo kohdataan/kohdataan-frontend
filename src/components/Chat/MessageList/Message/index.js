@@ -20,11 +20,8 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
-<<<<<<< HEAD
     isAdmin,
-=======
     pinPost,
->>>>>>> development
   } = props
 
   // Adds the text to be used for the date divider
@@ -180,12 +177,9 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
-<<<<<<< HEAD
   isAdmin: propTypes.bool,
-=======
   pinPost: propTypes.func.isRequired,
   id: propTypes.string.isRequired,
->>>>>>> development
 }
 
 export default memo(Message)
