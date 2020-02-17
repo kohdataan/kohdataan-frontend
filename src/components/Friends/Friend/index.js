@@ -10,7 +10,6 @@ import {
   removeUserFromBlocked,
 } from '../../../api/blocking/blocked_user'
 
-
 const Friend = props => {
   const {
     channel,
@@ -59,11 +58,11 @@ const Friend = props => {
 
   useEffect(() => {
     const checkUserBlockedStatus = async () => {
-      if (blockedFriends.indexOf(user.id) !== -1) {
+      if (blockedFriends && blockedFriends.indexOf(user.id) !== -1) {
         setBlocked(true)
       }
     }
-    checkUserBlockedStatus()
+    if (myUserInfo && user) checkUserBlockedStatus()
   }, [user])
 
   const toggleBlockedStatus = async () => {
