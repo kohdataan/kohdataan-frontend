@@ -72,16 +72,14 @@ const MessageList = props => {
           posts
             .filter(
               p =>
-                p.type !== 'system_join_channel' &&
-                p.type !== 'system_leave_channel' &&
                 p.type !== 'system_purpose_change'
+                // p.sender !== 'Käyttäjä poistunut'
             )
             .map(post => {
               const timestampValues = setTimeStampValues(post)
               return (
                 post &&
-                post.user_id &&
-                !post.type.includes('system') && (
+                post.user_id && (
                   <Message
                     key={post.id}
                     id={post.id}
@@ -102,7 +100,7 @@ const MessageList = props => {
                     pinPost={pinPost}
                   />
                 )
-              )
+            )
             })}
       </div>
     </div>
