@@ -8,6 +8,10 @@ import isAdmin from '../../../utils/userIsAdmin'
 const SuggestionBox = props => {
   const { channel, members, hidden, top, profiles } = props
 
+  const sortPurpose = purpose => {
+    return Object.keys(purpose).sort((a, b) => purpose[b] - purpose[a])
+  }
+
   return (
     <div
       className={`group-box group-suggestion-box ${hidden ? 'hidden-box' : ''}`}
@@ -30,10 +34,9 @@ const SuggestionBox = props => {
           <h2>{channel.display_name}</h2>
         </div>
         <div className="group-in-common">
-          {Object.keys(channel.purpose) &&
-          Object.keys(channel.purpose).length > 0 ? (
+          {channel.purpose && Object.keys(channel.purpose).length > 0 ? (
             <p className="group-in-common-text">
-              {`Kiinnostukset: ${Object.keys(channel.purpose)
+              {`Kiinnostukset: ${sortPurpose(channel.purpose)
                 .slice(0, 3)
                 .join(', ')}`}
             </p>

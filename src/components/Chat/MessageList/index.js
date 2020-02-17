@@ -14,6 +14,7 @@ const MessageList = props => {
     channelId,
     profiles,
     getStatusById,
+    pinPost,
   } = props
 
   const getIconMemberStatus = userId =>
@@ -84,6 +85,7 @@ const MessageList = props => {
                 !post.type.includes('system') && (
                   <Message
                     key={post.id}
+                    id={post.id}
                     files={post.file_ids}
                     type={post.type}
                     url={post.url}
@@ -98,7 +100,11 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
+<<<<<<< HEAD
                     isAdmin={isAdmin(post.user_id, profiles)}
+=======
+                    pinPost={pinPost}
+>>>>>>> development
                   />
                 )
               )
@@ -116,6 +122,7 @@ MessageList.propTypes = {
   channelId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
+  pinPost: propTypes.func.isRequired,
 }
 
 export default memo(MessageList)
