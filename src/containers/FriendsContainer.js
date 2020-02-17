@@ -19,6 +19,7 @@ const FriendsContainer = props => {
     friendsCoordinates,
     user,
     history,
+    statuses,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
@@ -105,6 +106,7 @@ const FriendsContainer = props => {
         friendsCoordinates={friendsCoordinates}
         history={history}
         myUserInfo={user}
+        statuses={statuses}
       />
     </>
   )
@@ -140,6 +142,7 @@ const mapStateToProps = state => {
   const { user } = state
   const friendsCoordinates =
     state.loading.coordinates && state.loading.coordinates.friendsNav
+  const { statuses } = state.entities.users
 
   return {
     currentUserId,
@@ -152,6 +155,7 @@ const mapStateToProps = state => {
     myChannels,
     membersInChannel,
     friendsCoordinates,
+    statuses,
   }
 }
 

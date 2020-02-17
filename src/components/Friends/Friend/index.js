@@ -19,6 +19,7 @@ const Friend = props => {
     getLatestMessage,
     membersInChannel,
     myUserInfo,
+    getStatusById,
   } = props
 
   const [user, setUser] = useState({})
@@ -26,6 +27,9 @@ const Friend = props => {
   const [blockedFriends, setBlockedFriends] = useState(myUserInfo.blockedUsers)
   const [blocked, setBlocked] = useState(false)
   const [showModal, setShowModal] = useState(false)
+
+  const getIconMemberStatus = userId =>
+    `friends-${getStatusById(userId)}-status-icon`
 
   const imageUri =
     user && user.id
@@ -88,7 +92,14 @@ const Friend = props => {
         <div className="friend-box-container">
           <div className="friend-icon-box">
             {!blocked && (
-              <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+              <div>
+                <img
+                  className="friend-icon"
+                  src={imageUri}
+                  alt="Profiilikuva"
+                />
+                <div className={getIconMemberStatus(user.id)} />
+              </div>
             )}
             {blocked && <i className="fas fa-ban fa-lg blocked-icon" />}
           </div>
@@ -175,19 +186,20 @@ const Friend = props => {
     )
   }
   return (
-    <div className="friend-box">
-      <div className="friend-box-content">
-        <div className="friend-icon-box">
-          <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
-        </div>
-        <div className="friend-text-content">
+    <div className="friend-box-container">
+      <div className="friend-icon-box">
+        <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+      </div>
+      <div className="friend-messages-content">
+        <div className="friend-box-content">
           <div className="friend-header">
             <h2 className="deleted-user-nickname">{user.nickname}</h2>
           </div>
-          <div className="deleted-user-message">
+          <div className="deleted-user-message text-content">
             Käyttäjä on poistunut palvelusta
           </div>
         </div>
+        <div className="deleted-user-empty-fields" />
       </div>
     </div>
   )
@@ -201,6 +213,7 @@ Friend.propTypes = {
   getLatestMessage: propTypes.func.isRequired,
   membersInChannel: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
+  getStatusById: propTypes.func.isRequired,
 }
 
 export default memo(Friend)

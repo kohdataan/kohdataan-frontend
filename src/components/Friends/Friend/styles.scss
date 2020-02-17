@@ -53,7 +53,6 @@
   text-decoration: none;
   justify-content: space-between;
   text-align: left;
-  flex-grow: 5;
 }
 .friend-icon {
   background-color: gray;
@@ -99,6 +98,37 @@
   }  
 }
 
+.friends-online-status-icon {
+  position: relative; 
+  bottom: 10px;
+  left: 30px;
+  background-color: green;
+  border: 1px solid $white;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+.friends-offline-status-icon {
+  position: relative; 
+  bottom: 10px;
+  left: 30px;
+  border: 1px solid $white;
+  background-color: grey;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.friends-away-status-icon {
+  position: relative; 
+  bottom: 10px;
+  left: 30px;
+  background-color: yellow;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
 .icon-btn {
   flex-grow: 1;
 }
@@ -114,6 +144,12 @@
 .no-unread-messages {
   width: 30px;
   height: 30px;
+  margin: 0 10px;
+}
+
+.deleted-user-empty-fields {
+  width: 55px;
+  height: 50px;
   margin: 0 10px;
 }
 

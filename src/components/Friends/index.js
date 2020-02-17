@@ -16,6 +16,7 @@ const Friends = props => {
     friendsCoordinates,
     history,
     myUserInfo,
+    statuses,
   } = props
 
   const getShowModals = () => {
@@ -31,6 +32,11 @@ const Friends = props => {
     newState[modal] = false
     setShowModals(newState)
     history.push('/')
+  }
+
+  const getStatusById = id => {
+    const status = id ? statuses[id] : ''
+    return status
   }
 
   return (
@@ -50,6 +56,7 @@ const Friends = props => {
               getLatestMessage={getLatestMessage}
               membersInChannel={membersInChannel}
               myUserInfo={myUserInfo}
+              getStatusById={getStatusById}
             />
           ))
         ) : (
@@ -81,6 +88,7 @@ Friends.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   friendsCoordinates: PropTypes.instanceOf(Object),
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 Friends.defaultProps = {
