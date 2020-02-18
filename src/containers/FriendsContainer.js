@@ -124,6 +124,7 @@ FriendsContainer.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   friendsCoordinates: PropTypes.instanceOf(Object),
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 FriendsContainer.defaultProps = {
