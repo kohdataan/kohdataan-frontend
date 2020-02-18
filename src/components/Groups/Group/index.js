@@ -63,27 +63,33 @@ const Group = props => {
         )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
-            {activeMembers.map(member => (
-              <Member
-                key={`group-${member.id}`}
-                nickname={member.nickname || member.username}
-                currentUserId={currentUserId}
-                userId={member.id}
-              />
-            ))}
+            {activeMembers &&
+              activeMembers.map(member => (
+                <Member
+                  key={`group-${member.id}`}
+                  nickname={member.nickname || member.username}
+                  currentUserId={currentUserId}
+                  userId={member.id}
+                />
+              ))}
           </div>
         ) : (
           <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
       </div>
-      {unreadCount > 0 && (
+      {unreadCount === 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadCount} uutta viestiä`}</li>
+          <li>{`${unreadCount} uusi ilmoitus`}</li>
+        </div>
+      )}
+      {unreadCount > 1 && (
+        <div className="group-unreads-text">
+          <li>{`${unreadCount} uutta ilmoitusta`}</li>
         </div>
       )}
       {unreadCount <= 0 && (
         <div className="group-unreads-text no-unreads">
-          <p>Ei uusia viestejä</p>
+          <p>Ei uusia ilmoituksia</p>
         </div>
       )}
     </Link>
