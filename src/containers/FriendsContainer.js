@@ -107,6 +107,7 @@ const FriendsContainer = props => {
         history={history}
         myUserInfo={user}
         statuses={statuses}
+        currentUserId={currentUserId}
       />
     </>
   )

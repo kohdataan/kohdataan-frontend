@@ -159,6 +159,7 @@
   overflow: hidden; 
   text-overflow: ellipsis; 
   white-space: nowrap;
+  margin-bottom: -5px;
   @media (max-width: 800px) {
     width: 350px;
   }

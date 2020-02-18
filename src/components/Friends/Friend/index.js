@@ -9,6 +9,7 @@ import {
   addUserToBlocked,
   removeUserFromBlocked,
 } from '../../../api/blocking/blocked_user'
+import { getUserByUsername, getUser } from '../../../api/user/user'
 
 const Friend = props => {
   const {
@@ -20,6 +21,7 @@ const Friend = props => {
     membersInChannel,
     myUserInfo,
     getStatusById,
+    currentUserId,
   } = props
 
   const [user, setUser] = useState({})
@@ -27,13 +29,16 @@ const Friend = props => {
   const [blockedFriends, setBlockedFriends] = useState(myUserInfo.blockedUsers)
   const [blocked, setBlocked] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [otherUserInfo, setOtherUserInfo] = useState({})
 
   const getIconMemberStatus = userId =>
     `friends-${getStatusById(userId)}-status-icon`
 
   const imageUri =
     user && user.id
-      ? `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${user.id}/image`
+      ? `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${
+          user.id
+        }/image?${Date.now()}`
       : null
   const message = getLatestMessage(posts)
 
@@ -61,6 +66,7 @@ const Friend = props => {
   }, [channel, getPosts])
 
   useEffect(() => {
+    // checks if friend is blocked
     const checkUserBlockedStatus = async () => {
       if (blockedFriends && blockedFriends.indexOf(user.id) !== -1) {
         setBlocked(true)
@@ -69,10 +75,30 @@ const Friend = props => {
     if (myUserInfo && user) checkUserBlockedStatus()
   }, [user])
 
+  useEffect(() => {
+    // fetches user info for other user containing blocked users
+    const fetchOtherUser = async () => {
+      if (user && user.delete_at === 0) {
+        const userInfo = await getUserByUsername(
+          user.username,
+          localStorage.getItem('authToken')
+        )
+        if (userInfo) {
+          const res = await getUser(
+            userInfo.id,
+            localStorage.getItem('authToken')
+          )
+          setOtherUserInfo(res)
+        }
+      }
+    }
+    fetchOtherUser()
+  }, [user])
+
   const toggleBlockedStatus = async () => {
     const { id } = user
     const token = localStorage.getItem('authToken')
-    if (blockedFriends.indexOf(id) !== -1) {
+    if (blockedFriends.includes(id)) {
       setBlockedFriends(blockedFriends.filter(foundId => foundId !== id))
       const data = { unblockedUser: user.id }
       await removeUserFromBlocked(data, token)
@@ -86,7 +112,11 @@ const Friend = props => {
     setShowModal(false)
   }
 
-  if (user.delete_at === 0) {
+  if (
+    user.delete_at === 0 &&
+    otherUserInfo.blockedUsers &&
+    !otherUserInfo.blockedUsers.includes(currentUserId)
+  ) {
     return (
       <div>
         <div className="friend-box-container">
@@ -185,24 +215,27 @@ const Friend = props => {
       </div>
     )
   }
-  return (
-    <div className="friend-box-container">
-      <div className="friend-icon-box">
-        <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
-      </div>
-      <div className="friend-messages-content">
-        <div className="friend-box-content">
-          <div className="friend-header">
-            <h2 className="deleted-user-nickname">{user.nickname}</h2>
-          </div>
-          <div className="deleted-user-message text-content">
-            Käyttäjä on poistunut palvelusta
-          </div>
+  if (user.delete_at !== 0) {
+    return (
+      <div className="friend-box-container">
+        <div className="friend-icon-box">
+          <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
         </div>
-        <div className="deleted-user-empty-fields" />
+        <div className="friend-messages-content">
+          <div className="friend-box-content">
+            <div className="friend-header">
+              <h2 className="deleted-user-nickname">{user.nickname}</h2>
+            </div>
+            <div className="deleted-user-message text-content">
+              Käyttäjä on poistunut palvelusta
+            </div>
+          </div>
+          <div className="deleted-user-empty-fields" />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  return <></>
 }
 
 Friend.propTypes = {
@@ -214,6 +247,7 @@ Friend.propTypes = {
   membersInChannel: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
+  currentUserId: propTypes.string.isRequired,
 }
 
 export default memo(Friend)
