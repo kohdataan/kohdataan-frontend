@@ -161,7 +161,7 @@ const Friend = props => {
                 </div>
               </div>
             </Link>
-            <Link 
+            <Link
               className="unread-box"
               to={blocked ? `/friends` : `/chat/${channel.id}`}
             >

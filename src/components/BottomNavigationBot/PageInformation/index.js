@@ -55,8 +55,7 @@ const PageInformation = props => {
         \nKun klikkaat ryhmän jäsenen nimeä, näet hänen profiilinsa. Profiilissa voit lähettää hänelle yksityisen viestin.         
         \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.
         \nJos huomaat keskustelussa asiattoman viestin tai viestejä, voit ilmoittaa siitä valvojalle. Valvoja voi poistaa viestin. Valvoja voi tarvittaessa myös liittyä keskusteluun. Valvojalla on pääsy kaikkiin ryhmäkeskusteluihin.`
-    
-        break
+      break
     case '/member-profile':
       text = `Tämä on toisen käyttäjän profiili.
         \nTäällä näet tiedot, jotka hän haluaa kertoa itsestään muille käyttäjille.
