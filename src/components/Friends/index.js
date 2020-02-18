@@ -63,8 +63,8 @@ const Friends = props => {
           ))
         ) : (
           <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä. Löydät uusia kavereita
-            Ryhmät-välilehdeltä!
+            Sinulla ei ole vielä yksityisviestejä. Voit löytää uusia kavereita
+            ryhmistä.
           </h3>
         )}
       </div>
