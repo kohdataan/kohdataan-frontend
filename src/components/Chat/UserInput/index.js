@@ -72,7 +72,7 @@ const UserInput = props => {
         <input
           style={{ display: 'none' }}
           type="file"
-          accept="image/*"
+          accept="image/*,video/*"
           onChange={addImage}
           ref={fileInput}
           aria-label="add image"

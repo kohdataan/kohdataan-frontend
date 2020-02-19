@@ -1,5 +1,14 @@
 @import '../../../../styles/colors.scss';
 
+.player-wrapper {
+  position: relative;
+}
+
+.react-player {
+  top: 0;
+  left: 0;
+}
+
 .chat-message-wrapper {
   display: flex;
   justify-content: space-around;

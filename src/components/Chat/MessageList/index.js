@@ -14,6 +14,7 @@ const MessageList = props => {
     profiles,
     getStatusById,
     pinPost,
+    filesData,
   } = props
 
   const getIconMemberStatus = userId =>
@@ -100,6 +101,7 @@ const MessageList = props => {
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
                     pinPost={pinPost}
+                    filesData={filesData}
                   />
                 )
               )
@@ -118,6 +120,7 @@ MessageList.propTypes = {
   profiles: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
+  filesData: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(MessageList)
