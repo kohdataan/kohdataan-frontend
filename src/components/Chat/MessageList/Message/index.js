@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 import propTypes from 'prop-types'
@@ -24,14 +24,18 @@ const Message = props => {
     pinPost,
   } = props
 
+  const [messageText, setMessageText] = useState(text)
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
 
-  // Checks if message is combined user activity message
-  const isSystemCombinedUserActivity = () =>
-    type === 'system_combined_user_activity'
-
+  // Checks if message type is users leaving or joining the channel
+  const isUserLeavingOrJoiningChannel = () => {
+    if (type === 'system_join_channel' || type === 'system_leave_channel') {
+      return true
+    }
+    return false
+  }
   // Get message wrapper classes
   const messageWrapperClassList = [
     'chat-message-wrapper',
@@ -42,8 +46,22 @@ const Message = props => {
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isSystemCombinedUserActivity() ? 'content-system-combined' : '',
+    isUserLeavingOrJoiningChannel() ? 'content-system-message' : '',
   ]
+
+  useEffect(() => {
+    if (type === 'system_join_channel') {
+      if (senderId === currentUserId) {
+        setMessageText('Sinä liityit kanavalle.')
+      } else if (sender === 'Käyttäjä poistunut') {
+        setMessageText(`Käyttäjä poistunut.`)
+      } else {
+        setMessageText(`${sender} liittyi kanavalle.`)
+      }
+    } else if (type === 'system_leave_channel') {
+      setMessageText(`${sender} poistui kanavalta.`)
+    }
+  }, [currentUserId, sender, senderId, type])
 
   return (
     <>
@@ -132,20 +150,25 @@ const Message = props => {
                       />
                     </Link>
                     <p className="image-message-content-text chat-message-content-text">
-                      {text}
+                      {messageText}
                     </p>
                   </>
                 )}
-                {!files && <p className="chat-message-content-text">{text}</p>}
+                {!files && (
+                  <p className="chat-message-content-text">{messageText}</p>
+                )}
               </div>
-              {currentUserId !== senderId && !directChannel && !isAdmin && (
-                <ButtonContainer
-                  className="chat-report-message-icon"
-                  onClick={() => pinPost(id)}
-                >
-                  <i className="far fa-flag" aria-hidden="true" />
-                </ButtonContainer>
-              )}
+              {currentUserId !== senderId &&
+                !directChannel &&
+                !isAdmin &&
+                !isUserLeavingOrJoiningChannel() && (
+                  <ButtonContainer
+                    className="chat-report-message-icon"
+                    onClick={() => pinPost(id)}
+                  >
+                    <i className="far fa-flag" aria-hidden="true" />
+                  </ButtonContainer>
+                )}
             </div>
           </div>
         </div>
