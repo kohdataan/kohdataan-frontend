@@ -36,7 +36,7 @@ const MembersSider = props => {
     return (
       <div className="chat-header-members-sider" id="members-sider" ref={ref}>
         <div className="chat-header-members-sider-content">
-          <p>Tämä ryhmä on Kohdataan-somen pilottivaihetta varten.</p>
+          <p>Tämä ryhmä on Kohdataan-somen testausta varten.</p>
           <p>
             Tänne voit kirjoittaa vapaamuotoisesti palautetta palveluun
             liittyen.

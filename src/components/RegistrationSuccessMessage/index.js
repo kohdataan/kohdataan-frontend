@@ -31,21 +31,23 @@ const RegistrationSuccessMessage = () => {
           </ol>
           <p className="reminder-content-text,">
             Jos et löydä sähköpostistasi viestiä, muista tarkistaa myös
-            roskapostikansio.
+            roskapostikansio. 
+          </p>
+          <p>
+            Voit myös pyytää, että sinulle lähetetään {' '}
+            <Link className="resend-verification-link" to="/email-verification">
+            sähköposti uudestaan.
+            </Link>
           </p>
         </div>
         <hr className="divider" />
-        <div className="resend-verification-link-container">
-          <Link className="resend-verification-link" to="/email-verification">
-            Uudelleenlähettäkää kirjautumislinkki
-          </Link>
-        </div>
+        <div className="resend-verification-link-container" />
         <div className="problems-with-registration-link-container">
           <Link
             className="problems-with-registration-link"
             to="/registrationproblem"
           >
-            Tarvitsen apua rekisteröitymisessä
+            Tarvitsen apua rekisteröitymisessä.
           </Link>
         </div>
       </div>

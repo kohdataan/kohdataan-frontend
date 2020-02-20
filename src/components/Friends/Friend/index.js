@@ -190,12 +190,12 @@ const Friend = props => {
           <div className="block-user-modal-content">
             <h3 className="interests-modal-text">
               {blocked
-                ? 'Haluatko poistaa kaverin estetyistä?'
-                : 'Oletko varma, että haluat estää tämän kaverin?'}
+                ? 'Haluatko poistaa kaverin eston?'
+                : 'Haluatko varmasti estää tämän kaverin?'}
             </h3>
             <p>
               {blocked
-                ? 'Voit taas viestitellä kaverin kanssa.'
+                ? 'Voit taas viestitellä kaverin kanssa kahdestaan.'
                 : 'Estetty kaveri ei voi enää lähettää sinulle yksityisviestejä.'}
             </p>
             <ButtonContainer
