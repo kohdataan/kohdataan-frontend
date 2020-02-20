@@ -46,10 +46,6 @@ const Message = props => {
     isSystemCombinedUserActivity() ? 'content-system-combined' : '',
   ]
 
-  if (files && files[0] && filesData[files[0]]) {
-    console.log(filesData[files[0]])
-  }
-
   return (
     <>
       {showDate && (
