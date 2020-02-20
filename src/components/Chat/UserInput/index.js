@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import FilePreview from '../FilePreview'
+import AudioInput from '../AudioInput'
 import './styles.scss'
 
 const UserInput = props => {
@@ -43,12 +44,39 @@ const UserInput = props => {
   const addFile = async e => {
     const channelId = channel.id
     const data = new FormData()
+    console.log(e.target.files[0])
     data.append('files', e.target.files[0])
     data.append('channel_id', channelId)
+    for (var value of data.values()) {
+      console.log(value) 
+   }
     const res = await uploadFile(channelId, null, null, data)
     const id = res && res.data.file_infos[0].id
     setFileId(id)
     setModalIsOpen(true)
+  }
+
+  const startSendingAudio = () => {
+    setModalIsOpen(true)
+  }
+
+  const handleAudioSubmit = async blob => {
+    const data = new FormData()
+    console.log(blob)
+    data.append('files', blob)
+    data.append('channel_id', channel.id)
+    console.log(data.keys())
+    for (var value of data.values()) {
+      console.log(value) 
+   }
+    const res = await uploadFile(channel.id, null, null, data)
+    const id = res && res.data.file_infos[0].id
+    const post = {
+      channel_id: channel.id,
+      message: '',
+      file_ids: [id],
+    }
+    await createPost(post)
   }
 
   const clickFileInput = () => {
@@ -80,7 +108,7 @@ const UserInput = props => {
         <ButtonContainer className="icon-btn" onClick={clickFileInput}>
           <div className="send-image-attachment-button" />
         </ButtonContainer>
-        <ButtonContainer className="icon-btn" onClick={() => {}}>
+        <ButtonContainer className="icon-btn" onClick={startSendingAudio}>
           <div className="send-voice-attachment-button" />
         </ButtonContainer>
         <input
@@ -98,16 +126,28 @@ const UserInput = props => {
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
-        <FilePreview
-          channel={channel}
-          handleSubmit={handleSubmit}
-          createPost={createPost}
-          message={message}
-          handleChange={handleChange}
-          fileId={fileId}
-          closeModal={closeModal}
-          filesData={filesData}
-        />
+        {/* 
+        If fileId is set, it means that we have already uploaded a file and this is its id.
+        Only time when we arrive in this modal and have not set fileId, is when we have not yet uploaded a file.
+        This only happens when we have only started recording audio, so we check for this and display components accordingly.
+        */}
+        {fileId !== '' && (
+          <FilePreview
+            handleSubmit={handleSubmit}
+            message={message}
+            handleChange={handleChange}
+            fileId={fileId}
+            closeModal={closeModal}
+            filesData={filesData}
+          />
+        )}
+        {fileId === '' && (
+          <AudioInput
+            handleSubmit={handleAudioSubmit}
+            closeModal={closeModal}
+            isOpen={modalIsOpen}
+          />
+        )}
       </ModalContainer>
     </div>
   )

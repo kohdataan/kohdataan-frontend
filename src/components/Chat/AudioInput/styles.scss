@@ -1,0 +1,21 @@
+@import '../../../styles/colors.scss';
+
+.audio-recording-content {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.audio-input-close-modal-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid gray;
+  border-radius: 50%;
+  padding: 4px 10px;
+  font-size: 1.2em;
+  position: absolute;
+  top: -40px;
+  right: -2%;
+}

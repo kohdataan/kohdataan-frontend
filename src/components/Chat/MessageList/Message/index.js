@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import ReactPlayer from 'react-player'
+import ReactAudioPlayer from 'react-audio-player'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -143,6 +144,16 @@ const Message = props => {
                       <p className="image-message-content-text chat-message-content-text">
                         {text}
                       </p>
+                    </>
+                  )}
+                {files &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('audio') && (
+                    <>
+                      <ReactAudioPlayer
+                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                        controls
+                      />
                     </>
                   )}
                 {!files && <p className="chat-message-content-text">{text}</p>}
