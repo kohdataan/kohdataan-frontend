@@ -1,21 +1,39 @@
 /* eslint-disable no-alert */
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
+import EXIF from 'exif-js'
 import ShadowBox from '../../ShadowBox'
 import './styles.scss'
 import CameraIconPath from '../../../assets/camera-add-solid.svg'
 
 const Picture = props => {
   const { onChange, hideStep } = props
+  const [imageData, setImageData] = useState(null)
 
   const onBeforeFileLoad = e => {
+    console.log(e.target.files[0])
+    const file = e.target.files[0]
+    if (file && file.name) {
+      EXIF.getData(file, function() {
+        const exifData = EXIF.pretty(this)
+        if (exifData) {
+          console.log(exifData)
+          const orientationTag = EXIF.getTag(this, 'Orientation')
+          setImageData(orientationTag)
+        } else {
+          console.log(`No EXIF data found in image '${file.name}'.`)
+        }
+      })
+    }
+    console.log(' file ', file)
     if (e.target.files[0].size > 50000000) {
       alert('Tiedosto on liian suuri!')
       e.target.value = ''
     }
   }
 
+  console.log('imageData ', imageData)
   const customLabelStyle = {
     fontSize: '115',
     display: 'block',
@@ -32,6 +50,42 @@ const Picture = props => {
     borderRadius: '50%',
     margin: '10px',
   }
+
+  const getOrientation = orientationTag => {
+    let className
+    switch (orientationTag) {
+      case 2:
+        className = 'flip'
+        break
+      case 3:
+        className = 'rotate-180'
+        break
+      case 4:
+        className = 'flip-and-rotate-180'
+        break
+      case 5:
+        className = 'flip-and-rotate-270'
+        break
+      case 6:
+        className = 'rotate-90'
+        break
+      case 7:
+        className = 'flip-and-rotate-90'
+        break
+      case 8:
+        className = 'rotate-270'
+        break
+      default:
+        className = ''
+      break
+    }
+    return className
+  }
+
+  const imageContentClassList = [
+    'add-user-picture-picker',
+    getOrientation(imageData),
+  ]
 
   return (
     <ShadowBox>
@@ -59,7 +113,7 @@ const Picture = props => {
             borderStyle={customBorderStyle}
             onBeforeFileLoad={onBeforeFileLoad}
             onCrop={onChange}
-            className="add-user-picture-picker"
+            className={imageContentClassList.join(' ')}
           />
           <div className="add-user-picture-text">
             <p>Tämä kuva näkyy muille.</p>

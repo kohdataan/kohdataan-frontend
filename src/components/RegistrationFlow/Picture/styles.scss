@@ -2,6 +2,10 @@
   margin: 10px;
 }
 
+.add-user-picture-picker {
+  image-orientation: from-image;
+}
+
 .add-user-picture-title-container {
   display: flex;
   flex-direction: row;
@@ -25,4 +29,8 @@
 
 p .add-user-picture-content-container {
   text-align: center;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
 }
