@@ -118,7 +118,7 @@
 }
 
 .chat-online-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 8px;
   left: 18px;
   background-color: green;
@@ -130,7 +130,7 @@
 }
 
 .chat-offline-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 8px;
   left: 18px;
   border: 1px solid $white;
@@ -142,7 +142,7 @@
 }
 
 .chat-away-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 8px;
   left: 18px;
   background-color: yellow;
@@ -151,7 +151,6 @@
   border-radius: 50%;
   margin-right: 7px;
 }
-
 
 .chat-message-sender {
   margin-block-end: 0em;
@@ -199,4 +198,11 @@
 .message-image {
   height: inherit;
   width: inherit;
+}
+
+.chat-report-message-icon {
+  background: none;
+  border: none;
+  color: $orange;
+  cursor: grab;
 }

@@ -8,6 +8,20 @@ const Group = props => {
   const { channel, getMembers, unreadCount, profiles, currentUserId } = props
   const [members, setMembers] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
+  const [parsedPurpose, setParsedPurpose] = useState([])
+
+  useEffect(() => {
+    if (channel && channel.purpose) {
+      try {
+        const parsed = JSON.parse(channel.purpose)
+        const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
+        setParsedPurpose(sorted)
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
+      }
+    }
+  }, [channel, setParsedPurpose])
 
   useEffect(() => {
     const getMemberData = async () => {
@@ -42,6 +56,11 @@ const Group = props => {
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
         </div>
+        {channel.name !== 'town-square' && (
+          <div className="group-interests">
+            <p>{`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}</p>
+          </div>
+        )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
             {activeMembers.map(member => (

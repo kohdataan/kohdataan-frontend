@@ -1,7 +1,7 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
-import Instructions from '../Profile/Instructions'
+import Tutorial from '../Tutorial'
 import './styles.scss'
 
 const Friends = props => {
@@ -13,27 +13,23 @@ const Friends = props => {
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
-    friendsCoordinates,
+    updateUser,
     history,
     myUserInfo,
     statuses,
     currentUserId,
   } = props
 
-  const getShowModals = () => {
-    return !tutorialWatched
-  }
+  const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
-  const [showModals, setShowModals] = useState({
-    4: getShowModals(),
-  })
-
-  const closeModal = modal => () => {
-    const newState = { ...showModals }
-    newState[modal] = false
-    setShowModals(newState)
-    history.push('/')
-  }
+  const steps = [
+    {
+      target: '.nav-link-Kaverit',
+      content:
+        'Voit viestitellä kavereiden kanssa kahdestaan. Löydät kaverit täältä.',
+      disableBeacon: true,
+    },
+  ]
 
   const getStatusById = id => {
     const status = id ? statuses[id] : ''
@@ -68,10 +64,10 @@ const Friends = props => {
         )}
       </div>
       {!tutorialWatched && (
-        <Instructions
-          closeModal={closeModal}
-          showModals={showModals}
-          friendsCoordinates={friendsCoordinates}
+        <Tutorial
+          steps={steps}
+          history={history}
+          updateTutorialWatched={updateTutorialWatched}
         />
       )}
     </main>
@@ -86,15 +82,11 @@ Friends.propTypes = {
   getLatestMessage: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
+  updateUser: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object),
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
-}
-
-Friends.defaultProps = {
-  friendsCoordinates: {},
 }
 
 export default memo(Friends)
