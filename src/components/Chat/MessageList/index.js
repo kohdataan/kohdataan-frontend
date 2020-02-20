@@ -3,10 +3,12 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
 import getUsernameById from '../../../utils/getUsernameById'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const MessageList = props => {
   const {
     posts,
+    teams,
     currentUserId,
     getUserNamebyId,
     directChannel,
@@ -96,6 +98,10 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
+                    isAdmin={
+                      isSystemAdmin(post.user_id, profiles) ||
+                      isTeamAdmin(post.user_id, teams)
+                    }
                     pinPost={pinPost}
                   />
                 )
@@ -108,6 +114,7 @@ const MessageList = props => {
 
 MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
   directChannel: propTypes.bool.isRequired,

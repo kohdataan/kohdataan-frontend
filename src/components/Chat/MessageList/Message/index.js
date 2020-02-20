@@ -20,6 +20,7 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
+    isAdmin,
     pinPost,
   } = props
 
@@ -84,7 +85,7 @@ const Message = props => {
                       : ''
                   }`}
                 >
-                  {sender}
+                  {isAdmin ? 'Valvoja' : sender}
                 </h3>
               )}
             </div>
@@ -105,16 +106,28 @@ const Message = props => {
                   className="channel-name-link"
                 >
                   <i aria-hidden="true" title={sender[0]} />
-                  <div
-                    className="label chat-message-sender-icon"
-                    style={{
-                      backgroundImage: `url(
+                  {isAdmin ? (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                      }}
+                    >
+                      K
+                    </div>
+                  ) : (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundImage: `url(
                         ${
                           process.env.REACT_APP_MATTERMOST_URL
                         }/api/v4/users/${senderId}/image?${Date.now()}
                       )`,
-                    }}
-                  />
+                      }}
+                    />
+                  )}
                 </Link>
                 <div className={iconMemberStatus} />
               </div>
@@ -147,6 +160,7 @@ const Message = props => {
               </div>
               {currentUserId !== senderId &&
                 !directChannel &&
+                !isAdmin &&
                 !isUserLeavingOrJoiningChannel() && (
                   <ButtonContainer
                     className="chat-report-message-icon"
@@ -169,6 +183,7 @@ Message.defaultProps = {
   files: null,
   senderMmUsername: '',
   iconMemberStatus: '',
+  isAdmin: false,
 }
 
 Message.propTypes = {
@@ -185,6 +200,7 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
+  isAdmin: propTypes.bool,
   pinPost: propTypes.func.isRequired,
   id: propTypes.string.isRequired,
 }

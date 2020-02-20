@@ -1,6 +1,7 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
 import { loadMe } from 'mattermost-redux/actions/users'
+import { getTeamMembers, selectTeam } from 'mattermost-redux/actions/teams'
 import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
@@ -39,12 +40,25 @@ export const initUser = () => {
   }
 }
 
+export const initTeam = () => {
+  return async (dispatch, getState) => {
+    const { teams } = getState().entities.teams
+    const teamId = Object.keys(teams)[0]
+    const team = Object.values(teams)[0]
+    if (teamId && team) {
+      await dispatch(selectTeam(team))
+      await dispatch(getTeamMembers(teamId))
+    }
+  }
+}
+
 export const rootStartUp = () => {
   return async dispatch => {
     await dispatch(rootLoading())
     await dispatch(initMattermostReduxClient())
     await dispatch(getInterestsAction())
     await dispatch(initUser())
+    await dispatch(initTeam())
     await dispatch(rootLoadingReady())
   }
 }

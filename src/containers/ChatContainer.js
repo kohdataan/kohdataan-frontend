@@ -61,9 +61,9 @@ const ChatContainer = props => {
 
   // Get team related channels and members
   useEffect(() => {
-    const teamId = Object.keys(teams)[0]
-    if (teamId) {
-      fetchMyChannelsAndMembers(teamId)
+    const { currentTeamId } = teams
+    if (currentTeamId) {
+      fetchMyChannelsAndMembers(currentTeamId)
     }
   }, [teams, fetchMyChannelsAndMembers])
 
@@ -130,6 +130,7 @@ const ChatContainer = props => {
           channel={currentChannel}
           posts={currentPosts}
           profiles={profiles}
+          teams={teams}
           createPost={createPost}
           getFilesForPost={getFilesForPost}
           uploadFile={uploadFile}
@@ -171,7 +172,7 @@ ChatContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const { currentUserId } = state.entities.users
-  const { teams } = state.entities.teams
+  const { teams } = state.entities
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
   const { profiles } = state.entities.users

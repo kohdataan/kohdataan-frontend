@@ -4,7 +4,7 @@ import moment from 'moment'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels/channels'
 import { updateUser } from '../user/userAction'
-import { initUser } from '../root/index'
+import { initUser, initTeam } from '../root/index'
 
 export const startGroupPageFetching = () => {
   return async dispatch => {
@@ -97,6 +97,7 @@ export const fetchChannelsAndInvitations = () => {
   return async (dispatch, getState) => {
     await dispatch(startGroupPageFetching())
     await dispatch(initUser())
+    await dispatch(initTeam())
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
