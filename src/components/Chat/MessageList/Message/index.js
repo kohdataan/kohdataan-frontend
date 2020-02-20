@@ -28,8 +28,8 @@ const Message = props => {
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
 
-  // Checks if message is combined user activity message
-  const isSystemCombinedUserActivity = () => {
+  // Checks if message type is users leaving or joining the channel
+  const isUserLeavingOrJoiningChannel = () => {
     if (type === 'system_join_channel' || type === 'system_leave_channel') {
       return true
     }
@@ -45,7 +45,7 @@ const Message = props => {
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isSystemCombinedUserActivity() ? 'content-system-combined' : '',
+    isUserLeavingOrJoiningChannel() ? 'content-system-message' : '',
   ]
 
   useEffect(() => {
@@ -147,7 +147,7 @@ const Message = props => {
               </div>
               {currentUserId !== senderId &&
                 !directChannel &&
-                !isSystemCombinedUserActivity() && (
+                !isUserLeavingOrJoiningChannel() && (
                   <ButtonContainer
                     className="chat-report-message-icon"
                     onClick={() => pinPost(id)}
