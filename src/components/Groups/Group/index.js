@@ -3,10 +3,17 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Member from './Member'
-import isAdmin from '../../../utils/userIsAdmin'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const Group = props => {
-  const { channel, getMembers, unreadCount, profiles, currentUserId } = props
+  const {
+    channel,
+    getMembers,
+    unreadCount,
+    profiles,
+    currentUserId,
+    teams,
+  } = props
   const [members, setMembers] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
   const [parsedPurpose, setParsedPurpose] = useState([])
@@ -41,11 +48,15 @@ const Group = props => {
         members
           .map(member => profiles[member.user_id])
           .filter(member => member && member.delete_at === 0)
-          .filter(member => !isAdmin(member.id, profiles))
+          .filter(
+            member =>
+              !isSystemAdmin(member.id, profiles) &&
+              !isTeamAdmin(member.id, teams)
+          )
       setActiveMembers(activeMembersArr)
     }
     getActiveMembers()
-  }, [members, profiles, setActiveMembers])
+  }, [members, profiles, setActiveMembers, teams])
 
   return (
     <Link
@@ -98,6 +109,7 @@ Group.propTypes = {
   unreadCount: propTypes.number.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Group)

@@ -7,6 +7,7 @@ import './styles.scss'
 const Groups = props => {
   const {
     channels,
+    teams,
     getMembers,
     profiles,
     getUnreadCount,
@@ -44,6 +45,7 @@ const Groups = props => {
             profiles={profiles}
             unreadCount={getUnreadCount(channel.id)}
             currentUserId={currentUserId}
+            teams={teams}
           />
         ))}
       </div>
@@ -64,6 +66,7 @@ Groups.defaultProps = {
 
 Groups.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
+  teams: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
   getMembers: PropTypes.func.isRequired,
   profiles: PropTypes.instanceOf(Object),

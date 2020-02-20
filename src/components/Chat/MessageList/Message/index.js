@@ -138,7 +138,7 @@ const Message = props => {
                 )}
                 {!files && <p className="chat-message-content-text">{text}</p>}
               </div>
-              {currentUserId !== senderId && !directChannel && (
+              {currentUserId !== senderId && !directChannel && !isAdmin && (
                 <ButtonContainer
                   className="chat-report-message-icon"
                   onClick={() => pinPost(id)}

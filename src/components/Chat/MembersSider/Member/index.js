@@ -1,17 +1,24 @@
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import isAdmin from '../../../../utils/userIsAdmin'
+import { isSystemAdmin, isTeamAdmin } from '../../../../utils/userIsAdmin'
 import './styles.scss'
 
 const Member = props => {
-  const { userId, nickName, currentUserId, profiles, iconMemberStatus } = props
+  const {
+    userId,
+    nickName,
+    currentUserId,
+    profiles,
+    teams,
+    iconMemberStatus,
+  } = props
   const userFirstLetter = nickName[0]
   const getUsername = () => {
     return profiles && profiles[userId] && profiles[userId].username
   }
 
-  if (isAdmin(userId, profiles)) {
+  if (isSystemAdmin(userId, profiles) || isTeamAdmin(userId, teams)) {
     return (
       <div className="chat-header-members-sider-member">
         <div>
@@ -86,6 +93,7 @@ Member.propTypes = {
   nickName: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
 }
 

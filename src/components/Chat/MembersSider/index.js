@@ -11,6 +11,7 @@ const MembersSider = props => {
     members,
     profiles,
     channel,
+    teams,
     getNickNamebyId,
     getStatusById,
     currentUserId,
@@ -65,6 +66,7 @@ const MembersSider = props => {
               key={member.user_id}
               userId={member.user_id}
               profiles={profiles}
+              teams={teams}
               nickName={getNickNamebyId(member.user_id)}
               currentUserId={currentUserId}
               iconMemberStatus={getIconMemberStatus(member.user_id)}
@@ -89,6 +91,7 @@ const MembersSider = props => {
 MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   channel: propTypes.instanceOf(Object).isRequired,
   getNickNamebyId: propTypes.func.isRequired,
   getStatusById: propTypes.func.isRequired,
