@@ -4,7 +4,7 @@ import {
   getChannelMembers,
 } from 'mattermost-redux/actions/channels'
 import * as types from '../../contants/actionTypes'
-import { initUser } from '../root/index'
+import { initUser, initTeam } from '../root/index'
 
 export const startFriendsPageFetching = () => {
   return async dispatch => {
@@ -34,6 +34,7 @@ export const fetchFriendsPageData = () => {
   return async (dispatch, getState) => {
     await dispatch(startFriendsPageFetching())
     await dispatch(initUser())
+    await dispatch(initTeam())
     const { teams } = getState().entities.teams
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))

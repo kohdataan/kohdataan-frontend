@@ -120,6 +120,8 @@ const GroupsContainer = props => {
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
         resetChannelInvitations={resetChannelInvitations}
+        profiles={profiles}
+        teams={teams}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
@@ -129,6 +131,7 @@ const GroupsContainer = props => {
         currentUserId={currentUserId}
         updateUser={updateUser}
         tutorialWatched={user.tutorialWatched}
+        teams={teams}
       />
     </>
   )
@@ -159,7 +162,7 @@ GroupsContainer.defaultProps = {
 
 const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
-  const { teams } = state.entities.teams
+  const { teams } = state.entities
   const { channels } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
