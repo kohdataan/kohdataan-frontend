@@ -79,7 +79,8 @@ const Tutorial = props => {
       continuous
       disableScrolling
       styles={customStyles}
-      showSkipButton
+      disableOverlayClose
+      disableCloseOnEsc
     />
   )
 }
