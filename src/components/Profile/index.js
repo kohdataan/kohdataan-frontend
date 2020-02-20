@@ -12,6 +12,7 @@ import Tutorial from '../Tutorial'
 
 const Profile = props => {
   const {
+    currentUserId,
     mmuser,
     myUserInfo,
     ownProfile,
@@ -95,16 +96,19 @@ const Profile = props => {
         <InterestsGrid interestList={userInterests} />
       </div>
 
-      {!ownProfile && startDirectChannel && (
-        <div className="start-conversation-button">
-          <ButtonContainer
-            onClick={startDirectChannel}
-            className="profile-dm-button"
-          >
-            Lähetä viesti
-          </ButtonContainer>
-        </div>
-      )}
+      {!ownProfile &&
+        startDirectChannel &&
+        myUserInfo.blockedUsers &&
+        !myUserInfo.blockedUsers.includes(currentUserId) && (
+          <div className="start-conversation-button">
+            <ButtonContainer
+              onClick={startDirectChannel}
+              className="profile-dm-button"
+            >
+              Lähetä viesti
+            </ButtonContainer>
+          </div>
+        )}
       {!tutorialWatched && ownProfile && (
         <Tutorial
           steps={steps}
@@ -117,13 +121,14 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
+  currentUserId: propTypes.string.isRequired,
   mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
-  updateUser: propTypes.func.isRequired,
+  updateUser: propTypes.func,
 }
 
 Profile.defaultProps = {
@@ -131,6 +136,7 @@ Profile.defaultProps = {
   startDirectChannel: null,
   userInterests: [],
   history: null,
+  updateUser: null,
 }
 
 export default memo(Profile)
