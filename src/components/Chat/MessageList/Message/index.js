@@ -60,7 +60,7 @@ const Message = props => {
     } else if (type === 'system_leave_channel') {
       setMessageText(`${sender} poistui kanavalta.`)
     }
-  }, [])
+  }, [currentUserId, sender, senderId, type])
 
   return (
     <>

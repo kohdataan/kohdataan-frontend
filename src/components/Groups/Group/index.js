@@ -11,16 +11,21 @@ const Group = props => {
   const [parsedPurpose, setParsedPurpose] = useState([])
 
   useEffect(() => {
-    if (channel && channel.purpose) {
-      try {
-        const parsed = JSON.parse(channel.purpose)
-        const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
-        setParsedPurpose(sorted)
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e)
+    const getParsedPurpose = () => {
+      if (channel && channel.purpose) {
+        try {
+          const parsed = JSON.parse(channel.purpose)
+          const sorted = Object.keys(parsed).sort(
+            (a, b) => parsed[b] - parsed[a]
+          )
+          setParsedPurpose(sorted)
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.log(e)
+        }
       }
     }
+    getParsedPurpose()
   }, [channel, setParsedPurpose])
 
   useEffect(() => {
@@ -39,7 +44,7 @@ const Group = props => {
         members &&
         members
           .map(member => profiles[member.user_id])
-          .filter(member => member.delete_at === 0)
+          .filter(member => member && member.delete_at === 0)
       setActiveMembers(activeMembersArr)
     }
     getActiveMembers()

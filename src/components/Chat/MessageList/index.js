@@ -71,9 +71,8 @@ const MessageList = props => {
         {posts.length > 0 &&
           posts
             .filter(
-              p =>
-                p.type !== 'system_purpose_change'
-                // p.sender !== 'Käyttäjä poistunut'
+              p => p.type !== 'system_purpose_change'
+              // p.sender !== 'Käyttäjä poistunut'
             )
             .map(post => {
               const timestampValues = setTimeStampValues(post)
@@ -100,7 +99,7 @@ const MessageList = props => {
                     pinPost={pinPost}
                   />
                 )
-            )
+              )
             })}
       </div>
     </div>
