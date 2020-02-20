@@ -73,7 +73,7 @@ const Friend = props => {
       }
     }
     if (myUserInfo && user) checkUserBlockedStatus()
-  }, [user])
+  }, [user, myUserInfo, blockedFriends])
 
   useEffect(() => {
     // fetches user info for other user containing blocked users
