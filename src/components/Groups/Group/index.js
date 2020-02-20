@@ -40,7 +40,7 @@ const Group = props => {
         members &&
         members
           .map(member => profiles[member.user_id])
-          .filter(member => member.delete_at === 0)
+          .filter(member => member && member.delete_at === 0)
           .filter(member => !isAdmin(member.id, profiles))
       setActiveMembers(activeMembersArr)
     }
