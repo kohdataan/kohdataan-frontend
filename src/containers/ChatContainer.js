@@ -169,6 +169,7 @@ ChatContainer.propTypes = {
   matterMostLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  files: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {

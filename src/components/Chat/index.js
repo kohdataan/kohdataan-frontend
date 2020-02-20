@@ -140,6 +140,7 @@ const Chat = props => {
           createPost={createPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
+          filesData={filesData}
         />
       )}
       {showSider && !directChannel && (

@@ -144,6 +144,9 @@ const Message = props => {
                           height="100%"
                         />
                       </div>
+                      <p className="image-message-content-text chat-message-content-text">
+                        {text}
+                      </p>
                     </>
                   )}
                 {!files && <p className="chat-message-content-text">{text}</p>}
