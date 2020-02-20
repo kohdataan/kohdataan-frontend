@@ -19,7 +19,11 @@ const EditButton = props => {
 }
 
 EditButton.propTypes = {
-  isHighlighted: propTypes.bool.isRequired,
+  isHighlighted: propTypes.bool,
+}
+
+EditButton.defaultProps = {
+  isHighlighted: false,
 }
 
 export default memo(EditButton)

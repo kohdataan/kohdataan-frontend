@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
+import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
@@ -16,7 +17,7 @@ const FriendsContainer = props => {
     getPosts,
     fetchFriendsPageData,
     membersInChannel,
-    friendsCoordinates,
+    updateUser,
     user,
     history,
   } = props
@@ -102,7 +103,7 @@ const FriendsContainer = props => {
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
-        friendsCoordinates={friendsCoordinates}
+        updateUser={updateUser}
         history={history}
       />
     </>
@@ -119,11 +120,7 @@ FriendsContainer.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object),
-}
-
-FriendsContainer.defaultProps = {
-  friendsCoordinates: {},
+  updateUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -137,8 +134,6 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
-  const friendsCoordinates =
-    state.loading.coordinates && state.loading.coordinates.friendsNav
 
   return {
     currentUserId,
@@ -150,7 +145,6 @@ const mapStateToProps = state => {
     members,
     myChannels,
     membersInChannel,
-    friendsCoordinates,
   }
 }
 
@@ -159,6 +153,7 @@ const mapDispatchToProps = dispatch =>
     {
       getPosts: getPostsAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
+      updateUser: updateUserAction,
     },
     dispatch
   )
