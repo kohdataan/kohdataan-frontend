@@ -20,6 +20,7 @@ const FriendsContainer = props => {
     updateUser,
     user,
     history,
+    statuses,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
@@ -105,6 +106,9 @@ const FriendsContainer = props => {
         tutorialWatched={user.tutorialWatched}
         updateUser={updateUser}
         history={history}
+        myUserInfo={user}
+        statuses={statuses}
+        currentUserId={currentUserId}
       />
     </>
   )
@@ -121,6 +125,7 @@ FriendsContainer.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   updateUser: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = state => {
@@ -134,6 +139,7 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
+  const { statuses } = state.entities.users
 
   return {
     currentUserId,
@@ -145,6 +151,7 @@ const mapStateToProps = state => {
     members,
     myChannels,
     membersInChannel,
+    statuses,
   }
 }
 

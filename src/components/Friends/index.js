@@ -15,6 +15,9 @@ const Friends = props => {
     tutorialWatched,
     updateUser,
     history,
+    myUserInfo,
+    statuses,
+    currentUserId,
   } = props
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
@@ -27,6 +30,11 @@ const Friends = props => {
       disableBeacon: true,
     },
   ]
+
+  const getStatusById = id => {
+    const status = id ? statuses[id] : ''
+    return status
+  }
 
   return (
     <main className="friends-wrapper">
@@ -44,12 +52,14 @@ const Friends = props => {
               getPosts={getPosts}
               getLatestMessage={getLatestMessage}
               membersInChannel={membersInChannel}
+              myUserInfo={myUserInfo}
+              getStatusById={getStatusById}
+              currentUserId={currentUserId}
             />
           ))
         ) : (
           <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä. Löydät uusia kavereita
-            Ryhmät-välilehdeltä!
+            Sinulla ei ole vielä yksityisviestejä.
           </h3>
         )}
       </div>
@@ -74,6 +84,9 @@ Friends.propTypes = {
   tutorialWatched: PropTypes.bool.isRequired,
   updateUser: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  myUserInfo: PropTypes.instanceOf(Object).isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
+  currentUserId: PropTypes.string.isRequired,
 }
 
 export default memo(Friends)

@@ -17,23 +17,20 @@ const RestoreAccount = props => {
       label="restore-user-container"
       closeModal={() => setModalIsOpen(false)}
     >
-      <h3>
-        Olet ajastanut käyttäjätilisi pysyvän poiston. Voit vielä palauttaa
-        käyttäjätilisi valitsemalla palauta.
-      </h3>
+      <h3>Haluatko ottaa käyttäjätilisi uudelleen käyttöön?</h3>
       <div className="account-delete-buttons-wrapper">
         <ButtonContainer
           className="account-cancel-delete-button"
           secondary
           onClick={handleRestore}
         >
-          Palauta
+          Kyllä
         </ButtonContainer>
         <ButtonContainer
           className="account-delete-button"
           onClick={handleDelete}
         >
-          Poista heti
+          En
         </ButtonContainer>
       </div>
     </ModalContainer>
