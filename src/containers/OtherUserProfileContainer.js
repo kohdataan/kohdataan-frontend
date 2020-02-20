@@ -15,6 +15,7 @@ const OtherUserProfileContainer = props => {
     getProfilesByUsernames,
     history,
     createDirectChannel,
+    currentUserId,
   } = props
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
@@ -66,6 +67,7 @@ const OtherUserProfileContainer = props => {
       myUserInfo={otherUserInfo}
       startDirectChannel={startDirectChannel}
       history={history}
+      currentUserId={currentUserId}
     />
   )
 }
@@ -92,6 +94,7 @@ OtherUserProfileContainer.propTypes = {
   getProfilesByUsernames: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  currentUserId: PropTypes.string.isRequired,
 }
 
 OtherUserProfileContainer.defaultProps = {

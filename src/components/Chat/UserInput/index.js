@@ -83,12 +83,9 @@ const UserInput = props => {
         <ButtonContainer className="icon-btn" onClick={() => {}}>
           <div className="send-voice-attachment-button" />
         </ButtonContainer>
-        <input
-          type="submit"
-          value="➤"
-          className="send-message-button"
-          tabIndex="0"
-        />
+        <button type="submit" className="send-message-button" tabIndex="0">
+          {}
+        </button>
       </form>
       <ModalContainer
         modalIsOpen={modalIsOpen}

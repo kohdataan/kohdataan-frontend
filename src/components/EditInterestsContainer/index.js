@@ -98,7 +98,7 @@ const EditInterestsContainer = props => {
           <h3 className="interests-modal-text">
             Voit valita enintään viisi kiinnostavaa asiaa.
           </h3>
-          <p>Voit poistaa valinnan,kun klikkaat sitä uudestaan.</p>
+          <p>Voit poistaa valinnan, kun klikkaat sitä uudestaan.</p>
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}

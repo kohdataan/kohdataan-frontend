@@ -2,7 +2,6 @@ import * as types from '../../contants/actionTypes'
 
 const defaultState = {
   root: true,
-  coordinates: {},
 }
 
 export default function loading(state = defaultState, action) {
@@ -16,15 +15,6 @@ export default function loading(state = defaultState, action) {
       return {
         ...state,
         root: true,
-      }
-    }
-    case types.SET_COORDINATES: {
-      return {
-        ...state,
-        coordinates: {
-          ...state.coordinates,
-          [action.component]: action.coordinates,
-        },
       }
     }
     default:

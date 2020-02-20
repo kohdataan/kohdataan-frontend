@@ -1,4 +1,4 @@
-import React, { useState, memo, useRef } from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -6,23 +6,21 @@ import ProfileImage from './ProfileImage'
 import Description from './Description'
 import InterestsGrid from './InterestsGrid'
 import ProfileHeader from './ProfileHeader'
-import Instructions from './Instructions'
 import EditButton from './EditButton'
 import ButtonContainer from '../ButtonContainer'
+import Tutorial from '../Tutorial'
 
 const Profile = props => {
   const {
+    currentUserId,
     mmuser,
     myUserInfo,
     ownProfile,
     userInterests,
     startDirectChannel,
+    updateUser,
     history,
-    botCoordinates,
-    profileCoordinates,
   } = props
-
-  const editBtnRef = useRef()
 
   // Extended user info from node backend
   const {
@@ -34,25 +32,26 @@ const Profile = props => {
     showAge,
     showLocation,
   } = myUserInfo
-  // Decide whether to show modals
-  const getShowModals = () => {
-    return !!(!tutorialWatched && ownProfile)
-  }
 
-  const [showModals, setShowModals] = useState({
-    1: getShowModals(),
-    2: getShowModals(),
-    3: getShowModals(),
-  })
+  const steps = [
+    {
+      target: '.nav-link-Profiili',
+      content: 'Tämä on profiilisi! Löydät sen täältä.',
+      disableBeacon: true,
+    },
+    {
+      target: '.user-edit-button',
+      content:
+        'Profiilisi tiedot näkyvät myös muille. Voit muokata tietoja täältä.',
+    },
+    {
+      target: '.nav-bot',
+      content:
+        'Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit klikata Bottia. Löydät Botin täältä.',
+    },
+  ]
 
-  const closeModal = modal => () => {
-    const newState = { ...showModals }
-    newState[modal] = false
-    setShowModals(newState)
-    if (modal === 3 && ownProfile) {
-      history.push('/friends')
-    }
-  }
+  const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   return (
     <main className="profile-container">
@@ -78,8 +77,8 @@ const Profile = props => {
           />
         )}
         {ownProfile && (
-          <Link className="edit-me-link" to="/edit-me" ref={editBtnRef}>
-            <EditButton isHighlighted={showModals[1] && !showModals[2]} />
+          <Link className="edit-me-link" to="/edit-me">
+            <EditButton />
           </Link>
         )}
       </div>
@@ -97,23 +96,24 @@ const Profile = props => {
         <InterestsGrid interestList={userInterests} />
       </div>
 
-      {!ownProfile && startDirectChannel && (
-        <div className="start-conversation-button">
-          <ButtonContainer
-            onClick={startDirectChannel}
-            className="profile-dm-button"
-          >
-            Lähetä viesti
-          </ButtonContainer>
-        </div>
-      )}
+      {!ownProfile &&
+        startDirectChannel &&
+        myUserInfo.blockedUsers &&
+        !myUserInfo.blockedUsers.includes(currentUserId) && (
+          <div className="start-conversation-button">
+            <ButtonContainer
+              onClick={startDirectChannel}
+              className="profile-dm-button"
+            >
+              Lähetä viesti
+            </ButtonContainer>
+          </div>
+        )}
       {!tutorialWatched && ownProfile && (
-        <Instructions
-          closeModal={closeModal}
-          showModals={showModals}
-          editBtnRef={editBtnRef}
-          botCoordinates={botCoordinates}
-          profileCoordinates={profileCoordinates}
+        <Tutorial
+          steps={steps}
+          history={history}
+          updateTutorialWatched={updateTutorialWatched}
         />
       )}
     </main>
@@ -121,14 +121,14 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
+  currentUserId: propTypes.string.isRequired,
   mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
   ownProfile: propTypes.bool,
   startDirectChannel: propTypes.func,
   history: propTypes.instanceOf(Object),
-  profileCoordinates: propTypes.instanceOf(Object),
-  botCoordinates: propTypes.instanceOf(Object),
+  updateUser: propTypes.func,
 }
 
 Profile.defaultProps = {
@@ -136,8 +136,7 @@ Profile.defaultProps = {
   startDirectChannel: null,
   userInterests: [],
   history: null,
-  profileCoordinates: {},
-  botCoordinates: {},
+  updateUser: null,
 }
 
 export default memo(Profile)
