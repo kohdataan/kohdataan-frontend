@@ -36,6 +36,7 @@
 .icon-btn {
   background: transparent;
   border: none;
+  padding: 5px;
 } 
 
 .send-image-attachment-button {
@@ -70,7 +71,7 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
-  // padding: 0px 12px;
+  padding: 12px;
   border: 0;
     &:hover {
       cursor: pointer;

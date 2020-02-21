@@ -9,7 +9,7 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest, title, description } = props
+  const { handleRequest, title } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -60,7 +60,6 @@ const EmailSmsForm = props => {
 EmailSmsForm.propTypes = {
   handleRequest: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
 }
 
 export default memo(EmailSmsForm)

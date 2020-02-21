@@ -28,7 +28,6 @@ const Chat = props => {
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
-  const [afterPinModal, setAfterPinModal] = useState(false)
   const [pinPostId, setPinPostId] = useState(null)
   const directChannel = channel.type === 'D'
 
@@ -103,11 +102,6 @@ const Chat = props => {
   const completePinPost = id => {
     pinPost(id)
     closePinPostModal()
-    setAfterPinModal(true)
-  }
-
-  const closeAfterPinModal = () => {
-    setAfterPinModal(false)
   }
 
   return (
