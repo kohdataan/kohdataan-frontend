@@ -19,8 +19,6 @@ const EmailSmsForm = props => {
 
       <div className="email-sms-form-content-container">
         <h2 className="email-sms-form-title">{title}</h2>
-        <p>Anna sähköpostiosoitteesi.</p>
-        <p>{description}</p>
 
         <div className="email-sms-form-input-container">
           <InputField

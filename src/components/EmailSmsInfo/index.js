@@ -24,8 +24,8 @@ const EmailSmsInfo = props => {
           </div>
           <div className="divider" aria-hidden="true" />
           <div className="email-sms-info-link-container">
-            <Link className="email-sms-info-link" to="/">
-              Takaisin sisäänkirjautumiseen
+            <Link className="email-sms-info-link" to="/registrationproblem">
+              Tarvitsen apua salasanan vaihtamisessa
             </Link>
           </div>
         </div>

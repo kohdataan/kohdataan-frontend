@@ -15,7 +15,7 @@ const EmailVerificationInfoContainer = () => {
   )
   return (
     <EmailSmsInfo
-      title="Sähköpostin vahvistamis linkin uudelleen lähetys"
+      title="Sähköpostin vahvistus"
       description="Lähetimme sinulle sähköpostilla linkin, josta pääset vahvistamaan sähköpostisi."
       guide={emailVerificationInfo}
     />

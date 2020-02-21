@@ -58,7 +58,13 @@ const Message = props => {
         setMessageText(`${sender} liittyi kanavalle.`)
       }
     } else if (type === 'system_leave_channel') {
-      setMessageText(`${sender} poistui kanavalta.`)
+      if (senderId === currentUserId) {
+        setMessageText('Sinä poistuit kanavalta.')
+      } else if (sender === 'Käyttäjä poistunut') {
+        setMessageText(`Käyttäjä poistunut.`)
+      } else {
+        setMessageText(`${sender} poistui kanavalta.`)
+      }
     }
   }, [currentUserId, sender, senderId, type])
 

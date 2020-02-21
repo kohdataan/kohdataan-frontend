@@ -11,8 +11,9 @@ const AccountLocked = () => {
     <div className="account-locked-container">
       <h1 className="account-locked-text">Kohdataan</h1>
       <h3>
-        Näyttäisi, että käyttäjätilisi on tällä hetkellä pois käytöstä. Voit
-        yrittää kirjautua sisään myöhemmin uudestaan.
+        Käyttäjätilisi on tällä hetkellä pois käytöstä. Voit ottaa tarvittaessa
+        yhteyttä osoitteeseen{' '}
+        <a href="mailto:kohdataan@kohdataan.fi">kohdataan@kohdataan.fi.</a>
       </h3>
     </div>
   )

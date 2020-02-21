@@ -28,6 +28,10 @@
 .button-image {
   background: rgba(0, 0, 0, 0);
   border: none;
+  @media (max-width: 375px) {
+    padding: 0;
+    margin: 1px;
+  }
 }
 
 .inactive-item {

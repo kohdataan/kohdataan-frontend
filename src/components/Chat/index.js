@@ -170,27 +170,9 @@ const Chat = props => {
             onClick={() => completePinPost(pinPostId)}
             className="report-message-button"
           >
-            <p>Haluan</p>
+            <p>Kyllä</p>
           </ButtonContainer>
         </div>
-      </ModalContainer>
-      <ModalContainer
-        modalIsOpen={afterPinModal}
-        closeModal={closeAfterPinModal}
-        label="report-message-finish-modal"
-      >
-        <i
-          className="fas fa-check-circle"
-          aria-hidden="true"
-          style={{ color: 'green', fontSize: '30px' }}
-        />
-        <h3>Kiitos! Viesti on nyt ilmoitettu asiattomaksi.</h3>
-        <ButtonContainer
-          className="report-message-finish-button"
-          onClick={closeAfterPinModal}
-        >
-          Valmis
-        </ButtonContainer>
       </ModalContainer>
     </div>
   )
