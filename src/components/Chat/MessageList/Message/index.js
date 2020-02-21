@@ -172,7 +172,7 @@ const Message = props => {
                     className="chat-report-message-icon"
                     onClick={() => pinPost(id)}
                   >
-                    <i className="far fa-flag" aria-hidden="true" />
+                    <i className="fas fa-ellipsis-v" aria-hidden="true" />
                   </ButtonContainer>
                 )}
             </div>
