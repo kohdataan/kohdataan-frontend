@@ -3,9 +3,10 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import groupNameColors from '../../../assets/groupColors'
 import Member from '../../Groups/Group/Member'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const SuggestionBox = props => {
-  const { channel, members, hidden, top } = props
+  const { channel, members, hidden, top, profiles, teams } = props
 
   const sortPurpose = purpose => {
     return Object.keys(purpose).sort((a, b) => purpose[b] - purpose[a])
@@ -50,13 +51,19 @@ const SuggestionBox = props => {
           <div className="suggestion-members-wrapper">
             <div className="group-current-members">
               {members &&
-                members.map(member => (
-                  <Member
-                    key={`suggestion-${member.id}`}
-                    userId={member.id}
-                    nickname={member.nickname || member.username}
-                  />
-                ))}
+                members
+                  .filter(
+                    member =>
+                      !isSystemAdmin(member.id, profiles) &&
+                      !isTeamAdmin(member.id, teams)
+                  )
+                  .map(member => (
+                    <Member
+                      key={`suggestion-${member.id}`}
+                      userId={member.id}
+                      nickname={member.nickname || member.username}
+                    />
+                  ))}
             </div>
           </div>
         )}
@@ -68,6 +75,8 @@ const SuggestionBox = props => {
 SuggestionBox.propTypes = {
   channel: propTypes.instanceOf(Object).isRequired,
   members: propTypes.instanceOf(Array).isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   hidden: propTypes.bool,
   top: propTypes.number,
 }
