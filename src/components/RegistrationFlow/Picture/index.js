@@ -12,28 +12,112 @@ const Picture = props => {
   const [imageData, setImageData] = useState(null)
 
   const onBeforeFileLoad = e => {
-    console.log(e.target.files[0])
+    // get Exif data for file if it exists.
+    // Exif data is used to rotate the image to the correct orientation.
     const file = e.target.files[0]
     if (file && file.name) {
       EXIF.getData(file, function() {
         const exifData = EXIF.pretty(this)
         if (exifData) {
-          console.log(exifData)
           const orientationTag = EXIF.getTag(this, 'Orientation')
           setImageData(orientationTag)
-        } else {
-          console.log(`No EXIF data found in image '${file.name}'.`)
         }
       })
     }
-    console.log(' file ', file)
     if (e.target.files[0].size > 50000000) {
       alert('Tiedosto on liian suuri!')
       e.target.value = ''
     }
   }
 
-  console.log('imageData ', imageData)
+  const getOrientation = orientationTag => {
+    let orientationValue
+    switch (orientationTag) {
+      case 3:
+        orientationValue = 'rotate(180deg)'
+        break
+      case 6:
+        orientationValue = 'rotate(90deg)'
+        break
+      case 8:
+        orientationValue = 'rotate(270deg)'
+        break
+      default:
+        orientationValue = 'rotate(0deg)'
+        break
+    }
+    return orientationValue
+  }
+
+  function resetOrientation(srcBase64, srcOrientation, setImage) {
+    const img = new Image()
+    img.onload = function() {
+      const { width } = img
+      const { height } = img
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      // set proper canvas dimensions before transform & export
+      if (srcOrientation === 6 || srcOrientation === 9) {
+        canvas.width = height
+        canvas.height = width
+      } else {
+        canvas.width = width
+        canvas.height = height
+      }
+
+      // transform context before drawing image
+      switch (srcOrientation) {
+        case 3:
+          ctx.transform(-1, 0, 0, -1, width, height)
+          break
+        case 6:
+          ctx.transform(0, 1, -1, 0, height, 0)
+          break
+        case 8:
+          ctx.transform(0, -1, 1, 0, 0, width)
+          break
+        default:
+          break
+      }
+
+      // draw image
+      ctx.drawImage(img, 0, 0)
+
+      // export base64
+      setImage(canvas.toDataURL())
+    }
+    img.src = srcBase64
+  }
+
+  const onCrop = image => {
+    if (image) {
+      // resets orientation in base64 image
+      resetOrientation(image, imageData, onChange)
+
+      // changes orientation if necessary for preview canvas
+      /* const styleToAdd = getOrientation(imageData)
+      if (imageData) {
+        const elems = document
+          .getElementsByClassName('add-user-picture-content-container')[0]
+          .getElementsByTagName('div')
+        elems[0].style.transform = styleToAdd
+        elems[0].style.marginTop = '30px'
+      } */
+    }
+    return image
+  }
+
+  const onClose = () => {
+    // resets image data and rotation values
+    setImageData(null)
+    const elems = document
+      .getElementsByClassName('add-user-picture-content-container')[0]
+      .getElementsByTagName('div')
+    elems[0].style.transform = 'rotate(0deg)'
+    elems[0].style.marginTop = '0px'
+  }
+
   const customLabelStyle = {
     fontSize: '115',
     display: 'block',
@@ -49,37 +133,6 @@ const Picture = props => {
     borderStyle: 'solid',
     borderRadius: '50%',
     margin: '10px',
-  }
-
-  const getOrientation = orientationTag => {
-    let className
-    switch (orientationTag) {
-      case 2:
-        className = 'flip'
-        break
-      case 3:
-        className = 'rotate-180'
-        break
-      case 4:
-        className = 'flip-and-rotate-180'
-        break
-      case 5:
-        className = 'flip-and-rotate-270'
-        break
-      case 6:
-        className = 'rotate-90'
-        break
-      case 7:
-        className = 'flip-and-rotate-90'
-        break
-      case 8:
-        className = 'rotate-270'
-        break
-      default:
-        className = ''
-      break
-    }
-    return className
   }
 
   const imageContentClassList = [
@@ -112,7 +165,8 @@ const Picture = props => {
             labelStyle={customLabelStyle}
             borderStyle={customBorderStyle}
             onBeforeFileLoad={onBeforeFileLoad}
-            onCrop={onChange}
+            onCrop={onCrop}
+            onClose={onClose}
             className={imageContentClassList.join(' ')}
           />
           <div className="add-user-picture-text">
