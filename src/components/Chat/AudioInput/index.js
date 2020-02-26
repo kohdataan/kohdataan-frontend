@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import RecordRTCPromisesHandler from 'recordrtc'
+import RecordRTC from 'recordrtc'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
@@ -14,18 +14,15 @@ const AudioInput = props => {
     stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
     })
-    recorder = new RecordRTCPromisesHandler(stream, {
+    recorder = new RecordRTC(stream, {
       type: 'audio',
       mimeType: 'audio/wav',
     })
     recorder.startRecording()
   }
 
-  const endRecording = async () => {
-    await recorder.stopRecording(() => {
-      if (stream) {
-        stream.stop()
-      }
+  const endRecording = () => {
+    recorder.stopRecording(() => {
       const blob = recorder.getBlob()
       const file = new File([blob], 'audio.wav')
       handleSubmit(file)
@@ -33,11 +30,8 @@ const AudioInput = props => {
     })
   }
 
-  const cancelRecording = async () => {
-    await recorder.stopRecording(() => {
-      if (stream) {
-        stream.stop()
-      }
+  const cancelRecording = () => {
+    recorder.stopRecording(() => {
       closeModal()
     })
   }
@@ -45,6 +39,11 @@ const AudioInput = props => {
   useEffect(() => {
     if (isRecording) {
       startRecording()
+    }
+    return () => {
+      if (stream) {
+        stream.stop()
+      }
     }
   }, [isRecording])
 

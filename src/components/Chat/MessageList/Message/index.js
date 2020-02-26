@@ -1,8 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import ReactPlayer from 'react-player'
-import AudioPlayer from 'react-h5-audio-player'
-import 'react-h5-audio-player/src/styles.scss'
+import ReactAudioPlayer from 'react-audio-player'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -138,6 +137,14 @@ const Message = props => {
                           className="react-player"
                           url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                           controls
+                          config={{
+                            file: {
+                              attributes: {
+                                controlsList: 'nodownload noremoteplayback',
+                                disablePictureInPicture: true,
+                              },
+                            },
+                          }}
                           width="100%"
                           height="100%"
                         />
@@ -151,10 +158,11 @@ const Message = props => {
                   files[0] &&
                   filesData[files[0]].mime_type.includes('audio') && (
                     <div className="player-wrapper">
-                      <AudioPlayer
+                      <ReactAudioPlayer
                         src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
-                        showJumpControls={false}
-                        showLoopControl={false}
+                        controls
+                        preload="auto"
+                        controlsList="nodownload"
                       />
                     </div>
                   )}
