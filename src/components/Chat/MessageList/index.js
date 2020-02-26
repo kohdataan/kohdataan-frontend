@@ -31,7 +31,15 @@ const MessageList = props => {
     let showDate = false
     let showTime = true
     const sender = getUserNamebyId(post.user_id)
-    const dateSent = new Date(post.create_at).toLocaleDateString()
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }
+    const dateSent = new Date(post.create_at).toLocaleDateString(
+      'fi-FI',
+      options
+    )
     const timeSent = new Date(post.create_at).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
