@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import RecordRTC from 'recordrtc'
 import ButtonContainer from '../../ButtonContainer'
@@ -6,20 +6,45 @@ import './styles.scss'
 
 const AudioInput = props => {
   const { handleSubmit, closeModal, isRecording } = props
+  const [stream, setStream] = useState('')
+  const [recorder, setRecorder] = useState('')
 
-  let stream
-  let recorder
+  useEffect(() => {
+    if (isRecording) {
+      const openStream = async () => {
+        setStream(
+          await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          })
+        )
+      }
+      if (stream === '') {
+        openStream()
+      }
+    }
+    return () => {
+      if (stream !== '') {
+        stream.stop()
+      }
+    }
+  }, [isRecording, stream])
 
-  const startRecording = async () => {
-    stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-    })
-    recorder = new RecordRTC(stream, {
-      type: 'audio',
-      mimeType: 'audio/wav',
-    })
-    recorder.startRecording()
-  }
+  useEffect(() => {
+    if (stream !== '') {
+      setRecorder(
+        new RecordRTC(stream, {
+          type: 'audio',
+          mimeType: 'audio/wav',
+        })
+      )
+    }
+  }, [stream])
+
+  useEffect(() => {
+    if (recorder !== '') {
+      recorder.startRecording()
+    }
+  }, [recorder])
 
   const endRecording = () => {
     recorder.stopRecording(() => {
@@ -35,17 +60,6 @@ const AudioInput = props => {
       closeModal()
     })
   }
-
-  useEffect(() => {
-    if (isRecording) {
-      startRecording()
-    }
-    return () => {
-      if (stream) {
-        stream.stop()
-      }
-    }
-  }, [isRecording])
 
   return (
     <main className="audio-recording-content">
