@@ -4,12 +4,15 @@ import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
 import EXIF from 'exif-js'
 import ShadowBox from '../../ShadowBox'
+import ModalContainer from '../../ModalContainer'
+import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 import CameraIconPath from '../../../assets/camera-add-solid.svg'
 
 const Picture = props => {
   const { onChange, hideStep } = props
   const [imageData, setImageData] = useState(null)
+  const [openModal, setOpenModal] = useState(false)
 
   const onBeforeFileLoad = e => {
     // get Exif data for file if it exists.
@@ -25,7 +28,7 @@ const Picture = props => {
       })
     }
     if (e.target.files[0].size > 50000000) {
-      alert('Tiedosto on liian suuri!')
+      setOpenModal(true)
       e.target.value = ''
     }
   }
@@ -178,6 +181,21 @@ const Picture = props => {
             </p>
           </div>
         </div>
+        <ModalContainer
+          modalIsOpen={openModal}
+          label="leaveChannelModal"
+          closeModal={() => setOpenModal(false)}
+        >
+          <div>
+            <p className="image-max-size-exceeded-text">
+              Tiedosto on liian suuri!
+            </p>
+            <ButtonContainer
+              className="icon-btn go-back-button image-max-size-exceeded"
+              onClick={() => setOpenModal(false)}
+            />
+          </div>
+        </ModalContainer>
       </main>
     </ShadowBox>
   )
