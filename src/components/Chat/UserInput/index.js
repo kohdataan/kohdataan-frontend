@@ -12,11 +12,13 @@ const UserInput = props => {
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [isRecording, setIsRecording] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
     setFileId('')
     setMessage('')
+    setIsRecording(false)
   }
   const fileInput = React.createRef()
 
@@ -44,12 +46,8 @@ const UserInput = props => {
   const addFile = async e => {
     const channelId = channel.id
     const data = new FormData()
-    console.log(e.target.files[0])
     data.append('files', e.target.files[0])
     data.append('channel_id', channelId)
-    for (var value of data.values()) {
-      console.log(value) 
-   }
     const res = await uploadFile(channelId, null, null, data)
     const id = res && res.data.file_infos[0].id
     setFileId(id)
@@ -57,18 +55,15 @@ const UserInput = props => {
   }
 
   const startSendingAudio = () => {
+    setIsRecording(true)
     setModalIsOpen(true)
   }
 
-  const handleAudioSubmit = async blob => {
+  const handleAudioSubmit = async audioFile => {
+    setIsRecording(false)
     const data = new FormData()
-    console.log(blob)
-    data.append('files', blob)
+    data.append('files', audioFile)
     data.append('channel_id', channel.id)
-    console.log(data.keys())
-    for (var value of data.values()) {
-      console.log(value) 
-   }
     const res = await uploadFile(channel.id, null, null, data)
     const id = res && res.data.file_infos[0].id
     const post = {
@@ -126,12 +121,7 @@ const UserInput = props => {
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
-        {/* 
-        If fileId is set, it means that we have already uploaded a file and this is its id.
-        Only time when we arrive in this modal and have not set fileId, is when we have not yet uploaded a file.
-        This only happens when we have only started recording audio, so we check for this and display components accordingly.
-        */}
-        {fileId !== '' && (
+        {!isRecording && (
           <FilePreview
             handleSubmit={handleSubmit}
             message={message}
@@ -141,11 +131,11 @@ const UserInput = props => {
             filesData={filesData}
           />
         )}
-        {fileId === '' && (
+        {isRecording && (
           <AudioInput
             handleSubmit={handleAudioSubmit}
             closeModal={closeModal}
-            isOpen={modalIsOpen}
+            isRecording={isRecording}
           />
         )}
       </ModalContainer>
