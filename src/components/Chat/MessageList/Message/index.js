@@ -31,7 +31,12 @@ const Message = props => {
 
   // Checks if message type is users leaving or joining the channel
   const isUserLeavingOrJoiningChannel = () => {
-    if (type === 'system_join_channel' || type === 'system_leave_channel') {
+    if (
+      type === 'system_join_channel' ||
+      type === 'system_leave_channel' ||
+      type === 'system_join_team' ||
+      type === 'system_leave_team'
+    ) {
       return true
     }
     return false
@@ -40,17 +45,20 @@ const Message = props => {
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
+    isUserLeavingOrJoiningChannel() && isAdmin
+      ? 'content-system-message-admin'
+      : '',
   ]
 
   // Get message content classes
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isUserLeavingOrJoiningChannel() ? 'content-system-message' : '',
+    isUserLeavingOrJoiningChannel() && !isAdmin ? 'content-system-message' : '',
   ]
 
   useEffect(() => {
-    if (type === 'system_join_channel') {
+    if (type === 'system_join_channel' || type === 'system_join_team') {
       if (senderId === currentUserId) {
         setMessageText('Sinä liityit kanavalle.')
       } else if (sender === 'Käyttäjä poistunut') {
@@ -58,7 +66,10 @@ const Message = props => {
       } else {
         setMessageText(`${sender} liittyi kanavalle.`)
       }
-    } else if (type === 'system_leave_channel') {
+    } else if (
+      type === 'system_leave_channel' ||
+      type === 'system_leave_team'
+    ) {
       if (senderId === currentUserId) {
         setMessageText('Sinä poistuit kanavalta.')
       } else if (sender === 'Käyttäjä poistunut') {

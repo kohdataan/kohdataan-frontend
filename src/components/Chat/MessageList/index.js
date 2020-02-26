@@ -62,6 +62,13 @@ const MessageList = props => {
     }
   }
 
+  const isAdmin = id => {
+    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
+      return true
+    }
+    return false
+  }
+
   useEffect(() => {
     // TODO: implement some kind of button to scroll down when there are new messages
     ref.current.scrollTop = ref.current.scrollHeight
@@ -73,8 +80,14 @@ const MessageList = props => {
         {posts.length > 0 &&
           posts
             .filter(
-              p => p.type !== 'system_purpose_change'
-              // p.sender !== 'Käyttäjä poistunut'
+              p =>
+                p.type !== 'system_purpose_change' ||
+                (p.type === '' &&
+                  (p.type === 'system_join_channel' ||
+                    p.type === 'system_leave_channel' ||
+                    p.type === 'system_join_team' ||
+                    p.type === 'system_leave_team') &&
+                  !isAdmin(p.user_id))
             )
             .map(post => {
               const timestampValues = setTimeStampValues(post)
@@ -98,10 +111,7 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
-                    isAdmin={
-                      isSystemAdmin(post.user_id, profiles) ||
-                      isTeamAdmin(post.user_id, teams)
-                    }
+                    isAdmin={isAdmin(post.user_id)}
                     pinPost={pinPost}
                   />
                 )
