@@ -115,13 +115,16 @@ const PasswordResetPage = props => {
             onKeyPress={handleSubmit(handleNewPassword)}
             tabIndex="0"
           >
-            {'Vaihda salasana '}
+            {'Vaihda'}
           </button>
         </form>
 
         <div className="password-reset-link-container">
+          <Link className="password-reset-link" to="/registrationproblem">
+            Tarvitsen apua salasanan vaihtamisessa.
+          </Link>
           <Link className="password-reset-link" to="/login">
-            Olen vanha käyttäjä ja haluan kirjautua sisään
+            Haluan kirjautua sisään.
           </Link>
         </div>
       </div>

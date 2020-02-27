@@ -11,15 +11,14 @@ const PasswordResetRequestContainer = props => {
     if (resp.success) {
       history.push('/reset-password-info')
     } else {
-      alert('Sähköpostia ei löytynyt.')
+      alert('Tarkista sähköposti.')
     }
   }
 
   return (
     <EmailSmsForm
       handleRequest={handleResetRequest}
-      title="Salasanan palautus"
-      description="Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen salasanan."
+      title="Salasanan vaihtaminen"
     />
   )
 }

@@ -19,10 +19,15 @@ const EmailSmsForm = props => {
 
       <div className="email-sms-form-content-container">
         <h2 className="email-sms-form-title">{title}</h2>
+        <p>Anna sähköpostiosoitteesi.</p>
+        <p>
+          Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen
+          salasanan.
+        </p>
 
         <div className="email-sms-form-input-container">
           <InputField
-            label="Sähköpostiosoite"
+            label="Sähköposti"
             value={email}
             onChange={e => setEmail(e.target.value)}
             inputClassName="email-sms-form-input-text"
@@ -47,8 +52,11 @@ const EmailSmsForm = props => {
           </ButtonContainer>
 
           <div className="email-sms-form-link-container">
+            <Link className="email-sms-form-link" to="/registrationproblem">
+              Tarvitsen apua salasanan vaihtamisessa.
+            </Link>
             <Link className="email-sms-form-link" to="/login">
-              Takaisin sisäänkirjautumiseen
+              Haluan kirjautua sisään.
             </Link>
           </div>
         </div>

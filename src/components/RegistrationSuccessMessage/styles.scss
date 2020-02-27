@@ -5,14 +5,20 @@
   margin: 1em 0;
 }
 
-.problems-with-registration-link {
+.registration-link {
   color: $white;
   font-size: 17px;
+}
+
+.registration-link-container {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .resend-verification-link {
   color: $white;
   font-size: 17px;
+  text-align: center;
 }
 
 .registration-info-content {

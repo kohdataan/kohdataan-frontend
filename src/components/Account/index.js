@@ -149,7 +149,7 @@ const Account = props => {
             </div>
           )}
       </div>
-      <div className="account-box-outer">
+      <div className="account-box-outer account-box-reduced-padding">
         <ButtonContainer
           className="account-delete-button button"
           onClick={() => setShowDeleteModal(true)}

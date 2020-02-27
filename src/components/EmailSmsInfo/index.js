@@ -11,7 +11,7 @@ const EmailSmsInfo = props => {
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="email-sms-info-content-container">
-        <h2 className="email-sms-info-title">{title}</h2>
+        <h2 className="email-sms-info-title">Salasanan vaihtaminen</h2>
         <p>{description}</p>
 
         <div className="email-sms-info-input-container">
@@ -25,7 +25,10 @@ const EmailSmsInfo = props => {
           <div className="divider" aria-hidden="true" />
           <div className="email-sms-info-link-container">
             <Link className="email-sms-info-link" to="/registrationproblem">
-              Tarvitsen apua salasanan vaihtamisessa
+              Tarvitsen apua salasanan vaihtamisessa.
+            </Link>
+            <Link className="email-sms-info-link" to="/login">
+              Haluan kirjautua sisään.
             </Link>
           </div>
         </div>
