@@ -17,6 +17,7 @@
     "react": "^16.12.0",
     "react-autosize-textarea": "^7.0.0",
     "react-avatar-edit": "^0.8.3",
+    "react-avatar-editor": "^12.0.0-beta.0",
     "react-content-loader": "^4.3.3",
     "react-dom": "^16.12.0",
     "react-hook-form": "^3.29.2",
