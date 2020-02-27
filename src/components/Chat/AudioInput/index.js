@@ -91,22 +91,33 @@ const AudioInput = props => {
 
   return (
     <main className="audio-recording-content">
-      <Timer
-        ref={timer}
-        lastUnit="s"
-        checkpoints={[
-          { time: 60000, callback: () => setRecorderFinished(true) },
-        ]}
-      >
-        <Timer.Seconds />
-      </Timer>
-      <span className={recordingFinished ? 'pulse-done' : 'pulse-recording'} />
-      <ButtonContainer className="test-cancel-button" onClick={cancelRecording}>
-        cancel
-      </ButtonContainer>
-      <ButtonContainer className="test-save-button" onClick={endRecording}>
-        save
-      </ButtonContainer>
+      <div className="audio-recording-info">
+        <Timer
+          ref={timer}
+          lastUnit="s"
+          checkpoints={[
+            { time: 60000, callback: () => setRecorderFinished(true) },
+          ]}
+        >
+          <div className="audio-timer">
+            <Timer.Seconds />
+          </div>
+        </Timer>
+        <span
+          className={recordingFinished ? 'pulse-done' : 'pulse-recording'}
+        />
+      </div>
+      <p className="audio-description-text">
+        {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
+      </p>
+      <div className="audio-control-buttons">
+        <ButtonContainer className="cancel-button" onClick={cancelRecording}>
+          peruuta
+        </ButtonContainer>
+        <ButtonContainer className="save-button" onClick={endRecording}>
+          lähetä
+        </ButtonContainer>
+      </div>
     </main>
   )
 }

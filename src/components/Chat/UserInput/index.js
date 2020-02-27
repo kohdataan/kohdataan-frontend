@@ -117,7 +117,7 @@ const UserInput = props => {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         label="image-preview-dialog"
-        isLong
+        isLong={!isRecording}
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
