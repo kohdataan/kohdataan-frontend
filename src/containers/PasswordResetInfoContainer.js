@@ -19,7 +19,6 @@ const PasswordResetInfoContainer = () => {
   )
   return (
     <EmailSmsInfo
-      title="Salasanan palautus"
       description="Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan salasanan."
       guide={passwordResetInfo}
     />

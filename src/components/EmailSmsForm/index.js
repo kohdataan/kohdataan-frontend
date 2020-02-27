@@ -21,8 +21,8 @@ const EmailSmsForm = props => {
         <h2 className="email-sms-form-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
         <p>
-          Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen
-          salasanan.
+          Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
+          sähköpostisi ja kirjautumaan sisään.
         </p>
 
         <div className="email-sms-form-input-container">
@@ -53,7 +53,7 @@ const EmailSmsForm = props => {
 
           <div className="email-sms-form-link-container">
             <Link className="email-sms-form-link" to="/registrationproblem">
-              Tarvitsen apua salasanan vaihtamisessa.
+              Tarvitsen apua kirjautumisessa.
             </Link>
             <Link className="email-sms-form-link" to="/login">
               Haluan kirjautua sisään.

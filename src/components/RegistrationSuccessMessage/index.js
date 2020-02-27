@@ -9,8 +9,8 @@ const RegistrationSuccessMessage = () => {
       <div className="registration-success-content-container">
         <p className="registration-success-text">Kiitos rekisteröitymisestä!</p>
         <p>
-          Lähetimme sinulle sähköpostilla linkin, josta pääset kirjautumaan
-          palveluun.
+          Lähetimme sinulle sähköpostilla linkin, josta pääset vahvistamaan
+          sähköpostisi ja kirjautumaan palveluun.
         </p>
         <div className="registration-info-content">
           <ol className="registration-info-list">
@@ -20,8 +20,8 @@ const RegistrationSuccessMessage = () => {
               aiheena &quot;Rekisteröityminen&quot;.
             </li>
             <li>
-              Kun klikkaat viestissä olevaa linkkiä, vahvistat sähköpostisi ja pääset palvelun
-              kirjautumissivulle.
+              Kun klikkaat viestissä olevaa linkkiä, vahvistat sähköpostisi ja
+              pääset palvelun kirjautumissivulle.
             </li>
             <li>
               Kirjoita sivulle sähköpostisi ja salasana, jonka annoit
@@ -31,12 +31,12 @@ const RegistrationSuccessMessage = () => {
           </ol>
           <p className="reminder-content-text,">
             Jos et löydä sähköpostistasi viestiä, muista tarkistaa myös
-            roskapostikansio. 
+            roskapostikansio.
           </p>
           <p>
-            Voit myös pyytää, että lähetämme sinulle {' '}
+            Voit myös pyytää, että lähetämme sinulle{' '}
             <Link className="resend-verification-link" to="/email-verification">
-            vahvistuslinkin uudestaan.
+              vahvistuslinkin uudestaan.
             </Link>
           </p>
         </div>

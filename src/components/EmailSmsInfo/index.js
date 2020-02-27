@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const EmailSmsInfo = props => {
-  const { title, description, guide } = props
+  const { description, guide } = props
 
   return (
     <main role="main" className="email-sms-info-container">
@@ -39,7 +39,6 @@ const EmailSmsInfo = props => {
 
 // PropTypes.element allows us to pass in jsx
 EmailSmsInfo.propTypes = {
-  title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   guide: PropTypes.element,
 }
