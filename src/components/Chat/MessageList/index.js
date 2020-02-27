@@ -89,13 +89,13 @@ const MessageList = props => {
           posts
             .filter(
               p =>
-                p.type !== 'system_purpose_change' ||
-                (p.type === '' &&
-                  (p.type === 'system_join_channel' ||
+                p.type !== 'system_purpose_change' &&
+                (p.type === '' ||
+                  ((p.type === 'system_join_channel' ||
                     p.type === 'system_leave_channel' ||
                     p.type === 'system_join_team' ||
                     p.type === 'system_leave_team') &&
-                  !isAdmin(p.user_id))
+                    !isAdmin(p.user_id)))
             )
             .map(post => {
               const timestampValues = setTimeStampValues(post)
