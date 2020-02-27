@@ -7,7 +7,11 @@ const EmailVerificationContainer = props => {
   const { history } = props
 
   const handleVerifyRequest = async resetInfo => {
-    const resp = await API.sendVerifyEmailLink(resetInfo)
+    const formattedInfo = {
+      email: resetInfo.email.toLowerCase(),
+      phoneNumber: resetInfo.phoneNumber,
+    }
+    const resp = await API.sendVerifyEmailLink(formattedInfo)
     if (resp.success) {
       history.push('/email-verification-info')
     } else if (resp.message === 'This account is already verified') {

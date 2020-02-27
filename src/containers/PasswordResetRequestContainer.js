@@ -7,7 +7,11 @@ const PasswordResetRequestContainer = props => {
   const { history } = props
 
   const handleResetRequest = async resetInfo => {
-    const resp = await API.resetPassword(resetInfo)
+    const formattedInfo = {
+      email: resetInfo.email.toLowerCase(),
+      phoneNumber: resetInfo.phoneNumber,
+    }
+    const resp = await API.resetPassword(formattedInfo)
     if (resp.success) {
       history.push('/reset-password-info')
     } else {
