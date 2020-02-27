@@ -9,13 +9,37 @@
   height: 100vh;
 }
 
-.audio-input-close-modal-button {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid gray;
+.pulse-recording {
+  margin:100px;
+  display: block;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  padding: 4px 10px;
-  font-size: 1.2em;
-  position: absolute;
-  top: -40px;
-  right: -2%;
+  background: #ff0000;
+  box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
+  animation: pulse 3s infinite;
+}
+.pulse-done {
+  margin:100px;
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #888888;
+  box-shadow: 0 0 0 rgba(134, 134, 134, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+      box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
 }

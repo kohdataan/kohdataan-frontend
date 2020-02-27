@@ -1,14 +1,27 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import RecordRTC from 'recordrtc'
+import Timer from 'react-compound-timer'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const AudioInput = props => {
   const { handleSubmit, closeModal, isRecording } = props
-  const [stream, setStream] = useState('')
-  const [recorder, setRecorder] = useState('')
+  const [stream, setStream] = useState(null)
+  const [recorder, setRecorder] = useState(null)
+  const [recordingFinished, setRecorderFinished] = useState(false)
+  const timer = React.createRef()
 
+  // If timer has reached 60 seconds, it sets recordingFinished to true and this is activated
+  useEffect(() => {
+    if (recordingFinished) {
+      timer.current.stop()
+      recorder.stopRecording()
+      stream.stop()
+    }
+  }, [recordingFinished, recorder, stream, timer])
+
+  // This useEffect handles opening and closing audio stream
   useEffect(() => {
     if (isRecording) {
       const openStream = async () => {
@@ -18,19 +31,20 @@ const AudioInput = props => {
           })
         )
       }
-      if (stream === '') {
+      if (!stream) {
         openStream()
       }
     }
     return () => {
-      if (stream !== '') {
+      if (stream) {
         stream.stop()
       }
     }
   }, [isRecording, stream])
 
+  // This useEffect handles creating and setting recorder after stream is set
   useEffect(() => {
-    if (stream !== '') {
+    if (stream) {
       setRecorder(
         new RecordRTC(stream, {
           type: 'audio',
@@ -40,30 +54,53 @@ const AudioInput = props => {
     }
   }, [stream])
 
+  // This useEffect handles starting recorder after it is set.
   useEffect(() => {
-    if (recorder !== '') {
+    if (recorder) {
       recorder.startRecording()
     }
   }, [recorder])
 
+  // If recording is finished (timer is at 60 secs) recorder is already stopped.
   const endRecording = () => {
-    recorder.stopRecording(() => {
+    if (recordingFinished) {
       const blob = recorder.getBlob()
       const file = new File([blob], 'audio.wav')
       handleSubmit(file)
       closeModal()
-    })
+    } else {
+      recorder.stopRecording(() => {
+        const blob = recorder.getBlob()
+        const file = new File([blob], 'audio.wav')
+        handleSubmit(file)
+        closeModal()
+      })
+    }
   }
 
+  // If recording is finished (timer is at 60 secs) recorder is already stopped.
   const cancelRecording = () => {
-    recorder.stopRecording(() => {
+    if (recordingFinished) {
       closeModal()
-    })
+    } else {
+      recorder.stopRecording(() => {
+        closeModal()
+      })
+    }
   }
 
   return (
     <main className="audio-recording-content">
-      <p>test</p>
+      <Timer
+        ref={timer}
+        lastUnit="s"
+        checkpoints={[
+          { time: 60000, callback: () => setRecorderFinished(true) },
+        ]}
+      >
+        <Timer.Seconds />
+      </Timer>
+      <span className={recordingFinished ? 'pulse-done' : 'pulse-recording'} />
       <ButtonContainer className="test-cancel-button" onClick={cancelRecording}>
         cancel
       </ButtonContainer>
