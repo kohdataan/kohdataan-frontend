@@ -113,7 +113,7 @@ const EditAccountModal = props => {
             {errors[field] && messages[field]}
             {errors.passwordConfirm &&
               errors.passwordConfirm.type === 'validate' &&
-              'Salasanat eivät ole samat'}
+              'Salasanat eivät ole samat.'}
             {errors.passwordConfirm &&
               errors.passwordConfirm.type === 'required' &&
               'Kirjoita salasana uudestaan'}

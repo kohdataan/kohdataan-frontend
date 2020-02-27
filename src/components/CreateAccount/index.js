@@ -449,7 +449,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Kirjoita salasana uudestaan'}
               {errors.passwordConfirm &&
                 errors.passwordConfirm.type === 'validate' &&
-                'Salasanat eivät ole samat'}
+                'Salasanat eivät ole samat.'}
             </div>
           </div>
           <ServiceRulesContainer

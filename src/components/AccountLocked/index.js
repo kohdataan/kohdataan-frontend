@@ -10,11 +10,11 @@ const AccountLocked = () => {
   return (
     <div className="account-locked-container">
       <h1 className="account-locked-text">Kohdataan</h1>
-      <h3>
-        Käyttäjätilisi on tällä hetkellä pois käytöstä. Voit ottaa tarvittaessa
-        yhteyttä osoitteeseen{' '}
+      <p className="account-locked-paragraph">Käyttäjätilisi on tällä hetkellä pois käytöstä.</p>
+      <p className="account-locked-paragraph">
+        Ota tarvittaessa yhteyttä osoitteeseen{' '}
         <a href="mailto:kohdataan@kohdataan.fi">kohdataan@kohdataan.fi.</a>
-      </h3>
+      </p>
     </div>
   )
 }
