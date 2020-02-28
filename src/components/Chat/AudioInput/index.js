@@ -68,13 +68,15 @@ const AudioInput = props => {
       const file = new File([blob], 'audio.wav')
       handleSubmit(file)
       closeModal()
-    } else {
+    } else if (recorder) {
       recorder.stopRecording(() => {
         const blob = recorder.getBlob()
         const file = new File([blob], 'audio.wav')
         handleSubmit(file)
         closeModal()
       })
+    } else {
+      closeModal()
     }
   }
 
@@ -82,34 +84,48 @@ const AudioInput = props => {
   const cancelRecording = () => {
     if (recordingFinished) {
       closeModal()
-    } else {
+    } else if (recorder) {
       recorder.stopRecording(() => {
         closeModal()
       })
+    } else {
+      closeModal()
     }
   }
 
   return (
     <main className="audio-recording-content">
       <div className="audio-recording-info">
-        <Timer
-          ref={timer}
-          lastUnit="s"
-          checkpoints={[
-            { time: 60000, callback: () => setRecorderFinished(true) },
-          ]}
-        >
-          <div className="audio-timer">
-            <Timer.Seconds />
-          </div>
-        </Timer>
+        {recorder && (
+          <Timer
+            ref={timer}
+            lastUnit="s"
+            checkpoints={[
+              { time: 60000, callback: () => setRecorderFinished(true) },
+            ]}
+          >
+            <div className="audio-timer">
+              <Timer.Seconds />
+            </div>
+          </Timer>
+        )}
         <span
           className={recordingFinished ? 'pulse-done' : 'pulse-recording'}
         />
       </div>
-      <p className="audio-description-text">
-        {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
-      </p>
+      {recorder && (
+        <p className="audio-description-text">
+          {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
+        </p>
+      )}
+      {!recorder && (
+        <div className="audio-description-text">
+          <p>
+            Mikrofonia ei löydy. Nauhottaaksesi sinun on annettava selaimelle
+            lupa käyttää laitteen mikrofonia.
+          </p>
+        </div>
+      )}
       <div className="audio-control-buttons">
         <ButtonContainer className="cancel-button" onClick={cancelRecording}>
           peruuta
