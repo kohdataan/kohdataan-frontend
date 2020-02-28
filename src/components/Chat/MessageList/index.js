@@ -16,6 +16,7 @@ const MessageList = props => {
     profiles,
     getStatusById,
     pinPost,
+    filesData,
   } = props
 
   const getIconMemberStatus = userId =>
@@ -103,6 +104,7 @@ const MessageList = props => {
                       isTeamAdmin(post.user_id, teams)
                     }
                     pinPost={pinPost}
+                    filesData={filesData}
                   />
                 )
               )
@@ -122,6 +124,7 @@ MessageList.propTypes = {
   profiles: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
+  filesData: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(MessageList)

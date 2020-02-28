@@ -24,6 +24,7 @@ const Chat = props => {
     handleLogout,
     location,
     pinPost,
+    filesData,
   } = props
 
   const [showSider, setShowSider] = useState(false)
@@ -132,6 +133,7 @@ const Chat = props => {
         profiles={profiles}
         getStatusById={getStatusById}
         pinPost={handlePinPost}
+        filesData={filesData}
         teams={teams}
       />
       {channel.id && (
@@ -140,6 +142,7 @@ const Chat = props => {
           createPost={createPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
+          filesData={filesData}
         />
       )}
       {showSider && !directChannel && (
@@ -214,6 +217,7 @@ Chat.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  filesData: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {
