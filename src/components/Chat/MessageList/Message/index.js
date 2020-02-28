@@ -1,10 +1,10 @@
-import React, { memo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import ReactPlayer from "react-player";
-import ReactAudioPlayer from "react-audio-player";
-import "./styles.scss";
-import propTypes from "prop-types";
-import ButtonContainer from "../../../ButtonContainer";
+import React, { memo, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import ReactPlayer from 'react-player'
+import ReactAudioPlayer from 'react-audio-player'
+import './styles.scss'
+import propTypes from 'prop-types'
+import ButtonContainer from '../../../ButtonContainer'
 
 const Message = props => {
   const {
@@ -24,64 +24,64 @@ const Message = props => {
     iconMemberStatus,
     isAdmin,
     pinPost,
-    filesData
-  } = props;
+    filesData,
+  } = props
 
-  const [messageText, setMessageText] = useState(text);
+  const [messageText, setMessageText] = useState(text)
   // Adds the text to be used for the date divider
-  const today = new Date().toLocaleDateString();
-  const dateText = dateSent === today ? "Tänään" : dateSent;
+  const today = new Date().toLocaleDateString()
+  const dateText = dateSent === today ? 'Tänään' : dateSent
 
   // Checks if message type is users leaving or joining the channel
   const isUserLeavingOrJoiningChannel = () => {
     if (
-      type === "system_join_channel" ||
-      type === "system_leave_channel" ||
-      type === "system_join_team" ||
-      type === "system_leave_team"
+      type === 'system_join_channel' ||
+      type === 'system_leave_channel' ||
+      type === 'system_join_team' ||
+      type === 'system_leave_team'
     ) {
-      return true;
+      return true
     }
-    return false;
-  };
+    return false
+  }
   // Get message wrapper classes
   const messageWrapperClassList = [
-    "chat-message-wrapper",
-    currentUserId === senderId ? "wrapper-sent" : "wrapper-received",
+    'chat-message-wrapper',
+    currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
     isUserLeavingOrJoiningChannel() && isAdmin
-      ? "content-system-message-admin"
-      : ""
-  ];
+      ? 'content-system-message-admin'
+      : '',
+  ]
 
   // Get message content classes
   const messageContentClassList = [
-    "chat-message-content",
-    currentUserId === senderId ? "content-sent" : "content-received",
-    isUserLeavingOrJoiningChannel() && !isAdmin ? "content-system-message" : ""
-  ];
+    'chat-message-content',
+    currentUserId === senderId ? 'content-sent' : 'content-received',
+    isUserLeavingOrJoiningChannel() && !isAdmin ? 'content-system-message' : '',
+  ]
 
   useEffect(() => {
-    if (type === "system_join_channel" || type === "system_join_team") {
+    if (type === 'system_join_channel' || type === 'system_join_team') {
       if (senderId === currentUserId) {
-        setMessageText("Sinä liityit kanavalle.");
-      } else if (sender === "Käyttäjä poistunut") {
-        setMessageText(`Käyttäjä poistunut.`);
+        setMessageText('Sinä liityit kanavalle.')
+      } else if (sender === 'Käyttäjä poistunut') {
+        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} liittyi kanavalle.`);
+        setMessageText(`${sender} liittyi kanavalle.`)
       }
     } else if (
-      type === "system_leave_channel" ||
-      type === "system_leave_team"
+      type === 'system_leave_channel' ||
+      type === 'system_leave_team'
     ) {
       if (senderId === currentUserId) {
-        setMessageText("Sinä poistuit kanavalta.");
-      } else if (sender === "Käyttäjä poistunut") {
-        setMessageText(`Käyttäjä poistunut.`);
+        setMessageText('Sinä poistuit kanavalta.')
+      } else if (sender === 'Käyttäjä poistunut') {
+        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} poistui kanavalta.`);
+        setMessageText(`${sender} poistui kanavalta.`)
       }
     }
-  }, [currentUserId, sender, senderId, type]);
+  }, [currentUserId, sender, senderId, type])
 
   return (
     <>
@@ -92,20 +92,20 @@ const Message = props => {
           <div className="date-divider" />
         </div>
       )}
-      <div className={messageWrapperClassList.join(" ")}>
+      <div className={messageWrapperClassList.join(' ')}>
         <div className="message-outer">
-          {timeSent !== "" ? (
+          {timeSent !== '' ? (
             <div className="chat-message-header-content">
               <span className="chat-message-timestamp">{timeSent}</span>
               {currentUserId !== senderId && !directChannel && (
                 <h3
                   className={`chat-message-sender ${
-                    sender === "Käyttäjä poistunut"
-                      ? "chat-message-sender-unknown"
-                      : ""
+                    sender === 'Käyttäjä poistunut'
+                      ? 'chat-message-sender-unknown'
+                      : ''
                   }`}
                 >
-                  {isAdmin ? "Valvoja" : sender}
+                  {isAdmin ? 'Valvoja' : sender}
                 </h3>
               )}
             </div>
@@ -115,11 +115,11 @@ const Message = props => {
           <div
             className={`${
               currentUserId === senderId
-                ? "message-icon-and-content-sent"
-                : "message-icon-and-content"
+                ? 'message-icon-and-content-sent'
+                : 'message-icon-and-content'
             }`}
           >
-            {currentUserId !== senderId && sender !== "Käyttäjä poistunut" && (
+            {currentUserId !== senderId && sender !== 'Käyttäjä poistunut' && (
               <div>
                 <Link
                   to={`/profile/${senderMmUsername}`}
@@ -130,8 +130,8 @@ const Message = props => {
                     <div
                       className="label chat-message-sender-icon"
                       style={{
-                        backgroundColor: "black",
-                        color: "white"
+                        backgroundColor: 'black',
+                        color: 'white',
                       }}
                     >
                       K
@@ -144,7 +144,7 @@ const Message = props => {
                         ${
                           process.env.REACT_APP_MATTERMOST_URL
                         }/api/v4/users/${senderId}/image?${Date.now()}
-                      )`
+                      )`,
                       }}
                     />
                   )}
@@ -152,24 +152,22 @@ const Message = props => {
                 <div className={iconMemberStatus} />
               </div>
             )}
-            {currentUserId !== senderId && sender === "Käyttäjä poistunut" && (
+            {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
               <div className="chat-message-sender-icon">
                 <i aria-hidden="true" title={sender[0]} />
                 <span className="label">{sender[0]}</span>
               </div>
             )}
             <div className="chat-message-content-field">
-              <div className={messageContentClassList.join(" ")}>
+              <div className={messageContentClassList.join(' ')}>
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes("image") && (
+                  filesData[files[0]].mime_type.includes('image') && (
                     <>
                       <Link to={`${channelId}/${files[0]}`}>
                         <img
                           className="message-image"
-                          src={`${
-                            process.env.REACT_APP_MATTERMOST_URL
-                          }/api/v4/files/${files[0]}/thumbnail`}
+                          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                           alt="attachment"
                         />
                       </Link>
@@ -180,22 +178,20 @@ const Message = props => {
                   )}
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes("video") && (
+                  filesData[files[0]].mime_type.includes('video') && (
                     <>
                       <div className="player-wrapper">
                         <ReactPlayer
                           className="react-player"
-                          url={`${
-                            process.env.REACT_APP_MATTERMOST_URL
-                          }/api/v4/files/${files[0]}`}
+                          url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                           controls
                           config={{
                             file: {
                               attributes: {
-                                controlsList: "nodownload noremoteplayback",
-                                disablePictureInPicture: true
-                              }
-                            }
+                                controlsList: 'nodownload noremoteplayback',
+                                disablePictureInPicture: true,
+                              },
+                            },
                           }}
                           width="100%"
                           height="100%"
@@ -208,12 +204,10 @@ const Message = props => {
                   )}
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes("audio") && (
+                  filesData[files[0]].mime_type.includes('audio') && (
                     <div className="player-wrapper">
                       <ReactAudioPlayer
-                        src={`${
-                          process.env.REACT_APP_MATTERMOST_URL
-                        }/api/v4/files/${files[0]}`}
+                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                         controls
                         preload="auto"
                         controlsList="nodownload"
@@ -240,17 +234,17 @@ const Message = props => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 Message.defaultProps = {
-  type: "",
-  senderId: "",
+  type: '',
+  senderId: '',
   files: null,
-  senderMmUsername: "",
-  iconMemberStatus: "",
-  isAdmin: false
-};
+  senderMmUsername: '',
+  iconMemberStatus: '',
+  isAdmin: false,
+}
 
 Message.propTypes = {
   sender: propTypes.string.isRequired,
@@ -269,7 +263,7 @@ Message.propTypes = {
   isAdmin: propTypes.bool,
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
-  id: propTypes.string.isRequired
-};
+  id: propTypes.string.isRequired,
+}
 
-export default memo(Message);
+export default memo(Message)

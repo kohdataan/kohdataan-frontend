@@ -18,6 +18,8 @@ const AudioInput = props => {
       timer.current.stop()
       recorder.stopRecording()
       stream.stop()
+    } else if (recorder) {
+      recorder.startRecording()
     }
   }, [recordingFinished, recorder, stream, timer])
 
@@ -53,13 +55,6 @@ const AudioInput = props => {
       )
     }
   }, [stream])
-
-  // This useEffect handles starting recorder after it is set.
-  useEffect(() => {
-    if (recorder) {
-      recorder.startRecording()
-    }
-  }, [recorder])
 
   // If recording is finished (timer is at 60 secs) recorder is already stopped.
   const endRecording = () => {
