@@ -28,6 +28,13 @@ const Message = props => {
   } = props
 
   const [messageText, setMessageText] = useState(text)
+  const [deleted, setDeleted] = useState(false)
+
+  // checks if messagetext contains certain predetermined string and sets text to deleted if yes
+  if (messageText.includes('STRING_TO_USE')) {
+    setMessageText('Viesti poistettu.')
+    setDeleted(true)
+  }
   // Adds the text to be used for the date divider
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
@@ -161,6 +168,7 @@ const Message = props => {
             <div className="chat-message-content-field">
               <div className={messageContentClassList.join(' ')}>
                 {files &&
+                  !deleted &&
                   files[0] &&
                   filesData[files[0]].mime_type.includes('image') && (
                     <>
@@ -177,6 +185,7 @@ const Message = props => {
                     </>
                   )}
                 {files &&
+                  !deleted &&
                   files[0] &&
                   filesData[files[0]].mime_type.includes('video') && (
                     <>
