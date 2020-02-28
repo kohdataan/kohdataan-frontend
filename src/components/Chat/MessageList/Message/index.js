@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ReactPlayer from 'react-player'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -22,6 +23,7 @@ const Message = props => {
     iconMemberStatus,
     isAdmin,
     pinPost,
+    filesData,
   } = props
 
   const [messageText, setMessageText] = useState(text)
@@ -38,7 +40,12 @@ const Message = props => {
 
   // Checks if message type is users leaving or joining the channel
   const isUserLeavingOrJoiningChannel = () => {
-    if (type === 'system_join_channel' || type === 'system_leave_channel') {
+    if (
+      type === 'system_join_channel' ||
+      type === 'system_leave_channel' ||
+      type === 'system_join_team' ||
+      type === 'system_leave_team'
+    ) {
       return true
     }
     return false
@@ -47,17 +54,20 @@ const Message = props => {
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
+    isUserLeavingOrJoiningChannel() && isAdmin
+      ? 'content-system-message-admin'
+      : '',
   ]
 
   // Get message content classes
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isUserLeavingOrJoiningChannel() ? 'content-system-message' : '',
+    isUserLeavingOrJoiningChannel() && !isAdmin ? 'content-system-message' : '',
   ]
 
   useEffect(() => {
-    if (type === 'system_join_channel') {
+    if (type === 'system_join_channel' || type === 'system_join_team') {
       if (senderId === currentUserId) {
         setMessageText('Sinä liityit kanavalle.')
       } else if (sender === 'Käyttäjä poistunut') {
@@ -65,8 +75,17 @@ const Message = props => {
       } else {
         setMessageText(`${sender} liittyi kanavalle.`)
       }
-    } else if (type === 'system_leave_channel') {
-      setMessageText(`${sender} poistui kanavalta.`)
+    } else if (
+      type === 'system_leave_channel' ||
+      type === 'system_leave_team'
+    ) {
+      if (senderId === currentUserId) {
+        setMessageText('Sinä poistuit kanavalta.')
+      } else if (sender === 'Käyttäjä poistunut') {
+        setMessageText(`Käyttäjä poistunut.`)
+      } else {
+        setMessageText(`${sender} poistui kanavalta.`)
+      }
     }
   }, [currentUserId, sender, senderId, type])
 
@@ -147,24 +166,43 @@ const Message = props => {
             )}
             <div className="chat-message-content-field">
               <div className={messageContentClassList.join(' ')}>
-                {files && !deleted && (
-                  <>
-                    <Link to={`${channelId}/${files[0]}`}>
-                      <img
-                        className="message-image"
-                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                        alt="attachment"
-                      />
-                    </Link>
-                    <p className="image-message-content-text chat-message-content-text">
-                      {messageText}
-                    </p>
-                  </>
-                )}
-                {!files && !deleted && (
-                  <p className="chat-message-content-text">{messageText}</p>
-                )}
-                {deleted && (
+                {files &&
+                  !deleted &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('image') && (
+                    <>
+                      <Link to={`${channelId}/${files[0]}`}>
+                        <img
+                          className="message-image"
+                          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                          alt="attachment"
+                        />
+                      </Link>
+                      <p className="image-message-content-text chat-message-content-text">
+                        {messageText}
+                      </p>
+                    </>
+                  )}
+                {files &&
+                  !deleted &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('video') && (
+                    <>
+                      <div className="player-wrapper">
+                        <ReactPlayer
+                          className="react-player"
+                          url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                          controls
+                          width="100%"
+                          height="100%"
+                        />
+                      </div>
+                      <p className="image-message-content-text chat-message-content-text">
+                        {messageText}
+                      </p>
+                    </>
+                  )}
+                {!files && (
                   <p className="chat-message-content-text">{messageText}</p>
                 )}
               </div>
@@ -176,7 +214,7 @@ const Message = props => {
                     className="chat-report-message-icon"
                     onClick={() => pinPost(id)}
                   >
-                    <i className="far fa-flag" aria-hidden="true" />
+                    <i className="fas fa-ellipsis-v" aria-hidden="true" />
                   </ButtonContainer>
                 )}
             </div>
@@ -212,6 +250,7 @@ Message.propTypes = {
   iconMemberStatus: propTypes.string,
   isAdmin: propTypes.bool,
   pinPost: propTypes.func.isRequired,
+  filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
 }
 

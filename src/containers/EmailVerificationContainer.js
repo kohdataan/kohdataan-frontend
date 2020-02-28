@@ -7,9 +7,13 @@ const EmailVerificationContainer = props => {
   const { history } = props
 
   const handleVerifyRequest = async resetInfo => {
-    const resp = await API.sendVerifyEmailLink(resetInfo)
+    const formattedInfo = {
+      email: resetInfo.email.toLowerCase(),
+      phoneNumber: resetInfo.phoneNumber,
+    }
+    const resp = await API.sendVerifyEmailLink(formattedInfo)
     if (resp.success) {
-      history.push('/email-verification-info')
+      history.push('/registration-success')
     } else if (resp.message === 'This account is already verified') {
       alert('Sähköposti on jo vahvistettu.')
     } else {
@@ -20,7 +24,7 @@ const EmailVerificationContainer = props => {
   return (
     <EmailSmsForm
       handleRequest={handleVerifyRequest}
-      title="Sähköpostin vahvistamis linkin uudelleen lähetys"
+      title="Vahvistuslinkin lähettäminen uudelleen"
       description="Lähetämme sinulle linkin, josta pääset vahvistamaan sähköpostisi."
     />
   )

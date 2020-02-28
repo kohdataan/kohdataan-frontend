@@ -83,6 +83,7 @@ const customStylesLong = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-20%',
+    paddingTop: '30px',
     transform: 'translate(-50%, -50%)',
     position: 'fixed',
     border: 'none',

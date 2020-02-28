@@ -102,11 +102,11 @@ const LogIn = props => {
           <Link className="login-link" to="/reset-password">
             Olen unohtanut salasanani.
           </Link>
+          <Link className="login-link" to="/registrationproblem">
+            Tarvitsen apua kirjautumisessa.
+          </Link>
           <Link className="login-link" to="/createaccount">
             Olen uusi käyttäjä ja haluan rekisteröityä.
-          </Link>
-          <Link className="login-link" to="/email-verification">
-            En ole saanut sähköpostin vahvistus linkkiä
           </Link>
         </div>
       </div>

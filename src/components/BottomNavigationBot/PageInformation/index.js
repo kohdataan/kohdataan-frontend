@@ -26,7 +26,8 @@ const PageInformation = props => {
       break
     case '/edit-me':
       text = `Täällä voit muokata profiiliasi. 
-        \nVoit vaihtaa oman kuvan, ja voit muuttaa nimesi ja asuinpaikkasi. Voit valita näkyykö ikäsi ja asuinpaikkasi muille käyttäjille. Voit myös muokata kuvausta, jossa kerrot itsestäsi.
+        \nVoit vaihtaa oman kuvan. Kuva voi olla BMP-, JPG- tai PNG-tiedosto. Tiedoston koko voi olla enintään 50 MB. 
+        \nVoit muuttaa nimesi ja asuinpaikkasi. Voit valita näkyykö ikäsi ja asuinpaikkasi muille käyttäjille. Voit myös muokata kuvausta, jossa kerrot itsestäsi.
         \nMuista tallentaa muutokset!`
       break
     case '/friends':
