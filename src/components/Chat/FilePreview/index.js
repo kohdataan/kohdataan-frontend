@@ -62,7 +62,7 @@ const FilePreview = props => {
               rows={1}
               aria-label="message text"
             />
-            <input type="submit" value="➤" className="send-message-button" />
+            <input type="submit" value="" className="send-message-button" />
           </form>
         </div>
       </div>
