@@ -9,6 +9,8 @@ import BouncingLoader from '../BouncingLoader'
 const GroupSuggestions = props => {
   const {
     channels,
+    profiles,
+    teams,
     handleJoinChannel,
     channelMembers,
     getChannelInvitations,
@@ -92,6 +94,8 @@ const GroupSuggestions = props => {
                     key={cards[i].id}
                     channel={cards[i]}
                     members={channelMembers[cards[i].id]}
+                    profiles={profiles}
+                    teams={teams}
                   />
                 </Swipeable>
               ) : (
@@ -100,6 +104,8 @@ const GroupSuggestions = props => {
                   key={card.id}
                   channel={cards[i]}
                   members={channelMembers[cards[i].id]}
+                  teams={teams}
+                  profiles={profiles}
                   top={cards.length - i}
                 />
               )
@@ -113,6 +119,8 @@ const GroupSuggestions = props => {
 
 GroupSuggestions.propTypes = {
   channels: propTypes.instanceOf(Array).isRequired,
+  profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   handleJoinChannel: propTypes.func.isRequired,
   channelMembers: propTypes.instanceOf(Object).isRequired,
   getChannelInvitations: propTypes.func.isRequired,

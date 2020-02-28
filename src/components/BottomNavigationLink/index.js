@@ -1,24 +1,24 @@
-import React, { memo, forwardRef } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './styles.scss'
 
-const BottomNavigationLink = forwardRef((props, ref) => {
+const BottomNavigationLink = props => {
   const { title, route, icon } = props
   return (
     <NavLink
       exact
       to={route}
       className="nav-link"
-      activeClassName="nav-link-active"
+      activeClassName={`nav-link-active nav-link-${title}`}
     >
       <div>
-        <i aria-hidden="true" className={icon} title={title} ref={ref} />
+        <i aria-hidden="true" className={icon} title={title} />
       </div>
       <p className="label">{title}</p>
     </NavLink>
   )
-})
+}
 
 BottomNavigationLink.propTypes = {
   title: PropTypes.string.isRequired,

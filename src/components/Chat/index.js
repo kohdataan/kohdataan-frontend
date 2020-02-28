@@ -11,6 +11,7 @@ import './styles.scss'
 const Chat = props => {
   const {
     channel,
+    teams,
     posts,
     profiles,
     createPost,
@@ -133,6 +134,7 @@ const Chat = props => {
         getStatusById={getStatusById}
         pinPost={handlePinPost}
         filesData={filesData}
+        teams={teams}
       />
       {channel.id && (
         <UserInput
@@ -153,6 +155,7 @@ const Chat = props => {
           getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
           channel={channel}
+          teams={teams}
         />
       )}
       <ModalContainer
@@ -201,6 +204,7 @@ const Chat = props => {
 
 Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
+  teams: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),

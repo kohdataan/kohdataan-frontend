@@ -372,7 +372,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 (errors.phoneNumber.type === 'pattern' ||
                   errors.phoneNumber.type === 'minLength' ||
                   errors.phoneNumber.type === 'maxLength') &&
-                'Tarkista puhelinnumero'}
+                'Tarkista puhelinnumero.'}
             </div>
           </div>
 

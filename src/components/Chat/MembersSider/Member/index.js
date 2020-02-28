@@ -1,15 +1,42 @@
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { isSystemAdmin, isTeamAdmin } from '../../../../utils/userIsAdmin'
 import './styles.scss'
 
 const Member = props => {
-  const { userId, nickName, currentUserId, profiles, iconMemberStatus } = props
+  const {
+    userId,
+    nickName,
+    currentUserId,
+    profiles,
+    teams,
+    iconMemberStatus,
+  } = props
   const userFirstLetter = nickName[0]
   const getUsername = () => {
     return profiles && profiles[userId] && profiles[userId].username
   }
 
+  if (isSystemAdmin(userId, profiles) || isTeamAdmin(userId, teams)) {
+    return (
+      <div className="chat-header-members-sider-member">
+        <div>
+          <div
+            className="label chat-message-sender-icon"
+            style={{
+              backgroundColor: 'black',
+              color: 'white',
+            }}
+          >
+            K
+          </div>
+        </div>
+        <span className={iconMemberStatus} />
+        <span>Valvoja</span>
+      </div>
+    )
+  }
   return (
     <div className="chat-header-members-sider-member">
       {currentUserId !== userId && (
@@ -19,10 +46,10 @@ const Member = props => {
             className="label chat-message-sender-icon"
             style={{
               backgroundImage: `url(
-                ${
-                  process.env.REACT_APP_MATTERMOST_URL
-                }/api/v4/users/${userId}/image?${Date.now()}
-              )`,
+                  ${
+                    process.env.REACT_APP_MATTERMOST_URL
+                  }/api/v4/users/${userId}/image?${Date.now()}
+                )`,
             }}
           />
         </Link>
@@ -34,10 +61,10 @@ const Member = props => {
             className="label chat-message-sender-icon"
             style={{
               backgroundImage: `url(
-                ${
-                  process.env.REACT_APP_MATTERMOST_URL
-                }/api/v4/users/${userId}/image?${Date.now()}
-              )`,
+                  ${
+                    process.env.REACT_APP_MATTERMOST_URL
+                  }/api/v4/users/${userId}/image?${Date.now()}
+                )`,
             }}
           />
         </div>
@@ -66,6 +93,7 @@ Member.propTypes = {
   nickName: propTypes.string.isRequired,
   currentUserId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   iconMemberStatus: propTypes.string.isRequired,
 }
 
