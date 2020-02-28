@@ -17,7 +17,6 @@ import RegistrationProblemContainer from './containers/RegistrationProblemContai
 import ProfileContainer from './containers/ProfileContainer'
 import OtherUserProfileContainer from './containers/OtherUserProfileContainer'
 import EmailVerificationContainer from './containers/EmailVerificationContainer'
-import EmailVerificationInfoContainer from './containers/EmailVerificationInfoContainer'
 import PasswordResetRequestContainer from './containers/PasswordResetRequestContainer'
 import PasswordResetInfoContainer from './containers/PasswordResetInfoContainer'
 import PasswordResetPageContainer from './containers/PasswordResetPageContainer'
@@ -67,10 +66,6 @@ class App extends Component {
           exact
           path="/email-verification"
           component={EmailVerificationContainer}
-        />
-        <Route
-          path="/email-verification-info"
-          component={EmailVerificationInfoContainer}
         />
         <Route
           exact

@@ -6,8 +6,8 @@
 
 .email-sms-form-container {
   background-color: $black;
-  height: 100%;
   width: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,11 +18,11 @@
 .email-sms-form-title {
   text-transform: uppercase;
   color: white;
+  margin-bottom: 30px;
 }
 
 .email-sms-form-content-container {
   width: 80%;
-  height: 100%;
 }
 
 .email-sms-form-input-container {
@@ -41,7 +41,7 @@
 }
 
 .email-sms-form-input-field {
-  margin-top: 5px;
+  margin-top: 15px;
   background: transparent;
   border: solid 1px $orange;
   border-radius: 25px;
@@ -62,7 +62,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
-  margin: auto;
+  margin: 50px auto 10px;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
   color: $black;

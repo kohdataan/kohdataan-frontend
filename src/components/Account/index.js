@@ -149,21 +149,13 @@ const Account = props => {
             </div>
           )}
       </div>
-      <div className="account-box-outer">
-        <div className="account-box-inner">
-          <div className="account-label-text delete-text">
-            Poista käyttäjätili
-          </div>
-          <ButtonContainer
-            className="account-delete-button"
-            onClick={() => setShowDeleteModal(true)}
-          >
-            Poista
-          </ButtonContainer>
-        </div>
-        <div className="account-box delete-box">
-          Aloita käyttäjätilin poistaminen.
-        </div>
+      <div className="account-box-outer account-box-reduced-padding">
+        <ButtonContainer
+          className="account-delete-button button"
+          onClick={() => setShowDeleteModal(true)}
+        >
+          Poista käyttäjätili
+        </ButtonContainer>
       </div>
       <ButtonContainer
         className="button-secondary account-save-button"
