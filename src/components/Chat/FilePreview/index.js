@@ -19,10 +19,10 @@ const FilePreview = props => {
     <main className="image-preview-content">
       <div className="image">
         <ButtonContainer
-          className="image-preview-close-modal-button"
+          className="image-preview-close-modal-button go-back-button"
           onClick={closeModal}
         >
-          x
+          {' '}
         </ButtonContainer>
         {fileId && filesData[fileId].mime_type.includes('image') && (
           <img
@@ -62,7 +62,9 @@ const FilePreview = props => {
               rows={1}
               aria-label="message text"
             />
-            <input type="submit" value="➤" className="send-message-button" />
+            <button type="submit" className="send-message-button" tabIndex="0">
+              {}
+            </button>
           </form>
         </div>
       </div>

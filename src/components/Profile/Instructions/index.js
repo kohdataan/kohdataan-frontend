@@ -27,9 +27,6 @@ const Instructions = props => {
     THIS_IS_GROUPS: 5,
   }
 
-  // TODO: ForwardRef
-  // TODO: Miten state säilyy eri komponenttien välillä
-
   const [coordinates, setCoordinates] = useState({
     1: {},
     2: {},

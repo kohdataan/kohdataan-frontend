@@ -19,13 +19,13 @@
 }
 
 .image-preview-close-modal-button {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid gray;
+  background: transparent;
+  border: none;
   border-radius: 50%;
   padding: 4px 10px;
   font-size: 1.2em;
   position: absolute;
-  top: -40px;
+  top: -20px;
   right: -2%;
 }
 
@@ -48,5 +48,5 @@
 }
 
 .preview-image {
-  margin: auto;
+  margin: 15px auto;
 }

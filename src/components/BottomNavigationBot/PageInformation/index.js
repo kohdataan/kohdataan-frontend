@@ -26,7 +26,8 @@ const PageInformation = props => {
       break
     case '/edit-me':
       text = `Täällä voit muokata profiiliasi. 
-        \nVoit vaihtaa oman kuvan, ja voit muuttaa nimesi ja asuinpaikkasi. Voit valita näkyykö ikäsi ja asuinpaikkasi muille käyttäjille. Voit myös muokata kuvausta, jossa kerrot itsestäsi.
+        \nVoit vaihtaa oman kuvan. Kuva voi olla BMP-, JPG- tai PNG-tiedosto. Tiedoston koko voi olla enintään 50 MB. 
+        \nVoit muuttaa nimesi ja asuinpaikkasi. Voit valita näkyykö ikäsi ja asuinpaikkasi muille käyttäjille. Voit myös muokata kuvausta, jossa kerrot itsestäsi.
         \nMuista tallentaa muutokset!`
       break
     case '/friends':
@@ -55,8 +56,7 @@ const PageInformation = props => {
         \nKun klikkaat ryhmän jäsenen nimeä, näet hänen profiilinsa. Profiilissa voit lähettää hänelle yksityisen viestin.         
         \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.
         \nJos huomaat keskustelussa asiattoman viestin tai viestejä, voit ilmoittaa siitä valvojalle. Valvoja voi poistaa viestin. Valvoja voi tarvittaessa myös liittyä keskusteluun. Valvojalla on pääsy kaikkiin ryhmäkeskusteluihin.`
-    
-        break
+      break
     case '/member-profile':
       text = `Tämä on toisen käyttäjän profiili.
         \nTäällä näet tiedot, jotka hän haluaa kertoa itsestään muille käyttäjille.

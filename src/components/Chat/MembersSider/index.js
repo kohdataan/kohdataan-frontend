@@ -11,12 +11,15 @@ const MembersSider = props => {
     members,
     profiles,
     channel,
+    teams,
     getNickNamebyId,
     getStatusById,
     currentUserId,
     handleLeaveChannel,
     toggleSiderClosedIfOpen,
   } = props
+
+  const masterUserEmail = process.env.REACT_APP_MASTER_USER_EMAIL
 
   const [showConfirmation, setShowConfirmation] = useState(false)
 
@@ -36,7 +39,7 @@ const MembersSider = props => {
     return (
       <div className="chat-header-members-sider" id="members-sider" ref={ref}>
         <div className="chat-header-members-sider-content">
-          <p>Tämä ryhmä on Kohdataan-somen pilottivaihetta varten.</p>
+          <p>Tämä ryhmä on Kohdataan-somen testausta varten.</p>
           <p>
             Tänne voit kirjoittaa vapaamuotoisesti palautetta palveluun
             liittyen.
@@ -55,13 +58,15 @@ const MembersSider = props => {
           .filter(
             member =>
               profiles[member.user_id] &&
-              profiles[member.user_id].delete_at === 0
+              profiles[member.user_id].delete_at === 0 &&
+              profiles[member.user_id].email !== masterUserEmail
           )
           .map(member => (
             <Member
               key={member.user_id}
               userId={member.user_id}
               profiles={profiles}
+              teams={teams}
               nickName={getNickNamebyId(member.user_id)}
               currentUserId={currentUserId}
               iconMemberStatus={getIconMemberStatus(member.user_id)}
@@ -86,6 +91,7 @@ const MembersSider = props => {
 MembersSider.propTypes = {
   members: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   channel: propTypes.instanceOf(Object).isRequired,
   getNickNamebyId: propTypes.func.isRequired,
   getStatusById: propTypes.func.isRequired,

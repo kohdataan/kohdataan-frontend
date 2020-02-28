@@ -31,7 +31,6 @@ const GroupsContainer = props => {
     fetchChannelsAndInvitations,
     getInvitationsAgain,
     resetChannelInvitations,
-    groupsCoordinates,
     profiles,
     user,
     updateUser,
@@ -121,6 +120,8 @@ const GroupsContainer = props => {
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
         resetChannelInvitations={resetChannelInvitations}
+        profiles={profiles}
+        teams={teams}
       />
       <Groups
         channels={getGroupChannels(getChannelInfoForMyChannels())}
@@ -130,7 +131,7 @@ const GroupsContainer = props => {
         currentUserId={currentUserId}
         updateUser={updateUser}
         tutorialWatched={user.tutorialWatched}
-        groupsCoordinates={groupsCoordinates}
+        teams={teams}
       />
     </>
   )
@@ -152,18 +153,16 @@ GroupsContainer.propTypes = {
   resetChannelInvitations: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   updateUser: PropTypes.func.isRequired,
-  groupsCoordinates: PropTypes.instanceOf(Object),
 }
 
 GroupsContainer.defaultProps = {
   channelSuggestions: [],
   channelSuggestionMembers: {},
-  groupsCoordinates: {},
 }
 
 const mapStateToProps = state => {
   const { currentUserId } = state.entities.users
-  const { teams } = state.entities.teams
+  const { teams } = state.entities
   const { channels } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
@@ -174,8 +173,6 @@ const mapStateToProps = state => {
   const { user } = state
   const channelSuggestions = state.channels.found
   const channelSuggestionMembers = state.channels.members
-  const groupsCoordinates =
-    state.loading.coordinates && state.loading.coordinates.groupsNav
 
   return {
     currentUserId,
@@ -189,7 +186,6 @@ const mapStateToProps = state => {
     channels,
     members,
     myChannels,
-    groupsCoordinates,
   }
 }
 

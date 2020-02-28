@@ -1,10 +1,10 @@
-import React, { memo } from 'react'
-import { Link } from 'react-router-dom'
-import ReactPlayer from 'react-player'
-import ReactAudioPlayer from 'react-audio-player'
-import './styles.scss'
-import propTypes from 'prop-types'
-import ButtonContainer from '../../../ButtonContainer'
+import React, { memo, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import ReactPlayer from "react-player";
+import ReactAudioPlayer from "react-audio-player";
+import "./styles.scss";
+import propTypes from "prop-types";
+import ButtonContainer from "../../../ButtonContainer";
 
 const Message = props => {
   const {
@@ -22,30 +22,66 @@ const Message = props => {
     channelId,
     senderMmUsername,
     iconMemberStatus,
+    isAdmin,
     pinPost,
-    filesData,
-  } = props
+    filesData
+  } = props;
 
+  const [messageText, setMessageText] = useState(text);
   // Adds the text to be used for the date divider
-  const today = new Date().toLocaleDateString()
-  const dateText = dateSent === today ? 'Tänään' : dateSent
+  const today = new Date().toLocaleDateString();
+  const dateText = dateSent === today ? "Tänään" : dateSent;
 
-  // Checks if message is combined user activity message
-  const isSystemCombinedUserActivity = () =>
-    type === 'system_combined_user_activity'
-
+  // Checks if message type is users leaving or joining the channel
+  const isUserLeavingOrJoiningChannel = () => {
+    if (
+      type === "system_join_channel" ||
+      type === "system_leave_channel" ||
+      type === "system_join_team" ||
+      type === "system_leave_team"
+    ) {
+      return true;
+    }
+    return false;
+  };
   // Get message wrapper classes
   const messageWrapperClassList = [
-    'chat-message-wrapper',
-    currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
-  ]
+    "chat-message-wrapper",
+    currentUserId === senderId ? "wrapper-sent" : "wrapper-received",
+    isUserLeavingOrJoiningChannel() && isAdmin
+      ? "content-system-message-admin"
+      : ""
+  ];
 
   // Get message content classes
   const messageContentClassList = [
-    'chat-message-content',
-    currentUserId === senderId ? 'content-sent' : 'content-received',
-    isSystemCombinedUserActivity() ? 'content-system-combined' : '',
-  ]
+    "chat-message-content",
+    currentUserId === senderId ? "content-sent" : "content-received",
+    isUserLeavingOrJoiningChannel() && !isAdmin ? "content-system-message" : ""
+  ];
+
+  useEffect(() => {
+    if (type === "system_join_channel" || type === "system_join_team") {
+      if (senderId === currentUserId) {
+        setMessageText("Sinä liityit kanavalle.");
+      } else if (sender === "Käyttäjä poistunut") {
+        setMessageText(`Käyttäjä poistunut.`);
+      } else {
+        setMessageText(`${sender} liittyi kanavalle.`);
+      }
+    } else if (
+      type === "system_leave_channel" ||
+      type === "system_leave_team"
+    ) {
+      if (senderId === currentUserId) {
+        setMessageText("Sinä poistuit kanavalta.");
+      } else if (sender === "Käyttäjä poistunut") {
+        setMessageText(`Käyttäjä poistunut.`);
+      } else {
+        setMessageText(`${sender} poistui kanavalta.`);
+      }
+    }
+  }, [currentUserId, sender, senderId, type]);
 
   return (
     <>
@@ -56,20 +92,20 @@ const Message = props => {
           <div className="date-divider" />
         </div>
       )}
-      <div className={messageWrapperClassList.join(' ')}>
+      <div className={messageWrapperClassList.join(" ")}>
         <div className="message-outer">
-          {timeSent !== '' ? (
+          {timeSent !== "" ? (
             <div className="chat-message-header-content">
               <span className="chat-message-timestamp">{timeSent}</span>
               {currentUserId !== senderId && !directChannel && (
                 <h3
                   className={`chat-message-sender ${
-                    sender === 'Käyttäjä poistunut'
-                      ? 'chat-message-sender-unknown'
-                      : ''
+                    sender === "Käyttäjä poistunut"
+                      ? "chat-message-sender-unknown"
+                      : ""
                   }`}
                 >
-                  {sender}
+                  {isAdmin ? "Valvoja" : sender}
                 </h3>
               )}
             </div>
@@ -79,118 +115,142 @@ const Message = props => {
           <div
             className={`${
               currentUserId === senderId
-                ? 'message-icon-and-content-sent'
-                : 'message-icon-and-content'
+                ? "message-icon-and-content-sent"
+                : "message-icon-and-content"
             }`}
           >
-            {currentUserId !== senderId && sender !== 'Käyttäjä poistunut' && (
+            {currentUserId !== senderId && sender !== "Käyttäjä poistunut" && (
               <div>
                 <Link
                   to={`/profile/${senderMmUsername}`}
                   className="channel-name-link"
                 >
                   <i aria-hidden="true" title={sender[0]} />
-                  <div
-                    className="label chat-message-sender-icon"
-                    style={{
-                      backgroundImage: `url(
+                  {isAdmin ? (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundColor: "black",
+                        color: "white"
+                      }}
+                    >
+                      K
+                    </div>
+                  ) : (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundImage: `url(
                         ${
                           process.env.REACT_APP_MATTERMOST_URL
                         }/api/v4/users/${senderId}/image?${Date.now()}
-                      )`,
-                    }}
-                  />
+                      )`
+                      }}
+                    />
+                  )}
                 </Link>
                 <div className={iconMemberStatus} />
               </div>
             )}
-            {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
+            {currentUserId !== senderId && sender === "Käyttäjä poistunut" && (
               <div className="chat-message-sender-icon">
                 <i aria-hidden="true" title={sender[0]} />
                 <span className="label">{sender[0]}</span>
               </div>
             )}
             <div className="chat-message-content-field">
-              <div className={messageContentClassList.join(' ')}>
+              <div className={messageContentClassList.join(" ")}>
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes('image') && (
+                  filesData[files[0]].mime_type.includes("image") && (
                     <>
                       <Link to={`${channelId}/${files[0]}`}>
                         <img
                           className="message-image"
-                          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                          src={`${
+                            process.env.REACT_APP_MATTERMOST_URL
+                          }/api/v4/files/${files[0]}/thumbnail`}
                           alt="attachment"
                         />
                       </Link>
                       <p className="image-message-content-text chat-message-content-text">
-                        {text}
+                        {messageText}
                       </p>
                     </>
                   )}
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes('video') && (
+                  filesData[files[0]].mime_type.includes("video") && (
                     <>
                       <div className="player-wrapper">
                         <ReactPlayer
                           className="react-player"
-                          url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                          url={`${
+                            process.env.REACT_APP_MATTERMOST_URL
+                          }/api/v4/files/${files[0]}`}
                           controls
                           config={{
                             file: {
                               attributes: {
-                                controlsList: 'nodownload noremoteplayback',
-                                disablePictureInPicture: true,
-                              },
-                            },
+                                controlsList: "nodownload noremoteplayback",
+                                disablePictureInPicture: true
+                              }
+                            }
                           }}
                           width="100%"
                           height="100%"
                         />
                       </div>
                       <p className="image-message-content-text chat-message-content-text">
-                        {text}
+                        {messageText}
                       </p>
                     </>
                   )}
                 {files &&
                   files[0] &&
-                  filesData[files[0]].mime_type.includes('audio') && (
+                  filesData[files[0]].mime_type.includes("audio") && (
                     <div className="player-wrapper">
                       <ReactAudioPlayer
-                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                        src={`${
+                          process.env.REACT_APP_MATTERMOST_URL
+                        }/api/v4/files/${files[0]}`}
                         controls
                         preload="auto"
                         controlsList="nodownload"
                       />
                     </div>
                   )}
-                {!files && <p className="chat-message-content-text">{text}</p>}
+                {!files && (
+                  <p className="chat-message-content-text">{messageText}</p>
+                )}
               </div>
-              {currentUserId !== senderId && !directChannel && (
-                <ButtonContainer
-                  className="chat-report-message-icon"
-                  onClick={() => pinPost(id)}
-                >
-                  <i className="far fa-flag" aria-hidden="true" />
-                </ButtonContainer>
-              )}
+              {currentUserId !== senderId &&
+                !directChannel &&
+                !isAdmin &&
+                !isUserLeavingOrJoiningChannel() && (
+                  <ButtonContainer
+                    className="chat-report-message-icon"
+                    onClick={() => pinPost(id)}
+                  >
+                    <i className="fas fa-ellipsis-v" aria-hidden="true" />
+                  </ButtonContainer>
+                )}
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 Message.defaultProps = {
-  type: '',
-  senderId: '',
+  type: "",
+  senderId: "",
   files: null,
-  senderMmUsername: '',
-  iconMemberStatus: '',
-}
+  senderMmUsername: "",
+  iconMemberStatus: "",
+  isAdmin: false
+};
 
 Message.propTypes = {
   sender: propTypes.string.isRequired,
@@ -206,9 +266,10 @@ Message.propTypes = {
   channelId: propTypes.string.isRequired,
   senderMmUsername: propTypes.string,
   iconMemberStatus: propTypes.string,
+  isAdmin: propTypes.bool,
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
-  id: propTypes.string.isRequired,
-}
+  id: propTypes.string.isRequired
+};
 
-export default memo(Message)
+export default memo(Message);

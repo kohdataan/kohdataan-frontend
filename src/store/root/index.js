@@ -1,16 +1,11 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
 import { loadMe } from 'mattermost-redux/actions/users'
+import { getTeamMembers, selectTeam } from 'mattermost-redux/actions/teams'
 import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'
-
-export const setComponentCoordinates = (component, coordinates) => {
-  return async dispatch => {
-    dispatch({ type: types.SET_COORDINATES, component, coordinates })
-  }
-}
 
 export const rootLoading = () => {
   return async dispatch => {
@@ -45,12 +40,25 @@ export const initUser = () => {
   }
 }
 
+export const initTeam = () => {
+  return async (dispatch, getState) => {
+    const { teams } = getState().entities.teams
+    const teamId = Object.keys(teams)[0]
+    const team = Object.values(teams)[0]
+    if (teamId && team) {
+      await dispatch(selectTeam(team))
+      await dispatch(getTeamMembers(teamId))
+    }
+  }
+}
+
 export const rootStartUp = () => {
   return async dispatch => {
     await dispatch(rootLoading())
     await dispatch(initMattermostReduxClient())
     await dispatch(getInterestsAction())
     await dispatch(initUser())
+    await dispatch(initTeam())
     await dispatch(rootLoadingReady())
   }
 }

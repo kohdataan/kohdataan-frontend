@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import './styles.scss'
 
 const EmailSmsInfo = props => {
-  const { title, description, guide } = props
+  const { description, guide } = props
 
   return (
     <main role="main" className="email-sms-info-container">
       <h1 className="main-title">Kohdataan</h1>
 
       <div className="email-sms-info-content-container">
-        <h2 className="email-sms-info-title">{title}</h2>
+        <h2 className="email-sms-info-title">Salasanan vaihtaminen</h2>
         <p>{description}</p>
 
         <div className="email-sms-info-input-container">
@@ -24,8 +24,11 @@ const EmailSmsInfo = props => {
           </div>
           <div className="divider" aria-hidden="true" />
           <div className="email-sms-info-link-container">
-            <Link className="email-sms-info-link" to="/">
-              Takaisin sisäänkirjautumiseen
+            <Link className="email-sms-info-link" to="/registrationproblem">
+              Tarvitsen apua salasanan vaihtamisessa.
+            </Link>
+            <Link className="email-sms-info-link" to="/login">
+              Haluan kirjautua sisään.
             </Link>
           </div>
         </div>
@@ -36,7 +39,6 @@ const EmailSmsInfo = props => {
 
 // PropTypes.element allows us to pass in jsx
 EmailSmsInfo.propTypes = {
-  title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   guide: PropTypes.element,
 }

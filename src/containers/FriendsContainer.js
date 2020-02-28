@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
+import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
@@ -16,9 +17,10 @@ const FriendsContainer = props => {
     getPosts,
     fetchFriendsPageData,
     membersInChannel,
-    friendsCoordinates,
+    updateUser,
     user,
     history,
+    statuses,
   } = props
 
   const [directChannels, setDirectChannels] = useState([])
@@ -102,8 +104,11 @@ const FriendsContainer = props => {
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
-        friendsCoordinates={friendsCoordinates}
+        updateUser={updateUser}
         history={history}
+        myUserInfo={user}
+        statuses={statuses}
+        currentUserId={currentUserId}
       />
     </>
   )
@@ -119,11 +124,8 @@ FriendsContainer.propTypes = {
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
-  friendsCoordinates: PropTypes.instanceOf(Object),
-}
-
-FriendsContainer.defaultProps = {
-  friendsCoordinates: {},
+  updateUser: PropTypes.func.isRequired,
+  statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = state => {
@@ -137,8 +139,7 @@ const mapStateToProps = state => {
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
   const { user } = state
-  const friendsCoordinates =
-    state.loading.coordinates && state.loading.coordinates.friendsNav
+  const { statuses } = state.entities.users
 
   return {
     currentUserId,
@@ -150,7 +151,7 @@ const mapStateToProps = state => {
     members,
     myChannels,
     membersInChannel,
-    friendsCoordinates,
+    statuses,
   }
 }
 
@@ -159,6 +160,7 @@ const mapDispatchToProps = dispatch =>
     {
       getPosts: getPostsAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
+      updateUser: updateUserAction,
     },
     dispatch
   )
