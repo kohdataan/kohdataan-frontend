@@ -212,6 +212,7 @@ const Message = props => {
                     </>
                   )}
                 {files &&
+                  !deleted &&
                   files[0] &&
                   filesData[files[0]].mime_type.includes('audio') && (
                     <div className="player-wrapper">
