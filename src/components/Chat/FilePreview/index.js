@@ -62,13 +62,9 @@ const FilePreview = props => {
               rows={1}
               aria-label="message text"
             />
-<<<<<<< HEAD:src/components/Chat/ImagePreview/index.js
             <button type="submit" className="send-message-button" tabIndex="0">
               {}
             </button>
-=======
-            <input type="submit" value="" className="send-message-button" />
->>>>>>> development:src/components/Chat/FilePreview/index.js
           </form>
         </div>
       </div>
