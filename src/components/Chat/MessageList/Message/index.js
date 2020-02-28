@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ReactPlayer from 'react-player'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -22,6 +23,7 @@ const Message = props => {
     iconMemberStatus,
     isAdmin,
     pinPost,
+    filesData,
   } = props
 
   const [messageText, setMessageText] = useState(text)
@@ -157,20 +159,40 @@ const Message = props => {
             )}
             <div className="chat-message-content-field">
               <div className={messageContentClassList.join(' ')}>
-                {files && (
-                  <>
-                    <Link to={`${channelId}/${files[0]}`}>
-                      <img
-                        className="message-image"
-                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                        alt="attachment"
-                      />
-                    </Link>
-                    <p className="image-message-content-text chat-message-content-text">
-                      {messageText}
-                    </p>
-                  </>
-                )}
+                {files &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('image') && (
+                    <>
+                      <Link to={`${channelId}/${files[0]}`}>
+                        <img
+                          className="message-image"
+                          src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
+                          alt="attachment"
+                        />
+                      </Link>
+                      <p className="image-message-content-text chat-message-content-text">
+                        {messageText}
+                      </p>
+                    </>
+                  )}
+                {files &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('video') && (
+                    <>
+                      <div className="player-wrapper">
+                        <ReactPlayer
+                          className="react-player"
+                          url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                          controls
+                          width="100%"
+                          height="100%"
+                        />
+                      </div>
+                      <p className="image-message-content-text chat-message-content-text">
+                        {messageText}
+                      </p>
+                    </>
+                  )}
                 {!files && (
                   <p className="chat-message-content-text">{messageText}</p>
                 )}
@@ -219,6 +241,7 @@ Message.propTypes = {
   iconMemberStatus: propTypes.string,
   isAdmin: propTypes.bool,
   pinPost: propTypes.func.isRequired,
+  filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
 }
 

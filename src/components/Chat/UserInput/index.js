@@ -3,11 +3,11 @@ import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
-import ImagePreview from '../ImagePreview'
+import FilePreview from '../FilePreview'
 import './styles.scss'
 
 const UserInput = props => {
-  const { createPost, channel, uploadFile } = props
+  const { createPost, channel, uploadFile, filesData } = props
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -40,7 +40,7 @@ const UserInput = props => {
   const handleChange = e => {
     setMessage(e.target.value)
   }
-  const addImage = async e => {
+  const addFile = async e => {
     const channelId = channel.id
     const data = new FormData()
     data.append('files', e.target.files[0])
@@ -72,8 +72,8 @@ const UserInput = props => {
         <input
           style={{ display: 'none' }}
           type="file"
-          accept="image/*"
-          onChange={addImage}
+          accept="image/*,video/*"
+          onChange={addFile}
           ref={fileInput}
           aria-label="add image"
         />
@@ -95,7 +95,7 @@ const UserInput = props => {
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
-        <ImagePreview
+        <FilePreview
           channel={channel}
           handleSubmit={handleSubmit}
           createPost={createPost}
@@ -103,6 +103,7 @@ const UserInput = props => {
           handleChange={handleChange}
           fileId={fileId}
           closeModal={closeModal}
+          filesData={filesData}
         />
       </ModalContainer>
     </div>
@@ -113,6 +114,7 @@ UserInput.propTypes = {
   createPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
   channel: PropTypes.instanceOf(Object).isRequired,
+  filesData: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(UserInput)
