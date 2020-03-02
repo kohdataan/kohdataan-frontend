@@ -7,10 +7,9 @@ import './styles.scss'
 import ImageUploader from '../../ImageUploader'
 
 const Picture = props => {
-  const { onChange, hideStep } = props
+  const { onChange, hideStep, image } = props
   const [showFileLoader, setShowFileLoader] = useState(true)
   const [imageFile, setImageFile] = useState(null)
-  const [image, setImage] = useState(null)
   const [imageData, setImageData] = useState(null)
 
   return (
@@ -33,13 +32,13 @@ const Picture = props => {
         <div className="add-user-picture-content-container">
           {showFileLoader ? (
             <ImageUploader
-              onChange={setImageFile}
+              onChange={onChange}
               setShowFileLoader={setShowFileLoader}
               setImageData={setImageData}
             />
           ) : (
             <AvatarEditor
-              image={imageFile}
+              image={image}
               width={115}
               height={115}
               border={50}
@@ -62,12 +61,14 @@ const Picture = props => {
 }
 
 Picture.propTypes = {
+  image: PropTypes.instanceOf(Object),
   onChange: PropTypes.func.isRequired,
   hideStep: PropTypes.bool,
 }
 
 Picture.defaultProps = {
   hideStep: false,
+  image: null,
 }
 
 export default memo(Picture)

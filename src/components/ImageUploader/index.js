@@ -49,7 +49,6 @@ const ImageUploader = props => {
 
   const uploadFile = e => {
     e.preventDefault()
-
     onBeforeFileLoad(e)
     if (!e.target.value) return
 
