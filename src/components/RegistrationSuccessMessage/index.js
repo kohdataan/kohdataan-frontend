@@ -9,22 +9,22 @@ const RegistrationSuccessMessage = () => {
       <div className="registration-success-content-container">
         <p className="registration-success-text">Kiitos rekisteröitymisestä!</p>
         <p>
-          Lähetimme sinulle sähköpostilla linkin, josta pääset kirjautumaan
-          palveluun.
+          Lähetimme sinulle sähköpostilla linkin, josta pääset vahvistamaan
+          sähköpostisi ja kirjautumaan palveluun.
         </p>
         <div className="registration-info-content">
           <ol className="registration-info-list">
             <li>Avaa sähköposti.</li>
             <li>
               Olet saanut viestin, jossa on lähettäjänä &quot;Kohdataan&quot; ja
-              aiheena &quot;Kirjautuminen&quot;.
+              aiheena &quot;Rekisteröityminen&quot;.
             </li>
             <li>
-              Kun klikkaat viestissä olevaa linkkiä, pääset palvelun
-              kirjautumissivulle.
+              Kun klikkaat viestissä olevaa linkkiä, vahvistat sähköpostisi ja
+              pääset palvelun kirjautumissivulle.
             </li>
             <li>
-              Kirjoita sivulle sähköposti ja salasana, jonka annoit
+              Kirjoita sivulle sähköpostisi ja salasana, jonka annoit
               rekisteröitymisessä.
             </li>
             <li>Kun klikkaat &quot;Kirjaudu&quot;, olet palvelussa!</li>
@@ -33,19 +33,18 @@ const RegistrationSuccessMessage = () => {
             Jos et löydä sähköpostistasi viestiä, muista tarkistaa myös
             roskapostikansio.
           </p>
+          <p>
+            Voit myös pyytää, että lähetämme sinulle{' '}
+            <Link className="resend-verification-link" to="/email-verification">
+              vahvistuslinkin uudestaan.
+            </Link>
+          </p>
         </div>
         <hr className="divider" />
-        <div className="resend-verification-link-container">
-          <Link className="resend-verification-link" to="/email-verification">
-            Uudelleenlähettäkää kirjautumislinkki
-          </Link>
-        </div>
-        <div className="problems-with-registration-link-container">
-          <Link
-            className="problems-with-registration-link"
-            to="/registrationproblem"
-          >
-            Tarvitsen apua rekisteröitymisessä
+        <div className="resend-verification-link-container" />
+        <div className="registration-link-container">
+          <Link className="registration-link" to="/registrationproblem">
+            Tarvitsen apua rekisteröitymisessä.
           </Link>
         </div>
       </div>

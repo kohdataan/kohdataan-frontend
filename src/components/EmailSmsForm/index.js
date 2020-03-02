@@ -9,7 +9,7 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest, title, description } = props
+  const { handleRequest, title } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -20,11 +20,14 @@ const EmailSmsForm = props => {
       <div className="email-sms-form-content-container">
         <h2 className="email-sms-form-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
-        <p>{description}</p>
+        <p>
+          Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
+          sähköpostisi ja kirjautumaan sisään.
+        </p>
 
         <div className="email-sms-form-input-container">
           <InputField
-            label="Sähköpostiosoite"
+            label="Sähköposti"
             value={email}
             onChange={e => setEmail(e.target.value)}
             inputClassName="email-sms-form-input-text"
@@ -49,8 +52,11 @@ const EmailSmsForm = props => {
           </ButtonContainer>
 
           <div className="email-sms-form-link-container">
+            <Link className="email-sms-form-link" to="/registrationproblem">
+              Tarvitsen apua kirjautumisessa.
+            </Link>
             <Link className="email-sms-form-link" to="/login">
-              Takaisin sisäänkirjautumiseen
+              Haluan kirjautua sisään.
             </Link>
           </div>
         </div>
@@ -62,7 +68,6 @@ const EmailSmsForm = props => {
 EmailSmsForm.propTypes = {
   handleRequest: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
 }
 
 export default memo(EmailSmsForm)

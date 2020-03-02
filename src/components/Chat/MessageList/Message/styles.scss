@@ -1,5 +1,14 @@
 @import '../../../../styles/colors.scss';
 
+.player-wrapper {
+  position: relative;
+}
+
+.react-player {
+  top: 0;
+  left: 0;
+}
+
 .chat-message-wrapper {
   display: flex;
   justify-content: space-around;
@@ -110,11 +119,12 @@
   justify-content: flex-end;
 }
 
-.content-system-combined {
+.content-system-message {
   background-color: white;
-  color: gray;
+  color: #666464;
   border: none;
   width: 100%;
+  padding: 2px;
 }
 
 .chat-online-status-icon {
@@ -203,6 +213,10 @@
 .chat-report-message-icon {
   background: none;
   border: none;
-  color: $orange;
+  color: gray;
   cursor: grab;
+}
+
+.content-system-message-admin {
+  display: none;
 }

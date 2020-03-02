@@ -3,24 +3,37 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Member from './Member'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const Group = props => {
-  const { channel, getMembers, unreadCount, profiles, currentUserId } = props
+  const {
+    channel,
+    getMembers,
+    unreadCount,
+    profiles,
+    currentUserId,
+    teams,
+  } = props
   const [members, setMembers] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
   const [parsedPurpose, setParsedPurpose] = useState([])
 
   useEffect(() => {
-    if (channel && channel.purpose) {
-      try {
-        const parsed = JSON.parse(channel.purpose)
-        const sorted = Object.keys(parsed).sort((a, b) => parsed[b] - parsed[a])
-        setParsedPurpose(sorted)
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e)
+    const getParsedPurpose = () => {
+      if (channel && channel.purpose) {
+        try {
+          const parsed = JSON.parse(channel.purpose)
+          const sorted = Object.keys(parsed).sort(
+            (a, b) => parsed[b] - parsed[a]
+          )
+          setParsedPurpose(sorted)
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.log(e)
+        }
       }
     }
+    getParsedPurpose()
   }, [channel, setParsedPurpose])
 
   useEffect(() => {
@@ -39,11 +52,16 @@ const Group = props => {
         members &&
         members
           .map(member => profiles[member.user_id])
-          .filter(member => member.delete_at === 0)
+          .filter(member => member && member.delete_at === 0)
+          .filter(
+            member =>
+              !isSystemAdmin(member.id, profiles) &&
+              !isTeamAdmin(member.id, teams)
+          )
       setActiveMembers(activeMembersArr)
     }
     getActiveMembers()
-  }, [members, profiles, setActiveMembers])
+  }, [members, profiles, setActiveMembers, teams])
 
   return (
     <Link
@@ -63,27 +81,33 @@ const Group = props => {
         )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
-            {activeMembers.map(member => (
-              <Member
-                key={`group-${member.id}`}
-                nickname={member.nickname || member.username}
-                currentUserId={currentUserId}
-                userId={member.id}
-              />
-            ))}
+            {activeMembers &&
+              activeMembers.map(member => (
+                <Member
+                  key={`group-${member.id}`}
+                  nickname={member.nickname || member.username}
+                  currentUserId={currentUserId}
+                  userId={member.id}
+                />
+              ))}
           </div>
         ) : (
           <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
       </div>
-      {unreadCount > 0 && (
+      {unreadCount === 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadCount} uutta viestiä`}</li>
+          <li>{`${unreadCount} uusi ilmoitus`}</li>
+        </div>
+      )}
+      {unreadCount > 1 && (
+        <div className="group-unreads-text">
+          <li>{`${unreadCount} uutta ilmoitusta`}</li>
         </div>
       )}
       {unreadCount <= 0 && (
         <div className="group-unreads-text no-unreads">
-          <p>Ei uusia viestejä</p>
+          <p>Ei uusia ilmoituksia</p>
         </div>
       )}
     </Link>
@@ -96,6 +120,7 @@ Group.propTypes = {
   unreadCount: propTypes.number.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Group)

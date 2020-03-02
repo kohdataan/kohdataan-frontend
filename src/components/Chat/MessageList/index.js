@@ -3,10 +3,12 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
 import getUsernameById from '../../../utils/getUsernameById'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const MessageList = props => {
   const {
     posts,
+    teams,
     currentUserId,
     getUserNamebyId,
     directChannel,
@@ -14,6 +16,7 @@ const MessageList = props => {
     profiles,
     getStatusById,
     pinPost,
+    filesData,
   } = props
 
   const getIconMemberStatus = userId =>
@@ -29,7 +32,15 @@ const MessageList = props => {
     let showDate = false
     let showTime = true
     const sender = getUserNamebyId(post.user_id)
-    const dateSent = new Date(post.create_at).toLocaleDateString()
+    const options = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }
+    const dateSent = new Date(post.create_at).toLocaleDateString(
+      'fi-FI',
+      options
+    )
     const timeSent = new Date(post.create_at).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
@@ -60,6 +71,13 @@ const MessageList = props => {
     }
   }
 
+  const isAdmin = id => {
+    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
+      return true
+    }
+    return false
+  }
+
   useEffect(() => {
     // TODO: implement some kind of button to scroll down when there are new messages
     ref.current.scrollTop = ref.current.scrollHeight
@@ -72,16 +90,19 @@ const MessageList = props => {
           posts
             .filter(
               p =>
-                p.type !== 'system_join_channel' &&
-                p.type !== 'system_leave_channel' &&
-                p.type !== 'system_purpose_change'
+                p.type !== 'system_purpose_change' &&
+                (p.type === '' ||
+                  ((p.type === 'system_join_channel' ||
+                    p.type === 'system_leave_channel' ||
+                    p.type === 'system_join_team' ||
+                    p.type === 'system_leave_team') &&
+                    !isAdmin(p.user_id)))
             )
             .map(post => {
               const timestampValues = setTimeStampValues(post)
               return (
                 post &&
-                post.user_id &&
-                !post.type.includes('system') && (
+                post.user_id && (
                   <Message
                     key={post.id}
                     id={post.id}
@@ -99,7 +120,9 @@ const MessageList = props => {
                     channelId={channelId}
                     senderMmUsername={getUsernameById(post.user_id, profiles)}
                     iconMemberStatus={getIconMemberStatus(post.user_id)}
+                    isAdmin={isAdmin(post.user_id)}
                     pinPost={pinPost}
+                    filesData={filesData}
                   />
                 )
               )
@@ -111,6 +134,7 @@ const MessageList = props => {
 
 MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
+  teams: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
   getUserNamebyId: propTypes.func.isRequired,
   directChannel: propTypes.bool.isRequired,
@@ -118,6 +142,7 @@ MessageList.propTypes = {
   profiles: propTypes.instanceOf(Object).isRequired,
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
+  filesData: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(MessageList)

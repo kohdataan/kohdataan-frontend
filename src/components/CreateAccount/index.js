@@ -372,7 +372,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 (errors.phoneNumber.type === 'pattern' ||
                   errors.phoneNumber.type === 'minLength' ||
                   errors.phoneNumber.type === 'maxLength') &&
-                'Tarkista puhelinnumero'}
+                'Tarkista puhelinnumero.'}
             </div>
           </div>
 
@@ -449,7 +449,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 'Kirjoita salasana uudestaan'}
               {errors.passwordConfirm &&
                 errors.passwordConfirm.type === 'validate' &&
-                'Salasanat eivät ole samat'}
+                'Salasanat eivät ole samat.'}
             </div>
           </div>
           <ServiceRulesContainer

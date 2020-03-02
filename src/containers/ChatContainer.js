@@ -48,6 +48,7 @@ const ChatContainer = props => {
     matterMostLogout,
     location,
     pinPost,
+    files,
   } = props
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
@@ -61,9 +62,9 @@ const ChatContainer = props => {
 
   // Get team related channels and members
   useEffect(() => {
-    const teamId = Object.keys(teams)[0]
-    if (teamId) {
-      fetchMyChannelsAndMembers(teamId)
+    const { currentTeamId } = teams
+    if (currentTeamId) {
+      fetchMyChannelsAndMembers(currentTeamId)
     }
   }, [teams, fetchMyChannelsAndMembers])
 
@@ -130,6 +131,7 @@ const ChatContainer = props => {
           channel={currentChannel}
           posts={currentPosts}
           profiles={profiles}
+          teams={teams}
           createPost={createPost}
           getFilesForPost={getFilesForPost}
           uploadFile={uploadFile}
@@ -141,6 +143,7 @@ const ChatContainer = props => {
           handleLogout={handleLogout}
           location={location}
           pinPost={pinPost}
+          filesData={files}
         />
       )}
     </>
@@ -167,17 +170,19 @@ ChatContainer.propTypes = {
   matterMostLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  files: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
   const { currentUserId } = state.entities.users
-  const { teams } = state.entities.teams
+  const { teams } = state.entities
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
   const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
   const { statuses } = state.entities.users
+  const { files } = state.entities.files
 
   return {
     currentUserId,
@@ -188,6 +193,7 @@ const mapStateToProps = (state, ownProps) => {
     posts,
     channels,
     statuses,
+    files,
   }
 }
 

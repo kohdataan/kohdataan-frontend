@@ -54,10 +54,6 @@ const Picture = props => {
           <div className="add-user-picture-text">
             <p>Tämä kuva näkyy muille.</p>
             <p>Voit lisätä kuvan myös myöhemmin.</p>
-            <p>
-              Kuva voi olla formaateissa BMP, JPG tai PNG. Tiedoston maksimikoko
-              on 50MB.
-            </p>
           </div>
         </div>
       </main>

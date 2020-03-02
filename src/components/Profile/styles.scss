@@ -3,14 +3,14 @@
 .profile-container {
   overflow-y: auto;
   overflow-x: hidden;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
   display: flex;
   flex-direction: column;
 }
 
 .profile-header-container {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
   background-color: $background-gray;
@@ -77,4 +77,5 @@
 .start-conversation-button {
   text-align: center;
   padding-top: 30px;
+  display: inline-block;
 }

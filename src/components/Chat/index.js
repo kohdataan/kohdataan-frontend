@@ -11,6 +11,7 @@ import './styles.scss'
 const Chat = props => {
   const {
     channel,
+    teams,
     posts,
     profiles,
     createPost,
@@ -23,11 +24,11 @@ const Chat = props => {
     handleLogout,
     location,
     pinPost,
+    filesData,
   } = props
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
-  const [afterPinModal, setAfterPinModal] = useState(false)
   const [pinPostId, setPinPostId] = useState(null)
   const directChannel = channel.type === 'D'
 
@@ -102,11 +103,6 @@ const Chat = props => {
   const completePinPost = id => {
     pinPost(id)
     closePinPostModal()
-    setAfterPinModal(true)
-  }
-
-  const closeAfterPinModal = () => {
-    setAfterPinModal(false)
   }
 
   return (
@@ -131,6 +127,8 @@ const Chat = props => {
         profiles={profiles}
         getStatusById={getStatusById}
         pinPost={handlePinPost}
+        filesData={filesData}
+        teams={teams}
       />
       {channel.id && (
         <UserInput
@@ -138,6 +136,7 @@ const Chat = props => {
           createPost={createPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
+          filesData={filesData}
         />
       )}
       {showSider && !directChannel && (
@@ -150,6 +149,7 @@ const Chat = props => {
           getStatusById={getStatusById}
           toggleSiderClosedIfOpen={toggleSiderClosedIfOpen}
           channel={channel}
+          teams={teams}
         />
       )}
       <ModalContainer
@@ -170,27 +170,9 @@ const Chat = props => {
             onClick={() => completePinPost(pinPostId)}
             className="report-message-button"
           >
-            <p>Haluan</p>
+            <p>Kyllä</p>
           </ButtonContainer>
         </div>
-      </ModalContainer>
-      <ModalContainer
-        modalIsOpen={afterPinModal}
-        closeModal={closeAfterPinModal}
-        label="report-message-finish-modal"
-      >
-        <i
-          className="fas fa-check-circle"
-          aria-hidden="true"
-          style={{ color: 'green', fontSize: '30px' }}
-        />
-        <h3>Kiitos! Viesti on nyt ilmoitettu asiattomaksi.</h3>
-        <ButtonContainer
-          className="report-message-finish-button"
-          onClick={closeAfterPinModal}
-        >
-          Valmis
-        </ButtonContainer>
       </ModalContainer>
     </div>
   )
@@ -198,6 +180,7 @@ const Chat = props => {
 
 Chat.propTypes = {
   channel: PropTypes.instanceOf(Object).isRequired,
+  teams: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
@@ -210,6 +193,7 @@ Chat.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  filesData: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {
