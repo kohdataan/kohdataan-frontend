@@ -1,10 +1,21 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
 const Member = props => {
   const { nickname, iconColor, userId, currentUserId, key } = props
   const userFirstLetter = nickname[0]
+  const [image, setImage] = useState(null)
+
+  useEffect(() => {
+    const getMemberImage = () => {
+      const url = `${
+        process.env.REACT_APP_MATTERMOST_URL
+      }/api/v4/users/${userId}/image?${Date.now()}`
+      setImage(url)
+    }
+    getMemberImage()
+  }, [userId])
 
   const getTruncatedName = name => {
     let visibleName = name
@@ -23,11 +34,7 @@ const Member = props => {
             className="label chat-message-sender-icon"
             style={{
               backgroundColor: iconColor,
-              backgroundImage: `url(
-                ${
-                  process.env.REACT_APP_MATTERMOST_URL
-                }/api/v4/users/${userId}/image?${Date.now()}
-              )`,
+              backgroundImage: `url(${image})`,
             }}
           >
             {' '}
