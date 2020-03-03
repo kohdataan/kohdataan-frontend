@@ -25,8 +25,14 @@ const Friends = props => {
   const steps = [
     {
       target: '.nav-link-Kaverit',
-      content:
-        'Voit viestitellä kavereiden kanssa kahdestaan. Löydät kaverit täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Voit viestitellä kavereiden kanssa kahdestaan.
+          </p>
+          <p className="tutorial-text">Löydät kaverit täältä.</p>
+        </>
+      ),
       disableBeacon: true,
     },
   ]

@@ -6,6 +6,7 @@ import './styles.scss'
 
 const Groups = props => {
   const {
+    history,
     channels,
     teams,
     getMembers,
@@ -21,8 +22,14 @@ const Groups = props => {
   const steps = [
     {
       target: '.nav-link-Ryhmät',
-      content:
-        'Voit jutella ja tutustua uusiin ihmisiin ryhmissä. Löydät ryhmät täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
+          </p>
+          <p className="tutorial-text">Löydät ryhmät täältä.</p>
+        </>
+      ),
       disableBeacon: true,
     },
   ]
@@ -46,7 +53,11 @@ const Groups = props => {
         ))}
       </div>
       {!tutorialWatched && (
-        <Tutorial steps={steps} updateTutorialWatched={updateTutorialWatched} />
+        <Tutorial
+          steps={steps}
+          updateTutorialWatched={updateTutorialWatched}
+          history={history}
+        />
       )}
     </div>
   )
@@ -54,6 +65,7 @@ const Groups = props => {
 
 Groups.defaultProps = {
   profiles: {},
+  history: null,
 }
 
 Groups.propTypes = {
@@ -65,6 +77,7 @@ Groups.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
+  history: PropTypes.instanceOf(Object),
 }
 
 export default memo(Groups)
