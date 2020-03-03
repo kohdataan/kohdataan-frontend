@@ -1,5 +1,4 @@
 import React, { memo, useState } from 'react'
-import EXIF from 'exif-js'
 import propTypes from 'prop-types'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
@@ -7,24 +6,12 @@ import CameraIconPath from '../../assets/camera-add-solid.svg'
 import './styles.scss'
 
 const ImageUploader = props => {
-  const { onChange, setShowFileLoader, setImageData } = props
+  const { onChange, setShowFileLoader } = props
   const [openModal, setOpenModal] = useState(false)
 
   const fileInput = React.createRef()
 
   const onBeforeFileLoad = e => {
-    // get Exif data for file if it exists.
-    // Exif data is used to rotate the image to the correct orientation.
-    const file = e.target.files[0]
-    if (file && file.name) {
-      EXIF.getData(file, function() {
-        const exifData = EXIF.pretty(this)
-        if (exifData) {
-          const orientationTag = EXIF.getTag(this, 'Orientation')
-          setImageData(orientationTag)
-        }
-      })
-    }
     if (e.target.files[0].size > 50000000) {
       setOpenModal(true)
       e.target.value = ''
@@ -101,7 +88,6 @@ const ImageUploader = props => {
 ImageUploader.propTypes = {
   onChange: propTypes.func.isRequired,
   setShowFileLoader: propTypes.func.isRequired,
-  setImageData: propTypes.func.isRequired,
 }
 
 export default memo(ImageUploader)

@@ -5,7 +5,6 @@
   "dependencies": {
     "clone": "^2.1.2",
     "core-js": "^2.6.11",
-    "exif-js": "^2.3.0",
     "history": "^4.10.1",
     "jest-fetch-mock": "^3.0.1",
     "localforage": "^1.7.3",
@@ -14,6 +13,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
+    "rc-slider": "^9.2.2",
     "react": "^16.12.0",
     "react-autosize-textarea": "^7.0.0",
     "react-avatar-edit": "^0.8.3",

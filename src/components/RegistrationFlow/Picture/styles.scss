@@ -4,6 +4,8 @@
 
 .add-user-picture-picker {
   image-orientation: from-image;
+  width: 215px;
+  height: 215px;
 }
 
 .add-user-picture-title-container {
@@ -29,4 +31,31 @@
 
 p .add-user-picture-content-container {
   text-align: center;
+}
+
+.image-preview-container {
+  position: relative;
+}
+
+.close-preview-button {
+  font-size: 1.5em;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.rotate-btn {
+  font-size: 2em;
+}
+
+.zoom-control-sign {
+  font-size: 1.3em;
+  margin: 0 20px;
+}
+
+.zoom-controls-container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
 }
