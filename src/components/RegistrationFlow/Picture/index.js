@@ -102,7 +102,7 @@ const Picture = props => {
                   className="icon-btn rotate-btn"
                   onClick={handleRotate}
                 >
-                  <i className="fas fa-sync-alt" />
+                  <i className="fas fa-retweet" />
                 </ButtonContainer>
                 <br />
                 <div className="zoom-controls-container">
@@ -141,7 +141,7 @@ const Picture = props => {
             </div>
           )}
           <div className="add-user-picture-text">
-            <p>Tämä kuva näkyy muille.</p>
+            <p className="add-user-topmost-text">Tämä kuva näkyy muille.</p>
             <p>Voit lisätä kuvan myös myöhemmin.</p>
           </div>
         </div>

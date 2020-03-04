@@ -8,6 +8,10 @@
   height: 215px;
 }
 
+.add-user-topmost-text {
+  margin-top: 10px;
+}
+
 .add-user-picture-title-container {
   display: flex;
   flex-direction: row;
@@ -46,6 +50,7 @@ p .add-user-picture-content-container {
 
 .rotate-btn {
   font-size: 2em;
+  margin: 10px 0;
 }
 
 .zoom-control-sign {
