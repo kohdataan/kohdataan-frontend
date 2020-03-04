@@ -61,6 +61,7 @@ const LogInContainer = props => {
       user={user}
       uuid={uuidValid}
       linkError={error}
+      textToAdd={history.location.state.textToAdd}
     />
   )
 }
@@ -77,10 +78,12 @@ LogInContainer.propTypes = {
   addUserToState: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+  textToAdd: PropTypes.string,
 }
 
 LogInContainer.defaultProps = {
   match: null,
+  textToAdd: null,
 }
 
 const mapStateToProps = state => {

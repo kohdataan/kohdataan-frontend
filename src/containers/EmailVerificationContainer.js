@@ -25,7 +25,7 @@ const EmailVerificationContainer = props => {
     <EmailSmsForm
       handleRequest={handleVerifyRequest}
       title="Vahvistuslinkin lähettäminen uudelleen"
-      description="Lähetämme sinulle linkin, josta pääset vahvistamaan sähköpostisi."
+      pagePurpose="verifyEmail"
     />
   )
 }

@@ -9,7 +9,7 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest, title } = props
+  const { handleRequest, title, pagePurpose } = props
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
@@ -20,10 +20,17 @@ const EmailSmsForm = props => {
       <div className="email-sms-form-content-container">
         <h2 className="email-sms-form-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
-        <p>
-          Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
-          sähköpostisi ja kirjautumaan sisään.
-        </p>
+        {pagePurpose === 'changePassword' ? (
+          <p>
+            Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen
+            salasanan.
+          </p>
+        ) : (
+          <p>
+            Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
+            sähköpostisi ja kirjautumaan sisään.
+          </p>
+        )}
 
         <div className="email-sms-form-input-container">
           <InputField
@@ -68,6 +75,7 @@ const EmailSmsForm = props => {
 EmailSmsForm.propTypes = {
   handleRequest: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  pagePurpose: PropTypes.string.isRequired,
 }
 
 export default memo(EmailSmsForm)

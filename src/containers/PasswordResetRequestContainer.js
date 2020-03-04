@@ -23,6 +23,7 @@ const PasswordResetRequestContainer = props => {
     <EmailSmsForm
       handleRequest={handleResetRequest}
       title="Salasanan vaihtaminen"
+      pagePurpose="changePassword"
     />
   )
 }

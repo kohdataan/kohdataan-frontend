@@ -15,10 +15,17 @@ const PasswordResetPageContainer = props => {
     const data = { uuid, password: password.password }
     await API.setNewPassword(data).then(resp => {
       if (!resp.success) {
-        alert('Resetointilinkki on joko vanhentunut, käytetty tai väärä.')
+        history.push({
+          state: {
+            textToAdd:
+              'Resetointilinkki on joko vanhentunut, käytetty tai väärä.',
+          },
+        })
       } else {
-        alert('Salasana vaihdettu onnistuneesti.')
-        history.push('/')
+        history.push({
+          pathname: '/login',
+          state: { textToAdd: 'Salasana vaihdettu onnistuneesti.'},
+        })
       }
     })
   }
