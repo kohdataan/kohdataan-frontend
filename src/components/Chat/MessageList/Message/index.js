@@ -70,10 +70,8 @@ const Message = props => {
     if (type === 'system_join_channel' || type === 'system_join_team') {
       if (senderId === currentUserId) {
         setMessageText('Sinä liityit kanavalle.')
-      } else if (sender === 'Käyttäjä poistunut') {
-        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} liittyi kanavalle.`)
+        setMessageText(`Käyttäjä liittyi kanavalle.`)
       }
     } else if (
       type === 'system_leave_channel' ||
@@ -81,10 +79,8 @@ const Message = props => {
     ) {
       if (senderId === currentUserId) {
         setMessageText('Sinä poistuit kanavalta.')
-      } else if (sender === 'Käyttäjä poistunut') {
-        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} poistui kanavalta.`)
+        setMessageText(`Käyttäjä poistui kanavalta.`)
       }
     }
   }, [currentUserId, sender, senderId, type])
@@ -106,7 +102,7 @@ const Message = props => {
               {currentUserId !== senderId && !directChannel && (
                 <h3
                   className={`chat-message-sender ${
-                    sender === 'Käyttäjä poistunut'
+                    sender === 'Poistunut käyttäjä'
                       ? 'chat-message-sender-unknown'
                       : ''
                   }`}
@@ -125,7 +121,7 @@ const Message = props => {
                 : 'message-icon-and-content'
             }`}
           >
-            {currentUserId !== senderId && sender !== 'Käyttäjä poistunut' && (
+            {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
               <div>
                 <Link
                   to={`/profile/${senderMmUsername}`}
@@ -158,10 +154,11 @@ const Message = props => {
                 <div className={iconMemberStatus} />
               </div>
             )}
-            {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
-              <div className="chat-message-sender-icon">
-                <i aria-hidden="true" title={sender[0]} />
-                <span className="label">{sender[0]}</span>
+            {currentUserId !== senderId && sender === 'Poistunut käyttäjä' && (
+              <div className="deleted-user-icon-container">
+                <div className="chat-message-sender-icon">
+                  <i className="fas fa-circle deleted-user-chat-icon" />
+                </div>
               </div>
             )}
             <div className="chat-message-content-field">

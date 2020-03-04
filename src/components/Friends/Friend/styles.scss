@@ -1,7 +1,8 @@
 @import '../../../styles/colors.scss';
 
 .blocked-icon {
-  margin-right: 10px;
+  margin-right: 18px;
+  font-size: 1.8em;
 }
 .block-user-icon {
   height: 100%;
@@ -29,6 +30,11 @@
     margin-bottom: 5px;
     color: grey;
   }  
+}
+.deleted-user-icon {
+  font-size: 1.8em;
+  color: gray;
+  margin-right: 5px;
 }
 .friend-box-container {
   width: 100%;
