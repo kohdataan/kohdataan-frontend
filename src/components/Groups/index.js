@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Group from './Group'
 import Tutorial from '../Tutorial'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
 const Groups = props => {
@@ -19,6 +20,10 @@ const Groups = props => {
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
+  const goToPreviousTutorial = () => {
+    history.push('/friends')
+  }
+
   const steps = [
     {
       target: '.nav-link-Ryhmät',
@@ -28,6 +33,12 @@ const Groups = props => {
             Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
           </p>
           <p className="tutorial-text">Löydät ryhmät täältä.</p>
+          <ButtonContainer
+            className="button groups-tutorial-btn"
+            onClick={goToPreviousTutorial}
+          >
+            Edellinen
+          </ButtonContainer>
         </>
       ),
       disableBeacon: true,
