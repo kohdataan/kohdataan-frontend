@@ -154,7 +154,7 @@ const Chat = props => {
       )}
       {channel.id && getDeleteAt() !== 0 && directChannel && (
         <div className="inactive-userinput-field">
-          <p>Et voi lähettää viestiä poistuneelle käyttäjälle</p>
+          <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
         </div>
       )}
       {showSider && !directChannel && (
