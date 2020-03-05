@@ -13,7 +13,41 @@ const FilePreview = props => {
     fileId,
     closeModal,
     filesData,
+    orientation,
   } = props
+
+  const getOrientationClassName = () => {
+    let className
+    switch (orientation) {
+      case 2:
+        className = 'flip'
+        break
+      case 3:
+        className = 'rotate-180'
+        break
+      case 4:
+        className = 'flip-and-rotate-180'
+        break
+      case 5:
+        className = 'flip-and-rotate-270'
+        break
+      case 6:
+        className = 'rotate-90'
+        break
+      case 7:
+        className = 'flip-and-rotate-90'
+        break
+      case 8:
+        className = 'rotate-270'
+        break
+      default:
+        className = ''
+        break
+    }
+    return className
+  }
+
+  const imageContentClassList = ['preview-image', getOrientationClassName()]
 
   return (
     <main className="image-preview-content">
@@ -26,7 +60,7 @@ const FilePreview = props => {
         </ButtonContainer>
         {fileId && filesData[fileId].mime_type.includes('image') && (
           <img
-            className="preview-image"
+            className={imageContentClassList.join(' ')}
             src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
             alt="attachment"
             width="100%"
@@ -79,10 +113,12 @@ FilePreview.propTypes = {
   fileId: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   filesData: PropTypes.instanceOf(Object).isRequired,
+  orientation: PropTypes.number,
 }
 
 FilePreview.defaultProps = {
   message: '',
+  orientation: 0,
 }
 
 export default memo(FilePreview)
