@@ -5,6 +5,7 @@ import ViewImage from '../components/Chat/ViewImage'
 
 const ViewImageContainer = props => {
   const { history, match } = props
+
   return <ViewImage history={history} match={match} />
 }
 
