@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Group from './Group'
@@ -16,7 +17,7 @@ const Groups = props => {
     currentUserId,
     tutorialWatched,
     updateUser,
-    getPosts,
+    posts,
   } = props
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
@@ -61,7 +62,7 @@ const Groups = props => {
             unreadCount={getUnreadCount(channel.id)}
             currentUserId={currentUserId}
             teams={teams}
-            getPosts={getPosts}
+            posts={posts}
           />
         ))}
       </div>
@@ -90,7 +91,7 @@ Groups.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
-  getPosts: PropTypes.func.isRequired,
+  posts: PropTypes.instanceOf(Object).isRequired,
   history: PropTypes.instanceOf(Object),
 }
 

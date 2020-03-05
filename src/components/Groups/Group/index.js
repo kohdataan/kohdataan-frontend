@@ -13,14 +13,13 @@ const Group = props => {
     profiles,
     currentUserId,
     teams,
-    getPosts,
+    posts,
   } = props
 
   const [members, setMembers] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
   const [parsedPurpose, setParsedPurpose] = useState([])
   const [unreadPosts, setUnreadPosts] = useState([])
-  const [posts, setPosts] = useState({})
 
   useEffect(() => {
     const getParsedPurpose = () => {
@@ -68,30 +67,25 @@ const Group = props => {
   }, [members, profiles, setActiveMembers, teams])
 
   useEffect(() => {
-    // Get channel posts
-    const fetchPosts = async () => {
-      if (channel && channel.id) {
-        const channelPosts = await getPosts(channel.id)
-        setPosts(channelPosts.data.posts)
-      }
-    }
-    fetchPosts()
-  }, [channel, getPosts])
-
-  // get unread posts for channel
-  useEffect(() => {
-    const getUnreadPosts = async () => {
-      if (unreadCount && unreadCount > 0 && posts) {
-        const beginIndex = Object.keys(posts).length - unreadCount
-        const getUnreadMessages = Object.values(posts)
-          .sort((p1, p2) => p1.create_at - p2.create_at)
-          .slice(beginIndex)
-        if (getUnreadMessages)
-          setUnreadPosts(getUnreadMessages.filter(p => p.type === '').length)
+    const getUnreadPosts = () => {
+      if (unreadCount && unreadCount > 0 && posts && channel) {
+        const channelPosts =
+          posts &&
+          Object.values(posts).filter(item => item.channel_id === channel.id)
+        const beginIndex = Object.keys(channelPosts).length - unreadCount
+        const sorted =
+          channelPosts &&
+          channelPosts
+            .sort((p1, p2) => p1.create_at - p2.create_at)
+            .slice(beginIndex)
+        const filtered = sorted && sorted.filter(p => p.type === '')
+        if (filtered && filtered.length) {
+          setUnreadPosts(filtered.length)
+        }
       }
     }
     getUnreadPosts()
-  }, [unreadCount, posts])
+  }, [posts, unreadCount, channel])
 
   return (
     <Link
@@ -151,7 +145,7 @@ Group.propTypes = {
   profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
-  getPosts: propTypes.instanceOf(Object).isRequired,
+  posts: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Group)
