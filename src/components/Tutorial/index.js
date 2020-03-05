@@ -8,7 +8,7 @@ const Tutorial = props => {
   const locale = {
     back: 'Edellinen',
     close: 'Sulje',
-    last: 'Valmis',
+    last: history.location.pathname === '/' ? 'Valmis' : 'Seuraava',
     next: 'Seuraava',
     skip: 'Ohita',
   }
@@ -21,6 +21,7 @@ const Tutorial = props => {
       fontSize: '16px',
       borderRadius: '30px',
       padding: '5px 10px',
+      marginRight: '30px',
     },
     buttonBack: {
       marginLeft: 'auto',
