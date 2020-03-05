@@ -6,6 +6,7 @@ import EmailSmsForm from '../components/EmailSmsForm'
 const EmailVerificationContainer = props => {
   const { history } = props
   const [apiError, setApiError] = useState(false)
+  const [text, setText] = useState('')
 
   const handleVerifyRequest = async resetInfo => {
     const formattedInfo = {
@@ -16,8 +17,10 @@ const EmailVerificationContainer = props => {
     if (resp.success) {
       history.push('/registration-success')
     } else if (resp.message === 'This account is already verified') {
-      alert('Sähköposti on jo vahvistettu.')
+      setText('Sähköposti on jo vahvistettu.')
+      setApiError(true)
     } else {
+      setText('')
       setApiError(true)
     }
   }
@@ -28,6 +31,8 @@ const EmailVerificationContainer = props => {
       title="Vahvistuslinkin lähettäminen uudelleen"
       pagePurpose="verifyEmail"
       apiError={apiError}
+      text={text}
+      setText={setText}
     />
   )
 }

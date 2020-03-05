@@ -3,25 +3,37 @@ import PropTypes from 'prop-types'
 import useForm from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import ValidatedInputField from '../ValidatedInputField'
+import ModalContainer from '../ModalContainer'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
 // This component needs a function that takes in an object that contains email and phonenumber,
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { title, pagePurpose, handleRequest, apiError } = props
+  const { title, pagePurpose, handleRequest, apiError, text, setText } = props
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [showModal, setShowModal] = useState(false)
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
   useEffect(() => {
     const setApiErrors = () => {
-      if (apiError) setError('email', 'loginError')
+      if (apiError && text === '') {
+        setError('email', 'loginError')
+      } else if (apiError && text !== '') {
+        setShowModal(true)
+      }
     }
     setApiErrors()
-  }, [apiError])
+  }, [apiError, text])
 
   const onSubmit = async data => {
     await handleRequest(data.email.trim().toLowerCase())
+  }
+
+  const closeModal = () => {
+    setText('')
+    setShowModal(false)
   }
 
   return (
@@ -44,6 +56,21 @@ const EmailSmsForm = props => {
         )}
 
         <div className="email-sms-form-input-container">
+          <ModalContainer
+            modalIsOpen={showModal}
+            closeModal={closeModal}
+            label="Email already confirmed"
+          >
+            <div>
+              <h3 className="edit-profile-modal-text">{text}</h3>
+              <ButtonContainer
+                className="icon-btn edit-profile-icon-btn"
+                onClick={closeModal}
+              >
+                <div className="accept-rules-go-back-button go-back-button" />
+              </ButtonContainer>
+            </div>
+          </ModalContainer>
           <form
             className="email-sms-input-fields-container"
             onSubmit={handleSubmit(onSubmit)}
@@ -108,10 +135,14 @@ EmailSmsForm.propTypes = {
   title: PropTypes.string.isRequired,
   pagePurpose: PropTypes.string.isRequired,
   apiError: PropTypes.bool,
+  text: PropTypes.string,
+  setText: PropTypes.func,
 }
 
 EmailSmsForm.defaultProps = {
   apiError: false,
+  text: '',
+  setText: null,
 }
 
 export default memo(EmailSmsForm)

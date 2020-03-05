@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React, { memo } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
