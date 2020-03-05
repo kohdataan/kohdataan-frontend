@@ -177,8 +177,8 @@
 }
 
 .chat-message-sender-unknown {
-  color: #9b9b9b;
-  font-size: 16px;
+  color: #666464;
+  font-size: 18px;
 }
 
 .chat-message-sender-icon {
@@ -201,6 +201,11 @@
   margin-block-end: 0em;
 }
 
+.deleted-user-icon-container {
+  margin-left: -5px;
+  margin-right: 5px;
+}
+
 .image-message-content-text {
   margin-top: 0.5em;
 }
@@ -213,10 +218,15 @@
 .chat-report-message-icon {
   background: none;
   border: none;
-  color: gray;
+  color:  gray;
   cursor: grab;
 }
 
 .content-system-message-admin {
   display: none;
+}
+
+.deleted-user-chat-icon {
+  font-size: 1.4em;
+  color:  #bbb;
 }

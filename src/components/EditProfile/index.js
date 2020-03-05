@@ -1,6 +1,7 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import ModalContainer from '../ModalContainer'
 import Picture from '../RegistrationFlow/Picture'
 import Description from '../RegistrationFlow/Description'
 import Nickname from '../RegistrationFlow/Nickname'
@@ -26,6 +27,20 @@ const EditProfile = props => {
     value: myUserInfo.location,
   })
   const [img, setImg] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const checkForErrors = () => {
+      if (error) setShowModal(true)
+    }
+    checkForErrors()
+  }, [error])
+
+  const closeModal = () => {
+    setShowModal(false)
+    setError(false)
+  }
 
   const handleSave = () => {
     handleEditReady(
@@ -40,10 +55,25 @@ const EditProfile = props => {
 
   return (
     <main className="profile-edit-container">
+      <ModalContainer
+        modalIsOpen={showModal}
+        closeModal={closeModal}
+        label="File size exceeded"
+      >
+        <div>
+          <h3 className="edit-profile-modal-text">Tiedosto on liian suuri!</h3>
+          <ButtonContainer
+            className="icon-btn edit-profile-icon-btn"
+            onClick={closeModal}
+          >
+            <div className="go-back-button" />
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
       <EditTitle text="Muokkaa profiiliasi" history={history} />
       <div className="edit-wrapper">
         <div className="edit-profilepic">
-          <Picture hideStep onChange={setImg} />
+          <Picture hideStep onChange={setImg} setError={setError} />
         </div>
         <div className="edit-nickname">
           <Nickname
