@@ -1,6 +1,7 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
+import EXIF from 'exif-js'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import FilePreview from '../FilePreview'
@@ -11,10 +12,26 @@ const UserInput = props => {
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [orientation, setOrientation] = useState(0)
+
+  const getExifData = file => {
+    // get Exif data for file if it exists.
+    // Exif data is used to rotate the image to the correct orientation.
+    if (file) {
+      EXIF.getData(file, function() {
+        const exifData = EXIF.pretty(this)
+        if (exifData) {
+          const orientationTag = EXIF.getTag(this, 'Orientation')
+          setOrientation(orientationTag)
+        }
+      })
+    }
+  }
 
   const closeModal = () => {
     setModalIsOpen(false)
     setFileId('')
+    setOrientation(0)
     setMessage('')
   }
   const fileInput = React.createRef()
@@ -43,6 +60,7 @@ const UserInput = props => {
   const addFile = async e => {
     const channelId = channel.id
     const data = new FormData()
+    getExifData(e.target.files[0])
     data.append('files', e.target.files[0])
     data.append('channel_id', channelId)
     const res = await uploadFile(channelId, null, null, data)
@@ -104,6 +122,7 @@ const UserInput = props => {
           fileId={fileId}
           closeModal={closeModal}
           filesData={filesData}
+          orientation={orientation}
         />
       </ModalContainer>
     </div>
