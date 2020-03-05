@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
 import Tutorial from '../Tutorial'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
 const Friends = props => {
@@ -22,11 +23,27 @@ const Friends = props => {
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
+  const goToPreviousTutorial = () => {
+    history.push('/me')
+  }
+
   const steps = [
     {
       target: '.nav-link-Kaverit',
-      content:
-        'Voit viestitellä kavereiden kanssa kahdestaan. Löydät kaverit täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Voit viestitellä kavereiden kanssa kahdestaan.
+          </p>
+          <p className="tutorial-text">Löydät kaverit täältä.</p>
+          <ButtonContainer
+            className="button friends-tutorial-btn"
+            onClick={goToPreviousTutorial}
+          >
+            Edellinen
+          </ButtonContainer>
+        </>
+      ),
       disableBeacon: true,
     },
   ]

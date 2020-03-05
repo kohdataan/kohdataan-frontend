@@ -55,7 +55,7 @@
   @media screen and (min-width: 960px) {
     margin-right: 20px;
   }
-} 
+}
 
 .send-image-attachment-button {
   width: 1.7em;
@@ -75,8 +75,8 @@
   width: 1.7em;
   height: 1.7em;
   background-repeat: no-repeat;
+  background-image: url('../../../assets/microphone-light.svg');
   background-position: center;
-  background-image: url('../../../assets/microphone-light-inactive.svg');
   border: none;
   align-self: center;
 }
@@ -93,9 +93,9 @@
   margin: 0;
   border-radius: 50%;
   border: 0;
-    &:hover {
-      cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
   @media screen and (min-width: 360px) {
     margin-right: 5px;
   }
@@ -110,5 +110,4 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  
 }
