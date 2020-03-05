@@ -11,7 +11,15 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { title, pagePurpose, handleRequest, apiError, text, setText } = props
+  const {
+    title,
+    pagePurpose,
+    handleRequest,
+    apiError,
+    setApiError,
+    text,
+    setText,
+  } = props
   const [phoneNumber, setPhoneNumber] = useState('')
   const [showModal, setShowModal] = useState(false)
   const { register, handleSubmit, errors, setError, clearError } = useForm()
@@ -33,6 +41,7 @@ const EmailSmsForm = props => {
 
   const closeModal = () => {
     setText('')
+    setApiError(false)
     setShowModal(false)
   }
 
@@ -67,7 +76,7 @@ const EmailSmsForm = props => {
                 className="icon-btn edit-profile-icon-btn"
                 onClick={closeModal}
               >
-                <div className="accept-rules-go-back-button go-back-button" />
+                <div className="go-back-button" />
               </ButtonContainer>
             </div>
           </ModalContainer>
@@ -135,12 +144,14 @@ EmailSmsForm.propTypes = {
   title: PropTypes.string.isRequired,
   pagePurpose: PropTypes.string.isRequired,
   apiError: PropTypes.bool,
+  setApiError: PropTypes.func,
   text: PropTypes.string,
   setText: PropTypes.func,
 }
 
 EmailSmsForm.defaultProps = {
   apiError: false,
+  setApiError: null,
   text: '',
   setText: null,
 }

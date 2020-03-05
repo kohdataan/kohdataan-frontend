@@ -66,7 +66,7 @@ const EditProfile = props => {
             className="icon-btn edit-profile-icon-btn"
             onClick={closeModal}
           >
-            <div className="accept-rules-go-back-button go-back-button" />
+            <div className="go-back-button" />
           </ButtonContainer>
         </div>
       </ModalContainer>

@@ -31,6 +31,7 @@ const EmailVerificationContainer = props => {
       title="Vahvistuslinkin lähettäminen uudelleen"
       pagePurpose="verifyEmail"
       apiError={apiError}
+      setApiError={setApiError}
       text={text}
       setText={setText}
     />
