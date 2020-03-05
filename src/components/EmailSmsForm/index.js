@@ -33,7 +33,7 @@ const EmailSmsForm = props => {
       }
     }
     setApiErrors()
-  }, [apiError, text])
+  }, [apiError, text, setError])
 
   const onSubmit = async data => {
     await handleRequest(data.email.trim().toLowerCase())

@@ -26,7 +26,7 @@ const PasswordResetPageContainer = props => {
       })
     }
     checkIfLinkIsUsed()
-  }, [])
+  }, [uuid, history])
 
   const handleNewPassword = async password => {
     const data = { uuid, password: password.password }
