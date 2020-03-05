@@ -1,3 +1,17 @@
+@import '../../styles/colors.scss';
+
+.inactive-userinput-field {
+  height: 10%;
+  width: 100%;
+  background-color: $background-gray;
+  position: fixed;
+  bottom: 0;
+  padding: 0 10px;
+  @media screen and (min-width: 960px) {
+    max-width: 960px;
+  }
+}
+
 .report-message-buttons-wrapper {
   display: flex;
   flex-direction: row;

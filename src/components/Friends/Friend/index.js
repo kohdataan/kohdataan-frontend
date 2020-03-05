@@ -217,20 +217,39 @@ const Friend = props => {
   }
   if (user.delete_at !== 0) {
     return (
-      <div className="friend-box-container">
-        <div className="friend-icon-box">
-          <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
-        </div>
-        <div className="friend-messages-content">
-          <div className="friend-box-content">
-            <div className="friend-header">
-              <h2 className="deleted-user-nickname">{user.nickname}</h2>
-            </div>
-            <div className="deleted-user-message text-content">
-              Käyttäjä on poistunut palvelusta
-            </div>
+      <div>
+        <div className="friend-box-container">
+          <div className="friend-icon-box">
+            <i className="fas fa-circle deleted-user-icon" />
           </div>
-          <div className="deleted-user-empty-fields" />
+          <Link
+            className="friend-box"
+            to={blocked ? `/friends` : `/chat/${channel.id}`}
+          >
+            <div className="deleted-user-messages-content friend-messages-content">
+              <div className="friend-box-content">
+                <div className="friend-header">
+                  <h2 className="deleted-user-nickname">Poistunut käyttäjä</h2>
+                </div>
+                <div className="deleted-user-message text-content">
+                  <div
+                    className={
+                      blocked
+                        ? 'blocked-friend-text-content text-content'
+                        : 'friend-text-content text-content'
+                    }
+                  >
+                    {message && !blocked ? (
+                      <>{message}</>
+                    ) : (
+                      <TextLine className="text-content" />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="deleted-user-empty-fields" />
+            </div>
+          </Link>
         </div>
       </div>
     )

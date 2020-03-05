@@ -100,15 +100,17 @@ const UserInput = props => {
           ref={fileInput}
           aria-label="add image"
         />
-        <ButtonContainer className="icon-btn" onClick={clickFileInput}>
-          <div className="send-image-attachment-button" />
-        </ButtonContainer>
-        <ButtonContainer className="icon-btn" onClick={startSendingAudio}>
-          <div className="send-voice-attachment-button" />
-        </ButtonContainer>
-        <button type="submit" className="send-message-button" tabIndex="0">
-          {}
-        </button>
+        <div className="userinput-buttons">
+          <ButtonContainer className="icon-btn" onClick={clickFileInput}>
+            <div className="send-image-attachment-button" />
+          </ButtonContainer>
+          <ButtonContainer className="icon-btn" onClick={startSendingAudio}>
+            <div className="send-voice-attachment-button" />
+          </ButtonContainer>
+          <button type="submit" className="send-message-button" tabIndex="0">
+            {}
+          </button>
+        </div>
       </form>
       <ModalContainer
         modalIsOpen={modalIsOpen}

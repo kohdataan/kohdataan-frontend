@@ -51,7 +51,7 @@ const Chat = props => {
       }
       return visibleName
     }
-    return 'Käyttäjä poistunut'
+    return 'Poistunut käyttäjä'
   }
 
   const getStatusById = id => {
@@ -90,6 +90,18 @@ const Chat = props => {
     return null
   }
 
+  const getDeleteAt = () => {
+    if (directChannel) {
+      const friend = members.find(member => member.user_id !== currentUserId)
+      const mmid = friend && friend.user_id
+      const mmProfile = Object.values(profiles).find(
+        profile => profile.id === mmid
+      )
+      return mmProfile && mmProfile.delete_at
+    }
+    return null
+  }
+
   const handlePinPost = id => {
     setPinPostModalIsOpen(true)
     setPinPostId(id)
@@ -115,6 +127,7 @@ const Chat = props => {
         direct={directChannel}
         handleLogout={handleLogout}
         location={location}
+        deleted={getDeleteAt()}
       />
       <MessageList
         posts={posts}
@@ -138,6 +151,11 @@ const Chat = props => {
           currentUserId={currentUserId}
           filesData={filesData}
         />
+      )}
+      {channel.id && getDeleteAt() !== 0 && directChannel && (
+        <div className="inactive-userinput-field">
+          <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
+        </div>
       )}
       {showSider && !directChannel && (
         <MembersSider
