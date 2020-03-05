@@ -218,6 +218,7 @@ const Message = props => {
                         controls
                         preload="auto"
                         controlsList="nodownload"
+                        style={{ maxWidth: '50vw' }}
                       />
                     </div>
                   )}
