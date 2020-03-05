@@ -19,7 +19,7 @@ const UserInput = props => {
     // get Exif data for file if it exists.
     // Exif data is used to rotate the image to the correct orientation.
     if (file) {
-      EXIF.getData(file, function() {
+      EXIF.getData(file, () => {
         const exifData = EXIF.pretty(this)
         if (exifData) {
           const orientationTag = EXIF.getTag(this, 'Orientation')
