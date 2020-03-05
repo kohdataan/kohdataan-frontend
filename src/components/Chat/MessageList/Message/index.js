@@ -28,6 +28,7 @@ const Message = props => {
   } = props
 
   const [messageText, setMessageText] = useState(text)
+  const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
@@ -86,6 +87,16 @@ const Message = props => {
     }
   }, [currentUserId, sender, senderId, type])
 
+  useEffect(() => {
+    const getMemberImage = () => {
+      const url = `${
+        process.env.REACT_APP_MATTERMOST_URL
+      }/api/v4/users/${currentUserId}/image?${Date.now()}`
+      setImage(url)
+    }
+    getMemberImage()
+  }, [currentUserId])
+
   return (
     <>
       {showDate && (
@@ -143,11 +154,7 @@ const Message = props => {
                     <div
                       className="label chat-message-sender-icon"
                       style={{
-                        backgroundImage: `url(
-                        ${
-                          process.env.REACT_APP_MATTERMOST_URL
-                        }/api/v4/users/${senderId}/image?${Date.now()}
-                      )`,
+                        backgroundImage: `url(${image})`,
                       }}
                     />
                   )}

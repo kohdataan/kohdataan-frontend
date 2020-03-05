@@ -5,6 +5,7 @@ import {
   joinChannel as joinChannelAction,
   getChannelMembers as getChannelMembersAction,
 } from 'mattermost-redux/actions/channels'
+import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
@@ -34,6 +35,8 @@ const GroupsContainer = props => {
     profiles,
     user,
     updateUser,
+    getPosts,
+    posts,
   } = props
 
   const [isInitialized, setIsInitialized] = useState(false)
@@ -111,6 +114,7 @@ const GroupsContainer = props => {
   if (!isInitialized) {
     return <BouncingLoader />
   }
+
   // TODO: Refactor channel member fetching
   return (
     <>
@@ -133,6 +137,8 @@ const GroupsContainer = props => {
         updateUser={updateUser}
         tutorialWatched={user.tutorialWatched}
         teams={teams}
+        getPosts={getPosts}
+        posts={posts}
       />
     </>
   )
@@ -154,6 +160,8 @@ GroupsContainer.propTypes = {
   resetChannelInvitations: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   updateUser: PropTypes.func.isRequired,
+  posts: PropTypes.instanceOf(Object).isRequired,
+  getPosts: PropTypes.func.isRequired,
 }
 
 GroupsContainer.defaultProps = {
@@ -199,6 +207,7 @@ const mapDispatchToProps = dispatch =>
       getInvitationsAgain: getChannelInvitationsAgain,
       resetChannelInvitations: resetChannelInvitationsAction,
       updateUser: updateUserAction,
+      getPosts: getPostsAction,
     },
     dispatch
   )
