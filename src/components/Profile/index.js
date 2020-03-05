@@ -36,18 +36,36 @@ const Profile = props => {
   const steps = [
     {
       target: '.nav-link-Profiili',
-      content: 'Tämä on profiilisi! Löydät sen täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">Tämä on profiilisi!</p>
+          <p className="tutorial-text">Löydät sen täältä.</p>
+        </>
+      ),
       disableBeacon: true,
     },
     {
       target: '.user-edit-button',
-      content:
-        'Profiilisi tiedot näkyvät myös muille. Voit muokata tietoja täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Profiilisi tiedot näkyvät myös muille.
+          </p>
+          <p className="tutorial-text">Voit muokata tietoja täältä.</p>
+        </>
+      ),
     },
     {
       target: '.nav-bot',
-      content:
-        'Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit klikata Bottia. Löydät Botin täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit
+            klikata Bottia.
+          </p>
+          <p className="tutorial-text">Löydät Botin täältä.</p>
+        </>
+      ),
     },
   ]
 
@@ -121,7 +139,7 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
-  currentUserId: propTypes.string.isRequired,
+  currentUserId: propTypes.string,
   mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
@@ -137,6 +155,7 @@ Profile.defaultProps = {
   userInterests: [],
   history: null,
   updateUser: null,
+  currentUserId: null,
 }
 
 export default memo(Profile)

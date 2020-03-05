@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React, { memo } from 'react'
 import Avatar from 'react-avatar-edit'
 import PropTypes from 'prop-types'
@@ -7,11 +6,11 @@ import './styles.scss'
 import CameraIconPath from '../../../assets/camera-add-solid.svg'
 
 const Picture = props => {
-  const { onChange, hideStep } = props
+  const { onChange, hideStep, setError } = props
 
   const onBeforeFileLoad = e => {
     if (e.target.files[0].size > 50000000) {
-      alert('Tiedosto on liian suuri!')
+      setError(true)
       e.target.value = ''
     }
   }
@@ -64,10 +63,6 @@ const Picture = props => {
           <div className="add-user-picture-text">
             <p>Tämä kuva näkyy muille.</p>
             <p>Voit lisätä kuvan myös myöhemmin.</p>
-            <p>
-              Kuva voi olla formaateissa BMP, JPG tai PNG. Tiedoston maksimikoko
-              on 50MB.
-            </p>
           </div>
         </div>
       </main>
@@ -78,6 +73,7 @@ const Picture = props => {
 Picture.propTypes = {
   onChange: PropTypes.func.isRequired,
   hideStep: PropTypes.bool,
+  setError: PropTypes.func.isRequired,
 }
 
 Picture.defaultProps = {

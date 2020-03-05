@@ -24,11 +24,11 @@ const Chat = props => {
     handleLogout,
     location,
     pinPost,
+    filesData,
   } = props
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
-  const [afterPinModal, setAfterPinModal] = useState(false)
   const [pinPostId, setPinPostId] = useState(null)
   const directChannel = channel.type === 'D'
 
@@ -51,7 +51,7 @@ const Chat = props => {
       }
       return visibleName
     }
-    return 'Käyttäjä poistunut'
+    return 'Poistunut käyttäjä'
   }
 
   const getStatusById = id => {
@@ -90,6 +90,18 @@ const Chat = props => {
     return null
   }
 
+  const getDeleteAt = () => {
+    if (directChannel) {
+      const friend = members.find(member => member.user_id !== currentUserId)
+      const mmid = friend && friend.user_id
+      const mmProfile = Object.values(profiles).find(
+        profile => profile.id === mmid
+      )
+      return mmProfile && mmProfile.delete_at
+    }
+    return null
+  }
+
   const handlePinPost = id => {
     setPinPostModalIsOpen(true)
     setPinPostId(id)
@@ -103,11 +115,6 @@ const Chat = props => {
   const completePinPost = id => {
     pinPost(id)
     closePinPostModal()
-    setAfterPinModal(true)
-  }
-
-  const closeAfterPinModal = () => {
-    setAfterPinModal(false)
   }
 
   return (
@@ -120,6 +127,7 @@ const Chat = props => {
         direct={directChannel}
         handleLogout={handleLogout}
         location={location}
+        deleted={getDeleteAt()}
       />
       <MessageList
         posts={posts}
@@ -132,6 +140,7 @@ const Chat = props => {
         profiles={profiles}
         getStatusById={getStatusById}
         pinPost={handlePinPost}
+        filesData={filesData}
         teams={teams}
       />
       {channel.id && (
@@ -140,7 +149,13 @@ const Chat = props => {
           createPost={createPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
+          filesData={filesData}
         />
+      )}
+      {channel.id && getDeleteAt() !== 0 && directChannel && (
+        <div className="inactive-userinput-field">
+          <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
+        </div>
       )}
       {showSider && !directChannel && (
         <MembersSider
@@ -173,27 +188,9 @@ const Chat = props => {
             onClick={() => completePinPost(pinPostId)}
             className="report-message-button"
           >
-            <p>Haluan</p>
+            <p>Kyllä</p>
           </ButtonContainer>
         </div>
-      </ModalContainer>
-      <ModalContainer
-        modalIsOpen={afterPinModal}
-        closeModal={closeAfterPinModal}
-        label="report-message-finish-modal"
-      >
-        <i
-          className="fas fa-check-circle"
-          aria-hidden="true"
-          style={{ color: 'green', fontSize: '30px' }}
-        />
-        <h3>Kiitos! Viesti on nyt ilmoitettu asiattomaksi.</h3>
-        <ButtonContainer
-          className="report-message-finish-button"
-          onClick={closeAfterPinModal}
-        >
-          Valmis
-        </ButtonContainer>
       </ModalContainer>
     </div>
   )
@@ -214,6 +211,7 @@ Chat.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  filesData: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {

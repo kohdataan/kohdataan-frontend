@@ -10,7 +10,7 @@
   position: absolute;
   z-index: 2000;
   border-bottom: 1px solid $orange;
-  overflow: hidden;
+  overflow: visible;
   @media (max-width: 360px) {
     height: 15%;
   }
@@ -22,7 +22,7 @@
   min-width: 60px;
   align-items: center;
   text-align: right;
-  margin: 0 8px;
+  margin: 0 5px;
   @media (max-width: 360px) {
     margin: 0 7px;
   }
@@ -31,14 +31,14 @@
 .chat-header-nav-back-button {
   background: none;
   border: none;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 1em;
   text-decoration: none;
   color: $gray;
   text-align: left;
-  margin-right: 0;
-  @media (max-width: 360px) {
-    font-size: 14px;
+  margin-right: 2px;
+  @media (max-width: 411px) {
+    font-size: 12px;
   }
 }
 
@@ -46,17 +46,21 @@
   text-align: center;
   font-size: 1.4em;
   @media (max-width: 375px) {
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin: 0;
   }
   @media (max-width: 330px) {
-    font-size: 1.2em;
+    font-size: 1em;
+    margin: 0;
   }
 }
 
 .channel-name-button {
   background-color: transparent;
   border: none;
+  @media (max-width: 411px) {
+    padding: 2px;
+  }
 }
 
 .channel-name-link {

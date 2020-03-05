@@ -14,6 +14,7 @@ const Header = props => {
     handleLogout,
     otherUserName,
     location,
+    deleted,
   } = props
 
   const header = otherUser || channel.display_name
@@ -38,13 +39,21 @@ const Header = props => {
           </h1>
         </ButtonContainer>
       )}
-      {direct && (
+      {direct && deleted === 0 && (
         <Link to={`/profile/${otherUserName}`} className="channel-name-link">
           {' '}
           <h1 className="chat-header-item chat-header-channel-name">
             {header}
           </h1>
         </Link>
+      )}
+      {direct && deleted !== 0 && (
+        <div className="channel-header-deleted">
+          {' '}
+          <h1 className="chat-header-item chat-header-channel-name">
+            Poistunut käyttäjä
+          </h1>
+        </div>
       )}
       <div className="chat-header-item">
         <BottomNavigationBot
@@ -69,11 +78,13 @@ Header.propTypes = {
   direct: propTypes.bool.isRequired,
   otherUserName: propTypes.string,
   location: propTypes.instanceOf(Object).isRequired,
+  deleted: propTypes.number,
 }
 
 Header.defaultProps = {
   otherUser: null,
   otherUserName: null,
+  deleted: 0,
 }
 
 export default memo(Header)

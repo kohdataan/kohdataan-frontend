@@ -48,7 +48,9 @@ const ChatContainer = props => {
     matterMostLogout,
     location,
     pinPost,
+    files,
   } = props
+
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
@@ -142,6 +144,7 @@ const ChatContainer = props => {
           handleLogout={handleLogout}
           location={location}
           pinPost={pinPost}
+          filesData={files}
         />
       )}
     </>
@@ -168,6 +171,7 @@ ChatContainer.propTypes = {
   matterMostLogout: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
+  files: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -179,6 +183,7 @@ const mapStateToProps = (state, ownProps) => {
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
   const { statuses } = state.entities.users
+  const { files } = state.entities.files
 
   return {
     currentUserId,
@@ -189,6 +194,7 @@ const mapStateToProps = (state, ownProps) => {
     posts,
     channels,
     statuses,
+    files,
   }
 }
 

@@ -1,5 +1,14 @@
 @import '../../../../styles/colors.scss';
 
+.player-wrapper {
+  position: relative;
+}
+
+.react-player {
+  top: 0;
+  left: 0;
+}
+
 .chat-message-wrapper {
   display: flex;
   justify-content: space-around;
@@ -115,6 +124,7 @@
   color: #666464;
   border: none;
   width: 100%;
+  padding: 2px;
 }
 
 .chat-online-status-icon {
@@ -167,8 +177,8 @@
 }
 
 .chat-message-sender-unknown {
-  color: #9b9b9b;
-  font-size: 16px;
+  color: #666464;
+  font-size: 18px;
 }
 
 .chat-message-sender-icon {
@@ -191,6 +201,11 @@
   margin-block-end: 0em;
 }
 
+.deleted-user-icon-container {
+  margin-left: -5px;
+  margin-right: 5px;
+}
+
 .image-message-content-text {
   margin-top: 0.5em;
 }
@@ -203,6 +218,15 @@
 .chat-report-message-icon {
   background: none;
   border: none;
-  color: $orange;
+  color:  gray;
   cursor: grab;
+}
+
+.content-system-message-admin {
+  display: none;
+}
+
+.deleted-user-chat-icon {
+  font-size: 1.4em;
+  color:  #bbb;
 }

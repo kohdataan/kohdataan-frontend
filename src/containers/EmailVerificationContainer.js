@@ -1,27 +1,39 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import EmailSmsForm from '../components/EmailSmsForm'
 
 const EmailVerificationContainer = props => {
   const { history } = props
+  const [apiError, setApiError] = useState(false)
+  const [text, setText] = useState('')
 
   const handleVerifyRequest = async resetInfo => {
-    const resp = await API.sendVerifyEmailLink(resetInfo)
+    const formattedInfo = {
+      email: resetInfo.toLowerCase(),
+      phoneNumber: '',
+    }
+    const resp = await API.sendVerifyEmailLink(formattedInfo)
     if (resp.success) {
-      history.push('/email-verification-info')
+      history.push('/registration-success')
     } else if (resp.message === 'This account is already verified') {
-      alert('Sähköposti on jo vahvistettu.')
+      setText('Sähköposti on jo vahvistettu.')
+      setApiError(true)
     } else {
-      alert('Sähköpostia ei löytynyt.')
+      setText('')
+      setApiError(true)
     }
   }
 
   return (
     <EmailSmsForm
       handleRequest={handleVerifyRequest}
-      title="Sähköpostin vahvistamis linkin uudelleen lähetys"
-      description="Lähetämme sinulle linkin, josta pääset vahvistamaan sähköpostisi."
+      title="Vahvistuslinkin lähettäminen uudelleen"
+      pagePurpose="verifyEmail"
+      apiError={apiError}
+      setApiError={setApiError}
+      text={text}
+      setText={setText}
     />
   )
 }

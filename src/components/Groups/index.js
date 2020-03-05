@@ -1,11 +1,14 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Group from './Group'
 import Tutorial from '../Tutorial'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
 const Groups = props => {
   const {
+    history,
     channels,
     teams,
     getMembers,
@@ -14,15 +17,32 @@ const Groups = props => {
     currentUserId,
     tutorialWatched,
     updateUser,
+    getPosts,
   } = props
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
+  const goToPreviousTutorial = () => {
+    history.push('/friends')
+  }
+
   const steps = [
     {
       target: '.nav-link-Ryhmät',
-      content:
-        'Voit jutella ja tutustua uusiin ihmisiin ryhmissä. Löydät ryhmät täältä.',
+      content: (
+        <>
+          <p className="tutorial-text">
+            Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
+          </p>
+          <p className="tutorial-text">Löydät ryhmät täältä.</p>
+          <ButtonContainer
+            className="button groups-tutorial-btn"
+            onClick={goToPreviousTutorial}
+          >
+            Edellinen
+          </ButtonContainer>
+        </>
+      ),
       disableBeacon: true,
     },
   ]
@@ -42,11 +62,16 @@ const Groups = props => {
             unreadCount={getUnreadCount(channel.id)}
             currentUserId={currentUserId}
             teams={teams}
+            getPosts={getPosts}
           />
         ))}
       </div>
       {!tutorialWatched && (
-        <Tutorial steps={steps} updateTutorialWatched={updateTutorialWatched} />
+        <Tutorial
+          steps={steps}
+          updateTutorialWatched={updateTutorialWatched}
+          history={history}
+        />
       )}
     </div>
   )
@@ -54,6 +79,7 @@ const Groups = props => {
 
 Groups.defaultProps = {
   profiles: {},
+  history: null,
 }
 
 Groups.propTypes = {
@@ -65,6 +91,8 @@ Groups.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object),
 }
 
 export default memo(Groups)

@@ -13,13 +13,12 @@ const PasswordResetInfoContainer = () => {
         Kun klikkaat viestissä olevaa linkkiä, pääset sivulle, jossa voit
         vaihtaa salasanan.
       </li>
-      <li>Anna sivulla uusi salasana.</li>
-      <li>Kun klikkaat &quot;Kirjaudu&quot;, olet palvelussa!</li>
+      <li>Anna sivulla uusi salasana ohjeiden mukaan.</li>
+      <li>Kun klikkaat &quot;Vaihda&quot;, pääset kirjautumaan palveluun!</li>
     </ol>
   )
   return (
     <EmailSmsInfo
-      title="Salasanan palautus"
       description="Lähetimme sinulle sähköpostilla linkin, josta pääset vaihtamaan salasanan."
       guide={passwordResetInfo}
     />

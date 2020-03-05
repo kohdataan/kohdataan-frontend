@@ -22,15 +22,15 @@ const RestoreAccount = props => {
         <ButtonContainer
           className="account-cancel-delete-button"
           secondary
-          onClick={handleRestore}
-        >
-          Kyllä
-        </ButtonContainer>
-        <ButtonContainer
-          className="account-delete-button"
           onClick={handleDelete}
         >
           En
+        </ButtonContainer>
+        <ButtonContainer
+          className="account-cancel-delete-button"
+          onClick={handleRestore}
+        >
+          Kyllä
         </ButtonContainer>
       </div>
     </ModalContainer>

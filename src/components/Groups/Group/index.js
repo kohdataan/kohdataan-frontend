@@ -13,10 +13,14 @@ const Group = props => {
     profiles,
     currentUserId,
     teams,
+    getPosts,
   } = props
+
   const [members, setMembers] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
   const [parsedPurpose, setParsedPurpose] = useState([])
+  const [unreadPosts, setUnreadPosts] = useState([])
+  const [posts, setPosts] = useState({})
 
   useEffect(() => {
     const getParsedPurpose = () => {
@@ -63,9 +67,35 @@ const Group = props => {
     getActiveMembers()
   }, [members, profiles, setActiveMembers, teams])
 
+  useEffect(() => {
+    // Get channel posts
+    const fetchPosts = async () => {
+      if (channel && channel.id) {
+        const channelPosts = await getPosts(channel.id)
+        setPosts(channelPosts.data.posts)
+      }
+    }
+    fetchPosts()
+  }, [channel, getPosts])
+
+  // get unread posts for channel
+  useEffect(() => {
+    const getUnreadPosts = async () => {
+      if (unreadCount && unreadCount > 0 && posts) {
+        const beginIndex = Object.keys(posts).length - unreadCount
+        const getUnreadMessages = Object.values(posts)
+          .sort((p1, p2) => p1.create_at - p2.create_at)
+          .slice(beginIndex)
+        if (getUnreadMessages)
+          setUnreadPosts(getUnreadMessages.filter(p => p.type === '').length)
+      }
+    }
+    getUnreadPosts()
+  }, [unreadCount, posts])
+
   return (
     <Link
-      className={`${unreadCount > 0 ? 'group-box-unreads' : ''} group-box`}
+      className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
       to={`/chat/${channel.id}`}
     >
       <div className="group-box-content">
@@ -95,19 +125,19 @@ const Group = props => {
           <p>Tämä ryhmä on yleistä palautetta varten.</p>
         )}
       </div>
-      {unreadCount === 1 && (
+      {unreadPosts === 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadCount} uusi ilmoitus`}</li>
+          <li>{`${unreadPosts} uusi viesti`}</li>
         </div>
       )}
-      {unreadCount > 1 && (
+      {unreadPosts > 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadCount} uutta ilmoitusta`}</li>
+          <li>{`${unreadPosts} uutta viestiä`}</li>
         </div>
       )}
-      {unreadCount <= 0 && (
+      {unreadPosts <= 0 && (
         <div className="group-unreads-text no-unreads">
-          <p>Ei uusia ilmoituksia</p>
+          <p>Ei uusia viestejä</p>
         </div>
       )}
     </Link>
@@ -121,6 +151,7 @@ Group.propTypes = {
   profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
+  getPosts: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Group)
