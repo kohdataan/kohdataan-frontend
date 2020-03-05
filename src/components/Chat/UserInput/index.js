@@ -5,6 +5,7 @@ import EXIF from 'exif-js'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import FilePreview from '../FilePreview'
+import AudioInput from '../AudioInput'
 import './styles.scss'
 
 const UserInput = props => {
@@ -27,12 +28,14 @@ const UserInput = props => {
       })
     }
   }
+  const [isRecording, setIsRecording] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
     setFileId('')
     setOrientation(0)
     setMessage('')
+    setIsRecording(false)
   }
   const fileInput = React.createRef()
 
@@ -69,6 +72,26 @@ const UserInput = props => {
     setModalIsOpen(true)
   }
 
+  const startSendingAudio = () => {
+    setIsRecording(true)
+    setModalIsOpen(true)
+  }
+
+  const handleAudioSubmit = async audioFile => {
+    setIsRecording(false)
+    const data = new FormData()
+    data.append('files', audioFile)
+    data.append('channel_id', channel.id)
+    const res = await uploadFile(channel.id, null, null, data)
+    const id = res && res.data.file_infos[0].id
+    const post = {
+      channel_id: channel.id,
+      message: '',
+      file_ids: [id],
+    }
+    await createPost(post)
+  }
+
   const clickFileInput = () => {
     fileInput.current.click()
   }
@@ -98,7 +121,7 @@ const UserInput = props => {
         <ButtonContainer className="icon-btn" onClick={clickFileInput}>
           <div className="send-image-attachment-button" />
         </ButtonContainer>
-        <ButtonContainer className="icon-btn" onClick={() => {}}>
+        <ButtonContainer className="icon-btn" onClick={startSendingAudio}>
           <div className="send-voice-attachment-button" />
         </ButtonContainer>
         <button type="submit" className="send-message-button" tabIndex="0">
@@ -109,21 +132,28 @@ const UserInput = props => {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         label="image-preview-dialog"
-        isLong
+        isLong={!isRecording}
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
-        <FilePreview
-          channel={channel}
-          handleSubmit={handleSubmit}
-          createPost={createPost}
-          message={message}
-          handleChange={handleChange}
-          fileId={fileId}
-          closeModal={closeModal}
-          filesData={filesData}
-          orientation={orientation}
-        />
+        {!isRecording && (
+          <FilePreview
+            handleSubmit={handleSubmit}
+            message={message}
+            handleChange={handleChange}
+            fileId={fileId}
+            closeModal={closeModal}
+            filesData={filesData}
+            orientation={orientation}
+          />
+        )}
+        {isRecording && (
+          <AudioInput
+            handleSubmit={handleAudioSubmit}
+            closeModal={closeModal}
+            isRecording={isRecording}
+          />
+        )}
       </ModalContainer>
     </div>
   )
