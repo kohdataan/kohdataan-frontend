@@ -128,6 +128,7 @@ const GroupsContainer = props => {
         teams={teams}
       />
       <Groups
+        history={history}
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
         profiles={profiles}
