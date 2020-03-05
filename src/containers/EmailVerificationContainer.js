@@ -17,7 +17,7 @@ const EmailVerificationContainer = props => {
     } else if (resp.message === 'This account is already verified') {
       alert('Sähköposti on jo vahvistettu.')
     } else {
-      alert('Sähköpostia ei löytynyt.')
+      alert('Tarkista sähköposti.')
     }
   }
 

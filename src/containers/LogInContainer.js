@@ -61,7 +61,7 @@ const LogInContainer = props => {
       user={user}
       uuid={uuidValid}
       linkError={error}
-      textToAdd={history.location.state.textToAdd}
+      textToAdd={history.location.state && history.location.state.textToAdd}
     />
   )
 }
