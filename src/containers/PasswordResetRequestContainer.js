@@ -1,29 +1,29 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import EmailSmsForm from '../components/EmailSmsForm'
 
 const PasswordResetRequestContainer = props => {
   const { history } = props
+  const [apiError, setApiError] = useState(false)
 
   const handleResetRequest = async resetInfo => {
-    const formattedInfo = {
-      email: resetInfo.email.toLowerCase(),
-      phoneNumber: resetInfo.phoneNumber,
-    }
-    const resp = await API.resetPassword(formattedInfo)
+    const infoToSend = { email: resetInfo, phoneNumber: '' }
+    const resp = await API.resetPassword(infoToSend)
     if (resp.success) {
       history.push('/reset-password-info')
     } else {
-      alert('Tarkista sähköposti.')
+      setApiError(true)
     }
   }
 
   return (
     <EmailSmsForm
-      handleRequest={handleResetRequest}
+      history={history}
       title="Salasanan vaihtaminen"
       pagePurpose="changePassword"
+      handleReset={handleResetRequest}
+      apiError={apiError}
     />
   )
 }

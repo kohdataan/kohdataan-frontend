@@ -1,17 +1,28 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import PropTypes from 'prop-types'
+import useForm from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import InputField from '../InputField'
-import ButtonContainer from '../ButtonContainer'
+import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 // This component needs a function that takes in an object that contains email and phonenumber,
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest, title, pagePurpose } = props
-  const [email, setEmail] = useState('')
+  const { title, pagePurpose, handleReset, apiError } = props
   const [phoneNumber, setPhoneNumber] = useState('')
+  const { register, handleSubmit, errors, setError, clearError } = useForm()
+
+  useEffect(() => {
+    const setApiErrors = () => {
+      if (apiError) setError('email', 'loginError')
+    }
+    setApiErrors()
+  }, [apiError])
+
+  const onSubmit = async data => {
+    await handleReset(data.email.trim().toLowerCase())
+  }
 
   return (
     <div className="email-sms-form-container">
@@ -33,31 +44,51 @@ const EmailSmsForm = props => {
         )}
 
         <div className="email-sms-form-input-container">
-          <InputField
-            label="Sähköposti"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            inputClassName="email-sms-form-input-text"
-            labelClassName="email-sms-form-input-field"
-            showPlaceholder={false}
-          />
-          <div className="hidden-field">
-            <InputField
-              label="Puhelinnumero"
-              value={email}
-              onChange={e => setPhoneNumber(e.target.value)}
-              inputClassName="email-sms-form-input-text"
-              labelClassName="email-sms-form-input-field"
-              showPlaceholder={false}
-            />
-          </div>
-          <ButtonContainer
-            className="email-sms-form-button"
-            onClick={() => handleRequest({ email, phoneNumber })}
+          <form
+            className="email-sms-input-fields-container"
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Lähetä
-          </ButtonContainer>
-
+            <div className="formfield-container">
+              <ValidatedInputField
+                label="Sähköposti"
+                name="email"
+                ref={register({
+                  required: true,
+                })}
+                ariaInvalid={!!errors.email}
+                onChange={() => clearError()}
+                inputClassName="email-sms-form-input-text"
+                labelClassName="email-sms-form-input-field"
+                showPlaceholder={false}
+              />
+              <div className="error-text">
+                {errors.email &&
+                  errors.email.type === 'required' &&
+                  'Kirjoita sähköpostiosoite.'}
+                {errors.email &&
+                  errors.email.type === 'loginError' &&
+                  'Tarkista sähköposti.'}
+              </div>
+            </div>
+            <div className="hidden-field">
+              <ValidatedInputField
+                label="Puhelinnumero"
+                value={phoneNumber}
+                name="phoneNumber"
+                onChange={e => setPhoneNumber(e.target.value)}
+                inputClassName="email-sms-form-input-text"
+                labelClassName="email-sms-form-input-field"
+                showPlaceholder={false}
+              />
+            </div>
+            <button
+              type="submit"
+              className="email-sms-form-button"
+              onClick={handleSubmit(onSubmit)}
+            >
+              Lähetä
+            </button>
+          </form>
           <div className="email-sms-form-link-container">
             <Link className="email-sms-form-link" to="/registrationproblem">
               Tarvitsen apua kirjautumisessa.
@@ -73,9 +104,14 @@ const EmailSmsForm = props => {
 }
 
 EmailSmsForm.propTypes = {
-  handleRequest: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   pagePurpose: PropTypes.string.isRequired,
+  apiError: PropTypes.bool,
+}
+
+EmailSmsForm.defaultProps = {
+  apiError: false,
 }
 
 export default memo(EmailSmsForm)
