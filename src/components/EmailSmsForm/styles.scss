@@ -62,12 +62,20 @@
   text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
+  align-self: center;
   margin: 50px auto 10px;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
   color: $black;
   background-color: $orange;
   outline: none;
+}
+
+.email-sms-input-fields-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 .email-sms-form-link-container {

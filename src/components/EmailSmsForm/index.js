@@ -1,7 +1,9 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import PropTypes from 'prop-types'
+import useForm from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import InputField from '../InputField'
+import ValidatedInputField from '../ValidatedInputField'
+import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
@@ -9,9 +11,39 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { handleRequest, title } = props
-  const [email, setEmail] = useState('')
+  const {
+    title,
+    pagePurpose,
+    handleRequest,
+    apiError,
+    setApiError,
+    text,
+    setText,
+  } = props
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const { register, handleSubmit, errors, setError, clearError } = useForm()
+
+  useEffect(() => {
+    const setApiErrors = () => {
+      if (apiError && text === '') {
+        setError('email', 'loginError')
+      } else if (apiError && text !== '') {
+        setShowModal(true)
+      }
+    }
+    setApiErrors()
+  }, [apiError, text])
+
+  const onSubmit = async data => {
+    await handleRequest(data.email.trim().toLowerCase())
+  }
+
+  const closeModal = () => {
+    setText('')
+    setApiError(false)
+    setShowModal(false)
+  }
 
   return (
     <div className="email-sms-form-container">
@@ -20,37 +52,79 @@ const EmailSmsForm = props => {
       <div className="email-sms-form-content-container">
         <h2 className="email-sms-form-title">{title}</h2>
         <p>Anna sähköpostiosoitteesi.</p>
-        <p>
-          Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
-          sähköpostisi ja kirjautumaan sisään.
-        </p>
+        {pagePurpose === 'changePassword' ? (
+          <p>
+            Lähetämme sinulle linkin, josta pääset vaihtamaan unohtuneen
+            salasanan.
+          </p>
+        ) : (
+          <p>
+            Lähetämme sinulle uudelleen linkin, josta pääset vahvistamaan
+            sähköpostisi ja kirjautumaan sisään.
+          </p>
+        )}
 
         <div className="email-sms-form-input-container">
-          <InputField
-            label="Sähköposti"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            inputClassName="email-sms-form-input-text"
-            labelClassName="email-sms-form-input-field"
-            showPlaceholder={false}
-          />
-          <div className="hidden-field">
-            <InputField
-              label="Puhelinnumero"
-              value={email}
-              onChange={e => setPhoneNumber(e.target.value)}
-              inputClassName="email-sms-form-input-text"
-              labelClassName="email-sms-form-input-field"
-              showPlaceholder={false}
-            />
-          </div>
-          <ButtonContainer
-            className="email-sms-form-button"
-            onClick={() => handleRequest({ email, phoneNumber })}
+          <ModalContainer
+            modalIsOpen={showModal}
+            closeModal={closeModal}
+            label="Email already confirmed"
           >
-            Lähetä
-          </ButtonContainer>
-
+            <div>
+              <h3 className="edit-profile-modal-text">{text}</h3>
+              <ButtonContainer
+                className="icon-btn edit-profile-icon-btn"
+                onClick={closeModal}
+              >
+                <div className="go-back-button" />
+              </ButtonContainer>
+            </div>
+          </ModalContainer>
+          <form
+            className="email-sms-input-fields-container"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="formfield-container">
+              <ValidatedInputField
+                label="Sähköposti"
+                name="email"
+                ref={register({
+                  required: true,
+                })}
+                ariaInvalid={!!errors.email}
+                onChange={() => clearError()}
+                inputClassName="email-sms-form-input-text"
+                labelClassName="email-sms-form-input-field"
+                showPlaceholder={false}
+              />
+              <div className="error-text">
+                {errors.email &&
+                  errors.email.type === 'required' &&
+                  'Kirjoita sähköpostiosoite.'}
+                {errors.email &&
+                  errors.email.type === 'loginError' &&
+                  'Tarkista sähköposti.'}
+              </div>
+            </div>
+            <div className="hidden-field">
+              <ValidatedInputField
+                label="Puhelinnumero"
+                value={phoneNumber}
+                name="phoneNumber"
+                onChange={e => setPhoneNumber(e.target.value)}
+                inputClassName="email-sms-form-input-text"
+                labelClassName="email-sms-form-input-field"
+                showPlaceholder={false}
+              />
+            </div>
+            <button
+              type="submit"
+              className="email-sms-form-button"
+              onClick={handleSubmit(onSubmit)}
+            >
+              Lähetä
+            </button>
+          </form>
           <div className="email-sms-form-link-container">
             <Link className="email-sms-form-link" to="/registrationproblem">
               Tarvitsen apua kirjautumisessa.
@@ -68,6 +142,18 @@ const EmailSmsForm = props => {
 EmailSmsForm.propTypes = {
   handleRequest: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  pagePurpose: PropTypes.string.isRequired,
+  apiError: PropTypes.bool,
+  setApiError: PropTypes.func,
+  text: PropTypes.string,
+  setText: PropTypes.func,
+}
+
+EmailSmsForm.defaultProps = {
+  apiError: false,
+  setApiError: null,
+  text: '',
+  setText: null,
 }
 
 export default memo(EmailSmsForm)
