@@ -9,7 +9,7 @@ import './styles.scss'
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
 const EmailSmsForm = props => {
-  const { title, pagePurpose, handleReset, apiError } = props
+  const { title, pagePurpose, handleRequest, apiError } = props
   const [phoneNumber, setPhoneNumber] = useState('')
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
@@ -21,7 +21,7 @@ const EmailSmsForm = props => {
   }, [apiError])
 
   const onSubmit = async data => {
-    await handleReset(data.email.trim().toLowerCase())
+    await handleRequest(data.email.trim().toLowerCase())
   }
 
   return (
@@ -104,7 +104,7 @@ const EmailSmsForm = props => {
 }
 
 EmailSmsForm.propTypes = {
-  handleReset: PropTypes.func.isRequired,
+  handleRequest: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   pagePurpose: PropTypes.string.isRequired,
   apiError: PropTypes.bool,

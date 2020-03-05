@@ -1,15 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import EmailSmsForm from '../components/EmailSmsForm'
 
 const EmailVerificationContainer = props => {
   const { history } = props
+  const [apiError, setApiError] = useState(false)
 
   const handleVerifyRequest = async resetInfo => {
     const formattedInfo = {
-      email: resetInfo.email.toLowerCase(),
-      phoneNumber: resetInfo.phoneNumber,
+      email: resetInfo.toLowerCase(),
+      phoneNumber: '',
     }
     const resp = await API.sendVerifyEmailLink(formattedInfo)
     if (resp.success) {
@@ -17,7 +18,7 @@ const EmailVerificationContainer = props => {
     } else if (resp.message === 'This account is already verified') {
       alert('Sähköposti on jo vahvistettu.')
     } else {
-      alert('Tarkista sähköposti.')
+      setApiError(true)
     }
   }
 
@@ -26,6 +27,7 @@ const EmailVerificationContainer = props => {
       handleRequest={handleVerifyRequest}
       title="Vahvistuslinkin lähettäminen uudelleen"
       pagePurpose="verifyEmail"
+      apiError={apiError}
     />
   )
 }

@@ -19,10 +19,9 @@ const PasswordResetRequestContainer = props => {
 
   return (
     <EmailSmsForm
-      history={history}
       title="Salasanan vaihtaminen"
       pagePurpose="changePassword"
-      handleReset={handleResetRequest}
+      handleRequest={handleResetRequest}
       apiError={apiError}
     />
   )
