@@ -4,10 +4,11 @@ import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const ViewImage = ({ history, match }) => {
-  const { fileId } = match.params
   const goBack = () => {
     history.goBack()
   }
+
+  const { fileId } = match.params
 
   return (
     <main className="view-image-content">

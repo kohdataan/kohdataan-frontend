@@ -83,6 +83,23 @@ const setNewPassword = async data => {
   }
 }
 
+const checkIfResetLinkHasBeenUsed = async data => {
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/auth/check-resetlink`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const respJSON = await resp.json()
+    return respJSON
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const updatePassword = async data => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
@@ -305,6 +322,7 @@ export {
   userLogout,
   userSignUp,
   resetPassword,
+  checkIfResetLinkHasBeenUsed,
   setNewPassword,
   getUser,
   getUserByUsername,

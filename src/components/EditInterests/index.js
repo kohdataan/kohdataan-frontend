@@ -61,7 +61,7 @@ const EditInterests = props => {
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
           >
-            <div className="accept-rules-go-back-button go-back-button" />
+            <div className="go-back-button" />
           </ButtonContainer>
         </div>
       </ModalContainer>

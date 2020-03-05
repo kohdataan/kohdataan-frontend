@@ -139,7 +139,7 @@ const Profile = props => {
 }
 
 Profile.propTypes = {
-  currentUserId: propTypes.string.isRequired,
+  currentUserId: propTypes.string,
   mmuser: propTypes.instanceOf(Object).isRequired,
   myUserInfo: propTypes.instanceOf(Object).isRequired,
   userInterests: propTypes.instanceOf(Array),
@@ -155,6 +155,7 @@ Profile.defaultProps = {
   userInterests: [],
   history: null,
   updateUser: null,
+  currentUserId: null,
 }
 
 export default memo(Profile)
