@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ReactPlayer from 'react-player'
+import ReactAudioPlayer from 'react-audio-player'
 import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
@@ -200,6 +201,14 @@ const Message = props => {
                           className="react-player"
                           url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                           controls
+                          config={{
+                            file: {
+                              attributes: {
+                                controlsList: 'nodownload noremoteplayback',
+                                disablePictureInPicture: true,
+                              },
+                            },
+                          }}
                           width="100%"
                           height="100%"
                         />
@@ -208,6 +217,19 @@ const Message = props => {
                         {messageText}
                       </p>
                     </>
+                  )}
+                {files &&
+                  !deleted &&
+                  files[0] &&
+                  filesData[files[0]].mime_type.includes('audio') && (
+                    <div className="player-wrapper">
+                      <ReactAudioPlayer
+                        src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
+                        controls
+                        preload="auto"
+                        controlsList="nodownload"
+                      />
+                    </div>
                   )}
                 {!files && (
                   <p className="chat-message-content-text">{messageText}</p>
