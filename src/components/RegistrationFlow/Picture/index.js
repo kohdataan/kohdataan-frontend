@@ -16,6 +16,7 @@ const Picture = props => {
   const [scale, setScale] = useState(1)
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 })
   const [imageFile, setImageFile] = useState(null)
+  const [imageUploaded, setImageUploaded] = useState(false)
 
   const editorRef = React.createRef()
 
@@ -25,6 +26,7 @@ const Picture = props => {
     setRotation(0)
     setShowFileLoader(true)
     setPosition({ x: 0.5, y: 0.5 })
+    setImageUploaded(false)
   }
 
   const handlePositionChange = pos => {
@@ -40,13 +42,6 @@ const Picture = props => {
     setRotation(newRotation)
   }
 
-  const savePreview = () => {
-    if (editorRef && editorRef.current) {
-      const canvas = editorRef.current.getImageScaledToCanvas().toDataURL()
-      onChange(canvas)
-    }
-  }
-
   useEffect(() => {
     const saveAfterChange = () => {
       if (editorRef && editorRef.current) {
@@ -55,7 +50,7 @@ const Picture = props => {
       }
     }
     saveAfterChange()
-  }, [rotation, scale, editorRef, onChange])
+  }, [rotation, scale, imageUploaded, editorRef, onChange])
 
   return (
     <ShadowBox>
@@ -101,8 +96,7 @@ const Picture = props => {
                 position={position}
                 onPositionChange={handlePositionChange}
                 className="add-user-picture-picker"
-                onImageReady={savePreview}
-                onImageChange={savePreview}
+                onImageReady={() => setImageUploaded(true)}
               />
 
               <div className="controls-button-container">
