@@ -37,6 +37,16 @@ const Picture = props => {
     setScale(parseFloat(value))
   }
 
+  const handleScaleByDirection = (direction, value) => {
+    if (direction === 'down' && scale === 1) {
+      setScale(1)
+    } else if (direction === 'up' && scale === 3) {
+      setScale(3)
+    } else {
+      setScale(parseFloat(value))
+    }
+  }
+
   const handleRotate = () => {
     const newRotation = rotation + 90
     setRotation(newRotation)
@@ -108,7 +118,15 @@ const Picture = props => {
                 </ButtonContainer>
                 <br />
                 <div className="zoom-controls-container">
-                  <i className="fas fa-minus zoom-control-sign" />
+                  <ButtonContainer
+                    className="icon-btn"
+                    onKeyPress={() =>
+                      handleScaleByDirection('down', scale - 0.02)
+                    }
+                    onClick={() => handleScaleByDirection('down', scale - 0.02)}
+                  >
+                    <i className="fas fa-minus zoom-control-sign" />
+                  </ButtonContainer>
                   <Slider
                     defaultValue={1}
                     ariaLabelForHandle="zoom"
@@ -138,7 +156,13 @@ const Picture = props => {
                     max={3}
                     step={0.01}
                   />
-                  <i className="fas fa-plus zoom-control-sign" />
+                  <ButtonContainer
+                    className="icon-btn"
+                    onKeyDown={() => handleScaleByDirection('up', scale + 0.02)}
+                    onClick={() => handleScaleByDirection('up', scale + 0.02)}
+                  >
+                    <i className="fas fa-plus zoom-control-sign" />
+                  </ButtonContainer>
                 </div>
                 <br />
               </div>
