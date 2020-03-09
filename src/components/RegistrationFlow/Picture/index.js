@@ -117,6 +117,8 @@ const Picture = props => {
                   <i className="fas fa-minus zoom-control-sign" />
                   <Slider
                     defaultValue={1}
+                    ariaLabelForHandle="zoom"
+                    tabIndex={0}
                     handleStyle={{
                       borderColor: 'gray',
                       height: 20,
