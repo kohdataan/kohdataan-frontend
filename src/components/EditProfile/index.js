@@ -73,7 +73,7 @@ const EditProfile = props => {
       <EditTitle text="Muokkaa profiiliasi" history={history} />
       <div className="edit-wrapper">
         <div className="edit-profilepic">
-          <Picture hideStep onChange={setImg} setError={setError} />
+          <Picture hideStep onChange={setImg} image={img} />
         </div>
         <div className="edit-nickname">
           <Nickname
