@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import AvatarEditor from 'react-avatar-editor'
 import Slider from 'rc-slider'
@@ -27,12 +27,17 @@ const Picture = props => {
     setPosition({ x: 0.5, y: 0.5 })
   }
 
+  const handlePositionChange = pos => {
+    setPosition(pos)
+  }
+
   const handleScale = value => {
     setScale(parseFloat(value))
   }
 
-  const handlePositionChange = pos => {
-    setPosition(pos)
+  const handleRotate = () => {
+    const newRotation = rotation + 90
+    setRotation(newRotation)
   }
 
   const savePreview = () => {
@@ -42,10 +47,15 @@ const Picture = props => {
     }
   }
 
-  const handleRotate = () => {
-    const newRotation = rotation + 90
-    setRotation(newRotation)
-  }
+  useEffect(() => {
+    const saveAfterChange = () => {
+      if (editorRef && editorRef.current) {
+        const canvas = editorRef.current.getImageScaledToCanvas().toDataURL()
+        onChange(canvas)
+      }
+    }
+    saveAfterChange()
+  }, [rotation, scale, editorRef, onChange])
 
   return (
     <ShadowBox>
@@ -85,16 +95,14 @@ const Picture = props => {
                 height={200}
                 border={50}
                 borderRadius={100}
-                color={[255, 255, 255, 0.6]} // RGBA
+                color={[255, 255, 255, 0.8]} // RGBA
                 scale={parseFloat(scale)}
                 rotate={parseFloat(rotation)}
                 position={position}
                 onPositionChange={handlePositionChange}
                 className="add-user-picture-picker"
-                onLoadSuccess={savePreview}
                 onImageReady={savePreview}
                 onImageChange={savePreview}
-                onMouseMove={savePreview}
               />
 
               <div className="controls-button-container">
