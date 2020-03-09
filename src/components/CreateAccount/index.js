@@ -348,22 +348,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                     : 'create-account-input-field'
                 }
               />
-
-              <div className="info-circle">
-                <button
-                  type="button"
-                  onClick={openPhoneNumberModal}
-                  className="info-circle-button"
-                  aria-labelledby="phonenumber-info"
-                />
-              </div>
             </div>
-            <ToolTipModalContainer
-              modalIsOpen={phoneNumberModalIsOpen}
-              closeModal={closeModal}
-              label="show-phonenumber-info-dialog"
-              content="Jos unohdat salasanan, voit vaihtaa sen tekstiviestin avulla."
-            />
+
             <div className="error-text">
               {errors.phoneNumber &&
                 errors.phoneNumber.type === 'required' &&
