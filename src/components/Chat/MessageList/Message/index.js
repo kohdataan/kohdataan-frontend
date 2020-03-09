@@ -91,11 +91,11 @@ const Message = props => {
     const getMemberImage = () => {
       const url = `${
         process.env.REACT_APP_MATTERMOST_URL
-      }/api/v4/users/${currentUserId}/image?${Date.now()}`
+      }/api/v4/users/${senderId}/image?${Date.now()}`
       setImage(url)
     }
     getMemberImage()
-  }, [currentUserId])
+  }, [senderId])
 
   return (
     <>
