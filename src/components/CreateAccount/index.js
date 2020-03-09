@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-newline */
 import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -23,7 +24,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
     clearError,
   } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
-  const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
+  // const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
   const [birthday, setBirthday] = useState('')
   const [birthmonth, setBirthmonth] = useState('')
@@ -86,13 +87,15 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   }
 
   const closeModal = () => {
-    setPhoneNumberModalIsOpen(false)
+    // setPhoneNumberModalIsOpen(false)
     setPasswordModalIsOpen(false)
   }
 
+  /*
   const openPhoneNumberModal = () => {
     setPhoneNumberModalIsOpen(true)
   }
+  */
 
   const openPasswordModal = () => {
     setPasswordModalIsOpen(true)
