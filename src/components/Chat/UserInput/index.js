@@ -13,6 +13,7 @@ const UserInput = props => {
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [errorModalIsOpen, setErrorModalIsOpen] = useState(false)
   const [orientation, setOrientation] = useState(0)
 
   const getExifData = file => {
@@ -20,9 +21,9 @@ const UserInput = props => {
     // Exif data is used to rotate the image to the correct orientation.
     if (file) {
       EXIF.getData(file, () => {
-        const exifData = EXIF.pretty(this)
+        const exifData = EXIF.pretty(file)
         if (exifData) {
-          const orientationTag = EXIF.getTag(this, 'Orientation')
+          const orientationTag = EXIF.getTag(file, 'Orientation')
           setOrientation(orientationTag)
         }
       })
@@ -32,6 +33,7 @@ const UserInput = props => {
 
   const closeModal = () => {
     setModalIsOpen(false)
+    setErrorModalIsOpen(false)
     setFileId('')
     setOrientation(0)
     setMessage('')
@@ -66,10 +68,16 @@ const UserInput = props => {
     getExifData(e.target.files[0])
     data.append('files', e.target.files[0])
     data.append('channel_id', channelId)
-    const res = await uploadFile(channelId, null, null, data)
-    const id = res && res.data.file_infos[0].id
-    setFileId(id)
-    setModalIsOpen(true)
+    if (e.target.files[0].size > 50000000) {
+      setErrorModalIsOpen(true)
+      e.target.value = ''
+    } else {
+      const res = await uploadFile(channelId, null, null, data)
+      const id =
+        res && res.data && res.data.file_infos && res.data.file_infos[0].id
+      setFileId(id)
+      setModalIsOpen(true)
+    }
   }
 
   const startSendingAudio = () => {
@@ -156,6 +164,21 @@ const UserInput = props => {
             isRecording={isRecording}
           />
         )}
+      </ModalContainer>
+      <ModalContainer
+        modalIsOpen={errorModalIsOpen}
+        label="leaveChannelModal"
+        closeModal={closeModal}
+      >
+        <div>
+          <p className="image-max-size-exceeded-text">
+            Tiedosto on liian suuri!
+          </p>
+          <ButtonContainer
+            className="icon-btn go-back-button image-max-size-exceeded"
+            onClick={closeModal}
+          />
+        </div>
       </ModalContainer>
     </div>
   )
