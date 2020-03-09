@@ -1,7 +1,8 @@
 @import '../../../styles/colors.scss';
 
 .blocked-icon {
-  margin-right: 10px;
+  margin-right: 18px;
+  font-size: 1.8em;
 }
 .block-user-icon {
   height: 100%;
@@ -19,6 +20,7 @@
   padding: 8px 20px;
   font-size: 13px;
   width: 100px;
+  height: 40px;
 }
 .blocked-friend-header {
   display: flex;
@@ -28,7 +30,12 @@
   & h2 {
     margin-bottom: 5px;
     color: grey;
-  }  
+  }
+}
+.deleted-user-icon {
+  font-size: 1.8em;
+  color: gray;
+  margin-right: 5px;
 }
 .friend-box-container {
   width: 100%;
@@ -95,11 +102,11 @@
   justify-content: space-between;
   & h2 {
     margin-bottom: 5px;
-  }  
+  }
 }
 
 .friends-online-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 10px;
   left: 30px;
   background-color: green;
@@ -109,7 +116,7 @@
   border-radius: 50%;
 }
 .friends-offline-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 10px;
   left: 30px;
   border: 1px solid $white;
@@ -120,7 +127,7 @@
 }
 
 .friends-away-status-icon {
-  position: relative; 
+  position: relative;
   bottom: 10px;
   left: 30px;
   background-color: yellow;
@@ -154,10 +161,10 @@
 }
 
 .text-content {
-  width: 650px; 
+  width: 650px;
   height: 40px;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   margin-bottom: -5px;
   @media (max-width: 800px) {

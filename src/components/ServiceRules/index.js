@@ -38,7 +38,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
               <p>Tänne tulee palvelun käyttöehdot.</p>
             </div>
             <ButtonContainer className="accept-rules-icon-btn icon-btn" onClick={closeModal}>
-              <div className="accept-rules-go-back-button go-back-button" />
+              <div className="go-back-button" />
             </ButtonContainer>
             <ButtonContainer
               className="profile-modal-button accept-rules-modal-button"

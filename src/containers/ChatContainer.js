@@ -50,6 +50,7 @@ const ChatContainer = props => {
     pinPost,
     files,
   } = props
+
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])

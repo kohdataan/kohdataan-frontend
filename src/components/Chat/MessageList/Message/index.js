@@ -28,6 +28,7 @@ const Message = props => {
   } = props
 
   const [messageText, setMessageText] = useState(text)
+  const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
@@ -71,10 +72,8 @@ const Message = props => {
     if (type === 'system_join_channel' || type === 'system_join_team') {
       if (senderId === currentUserId) {
         setMessageText('Sinä liityit kanavalle.')
-      } else if (sender === 'Käyttäjä poistunut') {
-        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} liittyi kanavalle.`)
+        setMessageText(`Käyttäjä liittyi kanavalle.`)
       }
     } else if (
       type === 'system_leave_channel' ||
@@ -82,13 +81,21 @@ const Message = props => {
     ) {
       if (senderId === currentUserId) {
         setMessageText('Sinä poistuit kanavalta.')
-      } else if (sender === 'Käyttäjä poistunut') {
-        setMessageText(`Käyttäjä poistunut.`)
       } else {
-        setMessageText(`${sender} poistui kanavalta.`)
+        setMessageText(`Käyttäjä poistui kanavalta.`)
       }
     }
   }, [currentUserId, sender, senderId, type])
+
+  useEffect(() => {
+    const getMemberImage = () => {
+      const url = `${
+        process.env.REACT_APP_MATTERMOST_URL
+      }/api/v4/users/${currentUserId}/image?${Date.now()}`
+      setImage(url)
+    }
+    getMemberImage()
+  }, [currentUserId])
 
   return (
     <>
@@ -107,7 +114,7 @@ const Message = props => {
               {currentUserId !== senderId && !directChannel && (
                 <h3
                   className={`chat-message-sender ${
-                    sender === 'Käyttäjä poistunut'
+                    sender === 'Poistunut käyttäjä'
                       ? 'chat-message-sender-unknown'
                       : ''
                   }`}
@@ -126,7 +133,7 @@ const Message = props => {
                 : 'message-icon-and-content'
             }`}
           >
-            {currentUserId !== senderId && sender !== 'Käyttäjä poistunut' && (
+            {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
               <div>
                 <Link
                   to={`/profile/${senderMmUsername}`}
@@ -147,11 +154,7 @@ const Message = props => {
                     <div
                       className="label chat-message-sender-icon"
                       style={{
-                        backgroundImage: `url(
-                        ${
-                          process.env.REACT_APP_MATTERMOST_URL
-                        }/api/v4/users/${senderId}/image?${Date.now()}
-                      )`,
+                        backgroundImage: `url(${image})`,
                       }}
                     />
                   )}
@@ -159,10 +162,11 @@ const Message = props => {
                 <div className={iconMemberStatus} />
               </div>
             )}
-            {currentUserId !== senderId && sender === 'Käyttäjä poistunut' && (
-              <div className="chat-message-sender-icon">
-                <i aria-hidden="true" title={sender[0]} />
-                <span className="label">{sender[0]}</span>
+            {currentUserId !== senderId && sender === 'Poistunut käyttäjä' && (
+              <div className="deleted-user-icon-container">
+                <div className="chat-message-sender-icon">
+                  <i className="fas fa-circle deleted-user-chat-icon" />
+                </div>
               </div>
             )}
             <div className="chat-message-content-field">
@@ -221,6 +225,7 @@ const Message = props => {
                         controls
                         preload="auto"
                         controlsList="nodownload"
+                        style={{ maxWidth: '50vw' }}
                       />
                     </div>
                   )}

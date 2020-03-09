@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import PasswordResetPage from '../components/PasswordResetPage'
@@ -11,14 +11,38 @@ const PasswordResetPageContainer = props => {
     history,
   } = props
 
+  useEffect(() => {
+    const checkIfLinkIsUsed = async () => {
+      const data = { uuid }
+      await API.checkIfResetLinkHasBeenUsed(data).then(resp => {
+        if (!resp.success) {
+          history.push({
+            pathname: '/login',
+            state: {
+              textToAdd: 'Linkki on käytetty. Vaihda salasana uudestaan.',
+            },
+          })
+        }
+      })
+    }
+    checkIfLinkIsUsed()
+  }, [uuid, history])
+
   const handleNewPassword = async password => {
     const data = { uuid, password: password.password }
     await API.setNewPassword(data).then(resp => {
       if (!resp.success) {
-        alert('Resetointilinkki on joko vanhentunut, käytetty tai väärä.')
+        history.push({
+          state: {
+            textToAdd:
+              'Resetointilinkki on joko vanhentunut, käytetty tai väärä.',
+          },
+        })
       } else {
-        alert('Salasana vaihdettu onnistuneesti.')
-        history.push('/')
+        history.push({
+          pathname: '/login',
+          state: { textToAdd: 'Salasana vaihdettu onnistuneesti.' },
+        })
       }
     })
   }

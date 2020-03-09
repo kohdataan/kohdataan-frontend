@@ -5,6 +5,7 @@
   "dependencies": {
     "clone": "^2.1.2",
     "core-js": "^2.6.11",
+    "exif-js": "^2.3.0",
     "history": "^4.10.1",
     "jest-fetch-mock": "^3.0.1",
     "localforage": "^1.7.3",
