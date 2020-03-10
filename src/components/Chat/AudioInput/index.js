@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import RecordRTC from 'recordrtc'
+import RecordRTC, { StereoAudioRecorder } from 'recordrtc'
 import Timer from 'react-compound-timer'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
@@ -51,6 +51,7 @@ const AudioInput = props => {
         new RecordRTC(stream, {
           type: 'audio',
           mimeType: 'audio/wav',
+          recorderType: StereoAudioRecorder,
         })
       )
     }
@@ -116,8 +117,7 @@ const AudioInput = props => {
       {!recorder && (
         <div className="audio-description-text">
           <p>
-            Mikrofonia ei löydy. Nauhottaaksesi sinun on annettava selaimelle
-            lupa käyttää laitteen mikrofonia.
+            Jos haluat lähettää ääniviestejä, anna palvelun käyttää mikrofonia.
           </p>
         </div>
       )}
