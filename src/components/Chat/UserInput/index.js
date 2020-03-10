@@ -121,7 +121,7 @@ const UserInput = props => {
         <input
           style={{ display: 'none' }}
           type="file"
-          accept="image/*,video/*"
+          accept="image/*,video/*,video/mp4" // video/mp4 is for safari
           onChange={addFile}
           ref={fileInput}
           aria-label="add image"
