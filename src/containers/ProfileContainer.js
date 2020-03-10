@@ -6,10 +6,18 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Profile from '../components/Profile'
 
 const ProfileContainer = props => {
-  const { mmuser, userInterests, myUserInfo, updateUser, history } = props
+  const {
+    currentUserId,
+    mmuser,
+    userInterests,
+    myUserInfo,
+    updateUser,
+    history,
+  } = props
 
   return (
     <Profile
+      currentUserId={currentUserId}
       mmuser={mmuser}
       ownProfile
       userInterests={userInterests}
@@ -26,6 +34,7 @@ const mapStateToProps = state => {
   const userInterests = state.user.interests
   const myUserInfo = state.user
   return {
+    currentUserId,
     mmuser,
     userInterests,
     myUserInfo,
@@ -33,6 +42,7 @@ const mapStateToProps = state => {
 }
 
 ProfileContainer.propTypes = {
+  currentUserId: PropTypes.string.isRequired,
   mmuser: PropTypes.instanceOf(Object).isRequired,
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   userInterests: PropTypes.instanceOf(Array),
