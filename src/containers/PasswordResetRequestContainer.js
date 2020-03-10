@@ -23,6 +23,7 @@ const PasswordResetRequestContainer = props => {
       pagePurpose="changePassword"
       handleRequest={handleResetRequest}
       apiError={apiError}
+      setApiError={setApiError}
     />
   )
 }
