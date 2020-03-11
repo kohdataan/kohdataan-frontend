@@ -36,7 +36,7 @@ const CreateAccountContainer = props => {
     // Mattermot username must begin with a letter and contain between 3 and 22 characters
     // including numbers, lowercase letters, and the symbols ".", "-", and "_".
 
-    let username = `${uniqid.process()}`.concat(email.split('@')[0])
+    let username = `${uniqid('-')}`
     if (username.length > 22) {
       username = username.slice(0, 22)
     }
