@@ -13,6 +13,11 @@ export const userLogin = user => {
         const { email, password } = user
         await dispatch(matterMostLogin(email, password))
       } else {
+        // This is so that state is updated and effects related to user are ran even if the error message does not change.
+        await dispatch({
+          type: types.USER_LOGIN_FAILURE,
+          payload: '',
+        })
         await dispatch({
           type: types.USER_LOGIN_FAILURE,
           payload: res,
