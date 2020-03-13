@@ -16,6 +16,10 @@ describe('User actions', () => {
     fetch.once(JSON.stringify({ message: 'error happened' }))
     const expectedActions = [
       {
+        payload: '',
+        type: 'KOHDATAAN_USER_LOGIN_FAILURE',
+      },
+      {
         error: true,
         payload: { message: 'error happened' },
         type: 'KOHDATAAN_USER_LOGIN_FAILURE',
