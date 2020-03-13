@@ -33,7 +33,7 @@
     "react-select": "^3.0.8",
     "react-swipy": "0.0.6",
     "react-test-renderer": "^16.12.0",
-    "recordrtc": "^5.5.8",
+    "recordrtc": "^5.5.9",
     "redux": "^4.0.4",
     "redux-mock-store": "^1.5.4",
     "redux-persist": "4.10.2",
