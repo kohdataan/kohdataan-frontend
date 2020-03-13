@@ -172,7 +172,7 @@ const Friend = props => {
               )}
             </Link>
             <ButtonContainer
-              className="icon-btn"
+              className="icon-btn block-user-icon-btn"
               onClick={() => setShowModal(true)}
             >
               <i
