@@ -29,6 +29,7 @@ const Chat = props => {
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
+  const [afterPinModal, setAfterPinModal] = useState(false)
   const [pinPostId, setPinPostId] = useState(null)
   const directChannel = channel.type === 'D'
 
@@ -115,8 +116,12 @@ const Chat = props => {
   const completePinPost = id => {
     pinPost(id)
     closePinPostModal()
+    setAfterPinModal(true)
   }
 
+  const closeAfterPinModal = () => {
+    setAfterPinModal(false)
+  }
   return (
     <div className="chat-wrapper" id="chat">
       <ChatHeader
@@ -191,6 +196,24 @@ const Chat = props => {
             <p>Kyllä</p>
           </ButtonContainer>
         </div>
+      </ModalContainer>
+      <ModalContainer
+        modalIsOpen={afterPinModal}
+        closeModal={closeAfterPinModal}
+        label="report-message-finish-modal"
+      >
+        <i
+          className="fas fa-check-circle"
+          aria-hidden="true"
+          style={{ color: 'green', fontSize: '30px' }}
+        />
+        <h3>Viesti ilmoitettu asiattomaksi.</h3>
+        <ButtonContainer
+          className="report-message-finish-button"
+          onClick={closeAfterPinModal}
+        >
+          Valmis
+        </ButtonContainer>
       </ModalContainer>
     </div>
   )

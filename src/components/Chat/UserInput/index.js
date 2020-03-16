@@ -6,6 +6,7 @@ import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
 import FilePreview from '../FilePreview'
 import AudioInput from '../AudioInput'
+import BouncingLoader from '../../BouncingLoader'
 import './styles.scss'
 
 const UserInput = props => {
@@ -30,6 +31,7 @@ const UserInput = props => {
     }
   }
   const [isRecording, setIsRecording] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -63,20 +65,23 @@ const UserInput = props => {
     setMessage(e.target.value)
   }
   const addFile = async e => {
+    setIsUploading(true)
     const channelId = channel.id
     const data = new FormData()
     getExifData(e.target.files[0])
-    data.append('files', e.target.files[0])
+    const file = e.target.files[0]
+    e.target.value = ''
+    data.append('files', file)
     data.append('channel_id', channelId)
-    if (e.target.files[0].size > 50000000) {
+    if (file.size > 50000000) {
       setErrorModalIsOpen(true)
-      e.target.value = ''
     } else {
+      setModalIsOpen(true)
       const res = await uploadFile(channelId, null, null, data)
       const id =
         res && res.data && res.data.file_infos && res.data.file_infos[0].id
       setFileId(id)
-      setModalIsOpen(true)
+      setIsUploading(false)
     }
   }
 
@@ -142,11 +147,23 @@ const UserInput = props => {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         label="image-preview-dialog"
-        isLong={!isRecording}
+        isLong
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
       >
-        {!isRecording && (
+        {!isRecording && isUploading && !errorModalIsOpen && (
+          <div>
+            <ButtonContainer
+              className="icon-btn go-back-button image-max-size-exceeded"
+              onClick={closeModal}
+            >
+              {' '}
+            </ButtonContainer>
+            <BouncingLoader />
+            <p className="uploading-text">Ladataan...</p>
+          </div>
+        )}
+        {!isRecording && !isUploading && (
           <FilePreview
             handleSubmit={handleSubmit}
             message={message}
@@ -155,6 +172,7 @@ const UserInput = props => {
             closeModal={closeModal}
             filesData={filesData}
             orientation={orientation}
+            isUploading={isUploading}
           />
         )}
         {isRecording && (
