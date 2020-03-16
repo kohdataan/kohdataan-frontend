@@ -7,6 +7,11 @@
 .block-user-icon {
   height: 100%;
   color: #3a3a3a;
+  padding-top: 5px;
+  
+}
+.block-user-icon-btn {
+  margin: 0 10px 0 10px;
 }
 .blocked-friend-text-content {
   color: grey;
@@ -48,6 +53,7 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  margin-right: 12px;
 }
 .friend-box {
   width: 100%;
@@ -85,8 +91,9 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
+  margin-right: 5px;
   border-bottom: 1px solid #9a9a9a;
 }
 .friend-text-content {

@@ -22,14 +22,16 @@ const Tutorial = props => {
       borderRadius: '30px',
       padding: '5px 10px',
       marginRight: '30px',
+      outline: 'none',
     },
     buttonBack: {
       marginLeft: 'auto',
       fontFamily: 'Poppins',
-      fontSize: '14px',
+      fontSize: '16px',
       borderRadius: '30px',
       padding: '5px 10px',
       color: 'black',
+      outline: 'none',
     },
     buttonSkip: {
       marginLeft: 'auto',
@@ -41,6 +43,9 @@ const Tutorial = props => {
     },
     buttonClose: {
       display: 'none',
+    },
+    spotlight: {
+      backgroundColor: 'transparent',
     },
   }
 

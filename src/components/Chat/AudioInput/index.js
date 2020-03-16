@@ -91,44 +91,48 @@ const AudioInput = props => {
 
   return (
     <main className="audio-recording-content">
-      <div className="audio-recording-info">
-        {recorder && (
-          <Timer
-            ref={timer}
-            lastUnit="s"
-            checkpoints={[
-              { time: 60000, callback: () => setRecorderFinished(true) },
-            ]}
-          >
-            <div className="audio-timer">
-              <Timer.Seconds />
-            </div>
-          </Timer>
-        )}
-        <span
-          className={recordingFinished ? 'pulse-done' : 'pulse-recording'}
-        />
-      </div>
-      {recorder && (
-        <p className="audio-description-text">
-          {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
-        </p>
-      )}
       {!recorder && (
         <div className="audio-description-text">
-          <p>
-            Jos haluat lähettää ääniviestejä, anna palvelun käyttää mikrofonia.
-          </p>
+          <p>Odottaa mikrofonia...</p>
         </div>
       )}
-      <div className="audio-control-buttons">
-        <ButtonContainer className="cancel-button" onClick={cancelRecording}>
-          peruuta
-        </ButtonContainer>
-        <ButtonContainer className="save-button" onClick={endRecording}>
-          lähetä
-        </ButtonContainer>
-      </div>
+      {recorder && (
+        <div>
+          <div className="audio-recording-info">
+            <Timer
+              ref={timer}
+              lastUnit="s"
+              checkpoints={[
+                { time: 60000, callback: () => setRecorderFinished(true) },
+              ]}
+            >
+              <div className="audio-timer">
+                <Timer.Seconds />
+              </div>
+            </Timer>
+            <span
+              className={recordingFinished ? 'pulse-done' : 'pulse-recording'}
+            />
+          </div>
+          <p className="audio-description-text">
+            {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
+          </p>
+          <div className="audio-control-buttons">
+            <ButtonContainer
+              className="button cancel-button"
+              onClick={cancelRecording}
+            >
+              peruuta
+            </ButtonContainer>
+            <ButtonContainer
+              className="button save-button"
+              onClick={endRecording}
+            >
+              lähetä
+            </ButtonContainer>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

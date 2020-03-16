@@ -65,6 +65,7 @@
   background-repeat: no-repeat;
   border: none;
   align-self: center;
+  outline: none;
 }
 
 .send-image-attachment-button:active {
@@ -80,6 +81,7 @@
   background-position: center;
   border: none;
   align-self: center;
+  outline: none;
 }
 
 .send-message-button {
@@ -103,6 +105,11 @@
   @media screen and (min-width: 960px) {
     margin-right: 20px;
   }
+}
+
+.uploading-text {
+  font-size: 1.4em;
+  text-align: center;
 }
 
 .userinput-buttons {

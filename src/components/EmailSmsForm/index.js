@@ -92,7 +92,10 @@ const EmailSmsForm = props => {
                   required: true,
                 })}
                 ariaInvalid={!!errors.email}
-                onChange={() => clearError()}
+                onChange={() => {
+                  clearError()
+                  setApiError(false)
+                }}
                 inputClassName="email-sms-form-input-text"
                 labelClassName="email-sms-form-input-field"
                 showPlaceholder={false}
