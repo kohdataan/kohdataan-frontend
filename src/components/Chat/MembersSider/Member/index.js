@@ -19,23 +19,7 @@ const Member = props => {
   }
 
   if (isSystemAdmin(userId, profiles) || isTeamAdmin(userId, teams)) {
-    return (
-      <div className="chat-header-members-sider-member">
-        <div>
-          <div
-            className="label chat-message-sender-icon"
-            style={{
-              backgroundColor: 'black',
-              color: 'white',
-            }}
-          >
-            K
-          </div>
-        </div>
-        <span className={iconMemberStatus} />
-        <span>Valvoja</span>
-      </div>
-    )
+    return <></>
   }
   return (
     <div className="chat-header-members-sider-member">
