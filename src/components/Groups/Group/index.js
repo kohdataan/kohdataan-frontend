@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import groupNameColors from '../../../assets/groupColors'
 import Member from './Member'
 import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
@@ -100,6 +101,20 @@ const Group = props => {
     >
       <div className="group-box-content">
         <div className="group-header">
+          <div
+            className="group-color-icon"
+            style={{
+              backgroundColor:
+                channel.name === 'town-square'
+                  ? 'grey'
+                  : groupNameColors[channel.display_name],
+              border: `${
+                channel.display_name.toLowerCase().includes('valkoiset')
+                  ? '1px solid grey'
+                  : 'none'
+              }`,
+            }}
+          />
           <h2>
             {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
           </h2>
