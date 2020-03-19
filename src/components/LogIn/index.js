@@ -27,7 +27,7 @@ const LogIn = props => {
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       {uuid && <p id="message-text">Kiitos sähköpostin vahvistamisesta.</p>}
-      {linkError && <p id="message-text">Tarkasta linkki.</p>}
+      {linkError && !errors.email && <p id="message-text">Tarkasta linkki.</p>}
       {textToAdd && <p id="message-text">{textToAdd}</p>}
       <div className="login-fields-container">
         <h2 className="login-title">KIRJAUTUMINEN</h2>
