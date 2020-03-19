@@ -229,6 +229,9 @@ const Message = props => {
                       />
                     </div>
                   )}
+                {files && deleted && (
+                  <p className="chat-message-content-text">{messageText}</p>
+                )}
                 {!files && (
                   <p className="chat-message-content-text">{messageText}</p>
                 )}
