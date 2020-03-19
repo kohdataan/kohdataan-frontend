@@ -18,8 +18,6 @@ const GroupSuggestions = props => {
     resetChannelInvitations,
   } = props
 
-  console.log(joinedChannels)
-
   const [cards, setCards] = useState(channels)
   const [channelsLoading, setChannelsLoading] = useState(false)
 
@@ -74,56 +72,60 @@ const GroupSuggestions = props => {
       )}
       <div className="group-suggestion-boxes">
         {channelsLoading && <BouncingLoader />}
-        {cards && cards.length > 0 && !channelsLoading && (
-          <div>
-            {cards.map((card, i) =>
-              i === cards.length - 1 ? (
-                <Swipeable
-                  key={card.id}
-                  min={80}
-                  buttons={({ left }) => (
-                    <div className="suggestion-buttons-wrapper">
-                      <ButtonContainer
-                        className="suggestion-button button-skip"
-                        onClick={() => {
-                          left()
-                        }}
-                      >
-                        Älä liity
-                      </ButtonContainer>
-                      <ButtonContainer
-                        onClick={handleJoinChannel(card.id)}
-                        className="suggestion-button button-join"
-                        secondary
-                      >
-                        Liity
-                      </ButtonContainer>
-                    </div>
-                  )}
-                  onAfterSwipe={remove}
-                >
+        {joinedChannels &&
+          joinedChannels.length < 6 &&
+          cards &&
+          cards.length > 0 &&
+          !channelsLoading && (
+            <div>
+              {cards.map((card, i) =>
+                i === cards.length - 1 ? (
+                  <Swipeable
+                    key={card.id}
+                    min={80}
+                    buttons={({ left }) => (
+                      <div className="suggestion-buttons-wrapper">
+                        <ButtonContainer
+                          className="suggestion-button button-skip"
+                          onClick={() => {
+                            left()
+                          }}
+                        >
+                          Älä liity
+                        </ButtonContainer>
+                        <ButtonContainer
+                          onClick={handleJoinChannel(card.id)}
+                          className="suggestion-button button-join"
+                          secondary
+                        >
+                          Liity
+                        </ButtonContainer>
+                      </div>
+                    )}
+                    onAfterSwipe={remove}
+                  >
+                    <SuggestionBox
+                      key={cards[i].id}
+                      channel={cards[i]}
+                      members={channelMembers[cards[i].id]}
+                      profiles={profiles}
+                      teams={teams}
+                    />
+                  </Swipeable>
+                ) : (
                   <SuggestionBox
-                    key={cards[i].id}
+                    hidden
+                    key={card.id}
                     channel={cards[i]}
                     members={channelMembers[cards[i].id]}
-                    profiles={profiles}
                     teams={teams}
+                    profiles={profiles}
+                    top={cards.length - i}
                   />
-                </Swipeable>
-              ) : (
-                <SuggestionBox
-                  hidden
-                  key={card.id}
-                  channel={cards[i]}
-                  members={channelMembers[cards[i].id]}
-                  teams={teams}
-                  profiles={profiles}
-                  top={cards.length - i}
-                />
-              )
-            )}
-          </div>
-        )}
+                )
+              )}
+            </div>
+          )}
       </div>
     </div>
   )
