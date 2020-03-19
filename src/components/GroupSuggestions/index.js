@@ -9,6 +9,7 @@ import BouncingLoader from '../BouncingLoader'
 const GroupSuggestions = props => {
   const {
     channels,
+    joinedChannels,
     profiles,
     teams,
     handleJoinChannel,
@@ -16,6 +17,8 @@ const GroupSuggestions = props => {
     getChannelInvitations,
     resetChannelInvitations,
   } = props
+
+  console.log(joinedChannels)
 
   const [cards, setCards] = useState(channels)
   const [channelsLoading, setChannelsLoading] = useState(false)
@@ -48,16 +51,25 @@ const GroupSuggestions = props => {
         </div>
       ) : (
         <div>
-          <p>
-            Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
-          </p>
-          <ButtonContainer
-            secondary
-            className="get-suggestions-again-button"
-            onClick={handleGetChannelsAgain}
-          >
-            Näytä uudestaan
-          </ButtonContainer>
+          {joinedChannels && joinedChannels.length < 6 ? (
+            <div>
+              <p>
+                Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
+              </p>
+              <ButtonContainer
+                secondary
+                className="get-suggestions-again-button"
+                onClick={handleGetChannelsAgain}
+              >
+                Näytä uudestaan
+              </ButtonContainer>
+            </div>
+          ) : (
+            <p>
+              Olet jo viidessä eri ryhmässä, poistu ensin jostakin ryhmästä ja
+              näet uusia ryhmiä.
+            </p>
+          )}
         </div>
       )}
       <div className="group-suggestion-boxes">
@@ -119,6 +131,7 @@ const GroupSuggestions = props => {
 
 GroupSuggestions.propTypes = {
   channels: propTypes.instanceOf(Array).isRequired,
+  joinedChannels: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
   handleJoinChannel: propTypes.func.isRequired,
