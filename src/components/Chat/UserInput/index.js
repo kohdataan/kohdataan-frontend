@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
+import { isBrowser } from 'react-device-detect'
 import EXIF from 'exif-js'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
@@ -20,7 +21,7 @@ const UserInput = props => {
   const getExifData = file => {
     // get Exif data for file if it exists.
     // Exif data is used to rotate the image to the correct orientation.
-    if (file) {
+    if (file && isBrowser) {
       EXIF.getData(file, () => {
         const exifData = EXIF.pretty(file)
         if (exifData) {
