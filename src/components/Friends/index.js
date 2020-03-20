@@ -75,9 +75,16 @@ const Friends = props => {
             />
           ))
         ) : (
-          <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä.
-          </h3>
+          <div>
+            <h3 className="no-friends-yet-header">
+              Sinulla ei ole vielä yksityisviestejä.
+            </h3>
+            <p className="no-friends-yet-text">
+              Voit lähettää toiselle käyttäjälle yksityisviestin hänen
+              profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta,
+              kun klikkaat ryhmässä hänen kuvakettaan.
+            </p>
+          </div>
         )}
       </div>
       {!tutorialWatched && (
