@@ -43,7 +43,7 @@ const Chat = props => {
 
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
-    let visibleName = ''
+    let visibleName = 'Käyttäjä'
     if (user && user.delete_at === 0) {
       if (user && user.nickname) {
         visibleName = user.nickname

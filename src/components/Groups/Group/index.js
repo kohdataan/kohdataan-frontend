@@ -130,7 +130,7 @@ const Group = props => {
               activeMembers.map(member => (
                 <Member
                   key={`group-${member.id}`}
-                  nickname={member.nickname || member.username}
+                  nickname={member.nickname || 'Käyttäjä'}
                   currentUserId={currentUserId}
                   userId={member.id}
                 />
