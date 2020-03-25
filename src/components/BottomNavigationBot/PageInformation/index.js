@@ -32,10 +32,10 @@ const PageInformation = props => {
       break
     case '/friends':
       text = `Täällä näet kaikki kaverisi. 
+      \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä.
         \nKaikki käyttäjät, joiden kanssa olet viestitellyt kahdestaan, ovat kavereitasi.
-        \nTäällä näet, ovatko kaverisi lähettäneet sinulle uusia viestejä.
-        \nJos et enää halua viestitellä kaverin kanssa, voit estää hänet. Klikkaa kaverin nimen vieressä olevia pisteitä, ja valitse estä. 
-        \nTäällä voit myös etsiä kavereita.`
+        \nVoit lähettää toiselle käyttäjälle yksityisviestin hänen profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta, kun klikkaat ryhmässä hänen kuvakettaan.
+        \nJos et halua enää viestitellä kaverin kanssa, voit estää hänet. Voit laittaa eston päälle ja myöhemmin poistaa sen, kun klikkaat kaverin nimen perässä olevia pisteitä.`
       break
     case '/edit-interests':
       text = `Täällä voit muokata kiinnostuksen kohteitasi.
