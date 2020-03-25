@@ -155,7 +155,7 @@ const Chat = props => {
           filesData={filesData}
         />
       )}
-      {channel.id && getDeleteAt() !== 0 && directChannel && (
+      {channel.id && getDeleteAt() && getDeleteAt() !== 0 && directChannel && (
         <div className="inactive-userinput-field">
           <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
         </div>
