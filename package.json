@@ -21,6 +21,7 @@
     "react-avatar-editor": "^12.0.0-beta.0",
     "react-compound-timer": "^1.1.15",
     "react-content-loader": "^4.3.3",
+    "react-cookie-consent": "^3.0.0",
     "react-dom": "^16.12.0",
     "react-hook-form": "^3.29.2",
     "react-hot-loader": "^4.12.19",

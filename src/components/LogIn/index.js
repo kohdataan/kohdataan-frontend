@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
+import CookieConsent from 'react-cookie-consent'
 import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
@@ -99,6 +100,10 @@ const LogIn = props => {
             Kirjaudu
           </button>
         </form>
+        <CookieConsent buttonText="Hyväksyn" declineButtonText="En hyväksy">
+          Käytämme keksejä muistaaksemme sisäänkirjautumisen. Emme kerää tietoja
+          tai anna niitä eteenpäin.
+        </CookieConsent>
         <div className="login-links-container">
           <Link className="login-link" to="/reset-password">
             Olen unohtanut salasanani.
