@@ -122,7 +122,7 @@ const UserInput = props => {
           placeholder="Kirjoita viesti"
           maxRows={3}
           rows={1}
-          aria-label="add message"
+          aria-label="Kirjoita viesti"
         />
         <input
           style={{ display: 'none' }}
@@ -130,16 +130,29 @@ const UserInput = props => {
           accept="image/*,video/*,video/mp4" // video/mp4 is for safari
           onChange={addFile}
           ref={fileInput}
-          aria-label="add image"
+          aria-label="Liitä tiedosto"
         />
         <div className="userinput-buttons">
-          <ButtonContainer className="icon-btn" onClick={clickFileInput}>
+          <ButtonContainer
+            className="icon-btn"
+            onClick={clickFileInput}
+            label="Lähetä kuva tai video"
+          >
             <div className="send-image-attachment-button" />
           </ButtonContainer>
-          <ButtonContainer className="icon-btn" onClick={startSendingAudio}>
+          <ButtonContainer
+            className="icon-btn"
+            onClick={startSendingAudio}
+            label="Lähetä ääniviesti"
+          >
             <div className="send-voice-attachment-button" />
           </ButtonContainer>
-          <button type="submit" className="send-message-button" tabIndex="0">
+          <button
+            type="submit"
+            className="send-message-button"
+            tabIndex="0"
+            aria-label="Lähetä viesti"
+          >
             {}
           </button>
         </div>
@@ -157,6 +170,7 @@ const UserInput = props => {
             <ButtonContainer
               className="icon-btn go-back-button image-max-size-exceeded"
               onClick={closeModal}
+              label="Sulje"
             >
               {' '}
             </ButtonContainer>
@@ -186,7 +200,7 @@ const UserInput = props => {
       </ModalContainer>
       <ModalContainer
         modalIsOpen={errorModalIsOpen}
-        label="leaveChannelModal"
+        label="Tiedosto on liian suuri"
         closeModal={closeModal}
       >
         <div>
@@ -196,6 +210,7 @@ const UserInput = props => {
           <ButtonContainer
             className="icon-btn go-back-button image-max-size-exceeded"
             onClick={closeModal}
+            label="Sulje"
           />
         </div>
       </ModalContainer>

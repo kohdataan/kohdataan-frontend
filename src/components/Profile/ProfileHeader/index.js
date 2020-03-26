@@ -8,7 +8,7 @@ const Header = props => {
 
   return (
     <div className="profile-header-item">
-      <h3>{nickname}</h3>
+      <h2>{nickname}</h2>
       {showAge && <p>{`${getAge({ birthdate })} vuotta`}</p>}
       {showLocation && <p>{location}</p>}
     </div>

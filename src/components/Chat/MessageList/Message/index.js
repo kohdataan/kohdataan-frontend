@@ -243,6 +243,7 @@ const Message = props => {
                   <ButtonContainer
                     className="chat-report-message-icon"
                     onClick={() => pinPost(id)}
+                    label="Ilmoita asiattomasta viestistä"
                   >
                     <i className="fas fa-ellipsis-v" aria-hidden="true" />
                   </ButtonContainer>

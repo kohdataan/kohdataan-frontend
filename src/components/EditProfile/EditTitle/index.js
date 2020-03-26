@@ -16,6 +16,7 @@ const EditTitle = props => {
       <ButtonContainer
         className="icon-btn go-back-button edit-header-btn"
         onClick={closeEditPage}
+        label="Sulje"
       >
         {' '}
       </ButtonContainer>
