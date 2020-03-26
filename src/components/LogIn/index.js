@@ -100,10 +100,6 @@ const LogIn = props => {
             Kirjaudu
           </button>
         </form>
-        <CookieConsent buttonText="Hyväksyn" declineButtonText="En hyväksy">
-          Käytämme keksejä muistaaksemme sisäänkirjautumisen. Emme kerää tietoja
-          tai anna niitä eteenpäin.
-        </CookieConsent>
         <div className="login-links-container">
           <Link className="login-link" to="/reset-password">
             Olen unohtanut salasanani.
@@ -115,6 +111,18 @@ const LogIn = props => {
             Olen uusi käyttäjä ja haluan rekisteröityä.
           </Link>
         </div>
+      </div>
+      <div className="cookie-info-container">
+        <CookieConsent
+          buttonText="Hyväksyn"
+          buttonStyle={{
+            color: '#3a3a3a',
+            fontSize: '0.875rem',
+            background: '#f59023',
+          }}
+        >
+          test
+        </CookieConsent>
       </div>
     </main>
   )
