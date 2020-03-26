@@ -22,6 +22,8 @@ const EditProfileContainer = props => {
     myUserInfo,
   } = props
 
+  if (!myUserInfo.profileReady) history.push('/registration/info')
+
   const updateImages = async img => {
     if (!img && !myUserInfo.imageUploaded) {
       await props.setDefaultProfileImage(mmuserId)

@@ -23,6 +23,8 @@ const FriendsContainer = props => {
     statuses,
   } = props
 
+  if (!user.profileReady) history.push('/registration/info')
+
   const [directChannels, setDirectChannels] = useState([])
   const [isInitialized, setIsInitialized] = useState(false)
 
