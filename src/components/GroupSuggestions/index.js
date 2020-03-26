@@ -49,7 +49,7 @@ const GroupSuggestions = props => {
         </div>
       ) : (
         <div>
-          {joinedChannels && joinedChannels.length < 6 ? (
+          {joinedChannels && joinedChannels.length < 5 ? (
             <div>
               <p>
                 Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
@@ -64,8 +64,8 @@ const GroupSuggestions = props => {
             </div>
           ) : (
             <p>
-              Olet jo viidessä eri ryhmässä, poistu ensin jostakin ryhmästä ja
-              näet uusia ryhmiä.
+              Olet jo viidessä ryhmässä. Jos haluat liittyä uuteen ryhmään,
+              poistu ensi jostain vanhasta ryhmästä.
             </p>
           )}
         </div>
@@ -73,7 +73,7 @@ const GroupSuggestions = props => {
       <div className="group-suggestion-boxes">
         {channelsLoading && <BouncingLoader />}
         {joinedChannels &&
-          joinedChannels.length < 6 &&
+          joinedChannels.length < 5 &&
           cards &&
           cards.length > 0 &&
           !channelsLoading && (
