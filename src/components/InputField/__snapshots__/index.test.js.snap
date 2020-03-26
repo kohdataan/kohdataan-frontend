@@ -15,6 +15,7 @@ exports[`Input field it matches the snapshot 1`] = `
     placeholder="test"
     type="text"
     value=""
+    ariaRequired={false}
   />
 </label>
 `;
