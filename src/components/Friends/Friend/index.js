@@ -170,6 +170,7 @@ const Friend = props => {
               ) : (
                 <div className="no-unread-messages">{}</div>
               )}
+              <span className="sr-only">Lukemattomia viestejä</span>
             </Link>
             <ButtonContainer
               className="icon-btn block-user-icon-btn"

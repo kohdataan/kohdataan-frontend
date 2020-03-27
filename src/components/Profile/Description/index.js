@@ -6,7 +6,7 @@ class Description extends PureComponent {
     const { text } = this.props || ''
     return (
       <section className="description-container">
-        <h2 className="description-header">Kuvaus</h2>
+        <h2 className="profile-secondary-header">Kuvaus</h2>
         <div className="description-text">{text}</div>
       </section>
     )

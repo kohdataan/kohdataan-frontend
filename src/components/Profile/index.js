@@ -96,7 +96,7 @@ const Profile = props => {
         )}
         {ownProfile && (
           <Link className="edit-me-link" to="/edit-me">
-            <EditButton />
+            <EditButton label="muokkaa profiilia"/>
           </Link>
         )}
       </header>
@@ -104,10 +104,13 @@ const Profile = props => {
 
       <section className="interests-container">
         <div className="interests-header">
-          <h2>Minua kiinnostaa</h2>
+          <h2 className="profile-secondary-header">Minua kiinnostaa</h2>
           {ownProfile && (
             <Link className="edit-interests-link" to="/edit-interests">
-              <EditButton isHighlighted={false} />
+              <EditButton
+                isHighlighted={false}
+                label="muokkaa mielenkiinnon kohteita"
+              />
             </Link>
           )}
         </div>

@@ -10,7 +10,7 @@ const InterestsGrid = props => {
     a.name > b.name ? 1 : -1
   )
   return (
-    <section className="interests-grid">
+    <div className="interests-grid">
       {sortedInterestsList.map(interest => (
         <div className="interests-grid-item-container" key={interest.id}>
           <span className="interests-grid-item">
@@ -23,7 +23,7 @@ const InterestsGrid = props => {
           </span>
         </div>
       ))}
-    </section>
+    </div>
   )
 }
 
