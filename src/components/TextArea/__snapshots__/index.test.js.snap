@@ -7,9 +7,9 @@ exports[`TextArea it matches the snapshot 1`] = `
 >
   test
   <textarea
+    aria-label="test"
     className=""
     id="test"
-    aria-label="test"
     maxLength={1000}
     name="test"
     onChange={[Function]}
