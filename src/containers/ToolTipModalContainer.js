@@ -43,7 +43,10 @@ const ToolTipModalContainer = props => {
       contentLabel={label}
       style={customStyles}
       role="dialog"
-      aria-labelledby={label}
+      aria={{
+        labelledby: label,
+        modal: true,
+      }}
     >
       <div>
         <button
@@ -51,7 +54,7 @@ const ToolTipModalContainer = props => {
           className="go-back-button"
           onClick={closeModal}
           style={closeModalBtnStyle}
-          aria-label="close-dialog"
+          aria-label="Sulje"
           onKeyPress={closeModal}
           tabIndex="0"
         />

@@ -75,7 +75,7 @@ const EditInterestsContainer = props => {
         <button
           key={interest.id}
           role="checkbox"
-          aria-checked
+          aria-checked={interests.includes(interest.id)}
           type="button"
           className={`${
             interests.includes(interest.id)

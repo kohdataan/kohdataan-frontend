@@ -83,7 +83,7 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
-      <div className="profile-header-container" role="heading" aria-level="1">
+      <div className="profile-header-container">
         <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
