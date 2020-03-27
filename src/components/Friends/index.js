@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
+import ValidatedInputField from '../ValidatedInputField'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
@@ -53,8 +54,13 @@ const Friends = props => {
     return status
   }
 
+  console.log('ree')
+
   return (
     <main className="friends-wrapper">
+      <ValidatedInputField label="test" name="test">
+        moi
+      </ValidatedInputField>
       <div className="friends-header">
         <h1>Kaverit</h1>
       </div>
