@@ -7,7 +7,7 @@ import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 const LogIn = props => {
-  const { handleLogin, user, uuid, linkError, textToAdd } = props
+  const { handleLogin, user, uuid, error, textToAdd } = props
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
   // Set appropriate error given different errors
@@ -24,11 +24,21 @@ const LogIn = props => {
     await handleLogin(data.email.trim().toLowerCase(), data.password)
   }
 
+  console.log(error)
+  if (error) {
+    console.log('reAmrkmkrmaklsdmklamdklasmdklasmdklasmdklasmkldmas')
+  }
+
   return (
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       {uuid && <p id="message-text">Kiitos sähköpostin vahvistamisesta.</p>}
-      {linkError && !errors.email && <p id="message-text">Tarkasta linkki.</p>}
+      {error && error === 'uuidLinkError' && (
+        <p id="message-text">Tarkasta linkki.</p>
+      )}
+      {error && error === 'cookiesNotAccepted' && (
+        <p id="message-text">Hyväksy evästeiden käyttö</p>
+      )}
       {textToAdd && <p id="message-text">{textToAdd}</p>}
       <div className="login-fields-container">
         <h2 className="login-title">KIRJAUTUMINEN</h2>
@@ -114,14 +124,16 @@ const LogIn = props => {
       </div>
       <div className="cookie-info-container">
         <CookieConsent
-          buttonText="Hyväksyn"
+          buttonText="Hyväksy"
           buttonStyle={{
             color: '#3a3a3a',
             fontSize: '0.875rem',
             background: '#f59023',
           }}
         >
-          test
+          Kohdataan-somessa käytämme evästeitä sisäänkirjautumiseen ja
+          analysointiin. Voit lukea lisää evästeistä
+          <a href="test"> tietosuojaselosteesta. </a>
         </CookieConsent>
       </div>
     </main>
@@ -132,7 +144,7 @@ LogIn.propTypes = {
   uuid: PropTypes.bool,
   handleLogin: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  linkError: PropTypes.bool,
+  error: PropTypes.bool,
   textToAdd: PropTypes.string,
 }
 
