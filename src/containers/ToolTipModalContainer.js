@@ -48,7 +48,7 @@ const ToolTipModalContainer = props => {
         modal: true,
       }}
     >
-      <div>
+      <aside>
         <button
           type="button"
           className="go-back-button"
@@ -59,7 +59,7 @@ const ToolTipModalContainer = props => {
           tabIndex="0"
         />
         <p className="text-paragraph">{content}</p>
-      </div>
+      </aside>
     </Modal>
   )
 }

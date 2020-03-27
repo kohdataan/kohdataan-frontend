@@ -83,7 +83,7 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
-      <div className="profile-header-container">
+      <header className="profile-header-container">
         <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
@@ -99,10 +99,10 @@ const Profile = props => {
             <EditButton />
           </Link>
         )}
-      </div>
+      </header>
       <Description text={description} />
 
-      <div className="interests-container">
+      <section className="interests-container">
         <div className="interests-header">
           <h2>Minua kiinnostaa</h2>
           {ownProfile && (
@@ -112,7 +112,7 @@ const Profile = props => {
           )}
         </div>
         <InterestsGrid interestList={userInterests} />
-      </div>
+      </section>
 
       {!ownProfile &&
         startDirectChannel &&

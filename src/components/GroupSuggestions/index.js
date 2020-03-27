@@ -40,7 +40,7 @@ const GroupSuggestions = props => {
   }, [channels])
 
   return (
-    <div className="group-suggestions">
+    <section className="group-suggestions">
       <h1>Uudet ryhmät</h1>
       {cards && cards.length > 0 && !channelsLoading ? (
         <div className="group-suggestion-info">
@@ -113,7 +113,7 @@ const GroupSuggestions = props => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   )
 }
 

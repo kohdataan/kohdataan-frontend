@@ -36,7 +36,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
             modal: true,
           }}
         >
-          <div className="service-rules-content">
+          <aside className="service-rules-content">
             <h2 className="service-rules-header">Palvelun käyttöehdot</h2>
             <div className="service-rules-text">
               <p>Tänne tulee palvelun käyttöehdot.</p>
@@ -54,7 +54,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
             >
               Hyväksy
             </ButtonContainer>
-          </div>
+          </aside>
         </ModalContainer>
       </div>
     </main>

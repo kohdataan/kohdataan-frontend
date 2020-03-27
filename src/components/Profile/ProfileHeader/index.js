@@ -7,11 +7,11 @@ const Header = props => {
   const { nickname, location, showAge, showLocation, birthdate } = props
 
   return (
-    <header className="profile-header-item">
-      <h2>{nickname}</h2>
+    <div className="profile-header-item">
+      <h1 className="profile-header-nickname">{nickname}</h1>
       {showAge && <p>{`${getAge({ birthdate })} vuotta`}</p>}
       {showLocation && <p>{location}</p>}
-    </header>
+    </div>
   )
 }
 
