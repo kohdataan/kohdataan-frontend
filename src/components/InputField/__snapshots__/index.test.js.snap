@@ -8,6 +8,7 @@ exports[`Input field it matches the snapshot 1`] = `
   test
   <input
     aria-label="test"
+    aria-required={false}
     className=""
     id="test"
     name="test"
@@ -15,7 +16,6 @@ exports[`Input field it matches the snapshot 1`] = `
     placeholder="test"
     type="text"
     value=""
-    aria-required={false}
   />
 </label>
 `;

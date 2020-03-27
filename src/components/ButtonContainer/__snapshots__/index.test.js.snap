@@ -2,12 +2,12 @@
 
 exports[`Button container it matches the snapshot 1`] = `
 <button
+  aria-label="test"
   className="button-container  test"
   onClick={[Function]}
   onKeyPress={[Function]}
   tabIndex="0"
   type="button"
-  aria-label="test"
 >
   Test
 </button>
