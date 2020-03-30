@@ -35,38 +35,53 @@ const Profile = props => {
 
   const steps = [
     {
+      content: (
+        <aside aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">1/6</p>
+          <h1 className="tutorial-header">
+            Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
+          </h1>
+        </aside>
+      ),
+      placement: 'center',
+      target: 'body',
+      disableBeacon: true,
+    },
+    {
       target: '.nav-link-Profiili',
       content: (
         <>
-          <p className="tutorial-text">Tämä on oma profiilisi!</p>
-          <p className="tutorial-text">Löydät sen täältä, kohdasta Profiili.</p>
+          <p className="tutorial-step">2/6</p>
+          <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
+          <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
         </>
       ),
-      disableBeacon: true,
     },
     {
       target: '.user-edit-button',
       content: (
-        <>
-          <p className="tutorial-text">
+        <aside>
+          <p className="tutorial-step">3/6</p>
+          <h1 className="tutorial-header">
             Profiilisi tiedot näkyvät myös muille.
-          </p>
+          </h1>
           <p className="tutorial-text">
-            Voit muokata tietoja täältä, kohdasta Muokkaa.
+            Voit muokata tietoja kohdasta Muokkaa.
           </p>
-        </>
+        </aside>
       ),
     },
     {
       target: '.nav-bot',
       content: (
-        <>
-          <p className="tutorial-text">
+        <aside>
+          <p className="tutorial-step">4/6</p>
+          <h1 className="tutorial-header">
             Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
             klikata Bottia.
-          </p>
-          <p className="tutorial-text">Löydät sen täältä, kohdasta Botti.</p>
-        </>
+          </h1>
+          <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
+        </aside>
       ),
     },
   ]

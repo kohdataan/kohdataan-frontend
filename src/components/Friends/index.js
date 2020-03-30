@@ -31,10 +31,11 @@ const Friends = props => {
     {
       target: '.nav-link-Kaverit',
       content: (
-        <>
-          <p className="tutorial-text">
+        <aside>
+          <p className="tutorial-step">5/6</p>
+          <h1 className="tutorial-header">
             Voit viestitellä kavereiden kanssa kahdestaan.
-          </p>
+          </h1>
           <p className="tutorial-text">
             Löydät kaverit täältä, kohdasta Kaverit.
           </p>
@@ -44,7 +45,7 @@ const Friends = props => {
           >
             Edellinen
           </ButtonContainer>
-        </>
+        </aside>
       ),
       disableBeacon: true,
     },
