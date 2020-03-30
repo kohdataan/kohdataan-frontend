@@ -24,11 +24,6 @@ const LogIn = props => {
     await handleLogin(data.email.trim().toLowerCase(), data.password)
   }
 
-  console.log(error)
-  if (error) {
-    console.log('reAmrkmkrmaklsdmklamdklasmdklasmdklasmdklasmkldmas')
-  }
-
   return (
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
@@ -37,7 +32,10 @@ const LogIn = props => {
         <p id="message-text">Tarkasta linkki.</p>
       )}
       {error && error === 'cookiesNotAccepted' && (
-        <p id="message-text">Hyväksy evästeiden käyttö</p>
+        <p id="message-text">
+          Jos haluat käyttää Kohdataan-somea, sinun täytyy hyväksyä evästeiden
+          käyttö.
+        </p>
       )}
       {textToAdd && <p id="message-text">{textToAdd}</p>}
       <div className="login-fields-container">
@@ -132,8 +130,10 @@ const LogIn = props => {
           }}
         >
           Kohdataan-somessa käytämme evästeitä sisäänkirjautumiseen ja
-          analysointiin. Voit lukea lisää evästeistä
-          <a href="test"> tietosuojaselosteesta. </a>
+          analysointiin. Voit lukea lisää evästeistä{' '}
+          <a href=" https://kohdataan.fi/tietosuojaseloste/">
+            tietosuojaselosteesta.
+          </a>
         </CookieConsent>
       </div>
     </main>
@@ -144,13 +144,13 @@ LogIn.propTypes = {
   uuid: PropTypes.bool,
   handleLogin: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
   textToAdd: PropTypes.string,
 }
 
 LogIn.defaultProps = {
   uuid: false,
-  linkError: false,
+  error: null,
   textToAdd: null,
 }
 
