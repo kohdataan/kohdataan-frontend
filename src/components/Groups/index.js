@@ -34,7 +34,9 @@ const Groups = props => {
           <p className="tutorial-text">
             Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
           </p>
-          <p className="tutorial-text">Löydät ryhmät täältä.</p>
+          <p className="tutorial-text">
+            Löydät ryhmät täältä, kohdasta Ryhmät.
+          </p>
           <ButtonContainer
             className="button groups-tutorial-btn"
             onClick={goToPreviousTutorial}

@@ -35,7 +35,9 @@ const Friends = props => {
           <p className="tutorial-text">
             Voit viestitellä kavereiden kanssa kahdestaan.
           </p>
-          <p className="tutorial-text">Löydät kaverit täältä.</p>
+          <p className="tutorial-text">
+            Löydät kaverit täältä, kohdasta Kaverit.
+          </p>
           <ButtonContainer
             className="button friends-tutorial-btn"
             onClick={goToPreviousTutorial}

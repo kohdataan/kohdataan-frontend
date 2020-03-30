@@ -38,8 +38,8 @@ const Profile = props => {
       target: '.nav-link-Profiili',
       content: (
         <>
-          <p className="tutorial-text">Tämä on profiilisi!</p>
-          <p className="tutorial-text">Löydät sen täältä.</p>
+          <p className="tutorial-text">Tämä on oma profiilisi!</p>
+          <p className="tutorial-text">Löydät sen täältä, kohdasta Profiili.</p>
         </>
       ),
       disableBeacon: true,
@@ -51,7 +51,9 @@ const Profile = props => {
           <p className="tutorial-text">
             Profiilisi tiedot näkyvät myös muille.
           </p>
-          <p className="tutorial-text">Voit muokata tietoja täältä.</p>
+          <p className="tutorial-text">
+            Voit muokata tietoja täältä, kohdasta Muokkaa.
+          </p>
         </>
       ),
     },
@@ -60,10 +62,10 @@ const Profile = props => {
       content: (
         <>
           <p className="tutorial-text">
-            Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit
+            Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
             klikata Bottia.
           </p>
-          <p className="tutorial-text">Löydät Botin täältä.</p>
+          <p className="tutorial-text">Löydät sen täältä, kohdasta Botti.</p>
         </>
       ),
     },
