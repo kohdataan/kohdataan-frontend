@@ -194,10 +194,10 @@ const RegistrationContainer = props => {
     }
   }
 
-  const stepButtonActions = () => {
+  const stepButtonActions = async () => {
     if (pages[step].last)
-      props.updateUser({ profileReady: true, imageUploaded })
-    profileCreationAction()
+      await props.updateUser({ profileReady: true, imageUploaded })
+    await profileCreationAction()
   }
 
   const closeModal = () => {
