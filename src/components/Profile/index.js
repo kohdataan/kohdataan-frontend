@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -22,6 +22,14 @@ const Profile = props => {
     history,
   } = props
 
+  const [returnToTutorial, setReturnToTutorial] = useState(false)
+
+  useEffect(() => {
+    if (history.location.state && history.location.state.navigateBack) {
+      setReturnToTutorial(true)
+    }
+  }, [])
+
   // Extended user info from node backend
   const {
     location,
@@ -32,6 +40,13 @@ const Profile = props => {
     showAge,
     showLocation,
   } = myUserInfo
+
+  const goToFriendsPage = () => {
+    history.push({
+      pathname: '/friends',
+      state: { navigateBack: false },
+    })
+  }
 
   const steps = [
     {
@@ -50,17 +65,17 @@ const Profile = props => {
     {
       target: '.nav-link-Profiili',
       content: (
-        <>
+        <aside aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">2/6</p>
           <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
           <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
-        </>
+        </aside>
       ),
     },
     {
       target: '.user-edit-button',
       content: (
-        <aside>
+        <aside aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">3/6</p>
           <h1 className="tutorial-header">
             Profiilisi tiedot näkyvät myös muille.
@@ -74,7 +89,7 @@ const Profile = props => {
     {
       target: '.nav-bot',
       content: (
-        <aside>
+        <aside aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">4/6</p>
           <h1 className="tutorial-header">
             Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
@@ -83,6 +98,66 @@ const Profile = props => {
           <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
         </aside>
       ),
+    },
+  ]
+
+  const reversedSteps = [
+    {
+      target: '.nav-bot',
+      content: (
+        <aside aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">4/6</p>
+          <h1 className="tutorial-header">
+            Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
+            klikata Bottia.
+          </h1>
+          <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
+          <ButtonContainer
+            className="button profile-tutorial-btn"
+            onClick={goToFriendsPage}
+          >
+            Seuraava
+          </ButtonContainer>
+        </aside>
+      ),
+      disableBeacon: true,
+    },
+    {
+      target: '.user-edit-button',
+      content: (
+        <aside aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">3/6</p>
+          <h1 className="tutorial-header">
+            Profiilisi tiedot näkyvät myös muille.
+          </h1>
+          <p className="tutorial-text">
+            Voit muokata tietoja kohdasta Muokkaa.
+          </p>
+        </aside>
+      ),
+    },
+    {
+      target: '.nav-link-Profiili',
+      content: (
+        <aside aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">2/6</p>
+          <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
+          <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
+        </aside>
+      ),
+    },
+    {
+      content: (
+        <aside aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">1/6</p>
+          <h1 className="tutorial-header">
+            Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
+          </h1>
+        </aside>
+      ),
+      placement: 'center',
+      target: 'body',
+      styles: { buttonNext: { display: 'none' } },
     },
   ]
 
@@ -149,9 +224,10 @@ const Profile = props => {
         )}
       {!tutorialWatched && ownProfile && (
         <Tutorial
-          steps={steps}
+          steps={returnToTutorial ? reversedSteps : steps}
           history={history}
           updateTutorialWatched={updateTutorialWatched}
+          navigateBack={returnToTutorial}
         />
       )}
     </main>

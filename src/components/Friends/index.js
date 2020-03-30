@@ -24,7 +24,10 @@ const Friends = props => {
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {
-    history.push('/me')
+    history.push({
+      pathname: '/me',
+      state: { navigateBack: true },
+    })
   }
 
   const steps = [
@@ -95,6 +98,7 @@ const Friends = props => {
           steps={steps}
           history={history}
           updateTutorialWatched={updateTutorialWatched}
+          navigateBack={false}
         />
       )}
     </section>

@@ -154,11 +154,13 @@ textarea {
   text-transform: none;
   text-align: center;
   color: $gray;
+  letter-spacing: normal;
 }
 
 .tutorial-step {
   text-align: right;
   color: $gray;
+  margin: 0;
 }
 
 .tutorial-text {
