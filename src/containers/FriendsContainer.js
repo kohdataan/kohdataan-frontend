@@ -95,7 +95,7 @@ const FriendsContainer = props => {
     return <BouncingLoader />
   }
   return (
-    <>
+    <main>
       <Friends
         channels={directChannels}
         getUnreadCount={getUnreadCountByChannelId}
@@ -110,7 +110,7 @@ const FriendsContainer = props => {
         statuses={statuses}
         currentUserId={currentUserId}
       />
-    </>
+    </main>
   )
 }
 

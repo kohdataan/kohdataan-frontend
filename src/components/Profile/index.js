@@ -83,7 +83,7 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
-      <div className="profile-header-container">
+      <header className="profile-header-container">
         <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
@@ -96,23 +96,26 @@ const Profile = props => {
         )}
         {ownProfile && (
           <Link className="edit-me-link" to="/edit-me">
-            <EditButton />
+            <EditButton label="muokkaa profiilia"/>
           </Link>
         )}
-      </div>
+      </header>
       <Description text={description} />
 
-      <div className="interests-container">
+      <section className="interests-container">
         <div className="interests-header">
-          <h2>Minua kiinnostaa</h2>
+          <h2 className="profile-secondary-header">Minua kiinnostaa</h2>
           {ownProfile && (
             <Link className="edit-interests-link" to="/edit-interests">
-              <EditButton isHighlighted={false} />
+              <EditButton
+                isHighlighted={false}
+                label="muokkaa mielenkiinnon kohteita"
+              />
             </Link>
           )}
         </div>
         <InterestsGrid interestList={userInterests} />
-      </div>
+      </section>
 
       {!ownProfile &&
         startDirectChannel &&
