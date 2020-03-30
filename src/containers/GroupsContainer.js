@@ -120,6 +120,7 @@ const GroupsContainer = props => {
     <>
       <GroupSuggestions
         channels={filteredSuggestions}
+        joinedChannels={getGroupChannels(getChannelInfoForMyChannels())}
         handleJoinChannel={handleJoinChannel}
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
