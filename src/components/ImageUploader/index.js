@@ -61,14 +61,18 @@ const ImageUploader = props => {
           className="input-content"
           ref={fileInput}
         />
-        <ButtonContainer className="icon-btn" onClick={clickFileInput}>
+        <ButtonContainer
+          className="icon-btn"
+          onClick={clickFileInput}
+          label="Lisää kuva"
+        >
           <div style={customIconStyle}>&nbsp;</div>
         </ButtonContainer>
       </div>
 
       <ModalContainer
         modalIsOpen={openModal}
-        label="leaveChannelModal"
+        label="Tiedosto on liian suuri"
         closeModal={() => setOpenModal(false)}
       >
         <div>
@@ -78,6 +82,7 @@ const ImageUploader = props => {
           <ButtonContainer
             className="icon-btn go-back-button image-max-size-exceeded"
             onClick={() => setOpenModal(false)}
+            label="Sulje"
           />
         </div>
       </ModalContainer>

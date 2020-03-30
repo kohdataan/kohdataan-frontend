@@ -25,19 +25,27 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
     <main id="service-rules-container">
       <div className="service-rules-content">
         <ButtonContainer className="accept-rules-link" onClick={openModal}>
-          {'Hyväksy palvelun käyttöehdot'}
+          Hyväksy palvelun käyttöehdot
         </ButtonContainer>
         <ModalContainer
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
-          label="accept-rules-dialog"
+          label="Hyväksy käyttösäännöt-dialogi"
+          aria={{
+            labelledby: 'Hyväksy käyttösäännöt-dialogi',
+            modal: true,
+          }}
         >
-          <div className="service-rules-content">
+          <aside className="service-rules-content">
             <h2 className="service-rules-header">Palvelun käyttöehdot</h2>
             <div className="service-rules-text">
               <p>Tänne tulee palvelun käyttöehdot.</p>
             </div>
-            <ButtonContainer className="accept-rules-icon-btn icon-btn" onClick={closeModal}>
+            <ButtonContainer
+              className="accept-rules-icon-btn icon-btn"
+              onClick={closeModal}
+              label="Sulje"
+            >
               <div className="go-back-button" />
             </ButtonContainer>
             <ButtonContainer
@@ -46,7 +54,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
             >
               Hyväksy
             </ButtonContainer>
-          </div>
+          </aside>
         </ModalContainer>
       </div>
     </main>

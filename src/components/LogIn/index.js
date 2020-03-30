@@ -30,7 +30,7 @@ const LogIn = props => {
       {linkError && !errors.email && <p id="message-text">Tarkasta linkki.</p>}
       {textToAdd && <p id="message-text">{textToAdd}</p>}
       <div className="login-fields-container">
-        <h2 className="login-title">KIRJAUTUMINEN</h2>
+        <h2 className="login-title">Kirjautuminen</h2>
         <form
           className="login-input-fields-container"
           onSubmit={handleSubmit(onSubmit)}

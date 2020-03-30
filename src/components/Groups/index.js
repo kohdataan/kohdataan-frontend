@@ -51,10 +51,10 @@ const Groups = props => {
   ]
 
   return (
-    <div className="groups-wrapper">
-      <div className="groups-header">
+    <section className="groups-wrapper">
+      <header className="groups-header">
         <h1>Omat ryhmät</h1>
-      </div>
+      </header>
       <div className="groups-boxes">
         {Object.values(channels).map(channel => (
           <Group
@@ -76,7 +76,7 @@ const Groups = props => {
           history={history}
         />
       )}
-    </div>
+    </section>
   )
 }
 

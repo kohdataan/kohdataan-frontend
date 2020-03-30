@@ -113,6 +113,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         <form
           className="create-account-input-content-container"
           onSubmit={handleSubmit(onSubmit)}
+          autoComplete="on"
         >
           <div className="formfield-container">
             <ValidatedInputField
@@ -390,13 +391,14 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   type="button"
                   onClick={openPasswordModal}
                   className="info-circle-button"
+                  aria-label="salasana-info-nappi"
                   aria-labelledby="password-info"
                 />
               </div>
               <ToolTipModalContainer
                 modalIsOpen={passwordModalIsOpen}
                 closeModal={closeModal}
-                label="show-password-info-dialog"
+                label="salasana-info-modaali"
                 content="Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero."
               />
             </div>
@@ -449,12 +451,13 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             <ModalContainer
               modalIsOpen={openErrorModal}
               closeModal={closeAcceptModal}
-              label="User must accept rules modal"
+              label="Käyttöehtoja ei hyväksytty"
             >
               <div>
                 <ButtonContainer
                   className="icon-btn go-back-button accept-rules-icon-btn"
                   onClick={closeAcceptModal}
+                  label="Sulje"
                 />
                 <h3 className="accept-rules-modal-text">
                   Jos haluat käyttää palvelua, sinun täytyy hyväksyä
