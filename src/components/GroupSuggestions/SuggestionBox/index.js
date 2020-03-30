@@ -61,7 +61,7 @@ const SuggestionBox = props => {
                     <Member
                       key={`suggestion-${member.id}`}
                       userId={member.id}
-                      nickname={member.nickname || member.username}
+                      nickname={member.nickname}
                     />
                   ))}
             </div>

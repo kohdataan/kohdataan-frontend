@@ -87,7 +87,7 @@ const Profile = props => {
         <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
-            nickname={nickname || mmuser.username}
+            nickname={nickname}
             location={location}
             birthdate={birthdate}
             showAge={showAge}

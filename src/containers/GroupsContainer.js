@@ -39,6 +39,8 @@ const GroupsContainer = props => {
     posts,
   } = props
 
+  if (!user.profileReady) history.push('/registration/info')
+
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   // Get only those channels suggestions that user has not yet joined

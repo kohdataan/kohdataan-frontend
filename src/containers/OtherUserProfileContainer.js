@@ -17,6 +17,7 @@ const OtherUserProfileContainer = props => {
     createDirectChannel,
     currentUserId,
   } = props
+
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
@@ -77,14 +78,12 @@ const mapStateToProps = (state, ownProps) => {
   const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
   const interestOptions = state.interests.results
-  const myUserInfo = state.user
 
   return {
     currentUserId,
     currentUser,
     username,
     interestOptions,
-    myUserInfo,
   }
 }
 
