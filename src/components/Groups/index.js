@@ -30,7 +30,7 @@ const Groups = props => {
     {
       target: '.nav-link-Ryhmät',
       content: (
-        <aside>
+        <div>
           <p className="tutorial-step">6/6</p>
           <h1 className="tutorial-header">
             Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
@@ -44,7 +44,7 @@ const Groups = props => {
           >
             Edellinen
           </ButtonContainer>
-        </aside>
+        </div>
       ),
       disableBeacon: true,
     },

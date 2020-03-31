@@ -34,7 +34,7 @@ const Friends = props => {
     {
       target: '.nav-link-Kaverit',
       content: (
-        <aside>
+        <div>
           <p className="tutorial-step">5/6</p>
           <h1 className="tutorial-header">
             Voit viestitellä kavereiden kanssa kahdestaan.
@@ -48,7 +48,7 @@ const Friends = props => {
           >
             Edellinen
           </ButtonContainer>
-        </aside>
+        </div>
       ),
       disableBeacon: true,
     },

@@ -51,12 +51,12 @@ const Profile = props => {
   const steps = [
     {
       content: (
-        <aside aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-1">
           <p className="tutorial-step">1/6</p>
           <h1 className="tutorial-header">
             Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
           </h1>
-        </aside>
+        </div>
       ),
       placement: 'center',
       target: 'body',
@@ -65,17 +65,17 @@ const Profile = props => {
     {
       target: '.nav-link-Profiili',
       content: (
-        <aside aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">2/6</p>
           <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
           <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
-        </aside>
+        </div>
       ),
     },
     {
       target: '.user-edit-button',
       content: (
-        <aside aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">3/6</p>
           <h1 className="tutorial-header">
             Profiilisi tiedot näkyvät myös muille.
@@ -83,20 +83,20 @@ const Profile = props => {
           <p className="tutorial-text">
             Voit muokata tietoja kohdasta Muokkaa.
           </p>
-        </aside>
+        </div>
       ),
     },
     {
       target: '.nav-bot',
       content: (
-        <aside aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">4/6</p>
           <h1 className="tutorial-header">
             Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
             klikata Bottia.
           </h1>
           <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
-        </aside>
+        </div>
       ),
     },
   ]
@@ -105,7 +105,7 @@ const Profile = props => {
     {
       target: '.nav-bot',
       content: (
-        <aside aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">4/6</p>
           <h1 className="tutorial-header">
             Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
@@ -118,14 +118,14 @@ const Profile = props => {
           >
             Seuraava
           </ButtonContainer>
-        </aside>
+        </div>
       ),
       disableBeacon: true,
     },
     {
       target: '.user-edit-button',
       content: (
-        <aside aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">3/6</p>
           <h1 className="tutorial-header">
             Profiilisi tiedot näkyvät myös muille.
@@ -133,27 +133,27 @@ const Profile = props => {
           <p className="tutorial-text">
             Voit muokata tietoja kohdasta Muokkaa.
           </p>
-        </aside>
+        </div>
       ),
     },
     {
       target: '.nav-link-Profiili',
       content: (
-        <aside aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">2/6</p>
           <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
           <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
-        </aside>
+        </div>
       ),
     },
     {
       content: (
-        <aside aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+        <div aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
           <p className="tutorial-step">1/6</p>
           <h1 className="tutorial-header">
             Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
           </h1>
-        </aside>
+        </div>
       ),
       placement: 'center',
       target: 'body',
@@ -223,12 +223,14 @@ const Profile = props => {
           </div>
         )}
       {!tutorialWatched && ownProfile && (
-        <Tutorial
-          steps={returnToTutorial ? reversedSteps : steps}
-          history={history}
-          updateTutorialWatched={updateTutorialWatched}
-          navigateBack={returnToTutorial}
-        />
+        <aside>
+          <Tutorial
+            steps={returnToTutorial ? reversedSteps : steps}
+            history={history}
+            updateTutorialWatched={updateTutorialWatched}
+            navigateBack={returnToTutorial}
+          />
+        </aside>
       )}
     </main>
   )
