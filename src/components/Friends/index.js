@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
-import ValidatedInputField from '../ValidatedInputField'
+import ValidatedTextArea from '../ValidatedTextArea'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
@@ -21,6 +21,9 @@ const Friends = props => {
     statuses,
     currentUserId,
   } = props
+
+  const [friendSearch, setFriendSearch] = useState('')
+  const friendSearchTextInput = React.createRef()
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
@@ -54,15 +57,38 @@ const Friends = props => {
     return status
   }
 
-  console.log('ree')
+  const handleFriendSearchChange = event => {
+    setFriendSearch(event.target.value)
+  }
+
+  const handleFriendSearchReset = () => {
+    setFriendSearch('')
+    friendSearchTextInput.current.value = ''
+  }
 
   return (
     <main className="friends-wrapper">
-      <ValidatedInputField label="test" name="test">
-        moi
-      </ValidatedInputField>
       <div className="friends-header">
         <h1>Kaverit</h1>
+      </div>
+      <div className="friends-search">
+        <ValidatedTextArea
+          label="Hae kaveria"
+          name="friendSearch"
+          onChange={handleFriendSearchChange}
+          ref={friendSearchTextInput}
+          showLabel={false}
+          maxLength={20}
+          rows={1}
+          value=""
+        />
+        <ButtonContainer
+          className="registration-problem-button"
+          onClick={handleFriendSearchReset}
+          tabIndex="0"
+        >
+          Sulje
+        </ButtonContainer>
       </div>
       <div className="friends-boxes">
         {channels && channels.length > 0 ? (
