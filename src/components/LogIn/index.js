@@ -2,7 +2,6 @@ import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import useForm from 'react-hook-form'
-import CookieConsent from 'react-cookie-consent'
 import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
@@ -119,22 +118,6 @@ const LogIn = props => {
             Olen uusi käyttäjä ja haluan rekisteröityä.
           </Link>
         </div>
-      </div>
-      <div className="cookie-info-container">
-        <CookieConsent
-          buttonText="Hyväksy"
-          buttonStyle={{
-            color: '#3a3a3a',
-            fontSize: '0.875rem',
-            background: '#f59023',
-          }}
-        >
-          Kohdataan-somessa käytämme evästeitä sisäänkirjautumiseen ja
-          analysointiin. Voit lukea lisää evästeistä{' '}
-          <a href=" https://kohdataan.fi/tietosuojaseloste/">
-            tietosuojaselosteesta.
-          </a>
-        </CookieConsent>
       </div>
     </main>
   )

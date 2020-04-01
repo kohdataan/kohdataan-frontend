@@ -100,6 +100,30 @@ const customStylesLong = {
   },
 }
 
+const customStylesCookie = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    paddingTop: '10px',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    maxHeight: '12vh',
+    maxWidth: '70vh',
+    minHeight: '12vh',
+    minWidth: '70vh',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '2000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
 const ModalContainer = props => {
   const {
     children,
@@ -109,6 +133,7 @@ const ModalContainer = props => {
     isLong,
     tutorial,
     editModal,
+    cookie,
   } = props
 
   const getStyles = () => {
@@ -119,6 +144,8 @@ const ModalContainer = props => {
       styles = customStylesTutorial
     } else if (editModal) {
       styles = customStylesEditModal
+    } else if (cookie) {
+      styles = customStylesCookie
     }
     return styles
   }
@@ -149,6 +176,7 @@ ModalContainer.propTypes = {
   isLong: PropTypes.bool,
   tutorial: PropTypes.bool,
   editModal: PropTypes.bool,
+  cookie: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -156,6 +184,7 @@ ModalContainer.defaultProps = {
   modalIsOpen: false,
   editModal: false,
   tutorial: false,
+  cookie: false,
 }
 
 export default memo(ModalContainer)
