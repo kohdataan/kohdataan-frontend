@@ -58,6 +58,15 @@
   justify-content: space-evenly;
 }
 
+.create-account-link-item {
+  background: transparent;
+  border: none;
+  text-transform: none;
+  text-decoration: underline;
+  font-weight: normal;
+  font-family: 'Lato', sans-serif;
+}
+
 .create-account-text {
   color: #fff;
 }
@@ -181,6 +190,9 @@
 
 .create-account-links-container {
   padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 100px;
 }
 
 .create-account-title {
