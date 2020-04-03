@@ -22,7 +22,6 @@ const Tutorial = props => {
       borderRadius: '30px',
       padding: '5px 10px',
       marginRight: '30px',
-      outline: 'none',
     },
     buttonBack: {
       marginLeft: 'auto',
@@ -31,7 +30,6 @@ const Tutorial = props => {
       borderRadius: '30px',
       padding: '5px 10px',
       color: 'black',
-      outline: 'none',
     },
     buttonSkip: {
       marginLeft: 'auto',

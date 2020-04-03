@@ -79,11 +79,7 @@ const PageInformation = props => {
   return (
     <div className="page-information-container">
       <div className="page-info-text-content">{text}</div>
-      <ButtonContainer
-        className="button-close"
-        tabIndex={0}
-        onClick={handleClick}
-      >
+      <ButtonContainer className="button button-close" onClick={handleClick}>
         Sulje
       </ButtonContainer>
     </div>
