@@ -245,7 +245,7 @@ const Message = props => {
                 !isUserLeavingOrJoiningChannel() && (
                   <ButtonContainer
                     className="chat-report-message-icon"
-                    onClick={() => pinPost(id)}
+                    onClick={() => pinPost(id, senderId, text)}
                     label="Ilmoita asiattomasta viestistä"
                   >
                     <i className="fas fa-ellipsis-v" aria-hidden="true" />
