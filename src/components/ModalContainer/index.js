@@ -130,7 +130,10 @@ const ModalContainer = props => {
       contentLabel={label}
       style={getStyles()}
       role="dialog"
-      aria-labelledby={label}
+      aria={{
+        labelledby: label,
+        modal: true,
+      }}
     >
       {children}
     </Modal>

@@ -164,6 +164,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
         <ButtonContainer
           className="button-close"
           onClick={() => closeModal(setShowBot)}
+          label="Sulje"
         >
           Sulje
         </ButtonContainer>

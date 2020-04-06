@@ -138,7 +138,7 @@ const Chat = props => {
     setAfterPinModal(false)
   }
   return (
-    <div className="chat-wrapper" id="chat">
+    <main className="chat-wrapper" id="chat">
       <ChatHeader
         channel={channel}
         toggleSider={toggleSider}
@@ -230,7 +230,7 @@ const Chat = props => {
           Valmis
         </ButtonContainer>
       </ModalContainer>
-    </div>
+    </main>
   )
 }
 

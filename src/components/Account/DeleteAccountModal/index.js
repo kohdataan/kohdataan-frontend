@@ -11,7 +11,7 @@ const DeleteAccountModal = props => {
     <div className="leave-channel-modal-wrapper">
       <ModalContainer
         modalIsOpen={showModal}
-        label="leaveChannelModal"
+        label="Käyttäjätilin poistaminen"
         closeModal={closeModal}
       >
         <p>
