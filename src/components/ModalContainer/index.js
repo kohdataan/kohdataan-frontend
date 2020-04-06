@@ -17,7 +17,8 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
-    minWidth: '40vh',
+    minWidth: '30vh',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
@@ -42,7 +43,7 @@ const customStylesEditModal = {
     minHeight: '30vh',
     maxHeight: '80vh',
     width: '80vw',
-    maxWidth: '660px',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
