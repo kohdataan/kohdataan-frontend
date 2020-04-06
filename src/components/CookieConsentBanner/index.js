@@ -17,15 +17,30 @@ const CookieConsentBanner = props => {
         <CookieConsent
           buttonText="Hyväksy"
           onAccept={closeModal}
+          style={{
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            padding: '5px',
+            position: 'absolute',
+            top: '2%',
+          }}
           buttonStyle={{
             color: '#3a3a3a',
             fontSize: '0.900rem',
             background: '#f59023',
-            display: 'flex',
+            margin: '0 auto 10px',
+            padding: '5px 10px',
+            borderRadius: '30px',
+            flex: '0 auto',
+          }}
+          contentStyle={{
+            flex: '0 auto',
+            margin: '15px',
           }}
         >
-          Kohdataan-somessa käytämme evästeitä sisäänkirjautumiseen ja
-          analysointiin. Voit lukea lisää evästeistä{' '}
+          Kohdataan-somessa käytämme evästeitä, jotta palvelu toimii ja sitä voi 
+          käyttää. Voit lukea lisää evästeistä {' '}
           <a href=" https://kohdataan.fi/tietosuojaseloste/">
             tietosuojaselosteesta.
           </a>
