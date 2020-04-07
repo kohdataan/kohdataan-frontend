@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 
 const ButtonContainer = props => {
-  const { className, children, secondary, onClick, label } = props
+  const { className, children, secondary, onClick, label, role } = props
   return (
     <button
       type="button"
@@ -14,6 +14,7 @@ const ButtonContainer = props => {
       onKeyPress={onClick}
       tabIndex="0"
       aria-label={label}
+      role={role}
     >
       {children}
     </button>
@@ -30,11 +31,13 @@ ButtonContainer.propTypes = {
   onClick: propTypes.func.isRequired,
   secondary: propTypes.bool,
   label: propTypes.string,
+  role: propTypes.string,
 }
 
 ButtonContainer.defaultProps = {
   secondary: false,
   label: '',
+  role: 'button',
 }
 
 export default memo(ButtonContainer)
