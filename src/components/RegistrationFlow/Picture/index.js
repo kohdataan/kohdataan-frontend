@@ -90,6 +90,7 @@ const Picture = props => {
               <ButtonContainer
                 className="icon-btn close-preview-button"
                 onClick={closePreview}
+                label="Sulje"
               >
                 <i className="fas fa-times" />
               </ButtonContainer>
@@ -113,6 +114,7 @@ const Picture = props => {
                 <ButtonContainer
                   className="icon-btn rotate-btn"
                   onClick={handleRotate}
+                  label="Käännä"
                 >
                   <i className="fas fa-retweet" />
                 </ButtonContainer>
@@ -124,6 +126,7 @@ const Picture = props => {
                       handleScaleByDirection('down', scale - 0.02)
                     }
                     onClick={() => handleScaleByDirection('down', scale - 0.02)}
+                    label="Pienennä"
                   >
                     <i className="fas fa-minus zoom-control-sign" />
                   </ButtonContainer>
@@ -160,6 +163,7 @@ const Picture = props => {
                     className="icon-btn"
                     onKeyDown={() => handleScaleByDirection('up', scale + 0.02)}
                     onClick={() => handleScaleByDirection('up', scale + 0.02)}
+                    label="Suurenna"
                   >
                     <i className="fas fa-plus zoom-control-sign" />
                   </ButtonContainer>

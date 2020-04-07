@@ -14,7 +14,6 @@
   background-color: $black;
   color: white;
   cursor: pointer;
-  outline: none;
   position: relative;
   & p {
     font-size: 12px;
@@ -26,7 +25,13 @@
   }
 }
 
+.nav-link:focus {
+  outline: none;
+  border: thin $outlineColor solid;
+}
+
 .nav-link-active {
+  border: none;
   & i {
     transition-property: font-size;
     transition-duration: 0.1s;

@@ -8,7 +8,6 @@
   text-align: center;
   & h1 {
     font-size: 32px;
-    color: $orange;
     font-weight: bold;
     font-style: normal;
     font-stretch: condensed;
@@ -30,13 +29,18 @@
 
 .friends-tutorial-btn {
   background-color: transparent;
-  border: none; 
+  border: none;
   position: absolute;
-  right: 150px;
-  bottom: 15px;
-  outline: none;
+  left: 30px;
+  bottom: 20px;
 }
 
 .no-friends-yet-header {
   text-align: center;
+}
+
+.no-friends-yet-text {
+  text-align: center;
+  line-height: 1.2em;
+  padding: 10px;
 }

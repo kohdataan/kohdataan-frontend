@@ -23,6 +23,8 @@ const FriendsContainer = props => {
     statuses,
   } = props
 
+  if (!user.profileReady) history.push('/registration/info')
+
   const [directChannels, setDirectChannels] = useState([])
   const [isInitialized, setIsInitialized] = useState(false)
 
@@ -95,7 +97,7 @@ const FriendsContainer = props => {
     return <BouncingLoader />
   }
   return (
-    <>
+    <main>
       <Friends
         channels={directChannels}
         getUnreadCount={getUnreadCountByChannelId}
@@ -110,7 +112,7 @@ const FriendsContainer = props => {
         statuses={statuses}
         currentUserId={currentUserId}
       />
-    </>
+    </main>
   )
 }
 

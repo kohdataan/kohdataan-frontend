@@ -58,7 +58,7 @@ const Friend = props => {
     // Get channel posts
     const fetchPosts = async () => {
       if (channel && channel.id) {
-        const channelPosts = await getPosts(channel.id)
+        const channelPosts = await getPosts(channel.id, 0, 100)
         setPosts(channelPosts.data)
       }
     }
@@ -170,10 +170,12 @@ const Friend = props => {
               ) : (
                 <div className="no-unread-messages">{}</div>
               )}
+              <span className="sr-only">Lukemattomia viestejä</span>
             </Link>
             <ButtonContainer
               className="icon-btn block-user-icon-btn"
               onClick={() => setShowModal(true)}
+              label="Estä käyttäjä"
             >
               <i
                 className="fas fa-ellipsis-v fa-lg block-user-icon"
@@ -185,7 +187,7 @@ const Friend = props => {
         <ModalContainer
           modalIsOpen={showModal}
           closeModal={() => setShowModal(false)}
-          label="Change user block status"
+          label="Lisää tai poista kaverin esto"
         >
           <div className="block-user-modal-content">
             <h3 className="interests-modal-text">

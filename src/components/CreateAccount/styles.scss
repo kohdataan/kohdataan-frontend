@@ -14,6 +14,15 @@
   margin-top: 40px;
 }
 
+.accessibility-statement-icon-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  border-radius: 0;
+  margin: 10px 0px 10px 0px;
+  padding-top: 0.67em;
+}
+
 .birthdate-container {
   width: 100%;
   display: flex;
@@ -56,6 +65,15 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.create-account-link-item {
+  background: transparent;
+  border: none;
+  text-transform: none;
+  text-decoration: underline;
+  font-weight: normal;
+  font-family: 'Lato', sans-serif;
 }
 
 .create-account-text {
@@ -147,13 +165,8 @@
   transition: all 0.15s ease-in-out;
   color: #3a3a3a;
   background-color: $orange;
-  outline: none;
   width: 210px;
   height: 42px;
-  &:focus {
-    outline: none;
-    border: solid 1px $white;
-  }
   &:hover {
     cursor: pointer;
   }
@@ -181,6 +194,9 @@
 
 .create-account-links-container {
   padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 100px;
 }
 
 .create-account-title {
@@ -231,6 +247,15 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.privacy-policy-icon-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  border-radius: 0;
+  margin: 10px;
+  padding-top: 0.67em;
 }
 
 .select-birthdate-container {

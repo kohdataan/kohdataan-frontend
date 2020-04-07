@@ -24,25 +24,31 @@ const Friends = props => {
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {
-    history.push('/me')
+    history.push({
+      pathname: '/me',
+      state: { navigateBack: true },
+    })
   }
 
   const steps = [
     {
       target: '.nav-link-Kaverit',
       content: (
-        <>
-          <p className="tutorial-text">
+        <div>
+          <p className="tutorial-step">5/6</p>
+          <h1 className="tutorial-header">
             Voit viestitellä kavereiden kanssa kahdestaan.
+          </h1>
+          <p className="tutorial-text">
+            Löydät kaverit täältä, kohdasta Kaverit.
           </p>
-          <p className="tutorial-text">Löydät kaverit täältä.</p>
           <ButtonContainer
             className="button friends-tutorial-btn"
             onClick={goToPreviousTutorial}
           >
             Edellinen
           </ButtonContainer>
-        </>
+        </div>
       ),
       disableBeacon: true,
     },
@@ -54,10 +60,10 @@ const Friends = props => {
   }
 
   return (
-    <main className="friends-wrapper">
-      <div className="friends-header">
+    <section className="friends-wrapper">
+      <header className="friends-header">
         <h1>Kaverit</h1>
-      </div>
+      </header>
       <div className="friends-boxes">
         {channels && channels.length > 0 ? (
           Object.values(channels).map(channel => (
@@ -75,9 +81,16 @@ const Friends = props => {
             />
           ))
         ) : (
-          <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä.
-          </h3>
+          <section>
+            <h2 className="no-friends-yet-header">
+              Sinulla ei ole vielä yksityisviestejä.
+            </h2>
+            <p className="no-friends-yet-text">
+              Voit lähettää toiselle käyttäjälle yksityisviestin hänen
+              profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta,
+              kun klikkaat ryhmässä hänen kuvakettaan.
+            </p>
+          </section>
         )}
       </div>
       {!tutorialWatched && (
@@ -85,9 +98,10 @@ const Friends = props => {
           steps={steps}
           history={history}
           updateTutorialWatched={updateTutorialWatched}
+          navigateBack={false}
         />
       )}
-    </main>
+    </section>
   )
 }
 

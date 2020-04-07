@@ -2,7 +2,7 @@
 
 .step-button-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: row;
   align-items: center;
   height: 33%;
@@ -19,7 +19,6 @@
   font-size: 0.875rem;
   color: white;
   background-color: black;
-  outline: none;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: bold;
