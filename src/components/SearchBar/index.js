@@ -8,8 +8,6 @@ const SearchBar = React.forwardRef((props, ref) => {
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      // TODO
-      console.log(e)
     }
   }
 
