@@ -2,9 +2,9 @@ import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
 import FriendSearch from './FriendSearch'
-import ValidatedTextArea from '../ValidatedTextArea'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
+import SearchBar from '../SearchBar'
 import './styles.scss'
 
 const Friends = props => {
@@ -60,13 +60,13 @@ const Friends = props => {
     return status
   }
 
-  const handleFriendSearchChange = async event => {
-    setFriendSearch(event.target.value)
-    if (event.target.value === '') {
+  const handleFriendSearchChange = async searchText => {
+    setFriendSearch(searchText)
+    if (searchText === '') {
       setFriendSearchResult([])
     } else {
       try {
-        const foundProfiles = await searchProfiles(event.target.value)
+        const foundProfiles = await searchProfiles(searchText)
         setFriendSearchResult(foundProfiles.data)
       } catch (e) {
         setFriendSearchResult([])
@@ -86,23 +86,13 @@ const Friends = props => {
       </header>
 
       <div className="friends-search">
-        <ValidatedTextArea
-          label="Hae kaveria"
-          name="friendSearch"
-          onChange={handleFriendSearchChange}
+        <SearchBar
+          expression={handleFriendSearchChange}
+          placeholder="Hae kaveria"
+          handleClear={handleFriendSearchReset}
+          label="hae kaveria"
           ref={friendSearchTextInput}
-          showLabel={false}
-          maxLength={20}
-          rows={1}
-          value=""
         />
-        <ButtonContainer
-          className="reset-friend-search-button"
-          onClick={handleFriendSearchReset}
-          tabIndex="0"
-        >
-          <div className="fas fa-times" />
-        </ButtonContainer>
       </div>
       {friendSearch.length === 0 ? (
         <div className="friends-boxes">

@@ -1,0 +1,50 @@
+@import '../../styles/colors.scss';
+
+form.search-bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.search-bar-icon {
+  font-size: 16px;
+  left: 12px;
+  opacity: 0.2;
+  position: absolute;
+  top: 10px;
+  &:focus {
+    border-color: blue;
+  }
+}
+
+.search-bar-icon-clear {
+  font-size: 16px;
+  right: 12px;
+  opacity: 0.2;
+  position: absolute;
+  top: 10px;
+  &:focus {
+    border-color: blue;
+  }
+}
+
+.search-clear-button {
+  border: none;
+  border-radius: 0px;
+  background: transparent;
+  padding: 0 0;
+}
+
+.search-bar-input {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px 10px 35px;
+  width: 100%;
+  font-size: 14px;
+  background-color: $background-gray;
+
+  &:focus {
+    border-color: blue;
+    outline: none;
+  }
+}

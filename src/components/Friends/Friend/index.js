@@ -118,71 +118,63 @@ const Friend = props => {
     !otherUserInfo.blockedUsers.includes(currentUserId)
   ) {
     return (
-      <div>
-        <div className="friend-box-container">
-          <div className="friend-icon-box">
-            {!blocked && (
-              <div>
-                <img
-                  className="friend-icon"
-                  src={imageUri}
-                  alt="Profiilikuva"
-                />
-                <div className={getIconMemberStatus(user.id)} />
+      <div className="friend-box-container">
+        <div className="friend-icon-box">
+          {!blocked && (
+            <div>
+              <img className="friend-icon" src={imageUri} alt="Profiilikuva" />
+              <div className={getIconMemberStatus(user.id)} />
+            </div>
+          )}
+          {blocked && <i className="fas fa-ban fa-lg blocked-icon" />}
+        </div>
+        <div className="friend-messages-content">
+          <Link
+            className="friend-box"
+            to={blocked ? `/friends` : `/chat/${channel.id}`}
+          >
+            <div className="friend-box-content">
+              <div
+                className={blocked ? 'blocked-friend-header' : 'friend-header'}
+              >
+                <h2>{user.nickname}</h2>
               </div>
+              <div
+                className={
+                  blocked
+                    ? 'blocked-friend-text-content text-content'
+                    : 'friend-text-content text-content'
+                }
+              >
+                {message && !blocked ? (
+                  <>{message}</>
+                ) : (
+                  <TextLine className="text-content" />
+                )}
+              </div>
+            </div>
+          </Link>
+          <Link
+            className="unread-box"
+            to={blocked ? `/friends` : `/chat/${channel.id}`}
+          >
+            {unreadCount > 0 && !blocked ? (
+              <mark className="unread-badge">{unreadCount}</mark>
+            ) : (
+              <div className="no-unread-messages">{}</div>
             )}
-            {blocked && <i className="fas fa-ban fa-lg blocked-icon" />}
-          </div>
-          <div className="friend-messages-content">
-            <Link
-              className="friend-box"
-              to={blocked ? `/friends` : `/chat/${channel.id}`}
-            >
-              <div className="friend-box-content">
-                <div
-                  className={
-                    blocked ? 'blocked-friend-header' : 'friend-header'
-                  }
-                >
-                  <h2>{user.nickname}</h2>
-                </div>
-                <div
-                  className={
-                    blocked
-                      ? 'blocked-friend-text-content text-content'
-                      : 'friend-text-content text-content'
-                  }
-                >
-                  {message && !blocked ? (
-                    <>{message}</>
-                  ) : (
-                    <TextLine className="text-content" />
-                  )}
-                </div>
-              </div>
-            </Link>
-            <Link
-              className="unread-box"
-              to={blocked ? `/friends` : `/chat/${channel.id}`}
-            >
-              {unreadCount > 0 && !blocked ? (
-                <mark className="unread-badge">{unreadCount}</mark>
-              ) : (
-                <div className="no-unread-messages">{}</div>
-              )}
-              <span className="sr-only">Lukemattomia viestejä</span>
-            </Link>
-            <ButtonContainer
-              className="icon-btn block-user-icon-btn"
-              onClick={() => setShowModal(true)}
-              label="Estä käyttäjä"
-            >
-              <i
-                className="fas fa-ellipsis-v fa-lg block-user-icon"
-                aria-hidden="true"
-              />
-            </ButtonContainer>
-          </div>
+            <span className="sr-only">Lukemattomia viestejä</span>
+          </Link>
+          <ButtonContainer
+            className="icon-btn block-user-icon-btn"
+            onClick={() => setShowModal(true)}
+            label="Estä käyttäjä"
+          >
+            <i
+              className="fas fa-ellipsis-v fa-lg block-user-icon"
+              aria-hidden="true"
+            />
+          </ButtonContainer>
         </div>
         <ModalContainer
           modalIsOpen={showModal}
