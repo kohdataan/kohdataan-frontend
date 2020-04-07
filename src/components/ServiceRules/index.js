@@ -22,7 +22,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   }
 
   return (
-    <main id="service-rules-container">
+    <div id="service-rules-container">
       <div className="service-rules-content">
         <ButtonContainer className="accept-rules-link" onClick={openModal}>
           Hyväksy palvelun käyttöehdot
@@ -57,7 +57,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
           </aside>
         </ModalContainer>
       </div>
-    </main>
+    </div>
   )
 }
 
