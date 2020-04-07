@@ -25,11 +25,23 @@ const Message = props => {
     isAdmin,
     pinPost,
     filesData,
+    newMessageCount,
+    lastViewed,
+    createAt,
   } = props
 
   const [messageText, setMessageText] = useState(text)
   const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
+  const [showNewMessageDivider, setShowNewMessageDivider] = useState(false)
+
+  useEffect(() => {
+    if (lastViewed < createAt && newMessageCount !== 0) {
+      setShowNewMessageDivider(true)
+    } else if (lastViewed > createAt) {
+      setShowNewMessageDivider(false)
+    }
+  }, [lastViewed, createAt])
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
   if (messageText.includes('STRING_TO_USE')) {
@@ -99,6 +111,15 @@ const Message = props => {
 
   return (
     <>
+      {showNewMessageDivider && (
+        <div className="show-date-content">
+          <div className="new-message-divider" />
+          <span className="new-message-divider-text">
+            {newMessageCount} uutta viestiä
+          </span>
+          <div className="new-message-divider" />
+        </div>
+      )}
       {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
@@ -161,7 +182,10 @@ const Message = props => {
                     />
                   )}
                 </Link>
-                <div className={iconMemberStatus} />
+                <div
+                  className={iconMemberStatus}
+                  aria-label={iconMemberStatus}
+                />
               </div>
             )}
             {currentUserId !== senderId && sender === 'Poistunut käyttäjä' && (
@@ -286,6 +310,13 @@ Message.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
+  newMessageCount: propTypes.number,
+  lastViewed: propTypes.number.isRequired,
+  createAt: propTypes.number.isRequired,
+}
+
+Message.defaultProps = {
+  newMessageCount: 0,
 }
 
 export default memo(Message)

@@ -119,6 +119,22 @@
   justify-content: flex-end;
 }
 
+.new-message-divider {
+  width: 32%;
+  height: 1px;
+  background: $orange;
+  margin: 10px 2px;
+  display: inline-block;
+}
+
+.new-message-divider-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7em;
+  color: #1A1A1A;
+  border: 1px $orange solid;
+  padding: 2px 3px;
+}
+
 .content-system-message {
   background-color: white;
   color: #666464;

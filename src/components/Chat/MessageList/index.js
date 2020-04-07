@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { memo, useEffect, useState, useRef } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import Message from './Message'
@@ -17,7 +17,11 @@ const MessageList = props => {
     getStatusById,
     pinPost,
     filesData,
+    location,
+    lastViewed,
   } = props
+
+  const { unreadCount } = location && location.state ? location.state : 0
 
   const getIconMemberStatus = userId =>
     `chat-${getStatusById(userId)}-status-icon`
@@ -84,7 +88,10 @@ const MessageList = props => {
   })
 
   return (
-    <section className="chat-message-list-container chat--message-list" ref={ref}>
+    <section
+      className="chat-message-list-container chat--message-list"
+      ref={ref}
+    >
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts
@@ -123,6 +130,9 @@ const MessageList = props => {
                     isAdmin={isAdmin(post.user_id)}
                     pinPost={pinPost}
                     filesData={filesData}
+                    newMessageCount={unreadCount}
+                    lastViewed={lastViewed}
+                    createAt={post.create_at}
                   />
                 )
               )
@@ -143,6 +153,7 @@ MessageList.propTypes = {
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
+  location: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(MessageList)
