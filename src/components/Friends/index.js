@@ -139,6 +139,7 @@ const Friends = props => {
               searchTerm={friendSearch}
             />
           ))}
+          <p className="found-friends-count-info">{`Löydettiin ${friendSearchResult.length} käyttäjää`}</p>
         </div>
       )}
       {!tutorialWatched && (
