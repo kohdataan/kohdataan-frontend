@@ -139,6 +139,7 @@ const Message = props => {
                   to={`/profile/${senderMmUsername}`}
                   className="channel-name-link"
                 >
+                  <span className="sr-only">Linkki profiiliin</span>
                   <i aria-hidden="true" title={sender[0]} />
                   {isAdmin ? (
                     <div
@@ -148,7 +149,8 @@ const Message = props => {
                         color: 'white',
                       }}
                     >
-                      K
+                      <span>K</span>
+                      <span className="sr-only">Valvojan profiili</span>
                     </div>
                   ) : (
                     <div
@@ -182,6 +184,7 @@ const Message = props => {
                           src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
                           alt="attachment"
                         />
+                        <span className="sr-only">Linkki kuvaan</span>
                       </Link>
                       <p className="image-message-content-text chat-message-content-text">
                         {messageText}
@@ -242,7 +245,8 @@ const Message = props => {
                 !isUserLeavingOrJoiningChannel() && (
                   <ButtonContainer
                     className="chat-report-message-icon"
-                    onClick={() => pinPost(id)}
+                    onClick={() => pinPost(id, senderId, text)}
+                    label="Ilmoita asiattomasta viestistä"
                   >
                     <i className="fas fa-ellipsis-v" aria-hidden="true" />
                   </ButtonContainer>

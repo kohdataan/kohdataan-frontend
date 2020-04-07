@@ -22,6 +22,7 @@ const Chat = props => {
     handleLeaveChannel,
     statuses,
     handleLogout,
+    sendEmail,
     location,
     pinPost,
     filesData,
@@ -31,6 +32,8 @@ const Chat = props => {
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
   const [afterPinModal, setAfterPinModal] = useState(false)
   const [pinPostId, setPinPostId] = useState(null)
+  const [pinPostSenderData, setPinPostSenderData] = useState(null)
+  const [pinPostText, setPinPostText] = useState(null)
   const directChannel = channel.type === 'D'
 
   const toggleSider = () => setShowSider(!showSider)
@@ -43,17 +46,18 @@ const Chat = props => {
 
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
-    let visibleName = ''
+    let visibleName = 'Käyttäjä'
     if (user && user.delete_at === 0) {
       if (user && user.nickname) {
         visibleName = user.nickname
-      } else if (user) {
-        visibleName = user.username
       }
       return visibleName
     }
     return 'Poistunut käyttäjä'
   }
+
+  const getUserDataById = id =>
+    Object.values(profiles).find(profile => profile.id === id)
 
   const getStatusById = id => {
     const status = id ? statuses[id] : ''
@@ -103,17 +107,28 @@ const Chat = props => {
     return null
   }
 
-  const handlePinPost = id => {
+  const handlePinPost = (id, senderId, text) => {
+    setPinPostSenderData(getUserDataById(senderId))
+    setPinPostText(text)
     setPinPostModalIsOpen(true)
     setPinPostId(id)
   }
 
   const closePinPostModal = () => {
+    setPinPostSenderData(getUserDataById(null))
+    setPinPostText(null)
     setPinPostModalIsOpen(false)
     setPinPostId(null)
   }
 
   const completePinPost = id => {
+    const currentUserData = getUserDataById(currentUserId)
+    sendEmail({
+      name: `${currentUserData.nickname}(${currentUserData.username})`,
+      email: currentUserData.email,
+      message: `Käyttäjä ${pinPostSenderData.nickname}(${pinPostSenderData.username}) lähetti seuraavan viestin ryhmään ${channel.display_name}: ${pinPostText}`,
+      type: 'reported post',
+    })
     pinPost(id)
     closePinPostModal()
     setAfterPinModal(true)
@@ -123,7 +138,7 @@ const Chat = props => {
     setAfterPinModal(false)
   }
   return (
-    <div className="chat-wrapper" id="chat">
+    <main className="chat-wrapper" id="chat">
       <ChatHeader
         channel={channel}
         toggleSider={toggleSider}
@@ -138,7 +153,7 @@ const Chat = props => {
         posts={posts}
         getFilesForPost={getFilesForPost}
         currentUserId={currentUserId}
-        getUserNamebyId={getNicknameById}
+        getNickNamebyId={getNicknameById}
         directChannel={directChannel}
         members={members}
         channelId={channel.id}
@@ -157,7 +172,7 @@ const Chat = props => {
           filesData={filesData}
         />
       )}
-      {channel.id && getDeleteAt() !== 0 && directChannel && (
+      {channel.id && getDeleteAt() && getDeleteAt() !== 0 && directChannel && (
         <div className="inactive-userinput-field">
           <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
         </div>
@@ -215,7 +230,7 @@ const Chat = props => {
           Valmis
         </ButtonContainer>
       </ModalContainer>
-    </div>
+    </main>
   )
 }
 
@@ -232,6 +247,7 @@ Chat.propTypes = {
   handleLeaveChannel: PropTypes.func.isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   handleLogout: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
   filesData: PropTypes.instanceOf(Object).isRequired,

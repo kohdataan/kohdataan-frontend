@@ -60,6 +60,7 @@ const EditInterests = props => {
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
+            label="Sulje"
           >
             <div className="go-back-button" />
           </ButtonContainer>

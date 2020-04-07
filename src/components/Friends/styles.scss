@@ -8,7 +8,6 @@
   text-align: center;
   & h1 {
     font-size: 32px;
-    color: $orange;
     font-weight: bold;
     font-style: normal;
     font-stretch: condensed;
@@ -54,4 +53,10 @@
 
 .no-friends-yet-header {
   text-align: center;
+}
+
+.no-friends-yet-text {
+  text-align: center;
+  line-height: 1.2em;
+  padding: 10px;
 }

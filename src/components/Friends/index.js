@@ -75,16 +75,16 @@ const Friends = props => {
   }
 
   const handleFriendSearchReset = async () => {
-    console.log(friendSearchResult)
     setFriendSearch('')
     friendSearchTextInput.current.value = ''
   }
 
   return (
-    <main className="friends-wrapper">
-      <div className="friends-header">
+    <section className="friends-wrapper">
+      <header className="friends-header">
         <h1>Kaverit</h1>
-      </div>
+      </header>
+
       <div className="friends-search">
         <ValidatedTextArea
           label="Hae kaveria"
@@ -122,9 +122,16 @@ const Friends = props => {
               />
             ))
           ) : (
-            <h3 className="no-friends-yet-header">
-              Sinulla ei ole vielä yksityisviestejä.
-            </h3>
+            <section>
+              <h2 className="no-friends-yet-header">
+                Sinulla ei ole vielä yksityisviestejä.
+              </h2>
+              <p className="no-friends-yet-text">
+                Voit lähettää toiselle käyttäjälle yksityisviestin hänen
+                profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta,
+                kun klikkaat ryhmässä hänen kuvakettaan.
+              </p>
+            </section>
           )}
         </div>
       ) : (
@@ -143,7 +150,7 @@ const Friends = props => {
           updateTutorialWatched={updateTutorialWatched}
         />
       )}
-    </main>
+    </section>
   )
 }
 
