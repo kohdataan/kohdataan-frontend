@@ -4,10 +4,15 @@ import './styles.scss'
 const AccessibilityStatement = () => {
   return (
     <div id="create-account-modal-container">
-      <div className="create-account-modal-content">
-        <h2 className="create-account-modal-header">Saavutettavuusseloste</h2>
-        <div className="create-account-modal-text">
-          <p>Tänne tulee palvelun saavutettavuusseloste.</p>
+      <div className="accesibility-statement-modal-content">
+        <h1 className="service-info-header">Saavutettavuus&shy;seloste</h1>
+        <div className="service-info-content">
+          <article>
+            <section>
+              <h2 className="service-info-list-item">Saavutettavuusselosteesta</h2>
+              <p>Tänne tulee palvelun saavutettavuusseloste.</p>
+            </section>
+          </article>
         </div>
       </div>
     </div>

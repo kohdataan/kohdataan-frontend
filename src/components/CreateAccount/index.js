@@ -507,14 +507,14 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             }}
           >
             <aside id="Tietosuojaseloste">
-              <PrivacyPolicy />
               <ButtonContainer
-                className="accept-rules-icon-btn icon-btn"
+                className="privacy-policy-icon-btn icon-btn"
                 onClick={() => setPrivacyPolicyModalIsOpen(false)}
                 label="Sulje"
               >
                 <div className="go-back-button" />
               </ButtonContainer>
+              <PrivacyPolicy />
               <ButtonContainer
                 className="profile-modal-button accept-rules-modal-button"
                 onClick={() => setPrivacyPolicyModalIsOpen(false)}
@@ -540,14 +540,14 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             }}
           >
             <aside>
-              <AccessibilityStatement />
               <ButtonContainer
-                className="accept-rules-icon-btn icon-btn"
+                className="accessibility-statement-icon-btn icon-btn"
                 onClick={() => setAccessibilityStatementModalIsOpen(false)}
                 label="Sulje"
               >
                 <div className="go-back-button" />
               </ButtonContainer>
+              <AccessibilityStatement />
               <ButtonContainer
                 className="profile-modal-button accept-rules-modal-button"
                 onClick={() => setAccessibilityStatementModalIsOpen(false)}
