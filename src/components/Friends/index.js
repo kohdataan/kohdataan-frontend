@@ -60,6 +60,9 @@ const Friends = props => {
     return status
   }
 
+  const sortByUnreadCount = (a, b) =>
+    getUnreadCount(b.id) - getUnreadCount(a.id)
+
   const filterSearchResults = data =>
     data &&
     data.filter(
@@ -106,20 +109,22 @@ const Friends = props => {
       {friendSearch.length === 0 ? (
         <div className="friends-boxes">
           {channels && channels.length > 0 ? (
-            Object.values(channels).map(channel => (
-              <Friend
-                key={channel.id}
-                channel={channel}
-                unreadCount={getUnreadCount(channel.id)}
-                getUsername={getUsername}
-                getPosts={getPosts}
-                getLatestMessage={getLatestMessage}
-                membersInChannel={membersInChannel}
-                myUserInfo={myUserInfo}
-                getStatusById={getStatusById}
-                currentUserId={currentUserId}
-              />
-            ))
+            Object.values(channels)
+              .sort(sortByUnreadCount)
+              .map(channel => (
+                <Friend
+                  key={channel.id}
+                  channel={channel}
+                  unreadCount={getUnreadCount(channel.id)}
+                  getUsername={getUsername}
+                  getPosts={getPosts}
+                  getLatestMessage={getLatestMessage}
+                  membersInChannel={membersInChannel}
+                  myUserInfo={myUserInfo}
+                  getStatusById={getStatusById}
+                  currentUserId={currentUserId}
+                />
+              ))
           ) : (
             <section>
               <h2 className="no-friends-yet-header">
