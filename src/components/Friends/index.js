@@ -67,7 +67,13 @@ const Friends = props => {
     } else {
       try {
         const foundProfiles = await searchProfiles(searchText)
-        setFriendSearchResult(foundProfiles.data)
+        // Filter out current user profile
+        const filteredProfiles =
+          foundProfiles &&
+          foundProfiles.data &&
+          foundProfiles.data.filter(profile => profile.id !== currentUserId)
+
+        setFriendSearchResult(filteredProfiles)
       } catch (e) {
         setFriendSearchResult([])
       }
