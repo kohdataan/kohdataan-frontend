@@ -9,23 +9,17 @@ form.search-bar {
 .search-bar-icon {
   font-size: 16px;
   left: 12px;
-  opacity: 0.2;
+  opacity: 0.5;
   position: absolute;
-  top: 11px;
-  &:focus {
-    border-color: blue;
-  }
+  top: 12px;
 }
 
 .search-bar-icon-clear {
   font-size: 16px;
   right: 12px;
-  opacity: 0.2;
+  opacity: 0.5;
   position: absolute;
-  top: 11px;
-  &:focus {
-    border-color: blue;
-  }
+  top: 12px;
 }
 
 .search-clear-button {
@@ -42,9 +36,9 @@ form.search-bar {
   width: 100%;
   font-size: 18px;
   background-color: $background-gray;
-
+  border: 1px solid $background-gray;
   &:focus {
-    border-color: blue;
     outline: none;
+    border: 1px solid black;
   }
 }
