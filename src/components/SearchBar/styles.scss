@@ -11,7 +11,7 @@ form.search-bar {
   left: 12px;
   opacity: 0.2;
   position: absolute;
-  top: 10px;
+  top: 11px;
   &:focus {
     border-color: blue;
   }
@@ -22,7 +22,7 @@ form.search-bar {
   right: 12px;
   opacity: 0.2;
   position: absolute;
-  top: 10px;
+  top: 11px;
   &:focus {
     border-color: blue;
   }
@@ -37,10 +37,10 @@ form.search-bar {
 
 .search-bar-input {
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px 15px 10px 35px;
   width: 100%;
-  font-size: 14px;
+  font-size: 18px;
   background-color: $background-gray;
 
   &:focus {

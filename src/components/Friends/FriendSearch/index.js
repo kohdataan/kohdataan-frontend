@@ -31,11 +31,13 @@ const FriendSearch = props => {
               alt="Profiilikuva"
             />
           </div>
-          <div className="found-profile-name">
-            <h2>{profileData.nickname}</h2>
-          </div>
-          <div className="arrow-image-container">
-            <div className="fas fa-chevron-right" />
+          <div className="found-friend-messages-content">
+            <div className="found-profile-name">
+              <h2>{profileData.nickname}</h2>
+            </div>
+            <div className="arrow-image-container">
+              <div className="fas fa-chevron-right" />
+            </div>
           </div>
         </Link>
       </div>

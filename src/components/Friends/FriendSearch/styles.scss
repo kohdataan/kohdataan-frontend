@@ -8,18 +8,15 @@
   background-color: white;
   display: flex;
   flex-direction: row;
-  flex-flow: row nowrap;
   flex-wrap: nowrap;
   align-items: center;
-  align-content: center;
-  justify-content: space-around;
-  margin-right: 12px;
-  padding: 6px;
+  justify-content: center;
 }
 
 .found-profile-link {
   display: flex;
   flex-flow: row nowrap;
+  width: 100%;
   align-items: center;
   justify-content: space-around;
   align-content: center;
@@ -57,9 +54,17 @@
 }
 
 .arrow-image-container {
-  margin: 20px 10px;
-  padding: 8px 20px;
+  margin: 20px 0px;
+  padding: 8px 10px;
   font-size: 18px;
-  width: 100px;
   height: 40px;
+}
+
+.found-friend-messages-content {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+  width: 100%;
 }

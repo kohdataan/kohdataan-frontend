@@ -125,13 +125,15 @@ const Friends = props => {
           )}
         </div>
       ) : (
-        Object.values(friendSearchResult).map(profile => (
-          <FriendSearch
-            key={profile.id}
-            profileData={profile}
-            searchTerm={friendSearch}
-          />
-        ))
+        <div className="friends-boxes">
+          {Object.values(friendSearchResult).map(profile => (
+            <FriendSearch
+              key={profile.id}
+              profileData={profile}
+              searchTerm={friendSearch}
+            />
+          ))}
+        </div>
       )}
       {!tutorialWatched && (
         <Tutorial
