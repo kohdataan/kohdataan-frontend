@@ -18,7 +18,18 @@
 }
 
 .friends-search {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.reset-friend-search-button {
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+  margin-right: 7px;
+  padding: 2;
+  outline: none;
 }
 
 .friends-boxes {

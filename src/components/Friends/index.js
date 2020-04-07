@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
+import FriendSearch from './FriendSearch'
 import ValidatedTextArea from '../ValidatedTextArea'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
@@ -12,6 +13,7 @@ const Friends = props => {
     getUnreadCount,
     getUsername,
     getPosts,
+    searchProfiles,
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
@@ -23,6 +25,7 @@ const Friends = props => {
   } = props
 
   const [friendSearch, setFriendSearch] = useState('')
+  const [friendSearchResult, setFriendSearchResult] = useState([])
   const friendSearchTextInput = React.createRef()
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
@@ -57,11 +60,22 @@ const Friends = props => {
     return status
   }
 
-  const handleFriendSearchChange = event => {
+  const handleFriendSearchChange = async event => {
     setFriendSearch(event.target.value)
+    if (event.target.value === '') {
+      setFriendSearchResult([])
+    } else {
+      try {
+        const foundProfiles = await searchProfiles(event.target.value)
+        setFriendSearchResult(foundProfiles.data)
+      } catch (e) {
+        setFriendSearchResult([])
+      }
+    }
   }
 
-  const handleFriendSearchReset = () => {
+  const handleFriendSearchReset = async () => {
+    console.log(friendSearchResult)
     setFriendSearch('')
     friendSearchTextInput.current.value = ''
   }
@@ -83,35 +97,45 @@ const Friends = props => {
           value=""
         />
         <ButtonContainer
-          className="registration-problem-button"
+          className="reset-friend-search-button"
           onClick={handleFriendSearchReset}
           tabIndex="0"
         >
-          Sulje
+          <div className="fas fa-times" />
         </ButtonContainer>
       </div>
-      <div className="friends-boxes">
-        {channels && channels.length > 0 ? (
-          Object.values(channels).map(channel => (
-            <Friend
-              key={channel.id}
-              channel={channel}
-              unreadCount={getUnreadCount(channel.id)}
-              getUsername={getUsername}
-              getPosts={getPosts}
-              getLatestMessage={getLatestMessage}
-              membersInChannel={membersInChannel}
-              myUserInfo={myUserInfo}
-              getStatusById={getStatusById}
-              currentUserId={currentUserId}
-            />
-          ))
-        ) : (
-          <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä.
-          </h3>
-        )}
-      </div>
+      {friendSearch.length === 0 ? (
+        <div className="friends-boxes">
+          {channels && channels.length > 0 ? (
+            Object.values(channels).map(channel => (
+              <Friend
+                key={channel.id}
+                channel={channel}
+                unreadCount={getUnreadCount(channel.id)}
+                getUsername={getUsername}
+                getPosts={getPosts}
+                getLatestMessage={getLatestMessage}
+                membersInChannel={membersInChannel}
+                myUserInfo={myUserInfo}
+                getStatusById={getStatusById}
+                currentUserId={currentUserId}
+              />
+            ))
+          ) : (
+            <h3 className="no-friends-yet-header">
+              Sinulla ei ole vielä yksityisviestejä.
+            </h3>
+          )}
+        </div>
+      ) : (
+        Object.values(friendSearchResult).map(profile => (
+          <FriendSearch
+            key={profile.id}
+            profileData={profile}
+            searchTerm={friendSearch}
+          />
+        ))
+      )}
       {!tutorialWatched && (
         <Tutorial
           steps={steps}
@@ -128,6 +152,7 @@ Friends.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   getUsername: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
+  searchProfiles: PropTypes.func.isRequired,
   getLatestMessage: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,

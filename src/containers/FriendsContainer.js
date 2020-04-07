@@ -103,6 +103,7 @@ const FriendsContainer = props => {
         getUnreadCount={getUnreadCountByChannelId}
         getUsername={getUsername}
         getPosts={getPosts}
+        searchProfiles={searchProfiles}
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
