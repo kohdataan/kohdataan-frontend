@@ -117,14 +117,23 @@ const BottomNavigationBot = forwardRef((props, ref) => {
           </div>
           <hr aria-hidden="true" />
           <div className="modal-item">
-            <Link to="/account" onClick={() => closeModal(setShowBot)}>
+            <div>
               <i className="fas fa-cog modal-icon" aria-hidden="true" />
+            </div>
+            <Link to="/account" onClick={() => closeModal(setShowBot)}>
               Rekisteröitymis&shy;tiedot
             </Link>
           </div>
-          <hr aria-hidden="true" />
-          <ButtonContainer className="bot-link" onClick={openLogOutModal}>
+          <hr />
+          <div>
             <i className="fas fa-sign-out-alt modal-icon" aria-hidden="true" />
+          </div>
+          <ButtonContainer
+            className="bot-link"
+            role="link"
+            tabIndex={0}
+            onClick={openLogOutModal}
+          >
             Kirjaudu ulos
           </ButtonContainer>
           <ModalContainer
@@ -155,7 +164,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
           </ModalContainer>
         </div>
         <ButtonContainer
-          className="button-close"
+          className="button button-close"
           onClick={() => closeModal(setShowBot)}
           label="Sulje"
         >

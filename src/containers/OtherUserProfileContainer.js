@@ -24,7 +24,8 @@ const OtherUserProfileContainer = props => {
 
   const startDirectChannel = async () => {
     const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
-    history.push(`/chat/${newChannel.data.id}`)
+    if (newChannel && newChannel.data && newChannel.data.id)
+      history.push(`/chat/${newChannel.data.id}`)
   }
 
   // If username is given, get other user's info

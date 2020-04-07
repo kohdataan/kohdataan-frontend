@@ -22,7 +22,6 @@ const Tutorial = props => {
       borderRadius: '30px',
       padding: '5px 10px',
       marginRight: '30px',
-      outline: 'none',
       position: 'absolute',
       right: 20,
       bottom: 20,
@@ -34,7 +33,6 @@ const Tutorial = props => {
       borderRadius: '30px',
       padding: '5px 10px',
       color: 'black',
-      outline: 'none',
       position: 'absolute',
       left: 30,
       bottom: 20,
@@ -143,7 +141,7 @@ Tutorial.propTypes = {
 
 Tutorial.defaultProps = {
   history: null,
-   navigateBack: false,
+  navigateBack: false,
 }
 
 export default Tutorial
