@@ -30,18 +30,21 @@ const Groups = props => {
     {
       target: '.nav-link-Ryhmät',
       content: (
-        <>
-          <p className="tutorial-text">
+        <div>
+          <p className="tutorial-step">6/6</p>
+          <h1 className="tutorial-header">
             Voit jutella ja tutustua uusiin ihmisiin ryhmissä.{' '}
+          </h1>
+          <p className="tutorial-text">
+            Löydät ryhmät täältä, kohdasta Ryhmät.
           </p>
-          <p className="tutorial-text">Löydät ryhmät täältä.</p>
           <ButtonContainer
             className="button groups-tutorial-btn"
             onClick={goToPreviousTutorial}
           >
             Edellinen
           </ButtonContainer>
-        </>
+        </div>
       ),
       disableBeacon: true,
     },
