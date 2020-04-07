@@ -28,7 +28,7 @@ const Profile = props => {
     if (history.location.state && history.location.state.navigateBack) {
       setReturnToTutorial(true)
     }
-  }, [])
+  }, [history.location.state])
 
   // Extended user info from node backend
   const {
