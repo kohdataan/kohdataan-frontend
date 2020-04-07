@@ -83,14 +83,12 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               />
             </ModalContainer>
           </div>
-          <hr />
+          <hr aria-hidden="true" />
           <div className="modal-content">
             <div className="modal-item">
               <i className="fas fa-life-ring modal-icon" aria-hidden="true" />
               <ButtonContainer
                 className="bot-link"
-                role="link"
-                tabIndex={0}
                 onClick={openSendMessageModal}
               >
                 Lähetä valvojalle viesti
@@ -107,17 +105,17 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               </ModalContainer>
             </div>
           </div>
-          <hr />
-          <div className="modal-item inactive-item">
+          <hr aria-hidden="true" />
+          <div className="modal-item inactive-item" aria-hidden="true">
             <i className="fas fa-check-square modal-icon" aria-hidden="true" />
             Palvelun säännöt
           </div>
-          <hr />
-          <div className="modal-item inactive-item">
+          <hr aria-hidden="true" />
+          <div className="modal-item inactive-item" aria-hidden="true">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
             Yleiset ohjeet
           </div>
-          <hr />
+          <hr aria-hidden="true" />
           <div className="modal-item">
             <div>
               <i className="fas fa-cog modal-icon" aria-hidden="true" />

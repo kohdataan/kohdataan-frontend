@@ -22,7 +22,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getUserByUsername, userLogout } from '../api/user/user'
+import { getUserByUsername, userLogout, sendEmail } from '../api/user/user'
 import { removeUserInterestsFromChannelPurpose } from '../api/channels/channels'
 import Chat from '../components/Chat'
 import logoutHandler from '../utils/userLogout'
@@ -141,6 +141,7 @@ const ChatContainer = props => {
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}
+          sendEmail={sendEmail}
           handleLogout={handleLogout}
           location={location}
           pinPost={pinPost}
