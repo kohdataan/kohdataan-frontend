@@ -24,25 +24,31 @@ const Friends = props => {
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {
-    history.push('/me')
+    history.push({
+      pathname: '/me',
+      state: { navigateBack: true },
+    })
   }
 
   const steps = [
     {
       target: '.nav-link-Kaverit',
       content: (
-        <>
-          <p className="tutorial-text">
+        <div>
+          <p className="tutorial-step">5/6</p>
+          <h1 className="tutorial-header">
             Voit viestitellä kavereiden kanssa kahdestaan.
+          </h1>
+          <p className="tutorial-text">
+            Löydät kaverit täältä, kohdasta Kaverit.
           </p>
-          <p className="tutorial-text">Löydät kaverit täältä.</p>
           <ButtonContainer
             className="button friends-tutorial-btn"
             onClick={goToPreviousTutorial}
           >
             Edellinen
           </ButtonContainer>
-        </>
+        </div>
       ),
       disableBeacon: true,
     },
@@ -92,6 +98,7 @@ const Friends = props => {
           steps={steps}
           history={history}
           updateTutorialWatched={updateTutorialWatched}
+          navigateBack={false}
         />
       )}
     </section>
