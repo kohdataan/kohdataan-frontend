@@ -60,6 +60,13 @@ const Friends = props => {
     return status
   }
 
+  const filterSearchResults = data =>
+    data &&
+    data.filter(
+      profile =>
+        profile.id !== currentUserId && profile.username !== 'surveybot'
+    )
+
   const handleFriendSearchChange = async searchText => {
     setFriendSearch(searchText)
     if (searchText === '') {
@@ -68,11 +75,7 @@ const Friends = props => {
       try {
         const foundProfiles = await searchProfiles(searchText)
         // Filter out current user profile
-        const filteredProfiles =
-          foundProfiles &&
-          foundProfiles.data &&
-          foundProfiles.data.filter(profile => profile.id !== currentUserId)
-
+        const filteredProfiles = filterSearchResults(foundProfiles.data)
         setFriendSearchResult(filteredProfiles)
       } catch (e) {
         setFriendSearchResult([])
