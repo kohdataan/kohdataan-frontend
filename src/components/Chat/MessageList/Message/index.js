@@ -226,7 +226,7 @@ const Message = props => {
                       <ReactAudioPlayer
                         src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                         controls
-                        preload="auto"
+                        preload="metadata"
                         controlsList="nodownload"
                         style={{ maxWidth: '53vw' }}
                       />
@@ -245,7 +245,7 @@ const Message = props => {
                 !isUserLeavingOrJoiningChannel() && (
                   <ButtonContainer
                     className="chat-report-message-icon"
-                    onClick={() => pinPost(id)}
+                    onClick={() => pinPost(id, senderId, text)}
                     label="Ilmoita asiattomasta viestistä"
                   >
                     <i className="fas fa-ellipsis-v" aria-hidden="true" />

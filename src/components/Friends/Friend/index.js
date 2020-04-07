@@ -58,7 +58,7 @@ const Friend = props => {
     // Get channel posts
     const fetchPosts = async () => {
       if (channel && channel.id) {
-        const channelPosts = await getPosts(channel.id)
+        const channelPosts = await getPosts(channel.id, 0, 100)
         setPosts(channelPosts.data)
       }
     }
