@@ -1,0 +1,74 @@
+@import '../../../styles/colors.scss';
+
+.found-profile-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.found-profile-link {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+  margin-right: 5px;
+  border-bottom: 1px solid #9a9a9a;
+}
+
+.found-profile-icon-box {
+  text-align: left;
+  width: 55px;
+  margin-right: 10px;
+  flex-shrink: 1;
+}
+
+.found-profile-icon {
+  background-color: gray;
+  padding: none;
+  height: 32px;
+  width: 32px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.found-profile-name {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: none;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  justify-content: space-between;
+  text-align: left;
+  & p {
+    color: $black;
+    font-weight: bold;
+  }
+}
+
+.arrow-image-container {
+  margin: 20px 0px;
+  padding: 8px 10px;
+  font-size: 18px;
+  height: 40px;
+}
+
+.found-friend-messages-content {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+  width: 100%;
+}

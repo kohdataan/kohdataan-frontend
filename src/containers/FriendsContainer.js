@@ -2,6 +2,7 @@ import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
+import { searchProfiles as searchProfilesAction } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
@@ -15,6 +16,7 @@ const FriendsContainer = props => {
     myChannels,
     profiles,
     getPosts,
+    searchProfiles,
     fetchFriendsPageData,
     membersInChannel,
     updateUser,
@@ -103,6 +105,7 @@ const FriendsContainer = props => {
         getUnreadCount={getUnreadCountByChannelId}
         getUsername={getUsername}
         getPosts={getPosts}
+        searchProfiles={searchProfiles}
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
@@ -122,6 +125,7 @@ FriendsContainer.propTypes = {
   currentUserId: PropTypes.string.isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
+  searchProfiles: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
@@ -161,6 +165,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getPosts: getPostsAction,
+      searchProfiles: searchProfilesAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
       updateUser: updateUserAction,
     },

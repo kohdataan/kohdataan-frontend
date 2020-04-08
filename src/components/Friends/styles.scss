@@ -16,6 +16,25 @@
   }
 }
 
+.friends-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0 30px;
+  @media (max-width: 375px) {
+    padding: 0 10px;
+  }
+}
+
+.reset-friend-search-button {
+  background: transparent;
+  border: none;
+  border-radius: 0px;
+  margin-right: 7px;
+  padding: 2;
+  outline: none;
+}
+
 .friends-boxes {
   padding: 0 30px;
   display: flex;
@@ -43,4 +62,9 @@
   text-align: center;
   line-height: 1.2em;
   padding: 10px;
+}
+
+.found-friends-count-info {
+  font-size: 16px;
+  color: $text-medium-gray;
 }
