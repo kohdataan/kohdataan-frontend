@@ -1,8 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
+import FriendSearch from './FriendSearch'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
+import SearchBar from '../SearchBar'
 import './styles.scss'
 
 const Friends = props => {
@@ -11,6 +13,7 @@ const Friends = props => {
     getUnreadCount,
     getUsername,
     getPosts,
+    searchProfiles,
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
@@ -21,28 +24,38 @@ const Friends = props => {
     currentUserId,
   } = props
 
+  const [friendSearch, setFriendSearch] = useState('')
+  const [friendSearchResult, setFriendSearchResult] = useState([])
+  const friendSearchTextInput = React.createRef()
+
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {
-    history.push('/me')
+    history.push({
+      pathname: '/me',
+      state: { navigateBack: true },
+    })
   }
 
   const steps = [
     {
       target: '.nav-link-Kaverit',
       content: (
-        <>
-          <p className="tutorial-text">
+        <div>
+          <p className="tutorial-step">5/6</p>
+          <h1 className="tutorial-header">
             Voit viestitellä kavereiden kanssa kahdestaan.
+          </h1>
+          <p className="tutorial-text">
+            Löydät kaverit täältä, kohdasta Kaverit.
           </p>
-          <p className="tutorial-text">Löydät kaverit täältä.</p>
           <ButtonContainer
             className="button friends-tutorial-btn"
             onClick={goToPreviousTutorial}
           >
             Edellinen
           </ButtonContainer>
-        </>
+        </div>
       ),
       disableBeacon: true,
     },
@@ -53,41 +66,105 @@ const Friends = props => {
     return status
   }
 
+  const sortByUnreadCount = (a, b) =>
+    getUnreadCount(b.id) - getUnreadCount(a.id)
+
+  const filterSearchResults = data =>
+    data &&
+    data.filter(
+      profile =>
+        profile.id !== currentUserId && profile.username !== 'surveybot'
+    )
+
+  const handleFriendSearchChange = async searchText => {
+    setFriendSearch(searchText)
+    if (searchText === '') {
+      setFriendSearchResult([])
+    } else {
+      try {
+        const foundProfiles = await searchProfiles(searchText)
+        // Filter out current user profile
+        const filteredProfiles = filterSearchResults(foundProfiles.data)
+        setFriendSearchResult(filteredProfiles)
+      } catch (e) {
+        setFriendSearchResult([])
+      }
+    }
+  }
+
+  const handleFriendSearchReset = async () => {
+    setFriendSearch('')
+    friendSearchTextInput.current.value = ''
+  }
+
   return (
-    <main className="friends-wrapper">
-      <div className="friends-header">
+    <section className="friends-wrapper">
+      <header className="friends-header">
         <h1>Kaverit</h1>
+      </header>
+
+      <div className="friends-search">
+        <SearchBar
+          expression={handleFriendSearchChange}
+          placeholder="Hae kaveria"
+          handleClear={handleFriendSearchReset}
+          label="hae kaveria"
+          ref={friendSearchTextInput}
+        />
       </div>
-      <div className="friends-boxes">
-        {channels && channels.length > 0 ? (
-          Object.values(channels).map(channel => (
-            <Friend
-              key={channel.id}
-              channel={channel}
-              unreadCount={getUnreadCount(channel.id)}
-              getUsername={getUsername}
-              getPosts={getPosts}
-              getLatestMessage={getLatestMessage}
-              membersInChannel={membersInChannel}
-              myUserInfo={myUserInfo}
-              getStatusById={getStatusById}
-              currentUserId={currentUserId}
+      {friendSearch.length === 0 ? (
+        <div className="friends-boxes">
+          {channels && channels.length > 0 ? (
+            Object.values(channels)
+              .sort(sortByUnreadCount)
+              .map(channel => (
+                <Friend
+                  key={channel.id}
+                  channel={channel}
+                  unreadCount={getUnreadCount(channel.id)}
+                  getUsername={getUsername}
+                  getPosts={getPosts}
+                  getLatestMessage={getLatestMessage}
+                  membersInChannel={membersInChannel}
+                  myUserInfo={myUserInfo}
+                  getStatusById={getStatusById}
+                  currentUserId={currentUserId}
+                />
+              ))
+          ) : (
+            <section>
+              <h2 className="no-friends-yet-header">
+                Sinulla ei ole vielä yksityisviestejä.
+              </h2>
+              <p className="no-friends-yet-text">
+                Voit lähettää toiselle käyttäjälle yksityisviestin hänen
+                profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta,
+                kun klikkaat ryhmässä hänen kuvakettaan.
+              </p>
+            </section>
+          )}
+        </div>
+      ) : (
+        <div className="friends-boxes">
+          {Object.values(friendSearchResult).map(profile => (
+            <FriendSearch
+              key={profile.id}
+              profileData={profile}
+              searchTerm={friendSearch}
             />
-          ))
-        ) : (
-          <h3 className="no-friends-yet-header">
-            Sinulla ei ole vielä yksityisviestejä.
-          </h3>
-        )}
-      </div>
+          ))}
+          <p className="found-friends-count-info">{`Löydettiin ${friendSearchResult.length} käyttäjää`}</p>
+        </div>
+      )}
       {!tutorialWatched && (
         <Tutorial
           steps={steps}
           history={history}
           updateTutorialWatched={updateTutorialWatched}
+          navigateBack={false}
         />
       )}
-    </main>
+    </section>
   )
 }
 
@@ -96,6 +173,7 @@ Friends.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   getUsername: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
+  searchProfiles: PropTypes.func.isRequired,
   getLatestMessage: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,

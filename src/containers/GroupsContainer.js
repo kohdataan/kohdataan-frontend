@@ -39,6 +39,8 @@ const GroupsContainer = props => {
     posts,
   } = props
 
+  if (!user.profileReady) history.push('/registration/info')
+
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   // Get only those channels suggestions that user has not yet joined
@@ -117,9 +119,10 @@ const GroupsContainer = props => {
 
   // TODO: Refactor channel member fetching
   return (
-    <>
+    <main>
       <GroupSuggestions
         channels={filteredSuggestions}
+        joinedChannels={getGroupChannels(getChannelInfoForMyChannels())}
         handleJoinChannel={handleJoinChannel}
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
@@ -140,7 +143,7 @@ const GroupsContainer = props => {
         getPosts={getPosts}
         posts={posts}
       />
-    </>
+    </main>
   )
 }
 

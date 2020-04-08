@@ -123,7 +123,7 @@ const RegistrationProblem = ({ handleEmailSending, handleClick, text }) => {
             </div>
             <button
               type="submit"
-              className="registration-problem-button"
+              className="button registration-problem-button"
               onKeyPress={handleSubmit(onSubmit)}
               tabIndex="0"
             >

@@ -41,7 +41,7 @@ const EditAccountModal = props => {
     <div className="leave-channel-modal-wrapper">
       <ModalContainer
         modalIsOpen={showModal}
-        label="leaveChannelModal"
+        label="Muokkaa tietoja"
         closeModal={closeModal}
         editModal
       >

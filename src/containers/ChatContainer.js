@@ -22,7 +22,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import { getUserByUsername, userLogout } from '../api/user/user'
+import { getUserByUsername, userLogout, sendEmail } from '../api/user/user'
 import { removeUserInterestsFromChannelPurpose } from '../api/channels/channels'
 import Chat from '../components/Chat'
 import logoutHandler from '../utils/userLogout'
@@ -73,7 +73,7 @@ const ChatContainer = props => {
   useEffect(() => {
     if (currentChannelId) {
       // get maximum of 400 posts at a time
-      getPosts(currentChannelId, 0, 400)
+      getPosts(currentChannelId, 0, 100)
       viewChannel(currentChannelId)
     }
   }, [teams, posts, getPosts, viewChannel, currentChannelId])
@@ -141,6 +141,7 @@ const ChatContainer = props => {
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}
+          sendEmail={sendEmail}
           handleLogout={handleLogout}
           location={location}
           pinPost={pinPost}

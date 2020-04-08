@@ -65,7 +65,6 @@
   background-repeat: no-repeat;
   border: none;
   align-self: center;
-  outline: none;
 }
 
 .send-image-attachment-button:active {
@@ -81,7 +80,10 @@
   background-position: center;
   border: none;
   align-self: center;
-  outline: none;
+  &:active {
+    width: 1.8em;
+    height: 1.8em;
+  }
 }
 
 .send-message-button {

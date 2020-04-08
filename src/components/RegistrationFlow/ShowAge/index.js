@@ -11,10 +11,10 @@ const ShowAge = props => {
     <ShadowBox>
       <main role="main" className="add-user-show-age-container">
         <div className="profile-creation-title-container">
-          <h3 className="profile-creation-title">
+          <h2 className="profile-creation-title">
             Ikäsi:
             <span className="add-user-show-age-value">{` ${age} vuotta`}</span>
-          </h3>
+          </h2>
 
           {!hideStep && <span className="profile-creation-step-text">2/6</span>}
         </div>

@@ -194,10 +194,10 @@ const RegistrationContainer = props => {
     }
   }
 
-  const stepButtonActions = () => {
+  const stepButtonActions = async () => {
     if (pages[step].last)
-      props.updateUser({ profileReady: true, imageUploaded })
-    profileCreationAction()
+      await props.updateUser({ profileReady: true, imageUploaded })
+    await profileCreationAction()
   }
 
   const closeModal = () => {
@@ -219,7 +219,7 @@ const RegistrationContainer = props => {
       <ModalContainer
         modalIsOpen={openModal}
         closeModal={closeModal}
-        label="User can have five interests at most"
+        label="Käyttäjällä voi olla enintään viisi kiinnostusta."
       >
         <div>
           <h3 className="interests-modal-text">
@@ -229,6 +229,7 @@ const RegistrationContainer = props => {
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
+            label="Sulje"
           >
             <div className="go-back-button" />
           </ButtonContainer>

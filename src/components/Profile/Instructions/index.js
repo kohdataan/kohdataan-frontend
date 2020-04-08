@@ -69,7 +69,9 @@ const Instructions = props => {
         <p className="profile-modal-text">
           Profiilisi tiedot näkyvät myös muille.
         </p>
-        <p className="profile-modal-text">Voit muokata tietoja täältä.</p>
+        <p className="profile-modal-text">
+          Voit muokata tietoja täältä, kohdasta Muokkaa.
+        </p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
@@ -97,7 +99,9 @@ const Instructions = props => {
         label="this-is-your-profile"
       >
         <p className="profile-modal-text">Tämä on oma profiilisi!</p>
-        <p className="profile-modal-text">Löydät sen täältä.</p>
+        <p className="profile-modal-text">
+          Löydät sen täältä, kohdasta Profiili.
+        </p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_YOUR_PROFILE)}
@@ -130,10 +134,10 @@ const Instructions = props => {
         label="this-is-the-bot"
       >
         <p className="profile-modal-text">
-          Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit
+          Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
           klikata Bottia.
         </p>
-        <p className="profile-modal-text">Löydät botin täältä.</p>
+        <p className="profile-modal-text">Löydät sen täältä, kohdasta Botti.</p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_THE_BOT)}
@@ -164,7 +168,9 @@ const Instructions = props => {
         <p className="profile-modal-text">
           Voit viestitellä kavereiden kanssa kahdestaan.
         </p>
-        <p className="profile-modal-text">Löydät kaverit täältä.</p>
+        <p className="profile-modal-text">
+          Löydät kaverit täältä, kohdasta Kaverit.
+        </p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_FRIENDS)}
@@ -193,7 +199,9 @@ const Instructions = props => {
         <p className="profile-modal-text">
           Voit jutella ja tutustua uusiin ihmisiin ryhmissä.
         </p>
-        <p className="profile-modal-text">Löydät ryhmät täältä.</p>
+        <p className="profile-modal-text">
+          Löydät ryhmät täältä, kohdasta Ryhmät.
+        </p>
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_GROUPS)}

@@ -17,13 +17,15 @@ const OtherUserProfileContainer = props => {
     createDirectChannel,
     currentUserId,
   } = props
+
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
 
   const startDirectChannel = async () => {
     const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
-    history.push(`/chat/${newChannel.data.id}`)
+    if (newChannel && newChannel.data && newChannel.data.id)
+      history.push(`/chat/${newChannel.data.id}`)
   }
 
   // If username is given, get other user's info
@@ -77,14 +79,12 @@ const mapStateToProps = (state, ownProps) => {
   const { username } = ownProps.match.params
   const currentUser = state.entities.users.profiles[currentUserId]
   const interestOptions = state.interests.results
-  const myUserInfo = state.user
 
   return {
     currentUserId,
     currentUser,
     username,
     interestOptions,
-    myUserInfo,
   }
 }
 

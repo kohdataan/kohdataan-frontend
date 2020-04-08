@@ -75,6 +75,7 @@ const EmailSmsForm = props => {
               <ButtonContainer
                 className="icon-btn edit-profile-icon-btn"
                 onClick={closeModal}
+                label="Sulje"
               >
                 <div className="go-back-button" />
               </ButtonContainer>

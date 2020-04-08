@@ -10,7 +10,7 @@ const MessageList = props => {
     posts,
     teams,
     currentUserId,
-    getUserNamebyId,
+    getNickNamebyId,
     directChannel,
     channelId,
     profiles,
@@ -31,7 +31,7 @@ const MessageList = props => {
   const setTimeStampValues = post => {
     let showDate = false
     let showTime = true
-    const sender = getUserNamebyId(post.user_id)
+    const sender = getNickNamebyId(post.user_id)
     const options = {
       year: 'numeric',
       month: 'numeric',
@@ -84,7 +84,7 @@ const MessageList = props => {
   })
 
   return (
-    <div className="chat-message-list-container chat--message-list" ref={ref}>
+    <section className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts
@@ -109,7 +109,7 @@ const MessageList = props => {
                     files={post.file_ids}
                     type={post.type}
                     url={post.url}
-                    sender={getUserNamebyId(post.user_id)}
+                    sender={getNickNamebyId(post.user_id)}
                     text={post.message}
                     senderId={post.user_id}
                     currentUserId={currentUserId}
@@ -128,7 +128,7 @@ const MessageList = props => {
               )
             })}
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -136,7 +136,7 @@ MessageList.propTypes = {
   posts: propTypes.instanceOf(Array).isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
-  getUserNamebyId: propTypes.func.isRequired,
+  getNickNamebyId: propTypes.func.isRequired,
   directChannel: propTypes.bool.isRequired,
   channelId: propTypes.string.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,

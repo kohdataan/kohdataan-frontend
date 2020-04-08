@@ -14,7 +14,7 @@ const Interests = props => {
         tutustua uusiin ihmisiin.
       </p>
       <div className="profile-creation-title-container">
-        <h3 className="profile-creation-title">Valitse 3-5</h3>
+        <h2 className="profile-creation-title">Valitse 3-5</h2>
         {!hideStep && <span className="profile-creation-step-text">6/6</span>}
       </div>
 
