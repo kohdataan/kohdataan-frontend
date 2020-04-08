@@ -185,7 +185,6 @@ DateSelectField.defaultProps = {
   showLabel: false,
   ariaInvalid: false,
   errors: null,
-  ariaDescribedBy: '',
   inputClassName: '',
   labelClassName: '',
 }
