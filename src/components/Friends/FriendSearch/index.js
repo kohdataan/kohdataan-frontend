@@ -33,7 +33,7 @@ const FriendSearch = props => {
           </div>
           <div className="found-friend-messages-content">
             <div className="found-profile-name">
-              <h2>{profileData.nickname}</h2>
+              <p>{profileData.nickname}</p>
             </div>
             <div className="arrow-image-container">
               <div className="fas fa-chevron-right" />

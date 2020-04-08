@@ -137,7 +137,7 @@ const Friend = props => {
               <div
                 className={blocked ? 'blocked-friend-header' : 'friend-header'}
               >
-                <h2>{user.nickname}</h2>
+                <p>{user.nickname}</p>
               </div>
               <div
                 className={
@@ -223,7 +223,7 @@ const Friend = props => {
             <div className="deleted-user-messages-content friend-messages-content">
               <div className="friend-box-content">
                 <div className="friend-header">
-                  <h2 className="deleted-user-nickname">Poistunut käyttäjä</h2>
+                  <p className="deleted-user-nickname">Poistunut käyttäjä</p>
                 </div>
                 <div className="deleted-user-message text-content">
                   <div

@@ -51,6 +51,10 @@
   text-decoration: none;
   justify-content: space-between;
   text-align: left;
+  & p {
+    color: $black;
+    font-weight: bold;
+  }
 }
 
 .arrow-image-container {
