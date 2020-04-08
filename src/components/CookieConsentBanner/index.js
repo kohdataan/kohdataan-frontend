@@ -10,7 +10,7 @@ const CookieConsentBanner = props => {
     <ModalContainer
       label="cookie-banner-modal"
       modalIsOpen={modalIsOpen}
-      closeModal={closeModal}
+      closeModal={() => {}}
       cookie
     >
       <div className="cookie-info-container">
