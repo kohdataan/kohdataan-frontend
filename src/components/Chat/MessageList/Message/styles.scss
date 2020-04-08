@@ -70,13 +70,16 @@
   flex-flow: row nowrap;
   margin-top: 15px;
   justify-content: flex-start;
-  width: 100%;
-  max-width: 63vw;
+  max-width: 58vw;
 }
 
 .own-chat-message-header {
   justify-content: flex-end;
   max-width: 58vw;
+}
+
+.other-user-message-header {
+  margin-left: 43px;
 }
 
 .message-without-header-content {
