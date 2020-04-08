@@ -29,7 +29,7 @@ const Chat = props => {
   } = props
 
   const [currentUser, setCurrentUser] = useState(null)
-  const [lastViewed, setLastViewed] = useState('') 
+  const [lastViewed, setLastViewed] = useState(0)
 
   useEffect(() => {
     setCurrentUser(members.find(member => member.user_id === currentUserId))
@@ -37,7 +37,6 @@ const Chat = props => {
       setLastViewed(currentUser.last_viewed_at)
     }
   }, [currentUserId, members])
-
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)

@@ -120,19 +120,28 @@
 }
 
 .new-message-divider {
-  width: 32%;
-  height: 1px;
+  width: 40%;
+  height: 2px;
   background: $orange;
   margin: 10px 2px;
   display: inline-block;
+  @media (max-width: 768px) {
+    width: 35%;
+  }
+  @media (max-width: 425px) {
+    width: 25%;
+  }
+  @media (max-width: 375px) {
+    width: 23%;
+  }
 }
 
 .new-message-divider-text {
   font-family: 'Lato', sans-serif;
-  font-size: 0.7em;
+  font-size: 16px;
   color: #1A1A1A;
   border: 1px $orange solid;
-  padding: 2px 3px;
+  padding: 3px 5px;
 }
 
 .content-system-message {

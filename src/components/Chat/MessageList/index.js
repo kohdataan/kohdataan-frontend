@@ -21,6 +21,7 @@ const MessageList = props => {
     lastViewed,
   } = props
 
+  const [messageDividerSet, setMessageDividerSet] = useState(false)
   const { unreadCount } = location && location.state ? location.state : 0
 
   const getIconMemberStatus = userId =>
@@ -131,8 +132,10 @@ const MessageList = props => {
                     pinPost={pinPost}
                     filesData={filesData}
                     newMessageCount={unreadCount}
-                    lastViewed={lastViewed}
+                    lastViewed={Number(lastViewed)}
                     createAt={post.create_at}
+                    setMessageDividerSet={setMessageDividerSet}
+                    messageDividerSet={messageDividerSet}
                   />
                 )
               )
@@ -154,6 +157,7 @@ MessageList.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   location: propTypes.instanceOf(Object).isRequired,
+  lastViewed: propTypes.number.isRequired,
 }
 
 export default memo(MessageList)

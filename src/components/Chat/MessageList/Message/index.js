@@ -28,17 +28,26 @@ const Message = props => {
     newMessageCount,
     lastViewed,
     createAt,
+    messageDividerSet,
+    setMessageDividerSet,
   } = props
 
   const [messageText, setMessageText] = useState(text)
   const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
   const [showNewMessageDivider, setShowNewMessageDivider] = useState(false)
+  const [newMessagesIndicator, setNewMessagesIndicator] = useState(0)
 
   useEffect(() => {
-    if (lastViewed < createAt && newMessageCount !== 0) {
+    if (
+      lastViewed === createAt &&
+      newMessageCount !== 0 &&
+      !messageDividerSet
+    ) {
       setShowNewMessageDivider(true)
-    } else if (lastViewed > createAt) {
+      setMessageDividerSet(true)
+      setNewMessagesIndicator(lastViewed)
+    } else if (messageDividerSet && lastViewed === newMessagesIndicator) {
       setShowNewMessageDivider(false)
     }
   }, [lastViewed, createAt])
@@ -111,15 +120,6 @@ const Message = props => {
 
   return (
     <>
-      {showNewMessageDivider && (
-        <div className="show-date-content">
-          <div className="new-message-divider" />
-          <span className="new-message-divider-text">
-            {newMessageCount} uutta viestiä
-          </span>
-          <div className="new-message-divider" />
-        </div>
-      )}
       {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
@@ -279,6 +279,13 @@ const Message = props => {
           </div>
         </div>
       </div>
+      {showNewMessageDivider && messageDividerSet && (
+        <div className="show-date-content">
+          <div className="new-message-divider" />
+          <span className="new-message-divider-text">Uudet tapahtumat</span>
+          <div className="new-message-divider" />
+        </div>
+      )}
     </>
   )
 }
@@ -313,6 +320,8 @@ Message.propTypes = {
   newMessageCount: propTypes.number,
   lastViewed: propTypes.number.isRequired,
   createAt: propTypes.number.isRequired,
+  messageDividerSet: propTypes.bool.isRequired,
+  setMessageDividerSet: propTypes.func.isRequired,
 }
 
 Message.defaultProps = {
