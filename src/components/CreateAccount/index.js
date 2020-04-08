@@ -399,6 +399,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 <button
                   type="button"
                   onClick={openPasswordModal}
+                  id="password-info"
                   className="info-circle-button"
                   aria-label="salasana-info-nappi"
                   aria-labelledby="password-info"

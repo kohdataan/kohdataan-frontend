@@ -165,13 +165,8 @@
   transition: all 0.15s ease-in-out;
   color: #3a3a3a;
   background-color: $orange;
-  outline: none;
   width: 210px;
   height: 42px;
-  &:focus {
-    outline: none;
-    border: solid 1px $white;
-  }
   &:hover {
     cursor: pointer;
   }

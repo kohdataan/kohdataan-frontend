@@ -10,7 +10,13 @@ const StepButton = props => {
     onClick,
     nextButtonActive,
     setOpenModal,
+    history,
   } = props
+
+  const handleProfileReady = async () => {
+    await onClick()
+    history.push('/me')
+  }
 
   return (
     <div className="step-button-container">
@@ -34,9 +40,12 @@ const StepButton = props => {
       )}
 
       {last && nextButtonActive && (
-        <Link className="next-step-button" to="/me" onClick={onClick}>
+        <ButtonContainer
+          className="next-step-button"
+          onClick={handleProfileReady}
+        >
           Tallenna
-        </Link>
+        </ButtonContainer>
       )}
 
       {last && !nextButtonActive && (
@@ -56,6 +65,7 @@ StepButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   nextButtonActive: PropTypes.bool.isRequired,
   setOpenModal: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(StepButton)

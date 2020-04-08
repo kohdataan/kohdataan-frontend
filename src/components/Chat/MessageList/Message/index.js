@@ -272,7 +272,7 @@ const Message = props => {
                       <ReactAudioPlayer
                         src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                         controls
-                        preload="auto"
+                        preload="metadata"
                         controlsList="nodownload"
                         style={{ maxWidth: '53vw' }}
                       />

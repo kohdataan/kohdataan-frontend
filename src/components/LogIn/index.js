@@ -6,7 +6,7 @@ import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
 const LogIn = props => {
-  const { handleLogin, user, uuid, linkError, textToAdd } = props
+  const { handleLogin, user, uuid, error, textToAdd } = props
   const { register, handleSubmit, errors, setError, clearError } = useForm()
 
   // Set appropriate error given different errors
@@ -27,7 +27,15 @@ const LogIn = props => {
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       {uuid && <p id="message-text">Kiitos sähköpostin vahvistamisesta.</p>}
-      {linkError && !errors.email && <p id="message-text">Tarkasta linkki.</p>}
+      {error && error === 'uuidLinkError' && (
+        <p id="message-text">Tarkasta linkki.</p>
+      )}
+      {error && error === 'cookiesNotAccepted' && (
+        <p id="message-text">
+          Jos haluat käyttää Kohdataan-somea, sinun täytyy hyväksyä evästeiden
+          käyttö.
+        </p>
+      )}
       {textToAdd && <p id="message-text">{textToAdd}</p>}
       <div className="login-fields-container">
         <h2 className="login-title">Kirjautuminen</h2>
@@ -119,13 +127,13 @@ LogIn.propTypes = {
   uuid: PropTypes.bool,
   handleLogin: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
-  linkError: PropTypes.bool,
+  error: PropTypes.string,
   textToAdd: PropTypes.string,
 }
 
 LogIn.defaultProps = {
   uuid: false,
-  linkError: false,
+  error: null,
   textToAdd: null,
 }
 

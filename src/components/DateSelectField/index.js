@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import './styles.scss'
@@ -9,7 +9,6 @@ const DateSelectField = React.forwardRef((props, ref) => {
     showLabel,
     ariaInvalid,
     errors,
-    ariaDescribedBy,
     inputClassName,
     labelClassName,
     noOptionsMessage,
@@ -17,6 +16,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
     onChange,
     value,
   } = props
+  const [ariaLabel, setAriaLabel] = useState('')
   const years = []
   let year = new Date().getFullYear()
   const months = [
@@ -135,6 +135,14 @@ const DateSelectField = React.forwardRef((props, ref) => {
     default:
   }
 
+  useEffect(() => {
+    const getAriaLabel = () => {
+      const arialabel = `${label}-combobox`
+      setAriaLabel(arialabel)
+    }
+    getAriaLabel()
+  }, [label])
+
   return (
     <label htmlFor={label} className={labelClassName}>
       {showLabel && label}
@@ -147,9 +155,9 @@ const DateSelectField = React.forwardRef((props, ref) => {
         isClearable
         isRequired
         placeholder={label}
-        aria-label={label}
+        aria-label={ariaLabel}
         aria-invalid={ariaInvalid}
-        aria-describedby={ariaDescribedBy}
+        role="combobox"
         styles={customStyles}
         onChange={onChange}
         className={inputClassName}
@@ -165,7 +173,6 @@ DateSelectField.propTypes = {
   showLabel: PropTypes.bool,
   ariaInvalid: PropTypes.bool,
   errors: PropTypes.instanceOf(Object),
-  ariaDescribedBy: PropTypes.string,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -178,7 +185,6 @@ DateSelectField.defaultProps = {
   showLabel: false,
   ariaInvalid: false,
   errors: null,
-  ariaDescribedBy: '',
   inputClassName: '',
   labelClassName: '',
 }
