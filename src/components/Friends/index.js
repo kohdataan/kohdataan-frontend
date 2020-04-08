@@ -66,8 +66,14 @@ const Friends = props => {
     return status
   }
 
-  const sortByUnreadCount = (a, b) =>
-    getUnreadCount(b.id) - getUnreadCount(a.id)
+  const sortByUnreadCount = (a, b) => {
+    // Sort primarily by unread count
+    // and secondarily by latest post timestamp
+    if (getUnreadCount(b.id) - getUnreadCount(a.id) === 0) {
+      return b.last_post_at - a.last_post_at
+    }
+    return getUnreadCount(b.id) - getUnreadCount(a.id)
+  }
 
   const filterSearchResults = data =>
     data &&
