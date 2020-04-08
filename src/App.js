@@ -29,6 +29,7 @@ import { rootStartUp as rootStartUpAction } from './store/root'
 import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 import RestoreAccountContainer from './containers/RestoreAccountContainer'
 import AccountLocked from './components/AccountLocked'
+import CookieContainer from './containers/CookieContainer'
 import './styles/defaults.scss'
 
 class App extends Component {
@@ -110,6 +111,7 @@ class App extends Component {
         {localStorage.getItem('authToken') && pUser && pUser.deleteAt && (
           <RestoreAccountContainer />
         )}
+        {!document.cookie.includes('CookieConsent=true') && <CookieContainer />}
       </Container>
     )
   }

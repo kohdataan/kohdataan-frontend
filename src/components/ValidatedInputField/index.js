@@ -12,6 +12,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
     inputClassName,
     labelClassName,
     type,
+    disabled,
   } = props
   return (
     <label htmlFor={label} className={inputClassName}>
@@ -26,6 +27,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
         aria-invalid={ariaInvalid}
         placeholder={showPlaceholder ? label : ''}
         className={labelClassName}
+        disabled={disabled}
       />
     </label>
   )
@@ -41,6 +43,7 @@ ValidatedInputField.propTypes = {
   ariaInvalid: PropTypes.bool,
   inputClassName: PropTypes.string,
   labelClassName: PropTypes.string,
+  disabled: PropTypes.bool,
 }
 
 ValidatedInputField.defaultProps = {
@@ -51,6 +54,7 @@ ValidatedInputField.defaultProps = {
   inputClassName: '',
   labelClassName: '',
   onChange: null,
+  disabled: false,
 }
 
 export default memo(ValidatedInputField)
