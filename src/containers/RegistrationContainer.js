@@ -39,6 +39,7 @@ const RegistrationContainer = props => {
     userBirthdate,
     mmuser,
     setDefaultProfileImage,
+    history,
   } = props
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState('')
@@ -214,6 +215,7 @@ const RegistrationContainer = props => {
           onClick={stepButtonActions}
           nextButtonActive={nextButtonActive}
           setOpenModal={setOpenModal}
+          history={history}
         />
       )}
       <ModalContainer
@@ -253,6 +255,7 @@ RegistrationContainer.propTypes = {
   userBirthdate: PropTypes.string,
   mmuser: PropTypes.shape({ username: PropTypes.string }).isRequired,
   setDefaultProfileImage: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 RegistrationContainer.defaultProps = {
