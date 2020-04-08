@@ -21,7 +21,7 @@ const LogInContainer = props => {
   } = props
 
   const [uuidValid, setUuidValid] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     document.body.className = 'create-account-body'
@@ -43,16 +43,20 @@ const LogInContainer = props => {
           setUuidValid(true)
         } else {
           setUuidValid(false)
-          setError(true)
+          setError('uuidLinkError')
         }
       })
     }
   }, [user, history, uuid])
 
   const handleLogin = async (email, password) => {
-    const userData = { email, password }
-    await userLogin(userData)
-    await addUserToState()
+    if (document.cookie.includes('CookieConsent=true')) {
+      const userData = { email, password }
+      await userLogin(userData)
+      await addUserToState()
+    } else {
+      setError('cookiesNotAccepted')
+    }
   }
 
   return (
@@ -60,7 +64,7 @@ const LogInContainer = props => {
       handleLogin={handleLogin}
       user={user}
       uuid={uuidValid}
-      linkError={error}
+      error={error}
       textToAdd={history.location.state && history.location.state.textToAdd}
     />
   )
