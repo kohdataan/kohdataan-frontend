@@ -72,7 +72,7 @@ const Group = props => {
     // Get channel posts
     const fetchPosts = async () => {
       if (channel && channel.id) {
-        const channelPosts = await getPosts(channel.id)
+        const channelPosts = await getPosts(channel.id, 0, 100)
         setPosts(channelPosts.data.posts)
       }
     }
@@ -130,7 +130,7 @@ const Group = props => {
               activeMembers.map(member => (
                 <Member
                   key={`group-${member.id}`}
-                  nickname={member.nickname || member.username}
+                  nickname={member.nickname}
                   currentUserId={currentUserId}
                   userId={member.id}
                 />

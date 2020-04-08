@@ -9,6 +9,7 @@ const BottomNavigationLink = props => {
     <NavLink
       exact
       to={route}
+      tabIndex={0}
       className="nav-link"
       activeClassName={`nav-link-active nav-link-${title}`}
     >

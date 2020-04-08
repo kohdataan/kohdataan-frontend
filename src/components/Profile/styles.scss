@@ -63,6 +63,15 @@
   align-self: center;
 }
 
+.profile-tutorial-btn {
+  border: none; 
+  background-color: $orange;
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  outline: none; 
+}
+
 .edit-me-link {
   align-self: flex-start;
   margin-block-start: 1em;

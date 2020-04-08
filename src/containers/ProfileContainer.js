@@ -15,6 +15,8 @@ const ProfileContainer = props => {
     history,
   } = props
 
+  if (myUserInfo && !myUserInfo.profileReady) history.push('/registration/info')
+
   return (
     <Profile
       currentUserId={currentUserId}

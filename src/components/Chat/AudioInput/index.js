@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { isIE } from 'react-device-detect'
 import RecordRTC, { StereoAudioRecorder } from 'recordrtc'
 import Timer from 'react-compound-timer'
 import ButtonContainer from '../../ButtonContainer'
@@ -25,7 +26,7 @@ const AudioInput = props => {
 
   // This useEffect handles opening and closing audio stream
   useEffect(() => {
-    if (isRecording) {
+    if (isRecording && !isIE) {
       const openStream = async () => {
         setStream(
           await navigator.mediaDevices.getUserMedia({
@@ -91,7 +92,21 @@ const AudioInput = props => {
 
   return (
     <main className="audio-recording-content">
-      {!recorder && (
+      {isIE && (
+        <div className="IE-info-container">
+          <p className="IE-info-text">
+            Interner Explorer -selaimella ei valitettavasti voi lähettää
+            ääniviestejä.
+          </p>
+          <ButtonContainer
+            onClick={closeModal}
+            className="button IE-close-button"
+          >
+            Sulje
+          </ButtonContainer>
+        </div>
+      )}
+      {!recorder && !isIE && (
         <div className="audio-description-text">
           <p>Odottaa mikrofonia...</p>
         </div>

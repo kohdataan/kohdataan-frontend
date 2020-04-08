@@ -19,7 +19,7 @@ const Description = props => {
         <TextArea
           inputClassName="add-user-description-text"
           labelClassName="add-user-description-field"
-          label="Kuvaus"
+          label="Kerro itsestäsi"
           showLabel={false}
           onChange={onChange}
           value={value}

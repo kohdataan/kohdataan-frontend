@@ -20,6 +20,7 @@ const TextArea = props => {
         type="text"
         name={label}
         id={label}
+        aria-label={label}
         value={value}
         placeholder={label}
         className={labelClassName}

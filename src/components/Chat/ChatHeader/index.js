@@ -25,7 +25,7 @@ const Header = props => {
   }
 
   return (
-    <div className="chat-header">
+    <header className="chat-header">
       <Link
         className="chat-header-item chat-header-nav-back-button"
         to={direct ? '/friends' : '/'}
@@ -63,7 +63,7 @@ const Header = props => {
           path={location.pathname}
         />
       </div>
-    </div>
+    </header>
   )
 }
 

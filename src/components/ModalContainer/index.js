@@ -17,7 +17,8 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
-    minWidth: '40vh',
+    minWidth: '30vh',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
@@ -42,7 +43,7 @@ const customStylesEditModal = {
     minHeight: '30vh',
     maxHeight: '80vh',
     width: '80vw',
-    maxWidth: '660px',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
@@ -112,10 +113,12 @@ const customStylesCookie = {
     position: 'fixed',
     border: 'none',
     borderRadius: '5px',
-    maxHeight: '12vh',
-    maxWidth: '70vh',
-    minHeight: '12vh',
-    minWidth: '70vh',
+    width: '90vw',
+    maxHeight: '306px',
+    maxWidth: '80vw',
+    minHeight: '156px',
+    minWidth: '330px',
+    backgroundColor: '#2B373B',
   },
   overlay: {
     position: 'fixed',
@@ -157,7 +160,10 @@ const ModalContainer = props => {
       contentLabel={label}
       style={getStyles()}
       role="dialog"
-      aria-labelledby={label}
+      aria={{
+        labelledby: label,
+        modal: true,
+      }}
     >
       {children}
     </Modal>

@@ -11,15 +11,16 @@ const EditTitle = props => {
   }
 
   return (
-    <div className="edit-header-container">
+    <header className="edit-header-container">
       <h1 className="edit-header-text">{text}</h1>
       <ButtonContainer
         className="icon-btn go-back-button edit-header-btn"
         onClick={closeEditPage}
+        label="Sulje"
       >
         {' '}
       </ButtonContainer>
-    </div>
+    </header>
   )
 }
 

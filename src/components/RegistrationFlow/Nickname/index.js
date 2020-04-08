@@ -10,7 +10,7 @@ const Nickname = props => {
     <ShadowBox>
       <main role="main" className="add-user-nickname-container">
         <div className="profile-creation-title-container">
-          <h3 className="profile-creation-title">Kerro kuka olet.</h3>
+          <h2 className="profile-creation-title">Kerro kuka olet.</h2>
           {!hideStep && <span className="profile-creation-step-text">1/6</span>}
         </div>
         <InputField
@@ -20,6 +20,7 @@ const Nickname = props => {
           showLabel={false}
           onChange={onChange}
           value={value}
+          ariaRequired
         />
         <p className="add-user-nickname-title">Tämä nimi näkyy muille.</p>
       </main>

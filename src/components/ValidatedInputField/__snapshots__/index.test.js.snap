@@ -10,6 +10,7 @@ exports[`Button container it matches the snapshot 1`] = `
     aria-invalid={false}
     aria-label="test"
     className=""
+    disabled={false}
     id="test"
     name="test"
     onChange={null}
