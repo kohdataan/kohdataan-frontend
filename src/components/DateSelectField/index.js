@@ -141,7 +141,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
       setAriaLabel(arialabel)
     }
     getAriaLabel()
-  }, [])
+  }, [label])
 
   return (
     <label htmlFor={label} className={labelClassName}>
@@ -185,7 +185,6 @@ DateSelectField.defaultProps = {
   showLabel: false,
   ariaInvalid: false,
   errors: null,
-  ariaDescribedBy: '',
   inputClassName: '',
   labelClassName: '',
 }
