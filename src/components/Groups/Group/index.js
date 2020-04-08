@@ -131,6 +131,7 @@ const Group = props => {
         )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
+            <span className="sr-only">Jäsenet</span>
             {activeMembers &&
               activeMembers.map(member => (
                 <Member

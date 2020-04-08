@@ -36,7 +36,7 @@ const Chat = props => {
     if (currentUser) {
       setLastViewed(currentUser.last_viewed_at)
     }
-  }, [currentUserId, members])
+  }, [currentUser, currentUserId, members])
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)

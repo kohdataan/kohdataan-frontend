@@ -30,6 +30,7 @@ const Message = props => {
     createAt,
     messageDividerSet,
     setMessageDividerSet,
+    lastPost,
   } = props
 
   const [messageText, setMessageText] = useState(text)
@@ -42,7 +43,8 @@ const Message = props => {
     if (
       lastViewed === createAt &&
       newMessageCount !== 0 &&
-      !messageDividerSet
+      !messageDividerSet &&
+      !lastPost
     ) {
       setShowNewMessageDivider(true)
       setMessageDividerSet(true)
@@ -118,8 +120,20 @@ const Message = props => {
     getMemberImage()
   }, [senderId])
 
+  const getMemberStatus = () => {
+    let status = ''
+    if (iconMemberStatus.includes('online')) {
+      status = 'Käyttäjä paikalla'
+    } else if (iconMemberStatus.includes('offline')) {
+      status = 'Käyttäjä offline'
+    } else if (iconMemberStatus.includes('away')) {
+      status = 'Käyttäjä poissa'
+    }
+    return status
+  }
+
   return (
-    <>
+    <article>
       {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
@@ -130,20 +144,30 @@ const Message = props => {
       <div className={messageWrapperClassList.join(' ')}>
         <div className="message-outer">
           {timeSent !== '' ? (
-            <div className="chat-message-header-content">
-              <span className="chat-message-timestamp">{timeSent}</span>
+            <header
+              className={`chat-message-header-content ${
+                senderId === currentUserId
+                  ? 'own-chat-message-header'
+                  : 'other-user-message-header'
+              }`}
+            >
               {currentUserId !== senderId && !directChannel && (
-                <h3
+                <p
                   className={`chat-message-sender ${
                     sender === 'Poistunut käyttäjä'
                       ? 'chat-message-sender-unknown'
                       : ''
                   }`}
                 >
+                  <span className="sr-only">Lähettäjä</span>
                   {isAdmin ? 'Valvoja' : sender}
-                </h3>
+                </p>
               )}
-            </div>
+              {currentUserId === senderId && (
+                <span className="sr-only">Minä</span>
+              )}
+              <span className="chat-message-timestamp">{timeSent}</span>
+            </header>
           ) : (
             <div className="message-without-header-content" />
           )}
@@ -155,7 +179,7 @@ const Message = props => {
             }`}
           >
             {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
-              <div>
+              <header>
                 <Link
                   to={`/profile/${senderMmUsername}`}
                   className="channel-name-link"
@@ -182,11 +206,9 @@ const Message = props => {
                     />
                   )}
                 </Link>
-                <div
-                  className={iconMemberStatus}
-                  aria-label={iconMemberStatus}
-                />
-              </div>
+                <div className={iconMemberStatus} aria-hidden />
+                <span className="sr-only">{getMemberStatus()}</span>
+              </header>
             )}
             {currentUserId !== senderId && sender === 'Poistunut käyttäjä' && (
               <div className="deleted-user-icon-container">
@@ -282,11 +304,14 @@ const Message = props => {
       {showNewMessageDivider && messageDividerSet && (
         <div className="show-date-content">
           <div className="new-message-divider" />
+          <span className="sr-only">
+            <h2 id="newMessages">Uudet tapahtumat</h2>
+          </span>
           <span className="new-message-divider-text">Uudet tapahtumat</span>
           <div className="new-message-divider" />
         </div>
       )}
-    </>
+    </article>
   )
 }
 
@@ -322,6 +347,7 @@ Message.propTypes = {
   createAt: propTypes.number.isRequired,
   messageDividerSet: propTypes.bool.isRequired,
   setMessageDividerSet: propTypes.func.isRequired,
+  lastPost: propTypes.bool.isRequired,
 }
 
 Message.defaultProps = {

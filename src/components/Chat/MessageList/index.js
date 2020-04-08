@@ -22,6 +22,7 @@ const MessageList = props => {
   } = props
 
   const [messageDividerSet, setMessageDividerSet] = useState(false)
+  const [filteredPosts, setFilteredPosts] = useState([])
   const { unreadCount } = location && location.state ? location.state : 0
 
   const getIconMemberStatus = userId =>
@@ -86,7 +87,25 @@ const MessageList = props => {
   useEffect(() => {
     // TODO: implement some kind of button to scroll down when there are new messages
     ref.current.scrollTop = ref.current.scrollHeight
+    if (document.getElementById('newMessages'))
+      document.getElementById('newMessages').scrollIntoView()
   })
+
+  let counter = 0
+
+  useEffect(() => {
+    const filtered = posts.filter(
+      p =>
+        p.type !== 'system_purpose_change' &&
+        (p.type === '' ||
+          ((p.type === 'system_join_channel' ||
+            p.type === 'system_leave_channel' ||
+            p.type === 'system_join_team' ||
+            p.type === 'system_leave_team') &&
+            !isAdmin(p.user_id)))
+    )
+    setFilteredPosts(filtered)
+  }, [posts])
 
   return (
     <section
@@ -95,51 +114,42 @@ const MessageList = props => {
     >
       <div className="chat--message-list--container">
         {posts.length > 0 &&
-          posts
-            .filter(
-              p =>
-                p.type !== 'system_purpose_change' &&
-                (p.type === '' ||
-                  ((p.type === 'system_join_channel' ||
-                    p.type === 'system_leave_channel' ||
-                    p.type === 'system_join_team' ||
-                    p.type === 'system_leave_team') &&
-                    !isAdmin(p.user_id)))
-            )
-            .map(post => {
-              const timestampValues = setTimeStampValues(post)
-              return (
-                post &&
-                post.user_id && (
-                  <Message
-                    key={post.id}
-                    id={post.id}
-                    files={post.file_ids}
-                    type={post.type}
-                    url={post.url}
-                    sender={getNickNamebyId(post.user_id)}
-                    text={post.message}
-                    senderId={post.user_id}
-                    currentUserId={currentUserId}
-                    directChannel={directChannel}
-                    timeSent={timestampValues.sendTime}
-                    dateSent={timestampValues.sendDate}
-                    showDate={timestampValues.show}
-                    channelId={channelId}
-                    senderMmUsername={getUsernameById(post.user_id, profiles)}
-                    iconMemberStatus={getIconMemberStatus(post.user_id)}
-                    isAdmin={isAdmin(post.user_id)}
-                    pinPost={pinPost}
-                    filesData={filesData}
-                    newMessageCount={unreadCount}
-                    lastViewed={Number(lastViewed)}
-                    createAt={post.create_at}
-                    setMessageDividerSet={setMessageDividerSet}
-                    messageDividerSet={messageDividerSet}
-                  />
-                )
+          filteredPosts.map(post => {
+            const timestampValues = setTimeStampValues(post)
+            counter += 1
+            return (
+              post &&
+              post.user_id && (
+                <Message
+                  key={post.id}
+                  id={post.id}
+                  files={post.file_ids}
+                  type={post.type}
+                  url={post.url}
+                  sender={getNickNamebyId(post.user_id)}
+                  text={post.message}
+                  senderId={post.user_id}
+                  currentUserId={currentUserId}
+                  directChannel={directChannel}
+                  timeSent={timestampValues.sendTime}
+                  dateSent={timestampValues.sendDate}
+                  showDate={timestampValues.show}
+                  channelId={channelId}
+                  senderMmUsername={getUsernameById(post.user_id, profiles)}
+                  iconMemberStatus={getIconMemberStatus(post.user_id)}
+                  isAdmin={isAdmin(post.user_id)}
+                  pinPost={pinPost}
+                  filesData={filesData}
+                  newMessageCount={unreadCount}
+                  lastViewed={Number(lastViewed)}
+                  createAt={post.create_at}
+                  setMessageDividerSet={setMessageDividerSet}
+                  messageDividerSet={messageDividerSet}
+                  lastPost={filteredPosts.length === counter}
+                />
               )
-            })}
+            )
+          })}
       </div>
     </section>
   )

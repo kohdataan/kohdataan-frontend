@@ -46,7 +46,6 @@
 .chat-message-timestamp {
   align-self: flex-end;
   margin-bottom: 7px;
-  margin-left: 4px;
   width: 33px;
   height: 15px;
   font-family: Lato;
@@ -67,11 +66,16 @@
 
 .chat-message-header-content {
   display: flex;
-  flex-flow: row-reverse nowrap;
-  padding: 0 10px;
+  flex-flow: row nowrap;
   margin-top: 15px;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
+  max-width: 63vw;
+}
+
+.own-chat-message-header {
+  justify-content: flex-end;
+  max-width: 58vw;
 }
 
 .message-without-header-content {
@@ -199,6 +203,7 @@
   letter-spacing: -0.19px;
   color: #1a1a1a;
   margin: 0 5px 4px 0;
+  flex-grow: 2;
 }
 
 .chat-message-sender-unknown {
