@@ -26,7 +26,8 @@ const CookieConsentBanner = props => {
             flexDirection: 'column',
             flexWrap: 'nowrap',
             alignItems: 'center',
-            padding: '5px',
+            justifyContent: 'space-around',
+            padding: '10px',
             position: 'absolute',
             top: '2%',
           }}
@@ -37,7 +38,6 @@ const CookieConsentBanner = props => {
             margin: '0 auto 10px',
             padding: '5px 10px',
             borderRadius: '30px',
-            flex: '0 auto',
           }}
           contentStyle={{
             flex: '0 auto',
