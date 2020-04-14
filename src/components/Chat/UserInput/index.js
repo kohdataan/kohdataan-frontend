@@ -166,7 +166,7 @@ const UserInput = props => {
       <ModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        label="Esikatselu-dialogi"
+        label={!isRecording ? 'Esikatselu' : 'Ääniviestin lähetys'}
         isLong
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
