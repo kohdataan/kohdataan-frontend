@@ -51,11 +51,16 @@ class App extends Component {
 
   render() {
     const { loading, user: pUser, mmuser } = this.props
-
+    console.log(pUser)
     if (loading.root && localStorage.getItem('authToken')) {
       return <FullScreenLoading />
     }
-    if (!loading.root && localStorage.getItem('authToken') && !mmuser) {
+    if (
+      !loading.root &&
+      localStorage.getItem('authToken') &&
+      !mmuser &&
+      pUser
+    ) {
       return <AccountLocked />
     }
 
@@ -107,10 +112,10 @@ class App extends Component {
         <PrivateRoute path="/chat/:id/:fileId" component={ViewImageContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
-        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         {localStorage.getItem('authToken') && pUser && pUser.deleteAt && (
           <RestoreAccountContainer />
         )}
+        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         {!document.cookie.includes('CookieConsent=true') && <CookieContainer />}
       </Container>
     )

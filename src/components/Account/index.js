@@ -35,7 +35,6 @@ const Account = props => {
       if (res && res.success) {
         localStorage.removeItem('userId')
         localStorage.removeItem('authToken')
-        history.push('/')
       } else if (res && res.message) {
         setDeleteError(res.message)
       }
@@ -174,6 +173,7 @@ const Account = props => {
         closeModal={() => setShowDeleteModal(false)}
         deleteUser={handleDeleteUser}
         deleteError={deleteError}
+        history={history}
       />
     </div>
   )

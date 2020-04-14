@@ -5,7 +5,12 @@ import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const DeleteAccountModal = props => {
-  const { showModal, deleteUser, closeModal, deleteError } = props
+  const { showModal, deleteUser, closeModal, deleteError, history } = props
+
+  const handleDelete = () => {
+    deleteUser()
+    history.push('/login')
+  }
 
   return (
     <div className="leave-channel-modal-wrapper">
@@ -32,7 +37,7 @@ const DeleteAccountModal = props => {
 
           <ButtonContainer
             className="account-delete-button"
-            onClick={deleteUser}
+            onClick={handleDelete}
           >
             Kyllä
           </ButtonContainer>
@@ -55,6 +60,7 @@ DeleteAccountModal.propTypes = {
   deleteUser: propTypes.func.isRequired,
   closeModal: propTypes.func.isRequired,
   deleteError: propTypes.string,
+  history: propTypes.instanceOf(Object).isRequired,
 }
 
 DeleteAccountModal.defaultProps = {
