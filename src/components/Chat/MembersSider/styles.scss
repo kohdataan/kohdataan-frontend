@@ -9,6 +9,7 @@
   position: absolute;
   top: 10%;
   right: 0;
+  overflow-y: scroll;
   @media (max-width: 360px) {
     top: 15%;
     height: 85%;

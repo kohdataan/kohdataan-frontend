@@ -161,7 +161,7 @@ const Account = props => {
         className="button-secondary account-save-button"
         onClick={closeEditPage}
       >
-        Valmis
+        Tallenna
       </ButtonContainer>
       <EditAccountModal
         showModal={showModal}
