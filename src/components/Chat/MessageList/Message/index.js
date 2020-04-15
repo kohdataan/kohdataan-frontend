@@ -85,7 +85,7 @@ const Message = props => {
         setMessageText(`Käyttäjä poistui kanavalta.`)
       }
     }
-  }, [currentUserId, sender, senderId, type])
+  }, [currentUserId, senderId, type])
 
   useEffect(() => {
     const getMemberImage = () => {
