@@ -113,14 +113,13 @@ const BottomNavigationBot = forwardRef((props, ref) => {
             </div>
           </div>
           <hr aria-hidden="true" />
-          <div className="modal-item" aria-hidden="true">
+          <div className="modal-item">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
             <ButtonContainer className="bot-link" onClick={openInfoModal}>
               Lisätietoa palvelusta
             </ButtonContainer>
             <ModalContainer
               modalIsOpen={showInfoModal}
-              isLong
               closeModal={() => closeModal(setShowInfoModal)}
               label="Lisätietoja palvelusta"
             >
@@ -132,8 +131,22 @@ const BottomNavigationBot = forwardRef((props, ref) => {
                 >
                   {' '}
                 </ButtonContainer>
-                <p>Voit lukea lisätietoa palvelusta </p>
-                <a href="https://kohdataan.fi">Kohdataan-palvelun omilta sivuilta.</a>
+                <div className="link-to-main-page-content">
+                  <p className="link-info-text">
+                    Kohdataan-sivuilta saat lisää tietoa ja ohjeita palvelun
+                    käyttöön.
+                  </p>
+                  <p>
+                    <a
+                      className="link-to-main-page"
+                      href="https://kohdataan.fi"
+                      tabIndex={0}
+                    >
+                      Siirry Kohdataan.fi-sivuille.
+                    </a>
+                    (kohdataan.fi)
+                  </p>
+                </div>
               </div>
             </ModalContainer>
           </div>

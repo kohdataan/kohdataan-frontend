@@ -26,15 +26,17 @@ const EmailVerificationContainer = props => {
   }
 
   return (
-    <EmailSmsForm
-      handleRequest={handleVerifyRequest}
-      title="Vahvistuslinkin lähettäminen uudelleen"
-      pagePurpose="verifyEmail"
-      apiError={apiError}
-      setApiError={setApiError}
-      text={text}
-      setText={setText}
-    />
+    <main>
+      <EmailSmsForm
+        handleRequest={handleVerifyRequest}
+        title="Vahvistuslinkin lähettäminen uudelleen"
+        pagePurpose="verifyEmail"
+        apiError={apiError}
+        setApiError={setApiError}
+        text={text}
+        setText={setText}
+      />
+    </main>
   )
 }
 
