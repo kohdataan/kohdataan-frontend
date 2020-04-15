@@ -119,9 +119,10 @@ const GroupsContainer = props => {
 
   // TODO: Refactor channel member fetching
   return (
-    <>
+    <main>
       <GroupSuggestions
         channels={filteredSuggestions}
+        joinedChannels={getGroupChannels(getChannelInfoForMyChannels())}
         handleJoinChannel={handleJoinChannel}
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
@@ -142,7 +143,7 @@ const GroupsContainer = props => {
         getPosts={getPosts}
         posts={posts}
       />
-    </>
+    </main>
   )
 }
 

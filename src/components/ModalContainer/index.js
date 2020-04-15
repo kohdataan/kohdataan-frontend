@@ -17,7 +17,8 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
-    minWidth: '40vh',
+    minWidth: '30vh',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
@@ -42,7 +43,7 @@ const customStylesEditModal = {
     minHeight: '30vh',
     maxHeight: '80vh',
     width: '80vw',
-    maxWidth: '660px',
+    maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
@@ -100,6 +101,32 @@ const customStylesLong = {
   },
 }
 
+const customStylesCookie = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    paddingTop: '10px',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    width: '90vw',
+    maxHeight: '306px',
+    maxWidth: '80vw',
+    minHeight: '156px',
+    minWidth: '330px',
+    backgroundColor: '#2B373B',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '2000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
 const ModalContainer = props => {
   const {
     children,
@@ -109,6 +136,7 @@ const ModalContainer = props => {
     isLong,
     tutorial,
     editModal,
+    cookie,
   } = props
 
   const getStyles = () => {
@@ -119,6 +147,8 @@ const ModalContainer = props => {
       styles = customStylesTutorial
     } else if (editModal) {
       styles = customStylesEditModal
+    } else if (cookie) {
+      styles = customStylesCookie
     }
     return styles
   }
@@ -130,7 +160,10 @@ const ModalContainer = props => {
       contentLabel={label}
       style={getStyles()}
       role="dialog"
-      aria-labelledby={label}
+      aria={{
+        labelledby: label,
+        modal: true,
+      }}
     >
       {children}
     </Modal>
@@ -149,6 +182,7 @@ ModalContainer.propTypes = {
   isLong: PropTypes.bool,
   tutorial: PropTypes.bool,
   editModal: PropTypes.bool,
+  cookie: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -156,6 +190,7 @@ ModalContainer.defaultProps = {
   modalIsOpen: false,
   editModal: false,
   tutorial: false,
+  cookie: false,
 }
 
 export default memo(ModalContainer)

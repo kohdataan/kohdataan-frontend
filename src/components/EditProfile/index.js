@@ -58,13 +58,14 @@ const EditProfile = props => {
       <ModalContainer
         modalIsOpen={showModal}
         closeModal={closeModal}
-        label="File size exceeded"
+        label="Tiedosto liian suuri"
       >
         <div>
           <h3 className="edit-profile-modal-text">Tiedosto on liian suuri!</h3>
           <ButtonContainer
             className="icon-btn edit-profile-icon-btn"
             onClick={closeModal}
+            label="Sulje"
           >
             <div className="go-back-button" />
           </ButtonContainer>

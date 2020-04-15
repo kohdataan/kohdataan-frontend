@@ -9,6 +9,7 @@ import BouncingLoader from '../BouncingLoader'
 const GroupSuggestions = props => {
   const {
     channels,
+    joinedChannels,
     profiles,
     teams,
     handleJoinChannel,
@@ -40,85 +41,103 @@ const GroupSuggestions = props => {
   }, [channels])
 
   return (
-    <div className="group-suggestions">
+    <section className="group-suggestions">
       <h1>Uudet ryhmät</h1>
-      {cards && cards.length > 0 && !channelsLoading ? (
+      {joinedChannels &&
+      joinedChannels.length < 6 &&
+      cards &&
+      cards.length > 0 &&
+      !channelsLoading ? (
         <div className="group-suggestion-info">
           Kiinnostaako sinua seuraava ryhmä?
         </div>
       ) : (
         <div>
-          <p>
-            Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
-          </p>
-          <ButtonContainer
-            secondary
-            className="get-suggestions-again-button"
-            onClick={handleGetChannelsAgain}
-          >
-            Näytä uudestaan
-          </ButtonContainer>
+          {joinedChannels && joinedChannels.length < 6 ? (
+            <div>
+              <p>
+                Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.
+              </p>
+              <ButtonContainer
+                secondary
+                className="get-suggestions-again-button"
+                onClick={handleGetChannelsAgain}
+              >
+                Näytä uudestaan
+              </ButtonContainer>
+            </div>
+          ) : (
+            <p>
+              Olet jo viidessä ryhmässä. Jos haluat liittyä uuteen ryhmään,
+              poistu ensi jostain vanhasta ryhmästä.
+            </p>
+          )}
         </div>
       )}
       <div className="group-suggestion-boxes">
         {channelsLoading && <BouncingLoader />}
-        {cards && cards.length > 0 && !channelsLoading && (
-          <div>
-            {cards.map((card, i) =>
-              i === cards.length - 1 ? (
-                <Swipeable
-                  key={card.id}
-                  min={80}
-                  buttons={({ left }) => (
-                    <div className="suggestion-buttons-wrapper">
-                      <ButtonContainer
-                        className="suggestion-button button-skip"
-                        onClick={() => {
-                          left()
-                        }}
-                      >
-                        Älä liity
-                      </ButtonContainer>
-                      <ButtonContainer
-                        onClick={handleJoinChannel(card.id)}
-                        className="suggestion-button button-join"
-                        secondary
-                      >
-                        Liity
-                      </ButtonContainer>
-                    </div>
-                  )}
-                  onAfterSwipe={remove}
-                >
+        {joinedChannels &&
+          joinedChannels.length < 6 &&
+          cards &&
+          cards.length > 0 &&
+          !channelsLoading && (
+            <div>
+              {cards.map((card, i) =>
+                i === cards.length - 1 ? (
+                  <Swipeable
+                    key={card.id}
+                    min={80}
+                    buttons={({ left }) => (
+                      <div className="suggestion-buttons-wrapper">
+                        <ButtonContainer
+                          className="suggestion-button button-skip"
+                          onClick={() => {
+                            left()
+                          }}
+                        >
+                          Älä liity
+                        </ButtonContainer>
+                        <ButtonContainer
+                          onClick={handleJoinChannel(card.id)}
+                          className="suggestion-button button-join"
+                          secondary
+                        >
+                          Liity
+                        </ButtonContainer>
+                      </div>
+                    )}
+                    onAfterSwipe={remove}
+                  >
+                    <SuggestionBox
+                      key={cards[i].id}
+                      channel={cards[i]}
+                      members={channelMembers[cards[i].id]}
+                      profiles={profiles}
+                      teams={teams}
+                    />
+                  </Swipeable>
+                ) : (
                   <SuggestionBox
-                    key={cards[i].id}
+                    hidden
+                    key={card.id}
                     channel={cards[i]}
                     members={channelMembers[cards[i].id]}
-                    profiles={profiles}
                     teams={teams}
+                    profiles={profiles}
+                    top={cards.length - i}
                   />
-                </Swipeable>
-              ) : (
-                <SuggestionBox
-                  hidden
-                  key={card.id}
-                  channel={cards[i]}
-                  members={channelMembers[cards[i].id]}
-                  teams={teams}
-                  profiles={profiles}
-                  top={cards.length - i}
-                />
-              )
-            )}
-          </div>
-        )}
+                )
+              )}
+            </div>
+          )}
       </div>
-    </div>
+    </section>
   )
 }
 
 GroupSuggestions.propTypes = {
   channels: propTypes.instanceOf(Array).isRequired,
+  joinedChannels: propTypes.instanceOf(Object).isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
   handleJoinChannel: propTypes.func.isRequired,

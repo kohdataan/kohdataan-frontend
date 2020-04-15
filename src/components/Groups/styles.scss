@@ -7,9 +7,6 @@
 
 .groups-header {
   padding: 0 30px;
-  h1 {
-    color: $orange;
-  }
 }
 
 .groups-boxes {
@@ -21,10 +18,9 @@
 }
 
 .groups-tutorial-btn {
+  border: none;
   background-color: transparent;
-  border: none; 
   position: absolute;
-  right: 150px;
-  bottom: 15px;
-  outline: none;
+  left: 30px;
+  bottom: 20px;
 }

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -22,6 +22,14 @@ const Profile = props => {
     history,
   } = props
 
+  const [returnToTutorial, setReturnToTutorial] = useState(false)
+
+  useEffect(() => {
+    if (history.location.state && history.location.state.navigateBack) {
+      setReturnToTutorial(true)
+    }
+  }, [history.location.state])
+
   // Extended user info from node backend
   const {
     location,
@@ -33,39 +41,123 @@ const Profile = props => {
     showLocation,
   } = myUserInfo
 
+  const goToFriendsPage = () => {
+    history.push({
+      pathname: '/friends',
+      state: { navigateBack: false },
+    })
+  }
+
   const steps = [
+    {
+      content: (
+        <div aria-label="tutoriaali-1">
+          <p className="tutorial-step">1/6</p>
+          <h1 className="tutorial-header">
+            Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
+          </h1>
+        </div>
+      ),
+      placement: 'center',
+      target: 'body',
+      disableBeacon: true,
+    },
     {
       target: '.nav-link-Profiili',
       content: (
-        <>
-          <p className="tutorial-text">Tämä on profiilisi!</p>
-          <p className="tutorial-text">Löydät sen täältä.</p>
-        </>
+        <div aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">2/6</p>
+          <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
+          <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
+        </div>
+      ),
+    },
+    {
+      target: '.user-edit-button',
+      content: (
+        <div aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">3/6</p>
+          <h1 className="tutorial-header">
+            Profiilisi tiedot näkyvät myös muille.
+          </h1>
+          <p className="tutorial-text">
+            Voit muokata tietoja kohdasta Muokkaa.
+          </p>
+        </div>
+      ),
+    },
+    {
+      target: '.nav-bot',
+      content: (
+        <div aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">4/6</p>
+          <h1 className="tutorial-header">
+            Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
+            klikata Bottia.
+          </h1>
+          <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
+        </div>
+      ),
+    },
+  ]
+
+  const reversedSteps = [
+    {
+      target: '.nav-bot',
+      content: (
+        <div aria-label="tutoriaali-4" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">4/6</p>
+          <h1 className="tutorial-header">
+            Jos tarvitset apua tai haluat lähettää valvojalle viestin, voit
+            klikata Bottia.
+          </h1>
+          <p className="tutorial-text">Löydät sen kohdasta Botti.</p>
+          <ButtonContainer
+            className="button profile-tutorial-btn"
+            onClick={goToFriendsPage}
+          >
+            Seuraava
+          </ButtonContainer>
+        </div>
       ),
       disableBeacon: true,
     },
     {
       target: '.user-edit-button',
       content: (
-        <>
-          <p className="tutorial-text">
+        <div aria-label="tutoriaali-3" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">3/6</p>
+          <h1 className="tutorial-header">
             Profiilisi tiedot näkyvät myös muille.
+          </h1>
+          <p className="tutorial-text">
+            Voit muokata tietoja kohdasta Muokkaa.
           </p>
-          <p className="tutorial-text">Voit muokata tietoja täältä.</p>
-        </>
+        </div>
       ),
     },
     {
-      target: '.nav-bot',
+      target: '.nav-link-Profiili',
       content: (
-        <>
-          <p className="tutorial-text">
-            Jos tarvitset apua, tai haluat lähettää ylläpidolle viestin, voit
-            klikata Bottia.
-          </p>
-          <p className="tutorial-text">Löydät Botin täältä.</p>
-        </>
+        <div aria-label="tutoriaali-2" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">2/6</p>
+          <h1 className="tutorial-header">Tämä on oma profiilisi!</h1>
+          <p className="tutorial-text">Löydät sen kohdasta Profiili.</p>
+        </div>
       ),
+    },
+    {
+      content: (
+        <div aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+          <p className="tutorial-step">1/6</p>
+          <h1 className="tutorial-header">
+            Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
+          </h1>
+        </div>
+      ),
+      placement: 'center',
+      target: 'body',
+      styles: { buttonNext: { display: 'none' } },
     },
   ]
 
@@ -83,7 +175,7 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
-      <div className="profile-header-container">
+      <header className="profile-header-container">
         <ProfileImage mmuser={mmuser} />
         {mmuser && myUserInfo && (
           <ProfileHeader
@@ -96,23 +188,26 @@ const Profile = props => {
         )}
         {ownProfile && (
           <Link className="edit-me-link" to="/edit-me">
-            <EditButton />
+            <EditButton label="muokkaa profiilia"/>
           </Link>
         )}
-      </div>
+      </header>
       <Description text={description} />
 
-      <div className="interests-container">
+      <section className="interests-container">
         <div className="interests-header">
-          <h2>Minua kiinnostaa</h2>
+          <h2 className="profile-secondary-header">Minua kiinnostaa</h2>
           {ownProfile && (
             <Link className="edit-interests-link" to="/edit-interests">
-              <EditButton isHighlighted={false} />
+              <EditButton
+                isHighlighted={false}
+                label="muokkaa mielenkiinnon kohteita"
+              />
             </Link>
           )}
         </div>
         <InterestsGrid interestList={userInterests} />
-      </div>
+      </section>
 
       {!ownProfile &&
         startDirectChannel &&
@@ -128,11 +223,14 @@ const Profile = props => {
           </div>
         )}
       {!tutorialWatched && ownProfile && (
-        <Tutorial
-          steps={steps}
-          history={history}
-          updateTutorialWatched={updateTutorialWatched}
-        />
+        <aside>
+          <Tutorial
+            steps={returnToTutorial ? reversedSteps : steps}
+            history={history}
+            updateTutorialWatched={updateTutorialWatched}
+            navigateBack={returnToTutorial}
+          />
+        </aside>
       )}
     </main>
   )

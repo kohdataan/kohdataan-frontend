@@ -72,8 +72,11 @@ const EditInterestsContainer = props => {
   return (
     <div className="interests-grid">
       {sortedOptions.map(interest => (
-        <ButtonContainer
+        <button
           key={interest.id}
+          role="checkbox"
+          aria-checked={interests.includes(interest.id)}
+          type="button"
           className={`${
             interests.includes(interest.id)
               ? 'interests-grid-item-selected'
@@ -87,12 +90,12 @@ const EditInterestsContainer = props => {
             title={interest.name}
           />
           <span className="interests-grid-label">{interest.name}</span>
-        </ButtonContainer>
+        </button>
       ))}
       <ModalContainer
         modalIsOpen={openModal}
         closeModal={closeModal}
-        label="User can have five interests at most"
+        label="Voit valita korkeintaan viisi kiinnostusta"
       >
         <div>
           <h3 className="interests-modal-text">
@@ -102,6 +105,7 @@ const EditInterestsContainer = props => {
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
+            label="Sulje"
           >
             <div className="go-back-button" />
           </ButtonContainer>

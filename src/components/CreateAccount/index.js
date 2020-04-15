@@ -12,6 +12,8 @@ import ModalContainer from '../ModalContainer'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import getAge from '../../utils/getAge'
 import './styles.scss'
+import PrivacyPolicy from '../PrivacyPolicy'
+import AccessibilityStatement from '../AccessibilityStatement'
 
 const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const {
@@ -31,6 +33,13 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthyear, setBirthyear] = useState('')
   const [currentApiErrors, setCurrentApiErrors] = useState({})
   const [openErrorModal, setOpenErrorModal] = useState(false)
+  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
+    false
+  )
+  const [
+    accessibilityStatementModalIsOpen,
+    setAccessibilityStatementModalIsOpen,
+  ] = useState(false)
 
   useEffect(() => {
     if (apiErrors && apiErrors.fields) {
@@ -113,6 +122,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         <form
           className="create-account-input-content-container"
           onSubmit={handleSubmit(onSubmit)}
+          autoComplete="on"
         >
           <div className="formfield-container">
             <ValidatedInputField
@@ -389,14 +399,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 <button
                   type="button"
                   onClick={openPasswordModal}
+                  id="password-info"
                   className="info-circle-button"
+                  aria-label="salasana-info-nappi"
                   aria-labelledby="password-info"
                 />
               </div>
               <ToolTipModalContainer
                 modalIsOpen={passwordModalIsOpen}
                 closeModal={closeModal}
-                label="show-password-info-dialog"
+                label="salasana-info-modaali"
                 content="Salasanassa täytyy olla vähintään 10 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi numero."
               />
             </div>
@@ -449,12 +461,13 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             <ModalContainer
               modalIsOpen={openErrorModal}
               closeModal={closeAcceptModal}
-              label="User must accept rules modal"
+              label="Käyttöehtoja ei hyväksytty"
             >
               <div>
                 <ButtonContainer
                   className="icon-btn go-back-button accept-rules-icon-btn"
                   onClick={closeAcceptModal}
+                  label="Sulje"
                 />
                 <h3 className="accept-rules-modal-text">
                   Jos haluat käyttää palvelua, sinun täytyy hyväksyä
@@ -473,24 +486,77 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           </button>
         </form>
         <div className="create-account-links-container">
-          <Link className="create-account-link-block" to="/login">
+          <Link className="create-account-link-block" to="/login" tabIndex={0}>
             Olen vanha käyttäjä ja haluan kirjautua sisään.
           </Link>
           <Link className="create-account-link-block" to="/registrationproblem">
             Tarvitsen apua rekisteröitymisessä.
           </Link>
-          <Link
-            className="create-account-link-block inactive-link"
-            to="/createaccount"
+          <ButtonContainer
+            className="create-account-link-block create-account-link-item create-account-link"
+            onClick={() => setPrivacyPolicyModalIsOpen(true)}
           >
             Tutustu tietosuojaselosteeseen.
-          </Link>
-          <Link
-            className="create-account-link-block inactive-link"
-            to="/createaccount"
+          </ButtonContainer>
+          <ModalContainer
+            modalIsOpen={privacyPolicyModalIsOpen}
+            closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+            label="Tietosuojaseloste"
+            aria={{
+              labelledby: 'Tietosuojaseloste',
+              modal: true,
+            }}
+          >
+            <aside id="Tietosuojaseloste">
+              <ButtonContainer
+                className="privacy-policy-icon-btn icon-btn"
+                onClick={() => setPrivacyPolicyModalIsOpen(false)}
+                label="Sulje"
+              >
+                <div className="go-back-button" />
+              </ButtonContainer>
+              <PrivacyPolicy />
+              <ButtonContainer
+                className="profile-modal-button accept-rules-modal-button"
+                onClick={() => setPrivacyPolicyModalIsOpen(false)}
+              >
+                Sulje
+              </ButtonContainer>
+            </aside>
+          </ModalContainer>
+          <ButtonContainer
+            className="create-account-link-block create-account-link-item create-account-link"
+            role="link"
+            onClick={() => setAccessibilityStatementModalIsOpen(true)}
           >
             Tutustu saavutettavuusselosteeseen.
-          </Link>
+          </ButtonContainer>
+          <ModalContainer
+            modalIsOpen={accessibilityStatementModalIsOpen}
+            closeModal={() => setAccessibilityStatementModalIsOpen(false)}
+            label="Saavutettavuusseloste"
+            aria={{
+              labelledby: 'Saavutettavuusseloste',
+              modal: true,
+            }}
+          >
+            <aside>
+              <ButtonContainer
+                className="accessibility-statement-icon-btn icon-btn"
+                onClick={() => setAccessibilityStatementModalIsOpen(false)}
+                label="Sulje"
+              >
+                <div className="go-back-button" />
+              </ButtonContainer>
+              <AccessibilityStatement />
+              <ButtonContainer
+                className="profile-modal-button accept-rules-modal-button"
+                onClick={() => setAccessibilityStatementModalIsOpen(false)}
+              >
+                Sulje
+              </ButtonContainer>
+            </aside>
+          </ModalContainer>
         </div>
       </div>
     </main>

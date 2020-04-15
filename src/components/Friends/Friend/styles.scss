@@ -8,7 +8,6 @@
   height: 100%;
   color: #3a3a3a;
   padding-top: 5px;
-  
 }
 .block-user-icon-btn {
   margin: 0 10px 0 10px;
@@ -45,7 +44,6 @@
 .friend-box-container {
   width: 100%;
   height: 100%;
-  border-radius: 5px;
   box-shadow: none;
   background-color: white;
   display: flex;
@@ -53,8 +51,9 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  margin-right: 12px;
+  border-bottom: 1px solid #9a9a9a;
 }
+
 .friend-box {
   width: 100%;
   height: 100%;
@@ -67,6 +66,7 @@
   justify-content: space-between;
   text-align: left;
 }
+
 .friend-icon {
   background-color: gray;
   padding: none;
@@ -83,18 +83,15 @@
 }
 .friend-box-content {
   padding-top: 15px;
-  & h2 {
-    font-weight: bold;
-  }
 }
+
 .friend-messages-content {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-around;
   align-content: center;
-  margin-right: 5px;
-  border-bottom: 1px solid #9a9a9a;
+  width: 100%;
 }
 .friend-text-content {
   font-family: Lato;
@@ -109,6 +106,12 @@
   justify-content: space-between;
   & h2 {
     margin-bottom: 5px;
+  }
+  & p {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: $black;
+    font-weight: bold;
   }
 }
 
@@ -149,6 +152,8 @@
 
 .deleted-user-nickname {
   color: lightgray;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .deleted-user-message {
@@ -197,7 +202,7 @@
   text-align: center;
   color: white;
   box-shadow: 0 3px 20px -5px rgba(0, 0, 0, 0.2);
-  background-color: $black;
+  background-color: $orange;
   & p {
     font-family: Lato;
     font-size: 18px;
@@ -206,8 +211,6 @@
 }
 
 .unread-box {
-  width: 100%;
-  height: 100%;
   border-radius: 5px;
   box-shadow: none;
   background-color: white;

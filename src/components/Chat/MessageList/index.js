@@ -84,7 +84,7 @@ const MessageList = props => {
   })
 
   return (
-    <div className="chat-message-list-container chat--message-list" ref={ref}>
+    <section className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           posts
@@ -128,7 +128,7 @@ const MessageList = props => {
               )
             })}
       </div>
-    </div>
+    </section>
   )
 }
 

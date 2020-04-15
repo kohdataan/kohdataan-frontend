@@ -39,6 +39,7 @@ const RegistrationContainer = props => {
     userBirthdate,
     mmuser,
     setDefaultProfileImage,
+    history,
   } = props
   const [nickname, setNickname] = useState('')
   const [showAge, setShowAge] = useState('')
@@ -214,12 +215,13 @@ const RegistrationContainer = props => {
           onClick={stepButtonActions}
           nextButtonActive={nextButtonActive}
           setOpenModal={setOpenModal}
+          history={history}
         />
       )}
       <ModalContainer
         modalIsOpen={openModal}
         closeModal={closeModal}
-        label="User can have five interests at most"
+        label="Käyttäjällä voi olla enintään viisi kiinnostusta."
       >
         <div>
           <h3 className="interests-modal-text">
@@ -229,6 +231,7 @@ const RegistrationContainer = props => {
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
+            label="Sulje"
           >
             <div className="go-back-button" />
           </ButtonContainer>
@@ -252,6 +255,7 @@ RegistrationContainer.propTypes = {
   userBirthdate: PropTypes.string,
   mmuser: PropTypes.shape({ username: PropTypes.string }).isRequired,
   setDefaultProfileImage: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 RegistrationContainer.defaultProps = {
