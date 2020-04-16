@@ -36,17 +36,19 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
             modal: true,
           }}
         >
-          <article className="service-rules-content">
+          <div className="service-rules-content">
             <ButtonContainer
-              className="accept-rules-icon-btn icon-btn"
+              className="accept-rules-icon-btn icon-btn go-back-button "
               onClick={closeModal}
               label="Sulje"
             >
-              <div className="go-back-button" />
+              {' '}
             </ButtonContainer>
             <h1 className="service-info-header">Käyttöehdot</h1>
-            <div className="service-info-content">
+            <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
+            <article className="service-info-content">
               <section>
+                <span className="sr-only">Säännöistä yleisesti</span>
                 <p>
                   Nämä käyttöehdot ovat sinun ja Kehitysvammaliiton välinen
                   sopimus <span className="uppercase-text">Kohdataan</span>
@@ -63,6 +65,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 </p>
               </section>
               <section>
+                <span className="sr-only">Säännöt</span>
                 <ol className="service-info-list">
                   <li>
                     <h2 className="service-info-list-item">
@@ -84,21 +87,300 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelu on ilmainen, kotimainen ja turvallinen palvelu.
                       Palvelua moderoidaan eli keskusteluista poistetaan
-                      asiattomat sisällöt. Valvojaan saa tarvittaessa ja valvoja
-                      pyrkii vastaamaan viesteihin mahdollisimman mahdollisimman
+                      asiattomat sisällöt. Valvojaan saa tarvittaessa yhteyden,
+                      ja valvoja pyrkii vastaamaan viesteihin mahdollisimman
                       pian.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      2.
+                      <span className="uppercase-text">Kohdataan </span>
+                      -palvelun ikäraja ja muut vaatimukset
+                    </h2>
+                    <p>
+                      {' '}
+                      Voit käyttää{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelua, jos olet vähintään 15-vuotias. Sinulla täytyy
+                      olla toimiva sähköpostiosoite ja puhelinnumero. Palvelu on
+                      ilmainen, mutta sinun täytyy itse maksaa omat laitteesi ja
+                      internetyhteytesi.
+                    </p>
+                    <p>
+                      {' '}
+                      Voit rekisteröityä palveluun vain omilla, oikeilla
+                      henkilötiedoilla. Palveluun ei saa ilmoittaa vääriä
+                      henkilötietoja.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      3. Mitä vastuita meillä on?
+                    </h2>
+                    <p>
+                      {' '}
+                      Kehitysvammaliitto tarjoaa sinulle parhaan mahdollisen
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun .
+                    </p>
+                    <p>
+                      {' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelussa saattaa olla virheitä, ja se voi olla joskus
+                      poissa käytöstä. Kehitysvammaliitto pyrkii korjaamaan
+                      virheet niin, että ne haittaavat palvelun käyttöä
+                      mahdollisimman vähän.
+                    </p>
+                    <p>
+                      Kehitysvammaliitto ei ole vastuussa, jos
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun käyttö aiheuttaa vahinkoja tai muita ongelmia,
+                      esimerkiksi maksuja internetin käyttämisestä puhelimella.
+                    </p>
+                    <p>
+                      Kehitysvammaliitto ei ole vastuussa materiaaleista, joita
+                      käyttäjät jakavat palvelussa.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      4. Mitä vastuita sinulla on?
+                    </h2>
+                    <p>
+                      {' '}
+                      Sinulla voi olla {' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelussa vain yksi käyttäjätili. Käyttäjätili aukeaa,
+                      kun rekisteröidyt palveluun.
+                    </p>
+                    <p>
+                      Käytät palvelua omalla vastuullasi. Olet vastuussa omasta
+                      käyttäjätilistäsi. Älä kerro tai anna tilisi salasanaa
+                      muille. Jos epäilet, että joku muu tietää salasanasi,
+                      vaihda se heti uuteen. Voit myös ottaa yhteyttä meihin,
+                      niin autamme sinua.
+                    </p>
+                    <p>
+                      Olet vastuussa kaikesta materiaalista, jota jaat
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelussa. Jaa vain materiaalia, johon sinulla on
+                      oikeus. Älä jaa viestejä ja materiaaleja, jotka ovat
+                      laittomia, asiattomia tai loukkaavia.
+                    </p>
+                    <p>
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun säännöissä kerrotaan lisää, millaisia
+                      materiaaleja kannattaa jakaa.
+                    </p>
+                    <p>
+                      <a href="/" className="link-outside-service">
+                        Siirry Kohdataan-sivuilla oleviin sääntöihin.
+                      </a>
+                    </p>
+                    <p>
+                      Säännöt ovat osa Kehitysvammaliiton ja sinun välistä
+                      sopimusta.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      5. Miten muut voivat käyttää materiaaliasi?
+                    </h2>
+                    <p>
+                      Kehitysvammaliitto ei käytä materiaalejasi mihinkään, ei
+                      muokkaa, eikä jaa niitä eteenpäin. Sinulla säilyvät kaikki
+                      tekijänoikeudet materiaaleihisi, joita jaat palvelussa.
+                    </p>
+                    <p>
+                      Muiden käyttäjien kuvia ja materiaaleja ei saa kopioida
+                      eikä jakaa eteenpäin. On kuitenkin mahdollista, että joku
+                      muu jakaa palvelussa olevia materiaaleja eteenpäin ilman
+                      lupaa. Me emme pysty estämään sitä teknisesti. Ilmoita
+                      meille, jos huomaat, että materiaalejasi jaetaan
+                      eteenpäin.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      6. Henkilötiedot ja yksityisyys
+                    </h2>
+                    <p>
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelu kerää sinusta seuraavat henkilötiedot: 
+                      <ul>
+                        <li>
+                          kun rekisteröidyt palvelun käyttäjäksi
+                          <ul>
+                            <li>etu-ja sukunimesi</li>
+                            <li>syntymäaikasi</li>
+                            <li>sähköpostiosoitteesi</li>
+                            <li>puhelinnumerosi</li>
+                            <li>luomasi salasana</li>
+                          </ul>
+                        </li>
+                        <li>
+                          kun luot käyttäjäprofiilin, joka näkyy muille
+                          käyttäjille
+                          <ul>
+                            <li>kutsumanimesi</li>
+                            <li>asuinpaikkasi</li>
+                            <li>kuvasi</li>
+                            <li>kuvauksen itsestäsi</li>
+                            <li>kiinnostuksen kohteesi</li>
+                          </ul>
+                        </li>
+                        <li>
+                          keskusteluryhmiin tuottamasi materiaalit, kuten
+                          tekstit, valokuvat, videot ja äänet.
+                        </li>
+                      </ul>
+                    </p>
+                    <p>
+                      Yksityisyytesi on meille hyvin tärkeää. Keräämme sinusta
+                      ainoastaan niitä tietoja, joita tarvitaan, että voit
+                      käyttää <span className="uppercase-text">Kohdataan</span>
+                      -palvelua ja saada meiltä viestejä.
+                    </p>
+                    <p>
+                      Voit katsoa ja muokata omia tietojasi omassa profiilissasi
+                      ja Rekisteröitymistiedot-osiossa. Jos tietosi muuttuvat,
+                      käy muuttamassa ne Rekisteröitymistiedot-osiossa.
+                    </p>
+                    <p>
+                      Kun käytät{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelua, hyväksyt samalla, että voimme tallentaa
+                      evästeitä tietokoneellesi tai mobiililaitteellesi.
+                    </p>
+                    <p>
+                      Henkilötietojen käsittelystä ja evästeiden käytöstä
+                      kerrotaan lisää palvelun tietosuojaselosteessa.
+                    </p>
+                    <p>
+                      <a className="link-outside-service" href="/">Siirry tietosuojaselosteeseen.</a>
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      7. Kuinka palvelun käyttö voi loppua?
+                    </h2>
+                    <p>
+                      Voit lopettaa
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun käytön ja poistaa käyttäjätilisi
+                      Rekisteröitymistiedot-osiossa. Voit myös pyytää palvelun
+                      valvojaa poistamaan käyttäjätilisi. Lähetä valvojalle
+                      sähköpostia siitä sähköpostiosoitteesta, jota käytit, kun
+                      rekisteröidyit palveluun.
+                    </p>
+                    <p>
+                      Voit käyttää
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelua vain, jos noudatat näitä käyttöehtoja. Jos et
+                      noudata käyttöehtoja, Kehitysvammaliitto voi poistaa
+                      käyttäjätilisi ja estää sinua avaamasta uutta
+                      käyttäjätiliä.
+                    </p>
+                    <p>
+                      Kun käyttäjätilisi poistetaan, käyttäjäprofiilisi ja
+                      kaikki profiilitietosi poistuvat
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelusta. Profiilitiedot poistuvat kaikissa
+                      tilanteissa, silloin kun itse poistat käyttäjätilin ja
+                      silloin kun me poistamme sen. Kaikki ryhmäkeskusteluissa
+                      jakamasi viestit ja materiaalit säilyvät palvelussa.
+                    </p>
+                    <p>
+                      Kehitysvammaliitolla on oikeus tehdä
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palveluun muutoksia tai lopettaa koko palvelu. Jos
+                      palvelu lopetetaan, Kehitysvammaliitto ilmoittaa siitä
+                      sinulle sähköpostilla hyvissä ajoin etukäteen.  
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      8. Miten näihin käyttöehtoihin voidaan tehdä muutoksia?
+                    </h2>
+                    <p>
+                      Kehitysvammaliitto voi muuttaa näitä käyttöehtoja ilman,
+                      että ilmoittaa siitä sinulle etukäteen. Jos muutamme
+                      käyttöehtojen sisältöä paljon, ilmoitamme sinulle
+                      muutoksista sähköpostilla siihen sähköpostiosoitteeseen,
+                      joka näkyy käyttäjätililläsi.
+                    </p>
+                    <p>
+                      Jos jatkat
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun käyttöä, hyväksyt samalla uudet käyttöehdot. Jos
+                      et hyväksy muutettuja ehtoja, et voi jatkaa palvelun
+                      käyttöä ja voit poistaa käyttäjätilisi palvelusta.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">
+                      9. Miten riidat ratkaistaan?
+                    </h2>
+                    <p>
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelu ja nämä käyttöehdot on tehty niin, että ne
+                      noudattavat Suomen lakeja. Jos sinulle ja
+                      Kehitysvammaliitolle tulee riita palvelusta ja sen
+                      käytöstä, yritämme ensin sopia riidan yhdessä. Jos se ei
+                      onnistu, riita ratkaistaan sinun kotipaikkasi
+                      käräjäoikeudessa. Voit myös viedä riidan
+                      kuluttajariitalautakuntaan, joka suosittelee, miten asia
+                      kannattaa ratkaista. Ennen kuin viet riidan
+                      kuluttajariitalautakuntaan, kannattaa pyytää apua oman
+                      kunnan kuluttajaneuvojalta.
+                    </p>
+                  </li>
+                  <li>
+                    <h2 className="service-info-list-item">10. Ota yhteyttä</h2>
+                    <p>
+                      Voit ottaa yhteyttä
+{' '}
+                      <span className="uppercase-text">Kohdataan</span>
+                      -palvelun valvojiin aina, kun sinulla on kysyttävää tai
+                      ongelmia palvelun käytössä.
+                    </p>
+                    <p>
+                      Voit ottaa yhteyttä valvojiin palvelussa olevalla
+                      lomakkeella tai sähköpostilla kohdataan@kohdataan.fi.
                     </p>
                   </li>
                 </ol>
               </section>
-            </div>
+              <section>
+                <h2>Yhteystiedot</h2>
+                Kehitysvammaliitto ry
+                <br />
+                Linnoitustie 2 B
+                <br />
+                02600 Espoo
+                <br />
+                Y-tunnus: 0116608-8
+                <br />
+                Puhelin: (09) 348 090 (vaihde)
+                <br />
+              </section>
+            </article>
             <ButtonContainer
               className="profile-modal-button accept-rules-modal-button"
               onClick={acceptRules}
             >
               Hyväksy
             </ButtonContainer>
-          </article>
+          </div>
         </ModalContainer>
       </div>
     </div>
