@@ -38,7 +38,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
         >
           <div className="service-rules-content">
             <ButtonContainer
-              className="accept-rules-icon-btn icon-btn go-back-button "
+              className="accept-rules-icon-btn icon-btn go-back-button"
               onClick={closeModal}
               label="Sulje"
             >
@@ -46,7 +46,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
             </ButtonContainer>
             <h1 className="service-info-header">Käyttöehdot</h1>
             <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
-            <article className="service-info-content">
+            <div className="service-info-content">
               <section>
                 <span className="sr-only">Säännöistä yleisesti</span>
                 <p>
@@ -68,11 +68,10 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 <span className="sr-only">Säännöt</span>
                 <ol className="service-info-list">
                   <li>
-                    <h2 className="service-info-list-item">
-                      1. Mikä on{' '}
-                      <span className="uppercase-text">Kohdataan </span>
+                    <span className="service-info-list-item">
+                      Mikä on <span className="uppercase-text">Kohdataan </span>
                       -palvelu?
-                    </h2>
+                    </span>
                     <p>
                       {' '}
                       <span className="uppercase-text">Kohdataan</span>
@@ -93,11 +92,10 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      2.
+                    <span className="service-info-list-item">
                       <span className="uppercase-text">Kohdataan </span>
                       -palvelun ikäraja ja muut vaatimukset
-                    </h2>
+                    </span>
                     <p>
                       {' '}
                       Voit käyttää{' '}
@@ -115,43 +113,47 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      3. Mitä vastuita meillä on?
-                    </h2>
-                    <p>
-                      {' '}
-                      Kehitysvammaliitto tarjoaa sinulle parhaan mahdollisen
+                    <span className="service-info-list-item">
+                      Mitä vastuita meillä on?
+                    </span>
+                    <div className="list-item-content">
+                      <p>
+                        {' '}
+                        Kehitysvammaliitto tarjoaa sinulle parhaan mahdollisen
 {' '}
-                      <span className="uppercase-text">Kohdataan</span>
-                      -palvelun .
-                    </p>
-                    <p>
-                      {' '}
-                      <span className="uppercase-text">Kohdataan</span>
-                      -palvelussa saattaa olla virheitä, ja se voi olla joskus
-                      poissa käytöstä. Kehitysvammaliitto pyrkii korjaamaan
-                      virheet niin, että ne haittaavat palvelun käyttöä
-                      mahdollisimman vähän.
-                    </p>
-                    <p>
-                      Kehitysvammaliitto ei ole vastuussa, jos
+                        <span className="uppercase-text">Kohdataan</span>
+                        -palvelun .
+                      </p>
+                      <p>
+                        {' '}
+                        <span className="uppercase-text">Kohdataan</span>
+                        -palvelussa saattaa olla virheitä, ja se voi olla joskus
+                        poissa käytöstä. Kehitysvammaliitto pyrkii korjaamaan
+                        virheet niin, että ne haittaavat palvelun käyttöä
+                        mahdollisimman vähän.
+                      </p>
+                      <p>
+                        Kehitysvammaliitto ei ole vastuussa, jos
 {' '}
-                      <span className="uppercase-text">Kohdataan</span>
-                      -palvelun käyttö aiheuttaa vahinkoja tai muita ongelmia,
-                      esimerkiksi maksuja internetin käyttämisestä puhelimella.
-                    </p>
-                    <p>
-                      Kehitysvammaliitto ei ole vastuussa materiaaleista, joita
-                      käyttäjät jakavat palvelussa.
-                    </p>
+                        <span className="uppercase-text">Kohdataan</span>
+                        -palvelun käyttö aiheuttaa vahinkoja tai muita ongelmia,
+                        esimerkiksi maksuja internetin käyttämisestä
+                        puhelimella.
+                      </p>
+                      <p>
+                        Kehitysvammaliitto ei ole vastuussa materiaaleista,
+                        joita käyttäjät jakavat palvelussa.
+                      </p>
+                    </div>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      4. Mitä vastuita sinulla on?
-                    </h2>
+                    <span className="service-info-list-item">
+                      Mitä vastuita sinulla on?
+                    </span>
                     <p>
                       {' '}
-                      Sinulla voi olla {' '}
+                      Sinulla voi olla
+{' '}
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelussa vain yksi käyttäjätili. Käyttäjätili aukeaa,
                       kun rekisteröidyt palveluun.
@@ -187,9 +189,9 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      5. Miten muut voivat käyttää materiaaliasi?
-                    </h2>
+                    <span className="service-info-list-item">
+                      Miten muut voivat käyttää materiaaliasi?
+                    </span>
                     <p>
                       Kehitysvammaliitto ei käytä materiaalejasi mihinkään, ei
                       muokkaa, eikä jaa niitä eteenpäin. Sinulla säilyvät kaikki
@@ -205,9 +207,9 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      6. Henkilötiedot ja yksityisyys
-                    </h2>
+                    <span className="service-info-list-item">
+                      Henkilötiedot ja yksityisyys
+                    </span>
                     <p>
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelu kerää sinusta seuraavat henkilötiedot: 
@@ -261,13 +263,15 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       kerrotaan lisää palvelun tietosuojaselosteessa.
                     </p>
                     <p>
-                      <a className="link-outside-service" href="/">Siirry tietosuojaselosteeseen.</a>
+                      <a className="link-outside-service" href="/">
+                        Siirry tietosuojaselosteeseen.
+                      </a>
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      7. Kuinka palvelun käyttö voi loppua?
-                    </h2>
+                    <span className="service-info-list-item">
+                      Kuinka palvelun käyttö voi loppua?
+                    </span>
                     <p>
                       Voit lopettaa
 {' '}
@@ -307,9 +311,9 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      8. Miten näihin käyttöehtoihin voidaan tehdä muutoksia?
-                    </h2>
+                    <span className="service-info-list-item">
+                      Miten näihin käyttöehtoihin voidaan tehdä muutoksia?
+                    </span>
                     <p>
                       Kehitysvammaliitto voi muuttaa näitä käyttöehtoja ilman,
                       että ilmoittaa siitä sinulle etukäteen. Jos muutamme
@@ -327,9 +331,9 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">
-                      9. Miten riidat ratkaistaan?
-                    </h2>
+                    <span className="service-info-list-item">
+                      Miten riidat ratkaistaan?
+                    </span>
                     <p>
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelu ja nämä käyttöehdot on tehty niin, että ne
@@ -345,7 +349,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                   </li>
                   <li>
-                    <h2 className="service-info-list-item">10. Ota yhteyttä</h2>
+                    <span className="service-info-list-item">Ota yhteyttä</span>
                     <p>
                       Voit ottaa yhteyttä
 {' '}
@@ -373,7 +377,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 Puhelin: (09) 348 090 (vaihde)
                 <br />
               </section>
-            </article>
+            </div>
             <ButtonContainer
               className="profile-modal-button accept-rules-modal-button"
               onClick={acceptRules}
