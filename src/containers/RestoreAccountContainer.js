@@ -19,6 +19,7 @@ const RestoreAccountContainer = props => {
       if (res && res.success) {
         localStorage.removeItem('userId')
         localStorage.removeItem('authToken')
+        history.push('/')
       }
     } catch (e) {
       // eslint-disable-next-line no-console

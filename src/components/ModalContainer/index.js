@@ -161,7 +161,7 @@ const ModalContainer = props => {
       style={getStyles()}
       role="dialog"
       aria={{
-        labelledby: label,
+        label,
         modal: true,
       }}
     >

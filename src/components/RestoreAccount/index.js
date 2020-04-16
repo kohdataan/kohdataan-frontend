@@ -5,12 +5,11 @@ import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 
 const RestoreAccount = props => {
-  const { handleRestore, handleDeleteNow, history } = props
+  const { handleRestore, handleDeleteNow } = props
   const [modalIsOpen, setModalIsOpen] = useState(true)
   const handleDelete = () => {
     handleDeleteNow()
     setModalIsOpen(false)
-    history.push('/login')
   }
   return (
     <ModalContainer
@@ -41,7 +40,6 @@ const RestoreAccount = props => {
 RestoreAccount.propTypes = {
   handleRestore: propTypes.func.isRequired,
   handleDeleteNow: propTypes.func.isRequired,
-  history: propTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(RestoreAccount)

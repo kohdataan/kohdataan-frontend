@@ -51,7 +51,6 @@ class App extends Component {
 
   render() {
     const { loading, user: pUser, mmuser } = this.props
-    console.log(pUser)
     if (loading.root && localStorage.getItem('authToken')) {
       return <FullScreenLoading />
     }
@@ -59,7 +58,8 @@ class App extends Component {
       !loading.root &&
       localStorage.getItem('authToken') &&
       !mmuser &&
-      pUser
+      pUser &&
+      !pUser.deleteAt
     ) {
       return <AccountLocked />
     }
@@ -115,7 +115,9 @@ class App extends Component {
         {localStorage.getItem('authToken') && pUser && pUser.deleteAt && (
           <RestoreAccountContainer />
         )}
-        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
+        {localStorage.getItem('authToken') && pUser && !pUser.deleteAt && (
+          <BottomNavigationContainer />
+        )}
         {!document.cookie.includes('CookieConsent=true') && <CookieContainer />}
       </Container>
     )
