@@ -58,6 +58,7 @@ const CookieConsentBanner = props => {
           modalIsOpen={privacyPolicyModalIsOpen}
           closeModal={() => setPrivacyPolicyModalIsOpen(false)}
           label="Tietosuojaseloste"
+          isLong
           aria={{
             labelledby: 'Tietosuojaseloste',
             modal: true,

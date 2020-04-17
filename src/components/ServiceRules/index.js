@@ -2,10 +2,14 @@ import React, { memo, useState } from 'react'
 import propTypes from 'prop-types'
 import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
+import PrivacyPolicy from '../PrivacyPolicy'
 import './styles.scss'
 
 const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
+    false
+  )
 
   const openModal = () => {
     setModalIsOpen(true)
@@ -180,7 +184,10 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       materiaaleja kannattaa jakaa.
                     </p>
                     <p>
-                      <a href="/" className="link-outside-service">
+                      <a
+                        href="https://kohdataan.fi/saannot/"
+                        className="service-info-link"
+                      >
                         Siirry Kohdataan-sivuilla oleviin sääntöihin.
                       </a>
                     </p>
@@ -263,12 +270,31 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       Henkilötietojen käsittelystä ja evästeiden käytöstä
                       kerrotaan lisää palvelun tietosuojaselosteessa.
                     </p>
-                    <p>
-                      <a className="link-outside-service" href="/">
-                        Siirry tietosuojaselosteeseen.
-                      </a>
-                    </p>
+                    <ButtonContainer
+                      className="service-info-link"
+                      role="link"
+                      onClick={() => setPrivacyPolicyModalIsOpen(true)}
+                    >
+                      <span>Siirry tietosuojaselosteeseen.</span>
+                    </ButtonContainer>
+                    <ModalContainer
+                      modalIsOpen={privacyPolicyModalIsOpen}
+                      closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+                      isLong
+                      label="Tietosuojaseloste"
+                      aria={{
+                        label: 'Tietosuojaseloste',
+                        modal: true,
+                      }}
+                    >
+                      <aside id="Tietosuojaseloste">
+                        <PrivacyPolicy
+                          closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+                        />
+                      </aside>
+                    </ModalContainer>
                   </li>
+                  <br />
                   <li>
                     <span className="service-info-list-item">
                       Kuinka palvelun käyttö voi loppua?
