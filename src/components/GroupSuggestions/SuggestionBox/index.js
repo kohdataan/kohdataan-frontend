@@ -54,6 +54,8 @@ const SuggestionBox = props => {
                 members
                   .filter(
                     member =>
+                      member &&
+                      member.delete_at === 0 &&
                       !isSystemAdmin(member.id, profiles) &&
                       !isTeamAdmin(member.id, teams)
                   )
