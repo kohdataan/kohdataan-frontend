@@ -1,11 +1,22 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({ closeModal }) => {
   return (
-    <div className="create-account-modal-container">
-      <div className="create-account-modal-content">
-        <h1 className="privacy-policy-header">Tietosuoja&shy;seloste</h1>
+    <div className="privacy-policy-modal-container">
+      <div className="privacy-policy-modal-content">
+        <div className="privacy-policy-header-content">
+          <h1 className="privacy-policy-header">Tietosuoja&shy;seloste</h1>
+          <ButtonContainer
+            className="privacy-policy-icon-btn"
+            onClick={closeModal}
+            label="Sulje"
+          >
+            <div className="go-back-button" />
+          </ButtonContainer>
+        </div>
         <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
         <div className="service-info-content">
           <p>
@@ -118,6 +129,7 @@ const PrivacyPolicy = () => {
                   <li>puhelinnumero</li>
                   <li>salasana</li>
                 </ul>
+                <br />
                 Kun luot käyttäjäprofiilin, joka näkyy muille käyttäjille,
                 sinusta kerätään:
                 <ul>
@@ -127,6 +139,7 @@ const PrivacyPolicy = () => {
                   <li>kuva itsestä</li>
                   <li>kiinnostuksen kohteet.</li>
                 </ul>
+                <br />
                 Kun käytät palvelua sinusta kerätään:
                 <ul>
                   <li>
@@ -271,6 +284,7 @@ const PrivacyPolicy = () => {
               Voit tehdä oikeuksiasi koskevan pyynnön ottamalla yhteyttä
               kohdassa 2 mainittuun yhteyshenkilöön.
             </li>
+            <br />
             <li>
               <span className="service-info-list-item">
                 Minkä maan lainsäädäntöä henkilötietojen käsittelyyn
@@ -306,8 +320,18 @@ const PrivacyPolicy = () => {
           </ol>
         </div>
       </div>
+      <ButtonContainer
+        className="profile-modal-button privacy-policy-modal-button"
+        onClick={closeModal}
+      >
+        Sulje
+      </ButtonContainer>
     </div>
   )
+}
+
+PrivacyPolicy.propTypes = {
+  closeModal: PropTypes.func.isRequired,
 }
 
 export default memo(PrivacyPolicy)

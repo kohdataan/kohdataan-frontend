@@ -31,24 +31,26 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
           label="Hyväksy käyttösäännöt-dialogi"
+          isLong
           aria={{
             labelledby: 'Hyväksy käyttösäännöt-dialogi',
             modal: true,
           }}
         >
           <div className="service-rules-content">
-            <ButtonContainer
-              className="accept-rules-icon-btn icon-btn go-back-button"
-              onClick={closeModal}
-              label="Sulje"
-            >
-              {' '}
-            </ButtonContainer>
-            <h1 className="service-info-header">Käyttöehdot</h1>
+            <div className="service-rules-header-content">
+              <h1 className="service-info-header">Käyttöehdot</h1>
+              <ButtonContainer
+                className="accept-rules-icon-btn"
+                onClick={closeModal}
+                label="Sulje"
+              >
+                <div className="go-back-button" />
+              </ButtonContainer>
+            </div>
             <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
             <div className="service-info-content">
               <section>
-                <span className="sr-only">Säännöistä yleisesti</span>
                 <p>
                   Nämä käyttöehdot ovat sinun ja Kehitysvammaliiton välinen
                   sopimus <span className="uppercase-text">Kohdataan</span>
@@ -65,7 +67,6 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 </p>
               </section>
               <section>
-                <span className="sr-only">Säännöt</span>
                 <ol className="service-info-list">
                   <li>
                     <span className="service-info-list-item">
@@ -219,8 +220,8 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                           <ul>
                             <li>etu-ja sukunimesi</li>
                             <li>syntymäaikasi</li>
-                            <li>sähköpostiosoitteesi</li>
-                            <li>puhelinnumerosi</li>
+                            <li>sähköpostiosoit&shy;teesi</li>
+                            <li>puhelinnume&shy;rosi</li>
                             <li>luomasi salasana</li>
                           </ul>
                         </li>

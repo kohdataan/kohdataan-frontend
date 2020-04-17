@@ -64,20 +64,9 @@ const CookieConsentBanner = props => {
           }}
         >
           <aside id="Tietosuojaseloste">
-            <PrivacyPolicy />
-            <ButtonContainer
-              className="accept-rules-icon-btn icon-btn"
-              onClick={() => setPrivacyPolicyModalIsOpen(false)}
-              label="Sulje"
-            >
-              <div className="go-back-button" />
-            </ButtonContainer>
-            <ButtonContainer
-              className="profile-modal-button accept-rules-modal-button"
-              onClick={() => setPrivacyPolicyModalIsOpen(false)}
-            >
-              Sulje
-            </ButtonContainer>
+            <PrivacyPolicy
+              closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+            />
           </aside>
         </ModalContainer>
       </div>

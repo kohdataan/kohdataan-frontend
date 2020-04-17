@@ -465,7 +465,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             >
               <div>
                 <ButtonContainer
-                  className="icon-btn go-back-button accept-rules-icon-btn"
+                  className="icon-btn go-back-button close-modal-icon-btn"
                   onClick={closeAcceptModal}
                   label="Sulje"
                 />
@@ -502,26 +502,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             modalIsOpen={privacyPolicyModalIsOpen}
             closeModal={() => setPrivacyPolicyModalIsOpen(false)}
             label="Tietosuojaseloste"
+            isLong
             aria={{
-              labelledby: 'Tietosuojaseloste',
+              label: 'Tietosuojaseloste',
               modal: true,
             }}
           >
-            <aside id="Tietosuojaseloste">
-              <ButtonContainer
-                className="privacy-policy-icon-btn icon-btn"
-                onClick={() => setPrivacyPolicyModalIsOpen(false)}
-                label="Sulje"
-              >
-                <div className="go-back-button" />
-              </ButtonContainer>
-              <PrivacyPolicy />
-              <ButtonContainer
-                className="profile-modal-button accept-rules-modal-button"
-                onClick={() => setPrivacyPolicyModalIsOpen(false)}
-              >
-                Sulje
-              </ButtonContainer>
+            <aside id="Tietosuojaseloste" className="privacy-policy-container">
+              <PrivacyPolicy
+                closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+              />
             </aside>
           </ModalContainer>
           <ButtonContainer
@@ -536,7 +526,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             closeModal={() => setAccessibilityStatementModalIsOpen(false)}
             label="Saavutettavuusseloste"
             aria={{
-              labelledby: 'Saavutettavuusseloste',
+              label: 'Saavutettavuusseloste',
               modal: true,
             }}
           >
