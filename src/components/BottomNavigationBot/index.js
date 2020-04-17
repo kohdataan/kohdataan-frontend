@@ -142,9 +142,8 @@ const BottomNavigationBot = forwardRef((props, ref) => {
                       href="https://kohdataan.fi"
                       tabIndex={0}
                     >
-                      Siirry Kohdataan.fi-sivuille.
+                      Siirry Kohdataan-sivuille.
                     </a>
-                    (kohdataan.fi)
                   </p>
                 </div>
               </div>
