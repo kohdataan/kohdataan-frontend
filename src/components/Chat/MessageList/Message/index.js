@@ -133,7 +133,12 @@ const Message = props => {
   }
 
   return (
-    <article>
+    <div
+      aria-haspopup="false"
+      role="article"
+      data-focusable="true"
+      tabIndex={0}
+    >
       {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
@@ -143,6 +148,10 @@ const Message = props => {
       )}
       <div className={messageWrapperClassList.join(' ')}>
         <div className="message-outer">
+          <span className="sr-only">
+            Viesti lähettäjältä
+            {isAdmin ? 'Valvoja' : sender}
+          </span>
           {timeSent !== '' ? (
             <header
               className={`chat-message-header-content ${
@@ -153,18 +162,15 @@ const Message = props => {
             >
               {currentUserId !== senderId && !directChannel && (
                 <p
+                  aria-hidden
                   className={`chat-message-sender ${
                     sender === 'Poistunut käyttäjä'
                       ? 'chat-message-sender-unknown'
                       : ''
                   }`}
                 >
-                  <span className="sr-only">Lähettäjä</span>
                   {isAdmin ? 'Valvoja' : sender}
                 </p>
-              )}
-              {currentUserId === senderId && (
-                <span className="sr-only">Minä</span>
               )}
               <span className="chat-message-timestamp">{timeSent}</span>
             </header>
@@ -183,8 +189,8 @@ const Message = props => {
                 <Link
                   to={`/profile/${senderMmUsername}`}
                   className="channel-name-link"
+                  aria-label="Linkki profiiliin"
                 >
-                  <span className="sr-only">Linkki profiiliin</span>
                   <i aria-hidden="true" title={sender[0]} />
                   {isAdmin ? (
                     <div
@@ -195,7 +201,7 @@ const Message = props => {
                       }}
                     >
                       <span>K</span>
-                      <span className="sr-only">Valvojan profiili</span>
+                      <span className="sr-only">Valvoja</span>
                     </div>
                   ) : (
                     <div
@@ -228,10 +234,11 @@ const Message = props => {
                         <img
                           className="message-image"
                           src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                          alt="attachment"
+                          alt="liite"
                         />
                         <span className="sr-only">Linkki kuvaan</span>
                       </Link>
+                      <span className="sr-only">Kuvateksti</span>
                       <p className="image-message-content-text chat-message-content-text">
                         {messageText}
                       </p>
@@ -242,7 +249,7 @@ const Message = props => {
                   files[0] &&
                   filesData[files[0]].mime_type.includes('video') && (
                     <>
-                      <div className="player-wrapper">
+                      <div className="player-wrapper" aria-label="Videoviesti">
                         <ReactPlayer
                           className="react-player"
                           url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
@@ -259,6 +266,7 @@ const Message = props => {
                           height="100%"
                         />
                       </div>
+                      <span className="sr-only">Viesti</span>
                       <p className="image-message-content-text chat-message-content-text">
                         {messageText}
                       </p>
@@ -268,7 +276,7 @@ const Message = props => {
                   !deleted &&
                   files[0] &&
                   filesData[files[0]].mime_type.includes('audio') && (
-                    <div className="player-wrapper">
+                    <div className="player-wrapper" aria-label="ääniviesti">
                       <ReactAudioPlayer
                         src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                         controls
@@ -279,10 +287,16 @@ const Message = props => {
                     </div>
                   )}
                 {files && deleted && (
-                  <p className="chat-message-content-text">{messageText}</p>
+                  <>
+                    <span className="sr-only">Viesti</span>
+                    <p className="chat-message-content-text">{messageText}</p>
+                  </>
                 )}
                 {!files && (
-                  <p className="chat-message-content-text">{messageText}</p>
+                  <>
+                    <span className="sr-only">Viesti</span>
+                    <p className="chat-message-content-text">{messageText}</p>
+                  </>
                 )}
               </div>
               {currentUserId !== senderId &&
@@ -304,14 +318,16 @@ const Message = props => {
       {showNewMessageDivider && messageDividerSet && (
         <div className="show-date-content">
           <div className="new-message-divider" />
-          <span className="sr-only">
-            <h2 id="newMessages">Uudet tapahtumat</h2>
-          </span>
-          <span className="new-message-divider-text">Uudet tapahtumat</span>
+          <h2
+            className="new-message-divider-text"
+            aria-label="Uudet tapahtumat"
+          >
+            Uudet tapahtumat
+          </h2>
           <div className="new-message-divider" />
         </div>
       )}
-    </article>
+    </div>
   )
 }
 
