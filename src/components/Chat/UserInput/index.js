@@ -160,7 +160,7 @@ const UserInput = props => {
       <ModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        label="image-preview-dialog"
+        label="Tiedoston esikatselu"
         isLong
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"

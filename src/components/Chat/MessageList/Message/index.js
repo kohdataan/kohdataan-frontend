@@ -138,6 +138,7 @@ const Message = props => {
       role="article"
       data-focusable="true"
       tabIndex={0}
+      aria-live="polite"
     >
       {showDate && (
         <div className="show-date-content">
