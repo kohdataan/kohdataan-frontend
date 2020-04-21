@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import CookieConsent from 'react-cookie-consent'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 import PrivacyPolicy from '../PrivacyPolicy'
 import './styles.scss'
 
-const CookieConsentBanner = props => {
-  const { modalIsOpen, closeModal } = props
+const CookieConsentBanner = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(true)
   const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
     false
   )
+
+  const acceptCookies = () => {
+    setModalIsOpen(false)
+  }
+
   return (
     <ModalContainer
       label="cookie-banner-modal"
@@ -21,7 +25,7 @@ const CookieConsentBanner = props => {
       <div className="cookie-info-container">
         <CookieConsent
           buttonText="Hyväksy"
-          onAccept={closeModal}
+          onAccept={acceptCookies}
           style={{
             flexDirection: 'column',
             flexWrap: 'nowrap',
@@ -83,11 +87,6 @@ const CookieConsentBanner = props => {
       </div>
     </ModalContainer>
   )
-}
-
-CookieConsentBanner.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
 }
 
 export default CookieConsentBanner
