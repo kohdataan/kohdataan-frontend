@@ -9,7 +9,7 @@ const IEWarningBanner = () => {
   const [modalIsOpen, setModalIsOpen] = useState(true)
   const [ieModalIsOpen, setIeModalIsOpen] = useState(false)
 
-  const acceptCookies = () => {
+  const acceptIeBad = () => {
     setModalIsOpen(false)
   }
 
@@ -23,7 +23,7 @@ const IEWarningBanner = () => {
       <div className="ie-info-container">
         <CookieConsent
           buttonText="Hyväksy"
-          onAccept={acceptCookies}
+          onAccept={acceptIeBad}
           cookieName="IEBadAcknowledged"
           style={{
             flexDirection: 'column',
