@@ -54,7 +54,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <p>
             <a
-              href="https://kohdataan.fi/saannot/"
+              href="https://www.finlex.fi/fi/laki/alkup/2019/20190306"
               className="service-info-link"
             >
               Siirry lakiin tästä.
@@ -98,9 +98,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <h2 className="accessibility-statement-headline">Anna palautetta</h2>
           <p>
-            Jos huomaat 
-{' '}
-<span className="uppercase-text">Kohdataan</span>
+            Jos huomaat <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuudessa ongelmia, anna meille palautetta. Voit
             antaa palautetta saavutettavuudesta sähköpostitse
             kohdataan@kohdataan.fi. Vastaamme palautteeseen kahden viikon
@@ -122,7 +120,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <p>
             <a
-              href="https://kohdataan.fi/saannot/"
+              href="https://www.saavutettavuusvaatimukset.fi/oikeutesi/oikeutesi-antaa-palautetta-saavutettavuudesta/"
               className="service-info-link"
             >
               Siirry aluehallintoviraston ohjeisiin tästä.
