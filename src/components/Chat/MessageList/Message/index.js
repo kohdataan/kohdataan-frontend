@@ -32,7 +32,7 @@ const Message = props => {
   const [deleted, setDeleted] = useState(false)
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
-  if (messageText.includes('STRING_TO_USE')) {
+  if (messageText.includes(process.env.REACT_APP_REMOVE_STRING)) {
     setMessageText('Viesti poistettu.')
     setDeleted(true)
   }
