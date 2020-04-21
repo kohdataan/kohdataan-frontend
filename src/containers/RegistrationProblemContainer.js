@@ -23,13 +23,11 @@ const RegistrationProblemContainer = props => {
     }
   }
   return (
-    <aside>
-      <RegistrationProblem
-        handleEmailSending={handleEmailSending}
-        handleClick={handleClick}
-        text={text}
-      />
-    </aside>
+    <RegistrationProblem
+      handleEmailSending={handleEmailSending}
+      handleClick={handleClick}
+      text={text}
+    />
   )
 }
 
