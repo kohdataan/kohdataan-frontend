@@ -31,7 +31,7 @@ const SuggestionBox = props => {
               }`,
             }}
           />
-          <h2>{channel.display_name}</h2>
+          <h2 className="channel-suggestion-header">{channel.display_name}</h2>
         </div>
         <div className="group-in-common">
           {channel.purpose && Object.keys(channel.purpose).length > 0 ? (
