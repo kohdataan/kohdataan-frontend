@@ -43,7 +43,6 @@ const LogInContainer = props => {
           setUuidValid(true)
         } else {
           setUuidValid(false)
-          setError('uuidLinkError')
         }
       })
     }
