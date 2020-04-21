@@ -525,26 +525,16 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             modalIsOpen={accessibilityStatementModalIsOpen}
             closeModal={() => setAccessibilityStatementModalIsOpen(false)}
             label="Saavutettavuusseloste"
+            isLong
             aria={{
               label: 'Saavutettavuusseloste',
               modal: true,
             }}
           >
             <aside>
-              <ButtonContainer
-                className="accessibility-statement-icon-btn icon-btn"
-                onClick={() => setAccessibilityStatementModalIsOpen(false)}
-                label="Sulje"
-              >
-                <div className="go-back-button" />
-              </ButtonContainer>
-              <AccessibilityStatement />
-              <ButtonContainer
-                className="profile-modal-button accept-rules-modal-button"
-                onClick={() => setAccessibilityStatementModalIsOpen(false)}
-              >
-                Sulje
-              </ButtonContainer>
+              <AccessibilityStatement
+                closeModal={() => setAccessibilityStatementModalIsOpen(false)}
+              />
             </aside>
           </ModalContainer>
         </div>
