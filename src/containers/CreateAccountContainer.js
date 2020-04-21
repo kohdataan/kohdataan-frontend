@@ -49,7 +49,7 @@ const CreateAccountContainer = props => {
         email,
         phoneNumber,
         username,
-        nickname: username,
+        nickname: 'Käyttäjä',
         password,
       }
 
