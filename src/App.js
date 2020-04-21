@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { isIE } from 'react-device-detect'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -30,6 +31,7 @@ import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 import RestoreAccountContainer from './containers/RestoreAccountContainer'
 import AccountLocked from './components/AccountLocked'
 import CookieConsentBanner from './components/CookieConsentBanner'
+import IEWarningBanner from './components/IEWarningBanner'
 import './styles/defaults.scss'
 
 class App extends Component {
@@ -113,6 +115,9 @@ class App extends Component {
         )}
         {!document.cookie.includes('CookieConsent=true') && (
           <CookieConsentBanner />
+        )}
+        {isIE && !document.cookie.includes('IEBadAcknowledged=true') && (
+          <IEWarningBanner />
         )}
       </Container>
     )
