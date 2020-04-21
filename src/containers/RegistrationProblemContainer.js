@@ -17,17 +17,19 @@ const RegistrationProblemContainer = props => {
     if (resp && resp.success && !handleClick) {
       history.push('/messagesent')
     } else if (handleClick) {
-      setText('Kiitos viestistä!')
+      setText('Kiitos viestistä.')
     } else {
       setText('Viestin lähetys ei onnistunut')
     }
   }
   return (
-    <RegistrationProblem
-      handleEmailSending={handleEmailSending}
-      handleClick={handleClick}
-      text={text}
-    />
+    <aside>
+      <RegistrationProblem
+        handleEmailSending={handleEmailSending}
+        handleClick={handleClick}
+        text={text}
+      />
+    </aside>
   )
 }
 

@@ -127,6 +127,30 @@ const customStylesCookie = {
   },
 }
 
+const customStylesSendMessage = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    maxHeight: '95vh',
+    maxWidth: '80vh',
+    minWidth: '50vh',
+    minHeight: '60vh',
+    padding: '0px',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '2000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
 const ModalContainer = props => {
   const {
     children,
@@ -137,6 +161,7 @@ const ModalContainer = props => {
     tutorial,
     editModal,
     cookie,
+    isSendMessage,
   } = props
 
   const getStyles = () => {
@@ -149,6 +174,8 @@ const ModalContainer = props => {
       styles = customStylesEditModal
     } else if (cookie) {
       styles = customStylesCookie
+    } else if (isSendMessage) {
+      styles = customStylesSendMessage
     }
     return styles
   }
@@ -161,7 +188,7 @@ const ModalContainer = props => {
       style={getStyles()}
       role="dialog"
       aria={{
-        labelledby: label,
+        label,
         modal: true,
       }}
     >
@@ -183,6 +210,7 @@ ModalContainer.propTypes = {
   tutorial: PropTypes.bool,
   editModal: PropTypes.bool,
   cookie: PropTypes.bool,
+  isSendMessage: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -191,6 +219,7 @@ ModalContainer.defaultProps = {
   editModal: false,
   tutorial: false,
   cookie: false,
+  isSendMessage: false,
 }
 
 export default memo(ModalContainer)

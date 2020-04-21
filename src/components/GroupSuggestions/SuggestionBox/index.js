@@ -43,7 +43,7 @@ const SuggestionBox = props => {
           ) : (
             <div className="suggestion-box-info">
               <p>Tässä ryhmässä ei ole vielä muita jäseniä.</p>
-              <p>Liity ryhmään ensimmäisenä</p>
+              <p>Liity ryhmään ensimmäisenä.</p>
             </div>
           )}
         </div>
