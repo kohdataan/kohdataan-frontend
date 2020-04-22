@@ -87,8 +87,6 @@ const MessageList = props => {
   useEffect(() => {
     // TODO: implement some kind of button to scroll down when there are new messages
     ref.current.scrollTop = ref.current.scrollHeight
-    if (document.getElementById('newMessages'))
-      document.getElementById('newMessages').scrollIntoView()
   })
 
   let counter = 0
