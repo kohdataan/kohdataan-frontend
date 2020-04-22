@@ -22,7 +22,7 @@ const customStyles = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -47,7 +47,7 @@ const customStylesEditModal = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -72,7 +72,7 @@ const customStylesTutorial = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -96,7 +96,7 @@ const customStylesLong = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -123,7 +123,7 @@ const customStylesCookie = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
