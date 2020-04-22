@@ -63,6 +63,7 @@ class App extends Component {
 
     return (
       <Container className="main-container">
+        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         <Route exact path="/login" component={LogInContainer} />
         <Route path="/login/:uuid" component={LogInContainer} />
         <Route
@@ -109,7 +110,6 @@ class App extends Component {
         <PrivateRoute path="/chat/:id/:fileId" component={ViewImageContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
-        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         {localStorage.getItem('authToken') && pUser && pUser.deleteAt && (
           <RestoreAccountContainer />
         )}
