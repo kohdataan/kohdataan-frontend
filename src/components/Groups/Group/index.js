@@ -98,7 +98,12 @@ const Group = props => {
   return (
     <Link
       className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
-      to={`/chat/${channel.id}`}
+      to={{
+        pathname: `/chat/${channel.id}`,
+        state: {
+          unreadCount,
+        },
+      }}
     >
       <div className="group-box-content">
         <div className="group-header">
@@ -127,6 +132,7 @@ const Group = props => {
         )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
+            <span className="sr-only">Jäsenet</span>
             {activeMembers &&
               activeMembers.map(member => (
                 <Member

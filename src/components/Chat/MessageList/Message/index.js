@@ -25,11 +25,34 @@ const Message = props => {
     isAdmin,
     pinPost,
     filesData,
+    newMessageCount,
+    lastViewed,
+    createAt,
+    messageDividerSet,
+    setMessageDividerSet,
+    lastPost,
   } = props
 
   const [messageText, setMessageText] = useState(text)
   const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
+  const [showNewMessageDivider, setShowNewMessageDivider] = useState(false)
+  const [newMessagesIndicator, setNewMessagesIndicator] = useState(0)
+
+  useEffect(() => {
+    if (
+      lastViewed === createAt &&
+      newMessageCount !== 0 &&
+      !messageDividerSet &&
+      !lastPost
+    ) {
+      setShowNewMessageDivider(true)
+      setMessageDividerSet(true)
+      setNewMessagesIndicator(lastViewed)
+    } else if (messageDividerSet && lastViewed === newMessagesIndicator) {
+      setShowNewMessageDivider(false)
+    }
+  }, [lastViewed, createAt])
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
   if (messageText.includes(process.env.REACT_APP_REMOVE_STRING)) {
@@ -97,8 +120,26 @@ const Message = props => {
     getMemberImage()
   }, [senderId])
 
+  const getMemberStatus = () => {
+    let status = ''
+    if (iconMemberStatus.includes('online')) {
+      status = 'Käyttäjä paikalla'
+    } else if (iconMemberStatus.includes('offline')) {
+      status = 'Käyttäjä offline'
+    } else if (iconMemberStatus.includes('away')) {
+      status = 'Käyttäjä poissa'
+    }
+    return status
+  }
+
   return (
-    <>
+    <div
+      aria-haspopup="false"
+      role="article"
+      data-focusable="true"
+      tabIndex={0}
+      aria-live="polite"
+    >
       {showDate && (
         <div className="show-date-content">
           <div className="date-divider" />
@@ -108,11 +149,21 @@ const Message = props => {
       )}
       <div className={messageWrapperClassList.join(' ')}>
         <div className="message-outer">
+          <span className="sr-only">
+            Viesti lähettäjältä
+            {isAdmin ? 'Valvoja' : sender}
+          </span>
           {timeSent !== '' ? (
-            <div className="chat-message-header-content">
-              <span className="chat-message-timestamp">{timeSent}</span>
+            <header
+              className={`chat-message-header-content ${
+                senderId === currentUserId
+                  ? 'own-chat-message-header'
+                  : 'other-user-message-header'
+              }`}
+            >
               {currentUserId !== senderId && !directChannel && (
-                <h3
+                <p
+                  aria-hidden
                   className={`chat-message-sender ${
                     sender === 'Poistunut käyttäjä'
                       ? 'chat-message-sender-unknown'
@@ -120,9 +171,10 @@ const Message = props => {
                   }`}
                 >
                   {isAdmin ? 'Valvoja' : sender}
-                </h3>
+                </p>
               )}
-            </div>
+              <span className="chat-message-timestamp">{timeSent}</span>
+            </header>
           ) : (
             <div className="message-without-header-content" />
           )}
@@ -134,12 +186,12 @@ const Message = props => {
             }`}
           >
             {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
-              <div>
+              <header>
                 <Link
                   to={`/profile/${senderMmUsername}`}
                   className="channel-name-link"
+                  aria-label="Linkki profiiliin"
                 >
-                  <span className="sr-only">Linkki profiiliin</span>
                   <i aria-hidden="true" title={sender[0]} />
                   {isAdmin ? (
                     <div
@@ -150,7 +202,7 @@ const Message = props => {
                       }}
                     >
                       <span>K</span>
-                      <span className="sr-only">Valvojan profiili</span>
+                      <span className="sr-only">Valvoja</span>
                     </div>
                   ) : (
                     <div
@@ -161,8 +213,9 @@ const Message = props => {
                     />
                   )}
                 </Link>
-                <div className={iconMemberStatus} />
-              </div>
+                <div className={iconMemberStatus} aria-hidden />
+                <span className="sr-only">{getMemberStatus()}</span>
+              </header>
             )}
             {currentUserId !== senderId && sender === 'Poistunut käyttäjä' && (
               <div className="deleted-user-icon-container">
@@ -182,10 +235,11 @@ const Message = props => {
                         <img
                           className="message-image"
                           src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}/thumbnail`}
-                          alt="attachment"
+                          alt="liite"
                         />
                         <span className="sr-only">Linkki kuvaan</span>
                       </Link>
+                      <span className="sr-only">Kuvateksti</span>
                       <p className="image-message-content-text chat-message-content-text">
                         {messageText}
                       </p>
@@ -196,7 +250,7 @@ const Message = props => {
                   files[0] &&
                   filesData[files[0]].mime_type.includes('video') && (
                     <>
-                      <div className="player-wrapper">
+                      <div className="player-wrapper" aria-label="Videoviesti">
                         <ReactPlayer
                           className="react-player"
                           url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
@@ -213,6 +267,7 @@ const Message = props => {
                           height="100%"
                         />
                       </div>
+                      <span className="sr-only">Viesti</span>
                       <p className="image-message-content-text chat-message-content-text">
                         {messageText}
                       </p>
@@ -222,7 +277,7 @@ const Message = props => {
                   !deleted &&
                   files[0] &&
                   filesData[files[0]].mime_type.includes('audio') && (
-                    <div className="player-wrapper">
+                    <div className="player-wrapper" aria-label="ääniviesti">
                       <ReactAudioPlayer
                         src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                         controls
@@ -233,10 +288,16 @@ const Message = props => {
                     </div>
                   )}
                 {files && deleted && (
-                  <p className="chat-message-content-text">{messageText}</p>
+                  <>
+                    <span className="sr-only">Viesti</span>
+                    <p className="chat-message-content-text">{messageText}</p>
+                  </>
                 )}
                 {!files && (
-                  <p className="chat-message-content-text">{messageText}</p>
+                  <>
+                    <span className="sr-only">Viesti</span>
+                    <p className="chat-message-content-text">{messageText}</p>
+                  </>
                 )}
               </div>
               {currentUserId !== senderId &&
@@ -255,7 +316,19 @@ const Message = props => {
           </div>
         </div>
       </div>
-    </>
+      {showNewMessageDivider && messageDividerSet && (
+        <div className="show-date-content">
+          <div className="new-message-divider" />
+          <h2
+            className="new-message-divider-text"
+            aria-label="Uudet tapahtumat"
+          >
+            Uudet tapahtumat
+          </h2>
+          <div className="new-message-divider" />
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -286,6 +359,16 @@ Message.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
+  newMessageCount: propTypes.number,
+  lastViewed: propTypes.number.isRequired,
+  createAt: propTypes.number.isRequired,
+  messageDividerSet: propTypes.bool.isRequired,
+  setMessageDividerSet: propTypes.func.isRequired,
+  lastPost: propTypes.bool.isRequired,
+}
+
+Message.defaultProps = {
+  newMessageCount: 0,
 }
 
 export default memo(Message)

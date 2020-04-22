@@ -18,7 +18,6 @@ const UserInput = props => {
   const [errorModalIsOpen, setErrorModalIsOpen] = useState(false)
   const [orientation, setOrientation] = useState(0)
 
-
   const getExifData = file => {
     // get Exif data for file if it exists.
     // Exif data is used to rotate the image to the correct orientation.

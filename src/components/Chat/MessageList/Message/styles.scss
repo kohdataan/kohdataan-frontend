@@ -47,7 +47,6 @@
 .chat-message-timestamp {
   align-self: flex-end;
   margin-bottom: 7px;
-  margin-left: 4px;
   width: 33px;
   height: 15px;
   font-family: Lato;
@@ -68,11 +67,19 @@
 
 .chat-message-header-content {
   display: flex;
-  flex-flow: row-reverse nowrap;
-  padding: 0 10px;
+  flex-flow: row nowrap;
   margin-top: 15px;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: flex-start;
+  max-width: 58vw;
+}
+
+.own-chat-message-header {
+  justify-content: flex-end;
+  max-width: 58vw;
+}
+
+.other-user-message-header {
+  margin-left: 43px;
 }
 
 .message-without-header-content {
@@ -82,6 +89,7 @@
 .show-date-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 34.5px -15px 24.5px;
 }
 
@@ -118,6 +126,31 @@
 .message-icon-and-content-sent {
   display: flex;
   justify-content: flex-end;
+}
+
+.new-message-divider {
+  width: 40%;
+  height: 2px;
+  background: $orange;
+  margin: 10px 2px;
+  display: inline-block;
+  @media (max-width: 768px) {
+    width: 35%;
+  }
+  @media (max-width: 425px) {
+    width: 25%;
+  }
+  @media (max-width: 375px) {
+    width: 23%;
+  }
+}
+
+.new-message-divider-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #1a1a1a;
+  border: 1px $orange solid;
+  padding: 3px 5px;
 }
 
 .content-system-message {
@@ -175,6 +208,7 @@
   letter-spacing: -0.19px;
   color: #1a1a1a;
   margin: 0 5px 4px 0;
+  flex-grow: 2;
 }
 
 .chat-message-sender-unknown {
@@ -221,7 +255,7 @@
 .chat-report-message-icon {
   background: none;
   border: none;
-  color:  gray;
+  color: gray;
   cursor: grab;
 }
 
@@ -231,5 +265,5 @@
 
 .deleted-user-chat-icon {
   font-size: 1.4em;
-  color:  #bbb;
+  color: #bbb;
 }
