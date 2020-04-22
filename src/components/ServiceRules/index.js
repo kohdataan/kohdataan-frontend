@@ -218,7 +218,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     <span className="service-info-list-item">
                       Henkilötiedot ja yksityisyys
                     </span>
-                    <p>
+                    <div>
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelu kerää sinusta seuraavat henkilötiedot: 
                       <ul>
@@ -248,7 +248,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                           tekstit, valokuvat, videot ja äänet.
                         </li>
                       </ul>
-                    </p>
+                    </div>
                     <p>
                       Yksityisyytesi on meille hyvin tärkeää. Keräämme sinusta
                       ainoastaan niitä tietoja, joita tarvitaan, että voit

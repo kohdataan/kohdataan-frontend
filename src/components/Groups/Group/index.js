@@ -122,7 +122,9 @@ const Group = props => {
             }}
           />
           <h2>
-            {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
+            {channel.name === 'town-square'
+              ? 'Kysy valvojalta'
+              : channel.display_name}
           </h2>
         </div>
         {channel.name !== 'town-square' && (
@@ -144,7 +146,13 @@ const Group = props => {
               ))}
           </div>
         ) : (
-          <p>Tämä ryhmä on yleistä palautetta varten.</p>
+          <div className="monitor-group-text">
+            <p>
+              Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+            </p>
+            <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
+            <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
+          </div>
         )}
       </div>
       {unreadPosts === 1 && (

@@ -151,6 +151,9 @@ const RegistrationProblem = ({ handleEmailSending, handleClick, text }) => {
             <Link className="registration-problem-link" to="/reset-password">
               Olen unohtanut salasanani.
             </Link>
+            <Link className="login-link" to="/email-verification">
+              En ole saanut vahvistuslinkkiä.
+            </Link>
           </div>
         )}
       </div>

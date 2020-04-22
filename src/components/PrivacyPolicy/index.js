@@ -50,7 +50,9 @@ const PrivacyPolicy = ({ closeModal }) => {
                 <br />
                 Puhelin: 0400 675 674
                 <br />
-                Sähköposti: tanja.rasanen@kvl.fi
+                Sähköposti:
+{' '}
+                <a className="email-link" href="mailto:tanja.rasanen@kvl.fi">tanja.rasanen@kvl.fi</a>
                 <br />
                 Voit kysyä yhteyshenkilöltä lisätietoa tästä selosteesta tai
                 henkilötietojesi käytöstä.
@@ -64,7 +66,9 @@ const PrivacyPolicy = ({ closeModal }) => {
                 <br />
                 Puhelin: (09) 3480 9262
                 <br />
-                Sähköposti: marko.peltomaki@kvl.fi
+                Sähköposti:
+{' '}
+                <a className="email-link" href="mailto:marko.peltomaki@kvl.fi">marko.peltomaki@kvl.fi</a>
                 <br />
               </div>
             </li>
@@ -224,8 +228,7 @@ const PrivacyPolicy = ({ closeModal }) => {
                 Tietokoneesi selaimen tai mobiililaitteen asetuksista voit
                 hallita evästeiden käyttöä tai halutessasi estää ne kokonaan.
                 Jos estät asetuksistasi evästeiden käytön kokonaan, et pysty
-                käyttämään
-                <span className="uppercase-text">Kohdataan</span>
+                käyttämään <span className="uppercase-text">Kohdataan</span>
                 -palvelua.
               </p>
             </li>
