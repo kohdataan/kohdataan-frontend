@@ -130,7 +130,10 @@ const AccessibilityStatement = ({ closeModal }) => {
             <span className="uppercase-text">Kohdataan</span>
             -palvelun yhteystiedot 
           </h2>
-          <span>Sähköposti: kohdataan@kohdataan.fi</span>
+          <span>
+            Sähköposti: {' '}
+            <a className="email-link" href="mailto:kohdataan@kohdataan.fi">kohdataan@kohdataan.fi</a>
+          </span>
           <br />
           <span>Puhelinnumero: 09 348 090 (vaihde)</span>
           <br />
@@ -149,7 +152,11 @@ const AccessibilityStatement = ({ closeModal }) => {
               www.saavutettavuusvaatimukset.fi
             </a>
           </p>
-          <span>Sähköposti: saavutettavuus@avi.fi</span>
+          <span>
+            Sähköposti:
+{' '}
+            <a className="email-link" href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
+          </span>
           <br />
           <span>Puhelinnumero: 02 9501 6000</span>
           <br />
