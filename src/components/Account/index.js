@@ -7,7 +7,14 @@ import * as API from '../../api/user/user'
 import './styles.scss'
 
 const Account = props => {
-  const { nodeUser, mmuser, updateUser, updatePassword, history } = props
+  const {
+    nodeUser,
+    mmuser,
+    updateUser,
+    updatePassword,
+    history,
+    userLogout,
+  } = props
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteError, setDeleteError] = useState(null)
@@ -33,9 +40,7 @@ const Account = props => {
       const token = localStorage.getItem('authToken')
       const res = await API.deleteUser(data, id, token)
       if (res && res.success) {
-        localStorage.removeItem('userId')
-        localStorage.removeItem('authToken')
-        history.push('/')
+        userLogout()
       } else if (res && res.message) {
         setDeleteError(res.message)
       }
@@ -193,6 +198,7 @@ Account.propTypes = {
   updateUser: propTypes.func.isRequired,
   updatePassword: propTypes.func.isRequired,
   history: propTypes.instanceOf(Object).isRequired,
+  userLogout: propTypes.func.isRequired,
 }
 
 export default memo(Account)
