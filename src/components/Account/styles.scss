@@ -1,5 +1,9 @@
 @import '../../styles/colors.scss';
 
+.account-info-text {
+  font-size: 1.17em;
+}
+
 .account-update-container {
   margin: 30px 35px;
   display: flex;
@@ -60,7 +64,7 @@
 }
 
 .account-delete-button {
-  color: red;
+  color: black;
   min-width: 230px;
   align-self: center;
   height: 42px;
@@ -87,7 +91,7 @@
 }
 
 .delete-text {
-  color: red;
+  color: black;
 }
 
 .delete-box {

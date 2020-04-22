@@ -7,7 +7,14 @@ import * as API from '../../api/user/user'
 import './styles.scss'
 
 const Account = props => {
-  const { nodeUser, mmuser, updateUser, updatePassword, history } = props
+  const {
+    nodeUser,
+    mmuser,
+    updateUser,
+    updatePassword,
+    history,
+    userLogout,
+  } = props
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteError, setDeleteError] = useState(null)
@@ -33,9 +40,7 @@ const Account = props => {
       const token = localStorage.getItem('authToken')
       const res = await API.deleteUser(data, id, token)
       if (res && res.success) {
-        localStorage.removeItem('userId')
-        localStorage.removeItem('authToken')
-        history.push('/')
+        userLogout()
       } else if (res && res.message) {
         setDeleteError(res.message)
       }
@@ -67,7 +72,7 @@ const Account = props => {
   }
 
   return (
-    <div className="account-update-container">
+    <main className="account-update-container">
       <div className="account-header">
         <h1>Muokkaa tietojasi</h1>
         <ButtonContainer
@@ -78,10 +83,7 @@ const Account = props => {
         </ButtonContainer>
       </div>
       <div className="account-info-text">
-        <h3>
-          Täällä voit muokata rekisteröitymistietojasi. Nämä tiedot näkyvät vain
-          sinulle. Kaikki tiedot ovat pakollisia.
-        </h3>
+        <p>Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.</p>
       </div>
       <div className="account-box-outer">
         <div className="account-box-inner">
@@ -89,6 +91,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('firstname')}
+            label="Muokkaa etunimeä"
           >
             Muokkaa
           </ButtonContainer>
@@ -101,6 +104,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('lastname')}
+            label="Muokkaa sukunimeä"
           >
             Muokkaa
           </ButtonContainer>
@@ -113,6 +117,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('email')}
+            label="Muokkaa sähköpostia"
           >
             Muokkaa
           </ButtonContainer>
@@ -125,6 +130,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('phoneNumber')}
+            label="Muokkaa puhelinnumeroa"
           >
             Muokkaa
           </ButtonContainer>
@@ -137,6 +143,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('password')}
+            label="Muokkaa salasanaa"
           >
             Muokkaa
           </ButtonContainer>
@@ -176,7 +183,7 @@ const Account = props => {
         deleteUser={handleDeleteUser}
         deleteError={deleteError}
       />
-    </div>
+    </main>
   )
 }
 
@@ -193,6 +200,7 @@ Account.propTypes = {
   updateUser: propTypes.func.isRequired,
   updatePassword: propTypes.func.isRequired,
   history: propTypes.instanceOf(Object).isRequired,
+  userLogout: propTypes.func.isRequired,
 }
 
 export default memo(Account)
