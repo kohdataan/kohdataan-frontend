@@ -53,11 +53,15 @@
 .group-unreads-text {
   background-color: $orange;
   padding: 10px 0 10px 0;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
   text-align: center;
+}
+
+.monitor-group-text {
+  line-height: 1.3em;
 }
 
 .no-unreads {

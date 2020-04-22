@@ -75,11 +75,16 @@ const Friends = props => {
     return getUnreadCount(b.id) - getUnreadCount(a.id)
   }
 
-  const filterSearchResults = data =>
+  // Filter out current user, surveybot and
+  // only return profiles where nickname matches
+  const filterSearchResults = (data, searchTerm) =>
     data &&
     data.filter(
       profile =>
-        profile.id !== currentUserId && profile.username !== 'surveybot'
+        profile.id !== currentUserId &&
+        profile.username !== 'surveybot' &&
+        profile.delete_at === 0 &&
+        profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
   const handleFriendSearchChange = async searchText => {
@@ -90,7 +95,10 @@ const Friends = props => {
       try {
         const foundProfiles = await searchProfiles(searchText)
         // Filter out current user profile
-        const filteredProfiles = filterSearchResults(foundProfiles.data)
+        const filteredProfiles = filterSearchResults(
+          foundProfiles.data,
+          searchText
+        )
         setFriendSearchResult(filteredProfiles)
       } catch (e) {
         setFriendSearchResult([])
@@ -115,6 +123,7 @@ const Friends = props => {
           placeholder="Hae kaveria"
           handleClear={handleFriendSearchReset}
           label="hae kaveria"
+          aria-label="hae kaveria"
           ref={friendSearchTextInput}
         />
       </div>

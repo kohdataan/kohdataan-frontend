@@ -17,12 +17,12 @@ const customStyles = {
     borderRadius: '5px',
     textAlign: 'center',
     maxHeight: '80vh',
-    minWidth: '30vh',
+    minWidth: '290px',
     maxWidth: '400px',
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -47,7 +47,7 @@ const customStylesEditModal = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -72,7 +72,7 @@ const customStylesTutorial = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -96,7 +96,7 @@ const customStylesLong = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -109,20 +109,45 @@ const customStylesCookie = {
     bottom: 'auto',
     marginRight: '-20%',
     paddingTop: '10px',
+    paddingBottom: '10px',
     transform: 'translate(-50%, -50%)',
     position: 'fixed',
     border: 'none',
     borderRadius: '5px',
-    width: '90vw',
-    maxHeight: '306px',
-    maxWidth: '80vw',
+    width: '80%',
+    height: '180px',
     minHeight: '156px',
     minWidth: '330px',
+    maxHeight: '306px',
     backgroundColor: '#2B373B',
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
+const customStylesSendMessage = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    maxHeight: '95vh',
+    maxWidth: '80vh',
+    minWidth: '50vh',
+    minHeight: '60vh',
+    padding: '0px',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
@@ -137,6 +162,7 @@ const ModalContainer = props => {
     tutorial,
     editModal,
     cookie,
+    isSendMessage,
   } = props
 
   const getStyles = () => {
@@ -149,6 +175,8 @@ const ModalContainer = props => {
       styles = customStylesEditModal
     } else if (cookie) {
       styles = customStylesCookie
+    } else if (isSendMessage) {
+      styles = customStylesSendMessage
     }
     return styles
   }
@@ -161,7 +189,7 @@ const ModalContainer = props => {
       style={getStyles()}
       role="dialog"
       aria={{
-        labelledby: label,
+        label,
         modal: true,
       }}
     >
@@ -183,6 +211,7 @@ ModalContainer.propTypes = {
   tutorial: PropTypes.bool,
   editModal: PropTypes.bool,
   cookie: PropTypes.bool,
+  isSendMessage: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -191,6 +220,7 @@ ModalContainer.defaultProps = {
   editModal: false,
   tutorial: false,
   cookie: false,
+  isSendMessage: false,
 }
 
 export default memo(ModalContainer)

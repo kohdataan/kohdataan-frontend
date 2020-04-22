@@ -20,7 +20,6 @@ const ValidatedTextArea = React.forwardRef((props, ref) => {
         name={name}
         id={label}
         ref={ref}
-        placeholder={label}
         className={labelClassName}
         onChange={onChange}
         maxLength={maxLength}

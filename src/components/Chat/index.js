@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import MessageList from './MessageList'
 import ChatHeader from './ChatHeader'
@@ -27,6 +27,16 @@ const Chat = props => {
     pinPost,
     filesData,
   } = props
+
+  const [currentUser, setCurrentUser] = useState(null)
+  const [lastViewed, setLastViewed] = useState(0)
+
+  useEffect(() => {
+    setCurrentUser(members.find(member => member.user_id === currentUserId))
+    if (currentUser) {
+      setLastViewed(currentUser.last_viewed_at)
+    }
+  }, [currentUser, currentUserId, members])
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
@@ -162,6 +172,8 @@ const Chat = props => {
         pinPost={handlePinPost}
         filesData={filesData}
         teams={teams}
+        location={location}
+        lastViewed={lastViewed}
       />
       {channel.id && (
         <UserInput

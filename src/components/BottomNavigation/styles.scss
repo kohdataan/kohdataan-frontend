@@ -12,6 +12,7 @@
   z-index: 3000;
   width: 100%;
   max-width: 960px;
+  padding-left: 3px;
 }
 
 .bottom-navigation-container {
@@ -22,4 +23,5 @@
   left: 0;
   display: flex;
   justify-content: center;
+  z-index: 3000;
 }

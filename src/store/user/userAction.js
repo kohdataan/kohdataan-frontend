@@ -43,7 +43,7 @@ export const addUserToState = () => {
     try {
       if (token) {
         const user = await API.getUser(id, token)
-        dispatch({
+        await dispatch({
           type: types.ADD_USER_TO_STATE,
           user,
         })
@@ -62,7 +62,7 @@ export const updateUser = data => {
   return async dispatch => {
     try {
       await API.updateUser(data, id, token)
-      dispatch({
+      await dispatch({
         type: types.UPDATE_USER,
         user: data,
       })
@@ -81,11 +81,11 @@ export const updateUserPassword = data => {
     try {
       const res = await API.updatePassword(data, id, token)
       if (res && res.ok) {
-        dispatch({
+        await dispatch({
           type: types.UPDATE_USER_PASSWORD,
         })
       } else if (res) {
-        dispatch({
+        await dispatch({
           type: types.UPDATE_USER_PASSWORD_FAILURE,
           payload: res.message,
           error: true,
@@ -105,7 +105,7 @@ export const restoreUserAccount = () => {
     try {
       const resp = await API.restoreUser(id, token)
       if (resp && resp.success && resp.restored) {
-        dispatch({
+        await dispatch({
           type: types.RESTORE_USER,
         })
       }

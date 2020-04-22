@@ -3,24 +3,27 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import propTypes from 'prop-types'
+import { logout } from 'mattermost-redux/actions/users'
 import RestoreAccount from '../components/RestoreAccount'
 import { restoreUserAccount as restoreUserAction } from '../store/user/userAction'
 import * as API from '../api/user/user'
+import logoutHandler from '../utils/userLogout'
 
 const RestoreAccountContainer = props => {
-  const { restoreUserAccount, history, mmid } = props
+  const { restoreUserAccount, mmid, matterMostLogout } = props
+
+  const handleLogout = () => logoutHandler(API.userLogout, matterMostLogout)
 
   const handleDeleteUserNow = async () => {
     try {
+      // Get user data and token from local storage before logging out
       const data = { mmid }
       const id = localStorage.getItem('userId')
       const token = localStorage.getItem('authToken')
-      const res = await API.deleteUserNow(data, id, token)
-      if (res && res.success) {
-        localStorage.removeItem('userId')
-        localStorage.removeItem('authToken')
-        history.push('/')
-      }
+      // First logout user (while it still exists)
+      handleLogout()
+      // Then delete the user permanently
+      API.deleteUserNow(data, id, token)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
@@ -39,6 +42,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       restoreUserAccount: restoreUserAction,
+      matterMostLogout: logout,
     },
     dispatch
   )
@@ -53,8 +57,8 @@ const mapStateToProps = state => {
 
 RestoreAccountContainer.propTypes = {
   restoreUserAccount: propTypes.func.isRequired,
-  history: propTypes.instanceOf(Object).isRequired,
   mmid: propTypes.string.isRequired,
+  matterMostLogout: propTypes.func.isRequired,
 }
 
 const shouldComponentUpdate = (props, prevProps) => {

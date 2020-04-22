@@ -73,7 +73,8 @@ const Group = props => {
     const fetchPosts = async () => {
       if (channel && channel.id) {
         const channelPosts = await getPosts(channel.id, 0, 100)
-        setPosts(channelPosts.data.posts)
+        if (channelPosts.data && channelPosts.data.posts)
+          setPosts(channelPosts.data.posts)
       }
     }
     fetchPosts()
@@ -97,7 +98,12 @@ const Group = props => {
   return (
     <Link
       className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
-      to={`/chat/${channel.id}`}
+      to={{
+        pathname: `/chat/${channel.id}`,
+        state: {
+          unreadCount,
+        },
+      }}
     >
       <div className="group-box-content">
         <div className="group-header">
@@ -116,7 +122,9 @@ const Group = props => {
             }}
           />
           <h2>
-            {channel.name === 'town-square' ? 'Palaute' : channel.display_name}
+            {channel.name === 'town-square'
+              ? 'Kysy valvojalta'
+              : channel.display_name}
           </h2>
         </div>
         {channel.name !== 'town-square' && (
@@ -126,6 +134,7 @@ const Group = props => {
         )}
         {channel.name !== 'town-square' ? (
           <div className="group-current-members">
+            <span className="sr-only">Jäsenet</span>
             {activeMembers &&
               activeMembers.map(member => (
                 <Member
@@ -137,17 +146,23 @@ const Group = props => {
               ))}
           </div>
         ) : (
-          <p>Tämä ryhmä on yleistä palautetta varten.</p>
+          <div className="monitor-group-text">
+            <p>
+              Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+            </p>
+            <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
+            <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
+          </div>
         )}
       </div>
       {unreadPosts === 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadPosts} uusi viesti`}</li>
+          <span>{`${unreadPosts} uusi viesti`}</span>
         </div>
       )}
       {unreadPosts > 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadPosts} uutta viestiä`}</li>
+          <span>{`${unreadPosts} uutta viestiä`}</span>
         </div>
       )}
       {unreadPosts <= 0 && (

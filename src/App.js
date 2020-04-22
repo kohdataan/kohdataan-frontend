@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { isIE } from 'react-device-detect'
 import PropTypes from 'prop-types'
 import Container from './components/Container'
 import BottomNavigationContainer from './containers/BottomNavigationContainer'
@@ -29,7 +30,8 @@ import { rootStartUp as rootStartUpAction } from './store/root'
 import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 import RestoreAccountContainer from './containers/RestoreAccountContainer'
 import AccountLocked from './components/AccountLocked'
-import CookieContainer from './containers/CookieContainer'
+import CookieConsentBanner from './components/CookieConsentBanner'
+import IEWarningBanner from './components/IEWarningBanner'
 import './styles/defaults.scss'
 
 class App extends Component {
@@ -61,6 +63,7 @@ class App extends Component {
 
     return (
       <Container className="main-container">
+        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         <Route exact path="/login" component={LogInContainer} />
         <Route path="/login/:uuid" component={LogInContainer} />
         <Route
@@ -107,11 +110,15 @@ class App extends Component {
         <PrivateRoute path="/chat/:id/:fileId" component={ViewImageContainer} />
         <PrivateRoute path="/edit-interests" component={InterestsContainer} />
         <PrivateRoute path="/account" component={ChangeAccountInfoContainer} />
-        {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         {localStorage.getItem('authToken') && pUser && pUser.deleteAt && (
           <RestoreAccountContainer />
         )}
-        {!document.cookie.includes('CookieConsent=true') && <CookieContainer />}
+        {!document.cookie.includes('CookieConsent=true') && (
+          <CookieConsentBanner />
+        )}
+        {isIE && !document.cookie.includes('IEBadAcknowledged=true') && (
+          <IEWarningBanner />
+        )}
       </Container>
     )
   }

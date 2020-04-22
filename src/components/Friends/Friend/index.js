@@ -59,7 +59,7 @@ const Friend = props => {
     const fetchPosts = async () => {
       if (channel && channel.id) {
         const channelPosts = await getPosts(channel.id, 0, 100)
-        setPosts(channelPosts.data)
+        if (channelPosts.data) setPosts(channelPosts.data)
       }
     }
     fetchPosts()
@@ -88,7 +88,7 @@ const Friend = props => {
             userInfo.id,
             localStorage.getItem('authToken')
           )
-          setOtherUserInfo(res)
+          if (res) setOtherUserInfo(res)
         }
       }
     }
