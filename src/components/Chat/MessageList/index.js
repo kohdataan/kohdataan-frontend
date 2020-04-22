@@ -108,10 +108,7 @@ const MessageList = props => {
   }, [posts])
 
   return (
-    <div
-      className="chat-message-list-container chat--message-list"
-      ref={ref}
-    >
+    <div className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           filteredPosts.map(post => {

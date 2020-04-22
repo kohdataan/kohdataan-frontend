@@ -325,7 +325,9 @@ const Message = props => {
       {showNewMessageDivider && messageDividerSet && (
         <div className="show-date-content">
           <div className="new-message-divider" />
-          <h2 className="new-message-divider-text">Uudet tapahtumat</h2>
+          <h2 className="new-message-divider-text" id="newMessages">
+            Uudet tapahtumat
+          </h2>
           <div className="new-message-divider" />
         </div>
       )}
