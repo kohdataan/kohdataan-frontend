@@ -89,6 +89,7 @@
 .show-date-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 34.5px -15px 24.5px;
 }
 
@@ -147,7 +148,7 @@
 .new-message-divider-text {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
-  color: #1A1A1A;
+  color: #1a1a1a;
   border: 1px $orange solid;
   padding: 3px 5px;
 }
@@ -254,7 +255,7 @@
 .chat-report-message-icon {
   background: none;
   border: none;
-  color:  gray;
+  color: gray;
   cursor: grab;
 }
 
@@ -264,5 +265,5 @@
 
 .deleted-user-chat-icon {
   font-size: 1.4em;
-  color:  #bbb;
+  color: #bbb;
 }
