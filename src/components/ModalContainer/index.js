@@ -128,6 +128,30 @@ const customStylesCookie = {
   },
 }
 
+const customStylesSendMessage = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-20%',
+    transform: 'translate(-50%, -50%)',
+    position: 'fixed',
+    border: 'none',
+    borderRadius: '5px',
+    maxHeight: '95vh',
+    maxWidth: '80vh',
+    minWidth: '50vh',
+    minHeight: '60vh',
+    padding: '0px',
+  },
+  overlay: {
+    position: 'fixed',
+    zIndex: '4000',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+}
+
 const ModalContainer = props => {
   const {
     children,
@@ -138,6 +162,7 @@ const ModalContainer = props => {
     tutorial,
     editModal,
     cookie,
+    isSendMessage,
   } = props
 
   const getStyles = () => {
@@ -150,6 +175,8 @@ const ModalContainer = props => {
       styles = customStylesEditModal
     } else if (cookie) {
       styles = customStylesCookie
+    } else if (isSendMessage) {
+      styles = customStylesSendMessage
     }
     return styles
   }
@@ -184,6 +211,7 @@ ModalContainer.propTypes = {
   tutorial: PropTypes.bool,
   editModal: PropTypes.bool,
   cookie: PropTypes.bool,
+  isSendMessage: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -192,6 +220,7 @@ ModalContainer.defaultProps = {
   editModal: false,
   tutorial: false,
   cookie: false,
+  isSendMessage: false,
 }
 
 export default memo(ModalContainer)

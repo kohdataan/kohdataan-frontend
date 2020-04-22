@@ -7,11 +7,14 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .registration-problem-content-container {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .registration-problem-errors-field {
@@ -76,7 +79,6 @@
   padding: 10px 50px;
   text-transform: uppercase;
   white-space: nowrap;
-  vertical-align: right;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
   color: #3a3a3a;
@@ -85,7 +87,7 @@
   width: 210px;
   height: 42px;
   margin-top: 20px;
-  margin-bottom: 1em;
+  margin-bottom: 20px;
   &:hover {
     cursor: pointer;
   }

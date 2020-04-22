@@ -41,7 +41,7 @@ const PasswordResetPageContainer = props => {
       } else {
         history.push({
           pathname: '/login',
-          state: { textToAdd: 'Salasana vaihdettu onnistuneesti.' },
+          state: { textToAdd: 'Salasana vaihdettu.' },
         })
       }
     })

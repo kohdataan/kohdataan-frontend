@@ -102,7 +102,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               </ButtonContainer>
               <ModalContainer
                 modalIsOpen={showSendMessage}
-                isLong
+                isSendMessage
                 closeModal={() => closeModal(setShowSendMessage)}
                 label="Viestin lähetys"
               >

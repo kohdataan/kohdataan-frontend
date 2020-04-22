@@ -337,7 +337,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               {currentApiErrors &&
                 currentApiErrors.fields &&
                 currentApiErrors.fields.email && (
-                  <p>Tähän sähköpostiin on liitetty jo käyttäjä.</p>
+                  <p>Olet jo rekisteröitynyt tällä sähköpostilla palveluun.</p>
                 )}
             </div>
           </div>

@@ -157,12 +157,12 @@ const Group = props => {
       </div>
       {unreadPosts === 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadPosts} uusi viesti`}</li>
+          <span>{`${unreadPosts} uusi viesti`}</span>
         </div>
       )}
       {unreadPosts > 1 && (
         <div className="group-unreads-text">
-          <li>{`${unreadPosts} uutta viestiä`}</li>
+          <span>{`${unreadPosts} uutta viestiä`}</span>
         </div>
       )}
       {unreadPosts <= 0 && (
