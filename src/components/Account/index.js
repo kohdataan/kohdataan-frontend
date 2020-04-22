@@ -72,7 +72,7 @@ const Account = props => {
   }
 
   return (
-    <div className="account-update-container">
+    <main className="account-update-container">
       <div className="account-header">
         <h1>Muokkaa tietojasi</h1>
         <ButtonContainer
@@ -83,10 +83,7 @@ const Account = props => {
         </ButtonContainer>
       </div>
       <div className="account-info-text">
-        <h3>
-          Täällä voit muokata rekisteröitymistietojasi. Nämä tiedot näkyvät vain
-          sinulle. Kaikki tiedot ovat pakollisia.
-        </h3>
+        <p>Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.</p>
       </div>
       <div className="account-box-outer">
         <div className="account-box-inner">
@@ -94,6 +91,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('firstname')}
+            label="Muokkaa etunimeä"
           >
             Muokkaa
           </ButtonContainer>
@@ -106,6 +104,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('lastname')}
+            label="Muokkaa sukunimeä"
           >
             Muokkaa
           </ButtonContainer>
@@ -118,6 +117,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('email')}
+            label="Muokkaa sähköpostia"
           >
             Muokkaa
           </ButtonContainer>
@@ -130,6 +130,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('phoneNumber')}
+            label="Muokkaa puhelinnumeroa"
           >
             Muokkaa
           </ButtonContainer>
@@ -142,6 +143,7 @@ const Account = props => {
           <ButtonContainer
             className="account-edit-button"
             onClick={() => openModal('password')}
+            label="Muokkaa salasanaa"
           >
             Muokkaa
           </ButtonContainer>
@@ -181,7 +183,7 @@ const Account = props => {
         deleteUser={handleDeleteUser}
         deleteError={deleteError}
       />
-    </div>
+    </main>
   )
 }
 
