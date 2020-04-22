@@ -147,7 +147,7 @@ const customStylesSendMessage = {
   },
   overlay: {
     position: 'fixed',
-    zIndex: '2000',
+    zIndex: '4000',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 }
