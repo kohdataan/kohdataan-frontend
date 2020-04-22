@@ -79,7 +79,8 @@ const Account = props => {
       </div>
       <div className="account-info-text">
         <h3>
-          Nämä tiedot näkyvät vain sinulle. Kaikki tiedot ovat pakollisia.
+          Täällä voit muokata rekisteröitymistietojasi. Nämä tiedot näkyvät vain
+          sinulle. Kaikki tiedot ovat pakollisia.
         </h3>
       </div>
       <div className="account-box-outer">
@@ -161,7 +162,7 @@ const Account = props => {
         className="button-secondary account-save-button"
         onClick={closeEditPage}
       >
-        Valmis
+        Tallenna
       </ButtonContainer>
       <EditAccountModal
         showModal={showModal}

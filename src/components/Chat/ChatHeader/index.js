@@ -20,7 +20,7 @@ const Header = props => {
   const header = otherUser || channel.display_name
   const getHeader = () => {
     if (otherUser) return otherUser
-    if (channel.name === 'town-square') return 'Palaute'
+    if (channel.name === 'town-square') return 'Kysy valvojalta'
     return channel.display_name
   }
 

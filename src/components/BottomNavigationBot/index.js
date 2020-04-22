@@ -14,6 +14,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
   const [showSendMessage, setShowSendMessage] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState(false)
   const [logOutConfirmation, setLogOutConfirmation] = useState(false)
   const openModal = setter => setter(true)
   const closeModal = setter => setter(false)
@@ -33,6 +34,11 @@ const BottomNavigationBot = forwardRef((props, ref) => {
     openModal(setShowSendMessage)
   }
 
+  const openInfoModal = () => {
+    setShowInfoModal(true)
+    openModal(setShowInfoModal)
+  }
+
   const closeSendMessageModal = () => {
     setShowSendMessage(false)
     closeModal(setShowSendMessage)
@@ -48,6 +54,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
       <ButtonContainer
         className="button-image"
         onClick={() => openModal(setShowBot)}
+        label="Avaa botti"
       >
         <img src={botIcon} alt="Botti" />
       </ButtonContainer>
@@ -73,7 +80,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
             <ModalContainer
               modalIsOpen={showPageInformation}
               closeModal={() => closeModal(setShowPageInformation)}
-              label="PageInformation"
+              label="Tietoa tästä sivusta"
             >
               <PageInformation
                 path={path}
@@ -106,14 +113,41 @@ const BottomNavigationBot = forwardRef((props, ref) => {
             </div>
           </div>
           <hr aria-hidden="true" />
-          <div className="modal-item inactive-item" aria-hidden="true">
-            <i className="fas fa-check-square modal-icon" aria-hidden="true" />
-            Palvelun säännöt
-          </div>
-          <hr aria-hidden="true" />
-          <div className="modal-item inactive-item" aria-hidden="true">
+          <div className="modal-item">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
-            Yleiset ohjeet
+            <ButtonContainer className="bot-link" onClick={openInfoModal}>
+              Lisätietoa palvelusta
+            </ButtonContainer>
+            <ModalContainer
+              modalIsOpen={showInfoModal}
+              closeModal={() => closeModal(setShowInfoModal)}
+              label="Lisätietoja palvelusta"
+            >
+              <div>
+                <ButtonContainer
+                  className="icon-btn go-back-button image-max-size-exceeded"
+                  onClick={() => closeModal(setShowInfoModal)}
+                  label="Sulje"
+                >
+                  {' '}
+                </ButtonContainer>
+                <div className="link-to-main-page-content">
+                  <p className="link-info-text">
+                    Kohdataan-sivuilta saat lisää tietoa ja ohjeita palvelun
+                    käyttöön.
+                  </p>
+                  <p>
+                    <a
+                      className="link-to-main-page"
+                      href="https://kohdataan.fi"
+                      tabIndex={0}
+                    >
+                      Siirry Kohdataan-sivuille.
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </ModalContainer>
           </div>
           <hr aria-hidden="true" />
           <div className="modal-item">
@@ -139,7 +173,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
           <ModalContainer
             modalIsOpen={logOutConfirmation}
             closeModal={() => closeModal(setLogOutConfirmation)}
-            label="ConfirmLogout"
+            label="Vahvista uloskirjautuminen"
           >
             <div>
               <h3 className="interests-modal-text">

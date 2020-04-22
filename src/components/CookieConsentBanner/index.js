@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import CookieConsent from 'react-cookie-consent'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 import PrivacyPolicy from '../PrivacyPolicy'
 import './styles.scss'
 
-const CookieConsentBanner = props => {
-  const { modalIsOpen, closeModal } = props
+const CookieConsentBanner = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(true)
   const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
     false
   )
+
+  const acceptCookies = () => {
+    setModalIsOpen(false)
+  }
+
   return (
     <ModalContainer
       label="cookie-banner-modal"
@@ -21,12 +25,13 @@ const CookieConsentBanner = props => {
       <div className="cookie-info-container">
         <CookieConsent
           buttonText="Hyväksy"
-          onAccept={closeModal}
+          onAccept={acceptCookies}
           style={{
             flexDirection: 'column',
             flexWrap: 'nowrap',
             alignItems: 'center',
-            padding: '5px',
+            justifyContent: 'space-around',
+            padding: '10px',
             position: 'absolute',
             top: '2%',
           }}
@@ -37,7 +42,6 @@ const CookieConsentBanner = props => {
             margin: '0 auto 10px',
             padding: '5px 10px',
             borderRadius: '30px',
-            flex: '0 auto',
           }}
           contentStyle={{
             flex: '0 auto',
@@ -58,36 +62,21 @@ const CookieConsentBanner = props => {
           modalIsOpen={privacyPolicyModalIsOpen}
           closeModal={() => setPrivacyPolicyModalIsOpen(false)}
           label="Tietosuojaseloste"
+          isLong
           aria={{
             labelledby: 'Tietosuojaseloste',
             modal: true,
           }}
         >
           <aside id="Tietosuojaseloste">
-            <PrivacyPolicy />
-            <ButtonContainer
-              className="accept-rules-icon-btn icon-btn"
-              onClick={() => setPrivacyPolicyModalIsOpen(false)}
-              label="Sulje"
-            >
-              <div className="go-back-button" />
-            </ButtonContainer>
-            <ButtonContainer
-              className="profile-modal-button accept-rules-modal-button"
-              onClick={() => setPrivacyPolicyModalIsOpen(false)}
-            >
-              Sulje
-            </ButtonContainer>
+            <PrivacyPolicy
+              closeModal={() => setPrivacyPolicyModalIsOpen(false)}
+            />
           </aside>
         </ModalContainer>
       </div>
     </ModalContainer>
   )
-}
-
-CookieConsentBanner.propTypes = {
-  modalIsOpen: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
 }
 
 export default CookieConsentBanner

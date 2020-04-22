@@ -38,6 +38,25 @@
   color: #a9a9a9;
 }
 
+.link-info-text {
+  font-size: 1em;
+}
+
+.link-to-main-page {
+  font-weight: bold;
+  color: $black;
+}
+
+.link-to-main-page-content {
+  max-width: 260px;
+  height: 332px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  line-height: 1.2em;
+}
+
 .log-out-btn {
   width: 80px;
   margin: 10px;
