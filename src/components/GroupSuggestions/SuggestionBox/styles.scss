@@ -1,5 +1,12 @@
 @import '../../../styles/colors.scss';
 
+.channel-suggestion-header {
+  @media (max-width: 360px) {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+}
+
 .group-suggestion-box {
   padding: 10px;
   @media screen and (min-width: 960px) {
@@ -64,6 +71,9 @@
 
 .group-in-common {
   margin: 0 0 25px 0;
+  @media (max-width: 360px) {
+    margin-bottom: 5px;
+  }
 }
 
 .group-suggestion-info {

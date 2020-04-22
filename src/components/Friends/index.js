@@ -123,6 +123,7 @@ const Friends = props => {
           placeholder="Hae kaveria"
           handleClear={handleFriendSearchReset}
           label="hae kaveria"
+          aria-label="hae kaveria"
           ref={friendSearchTextInput}
         />
       </div>

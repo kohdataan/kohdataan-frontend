@@ -47,11 +47,15 @@ const UserInput = props => {
   const isEmpty = str => {
     return str.replace(/^\s+|\s+$/g, '').length === 0
   }
-  const handleSubmit = async e => {
+  const handleSubmit = async (e, msg) => {
     e.preventDefault()
+    let messageToUse = msg
+    if (msg === '' || msg === undefined) {
+      messageToUse = message
+    }
     const post = {
       channel_id: channel.id,
-      message,
+      message: messageToUse,
       file_ids: fileId !== '' ? [fileId] : null,
     }
     if ((message && !isEmpty(message)) || fileId !== '') {
@@ -65,6 +69,7 @@ const UserInput = props => {
   const handleChange = e => {
     setMessage(e.target.value)
   }
+
   const addFile = async e => {
     setIsUploading(true)
     const channelId = channel.id
@@ -160,7 +165,7 @@ const UserInput = props => {
       <ModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        label="Tiedoston esikatselu"
+        label={!isRecording ? 'Esikatselu' : 'Ääniviestin lähetys'}
         isLong
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
@@ -182,7 +187,7 @@ const UserInput = props => {
           <FilePreview
             handleSubmit={handleSubmit}
             message={message}
-            handleChange={handleChange}
+            handleChange={setMessage}
             fileId={fileId}
             closeModal={closeModal}
             filesData={filesData}

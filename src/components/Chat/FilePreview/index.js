@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
@@ -15,6 +15,16 @@ const FilePreview = props => {
     filesData,
     orientation,
   } = props
+
+  useEffect(() => {
+    handleChange('')
+  }, [handleChange])
+
+  const [msg, setMsg] = useState(message)
+
+  const addCaption = async e => {
+    handleSubmit(e, msg)
+  }
 
   const getOrientationClassName = () => {
     let className
@@ -55,6 +65,7 @@ const FilePreview = props => {
         <ButtonContainer
           className="image-preview-close-modal-button go-back-button"
           onClick={closeModal}
+          label="Sulje"
         >
           {' '}
         </ButtonContainer>
@@ -82,21 +93,26 @@ const FilePreview = props => {
       <div className="image-preview-form">
         <div className="image-preview-user-input-wrapper">
           <form
-            onSubmit={handleSubmit}
+            onSubmit={e => addCaption(e)}
             className="image-preview-user-input-content"
           >
             <TextareaAutosize
               className="image-preview-user-input-text-field"
               id="image-message"
               type="text"
-              value={message}
-              onChange={handleChange}
+              value={msg}
+              onChange={e => setMsg(e.target.value)}
               placeholder="Kirjoita viesti"
               maxRows={3}
               rows={1}
-              aria-label="message text"
+              aria-label="Lisää kuvateksti"
             />
-            <button type="submit" className="send-message-button" tabIndex="0">
+            <button
+              type="submit"
+              className="send-message-button"
+              tabIndex="0"
+              aria-label="Lähetä"
+            >
               {}
             </button>
           </form>

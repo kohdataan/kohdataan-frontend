@@ -73,7 +73,8 @@ const Group = props => {
     const fetchPosts = async () => {
       if (channel && channel.id) {
         const channelPosts = await getPosts(channel.id, 0, 100)
-        setPosts(channelPosts.data.posts)
+        if (channelPosts.data && channelPosts.data.posts)
+          setPosts(channelPosts.data.posts)
       }
     }
     fetchPosts()

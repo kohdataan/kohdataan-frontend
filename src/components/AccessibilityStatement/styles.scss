@@ -1,0 +1,43 @@
+.accessibility-statement-icon-btn {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.accessibility-statement-header-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 10px;
+}
+
+.accessibility-statement-header {
+  margin-top: 0px;
+  font-size: 28px;
+  text-align: left;
+  padding-top: 0;
+  padding-bottom: 0;
+  @media (max-width: 375px){
+    font-size: 1.3em;
+  }
+}
+
+.accessibility-statement-headline {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+.accessibility-statement-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.accessibility-statement-modal-button {
+  margin: 2em auto;
+}

@@ -5,6 +5,7 @@ import './styles.scss'
 
 const BottomNavigationLink = props => {
   const { title, route, icon } = props
+
   return (
     <NavLink
       exact
@@ -12,6 +13,7 @@ const BottomNavigationLink = props => {
       tabIndex={0}
       className="nav-link"
       activeClassName={`nav-link-active nav-link-${title}`}
+      aria-current="page"
     >
       <div>
         <i aria-hidden="true" className={icon} title={title} />
