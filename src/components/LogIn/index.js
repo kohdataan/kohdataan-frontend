@@ -27,9 +27,6 @@ const LogIn = props => {
     <main className="login-container">
       <h1 className="main-title">Kohdataan</h1>
       {uuid && <p id="message-text">Kiitos sähköpostin vahvistamisesta.</p>}
-      {error && error === 'uuidLinkError' && (
-        <p id="message-text">Tarkasta linkki.</p>
-      )}
       {error && error === 'cookiesNotAccepted' && (
         <p id="message-text">
           Jos haluat käyttää Kohdataan-somea, sinun täytyy hyväksyä evästeiden
