@@ -87,8 +87,6 @@ const MessageList = props => {
   useEffect(() => {
     // TODO: implement some kind of button to scroll down when there are new messages
     ref.current.scrollTop = ref.current.scrollHeight
-    if (document.getElementById('newMessages'))
-      document.getElementById('newMessages').scrollIntoView()
   })
 
   let counter = 0
@@ -108,10 +106,7 @@ const MessageList = props => {
   }, [posts])
 
   return (
-    <section
-      className="chat-message-list-container chat--message-list"
-      ref={ref}
-    >
+    <div className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
           filteredPosts.map(post => {
@@ -151,7 +146,7 @@ const MessageList = props => {
             )
           })}
       </div>
-    </section>
+    </div>
   )
 }
 
