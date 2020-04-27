@@ -67,14 +67,21 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 </p>
                 <p>
                   Jos haluat kysyä käyttöehdoista, voit lähettää sähköpostia
-                  osoitteeseen kohdataan@kohdataan.fi.
+                  osoitteeseen{' '}
+                  <a
+                    className="email-link"
+                    href="mailto:kohdataan@kohdataan.fi"
+                  >
+                    kohdataan@kohdataan.fi
+                  </a>
+                  .
                 </p>
               </section>
               <section>
                 <ol className="service-info-list">
                   <li>
                     <span className="service-info-list-item">
-                      Mikä on <span className="uppercase-text">Kohdataan </span>
+                      Mikä on <span className="uppercase-text">Kohdataan</span>
                       -palvelu?
                     </span>
                     <p>
@@ -386,7 +393,13 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                     <p>
                       Voit ottaa yhteyttä valvojiin palvelussa olevalla
-                      lomakkeella tai sähköpostilla kohdataan@kohdataan.fi.
+                      lomakkeella tai sähköpostilla {' '} 
+                      <a
+                        className="email-link"
+                        href="mailto:kohdataan@kohdataan.fi"
+                      >
+                        kohdataan@kohdataan.fi
+                      </a>.
                     </p>
                   </li>
                 </ol>
