@@ -229,11 +229,6 @@ const Chat = props => {
         closeModal={closeAfterPinModal}
         label="report-message-finish-modal"
       >
-        <i
-          className="fas fa-check-circle"
-          aria-hidden="true"
-          style={{ color: 'green', fontSize: '30px' }}
-        />
         <h3>Viesti ilmoitettu asiattomaksi.</h3>
         <ButtonContainer
           className="report-message-finish-button"
