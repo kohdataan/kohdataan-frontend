@@ -140,6 +140,7 @@ const Message = props => {
         data-focusable="true"
         tabIndex={0}
         aria-live={lastPost ? 'polite' : 'off'}
+        className="message-container"
       >
         {lastPost ? <span className="sr-only">Viimeisin viesti.</span> : ''}
         {showDate && (

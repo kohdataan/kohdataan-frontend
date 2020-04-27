@@ -119,6 +119,12 @@
   border: 1px solid $gray;
 }
 
+.message-container {
+  &:focus {
+    outline: solid 1px $outlineColor;
+  }
+}
+
 .message-icon-and-content {
   display: flex;
 }
