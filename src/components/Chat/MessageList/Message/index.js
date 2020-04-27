@@ -11,6 +11,7 @@ const Message = props => {
     id,
     sender,
     text,
+    isUserLeavingOrJoiningChannel,
     currentUserId,
     senderId,
     type,
@@ -63,23 +64,11 @@ const Message = props => {
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
 
-  // Checks if message type is users leaving or joining the channel
-  const isUserLeavingOrJoiningChannel = () => {
-    if (
-      type === 'system_join_channel' ||
-      type === 'system_leave_channel' ||
-      type === 'system_join_team' ||
-      type === 'system_leave_team'
-    ) {
-      return true
-    }
-    return false
-  }
   // Get message wrapper classes
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
-    isUserLeavingOrJoiningChannel() && isAdmin
+    isUserLeavingOrJoiningChannel && isAdmin
       ? 'content-system-message-admin'
       : '',
   ]
@@ -88,7 +77,7 @@ const Message = props => {
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isUserLeavingOrJoiningChannel() && !isAdmin ? 'content-system-message' : '',
+    isUserLeavingOrJoiningChannel && !isAdmin ? 'content-system-message' : '',
   ]
 
   useEffect(() => {
@@ -309,7 +298,7 @@ const Message = props => {
                 {currentUserId !== senderId &&
                   !directChannel &&
                   !isAdmin &&
-                  !isUserLeavingOrJoiningChannel() && (
+                  !isUserLeavingOrJoiningChannel && (
                     <ButtonContainer
                       className="chat-report-message-icon"
                       onClick={() => pinPost(id, senderId, text)}
@@ -348,6 +337,7 @@ Message.defaultProps = {
 Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
+  isUserLeavingOrJoiningChannel: propTypes.bool.isRequired,
   type: propTypes.string,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,

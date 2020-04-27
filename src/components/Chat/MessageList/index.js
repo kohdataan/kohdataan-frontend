@@ -4,6 +4,7 @@ import propTypes from 'prop-types'
 import Message from './Message'
 import getUsernameById from '../../../utils/getUsernameById'
 import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
+import isUserLeavingOrJoiningChannel from '../../../utils/isUserLeavingOrJoiningChannel'
 
 const MessageList = props => {
   const {
@@ -112,6 +113,7 @@ const MessageList = props => {
           filteredPosts.map(post => {
             const timestampValues = setTimeStampValues(post)
             counter += 1
+            const isUserLeavingOrJoining = isUserLeavingOrJoiningChannel(post)
             return (
               post &&
               post.user_id && (
@@ -122,7 +124,8 @@ const MessageList = props => {
                   type={post.type}
                   url={post.url}
                   sender={getNickNamebyId(post.user_id)}
-                  text={post.message}
+                  text={isUserLeavingOrJoining ? '' : post.message}
+                  isUserLeavingOrJoiningChannel={isUserLeavingOrJoining}
                   senderId={post.user_id}
                   currentUserId={currentUserId}
                   directChannel={directChannel}
