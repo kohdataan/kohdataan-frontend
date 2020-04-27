@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   color: $white;
 }
 
@@ -23,22 +23,13 @@
 
 .email-sms-form-content-container {
   width: 80%;
+  padding-bottom: 40px;
 }
 
 .email-sms-form-input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.email-sms-form-input-text {
-  display: flex;
-  flex-direction: column;
-  color: $white;
-  margin: 0 0 20px 0;
-  margin-left: -12px;
-  font-size: 1.1em;
-  width: 100%;
 }
 
 .email-sms-form-input-field {
@@ -49,10 +40,6 @@
   padding: 10px 0 10px 10px;
   color: $white;
   width: 100%;
-  &::placeholder {
-    color: $white;
-  }
-
   &:focus {
     outline: none;
     border: solid 1px $white;
@@ -60,12 +47,7 @@
 }
 
 .email-sms-form-button {
-  padding: 10px 50px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  vertical-align: middle;
   align-self: center;
-  margin: 50px auto 10px;
   font-size: 0.875rem;
   transition: all 0.15s ease-in-out;
   color: $black;
@@ -73,10 +55,11 @@
 }
 
 .email-sms-input-fields-container {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
+  margin-bottom: 10px;
 }
 
 .email-sms-form-link-container {

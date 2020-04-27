@@ -65,22 +65,6 @@ const EmailSmsForm = props => {
         )}
 
         <div className="email-sms-form-input-container">
-          <ModalContainer
-            modalIsOpen={showModal}
-            closeModal={closeModal}
-            label="Email already confirmed"
-          >
-            <div>
-              <h3 className="edit-profile-modal-text">{text}</h3>
-              <ButtonContainer
-                className="icon-btn edit-profile-icon-btn"
-                onClick={closeModal}
-                label="Sulje"
-              >
-                <div className="go-back-button" />
-              </ButtonContainer>
-            </div>
-          </ModalContainer>
           <form
             className="email-sms-input-fields-container"
             onSubmit={handleSubmit(onSubmit)}
@@ -97,8 +81,8 @@ const EmailSmsForm = props => {
                   clearError()
                   setApiError(false)
                 }}
-                inputClassName="email-sms-form-input-text"
-                labelClassName="email-sms-form-input-field"
+                inputClassName="registration-problem-input-text"
+                labelClassName="registration-problem-input-field"
                 showPlaceholder={false}
               />
               <div className="error-text">
@@ -116,29 +100,49 @@ const EmailSmsForm = props => {
                 value={phoneNumber}
                 name="phoneNumber"
                 onChange={e => setPhoneNumber(e.target.value)}
-                inputClassName="email-sms-form-input-text"
-                labelClassName="email-sms-form-input-field"
+                inputClassName="registration-problem-input-text"
+                labelClassName="registration-problem-input-field"
                 showPlaceholder={false}
               />
             </div>
             <button
               type="submit"
-              className="email-sms-form-button"
+              className="registration-problem-button email-sms-form-button"
               onClick={handleSubmit(onSubmit)}
+              tabIndex={0}
             >
               Lähetä
             </button>
           </form>
-          <div className="email-sms-form-link-container">
-            <Link className="email-sms-form-link" to="/registrationproblem">
+          <div className="registration-problem-link-container">
+            <Link
+              className="registration-problem-link"
+              to="/registrationproblem"
+            >
               Tarvitsen apua kirjautumisessa.
             </Link>
-            <Link className="email-sms-form-link" to="/login">
+            <Link className="registration-problem-link" to="/login">
               Haluan kirjautua sisään.
             </Link>
           </div>
         </div>
       </div>
+      <ModalContainer
+        modalIsOpen={showModal}
+        closeModal={closeModal}
+        label="Email already confirmed"
+      >
+        <div>
+          <h3 className="edit-profile-modal-text">{text}</h3>
+          <ButtonContainer
+            className="icon-btn edit-profile-icon-btn"
+            onClick={closeModal}
+            label="Sulje"
+          >
+            <div className="go-back-button" />
+          </ButtonContainer>
+        </div>
+      </ModalContainer>
     </div>
   )
 }
