@@ -7,14 +7,16 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .registration-problem-content-container {
   width: 80%;
+  min-height: 60vh;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .registration-problem-errors-field {
