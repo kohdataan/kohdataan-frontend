@@ -7,13 +7,18 @@ import ValidatedInputField from '../ValidatedInputField'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const RegistrationProblem = ({ handleEmailSending, handleClick, text }) => {
+const RegistrationProblem = ({
+  handleEmailSending,
+  handleClick,
+  text,
+  user,
+}) => {
   const { register, handleSubmit, errors, clearError } = useForm()
 
   const onSubmit = async data => {
     await handleEmailSending(
       data.name.trim(),
-      data.email.trim(),
+      user ? user.email : data.email.trim(),
       data.message.trim(),
       handleClick ? 'Yhteydenotto' : 'Ongelma rekisteröitymisessä'
     )
@@ -76,33 +81,34 @@ const RegistrationProblem = ({ handleEmailSending, handleClick, text }) => {
                       'Tarkista, että kirjoitit nimen oikein.'}
                   </div>
                 </div>
-
-                <div className="formfield-container">
-                  <ValidatedInputField
-                    label="Oma sähköposti"
-                    name="email"
-                    onChange={() => clearError('email')}
-                    ref={register({
-                      required: true,
-                      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    })}
-                    ariaInvalid={!!errors.email}
-                    inputClassName="registration-problem-input-text"
-                    labelClassName={
-                      errors.email
-                        ? 'registration-problem-errors-field'
-                        : 'registration-problem-input-field'
-                    }
-                  />
-                  <div className="error-text">
-                    {errors.email &&
-                      errors.email.type === 'required' &&
-                      'Kirjoita sähköposti.'}
-                    {errors.email &&
-                      errors.email.type === 'pattern' &&
-                      'Tarkista, että kirjoitit sähköpostin oikein.'}
+                {!handleClick && (
+                  <div className="formfield-container">
+                    <ValidatedInputField
+                      label="Oma sähköposti"
+                      name="email"
+                      onChange={() => clearError('email')}
+                      ref={register({
+                        required: true,
+                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      })}
+                      ariaInvalid={!!errors.email}
+                      inputClassName="registration-problem-input-text"
+                      labelClassName={
+                        errors.email
+                          ? 'registration-problem-errors-field'
+                          : 'registration-problem-input-field'
+                      }
+                    />
+                    <div className="error-text">
+                      {errors.email &&
+                        errors.email.type === 'required' &&
+                        'Kirjoita sähköposti.'}
+                      {errors.email &&
+                        errors.email.type === 'pattern' &&
+                        'Tarkista, että kirjoitit sähköpostin oikein.'}
+                    </div>
                   </div>
-                </div>
+                )}
                 <div className="formfield-container">
                   <ValidatedTextArea
                     label="Viesti"
@@ -169,11 +175,13 @@ RegistrationProblem.propTypes = {
   handleEmailSending: PropTypes.func.isRequired,
   handleClick: PropTypes.func,
   text: PropTypes.string,
+  user: PropTypes.instanceOf(Object),
 }
 
 RegistrationProblem.defaultProps = {
   handleClick: null,
   text: '',
+  user: null,
 }
 
 export default memo(RegistrationProblem)

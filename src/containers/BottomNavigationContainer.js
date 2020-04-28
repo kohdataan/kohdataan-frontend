@@ -14,6 +14,7 @@ const BottomNavigationContainer = props => {
   const {
     location: { pathname },
     logout: matterMostLogout,
+    user,
   } = props
 
   if (pathname.split('/')[1] === 'chat') {
@@ -44,7 +45,11 @@ const BottomNavigationContainer = props => {
         icon="fas fa-user-friends"
       />
 
-      <BottomNavigationBot handleLogout={handleLogout} path={pathname} />
+      <BottomNavigationBot
+        handleLogout={handleLogout}
+        path={pathname}
+        user={user}
+      />
     </BottomNavigation>
   )
 }
@@ -52,6 +57,16 @@ const BottomNavigationContainer = props => {
 BottomNavigationContainer.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,
   logout: PropTypes.func.isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
+}
+
+const mapStateToProps = state => {
+  const { currentUserId } = state.entities.users
+  const user = state.entities.users.profiles[currentUserId]
+  return {
+    currentUserId,
+    user,
+  }
 }
 
 const mapDispatchToProps = dispatch =>
@@ -69,6 +84,6 @@ const shouldComponentUpdate = (props, prevProps) => {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(memo(BottomNavigationContainer, shouldComponentUpdate)))
