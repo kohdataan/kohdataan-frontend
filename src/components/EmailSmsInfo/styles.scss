@@ -42,17 +42,5 @@
 }
 
 .email-sms-info-link-container {
-  padding-top: 30px;
-}
-
-.email-sms-info-link {
-  color: $white;
-  font-size: 15px;
-  display: block;
-  text-align: center;
-  padding: 0 0 40px 0;
-
-  :visited {
-    color: $white;
-  }
+  padding-bottom: 30px;
 }
