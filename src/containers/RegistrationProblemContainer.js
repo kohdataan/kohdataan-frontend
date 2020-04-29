@@ -4,7 +4,7 @@ import RegistrationProblem from '../components/RegistrationProblem'
 import * as API from '../api/user/user'
 
 const RegistrationProblemContainer = props => {
-  const { handleClick, history } = props
+  const { handleClick, history, user } = props
   const [text, setText] = useState('')
   const handleEmailSending = async (name, email, message, type) => {
     const msg = {
@@ -27,6 +27,7 @@ const RegistrationProblemContainer = props => {
       handleEmailSending={handleEmailSending}
       handleClick={handleClick}
       text={text}
+      user={user}
     />
   )
 }
@@ -40,11 +41,13 @@ const shouldComponentUpdate = (props, prevProps) => {
 RegistrationProblemContainer.propTypes = {
   history: PropTypes.instanceOf(Object),
   handleClick: PropTypes.func,
+  user: PropTypes.instanceOf(Object),
 }
 
 RegistrationProblemContainer.defaultProps = {
   history: null,
   handleClick: null,
+  user: null,
 }
 
 export default memo(RegistrationProblemContainer, shouldComponentUpdate)

@@ -23,11 +23,14 @@ const EmailSmsInfo = props => {
             </p>
           </div>
           <div className="divider" aria-hidden="true" />
-          <div className="email-sms-info-link-container">
-            <Link className="email-sms-info-link" to="/registrationproblem">
+          <div className="registration-problem-link-container email-sms-info-link-container">
+            <Link
+              className="registration-problem-link"
+              to="/registrationproblem"
+            >
               Tarvitsen apua salasanan vaihtamisessa.
             </Link>
-            <Link className="email-sms-info-link" to="/login">
+            <Link className="registration-problem-link" to="/login">
               Haluan kirjautua sisään.
             </Link>
           </div>

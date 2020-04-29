@@ -9,7 +9,7 @@ import RegistrationProblemContainer from '../../containers/RegistrationProblemCo
 import PageInformation from './PageInformation'
 
 const BottomNavigationBot = forwardRef((props, ref) => {
-  const { handleLogout, path, inChat, direct } = props
+  const { handleLogout, path, inChat, direct, user } = props
 
   const [showBot, setShowBot] = useState(false)
   const [showPageInformation, setShowPageInformation] = useState(false)
@@ -108,6 +108,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               >
                 <RegistrationProblemContainer
                   handleClick={closeSendMessageModal}
+                  user={user}
                 />
               </ModalContainer>
             </div>
@@ -214,6 +215,7 @@ BottomNavigationBot.propTypes = {
   path: PropTypes.string.isRequired,
   inChat: PropTypes.bool,
   direct: PropTypes.bool,
+  user: PropTypes.instanceOf(Object).isRequired,
 }
 
 BottomNavigationBot.defaultProps = {

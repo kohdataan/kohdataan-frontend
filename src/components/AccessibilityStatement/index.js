@@ -100,10 +100,11 @@ const AccessibilityStatement = ({ closeModal }) => {
           <p>
             Jos huomaat <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuudessa ongelmia, anna meille palautetta. Voit
-            antaa palautetta saavutettavuudesta sähköpostitse
-            kohdataan@kohdataan.fi. Vastaamme palautteeseen kahden viikon
-            aikana. Pyrimme jatkuvasti parantamaan
-{' '}
+            antaa palautetta saavutettavuudesta sähköpostitse {' '}
+            <a className="email-link" href="mailto:kohdataan@kohdataan.fi">
+              kohdataan@kohdataan.fi
+            </a>
+            . Vastaamme palautteeseen kahden viikon aikana. Pyrimme jatkuvasti
             <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuutta.
           </p>

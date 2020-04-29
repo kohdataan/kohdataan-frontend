@@ -49,6 +49,7 @@ const ChatContainer = props => {
     location,
     pinPost,
     files,
+    user,
   } = props
 
   // Sort and filter posts, posts dependent effect
@@ -146,6 +147,7 @@ const ChatContainer = props => {
           location={location}
           pinPost={pinPost}
           filesData={files}
+          mmUser={user}
         />
       )}
     </>
@@ -173,6 +175,7 @@ ChatContainer.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
   files: PropTypes.instanceOf(Object).isRequired,
+  user: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
