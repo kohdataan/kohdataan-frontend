@@ -1,25 +1,30 @@
 @import '../../styles/colors.scss';
 
+.fa-times {
+  color: black;
+}
+
 form.search-bar {
   position: relative;
   display: flex;
   width: 100%;
 }
 
-.search-bar-icon {
-  font-size: 16px;
-  left: 12px;
-  opacity: 0.5;
-  position: absolute;
-  top: 12px;
+.search-bar-container {
+  width: 90vw;
 }
 
 .search-bar-icon-clear {
   font-size: 16px;
   right: 12px;
-  opacity: 0.5;
+  opacity: 0.8;
   position: absolute;
   top: 12px;
+  color: black;
+}
+
+.search-bar-label {
+  color: $black;
 }
 
 .search-clear-button {
@@ -27,12 +32,21 @@ form.search-bar {
   border-radius: 0px;
   background: transparent;
   padding: 0 0;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  color: black; 
+}
+
+.search-bar-description {
+  margin-left: 5px;
 }
 
 .search-bar-input {
   border: none;
   border-radius: 8px;
-  padding: 10px 15px 10px 35px;
+  padding: 10px 15px;
+  margin-top: 5px;
   width: 100%;
   font-size: 18px;
   background-color: $background-gray;

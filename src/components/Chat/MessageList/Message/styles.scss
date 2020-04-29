@@ -119,6 +119,17 @@
   border: 1px solid $gray;
 }
 
+.message-container {
+  &:focus {
+    outline: solid 1px $outlineColor;
+  }
+}
+
+.content-received-admin {
+  background-color: white;
+  border: 2px solid $black;
+}
+
 .message-icon-and-content {
   display: flex;
 }

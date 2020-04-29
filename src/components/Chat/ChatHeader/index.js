@@ -15,6 +15,7 @@ const Header = props => {
     otherUserName,
     location,
     deleted,
+    mmUser,
   } = props
 
   const header = otherUser || channel.display_name
@@ -61,6 +62,7 @@ const Header = props => {
           inChat
           direct={direct}
           path={location.pathname}
+          user={mmUser}
         />
       </div>
     </header>
@@ -79,6 +81,7 @@ Header.propTypes = {
   otherUserName: propTypes.string,
   location: propTypes.instanceOf(Object).isRequired,
   deleted: propTypes.number,
+  mmUser: propTypes.instanceOf(Object).isRequired,
 }
 
 Header.defaultProps = {

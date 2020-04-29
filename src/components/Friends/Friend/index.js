@@ -137,6 +137,7 @@ const Friend = props => {
               <div
                 className={blocked ? 'blocked-friend-header' : 'friend-header'}
               >
+                <span className="sr-only">Viesti käyttäjältä </span>
                 <p className="friends-nickname">{user.nickname}</p>
               </div>
               <div
@@ -163,7 +164,9 @@ const Friend = props => {
             ) : (
               <div className="no-unread-messages">{}</div>
             )}
-            <span className="sr-only">Lukemattomia viestejä</span>
+            <span className="sr-only">
+              `{unreadCount} lukemattomia viestejä`
+            </span>
           </Link>
           <ButtonContainer
             className="icon-btn block-user-icon-btn"

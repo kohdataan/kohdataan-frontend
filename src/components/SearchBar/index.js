@@ -12,25 +12,28 @@ const SearchBar = React.forwardRef((props, ref) => {
   }
 
   return (
-    <form className="search-bar">
-      <div className="search-bar-icon">
-        <i className="fas fa-search" aria-hidden="true" />
-      </div>
-      <input
-        className="search-bar-input"
-        placeholder={placeholder}
-        onChange={e => expression(e.target.value)}
-        onKeyPress={e => handleKeyPress(e)}
-        ref={ref}
-        label={label}
-      />
-      <div className="search-bar-icon-clear">
-        <ButtonContainer className="search-clear-button" onClick={handleClear}>
-          <span className="sr-only">Tyhjennä</span>
-          <i className="fas fa-times" aria-hidden="true" />
-        </ButtonContainer>
-      </div>
-    </form>
+    <div className="search-bar-container">
+      <span className="search-bar-description">Hae kaveria</span>
+      <form className="search-bar">
+        <input
+          className="search-bar-input"
+          placeholder={placeholder}
+          onChange={e => expression(e.target.value)}
+          onKeyPress={e => handleKeyPress(e)}
+          ref={ref}
+          aria-label={label}
+        />
+        <div className="search-bar-icon-clear">
+          <ButtonContainer
+            className="search-clear-button"
+            onClick={handleClear}
+            label="Tyhjennä"
+          >
+            <i className="fas fa-times times-icon" aria-hidden="true" />
+          </ButtonContainer>
+        </div>
+      </form>
+    </div>
   )
 })
 
