@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
 import FriendSearch from './FriendSearch'
@@ -111,6 +111,19 @@ const Friends = props => {
     friendSearchTextInput.current.value = ''
   }
 
+  useEffect(() => {
+    if (
+      history.location &&
+      history.location.state &&
+      history.location.state.searchTerm
+    ) {
+      const text = history.location.state.searchTerm
+      friendSearchTextInput.current.value = text
+      setFriendSearch(text)
+      handleFriendSearchChange(text)
+    }
+  }, [])
+
   return (
     <section className="friends-wrapper">
       <header className="friends-header">
@@ -120,10 +133,9 @@ const Friends = props => {
       <div className="friends-search">
         <SearchBar
           expression={handleFriendSearchChange}
-          placeholder="Hae kaveria"
+          placeholder="Kirjoita nimi"
           handleClear={handleFriendSearchReset}
-          label="hae kaveria"
-          aria-label="hae kaveria"
+          label="Hae kaveria"
           ref={friendSearchTextInput}
         />
       </div>

@@ -163,12 +163,27 @@ const Profile = props => {
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
+  const goToPreviousPage = () => {
+    if (
+      history.location &&
+      history.location.state &&
+      history.location.state.searchTerm
+    ) {
+      history.push({
+        pathname: '/friends',
+        state: { searchTerm: history.location.state.searchTerm },
+      })
+    } else {
+      history.goBack()
+    }
+  }
+
   return (
     <main className="profile-container">
       <div className="go-back-button-container">
         {!ownProfile && startDirectChannel && (
           <ButtonContainer
-            onClick={history.goBack}
+            onClick={goToPreviousPage}
             className="profile-modal-header-button"
           >
             {'< Palaa'}
@@ -188,7 +203,7 @@ const Profile = props => {
         )}
         {ownProfile && (
           <Link className="edit-me-link" to="/edit-me">
-            <EditButton label="muokkaa profiilia"/>
+            <EditButton label="muokkaa profiilia" />
           </Link>
         )}
       </header>

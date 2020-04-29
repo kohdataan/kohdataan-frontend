@@ -22,7 +22,12 @@ const FriendSearch = props => {
       <div className="found-profile-container">
         <Link
           className="found-profile-link"
-          to={`/profile/${profileData.username}`}
+          to={{
+            pathname: `/profile/${profileData.username}`,
+            state: {
+              searchTerm,
+            },
+          }}
         >
           <div className="found-profile-icon-box">
             <img
