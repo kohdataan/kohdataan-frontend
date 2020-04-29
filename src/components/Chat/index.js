@@ -85,7 +85,9 @@ const Chat = props => {
               src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
-            {getNicknameById(otherUser.user_id)}
+            <span className="direct-chat-header-name">
+              {getNicknameById(otherUser.user_id)}
+            </span>
           </>
         )
       }

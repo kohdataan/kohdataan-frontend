@@ -10,8 +10,14 @@ const Header = props => {
     <div className="profile-header-item">
       <span className="sr-only">Käyttäjän nimi</span>
       <h1 className="profile-header-nickname">{nickname}</h1>
-      {showAge && <p>{`${getAge({ birthdate })} vuotta`}</p>}
-      {showLocation && <p>{location}</p>}
+      {showAge && (
+        <p className="profile-header-text">
+          {`${getAge({
+            birthdate,
+          })} vuotta`}
+        </p>
+      )}
+      {showLocation && <p className="profile-header-text">{location}</p>}
     </div>
   )
 }

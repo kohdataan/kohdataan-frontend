@@ -42,7 +42,7 @@ const EditProfileContainer = props => {
     img
   ) => {
     let updatedUsername
-    if (myUserInfo.nickname !== newNickname) {
+    if (myUserInfo.nickname !== newNickname && !myUserInfo.imageUploaded) {
       updatedUsername = updateUsername(newNickname, currentUser)
     }
     let newUserInfo

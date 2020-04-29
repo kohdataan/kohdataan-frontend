@@ -146,6 +146,25 @@
   border-radius: 50%;
 }
 
+.friends-nickname {
+  width: 650px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @media (max-width: 800px) {
+    width: 350px;
+  }
+  @media (max-width: 600px) {
+    width: 250px;
+  }
+  @media (max-width: 415px) {
+    width: 200px;
+  }
+  @media (max-width: 335px) {
+    width: 180px;
+  }
+}
+
 .icon-btn {
   flex-grow: 1;
 }

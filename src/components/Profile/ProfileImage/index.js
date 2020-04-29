@@ -8,7 +8,7 @@ const ProfileImage = props => {
     mmuser.id
   }/image?${Date.now()}`
   return (
-    <div className="profile-header-item">
+    <div className="profile-header-image">
       {mmuser.id && (
         <img className="profile-img" src={imageUri} alt="Profiilikuva" />
       )}

@@ -209,6 +209,12 @@
   color: #1a1a1a;
   margin: 0 5px 4px 0;
   flex-grow: 2;
+  width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media(max-width: 320px) {
+    width: 150px;
+  }
 }
 
 .chat-message-sender-unknown {

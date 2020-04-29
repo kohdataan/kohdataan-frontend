@@ -137,7 +137,7 @@ const Friend = props => {
               <div
                 className={blocked ? 'blocked-friend-header' : 'friend-header'}
               >
-                <p>{user.nickname}</p>
+                <p className="friends-nickname">{user.nickname}</p>
               </div>
               <div
                 className={

@@ -175,8 +175,15 @@ const Profile = props => {
           </ButtonContainer>
         )}
       </div>
-      <header className="profile-header-container">
+      <div className="profile-top-row">
         <ProfileImage mmuser={mmuser} />
+        {ownProfile && (
+          <Link className="edit-me-link" to="/edit-me">
+            <EditButton label="muokkaa profiilia" />
+          </Link>
+        )}
+      </div>
+      <header className="profile-header-container">
         {mmuser && myUserInfo && (
           <ProfileHeader
             nickname={nickname}
@@ -185,11 +192,6 @@ const Profile = props => {
             showAge={showAge}
             showLocation={showLocation}
           />
-        )}
-        {ownProfile && (
-          <Link className="edit-me-link" to="/edit-me">
-            <EditButton label="muokkaa profiilia"/>
-          </Link>
         )}
       </header>
       <Description text={description} />
