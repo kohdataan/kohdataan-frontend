@@ -26,6 +26,7 @@ const Chat = props => {
     location,
     pinPost,
     filesData,
+    mmUser,
   } = props
 
   const [currentUser, setCurrentUser] = useState(null)
@@ -158,6 +159,7 @@ const Chat = props => {
         handleLogout={handleLogout}
         location={location}
         deleted={getDeleteAt()}
+        mmUser={mmUser}
       />
       <MessageList
         posts={posts}
@@ -258,6 +260,7 @@ Chat.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
   filesData: PropTypes.instanceOf(Object).isRequired,
+  mmUser: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {

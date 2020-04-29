@@ -78,6 +78,7 @@ const Message = props => {
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
     isUserLeavingOrJoiningChannel && !isAdmin ? 'content-system-message' : '',
+    isAdmin ? 'content-received-admin' : '',
   ]
 
   useEffect(() => {
@@ -179,32 +180,33 @@ const Message = props => {
             >
               {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
                 <header>
-                  <Link
-                    to={`/profile/${senderMmUsername}`}
-                    className="channel-name-link"
-                    aria-label="Linkki profiiliin"
-                  >
-                    <i aria-hidden="true" title={sender[0]} />
-                    {isAdmin ? (
-                      <div
-                        className="label chat-message-sender-icon"
-                        style={{
-                          backgroundColor: 'black',
-                          color: 'white',
-                        }}
-                      >
-                        <span>K</span>
-                        <span className="sr-only">Valvoja</span>
-                      </div>
-                    ) : (
+                  {isAdmin ? (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                      }}
+                    >
+                      <span>K</span>
+                      <span className="sr-only">Valvoja</span>
+                    </div>
+                  ) : (
+                    <Link
+                      to={`/profile/${senderMmUsername}`}
+                      className="channel-name-link"
+                      aria-label="Linkki profiiliin"
+                    >
+                      <i aria-hidden="true" title={sender[0]} />
                       <div
                         className="label chat-message-sender-icon"
                         style={{
                           backgroundImage: `url(${image})`,
                         }}
                       />
-                    )}
-                  </Link>
+                    </Link>
+                  )}
+
                   <div className={iconMemberStatus} aria-hidden />
                   <span className="sr-only">{getMemberStatus()}</span>
                 </header>
