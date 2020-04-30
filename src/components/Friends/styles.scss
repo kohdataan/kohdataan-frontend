@@ -55,13 +55,15 @@
 }
 
 .no-friends-yet-header {
-  text-align: center;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  padding: 10px;
 }
 
 .no-friends-yet-text {
-  text-align: center;
-  line-height: 1.2em;
-  padding: 10px;
+  text-align: left;
+  line-height: 1.3em;
+  padding: 0px 10px;
 }
 
 .found-friends-count-info {

@@ -7,6 +7,12 @@
   margin-block-end: 1em;
 }
 
+.chat-member-nickname {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .members-sider-profile-link {
   text-decoration: none;
   color: #3a3a3a;

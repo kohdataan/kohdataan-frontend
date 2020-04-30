@@ -11,6 +11,7 @@ const Message = props => {
     id,
     sender,
     text,
+    isUserLeavingOrJoiningChannel,
     currentUserId,
     senderId,
     type,
@@ -63,23 +64,11 @@ const Message = props => {
   const today = new Date().toLocaleDateString()
   const dateText = dateSent === today ? 'Tänään' : dateSent
 
-  // Checks if message type is users leaving or joining the channel
-  const isUserLeavingOrJoiningChannel = () => {
-    if (
-      type === 'system_join_channel' ||
-      type === 'system_leave_channel' ||
-      type === 'system_join_team' ||
-      type === 'system_leave_team'
-    ) {
-      return true
-    }
-    return false
-  }
   // Get message wrapper classes
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
-    isUserLeavingOrJoiningChannel() && isAdmin
+    isUserLeavingOrJoiningChannel && isAdmin
       ? 'content-system-message-admin'
       : '',
   ]
@@ -88,7 +77,8 @@ const Message = props => {
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isUserLeavingOrJoiningChannel() && !isAdmin ? 'content-system-message' : '',
+    isUserLeavingOrJoiningChannel && !isAdmin ? 'content-system-message' : '',
+    isAdmin ? 'content-received-admin' : '',
   ]
 
   useEffect(() => {
@@ -140,6 +130,7 @@ const Message = props => {
         data-focusable="true"
         tabIndex={0}
         aria-live={lastPost ? 'polite' : 'off'}
+        className="message-container"
       >
         {lastPost ? <span className="sr-only">Viimeisin viesti.</span> : ''}
         {showDate && (
@@ -189,32 +180,33 @@ const Message = props => {
             >
               {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
                 <header>
-                  <Link
-                    to={`/profile/${senderMmUsername}`}
-                    className="channel-name-link"
-                    aria-label="Linkki profiiliin"
-                  >
-                    <i aria-hidden="true" title={sender[0]} />
-                    {isAdmin ? (
-                      <div
-                        className="label chat-message-sender-icon"
-                        style={{
-                          backgroundColor: 'black',
-                          color: 'white',
-                        }}
-                      >
-                        <span>K</span>
-                        <span className="sr-only">Valvoja</span>
-                      </div>
-                    ) : (
+                  {isAdmin ? (
+                    <div
+                      className="label chat-message-sender-icon"
+                      style={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                      }}
+                    >
+                      <span>K</span>
+                      <span className="sr-only">Valvoja</span>
+                    </div>
+                  ) : (
+                    <Link
+                      to={`/profile/${senderMmUsername}`}
+                      className="channel-name-link"
+                      aria-label="Linkki profiiliin"
+                    >
+                      <i aria-hidden="true" title={sender[0]} />
                       <div
                         className="label chat-message-sender-icon"
                         style={{
                           backgroundImage: `url(${image})`,
                         }}
                       />
-                    )}
-                  </Link>
+                    </Link>
+                  )}
+
                   <div className={iconMemberStatus} aria-hidden />
                   <span className="sr-only">{getMemberStatus()}</span>
                 </header>
@@ -308,7 +300,7 @@ const Message = props => {
                 {currentUserId !== senderId &&
                   !directChannel &&
                   !isAdmin &&
-                  !isUserLeavingOrJoiningChannel() && (
+                  !isUserLeavingOrJoiningChannel && (
                     <ButtonContainer
                       className="chat-report-message-icon"
                       onClick={() => pinPost(id, senderId, text)}
@@ -347,6 +339,7 @@ Message.defaultProps = {
 Message.propTypes = {
   sender: propTypes.string.isRequired,
   text: propTypes.string.isRequired,
+  isUserLeavingOrJoiningChannel: propTypes.bool.isRequired,
   type: propTypes.string,
   currentUserId: propTypes.string.isRequired,
   senderId: propTypes.string,

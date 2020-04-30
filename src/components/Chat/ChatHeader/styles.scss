@@ -33,13 +33,16 @@
   background: none;
   border: none;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.1em;
   text-decoration: none;
   color: $gray;
   text-align: left;
   margin-right: 2px;
-  @media (max-width: 411px) {
-    font-size: 12px;
+  @media (max-width: 414px) {
+    font-size: 15px;
+  }
+  @media (max-width: 330px) {
+    font-size: 13px;
   }
 }
 
@@ -59,7 +62,7 @@
 .channel-name-button {
   background-color: transparent;
   border: none;
-  @media (max-width: 411px) {
+  @media (max-width: 414px) {
     padding: 2px;
   }
 }

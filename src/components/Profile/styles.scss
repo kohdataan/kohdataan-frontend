@@ -15,14 +15,17 @@
   justify-content: space-between;
   background-color: $background-gray;
   width: 100%;
-  padding: 0;
+  padding: 0px 16px;
 }
 
 .profile-header-item {
-  margin: 10px;
   display: inline-block;
   white-space: nowrap;
   flex-grow: 1;
+}
+
+.profile-header-image {
+  margin: 5px 16px;
 }
 
 .profile-modal-header {
@@ -55,12 +58,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0 1rem 0;
 }
 
 .profile-dm-button {
   padding: 10px 15px;
   align-self: center;
+}
+
+.profile-top-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background-gray;
 }
 
 .profile-tutorial-btn {

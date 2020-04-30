@@ -56,7 +56,7 @@ const Member = props => {
       <span className={iconMemberStatus} />
       {currentUserId !== userId && (
         <Link
-          className="members-sider-profile-link"
+          className="members-sider-profile-link chat-member-nickname"
           to={`/profile/${getUsername()}`}
         >
           {nickName}
@@ -64,7 +64,7 @@ const Member = props => {
       )}
       {currentUserId === userId && (
         <>
-          <span>{nickName}</span>
+          <span className="chat-member-nickname">{nickName}</span>
           <span className="chat-header-current-user-label">(sinä)</span>
         </>
       )}

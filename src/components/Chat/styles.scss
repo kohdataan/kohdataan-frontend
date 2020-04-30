@@ -1,5 +1,11 @@
 @import '../../styles/colors.scss';
 
+.direct-chat-header-name {
+  max-width: 45vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .inactive-userinput-field {
   height: 10%;
   width: 100%;

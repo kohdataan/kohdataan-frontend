@@ -26,6 +26,7 @@ const Chat = props => {
     location,
     pinPost,
     filesData,
+    mmUser,
   } = props
 
   const [currentUser, setCurrentUser] = useState(null)
@@ -85,7 +86,9 @@ const Chat = props => {
               src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${otherUser.user_id}/image`}
               alt="Profiilikuva"
             />
-            {getNicknameById(otherUser.user_id)}
+            <span className="direct-chat-header-name">
+              {getNicknameById(otherUser.user_id)}
+            </span>
           </>
         )
       }
@@ -158,6 +161,7 @@ const Chat = props => {
         handleLogout={handleLogout}
         location={location}
         deleted={getDeleteAt()}
+        mmUser={mmUser}
       />
       <MessageList
         posts={posts}
@@ -229,11 +233,6 @@ const Chat = props => {
         closeModal={closeAfterPinModal}
         label="report-message-finish-modal"
       >
-        <i
-          className="fas fa-check-circle"
-          aria-hidden="true"
-          style={{ color: 'green', fontSize: '30px' }}
-        />
         <h3>Viesti ilmoitettu asiattomaksi.</h3>
         <ButtonContainer
           className="report-message-finish-button"
@@ -263,6 +262,7 @@ Chat.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,
   pinPost: PropTypes.func.isRequired,
   filesData: PropTypes.instanceOf(Object).isRequired,
+  mmUser: PropTypes.instanceOf(Object).isRequired,
 }
 
 Chat.defaultProps = {

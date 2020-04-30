@@ -119,6 +119,17 @@
   border: 1px solid $gray;
 }
 
+.message-container {
+  &:focus {
+    outline: solid 1px $outlineColor;
+  }
+}
+
+.content-received-admin {
+  background-color: white;
+  border: 2px solid $black;
+}
+
 .message-icon-and-content {
   display: flex;
 }
@@ -209,6 +220,12 @@
   color: #1a1a1a;
   margin: 0 5px 4px 0;
   flex-grow: 2;
+  width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media(max-width: 320px) {
+    width: 150px;
+  }
 }
 
 .chat-message-sender-unknown {

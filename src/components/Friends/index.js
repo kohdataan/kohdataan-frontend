@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Friend from './Friend'
 import FriendSearch from './FriendSearch'
@@ -111,6 +111,19 @@ const Friends = props => {
     friendSearchTextInput.current.value = ''
   }
 
+  useEffect(() => {
+    if (
+      history.location &&
+      history.location.state &&
+      history.location.state.searchTerm
+    ) {
+      const text = history.location.state.searchTerm
+      friendSearchTextInput.current.value = text
+      setFriendSearch(text)
+      handleFriendSearchChange(text)
+    }
+  }, [])
+
   return (
     <section className="friends-wrapper">
       <header className="friends-header">
@@ -120,10 +133,9 @@ const Friends = props => {
       <div className="friends-search">
         <SearchBar
           expression={handleFriendSearchChange}
-          placeholder="Hae kaveria"
+          placeholder="Kirjoita nimi"
           handleClear={handleFriendSearchReset}
-          label="hae kaveria"
-          aria-label="hae kaveria"
+          label="Hae kaveria"
           ref={friendSearchTextInput}
         />
       </div>
@@ -149,12 +161,15 @@ const Friends = props => {
           ) : (
             <section>
               <h2 className="no-friends-yet-header">
-                Sinulla ei ole vielä yksityisviestejä.
+                Et ole vielä viestitellyt kenenkään kanssa kahdestaan.
               </h2>
               <p className="no-friends-yet-text">
                 Voit lähettää toiselle käyttäjälle yksityisviestin hänen
-                profiilistaan. Pääset toisen käyttäjän profiiliin ryhmän kautta,
-                kun klikkaat ryhmässä hänen kuvakettaan.
+                profiilinsa alareunasta.
+              </p>
+              <p className="no-friends-yet-text">
+                Pääset toisen käyttäjän profiiliin, kun klikkaat ryhmässä hänen
+                kuvakettaan. Voit myös hakea käyttäjää hänen kutsumanimellään.
               </p>
             </section>
           )}
