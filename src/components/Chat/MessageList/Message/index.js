@@ -261,7 +261,8 @@ const Message = props => {
                               },
                             }}
                             width="100%"
-                            height="100%"
+                            height="200px"
+                            outline="none"
                           />
                         </div>
                         <span className="sr-only">Viesti</span>
