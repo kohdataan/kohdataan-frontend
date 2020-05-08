@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player'
 import ReactAudioPlayer from 'react-audio-player'
 import './styles.scss'
 import propTypes from 'prop-types'
+import Linkify from 'react-linkify'
 import ButtonContainer from '../../../ButtonContainer'
 
 const Message = props => {
@@ -234,9 +235,15 @@ const Message = props => {
                           <span className="sr-only">Linkki kuvaan</span>
                         </Link>
                         <span className="sr-only">Kuvateksti</span>
-                        <p className="image-message-content-text chat-message-content-text">
-                          {messageText}
-                        </p>
+                        {isAdmin ? (
+                          <Linkify className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </Linkify>
+                        ) : (
+                          <p className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </p>
+                        )}
                       </>
                     )}
                   {files &&
@@ -265,9 +272,15 @@ const Message = props => {
                           />
                         </div>
                         <span className="sr-only">Viesti</span>
-                        <p className="image-message-content-text chat-message-content-text">
-                          {messageText}
-                        </p>
+                        {isAdmin ? (
+                          <Linkify className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </Linkify>
+                        ) : (
+                          <p className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </p>
+                        )}
                       </>
                     )}
                   {files &&
@@ -293,7 +306,15 @@ const Message = props => {
                   {!files && (
                     <>
                       <span className="sr-only">Viesti</span>
-                      <p className="chat-message-content-text">{messageText}</p>
+                      {isAdmin ? (
+                        <Linkify className="chat-message-content-text">
+                          {messageText}
+                        </Linkify>
+                      ) : (
+                        <p className="image-message-content-text chat-message-content-text">
+                          {messageText}
+                        </p>
+                      )}
                     </>
                   )}
                 </div>
