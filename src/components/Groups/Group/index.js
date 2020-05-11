@@ -15,6 +15,7 @@ const Group = props => {
     currentUserId,
     teams,
     getPosts,
+    showTownSquare,
   } = props
 
   const [members, setMembers] = useState([])
@@ -96,81 +97,108 @@ const Group = props => {
   }, [unreadCount, posts])
 
   return (
-    <Link
-      className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
-      to={{
-        pathname: `/chat/${channel.id}`,
-        state: {
-          unreadCount,
-        },
-      }}
-    >
-      <div className="group-box-content">
-        <div className="group-header">
-          <div
-            className="group-color-icon"
-            style={{
-              backgroundColor:
-                channel.name === 'town-square'
-                  ? 'grey'
-                  : groupNameColors[channel.display_name],
-              border: `${
-                channel.display_name.toLowerCase().includes('valkoiset')
-                  ? '1px solid grey'
-                  : 'none'
-              }`,
-            }}
-          />
-          <h2>
-            {channel.name === 'town-square'
-              ? 'Kysy valvojalta'
-              : channel.display_name}
-          </h2>
-        </div>
-        {channel.name !== 'town-square' && (
-          <div className="group-interests">
-            <p>{`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}</p>
+    <>
+      {channel.name === 'town-square' && !showTownSquare ? (
+        <>
+          <div className=" group-box-content-inactive">
+            <div className="group-header">
+              <div
+                className="group-color-icon"
+                style={{
+                  backgroundColor: 'grey',
+                }}
+              />
+              <h2>Kysy valvojalta</h2>
+            </div>
+            <div className="monitor-group-text">
+              <p>
+                Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+              </p>
+              <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
+              <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
+            </div>
           </div>
-        )}
-        {channel.name !== 'town-square' ? (
-          <div className="group-current-members">
-            <span className="sr-only">Jäsenet</span>
-            {activeMembers &&
-              activeMembers.map(member => (
-                <Member
-                  key={`group-${member.id}`}
-                  nickname={member.nickname}
-                  currentUserId={currentUserId}
-                  userId={member.id}
-                />
-              ))}
+        </>
+      ) : (
+        <Link
+          className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
+          to={{
+            pathname: `/chat/${channel.id}`,
+            state: {
+              unreadCount,
+            },
+          }}
+        >
+          <div className="group-box-content">
+            <div className="group-header">
+              <div
+                className="group-color-icon"
+                style={{
+                  backgroundColor:
+                    channel.name === 'town-square'
+                      ? 'grey'
+                      : groupNameColors[channel.display_name],
+                  border: `${
+                    channel.display_name.toLowerCase().includes('valkoiset')
+                      ? '1px solid grey'
+                      : 'none'
+                  }`,
+                }}
+              />
+              <h2>
+                {channel.name === 'town-square'
+                  ? 'Kysy valvojalta'
+                  : channel.display_name}
+              </h2>
+            </div>
+            {channel.name !== 'town-square' && (
+              <div className="group-interests">
+                <p>
+                  {`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}
+                </p>
+              </div>
+            )}
+            {channel.name !== 'town-square' ? (
+              <div className="group-current-members">
+                <span className="sr-only">Jäsenet</span>
+                {activeMembers &&
+                  activeMembers.map(member => (
+                    <Member
+                      key={`group-${member.id}`}
+                      nickname={member.nickname}
+                      currentUserId={currentUserId}
+                      userId={member.id}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <div className="monitor-group-text">
+                <p>
+                  Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+                </p>
+                <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
+                <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="monitor-group-text">
-            <p>
-              Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
-            </p>
-            <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
-            <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
-          </div>
-        )}
-      </div>
-      {unreadPosts === 1 && (
-        <div className="group-unreads-text">
-          <span>{`${unreadPosts} uusi viesti`}</span>
-        </div>
+          {unreadPosts === 1 && (
+            <div className="group-unreads-text">
+              <span>{`${unreadPosts} uusi viesti`}</span>
+            </div>
+          )}
+          {unreadPosts > 1 && (
+            <div className="group-unreads-text">
+              <span>{`${unreadPosts} uutta viestiä`}</span>
+            </div>
+          )}
+          {unreadPosts <= 0 && (
+            <div className="group-unreads-text no-unreads">
+              <p>Ei uusia viestejä</p>
+            </div>
+          )}
+        </Link>
       )}
-      {unreadPosts > 1 && (
-        <div className="group-unreads-text">
-          <span>{`${unreadPosts} uutta viestiä`}</span>
-        </div>
-      )}
-      {unreadPosts <= 0 && (
-        <div className="group-unreads-text no-unreads">
-          <p>Ei uusia viestejä</p>
-        </div>
-      )}
-    </Link>
+    </>
   )
 }
 
@@ -182,6 +210,7 @@ Group.propTypes = {
   currentUserId: propTypes.string.isRequired,
   teams: propTypes.instanceOf(Object).isRequired,
   getPosts: propTypes.instanceOf(Object).isRequired,
+  showTownSquare: propTypes.bool.isRequired,
 }
 
 export default memo(Group)

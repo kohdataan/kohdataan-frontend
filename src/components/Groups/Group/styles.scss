@@ -24,6 +24,27 @@
   padding: 15px 15px;
 }
 
+.group-box-content-inactive {
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 3px 15px -5px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  align-items: stretch;
+  text-align: left;
+  & p {
+    color: $gray;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+}
+
 .group-header {
   display: flex;
   flex-flow: row nowrap;
