@@ -123,6 +123,12 @@ const Message = props => {
     return status
   }
 
+  const componentDecorator = (href, content, key) => (
+    <a href={href} key={key} className="message-content-link">
+      {content}
+    </a>
+  );
+
   return (
     <>
       <div
@@ -236,7 +242,10 @@ const Message = props => {
                         </Link>
                         <span className="sr-only">Kuvateksti</span>
                         {isAdmin ? (
-                          <Linkify className="image-message-content-text chat-message-content-text">
+                          <Linkify
+                            className="image-message-content-text chat-message-content-text"
+                            componentDecorator={componentDecorator}
+                          >
                             {messageText}
                           </Linkify>
                         ) : (
@@ -273,7 +282,10 @@ const Message = props => {
                         </div>
                         <span className="sr-only">Viesti</span>
                         {isAdmin ? (
-                          <Linkify className="image-message-content-text chat-message-content-text">
+                          <Linkify
+                            className="image-message-content-text chat-message-content-text"
+                            componentDecorator={componentDecorator}
+                          >
                             {messageText}
                           </Linkify>
                         ) : (
@@ -307,7 +319,10 @@ const Message = props => {
                     <>
                       <span className="sr-only">Viesti</span>
                       {isAdmin ? (
-                        <Linkify className="chat-message-content-text">
+                        <Linkify
+                          className="chat-message-content-text"
+                          componentDecorator={componentDecorator}
+                        >
                           {messageText}
                         </Linkify>
                       ) : (
