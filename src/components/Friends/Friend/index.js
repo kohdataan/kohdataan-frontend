@@ -78,7 +78,7 @@ const Friend = props => {
   useEffect(() => {
     // fetches user info for other user containing blocked users
     const fetchOtherUser = async () => {
-      if (user && user.delete_at === 0) {
+      if (user && user.delete_at === 0 && user.username !== 'surveybot') {
         const userInfo = await getUserByUsername(
           user.username,
           localStorage.getItem('authToken')
@@ -114,6 +114,7 @@ const Friend = props => {
 
   if (
     user.delete_at === 0 &&
+    user.username !== 'surveybot' &&
     otherUserInfo.blockedUsers &&
     !otherUserInfo.blockedUsers.includes(currentUserId)
   ) {
@@ -223,7 +224,7 @@ const Friend = props => {
             className="friend-box"
             to={blocked ? `/friends` : `/chat/${channel.id}`}
           >
-            <div className="deleted-user-messages-content friend-messages-content">
+            <div className=" friend-messages-content deleted-user-messages-content">
               <div className="friend-box-content">
                 <div className="friend-header">
                   <p className="deleted-user-nickname">Poistunut käyttäjä</p>
