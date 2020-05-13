@@ -262,7 +262,7 @@ const Message = props => {
                             }}
                             width="100%"
                             height="200px"
-                            outline="none"
+                            style={{ outline: 'none' }}
                           />
                         </div>
                         <span className="sr-only">Viesti</span>
@@ -281,7 +281,7 @@ const Message = props => {
                           controls
                           preload="metadata"
                           controlsList="nodownload"
-                          style={{ maxWidth: '53vw' }}
+                          style={{ maxWidth: '53vw', outline: 'none' }}
                         />
                       </div>
                     )}
