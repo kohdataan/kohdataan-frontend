@@ -22,19 +22,14 @@
 
 .group-box-content {
   padding: 15px 15px;
-  @media screen and (min-width: 960px) {
-    height: 250px;
-  }
-  @media (max-width: 960px) {
-    height: 220px;
-  }
+  height: 250px;
   @media (max-width: 360px) {
     font-size: 14px;
     h2 {
       font-size: 18px;
     }
   }
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .group-header {

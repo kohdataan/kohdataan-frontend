@@ -9,19 +9,14 @@
 
 .group-suggestion-box {
   padding: 10px;
-  @media screen and (min-width: 960px) {
-    height: 250px;
-  }
-  @media (max-width: 960px) {
-    height: 300px;
-  }
+  height: 300px;
+  
   @media (max-width: 360px) {
     font-size: 14px;
     h2 {
       font-size: 18px;
     }
   }
-  overflow: scroll;
 }
 
 .hidden-box {
