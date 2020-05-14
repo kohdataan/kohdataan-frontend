@@ -40,8 +40,7 @@ const MembersSider = props => {
       <div className="chat-header-members-sider" id="members-sider" ref={ref}>
         <div className="chat-header-members-sider-content">
           <p>Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.</p>
-          <p>Valvoja vastaa arkisin klo 9-17 välillä.</p>
-          <p>Ryhmä on väliaikainen, se on auki 18.05. asti.</p>
+          <p>Ryhmä on auki arkisin klo 9-17.</p>
           <p>
             Kaikki käyttäjät kuuluvat tähän ryhmään, joten ryhmään lähetetyt
             viestit näkyvät kaikille.

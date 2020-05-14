@@ -114,7 +114,7 @@ const Group = props => {
               <p>
                 Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
               </p>
-              <p>Ryhmä on auki arkisin klo 9-17 välillä.</p>
+              <p>Ryhmä on auki arkisin klo 9-17.</p>
             </div>
           </div>
         </>
@@ -175,7 +175,7 @@ const Group = props => {
                 <p>
                   Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
                 </p>
-                <p>Ryhmä on auki arkisin klo 9-17 välillä.</p>
+                <p>Ryhmä on auki arkisin klo 9-17.</p>
               </div>
             )}
           </div>
