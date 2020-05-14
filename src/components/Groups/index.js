@@ -18,6 +18,7 @@ const Groups = props => {
     tutorialWatched,
     updateUser,
     getPosts,
+    showTownSquare,
   } = props
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
@@ -66,6 +67,7 @@ const Groups = props => {
             currentUserId={currentUserId}
             teams={teams}
             getPosts={getPosts}
+            showTownSquare={showTownSquare}
           />
         ))}
       </div>
@@ -96,6 +98,7 @@ Groups.propTypes = {
   tutorialWatched: PropTypes.bool.isRequired,
   getPosts: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object),
+  showTownSquare: PropTypes.bool.isRequired,
 }
 
 export default memo(Groups)

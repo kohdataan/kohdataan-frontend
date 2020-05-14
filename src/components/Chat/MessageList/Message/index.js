@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player'
 import ReactAudioPlayer from 'react-audio-player'
 import './styles.scss'
 import propTypes from 'prop-types'
+import Linkify from 'react-linkify'
 import ButtonContainer from '../../../ButtonContainer'
 
 const Message = props => {
@@ -122,6 +123,12 @@ const Message = props => {
     return status
   }
 
+  const componentDecorator = (href, content, key) => (
+    <a href={href} key={key} className="message-content-link">
+      {content}
+    </a>
+  );
+
   return (
     <>
       <div
@@ -234,9 +241,18 @@ const Message = props => {
                           <span className="sr-only">Linkki kuvaan</span>
                         </Link>
                         <span className="sr-only">Kuvateksti</span>
-                        <p className="image-message-content-text chat-message-content-text">
-                          {messageText}
-                        </p>
+                        {isAdmin ? (
+                          <Linkify
+                            className="image-message-content-text chat-message-content-text"
+                            componentDecorator={componentDecorator}
+                          >
+                            {messageText}
+                          </Linkify>
+                        ) : (
+                          <p className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </p>
+                        )}
                       </>
                     )}
                   {files &&
@@ -261,13 +277,23 @@ const Message = props => {
                               },
                             }}
                             width="100%"
-                            height="100%"
+                            height="200px"
+                            style={{ outline: 'none' }}
                           />
                         </div>
                         <span className="sr-only">Viesti</span>
-                        <p className="image-message-content-text chat-message-content-text">
-                          {messageText}
-                        </p>
+                        {isAdmin ? (
+                          <Linkify
+                            className="image-message-content-text chat-message-content-text"
+                            componentDecorator={componentDecorator}
+                          >
+                            {messageText}
+                          </Linkify>
+                        ) : (
+                          <p className="image-message-content-text chat-message-content-text">
+                            {messageText}
+                          </p>
+                        )}
                       </>
                     )}
                   {files &&
@@ -280,7 +306,7 @@ const Message = props => {
                           controls
                           preload="metadata"
                           controlsList="nodownload"
-                          style={{ maxWidth: '53vw' }}
+                          style={{ maxWidth: '53vw', outline: 'none' }}
                         />
                       </div>
                     )}
@@ -293,7 +319,18 @@ const Message = props => {
                   {!files && (
                     <>
                       <span className="sr-only">Viesti</span>
-                      <p className="chat-message-content-text">{messageText}</p>
+                      {isAdmin ? (
+                        <Linkify
+                          className="chat-message-content-text"
+                          componentDecorator={componentDecorator}
+                        >
+                          {messageText}
+                        </Linkify>
+                      ) : (
+                        <p className="image-message-content-text chat-message-content-text">
+                          {messageText}
+                        </p>
+                      )}
                     </>
                   )}
                 </div>

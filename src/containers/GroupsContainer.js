@@ -7,6 +7,7 @@ import {
 } from 'mattermost-redux/actions/channels'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
@@ -43,6 +44,7 @@ const GroupsContainer = props => {
 
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
+  const [showTownSquare, setShowTownSquare] = useState(false)
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group realated data at once
@@ -53,6 +55,17 @@ const GroupsContainer = props => {
     }
     initialize()
   }, [fetchChannelsAndInvitations])
+
+  useEffect(() => {
+    const dateObject = moment()
+    const weekday = dateObject.isoWeekday()
+    const format = 'hh:mm:ss'
+    const beforeTime = moment('09:00:00', format)
+    const afterTime = moment('17:00:00', format)
+    if (dateObject.isBetween(beforeTime, afterTime)) setShowTownSquare(true)
+    // checks if weekday is Saturday (6) or Sunday (7)
+    if (weekday === 6 || weekday === 7) setShowTownSquare(false)
+  }, [])
 
   useEffect(() => {
     const getFilteredChannelSuggestions = () => {
@@ -142,6 +155,7 @@ const GroupsContainer = props => {
         teams={teams}
         getPosts={getPosts}
         posts={posts}
+        showTownSquare={showTownSquare}
       />
     </main>
   )
