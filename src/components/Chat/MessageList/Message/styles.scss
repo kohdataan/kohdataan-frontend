@@ -1,15 +1,5 @@
 @import '../../../../styles/colors.scss';
 
-.player-wrapper {
-  position: relative;
-}
-
-.react-player {
-  top: 0;
-  left: 0;
-  outline: medium $outlineColor solid;
-}
-
 .chat-message-wrapper {
   display: flex;
   justify-content: space-around;
@@ -37,10 +27,9 @@
   border-radius: 20px 20px 20px 0px;
   border: 1px solid $gray;
   background-color: $beige;
-  width: max-content;
-  max-width: 60vw;
-  @media screen and (min-width: 960px) {
-    max-width: 700px;
+  max-width: 70vw;
+  @media screen and (min-width: 660px) {
+    max-width: 40vw;
   }
 }
 
@@ -261,6 +250,11 @@
 
 .image-message-content-text {
   margin-top: 0.5em;
+}
+
+.message-content-link {
+  color: black;
+  font-weight: bold;
 }
 
 .message-image {

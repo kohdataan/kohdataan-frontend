@@ -27,6 +27,7 @@
     "react-hook-form": "^3.29.2",
     "react-hot-loader": "^4.12.19",
     "react-joyride": "^2.2.1",
+    "react-linkify": "^1.0.0-alpha",
     "react-modal": "^3.11.1",
     "react-player": "^1.15.2",
     "react-redux": "^6.0.1",
