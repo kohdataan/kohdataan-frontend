@@ -327,7 +327,7 @@ const Message = props => {
                           {messageText}
                         </Linkify>
                       ) : (
-                        <p className="image-message-content-text chat-message-content-text">
+                        <p className="chat-message-content-text">
                           {messageText}
                         </p>
                       )}
