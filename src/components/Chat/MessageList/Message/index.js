@@ -28,33 +28,14 @@ const Message = props => {
     pinPost,
     filesData,
     newMessageCount,
-    lastViewed,
     createAt,
-    messageDividerSet,
-    setMessageDividerSet,
     lastPost,
+    dividerId,
   } = props
 
   const [messageText, setMessageText] = useState(text)
   const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
-  const [showNewMessageDivider, setShowNewMessageDivider] = useState(false)
-  const [newMessagesIndicator, setNewMessagesIndicator] = useState(0)
-
-  useEffect(() => {
-    if (
-      lastViewed === createAt &&
-      newMessageCount !== 0 &&
-      !messageDividerSet &&
-      !lastPost
-    ) {
-      setShowNewMessageDivider(true)
-      setMessageDividerSet(true)
-      setNewMessagesIndicator(lastViewed)
-    } else if (messageDividerSet && lastViewed === newMessagesIndicator) {
-      setShowNewMessageDivider(false)
-    }
-  }, [lastViewed, createAt])
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
   if (messageText.includes(process.env.REACT_APP_REMOVE_STRING)) {
@@ -127,7 +108,7 @@ const Message = props => {
     <a href={href} key={key} className="message-content-link">
       {content}
     </a>
-  );
+  )
 
   return (
     <>
@@ -139,6 +120,15 @@ const Message = props => {
         aria-live={lastPost ? 'polite' : 'off'}
         className="message-container"
       >
+        {dividerId === id && (
+          <div className="show-date-content">
+            <div className="new-message-divider" />
+            <h2 className="new-message-divider-text" id="newMessages">
+              Uudet tapahtumat
+            </h2>
+            <div className="new-message-divider" />
+          </div>
+        )}
         {lastPost ? <span className="sr-only">Viimeisin viesti.</span> : ''}
         {showDate && (
           <div className="show-date-content">
@@ -351,15 +341,6 @@ const Message = props => {
           </div>
         </div>
       </div>
-      {showNewMessageDivider && messageDividerSet && (
-        <div className="show-date-content">
-          <div className="new-message-divider" />
-          <h2 className="new-message-divider-text" id="newMessages">
-            Uudet tapahtumat
-          </h2>
-          <div className="new-message-divider" />
-        </div>
-      )}
     </>
   )
 }
@@ -393,15 +374,14 @@ Message.propTypes = {
   filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
   newMessageCount: propTypes.number,
-  lastViewed: propTypes.number.isRequired,
   createAt: propTypes.number.isRequired,
-  messageDividerSet: propTypes.bool.isRequired,
-  setMessageDividerSet: propTypes.func.isRequired,
   lastPost: propTypes.bool.isRequired,
+  dividerId: propTypes.string,
 }
 
 Message.defaultProps = {
   newMessageCount: 0,
+  dividerId: null,
 }
 
 export default memo(Message)

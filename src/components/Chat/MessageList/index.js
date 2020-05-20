@@ -19,10 +19,9 @@ const MessageList = props => {
     pinPost,
     filesData,
     location,
-    lastViewed,
+    dividerId,
   } = props
 
-  const [messageDividerSet, setMessageDividerSet] = useState(false)
   const [filteredPosts, setFilteredPosts] = useState([])
   const { unreadCount } = location && location.state ? location.state : 0
 
@@ -90,18 +89,12 @@ const MessageList = props => {
     ref.current.scrollTop = ref.current.scrollHeight
   })
 
-  let counter = 0
-
   useEffect(() => {
     const filtered = posts.filter(
       p =>
         p.type !== 'system_purpose_change' &&
         (p.type === '' ||
-          ((p.type === 'system_join_channel' ||
-            p.type === 'system_leave_channel' ||
-            p.type === 'system_join_team' ||
-            p.type === 'system_leave_team') &&
-            !isAdmin(p.user_id)))
+          (isUserLeavingOrJoiningChannel(p) && !isAdmin(p.user_id)))
     )
     setFilteredPosts(filtered)
   }, [posts])
@@ -112,7 +105,6 @@ const MessageList = props => {
         {posts.length > 0 &&
           filteredPosts.map(post => {
             const timestampValues = setTimeStampValues(post)
-            counter += 1
             const isUserLeavingOrJoining = isUserLeavingOrJoiningChannel(post)
             return (
               post &&
@@ -139,11 +131,9 @@ const MessageList = props => {
                   pinPost={pinPost}
                   filesData={filesData}
                   newMessageCount={unreadCount}
-                  lastViewed={Number(lastViewed)}
                   createAt={post.create_at}
-                  setMessageDividerSet={setMessageDividerSet}
-                  messageDividerSet={messageDividerSet}
-                  lastPost={filteredPosts.length === counter}
+                  lastPost={false}
+                  dividerId={dividerId}
                 />
               )
             )
@@ -165,7 +155,11 @@ MessageList.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   location: propTypes.instanceOf(Object).isRequired,
-  lastViewed: propTypes.number.isRequired,
+  dividerId: propTypes.number,
+}
+
+MessageList.defaultProps = {
+  dividerId: null,
 }
 
 export default memo(MessageList)

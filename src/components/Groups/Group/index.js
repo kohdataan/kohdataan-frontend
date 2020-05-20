@@ -16,6 +16,7 @@ const Group = props => {
     teams,
     getPosts,
     showTownSquare,
+    getPostsAfter,
   } = props
 
   const [members, setMembers] = useState([])
@@ -23,6 +24,7 @@ const Group = props => {
   const [parsedPurpose, setParsedPurpose] = useState([])
   const [unreadPosts, setUnreadPosts] = useState([])
   const [posts, setPosts] = useState({})
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     const getParsedPurpose = () => {
@@ -96,6 +98,12 @@ const Group = props => {
     getUnreadPosts()
   }, [unreadCount, posts])
 
+  useEffect(() => {
+    if (members) {
+      setCurrentUser(members.find(member => member.user_id === currentUserId))
+    }
+  }, [currentUser, currentUserId, members])
+
   return (
     <>
       {channel.name === 'town-square' && !showTownSquare ? (
@@ -125,6 +133,7 @@ const Group = props => {
             pathname: `/chat/${channel.id}`,
             state: {
               unreadCount,
+              currentUser,
             },
           }}
         >

@@ -35,6 +35,7 @@ const GroupsContainer = props => {
     resetChannelInvitations,
     profiles,
     user,
+    currentUser,
     updateUser,
     getPosts,
     posts,
@@ -45,6 +46,7 @@ const GroupsContainer = props => {
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(0)
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group realated data at once
@@ -97,21 +99,6 @@ const GroupsContainer = props => {
     return myCurrentChannels
   }
 
-  const handleJoinChannel = channelId => async () => {
-    try {
-      await addUserInterestsToChannelPurpose(
-        localStorage.getItem('authToken'),
-        channelId
-      )
-      const currentTeamId = Object.keys(teams)[0]
-      await joinChannel(currentUserId, currentTeamId, channelId)
-      history.push(`/chat/${channelId}`)
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e)
-    }
-  }
-
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
@@ -121,11 +108,35 @@ const GroupsContainer = props => {
       if (channel) {
         const channelMsgCount = channel.total_msg_count
         const myMessageCount = myChannels[channel.id].msg_count
+        setUnreadCount(channelMsgCount - myMessageCount)
         return channelMsgCount - myMessageCount
       }
     }
     return 0
   }
+
+  const handleJoinChannel = channelId => async () => {
+    try {
+      await addUserInterestsToChannelPurpose(
+        localStorage.getItem('authToken'),
+        channelId
+      )
+      const currentTeamId = Object.keys(teams)[0]
+      await joinChannel(currentUserId, currentTeamId, channelId)
+      history.push({
+        pathname: `/chat/${channelId}`,
+        state: {
+          unreadCount,
+          currentUser,
+        },
+      })
+      history.push(`/chat/${channelId}`)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e)
+    }
+  }
+
   if (!isInitialized) {
     return <BouncingLoader />
   }
@@ -179,6 +190,7 @@ GroupsContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   posts: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
+  currentUser: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {
