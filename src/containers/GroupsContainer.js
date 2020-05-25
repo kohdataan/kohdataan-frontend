@@ -35,7 +35,6 @@ const GroupsContainer = props => {
     resetChannelInvitations,
     profiles,
     user,
-    currentUser,
     updateUser,
     getPosts,
     posts,
@@ -49,7 +48,7 @@ const GroupsContainer = props => {
   const [unreadCount, setUnreadCount] = useState(0)
   // Get only those channels suggestions that user has not yet joined
 
-  // Get all group realated data at once
+  // Get all group related data at once
   useEffect(() => {
     const initialize = async () => {
       await fetchChannelsAndInvitations()
@@ -123,13 +122,6 @@ const GroupsContainer = props => {
       )
       const currentTeamId = Object.keys(teams)[0]
       await joinChannel(currentUserId, currentTeamId, channelId)
-      history.push({
-        pathname: `/chat/${channelId}`,
-        state: {
-          unreadCount,
-          currentUser,
-        },
-      })
       history.push(`/chat/${channelId}`)
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -190,7 +182,6 @@ GroupsContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
   posts: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
-  currentUser: PropTypes.instanceOf(Object).isRequired,
 }
 
 GroupsContainer.defaultProps = {

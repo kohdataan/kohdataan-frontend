@@ -155,7 +155,7 @@ MessageList.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   location: propTypes.instanceOf(Object).isRequired,
-  dividerId: propTypes.number,
+  dividerId: propTypes.string,
 }
 
 MessageList.defaultProps = {

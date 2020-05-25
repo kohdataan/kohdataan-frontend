@@ -60,8 +60,9 @@ const ChatContainer = props => {
   const currentChannel = channels[currentChannelId]
   const [filteredOrder, setFilteredOrder] = useState([])
   const [filteredPosts, setFilteredPosts] = useState([])
-  // const { currentUser } = location && location.state ? location.state : null
-  const [currentUser, setCurrentUser] = useState(null)
+
+  const currentUser =
+    location && location.state ? location.state.currentUser : null
 
   // Get current channel members
   useEffect(() => {
@@ -71,14 +72,6 @@ const ChatContainer = props => {
       )
     }
   }, [channels, currentChannelId, getChannelMembers])
-
-  useEffect(() => {
-    if (currentMembers) {
-      setCurrentUser(
-        currentMembers.find(member => member.user_id === currentUserId)
-      )
-    }
-  }, [currentUser, currentUserId, currentMembers])
 
   // fetches posts sent after last viewed time and filters and orders them
   useEffect(() => {
