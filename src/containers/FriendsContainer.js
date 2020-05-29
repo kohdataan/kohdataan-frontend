@@ -98,6 +98,7 @@ const FriendsContainer = props => {
   if (!isInitialized) {
     return <BouncingLoader />
   }
+
   return (
     <main>
       <Friends

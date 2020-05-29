@@ -4,7 +4,7 @@ import './styles.scss'
 import ButtonContainer from '../ButtonContainer'
 
 const SearchBar = React.forwardRef((props, ref) => {
-  const { expression, handleClear, placeholder, label } = props
+  const { handleChange, handleClear, placeholder, label } = props
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
       e.preventDefault()
@@ -18,7 +18,7 @@ const SearchBar = React.forwardRef((props, ref) => {
         <input
           className="search-bar-input"
           placeholder={placeholder}
-          onChange={e => expression(e.target.value)}
+          onChange={e => handleChange(e.target.value)}
           onKeyPress={e => handleKeyPress(e)}
           ref={ref}
           aria-label={label}
@@ -38,7 +38,7 @@ const SearchBar = React.forwardRef((props, ref) => {
 })
 
 SearchBar.propTypes = {
-  expression: propTypes.func.isRequired,
+  handleChange: propTypes.func.isRequired,
   placeholder: propTypes.string.isRequired,
   handleClear: propTypes.func.isRequired,
   label: propTypes.string.isRequired,

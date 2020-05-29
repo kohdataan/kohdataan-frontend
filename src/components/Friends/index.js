@@ -5,6 +5,7 @@ import FriendSearch from './FriendSearch'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
 import SearchBar from '../SearchBar'
+import { getUserByUsername } from '../../api/user/user'
 import './styles.scss'
 
 const Friends = props => {
@@ -27,6 +28,8 @@ const Friends = props => {
   const [friendSearch, setFriendSearch] = useState('')
   const [friendSearchResult, setFriendSearchResult] = useState([])
   const friendSearchTextInput = React.createRef()
+  const [deletedUsers, setDeletedUsers] = useState([])
+  const [profiles, setProfiles] = useState([])
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
@@ -75,6 +78,49 @@ const Friends = props => {
     return getUnreadCount(b.id) - getUnreadCount(a.id)
   }
 
+  useEffect(() => {
+    const removeDeletedProfiles = () => {
+      const filtered = profiles.filter(profile => {
+        return !deletedUsers.includes(profile.nickname)
+      })
+      if (filtered) {
+        // setFriendSearchResult(filtered)
+        setProfiles(filtered)
+      }
+    }
+    if (deletedUsers.length > 0 && profiles.length > 0) {
+      removeDeletedProfiles()
+      setDeletedUsers([])
+    } else {
+      setFriendSearchResult(profiles)
+    }
+  }, [deletedUsers, profiles, setFriendSearchResult])
+
+  const getDeletedUsers = profilesData => {
+    Object.values(profilesData).forEach(async user => {
+      if (user) {
+        const userInfo = await getUserByUsername(
+          user.username,
+          localStorage.getItem('authToken')
+        )
+        if (
+          userInfo &&
+          userInfo.deleteAt !== null &&
+          !deletedUsers.includes(userInfo.nickname)
+        ) {
+          setDeletedUsers(deletedUsers.concat(userInfo.nickname))
+        }
+      }
+    })
+  }
+
+  const handleFriendSearchReset = async () => {
+    setFriendSearch('')
+    friendSearchTextInput.current.value = ''
+    setDeletedUsers([])
+    setProfiles([])
+  }
+
   // Filter out current user, surveybot and
   // only return profiles where nickname matches
   const filterSearchResults = (data, searchTerm) =>
@@ -83,34 +129,31 @@ const Friends = props => {
       profile =>
         profile.id !== currentUserId &&
         profile.username !== 'surveybot' &&
-        profile.delete_at === 0 &&
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
   const handleFriendSearchChange = async searchText => {
     setFriendSearch(searchText)
-    if (searchText === '') {
-      setFriendSearchResult([])
-    } else {
-      try {
+    try {
+      if (searchText === '') {
+        handleFriendSearchReset()
+      } else {
         const foundProfiles = await searchProfiles(searchText)
-        // Filter out current user profile
-        const filteredProfiles = filterSearchResults(
+        const filtered = await filterSearchResults(
           foundProfiles.data,
           searchText
         )
-        setFriendSearchResult(filteredProfiles)
-      } catch (e) {
-        setFriendSearchResult([])
+        if (filtered) {
+          getDeletedUsers(filtered)
+        }
+        setProfiles(filtered)
       }
+    } catch (e) {
+      setFriendSearchResult([])
     }
   }
 
-  const handleFriendSearchReset = async () => {
-    setFriendSearch('')
-    friendSearchTextInput.current.value = ''
-  }
-
+  // if the user navigates back after visiting a profile, save the search term
   useEffect(() => {
     if (
       history.location &&
@@ -132,7 +175,7 @@ const Friends = props => {
 
       <div className="friends-search">
         <SearchBar
-          expression={handleFriendSearchChange}
+          handleChange={handleFriendSearchChange}
           placeholder="Kirjoita nimi"
           handleClear={handleFriendSearchReset}
           label="Hae kaveria"
