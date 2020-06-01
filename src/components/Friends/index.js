@@ -28,7 +28,6 @@ const Friends = props => {
   const [friendSearch, setFriendSearch] = useState('')
   const [friendSearchResult, setFriendSearchResult] = useState([])
   const friendSearchTextInput = React.createRef()
-  const [deletedUsers, setDeletedUsers] = useState([])
   const [profiles, setProfiles] = useState([])
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
@@ -78,46 +77,38 @@ const Friends = props => {
     return getUnreadCount(b.id) - getUnreadCount(a.id)
   }
 
-  useEffect(() => {
-    const removeDeletedProfiles = () => {
-      const filtered = profiles.filter(profile => {
-        return !deletedUsers.includes(profile.nickname)
+  const removeDeletedProfiles = resp => {
+    // Create array of nicknames of users with deleteAt timestamp
+    const deletedProfiles = resp
+      .filter(r => {
+        return r.deleteAt !== null
       })
-      if (filtered) {
-        // setFriendSearchResult(filtered)
-        setProfiles(filtered)
-      }
-    }
-    if (deletedUsers.length > 0 && profiles.length > 0) {
-      removeDeletedProfiles()
-      setDeletedUsers([])
-    } else {
-      setFriendSearchResult(profiles)
-    }
-  }, [deletedUsers, profiles, setFriendSearchResult])
-
-  const getDeletedUsers = profilesData => {
-    Object.values(profilesData).forEach(async user => {
-      if (user) {
-        const userInfo = await getUserByUsername(
-          user.username,
-          localStorage.getItem('authToken')
-        )
-        if (
-          userInfo &&
-          userInfo.deleteAt !== null &&
-          !deletedUsers.includes(userInfo.nickname)
-        ) {
-          setDeletedUsers(deletedUsers.concat(userInfo.nickname))
-        }
-      }
+      .map(deleted => deleted.nickname)
+    // filter out deleted profiles
+    const filteredProfiles = profiles.filter(profile => {
+      return !deletedProfiles.includes(profile.nickname)
     })
+    setFriendSearchResult(filteredProfiles)
   }
+
+  // Get user info from own backend
+  useEffect(() => {
+    const getNodeUsers = async () => {
+      const results = []
+      for (let i = 0; i < profiles.length; i++) {
+        const user = profiles[i]
+        results.push(
+          getUserByUsername(user.username, localStorage.getItem('authToken'))
+        )
+      }
+      return removeDeletedProfiles(await Promise.all(results))
+    }
+    getNodeUsers()
+  }, [profiles])
 
   const handleFriendSearchReset = async () => {
     setFriendSearch('')
     friendSearchTextInput.current.value = ''
-    setDeletedUsers([])
     setProfiles([])
   }
 
@@ -144,9 +135,8 @@ const Friends = props => {
           searchText
         )
         if (filtered) {
-          getDeletedUsers(filtered)
+          setProfiles(filtered)
         }
-        setProfiles(filtered)
       }
     } catch (e) {
       setFriendSearchResult([])
