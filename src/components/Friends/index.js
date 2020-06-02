@@ -120,6 +120,7 @@ const Friends = props => {
       profile =>
         profile.id !== currentUserId &&
         profile.username !== 'surveybot' &&
+        profile.delete_at === 0 &&
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import groupNameColors from '../../../assets/groupColors'
 import Member from './Member'
 import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
+import { getUserByUsername } from '../../../api/user/user'
 
 const Group = props => {
   const {
@@ -23,6 +24,7 @@ const Group = props => {
   const [parsedPurpose, setParsedPurpose] = useState([])
   const [unreadPosts, setUnreadPosts] = useState([])
   const [posts, setPosts] = useState({})
+  const [membersToShow, setMembersToShow] = useState([])
 
   useEffect(() => {
     const getParsedPurpose = () => {
@@ -68,6 +70,49 @@ const Group = props => {
     }
     getActiveMembers()
   }, [members, profiles, setActiveMembers, teams])
+
+  const removeDeletedMembers = resp => {
+    // Create array of nicknames of users with deleteAt timestamp
+    const deletedProfiles = resp
+      .filter(r => {
+        return r.deleteAt !== null
+      })
+      .map(deleted => deleted.nickname)
+    // filter out deleted profiles
+    const memberProfiles = []
+    for (let i = 0; i < activeMembers.length; i++) {
+      const { id } = activeMembers[i]
+      const user = profiles[id]
+      memberProfiles.push(user)
+    }
+    const filteredMmUserIds = memberProfiles
+      .filter(profile => {
+        return !deletedProfiles.includes(profile.nickname)
+      })
+      .map(profile => profile.id)
+    const filteredMembers = activeMembers.filter(member =>
+      filteredMmUserIds.includes(member.id)
+    )
+    setMembersToShow(filteredMembers)
+  }
+
+  // Get user info from own backend
+  useEffect(() => {
+    const getNodeUsers = async () => {
+      const results = []
+      for (let i = 0; i < activeMembers.length; i++) {
+        const { id } = activeMembers[i]
+        const user = profiles[id]
+        if (user && user.delete_at === 0) {
+          results.push(
+            getUserByUsername(user.username, localStorage.getItem('authToken'))
+          )
+        }
+      }
+      return removeDeletedMembers(await Promise.all(results))
+    }
+    getNodeUsers()
+  }, [profiles, activeMembers])
 
   useEffect(() => {
     // Get channel posts
@@ -160,8 +205,8 @@ const Group = props => {
             {channel.name !== 'town-square' ? (
               <div className="group-current-members">
                 <span className="sr-only">Jäsenet</span>
-                {activeMembers &&
-                  activeMembers.map(member => (
+                {membersToShow &&
+                  membersToShow.map(member => (
                     <Member
                       key={`group-${member.id}`}
                       nickname={member.nickname}

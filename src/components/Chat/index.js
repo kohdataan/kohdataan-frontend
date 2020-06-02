@@ -6,6 +6,8 @@ import UserInput from './UserInput'
 import MembersSider from './MembersSider'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
+import { getUserByUsername } from '../../api/user/user'
+import { isTeamAdmin, isSystemAdmin } from '../../utils/userIsAdmin'
 import './styles.scss'
 
 const Chat = props => {
@@ -31,6 +33,8 @@ const Chat = props => {
 
   const [currentUser, setCurrentUser] = useState(null)
   const [lastViewed, setLastViewed] = useState(0)
+  const [membersToShow, setMembersToShow] = useState([])
+  const [activeMembers, setActiveMembers] = useState([])
 
   useEffect(() => {
     setCurrentUser(members.find(member => member.user_id === currentUserId))
@@ -58,7 +62,11 @@ const Chat = props => {
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = 'Käyttäjä'
-    if (user && user.delete_at === 0) {
+    if (
+      user &&
+      user.delete_at === 0 &&
+      membersToShow.find(member => member.id === user.id)
+    ) {
       if (user && user.nickname) {
         visibleName = user.nickname
       }
@@ -150,6 +158,67 @@ const Chat = props => {
   const closeAfterPinModal = () => {
     setAfterPinModal(false)
   }
+
+  useEffect(() => {
+    const getActiveMembers = () => {
+      const activeMembersArr =
+        members &&
+        members
+          .map(member => profiles[member.user_id])
+          .filter(member => member && member.delete_at === 0)
+          .filter(
+            member =>
+              !isSystemAdmin(member.id, profiles) &&
+              !isTeamAdmin(member.id, teams)
+          )
+      setActiveMembers(activeMembersArr)
+    }
+    getActiveMembers()
+  }, [members, profiles, setActiveMembers, teams])
+
+  const removeDeletedMembers = resp => {
+    // Create array of nicknames of users with deleteAt timestamp
+    const deletedProfiles = resp
+      .filter(r => {
+        return r.deleteAt !== null
+      })
+      .map(deleted => deleted.nickname)
+    // filter out deleted profiles
+    const memberProfiles = []
+    for (let i = 0; i < activeMembers.length; i++) {
+      const { id } = activeMembers[i]
+      const user = profiles[id]
+      memberProfiles.push(user)
+    }
+    const filteredMmUserIds = memberProfiles
+      .filter(profile => {
+        return !deletedProfiles.includes(profile.nickname)
+      })
+      .map(profile => profile.id)
+    const filteredMembers = activeMembers.filter(member =>
+      filteredMmUserIds.includes(member.id)
+    )
+    setMembersToShow(filteredMembers)
+  }
+
+  // Get user info from own backend
+  useEffect(() => {
+    const getNodeUsers = async () => {
+      const results = []
+      for (let i = 0; i < activeMembers.length; i++) {
+        const { id } = activeMembers[i]
+        const user = profiles[id]
+        if (user && user.delete_at === 0) {
+          results.push(
+            getUserByUsername(user.username, localStorage.getItem('authToken'))
+          )
+        }
+      }
+      return removeDeletedMembers(await Promise.all(results))
+    }
+    getNodeUsers()
+  }, [profiles, activeMembers])
+
   return (
     <main className="chat-wrapper" id="chat">
       <ChatHeader
@@ -169,7 +238,7 @@ const Chat = props => {
         currentUserId={currentUserId}
         getNickNamebyId={getNicknameById}
         directChannel={directChannel}
-        members={members}
+        members={membersToShow}
         channelId={channel.id}
         profiles={profiles}
         getStatusById={getStatusById}

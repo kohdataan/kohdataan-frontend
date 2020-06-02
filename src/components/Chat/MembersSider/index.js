@@ -1,10 +1,11 @@
-import React, { useState, memo, useRef } from 'react'
+import React, { useState, memo, useRef, useEffect } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 import Member from './Member'
 import ButtonContainer from '../../ButtonContainer'
 import LeaveChannelModal from './LeaveChannelModal'
 import useOutsideClick from '../../../hooks/useOutsideClick'
+import { getUserByUsername } from '../../../api/user/user'
 
 const MembersSider = props => {
   const {
@@ -22,6 +23,7 @@ const MembersSider = props => {
   const masterUserEmail = process.env.REACT_APP_MASTER_USER_EMAIL
 
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [membersToShow, setMembersToShow] = useState([])
 
   const getIconMemberStatus = userId =>
     `chat-header-${getStatusById(userId)}-status-icon`
@@ -34,6 +36,49 @@ const MembersSider = props => {
   useOutsideClick(ref, () => {
     toggleSiderClosedIfOpen()
   })
+
+  const removeDeletedMembers = resp => {
+    // Create array of nicknames of users with deleteAt timestamp
+    const deletedProfiles = resp
+      .filter(r => {
+        return r.deleteAt !== null
+      })
+      .map(deleted => deleted.nickname)
+    // filter out deleted profiles
+    const memberProfiles = []
+    for (let i = 0; i < members.length; i++) {
+      const id = members[i].user_id
+      const user = profiles[id]
+      if (user.delete_at === 0) memberProfiles.push(user)
+    }
+    const filteredMmUserIds = memberProfiles
+      .filter(profile => {
+        return !deletedProfiles.includes(profile.nickname)
+      })
+      .map(profile => profile.id)
+    const filteredMembers = members.filter(member =>
+      filteredMmUserIds.includes(member.user_id)
+    )
+    setMembersToShow(filteredMembers)
+  }
+
+  // Get user info from own backend
+  useEffect(() => {
+    const getNodeUsers = async () => {
+      const results = []
+      for (let i = 0; i < members.length; i++) {
+        const id = members[i].user_id
+        const user = profiles[id]
+        if (user && user.delete_at === 0 && user.email !== masterUserEmail) {
+          results.push(
+            getUserByUsername(user.username, localStorage.getItem('authToken'))
+          )
+        }
+      }
+      return removeDeletedMembers(await Promise.all(results))
+    }
+    getNodeUsers()
+  }, [profiles])
 
   if (channel.name === 'town-square') {
     return (
@@ -58,7 +103,7 @@ const MembersSider = props => {
     <div className="chat-header-members-sider" id="members-sider" ref={ref}>
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
-        {members
+        {membersToShow
           .filter(
             member =>
               profiles[member.user_id] &&
