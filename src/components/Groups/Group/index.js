@@ -100,16 +100,21 @@ const Group = props => {
   useEffect(() => {
     const getNodeUsers = async () => {
       const results = []
-      for (let i = 0; i < activeMembers.length; i++) {
-        const { id } = activeMembers[i]
-        const user = profiles[id]
-        if (user && user.delete_at === 0) {
-          results.push(
-            getUserByUsername(user.username, localStorage.getItem('authToken'))
-          )
+      if (activeMembers) {
+        for (let i = 0; i < activeMembers.length; i++) {
+          const { id } = activeMembers[i]
+          const user = profiles[id]
+          if (user && user.delete_at === 0) {
+            results.push(
+              getUserByUsername(
+                user.username,
+                localStorage.getItem('authToken')
+              )
+            )
+          }
         }
+        return removeDeletedMembers(await Promise.all(results))
       }
-      return removeDeletedMembers(await Promise.all(results))
     }
     getNodeUsers()
   }, [profiles, activeMembers])

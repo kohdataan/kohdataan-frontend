@@ -116,7 +116,8 @@ const Friend = props => {
     user.delete_at === 0 &&
     user.username !== 'surveybot' &&
     otherUserInfo.blockedUsers &&
-    !otherUserInfo.blockedUsers.includes(currentUserId)
+    !otherUserInfo.blockedUsers.includes(currentUserId) &&
+    !otherUserInfo.deleteAt
   ) {
     return (
       <div className="friend-box-container">
@@ -213,7 +214,7 @@ const Friend = props => {
       </div>
     )
   }
-  if (user.delete_at !== 0) {
+  if (user.delete_at !== 0 || otherUserInfo.deleteAt) {
     return (
       <div>
         <div className="friend-box-container">
