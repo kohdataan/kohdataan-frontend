@@ -19,3 +19,10 @@
 .group-boxes-member-icon-wrapper {
   margin-bottom: 8px;
 }
+
+.suggestion-box-nickname {
+  max-width: 60px;
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

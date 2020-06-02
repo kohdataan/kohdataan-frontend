@@ -17,14 +17,6 @@ const Member = props => {
     getMemberImage()
   }, [userId])
 
-  const getTruncatedName = name => {
-    let visibleName = name
-    if (visibleName && visibleName.length >= 6) {
-      visibleName = `${visibleName.substring(0, 6)}...`
-    }
-    return visibleName
-  }
-
   return (
     currentUserId !== userId && (
       <div className="group-boxes-member" key={key}>
@@ -40,7 +32,7 @@ const Member = props => {
             {' '}
           </div>
         </div>
-        <p>{getTruncatedName(nickname)}</p>
+        <p className="suggestion-box-nickname">{nickname}</p>
       </div>
     )
   )
