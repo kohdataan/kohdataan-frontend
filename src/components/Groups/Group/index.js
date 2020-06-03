@@ -4,8 +4,6 @@ import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import groupNameColors from '../../../assets/groupColors'
 import Member from './Member'
-import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
-import { getUserByUsername } from '../../../api/user/user'
 
 const Group = props => {
   const {
@@ -14,13 +12,11 @@ const Group = props => {
     unreadCount,
     profiles,
     currentUserId,
-    teams,
     getPosts,
     showTownSquare,
   } = props
 
   const [members, setMembers] = useState([])
-  const [activeMembers, setActiveMembers] = useState([])
   const [parsedPurpose, setParsedPurpose] = useState([])
   const [unreadPosts, setUnreadPosts] = useState([])
   const [posts, setPosts] = useState({})
@@ -54,70 +50,17 @@ const Group = props => {
     getMemberData()
   }, [channel, getMembers])
 
+  // Only show members with existing profiles
   useEffect(() => {
-    const getActiveMembers = () => {
-      const activeMembersArr =
-        members &&
-        members
-          .map(member => profiles[member.user_id])
-          .filter(member => member && member.delete_at === 0)
-          .filter(
-            member =>
-              !isSystemAdmin(member.id, profiles) &&
-              !isTeamAdmin(member.id, teams)
-          )
-      setActiveMembers(activeMembersArr)
+    const setMemberProfilesToShow = () => {
+      const memberIds = members.map(member => member.user_id)
+      const channelMembers = profiles.filter(
+        p => memberIds.indexOf(p.id) !== -1
+      )
+      setMembersToShow(channelMembers)
     }
-    getActiveMembers()
-  }, [members, profiles, setActiveMembers, teams])
-
-  const removeDeletedMembers = resp => {
-    // Create array of nicknames of users with deleteAt timestamp
-    const deletedProfiles = resp
-      .filter(r => {
-        return r.deleteAt !== null
-      })
-      .map(deleted => deleted.nickname)
-    // filter out deleted profiles
-    const memberProfiles = []
-    for (let i = 0; i < activeMembers.length; i++) {
-      const { id } = activeMembers[i]
-      const user = profiles[id]
-      memberProfiles.push(user)
-    }
-    const filteredMmUserIds = memberProfiles
-      .filter(profile => {
-        return !deletedProfiles.includes(profile.nickname)
-      })
-      .map(profile => profile.id)
-    const filteredMembers = activeMembers.filter(member =>
-      filteredMmUserIds.includes(member.id)
-    )
-    setMembersToShow(filteredMembers)
-  }
-
-  // Get user info from own backend
-  useEffect(() => {
-    const getNodeUsers = async () => {
-      const results = []
-      if (activeMembers) {
-        for (let i = 0; i < activeMembers.length; i++) {
-          const { id } = activeMembers[i]
-          const user = profiles[id]
-          if (user && user.delete_at === 0) {
-            results.push(
-              getUserByUsername(
-                user.username,
-                localStorage.getItem('authToken')
-              )
-            )
-          }
-        }
-        return removeDeletedMembers(await Promise.all(results))
-      }
-    }
-    getNodeUsers()
-  }, [profiles, activeMembers])
+    setMemberProfilesToShow()
+  }, [members, profiles])
 
   useEffect(() => {
     // Get channel posts
@@ -256,7 +199,6 @@ Group.propTypes = {
   unreadCount: propTypes.number.isRequired,
   profiles: propTypes.instanceOf(Object).isRequired,
   currentUserId: propTypes.string.isRequired,
-  teams: propTypes.instanceOf(Object).isRequired,
   getPosts: propTypes.instanceOf(Object).isRequired,
   showTownSquare: propTypes.bool.isRequired,
 }

@@ -18,6 +18,8 @@ import {
   resetChannelInvitations as resetChannelInvitationsAction,
 } from '../store/channels/channelAction'
 import { updateUser as updateUserAction } from '../store/user/userAction'
+import { isSystemAdmin, isTeamAdmin } from '../utils/userIsAdmin'
+import { getUserByUsername } from '../api/user/user'
 
 const GroupsContainer = props => {
   const {
@@ -45,6 +47,8 @@ const GroupsContainer = props => {
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
+  const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
+  const [profilesToShow, setProfilesToShow] = useState([])
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group realated data at once
@@ -126,6 +130,71 @@ const GroupsContainer = props => {
     }
     return 0
   }
+
+  useEffect(() => {
+    const getActiveMattermostProfiles = () => {
+      const activeProfilesArr =
+        profiles &&
+        Object.values(profiles)
+          .map(member => profiles[member.id])
+          .filter(member => member && member.delete_at === 0)
+          .filter(member => member.username !== 'surveybot')
+          .filter(
+            member =>
+              !isSystemAdmin(member.id, profiles) &&
+              !isTeamAdmin(member.id, teams)
+          )
+      setActiveMemberMmProfiles(activeProfilesArr)
+    }
+    getActiveMattermostProfiles()
+  }, [profiles, setActiveMemberMmProfiles, teams])
+
+  const removeDeletedMembers = resp => {
+    // Create array of nicknames of users with deleteAt timestamp
+    const deletedNodeProfileNicknames = resp
+      .filter(r => {
+        return r.deleteAt !== null
+      })
+      .map(deleted => deleted.nickname)
+    // filter out deleted profiles
+    const memberProfiles = []
+    for (let i = 0; i < activeMemberMmProfiles.length; i++) {
+      const { id } = activeMemberMmProfiles[i]
+      const userProfile = profiles[id]
+      memberProfiles.push(userProfile)
+    }
+    const filteredMmUserIds = memberProfiles
+      .filter(profile => {
+        return !deletedNodeProfileNicknames.includes(profile.nickname)
+      })
+      .map(profile => profile.id)
+    const filteredProfiles = activeMemberMmProfiles.filter(member =>
+      filteredMmUserIds.includes(member.id)
+    )
+    setProfilesToShow(filteredProfiles)
+  }
+
+  // Get user info from own backend
+  useEffect(() => {
+    const getNodeUsers = async () => {
+      const results = []
+      for (let i = 0; i < activeMemberMmProfiles.length; i++) {
+        const { id } = activeMemberMmProfiles[i]
+        const mmUser = profiles[id]
+        if (mmUser && mmUser.delete_at === 0) {
+          results.push(
+            getUserByUsername(
+              mmUser.username,
+              localStorage.getItem('authToken')
+            )
+          )
+        }
+      }
+      return removeDeletedMembers(await Promise.all(results))
+    }
+    getNodeUsers()
+  }, [profiles, activeMemberMmProfiles])
+
   if (!isInitialized) {
     return <BouncingLoader />
   }
@@ -140,14 +209,14 @@ const GroupsContainer = props => {
         channelMembers={channelSuggestionMembers}
         getChannelInvitations={getInvitationsAgain}
         resetChannelInvitations={resetChannelInvitations}
-        profiles={profiles}
+        profiles={profilesToShow}
         teams={teams}
       />
       <Groups
         history={history}
         channels={getGroupChannels(getChannelInfoForMyChannels())}
         getMembers={getChannelMembers}
-        profiles={profiles}
+        profiles={profilesToShow}
         getUnreadCount={getUnreadCountByChannelId}
         currentUserId={currentUserId}
         updateUser={updateUser}

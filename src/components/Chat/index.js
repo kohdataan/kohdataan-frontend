@@ -6,8 +6,6 @@ import UserInput from './UserInput'
 import MembersSider from './MembersSider'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
-import { getUserByUsername } from '../../api/user/user'
-import { isTeamAdmin, isSystemAdmin } from '../../utils/userIsAdmin'
 import './styles.scss'
 
 const Chat = props => {
@@ -20,7 +18,8 @@ const Chat = props => {
     uploadFile,
     getFilesForPost,
     currentUserId,
-    members,
+    profilesInChannel,
+    membersInChannel,
     handleLeaveChannel,
     statuses,
     handleLogout,
@@ -33,15 +32,15 @@ const Chat = props => {
 
   const [currentUser, setCurrentUser] = useState(null)
   const [lastViewed, setLastViewed] = useState(0)
-  const [membersToShow, setMembersToShow] = useState([])
-  const [activeMembers, setActiveMembers] = useState([])
 
   useEffect(() => {
-    setCurrentUser(members.find(member => member.user_id === currentUserId))
+    setCurrentUser(
+      membersInChannel.find(member => member.user_id === currentUserId)
+    )
     if (currentUser) {
       setLastViewed(currentUser.last_viewed_at)
     }
-  }, [currentUser, currentUserId, members])
+  }, [currentUser, currentUserId, membersInChannel])
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
@@ -59,24 +58,13 @@ const Chat = props => {
     }
   }
 
-  const isAdmin = id => {
-    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
-      return true
-    }
-    return false
-  }
-
   const getNicknameById = id => {
-    const user = Object.values(profiles).find(profile => profile.id === id)
+    const user = Object.values(profilesInChannel).find(
+      profile => profile.id === id
+    )
     let visibleName = 'Käyttäjä'
-    if (
-      user &&
-      user.delete_at === 0 &&
-      (membersToShow.find(member => member.id === user.id) || isAdmin(user.id))
-    ) {
-      if (user && user.nickname) {
-        visibleName = user.nickname
-      }
+    if (user && user.nickname) {
+      visibleName = user.nickname
       return visibleName
     }
     return 'Poistunut käyttäjä'
@@ -92,7 +80,9 @@ const Chat = props => {
 
   const getOtherUserName = () => {
     if (directChannel) {
-      const otherUser = members.find(member => member.user_id !== currentUserId)
+      const otherUser = membersInChannel.find(
+        member => member.user_id !== currentUserId
+      )
       if (otherUser) {
         return (
           <>
@@ -113,7 +103,9 @@ const Chat = props => {
 
   const getOtherUser = () => {
     if (directChannel) {
-      const friend = members.find(member => member.user_id !== currentUserId)
+      const friend = membersInChannel.find(
+        member => member.user_id !== currentUserId
+      )
       const mmid = friend && friend.user_id
       const mmProfile = Object.values(profiles).find(
         profile => profile.id === mmid
@@ -125,7 +117,9 @@ const Chat = props => {
 
   const getDeleteAt = () => {
     if (directChannel) {
-      const friend = members.find(member => member.user_id !== currentUserId)
+      const friend = membersInChannel.find(
+        member => member.user_id !== currentUserId
+      )
       const mmid = friend && friend.user_id
       const mmProfile = Object.values(profiles).find(
         profile => profile.id === mmid
@@ -166,66 +160,6 @@ const Chat = props => {
     setAfterPinModal(false)
   }
 
-  useEffect(() => {
-    const getActiveMembers = () => {
-      const activeMembersArr =
-        members &&
-        members
-          .map(member => profiles[member.user_id])
-          .filter(member => member && member.delete_at === 0)
-          .filter(
-            member =>
-              !isSystemAdmin(member.id, profiles) &&
-              !isTeamAdmin(member.id, teams)
-          )
-      setActiveMembers(activeMembersArr)
-    }
-    getActiveMembers()
-  }, [members, profiles, setActiveMembers, teams])
-
-  const removeDeletedMembers = resp => {
-    // Create array of nicknames of users with deleteAt timestamp
-    const deletedProfiles = resp
-      .filter(r => {
-        return r.deleteAt !== null
-      })
-      .map(deleted => deleted.nickname)
-    // filter out deleted profiles
-    const memberProfiles = []
-    for (let i = 0; i < activeMembers.length; i++) {
-      const { id } = activeMembers[i]
-      const user = profiles[id]
-      memberProfiles.push(user)
-    }
-    const filteredMmUserIds = memberProfiles
-      .filter(profile => {
-        return !deletedProfiles.includes(profile.nickname)
-      })
-      .map(profile => profile.id)
-    const filteredMembers = activeMembers.filter(member =>
-      filteredMmUserIds.includes(member.id)
-    )
-    setMembersToShow(filteredMembers)
-  }
-
-  // Get user info from own backend
-  useEffect(() => {
-    const getNodeUsers = async () => {
-      const results = []
-      for (let i = 0; i < activeMembers.length; i++) {
-        const { id } = activeMembers[i]
-        const user = profiles[id]
-        if (user && user.delete_at === 0) {
-          results.push(
-            getUserByUsername(user.username, localStorage.getItem('authToken'))
-          )
-        }
-      }
-      return removeDeletedMembers(await Promise.all(results))
-    }
-    getNodeUsers()
-  }, [profiles, activeMembers])
-
   return (
     <main className="chat-wrapper" id="chat">
       <ChatHeader
@@ -245,9 +179,8 @@ const Chat = props => {
         currentUserId={currentUserId}
         getNickNamebyId={getNicknameById}
         directChannel={directChannel}
-        members={membersToShow}
         channelId={channel.id}
-        profiles={profiles}
+        profiles={profilesInChannel}
         getStatusById={getStatusById}
         pinPost={handlePinPost}
         filesData={filesData}
@@ -271,7 +204,7 @@ const Chat = props => {
       )}
       {showSider && !directChannel && (
         <MembersSider
-          members={members}
+          members={membersInChannel}
           profiles={profiles}
           currentUserId={currentUserId}
           getNickNamebyId={getNicknameById}
@@ -326,7 +259,8 @@ Chat.propTypes = {
   teams: PropTypes.instanceOf(Object).isRequired,
   posts: PropTypes.instanceOf(Array).isRequired,
   profiles: PropTypes.instanceOf(Object).isRequired,
-  members: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  membersInChannel: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  profilesInChannel: PropTypes.instanceOf(Array).isRequired,
   createPost: PropTypes.func.isRequired,
   getFilesForPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
@@ -342,7 +276,7 @@ Chat.propTypes = {
 }
 
 Chat.defaultProps = {
-  members: [],
+  membersInChannel: [],
 }
 
 export default memo(Chat)
