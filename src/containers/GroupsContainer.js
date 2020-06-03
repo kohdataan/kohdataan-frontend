@@ -47,7 +47,7 @@ const GroupsContainer = props => {
   const [showTownSquare, setShowTownSquare] = useState(false)
   // Get only those channels suggestions that user has not yet joined
 
-  // Get all group realated data at once
+  // Get all group related data at once
   useEffect(() => {
     const initialize = async () => {
       await fetchChannelsAndInvitations()
@@ -97,6 +97,21 @@ const GroupsContainer = props => {
     return myCurrentChannels
   }
 
+  // Get unread count by channel id
+  const getUnreadCountByChannelId = channelId => {
+    if (channels) {
+      const channel = Object.values(channels).find(
+        item => item.id === channelId
+      )
+      if (channel) {
+        const channelMsgCount = channel.total_msg_count
+        const myMessageCount = myChannels[channel.id].msg_count
+        return channelMsgCount - myMessageCount
+      }
+    }
+    return 0
+  }
+
   const handleJoinChannel = channelId => async () => {
     try {
       await addUserInterestsToChannelPurpose(
@@ -112,20 +127,6 @@ const GroupsContainer = props => {
     }
   }
 
-  // Get unread count by channel id
-  const getUnreadCountByChannelId = channelId => {
-    if (channels) {
-      const channel = Object.values(channels).find(
-        item => item.id === channelId
-      )
-      if (channel) {
-        const channelMsgCount = channel.total_msg_count
-        const myMessageCount = myChannels[channel.id].msg_count
-        return channelMsgCount - myMessageCount
-      }
-    }
-    return 0
-  }
   if (!isInitialized) {
     return <BouncingLoader />
   }

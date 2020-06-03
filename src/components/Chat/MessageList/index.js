@@ -18,13 +18,11 @@ const MessageList = props => {
     getStatusById,
     pinPost,
     filesData,
-    location,
-    lastViewed,
+    dividerId,
+    lastViewedAt,
   } = props
 
-  const [messageDividerSet, setMessageDividerSet] = useState(false)
   const [filteredPosts, setFilteredPosts] = useState([])
-  const { unreadCount } = location && location.state ? location.state : 0
 
   const getIconMemberStatus = userId =>
     `chat-${getStatusById(userId)}-status-icon`
@@ -79,10 +77,7 @@ const MessageList = props => {
   }
 
   const isAdmin = id => {
-    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
-      return true
-    }
-    return false
+    return isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)
   }
 
   useEffect(() => {
@@ -90,21 +85,17 @@ const MessageList = props => {
     ref.current.scrollTop = ref.current.scrollHeight
   })
 
-  let counter = 0
-
   useEffect(() => {
     const filtered = posts.filter(
       p =>
         p.type !== 'system_purpose_change' &&
         (p.type === '' ||
-          ((p.type === 'system_join_channel' ||
-            p.type === 'system_leave_channel' ||
-            p.type === 'system_join_team' ||
-            p.type === 'system_leave_team') &&
-            !isAdmin(p.user_id)))
+          (isUserLeavingOrJoiningChannel(p) && !isAdmin(p.user_id)))
     )
     setFilteredPosts(filtered)
   }, [posts])
+
+  const getLastPost = post => post.create_at === lastViewedAt
 
   return (
     <div className="chat-message-list-container chat--message-list" ref={ref}>
@@ -112,7 +103,6 @@ const MessageList = props => {
         {posts.length > 0 &&
           filteredPosts.map(post => {
             const timestampValues = setTimeStampValues(post)
-            counter += 1
             const isUserLeavingOrJoining = isUserLeavingOrJoiningChannel(post)
             return (
               post &&
@@ -138,12 +128,8 @@ const MessageList = props => {
                   isAdmin={isAdmin(post.user_id)}
                   pinPost={pinPost}
                   filesData={filesData}
-                  newMessageCount={unreadCount}
-                  lastViewed={Number(lastViewed)}
-                  createAt={post.create_at}
-                  setMessageDividerSet={setMessageDividerSet}
-                  messageDividerSet={messageDividerSet}
-                  lastPost={filteredPosts.length === counter}
+                  lastPost={getLastPost(post)}
+                  dividerId={dividerId}
                 />
               )
             )
@@ -164,8 +150,12 @@ MessageList.propTypes = {
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
-  location: propTypes.instanceOf(Object).isRequired,
-  lastViewed: propTypes.number.isRequired,
+  dividerId: propTypes.string,
+  lastViewedAt: propTypes.number.isRequired,
+}
+
+MessageList.defaultProps = {
+  dividerId: null,
 }
 
 export default memo(MessageList)

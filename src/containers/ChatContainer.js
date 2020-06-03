@@ -5,6 +5,7 @@ import {
   getPosts as getPostsAction,
   createPost as createPostAction,
   pinPost as pinPostAction,
+  getPostsAfter as getPostsAfterAction,
 } from 'mattermost-redux/actions/posts'
 import {
   uploadFile as uploadFileAction,
@@ -50,12 +51,58 @@ const ChatContainer = props => {
     pinPost,
     files,
     user,
+    getPostsAfter,
   } = props
 
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
+  const [filteredOrder, setFilteredOrder] = useState([])
+  const [lastViewedAt, setLastViewedAt] = useState(0)
+
+  const currentUser =
+    location && location.state ? location.state.currentUser : null
+
+  // Get current channel members
+  useEffect(() => {
+    if (currentChannelId) {
+      getChannelMembers(currentChannelId).then(data =>
+        setCurrentMembers(data.data)
+      )
+    }
+  }, [channels, currentChannelId, getChannelMembers])
+
+  useEffect(() => {
+    const getCurrentMemberData = async () => {
+      const currentMember = await currentMembers.find(
+        member => member.user_id === currentUserId
+      )
+      if (currentMember) setLastViewedAt(currentMember.last_viewed_at)
+    }
+    if (currentMembers) getCurrentMemberData()
+  }, [currentMembers, setLastViewedAt, currentUserId])
+
+  // fetches posts sent after last viewed time and filters and orders them
+  useEffect(() => {
+    const getPostsAfterLastViewed = async () => {
+      if (currentUser) {
+        const lastViewedPost = Object.values(posts).find(
+          p => p.create_at === currentUser.last_viewed_at
+        )
+        if (lastViewedPost) {
+          const res = await getPostsAfter(currentChannelId, lastViewedPost.id)
+          const filtered = Object.values(res.data.posts).filter(
+            p => p.type === ''
+          )
+          const filteredIds = Object.values(filtered).map(p => p.id)
+          const newOrder = res.data.order.filter(id => filteredIds.includes(id))
+          setFilteredOrder(newOrder)
+        }
+      }
+    }
+    getPostsAfterLastViewed()
+  }, [currentChannelId, getPostsAfter, currentUser])
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -79,15 +126,6 @@ const ChatContainer = props => {
     }
   }, [teams, posts, getPosts, viewChannel, currentChannelId])
 
-  // Get current channel members
-  useEffect(() => {
-    if (currentChannelId) {
-      getChannelMembers(currentChannelId).then(data =>
-        setCurrentMembers(data.data)
-      )
-    }
-  }, [channels, currentChannelId, getChannelMembers])
-
   // Remove current user from channel
   const handleLeaveChannel = async () => {
     try {
@@ -106,10 +144,10 @@ const ChatContainer = props => {
   useEffect(() => {
     // Filter posts by channel id
     const filterPostsByChannelId = channelId => {
-      const filteredPosts = Object.values(posts).filter(
+      const filtered = Object.values(posts).filter(
         post => post.channel_id === channelId
       )
-      return filteredPosts
+      return filtered
     }
     // Sort posts based on created timestamp
     const sortPosts = allPosts => {
@@ -118,8 +156,8 @@ const ChatContainer = props => {
       return postsArr
     }
     if (currentChannelId) {
-      const filteredPosts = filterPostsByChannelId(currentChannelId)
-      const sorted = sortPosts(filteredPosts)
+      const filtered = filterPostsByChannelId(currentChannelId)
+      const sorted = sortPosts(filtered)
       setCurrentPosts(sorted)
     }
   }, [posts, teams, currentChannelId])
@@ -148,6 +186,9 @@ const ChatContainer = props => {
           pinPost={pinPost}
           filesData={files}
           mmUser={user}
+          getPostsAfter={getPostsAfter}
+          dividerId={filteredOrder && filteredOrder[filteredOrder.length - 1]}
+          lastViewedAt={lastViewedAt}
         />
       )}
     </>
@@ -176,6 +217,7 @@ ChatContainer.propTypes = {
   pinPost: PropTypes.func.isRequired,
   files: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
+  getPostsAfter: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -217,6 +259,7 @@ const mapDispatchToProps = dispatch =>
       viewChannel: viewChannelAction,
       matterMostLogout: matterMostLogoutAction,
       pinPost: pinPostAction,
+      getPostsAfter: getPostsAfterAction,
     },
     dispatch
   )

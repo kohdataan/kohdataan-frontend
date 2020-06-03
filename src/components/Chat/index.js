@@ -29,19 +29,13 @@ const Chat = props => {
     pinPost,
     filesData,
     mmUser,
+    dividerId,
+    lastViewedAt,
   } = props
 
-  const [currentUser, setCurrentUser] = useState(null)
-  const [lastViewed, setLastViewed] = useState(0)
   const [membersToShow, setMembersToShow] = useState([])
   const [activeMembers, setActiveMembers] = useState([])
 
-  useEffect(() => {
-    setCurrentUser(members.find(member => member.user_id === currentUserId))
-    if (currentUser) {
-      setLastViewed(currentUser.last_viewed_at)
-    }
-  }, [currentUser, currentUserId, members])
 
   const [showSider, setShowSider] = useState(false)
   const [pinPostModalIsOpen, setPinPostModalIsOpen] = useState(false)
@@ -253,7 +247,8 @@ const Chat = props => {
         filesData={filesData}
         teams={teams}
         location={location}
-        lastViewed={lastViewed}
+        dividerId={dividerId}
+        lastViewedAt={lastViewedAt}
       />
       {channel.id && (
         <UserInput
@@ -339,10 +334,13 @@ Chat.propTypes = {
   pinPost: PropTypes.func.isRequired,
   filesData: PropTypes.instanceOf(Object).isRequired,
   mmUser: PropTypes.instanceOf(Object).isRequired,
+  dividerId: PropTypes.string,
+  lastViewedAt: PropTypes.number.isRequired,
 }
 
 Chat.defaultProps = {
   members: [],
+  dividerId: null,
 }
 
 export default memo(Chat)
