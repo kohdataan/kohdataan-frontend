@@ -59,13 +59,20 @@ const Chat = props => {
     }
   }
 
+  const isAdmin = id => {
+    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
+      return true
+    }
+    return false
+  }
+
   const getNicknameById = id => {
     const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = 'Käyttäjä'
     if (
       user &&
       user.delete_at === 0 &&
-      membersToShow.find(member => member.id === user.id)
+      (membersToShow.find(member => member.id === user.id) || isAdmin(user.id))
     ) {
       if (user && user.nickname) {
         visibleName = user.nickname
