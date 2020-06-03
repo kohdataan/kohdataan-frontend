@@ -102,6 +102,7 @@ const Message = props => {
     return status
   }
 
+  // adds class to linkify components
   const componentDecorator = (href, content, key) => (
     <a href={href} key={key} className="message-content-link">
       {content}
