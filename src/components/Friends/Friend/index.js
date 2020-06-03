@@ -30,6 +30,7 @@ const Friend = props => {
   const [blocked, setBlocked] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [otherUserInfo, setOtherUserInfo] = useState({})
+  const masterUserEmail = process.env.REACT_APP_MASTER_USER_EMAIL
 
   const getIconMemberStatus = userId =>
     `friends-${getStatusById(userId)}-status-icon`
@@ -78,7 +79,12 @@ const Friend = props => {
   useEffect(() => {
     // fetches user info for other user containing blocked users
     const fetchOtherUser = async () => {
-      if (user && user.delete_at === 0 && user.username !== 'surveybot') {
+      if (
+        user &&
+        user.delete_at === 0 &&
+        user.username !== 'surveybot' &&
+        user.email !== masterUserEmail
+      ) {
         const userInfo = await getUserByUsername(
           user.username,
           localStorage.getItem('authToken')
