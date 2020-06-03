@@ -45,7 +45,6 @@ const GroupsContainer = props => {
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
-  const [unreadCount, setUnreadCount] = useState(0)
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group related data at once
@@ -107,7 +106,6 @@ const GroupsContainer = props => {
       if (channel) {
         const channelMsgCount = channel.total_msg_count
         const myMessageCount = myChannels[channel.id].msg_count
-        setUnreadCount(channelMsgCount - myMessageCount)
         return channelMsgCount - myMessageCount
       }
     }

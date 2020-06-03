@@ -16,7 +16,6 @@ const Group = props => {
     teams,
     getPosts,
     showTownSquare,
-    getPostsAfter,
   } = props
 
   const [members, setMembers] = useState([])

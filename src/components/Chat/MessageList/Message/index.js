@@ -27,8 +27,6 @@ const Message = props => {
     isAdmin,
     pinPost,
     filesData,
-    newMessageCount,
-    createAt,
     lastPost,
     dividerId,
   } = props
@@ -120,6 +118,14 @@ const Message = props => {
         aria-live={lastPost ? 'polite' : 'off'}
         className="message-container"
       >
+        {lastPost ? <span className="sr-only">Viimeisin viesti.</span> : ''}
+        {showDate && (
+          <div className="show-date-content">
+            <div className="date-divider" />
+            <span className="date-divider-text">{dateText}</span>
+            <div className="date-divider" />
+          </div>
+        )}
         {dividerId === id && (
           <div className="show-date-content">
             <div className="new-message-divider" />
@@ -127,14 +133,6 @@ const Message = props => {
               Uudet tapahtumat
             </h2>
             <div className="new-message-divider" />
-          </div>
-        )}
-        {lastPost ? <span className="sr-only">Viimeisin viesti.</span> : ''}
-        {showDate && (
-          <div className="show-date-content">
-            <div className="date-divider" />
-            <span className="date-divider-text">{dateText}</span>
-            <div className="date-divider" />
           </div>
         )}
         <div className={messageWrapperClassList.join(' ')}>
@@ -373,14 +371,11 @@ Message.propTypes = {
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
   id: propTypes.string.isRequired,
-  newMessageCount: propTypes.number,
-  createAt: propTypes.number.isRequired,
   lastPost: propTypes.bool.isRequired,
   dividerId: propTypes.string,
 }
 
 Message.defaultProps = {
-  newMessageCount: 0,
   dividerId: null,
 }
 

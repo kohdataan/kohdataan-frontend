@@ -59,7 +59,7 @@ const ChatContainer = props => {
   const [currentMembers, setCurrentMembers] = useState([])
   const currentChannel = channels[currentChannelId]
   const [filteredOrder, setFilteredOrder] = useState([])
-  const [filteredPosts, setFilteredPosts] = useState([])
+  const [lastViewedAt, setLastViewedAt] = useState(0)
 
   const currentUser =
     location && location.state ? location.state.currentUser : null
@@ -73,6 +73,16 @@ const ChatContainer = props => {
     }
   }, [channels, currentChannelId, getChannelMembers])
 
+  useEffect(() => {
+    const getCurrentMemberData = async () => {
+      const currentMember = await currentMembers.find(
+        member => member.user_id === currentUserId
+      )
+      if (currentMember) setLastViewedAt(currentMember.last_viewed_at)
+    }
+    if (currentMembers) getCurrentMemberData()
+  }, [currentMembers, setLastViewedAt, currentUserId])
+
   // fetches posts sent after last viewed time and filters and orders them
   useEffect(() => {
     const getPostsAfterLastViewed = async () => {
@@ -85,7 +95,6 @@ const ChatContainer = props => {
           const filtered = Object.values(res.data.posts).filter(
             p => p.type === ''
           )
-          setFilteredPosts(filtered)
           const filteredIds = Object.values(filtered).map(p => p.id)
           const newOrder = res.data.order.filter(id => filteredIds.includes(id))
           setFilteredOrder(newOrder)
@@ -93,7 +102,7 @@ const ChatContainer = props => {
       }
     }
     getPostsAfterLastViewed()
-  }, [])
+  }, [currentChannelId, getPostsAfter, currentUser])
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -179,6 +188,7 @@ const ChatContainer = props => {
           mmUser={user}
           getPostsAfter={getPostsAfter}
           dividerId={filteredOrder && filteredOrder[filteredOrder.length - 1]}
+          lastViewedAt={lastViewedAt}
         />
       )}
     </>

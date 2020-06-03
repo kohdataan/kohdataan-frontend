@@ -18,12 +18,11 @@ const MessageList = props => {
     getStatusById,
     pinPost,
     filesData,
-    location,
     dividerId,
+    lastViewedAt,
   } = props
 
   const [filteredPosts, setFilteredPosts] = useState([])
-  const { unreadCount } = location && location.state ? location.state : 0
 
   const getIconMemberStatus = userId =>
     `chat-${getStatusById(userId)}-status-icon`
@@ -78,10 +77,7 @@ const MessageList = props => {
   }
 
   const isAdmin = id => {
-    if (isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)) {
-      return true
-    }
-    return false
+    return isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)
   }
 
   useEffect(() => {
@@ -98,6 +94,8 @@ const MessageList = props => {
     )
     setFilteredPosts(filtered)
   }, [posts])
+
+  const getLastPost = post => post.create_at === lastViewedAt
 
   return (
     <div className="chat-message-list-container chat--message-list" ref={ref}>
@@ -130,9 +128,7 @@ const MessageList = props => {
                   isAdmin={isAdmin(post.user_id)}
                   pinPost={pinPost}
                   filesData={filesData}
-                  newMessageCount={unreadCount}
-                  createAt={post.create_at}
-                  lastPost={false}
+                  lastPost={getLastPost(post)}
                   dividerId={dividerId}
                 />
               )
@@ -154,8 +150,8 @@ MessageList.propTypes = {
   getStatusById: propTypes.func.isRequired,
   pinPost: propTypes.func.isRequired,
   filesData: propTypes.instanceOf(Object).isRequired,
-  location: propTypes.instanceOf(Object).isRequired,
   dividerId: propTypes.string,
+  lastViewedAt: propTypes.number.isRequired,
 }
 
 MessageList.defaultProps = {

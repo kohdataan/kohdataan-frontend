@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import MessageList from './MessageList'
 import ChatHeader from './ChatHeader'
@@ -28,6 +28,7 @@ const Chat = props => {
     filesData,
     mmUser,
     dividerId,
+    lastViewedAt,
   } = props
 
   const [showSider, setShowSider] = useState(false)
@@ -169,6 +170,7 @@ const Chat = props => {
         teams={teams}
         location={location}
         dividerId={dividerId}
+        lastViewedAt={lastViewedAt}
       />
       {channel.id && (
         <UserInput
@@ -255,6 +257,7 @@ Chat.propTypes = {
   filesData: PropTypes.instanceOf(Object).isRequired,
   mmUser: PropTypes.instanceOf(Object).isRequired,
   dividerId: PropTypes.string,
+  lastViewedAt: PropTypes.number.isRequired,
 }
 
 Chat.defaultProps = {
