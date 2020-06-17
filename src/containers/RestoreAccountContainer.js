@@ -30,9 +30,14 @@ const RestoreAccountContainer = props => {
     }
   }
 
+  const handleRestore = async () => {
+    const data = { mmid }
+    restoreUserAccount(data)
+  }
+
   return (
     <RestoreAccount
-      handleRestore={restoreUserAccount}
+      handleRestore={handleRestore}
       handleDeleteNow={handleDeleteUserNow}
     />
   )

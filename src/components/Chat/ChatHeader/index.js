@@ -1,10 +1,9 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 import BottomNavigationBot from '../../BottomNavigationBot'
-import { getUserByUsername } from '../../../api/user/user'
 
 const Header = props => {
   const {
@@ -19,25 +18,12 @@ const Header = props => {
     mmUser,
   } = props
 
-  const [nodeUser, setNodeUser] = useState(null)
   const header = otherUser || channel.display_name
   const getHeader = () => {
     if (otherUser) return otherUser
     if (channel.name === 'town-square') return 'Kysy valvojalta'
     return channel.display_name
   }
-  useEffect(() => {
-    const getNodeUser = async () => {
-      if (otherUserName) {
-        const user = await getUserByUsername(
-          otherUserName,
-          localStorage.getItem('authToken')
-        )
-        setNodeUser(user)
-      }
-    }
-    getNodeUser()
-  }, [otherUserName, setNodeUser])
 
   return (
     <header className="chat-header">
@@ -54,7 +40,7 @@ const Header = props => {
           </h1>
         </ButtonContainer>
       )}
-      {direct && deleted === 0 && nodeUser && !nodeUser.deleteAt && (
+      {direct && !deleted && (
         <Link to={`/profile/${otherUserName}`} className="channel-name-link">
           {' '}
           <h1 className="chat-header-item chat-header-channel-name">
@@ -62,7 +48,7 @@ const Header = props => {
           </h1>
         </Link>
       )}
-      {direct && (deleted !== 0 || (nodeUser && nodeUser.deleteAt)) && (
+      {direct && deleted && (
         <div className="channel-header-deleted">
           {' '}
           <h1 className="chat-header-item chat-header-channel-name">
@@ -94,14 +80,14 @@ Header.propTypes = {
   direct: propTypes.bool.isRequired,
   otherUserName: propTypes.string,
   location: propTypes.instanceOf(Object).isRequired,
-  deleted: propTypes.number,
+  deleted: propTypes.bool,
   mmUser: propTypes.instanceOf(Object).isRequired,
 }
 
 Header.defaultProps = {
   otherUser: null,
   otherUserName: null,
-  deleted: 0,
+  deleted: false,
 }
 
 export default memo(Header)

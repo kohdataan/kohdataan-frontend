@@ -82,6 +82,7 @@ const Friend = props => {
       if (
         user &&
         user.delete_at === 0 &&
+        user.position !== 'deleted' &&
         user.username !== 'surveybot' &&
         user.email !== masterUserEmail
       ) {
@@ -99,7 +100,7 @@ const Friend = props => {
       }
     }
     fetchOtherUser()
-  }, [user])
+  }, [user, masterUserEmail])
 
   const toggleBlockedStatus = async () => {
     const { id } = user
@@ -220,7 +221,7 @@ const Friend = props => {
       </div>
     )
   }
-  if (user.delete_at !== 0 || otherUserInfo.deleteAt) {
+  if (user.delete_at !== 0 || user.position === 'deleted') {
     return (
       <div>
         <div className="friend-box-container">

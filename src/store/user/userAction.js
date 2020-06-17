@@ -98,12 +98,12 @@ export const updateUserPassword = data => {
   }
 }
 
-export const restoreUserAccount = () => {
+export const restoreUserAccount = data => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
   return async dispatch => {
     try {
-      const resp = await API.restoreUser(id, token)
+      const resp = await API.restoreUser(data, id, token)
       if (resp && resp.success && resp.restored) {
         await dispatch({
           type: types.RESTORE_USER,

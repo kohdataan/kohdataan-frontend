@@ -61,6 +61,7 @@ const ChatContainer = props => {
   const currentChannel = channels[currentChannelId]
   const [filteredOrder, setFilteredOrder] = useState([])
   const [lastViewedAt, setLastViewedAt] = useState(0)
+  const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
 
   const currentUser =
     location && location.state ? location.state.currentUser : null
@@ -104,9 +105,6 @@ const ChatContainer = props => {
     }
     getPostsAfterLastViewed()
   }, [currentChannelId, getPostsAfter, currentUser])
-  const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
-  const [membersToShow, setMembersToShow] = useState([])
-  const [profilesToShow, setProfilesToShow] = useState([])
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
@@ -174,9 +172,11 @@ const ChatContainer = props => {
         currentMembers &&
         currentMembers
           .map(member => profiles[member.user_id])
-          .filter(member => member && member.delete_at === 0)
           .filter(
             member =>
+              member &&
+              member.delete_at === 0 &&
+              member.position !== 'deleted' &&
               !isSystemAdmin(member.id, profiles) &&
               !isTeamAdmin(member.id, teams)
           )
@@ -184,56 +184,6 @@ const ChatContainer = props => {
     }
     getActiveMattermostProfiles()
   }, [currentMembers, profiles, setActiveMemberMmProfiles, teams])
-
-  const removeDeletedMembers = resp => {
-    // Create array of nicknames of users with deleteAt timestamp
-    const deletedNodeProfileNicknames = resp
-      .filter(r => {
-        return r.deleteAt !== null
-      })
-      .map(deleted => deleted.nickname)
-    // filter out deleted profiles
-    const memberProfiles = []
-    for (let i = 0; i < activeMemberMmProfiles.length; i++) {
-      const { id } = activeMemberMmProfiles[i]
-      const userProfile = profiles[id]
-      memberProfiles.push(userProfile)
-    }
-    const filteredMmUserIds = memberProfiles
-      .filter(profile => {
-        return !deletedNodeProfileNicknames.includes(profile.nickname)
-      })
-      .map(profile => profile.id)
-    const filteredProfiles = activeMemberMmProfiles.filter(member =>
-      filteredMmUserIds.includes(member.id)
-    )
-    setProfilesToShow(filteredProfiles)
-    const filteredMembers = currentMembers.filter(member =>
-      filteredMmUserIds.includes(member.user_id)
-    )
-    setMembersToShow(filteredMembers)
-  }
-
-  // Get user info from own backend
-  useEffect(() => {
-    const getNodeUsers = async () => {
-      const results = []
-      for (let i = 0; i < activeMemberMmProfiles.length; i++) {
-        const { id } = activeMemberMmProfiles[i]
-        const mmUser = profiles[id]
-        if (mmUser && mmUser.delete_at === 0) {
-          results.push(
-            getUserByUsername(
-              mmUser.username,
-              localStorage.getItem('authToken')
-            )
-          )
-        }
-      }
-      return removeDeletedMembers(await Promise.all(results))
-    }
-    getNodeUsers()
-  }, [profiles, activeMemberMmProfiles])
 
   return (
     <>
@@ -247,8 +197,8 @@ const ChatContainer = props => {
           getFilesForPost={getFilesForPost}
           uploadFile={uploadFile}
           currentUserId={currentUserId}
-          profilesInChannel={profilesToShow}
-          membersInChannel={membersToShow}
+          profilesInChannel={activeMemberMmProfiles}
+          membersInChannel={currentMembers}
           handleLeaveChannel={handleLeaveChannel}
           statuses={statuses}
           getUserByUsername={getUserByUsername}

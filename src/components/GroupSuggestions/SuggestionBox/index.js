@@ -1,27 +1,15 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 import groupNameColors from '../../../assets/groupColors'
 import Member from '../../Groups/Group/Member'
+import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
 const SuggestionBox = props => {
-  const { channel, members, hidden, top, profiles } = props
-  const [membersToShow, setMembersToShow] = useState([])
+  const { channel, members, hidden, top, profiles, teams } = props
   const sortPurpose = purpose => {
     return Object.keys(purpose).sort((a, b) => purpose[b] - purpose[a])
   }
-
-  // Only show members with existing profiles
-  useEffect(() => {
-    const setMemberProfilesToShow = () => {
-      const memberIds = Object.values(members).map(member => member.id)
-      const channelMembers = profiles.filter(
-        p => memberIds.indexOf(p.id) !== -1
-      )
-      setMembersToShow(channelMembers)
-    }
-    setMemberProfilesToShow()
-  }, [members, profiles])
 
   return (
     <div
@@ -61,14 +49,23 @@ const SuggestionBox = props => {
         {channel && members && (
           <div className="suggestion-members-wrapper">
             <div className="group-current-members">
-              {membersToShow &&
-                membersToShow.map(member => (
-                  <Member
-                    key={`suggestion-${member.id}`}
-                    userId={member.id}
-                    nickname={member.nickname}
-                  />
-                ))}
+              {members &&
+                members
+                  .filter(
+                    member =>
+                      member &&
+                      member.delete_at === 0 &&
+                      member.position !== 'deleted' &&
+                      !isSystemAdmin(member.id, profiles) &&
+                      !isTeamAdmin(member.id, teams)
+                  )
+                  .map(member => (
+                    <Member
+                      key={`suggestion-${member.id}`}
+                      userId={member.id}
+                      nickname={member.nickname}
+                    />
+                  ))}
             </div>
           </div>
         )}

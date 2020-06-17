@@ -269,11 +269,12 @@ const deleteUserNow = async (data, id, token) => {
   }
 }
 
-const restoreUser = async (id, token) => {
+const restoreUser = async (data, id, token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/user/restore/${id}`, {
       method: 'POST',
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

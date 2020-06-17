@@ -47,6 +47,22 @@ const Chat = props => {
   const [pinPostSenderData, setPinPostSenderData] = useState(null)
   const [pinPostText, setPinPostText] = useState(null)
   const directChannel = channel.type === 'D'
+  const [membersToShow, setMembersToShow] = useState([])
+
+  useEffect(() => {
+    const getMembersToShow = () => {
+      if (!directChannel) {
+        const activeUserIds = profilesInChannel.map(profile => profile.id)
+        const members = Object.values(membersInChannel).filter(member =>
+          activeUserIds.includes(member.user_id)
+        )
+        setMembersToShow(members)
+      } else {
+        setMembersToShow(membersInChannel)
+      }
+    }
+    getMembersToShow()
+  }, [membersInChannel, profilesInChannel, directChannel])
 
   const toggleSider = () => setShowSider(!showSider)
 
@@ -57,12 +73,12 @@ const Chat = props => {
   }
 
   const getNicknameById = id => {
-    const user = Object.values(profilesInChannel).find(
-      profile => profile.id === id
-    )
+    const user = Object.values(profiles).find(profile => profile.id === id)
     let visibleName = 'Käyttäjä'
-    if (user && user.nickname) {
-      visibleName = user.nickname
+    if (user && user.delete_at === 0 && user.position !== 'deleted') {
+      if (user && user.nickname) {
+        visibleName = user.nickname
+      }
       return visibleName
     }
     return 'Poistunut käyttäjä'
@@ -113,18 +129,22 @@ const Chat = props => {
     return null
   }
 
-  const getDeleteAt = () => {
+  const getDeleted = () => {
     if (directChannel) {
-      const friend = membersInChannel.find(
+      const friend = membersToShow.find(
         member => member.user_id !== currentUserId
       )
       const mmid = friend && friend.user_id
       const mmProfile = Object.values(profiles).find(
         profile => profile.id === mmid
       )
-      return mmProfile && mmProfile.delete_at
+      if (
+        mmProfile &&
+        (mmProfile.delete_at !== 0 || mmProfile.position === 'deleted')
+      )
+        return true
     }
-    return null
+    return false
   }
 
   const handlePinPost = (id, senderId, text) => {
@@ -168,7 +188,7 @@ const Chat = props => {
         direct={directChannel}
         handleLogout={handleLogout}
         location={location}
-        deleted={getDeleteAt()}
+        deleted={getDeleted()}
         mmUser={mmUser}
       />
       <MessageList
@@ -196,14 +216,14 @@ const Chat = props => {
           filesData={filesData}
         />
       )}
-      {channel.id && getDeleteAt() && getDeleteAt() !== 0 && directChannel && (
+      {channel.id && getDeleted() && directChannel && (
         <div className="inactive-userinput-field">
           <p>Et voi lähettää viestiä poistuneelle käyttäjälle.</p>
         </div>
       )}
       {showSider && !directChannel && (
         <MembersSider
-          members={membersInChannel}
+          members={membersToShow}
           profiles={profiles}
           currentUserId={currentUserId}
           getNickNamebyId={getNicknameById}

@@ -5,7 +5,6 @@ import FriendSearch from './FriendSearch'
 import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
 import SearchBar from '../SearchBar'
-import { getUserByUsername } from '../../api/user/user'
 import './styles.scss'
 
 const Friends = props => {
@@ -28,7 +27,6 @@ const Friends = props => {
   const [friendSearch, setFriendSearch] = useState('')
   const [friendSearchResult, setFriendSearchResult] = useState([])
   const friendSearchTextInput = React.createRef()
-  const [profiles, setProfiles] = useState([])
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
@@ -77,42 +75,13 @@ const Friends = props => {
     return getUnreadCount(b.id) - getUnreadCount(a.id)
   }
 
-  const removeDeletedProfiles = resp => {
-    // Create array of nicknames of users with deleteAt timestamp
-    const deletedProfiles = resp
-      .filter(r => {
-        return r.deleteAt !== null
-      })
-      .map(deleted => deleted.nickname)
-    // filter out deleted profiles
-    const filteredProfiles = profiles.filter(profile => {
-      return !deletedProfiles.includes(profile.nickname)
-    })
-    setFriendSearchResult(filteredProfiles)
-  }
-
-  // Get user info from own backend
-  useEffect(() => {
-    const getNodeUsers = async () => {
-      const results = []
-      for (let i = 0; i < profiles.length; i++) {
-        const user = profiles[i]
-        results.push(
-          getUserByUsername(user.username, localStorage.getItem('authToken'))
-        )
-      }
-      return removeDeletedProfiles(await Promise.all(results))
-    }
-    getNodeUsers()
-  }, [profiles])
-
   const handleFriendSearchReset = async () => {
     setFriendSearch('')
+    setFriendSearchResult([])
     friendSearchTextInput.current.value = ''
-    setProfiles([])
   }
 
-  // Filter out current user, surveybot and
+  // Filter out current user, surveybot, deleted users, and
   // only return profiles where nickname matches
   const filterSearchResults = (data, searchTerm) =>
     data &&
@@ -120,6 +89,7 @@ const Friends = props => {
       profile =>
         profile.id !== currentUserId &&
         profile.username !== 'surveybot' &&
+        profile.position !== 'deleted' &&
         profile.delete_at === 0 &&
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -136,7 +106,7 @@ const Friends = props => {
           searchText
         )
         if (filtered) {
-          setProfiles(filtered)
+          setFriendSearchResult(filtered)
         }
       }
     } catch (e) {
