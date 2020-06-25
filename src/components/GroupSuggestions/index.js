@@ -53,7 +53,7 @@ const GroupSuggestions = props => {
         </div>
       ) : (
         <div>
-          {joinedChannels && joinedChannels.length < 6 ? (
+          {joinedChannels && joinedChannels.length < 7 ? (
             <div>
               <p>
                 Sinulle ehdotetaan uusia ryhmiä päivittäin kiinnostusten mukaan.

@@ -86,7 +86,7 @@ const GroupsContainer = props => {
   // (filter direct messages and default channels out)
   const getGroupChannels = allChannels => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel => channel.type !== 'D' && channel.name !== 'off-topic'
+      channel => channel.type !== 'D'
     )
     return filteredChannels
   }

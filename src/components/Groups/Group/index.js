@@ -96,6 +96,52 @@ const Group = props => {
     }
   }, [currentUser, currentUserId, members])
 
+  const getChannelHeader = () => {
+    if (channel.name === 'town-square') {
+      return 'Kysy valvojalta'
+    }
+    if (channel.name === 'off-topic') {
+      return 'Teemaryhmä'
+    }
+    return channel.display_name
+  }
+
+  const showChannel = () => {
+    switch (channel.name) {
+      case 'town-square':
+        return (
+          <div className="monitor-group-text">
+            <p>
+              Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+            </p>
+            <p>Ryhmä on auki arkisin klo 9-17.</p>
+          </div>
+        )
+      case 'off-topic':
+        return (
+          <div className="monitor-group-text">
+            <p>{channel.header}</p>
+            <p>Ryhmä on auki arkisin klo 9-17.</p>
+          </div>
+        )
+      default:
+        return (
+          <div className="group-current-members">
+            <span className="sr-only">Jäsenet</span>
+            {membersToShow &&
+              membersToShow.map(member => (
+                <Member
+                  key={`group-${member.id}`}
+                  nickname={member.nickname}
+                  currentUserId={currentUserId}
+                  userId={member.id}
+                />
+              ))}
+          </div>
+        )
+    }
+  }
+
   return (
     <>
       {channel.name === 'town-square' && !showTownSquare ? (
@@ -135,7 +181,8 @@ const Group = props => {
                 className="group-color-icon"
                 style={{
                   backgroundColor:
-                    channel.name === 'town-square'
+                    channel.name === 'town-square' ||
+                    channel.name === 'off-topic'
                       ? 'grey'
                       : groupNameColors[channel.display_name],
                   border: `${
@@ -145,40 +192,16 @@ const Group = props => {
                   }`,
                 }}
               />
-              <h2>
-                {channel.name === 'town-square'
-                  ? 'Kysy valvojalta'
-                  : channel.display_name}
-              </h2>
+              <h2>{getChannelHeader()}</h2>
             </div>
-            {channel.name !== 'town-square' && (
+            {channel.name !== 'town-square' && channel.name !== 'off-topic' && (
               <div className="group-interests">
                 <p>
                   {`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}
                 </p>
               </div>
             )}
-            {channel.name !== 'town-square' ? (
-              <div className="group-current-members">
-                <span className="sr-only">Jäsenet</span>
-                {membersToShow &&
-                  membersToShow.map(member => (
-                    <Member
-                      key={`group-${member.id}`}
-                      nickname={member.nickname}
-                      currentUserId={currentUserId}
-                      userId={member.id}
-                    />
-                  ))}
-              </div>
-            ) : (
-              <div className="monitor-group-text">
-                <p>
-                  Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
-                </p>
-                <p>Ryhmä on auki arkisin klo 9-17.</p>
-              </div>
-            )}
+            {showChannel()}
           </div>
           {unreadPosts === 1 && (
             <div className="group-unreads-text">

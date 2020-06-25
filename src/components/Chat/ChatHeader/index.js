@@ -22,6 +22,7 @@ const Header = props => {
   const getHeader = () => {
     if (otherUser) return otherUser
     if (channel.name === 'town-square') return 'Kysy valvojalta'
+    if (channel.name === 'off-topic') return 'Teemaryhmä'
     return channel.display_name
   }
 

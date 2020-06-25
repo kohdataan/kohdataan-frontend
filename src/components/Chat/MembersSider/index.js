@@ -52,6 +52,25 @@ const MembersSider = props => {
     )
   }
 
+  if (channel.name === 'off-topic') {
+    return (
+      <div className="chat-header-members-sider" id="members-sider" ref={ref}>
+        <div className="chat-header-members-sider-content">
+          <p>Tämä on teemakeskusteluryhmä.</p>
+          <p>Ryhmä on auki arkisin klo 9-17.</p>
+          <p>
+            Kaikki käyttäjät kuuluvat tähän ryhmään, joten ryhmään lähetetyt
+            viestit näkyvät kaikille.
+          </p>
+          <p>
+            Jos haluat lähettää valvojalle viestin, jota muut eivät näe, voit
+            tehdä sen Botin kautta.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="chat-header-members-sider" id="members-sider" ref={ref}>
       <div className="chat-header-members-sider-content">
