@@ -123,6 +123,16 @@
         "projectManagement",
         "userTesting"
       ]
+    },
+    {
+      "login": "Miapurho",
+      "name": "Mia Purho",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/49512615?v=4",
+      "profile": "https://github.com/Miapurho",
+      "contributions": [
+        "ideas",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7,
