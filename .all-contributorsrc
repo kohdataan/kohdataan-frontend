@@ -134,6 +134,19 @@
         "ideas",
         "userTesting"
       ]
+    },
+    {
+      "login": "tavellan",
+      "name": "Tero Avellan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1239475?v=4",
+      "profile": "https://kuvatarina.fi",
+      "contributions": [
+        "ideas",
+        "bug",
+        "review",
+        "a11y",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
