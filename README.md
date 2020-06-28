@@ -211,6 +211,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Miapurho"><img src="https://avatars3.githubusercontent.com/u/49512615?v=4" width="100px;" alt=""/><br /><sub><b>Mia Purho</b></sub></a><br /><a href="#ideas-Miapurho" title="Ideas, Planning, & Feedback">🤔</a> <a href="#userTesting-Miapurho" title="User Testing">📓</a></td>
     <td align="center"><a href="https://kuvatarina.fi"><img src="https://avatars3.githubusercontent.com/u/1239475?v=4" width="100px;" alt=""/><br /><sub><b>Tero Avellan</b></sub></a><br /><a href="#ideas-tavellan" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/kohdataan/kohdataan-frontend/issues?q=author%3Atavellan" title="Bug reports">🐛</a> <a href="https://github.com/kohdataan/kohdataan-frontend/pulls?q=is%3Apr+reviewed-by%3Atavellan" title="Reviewed Pull Requests">👀</a> <a href="#a11y-tavellan" title="Accessibility">️️️️♿️</a> <a href="https://github.com/kohdataan/kohdataan-frontend/commits?author=tavellan" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/osavisaari"><img src="https://avatars0.githubusercontent.com/u/21077799?v=4" width="100px;" alt=""/><br /><sub><b>osavisaari</b></sub></a><br /><a href="#ideas-osavisaari" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-osavisaari" title="Design">🎨</a> <a href="#projectManagement-osavisaari" title="Project Management">📆</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
