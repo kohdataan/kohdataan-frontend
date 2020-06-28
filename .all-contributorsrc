@@ -68,7 +68,10 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/33627243?v=4",
       "profile": "https://github.com/larenala",
       "contributions": [
-        "code"
+        "code",
+        "ideas",
+        "a11y",
+        "review"
       ]
     },
     {
@@ -113,5 +116,6 @@
   "projectName": "kohdataan-frontend",
   "projectOwner": "kohdataan",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
