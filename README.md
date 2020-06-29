@@ -87,7 +87,7 @@ Noudata containereiden ja componentien hierarkiassa [tätä ohjetta](https://med
 
 Projektissa on käytössä SASS, jokaiselle komponentille on oma .scss-tiedostonsa komponentin kansiossa.
 
-**HUOM macOS-käyttäjät!** Kun luot uusia tiedostoja ja hakemistoja projektiin, kiinnitä erityistä huomiota nimeämiseen. Linuxissa käytetään oletuksena isot ja pienet kirjaimet erotteleva tiedostojärjestelmää (ext4), kun taas macOS ei oletusarvoisesti erottele isoja ja pieniä kirjaimia tiedostojärjestelmässä (HFS+).
+**HUOMIO macOS-käyttäjät!** *Kun luot uusia tiedostoja ja hakemistoja projektiin, kiinnitä erityistä huomiota nimeämiseen. Linuxissa käytetään oletuksena isot ja pienet kirjaimet erotteleva tiedostojärjestelmää (ext4), kun taas macOS ei oletusarvoisesti erottele isoja ja pieniä kirjaimia tiedostojärjestelmässä (HFS+).*
 
 ### Mattermost-redux
 
