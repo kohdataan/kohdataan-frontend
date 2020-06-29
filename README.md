@@ -23,7 +23,7 @@ Kohdataan-palvelu on kehitetty yhdessä käyttäjien kanssa ja toteutuksessa kai
 
 Palvelun kehittämiseen voit osallistua olit sitten ohjelmistoalan opiskelija tai rautainen ammattilainen. Osallistumalla voit saada kokemusta ja kehittää omaa osaamistasi, tai antaa osaamisesi ja panoksesi tärkeän palvelun rakentamiseen. Voit osallistua yksin, tai haastaa mukaan kaverisi tai kollegasi ja osallistua porukalla. Jokaisen panos on tärkeä!
 
-Palvelun kehittäminen tapahtuu GitHubissa. Kaikki palveluun liittyvä koodi ja graafinen aineisto on ja tulee olemaan vapaasti saatavilla ([MIT-lisenssi](https://github.com/kohdataan/kohdataan-backend/blob/master/LICENSE)).
+Palvelun kehittäminen tapahtuu GitHubissa. Kaikki palveluun liittyvä koodi ja graafinen aineisto on ja tulee olemaan vapaasti saatavilla ([MIT-lisenssi](https://github.com/kohdataan/kohdataan-backend/blob/master/LICENSE)). Käyttöliittymäsuunnitelma löytyy [Zeplinistä](https://app.zeplin.io/project/5cb591097f5deba21424eb89/).
 
 Palvelun teknisestä koordinoinnista 2019-2020 on vastannut [Perfektio](https://www.perfektio.fi/) ja muusta hallinnoinnista [Kehitysvammaliitto](https://www.kehitysvammaliitto.fi/). Jos haluat tietää lisää palvelusta, voit lähettää meille sähköpostia osoitteeseen [kohdataan@kohdataan.fi](mailto:kohdataan@kohdataan.fi).
 
@@ -46,7 +46,7 @@ npm install
 npm start
 ```
 
-Ympäristömuuttujat voi tallentaa .env.development (valmiina Githubissa) tiedostoon seuraavalla tyylillä:
+Oleellista on saada yhteys muodostettua yhteys taustapalveluun. Käytössä on seuraavia ympäristömuuttujia, jotka on tallennettu kehitysympäristössä tiedostoon [.env.development](https://github.com/kohdataan/kohdataan-frontend/blob/master/.env.development):
 
 ```
 REACT_APP_MATTERMOST_USERNAME = "kohdataanDev"
@@ -79,13 +79,15 @@ Tutustuaksesi designiin sinun täytyy rekisteröityä Zeplinin käyttäjäksi. R
 
 Tämänhetkiset näkymät sekä käytetyt ikonit löytyvät myös kootusti assets-repositoriosta: https://github.com/kohdataan/kohdataan-assets 
 
-### Lähdekoodin tyyliohjeet
+### Lähdekoodin ja hakemistojen tyyliohjeet
 
 Projektissa on käytössä [ESLint](https://github.com/eslint/eslint) ja [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) pienin muutoksin.
 
 Noudata containereiden ja componentien hierarkiassa [tätä ohjetta](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
 Projektissa on käytössä SASS, jokaiselle komponentille on oma .scss-tiedostonsa komponentin kansiossa.
+
+**HUOM macOS-käyttäjät!** Kun luot uusia tiedostoja ja hakemistoja projektiin, kiinnitä erityistä huomiota nimeämiseen. Linuxissa käytetään oletuksena isot ja pienet kirjaimet erotteleva tiedostojärjestelmää (ext4), kun taas macOS ei oletusarvoisesti erottele isoja ja pieniä kirjaimia tiedostojärjestelmässä (HFS+).
 
 ### Mattermost-redux
 
