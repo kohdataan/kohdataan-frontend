@@ -21,7 +21,8 @@
       "profile": "https://github.com/synyker",
       "contributions": [
         "infra",
-        "projectManagement"
+        "projectManagement",
+        "doc"
       ]
     },
     {
@@ -32,7 +33,8 @@
       "contributions": [
         "code",
         "doc",
-        "review"
+        "review",
+        "ideas"
       ]
     },
     {
@@ -68,7 +70,10 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/33627243?v=4",
       "profile": "https://github.com/larenala",
       "contributions": [
-        "code"
+        "code",
+        "ideas",
+        "a11y",
+        "review"
       ]
     },
     {
@@ -107,11 +112,58 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "tanjarasanen",
+      "name": "tanjarasanen",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/49152094?v=4",
+      "profile": "https://github.com/tanjarasanen",
+      "contributions": [
+        "ideas",
+        "a11y",
+        "projectManagement",
+        "userTesting"
+      ]
+    },
+    {
+      "login": "Miapurho",
+      "name": "Mia Purho",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/49512615?v=4",
+      "profile": "https://github.com/Miapurho",
+      "contributions": [
+        "ideas",
+        "userTesting"
+      ]
+    },
+    {
+      "login": "tavellan",
+      "name": "Tero Avellan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1239475?v=4",
+      "profile": "https://kuvatarina.fi",
+      "contributions": [
+        "ideas",
+        "bug",
+        "review",
+        "a11y",
+        "doc"
+      ]
+    },
+    {
+      "login": "osavisaari",
+      "name": "osavisaari",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/21077799?v=4",
+      "profile": "https://github.com/osavisaari",
+      "contributions": [
+        "ideas",
+        "design",
+        "projectManagement"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "kohdataan-frontend",
   "projectOwner": "kohdataan",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
