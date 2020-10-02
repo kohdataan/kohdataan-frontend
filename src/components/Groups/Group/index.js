@@ -108,13 +108,14 @@ const Group = props => {
                   backgroundColor: 'grey',
                 }}
               />
-              <h2>Kysy valvojalta</h2>
+              <h2>Kohdataan</h2>
             </div>
             <div className="monitor-group-text">
               <p>
-                Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+                Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
               </p>
-              <p>Ryhmä on auki arkisin klo 9-17.</p>
+              <p>Ryhmä on auki arkisin klo 9-21.</p>
+              <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
             </div>
           </div>
         </>
@@ -147,7 +148,7 @@ const Group = props => {
               />
               <h2>
                 {channel.name === 'town-square'
-                  ? 'Kysy valvojalta'
+                  ? 'Kohdataan'
                   : channel.display_name}
               </h2>
             </div>
@@ -174,9 +175,10 @@ const Group = props => {
             ) : (
               <div className="monitor-group-text">
                 <p>
-                  Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+                  Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
                 </p>
-                <p>Ryhmä on auki arkisin klo 9-17.</p>
+                <p>Ryhmä on auki arkisin klo 9-21.</p>
+                <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
               </div>
             )}
           </div>
