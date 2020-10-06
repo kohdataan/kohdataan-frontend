@@ -98,7 +98,7 @@ const Group = props => {
 
   const getChannelHeader = () => {
     if (channel.name === 'town-square') {
-      return 'Kysy valvojalta'
+      return 'Kohdataan'
     }
     if (channel.name === 'off-topic') {
       return 'Teemaryhmä'
@@ -112,9 +112,10 @@ const Group = props => {
         return (
           <div className="monitor-group-text">
             <p>
-              Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+              Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
             </p>
-            <p>Ryhmä on auki arkisin klo 9-17.</p>
+            <p>Ryhmä on auki arkisin klo 9-21.</p>
+            <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
           </div>
         )
       case 'off-topic':
@@ -154,13 +155,14 @@ const Group = props => {
                   backgroundColor: 'grey',
                 }}
               />
-              <h2>Kysy valvojalta</h2>
+              <h2>Kohdataan</h2>
             </div>
             <div className="monitor-group-text">
               <p>
-                Tässä ryhmässä voit kysyä valvojalta Kohdataan-somen käytöstä.
+                Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
               </p>
-              <p>Ryhmä on auki arkisin klo 9-17.</p>
+              <p>Ryhmä on auki arkisin klo 9-21.</p>
+              <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
             </div>
           </div>
         </>

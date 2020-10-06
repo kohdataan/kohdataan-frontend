@@ -63,7 +63,7 @@ const GroupsContainer = props => {
     const weekday = dateObject.isoWeekday()
     const format = 'hh:mm:ss'
     const beforeTime = moment('09:00:00', format)
-    const afterTime = moment('17:00:00', format)
+    const afterTime = moment('21:00:00', format)
     if (dateObject.isBetween(beforeTime, afterTime)) setShowTownSquare(true)
     // checks if weekday is Saturday (6) or Sunday (7)
     if (weekday === 6 || weekday === 7) setShowTownSquare(false)

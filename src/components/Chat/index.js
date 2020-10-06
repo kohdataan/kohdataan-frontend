@@ -198,7 +198,7 @@ const Chat = props => {
         getNickNamebyId={getNicknameById}
         directChannel={directChannel}
         channelId={channel.id}
-        profiles={profilesInChannel}
+        profiles={profiles}
         getStatusById={getStatusById}
         pinPost={handlePinPost}
         filesData={filesData}
