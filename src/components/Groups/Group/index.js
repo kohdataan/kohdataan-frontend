@@ -25,7 +25,7 @@ const Group = props => {
 
   useEffect(() => {
     const getParsedPurpose = () => {
-      if (channel && channel.purpose) {
+      if (channel && channel.purpose && channel.name !== 'off-topic') {
         try {
           const parsed = JSON.parse(channel.purpose)
           const sorted = Object.keys(parsed).sort(
@@ -100,9 +100,6 @@ const Group = props => {
     if (channel.name === 'town-square') {
       return 'Kohdataan'
     }
-    if (channel.name === 'off-topic') {
-      return 'Teemaryhmä'
-    }
     return channel.display_name
   }
 
@@ -121,8 +118,8 @@ const Group = props => {
       case 'off-topic':
         return (
           <div className="monitor-group-text">
+            <p>{channel.purpose}</p>
             <p>{channel.header}</p>
-            <p>Ryhmä on auki arkisin klo 9-17.</p>
           </div>
         )
       default:
