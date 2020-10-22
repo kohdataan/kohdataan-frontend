@@ -29,11 +29,18 @@ const Message = props => {
     filesData,
     lastPost,
     dividerId,
+    profiles,
   } = props
 
   const [messageText, setMessageText] = useState(text)
   const [image, setImage] = useState(null)
   const [deleted, setDeleted] = useState(false)
+
+  const isVisitor = () => {
+    return (
+      profiles && profiles[senderId] && profiles[senderId].position === 'vieras'
+    )
+  }
 
   // checks if messagetext contains certain predetermined string and sets text to deleted if yes
   if (messageText.includes(process.env.REACT_APP_REMOVE_STRING)) {
@@ -48,7 +55,7 @@ const Message = props => {
   const messageWrapperClassList = [
     'chat-message-wrapper',
     currentUserId === senderId ? 'wrapper-sent' : 'wrapper-received',
-    isUserLeavingOrJoiningChannel && isAdmin
+    isUserLeavingOrJoiningChannel && (isAdmin || isVisitor())
       ? 'content-system-message-admin'
       : '',
   ]
@@ -57,8 +64,10 @@ const Message = props => {
   const messageContentClassList = [
     'chat-message-content',
     currentUserId === senderId ? 'content-sent' : 'content-received',
-    isUserLeavingOrJoiningChannel && !isAdmin ? 'content-system-message' : '',
-    isAdmin ? 'content-received-admin' : '',
+    isUserLeavingOrJoiningChannel && !isAdmin && !isVisitor()
+      ? 'content-system-message'
+      : '',
+    isAdmin || isVisitor() ? 'content-received-admin' : '',
   ]
 
   useEffect(() => {
@@ -108,7 +117,6 @@ const Message = props => {
       {content}
     </a>
   )
-
   return (
     <>
       <div
@@ -176,7 +184,7 @@ const Message = props => {
             >
               {currentUserId !== senderId && sender !== 'Poistunut käyttäjä' && (
                 <header>
-                  {isAdmin ? (
+                  {isAdmin || isVisitor() ? (
                     <div
                       className="label chat-message-sender-icon"
                       style={{
@@ -230,7 +238,7 @@ const Message = props => {
                           <span className="sr-only">Linkki kuvaan</span>
                         </Link>
                         <span className="sr-only">Kuvateksti</span>
-                        {isAdmin ? (
+                        {isAdmin || isVisitor() ? (
                           <Linkify
                             className="image-message-content-text chat-message-content-text"
                             componentDecorator={componentDecorator}
@@ -271,7 +279,7 @@ const Message = props => {
                           />
                         </div>
                         <span className="sr-only">Viesti</span>
-                        {isAdmin ? (
+                        {isAdmin || isVisitor() ? (
                           <Linkify
                             className="image-message-content-text chat-message-content-text"
                             componentDecorator={componentDecorator}
@@ -308,7 +316,7 @@ const Message = props => {
                   {!files && (
                     <>
                       <span className="sr-only">Viesti</span>
-                      {isAdmin ? (
+                      {isAdmin || isVisitor() ? (
                         <Linkify
                           className="chat-message-content-text"
                           componentDecorator={componentDecorator}
@@ -326,6 +334,7 @@ const Message = props => {
                 {currentUserId !== senderId &&
                   !directChannel &&
                   !isAdmin &&
+                  !isVisitor &&
                   !isUserLeavingOrJoiningChannel && (
                     <ButtonContainer
                       className="chat-report-message-icon"
@@ -374,6 +383,7 @@ Message.propTypes = {
   id: propTypes.string.isRequired,
   lastPost: propTypes.bool.isRequired,
   dividerId: propTypes.string,
+  profiles: propTypes.instanceOf(Object).isRequired,
 }
 
 Message.defaultProps = {

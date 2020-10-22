@@ -130,6 +130,7 @@ const MessageList = props => {
                   filesData={filesData}
                   lastPost={getLastPost(post)}
                   dividerId={dividerId}
+                  profiles={profiles}
                 />
               )
             )
