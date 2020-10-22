@@ -334,7 +334,7 @@ const Message = props => {
                 {currentUserId !== senderId &&
                   !directChannel &&
                   !isAdmin &&
-                  !isVisitor &&
+                  !isVisitor() &&
                   !isUserLeavingOrJoiningChannel && (
                     <ButtonContainer
                       className="chat-report-message-icon"
