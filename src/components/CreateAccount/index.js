@@ -351,7 +351,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   required: true,
                   minLength: 6,
                   maxLength: 20,
-                  pattern: /^(\+358|00358|358|04|050)[0-9- ]{4,14}$/i,
+                  pattern: /^(\+358|00358|358|\+7|007|\+372|00372|\+46|0046|04|050)[0-9- ]{4,14}$/i,
                 })}
                 ariaInvalid={!!errors.phoneNumber}
                 inputClassName="create-account-input-text"
