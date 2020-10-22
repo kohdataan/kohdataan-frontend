@@ -32,6 +32,18 @@
   overflow-y: auto;
 }
 
+.group-suggestion-box-content {
+  padding: 15px 15px;
+  height: 250px;
+  @media (max-width: 360px) {
+    font-size: 14px;
+    h2 {
+      font-size: 18px;
+    }
+  }
+  overflow-y: auto;
+}
+
 .group-box-content-inactive {
   padding: 15px;
   width: 100%;

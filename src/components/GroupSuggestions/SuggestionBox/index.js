@@ -17,7 +17,7 @@ const SuggestionBox = props => {
       aria-hidden={hidden}
       style={{ top: `-${top + 2}px ` }}
     >
-      <div className="group-box-content">
+      <div className="group-suggestion-box-content">
         <div className="group-header">
           <div
             className="group-color-icon"
