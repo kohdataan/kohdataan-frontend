@@ -42,23 +42,38 @@ class App extends Component {
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
-    const { history, rootStartUp, user: pUser, loading } = this.props
+    const {
+      history,
+      rootStartUp,
+      user: pUser,
+      loading,
+      loginError,
+    } = this.props
     return !(
       nextProps.history === history &&
       nextProps.user === pUser &&
       nextProps.loading === loading &&
-      nextProps.rootStartUp === rootStartUp
+      nextProps.rootStartUp === rootStartUp &&
+      nextProps.loginError === loginError
     )
   }
 
   render() {
-    const { loading, user: pUser, mmuser } = this.props
-
+    const { loading, user: pUser, mmuser, loginError, history } = this.props
     if (loading.root && localStorage.getItem('authToken')) {
       return <FullScreenLoading />
     }
-    if (!loading.root && localStorage.getItem('authToken') && !mmuser) {
-      return <AccountLocked />
+    if (
+      // Checks if the error message reveals that the user has been deactivated, entire message:
+      // 'Login failed because your account has been deactivated.  Please contact an administrator.'
+      !loading.root &&
+      loginError &&
+      loginError.indexOf('deactivated') !== -1
+    ) {
+      return <AccountLocked history={history} loginError={loginError} />
+    }
+    if (!loading.root && !mmuser && localStorage.getItem('authToken')) {
+      return <AccountLocked history={history} loginError={null} />
     }
 
     return (
@@ -130,10 +145,12 @@ App.propTypes = {
   loading: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   mmuser: PropTypes.instanceOf(Object),
+  loginError: PropTypes.instanceOf(Object),
 }
 
 App.defaultProps = {
   mmuser: null,
+  loginError: null,
 }
 
 const mapDispatchToProps = dispatch =>
@@ -155,10 +172,18 @@ const mapStateToProps = store => {
     store.entities &&
     store.entities.users &&
     store.entities.users.profiles
+  const loginError =
+    store &&
+    store.requests &&
+    store.requests.users &&
+    store.requests.users.login &&
+    store.requests.users.login.error &&
+    store.requests.users.login.error.message
   return {
     loading: store.loading,
     user: store.user,
     mmuser: profiles[currentUserId],
+    loginError,
   }
 }
 
