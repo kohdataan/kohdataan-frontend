@@ -25,3 +25,22 @@
   text-align: center;
   margin: 20px;
 }
+
+
+.login-link-button {
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+  text-transform: none;
+  font-family: 'Lato', sans-serif;
+  color: $white;
+  font-size: 1em;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0 10px 0;
+
+  :visited {
+    color: $white;
+  }
+}

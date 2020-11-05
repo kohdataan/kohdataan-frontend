@@ -547,8 +547,8 @@ CreateAccount.propTypes = {
   handleAccountCreation: PropTypes.func.isRequired,
   apiErrors: PropTypes.shape({
     name: PropTypes.string,
-    errors: PropTypes.array,
-    fields: PropTypes.object,
+    errors: PropTypes.instanceOf(Array),
+    fields: PropTypes.instanceOf(Object),
   }),
 }
 

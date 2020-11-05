@@ -24,6 +24,7 @@ const CreateAccountContainer = props => {
     password
   ) => {
     // Remove empty spaces and potential country code
+    // in case of Russia, Estonia or Sweden, store number as 00{code}
     let number = phoneNumber.replace(/ /g, '')
     if (number.startsWith('+358')) {
       number = number.replace('+358', '0')
@@ -31,7 +32,13 @@ const CreateAccountContainer = props => {
       number = number.replace('358', '0')
     } else if (number.startsWith('00358')) {
       number = number.replace('00358', '0')
-    }
+    } else if (number.startsWith('+7')) {
+      number = number.replace('+', '00')
+    } else if (number.startsWith('+372')) {
+      number = number.replace('+', '00')
+    } else if (number.startsWith('+46')) {
+      number = number.replace('+', '00')
+    } 
     // create unique username for Mattermost
     // Mattermot username must begin with a letter and contain between 3 and 22 characters
     // including numbers, lowercase letters, and the symbols ".", "-", and "_".
