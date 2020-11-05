@@ -127,3 +127,15 @@
   justify-content: flex-start;
   flex-wrap: wrap;
 }
+
+.long-group-box-content {
+  padding: 15px 15px;
+  height: 100%;
+  @media (max-width: 360px) {
+    font-size: 14px;
+    h2 {
+      font-size: 18px;
+    }
+  }
+  overflow-y: auto;
+}

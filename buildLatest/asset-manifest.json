@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b2c6dbd1.chunk.css",
+    "main.js": "/static/js/main.6f2dbaa9.chunk.js",
+    "main.js.map": "/static/js/main.6f2dbaa9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cca332f5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cca332f5.js.map",
+    "static/css/2.ed590494.chunk.css": "/static/css/2.ed590494.chunk.css",
+    "static/js/2.02467d03.chunk.js": "/static/js/2.02467d03.chunk.js",
+    "static/js/2.02467d03.chunk.js.map": "/static/js/2.02467d03.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.9e60976c38e514711483f4ef863877c3.js": "/precache-manifest.9e60976c38e514711483f4ef863877c3.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.ed590494.chunk.css.map": "/static/css/2.ed590494.chunk.css.map",
+    "static/css/main.b2c6dbd1.chunk.css.map": "/static/css/main.b2c6dbd1.chunk.css.map",
+    "static/js/2.02467d03.chunk.js.LICENSE.txt": "/static/js/2.02467d03.chunk.js.LICENSE.txt",
+    "static/media/styles.scss": "/static/media/send-message-arrow.d7c59de5.svg",
+    "static/media/defaults.scss": "/static/media/X.14a0ba9d.svg",
+    "static/media/bot.svg": "/static/media/bot.c8cca1a5.svg",
+    "static/media/camera-add-solid.svg": "/static/media/camera-add-solid.0fa4b1f5.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cca332f5.js",
+    "static/css/2.ed590494.chunk.css",
+    "static/js/2.02467d03.chunk.js",
+    "static/css/main.b2c6dbd1.chunk.css",
+    "static/js/main.6f2dbaa9.chunk.js"
+  ]
+}

@@ -118,8 +118,9 @@ const Group = props => {
       case 'off-topic':
         return (
           <div className="monitor-group-text">
-            <p>{channel.purpose}</p>
-            <p>{channel.header}</p>
+            <p>Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä ohjattuja keskusteluja.</p>
+            <br />
+            <p>{addLineBreaks(channel.header)}</p>
           </div>
         )
       default:
@@ -138,6 +139,11 @@ const Group = props => {
           </div>
         )
     }
+  }
+
+  const addLineBreaks = (text) => {
+    const slices = text.split('///')
+    return slices.map((slice) => { return (<><span>{slice}</span><br/></>) })
   }
 
   return (
@@ -174,7 +180,7 @@ const Group = props => {
             },
           }}
         >
-          <div className="group-box-content">
+          <div className={channel.name === 'off-topic' ? "long-group-box-content" : "group-box-content"}>
             <div className="group-header">
               <div
                 className="group-color-icon"
