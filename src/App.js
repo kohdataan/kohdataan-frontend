@@ -53,12 +53,14 @@ class App extends Component {
 
   render() {
     const { loading, user: pUser, mmuser } = this.props
+
     if (loading.root && localStorage.getItem('authToken')) {
       return <FullScreenLoading />
     }
-    if (!loading.root && !mmuser && localStorage.getItem('authToken')) {
+    if (!loading.root && localStorage.getItem('authToken') && !mmuser) {
       return <AccountLocked />
     }
+
     return (
       <Container className="main-container">
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}

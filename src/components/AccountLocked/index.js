@@ -1,15 +1,7 @@
 import React, { memo, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import Button from '../ButtonContainer'
 import './styles.scss'
 
 const AccountLocked = () => {
-  const history = useHistory()
-  const goToLogin = () => {
-    history.push('/login')
-    history.go()
-  }
-
   useEffect(() => {
     localStorage.removeItem('userId')
     localStorage.removeItem('authToken')
@@ -30,11 +22,6 @@ const AccountLocked = () => {
           kohdataan@kohdataan.fi.
         </a>
       </p>
-      <div className="login-links-container">
-        <Button className="login-link login-link-button" onClick={goToLogin}>
-          Kirjautumissivulle.
-        </Button>
-      </div>
     </div>
   )
 }
