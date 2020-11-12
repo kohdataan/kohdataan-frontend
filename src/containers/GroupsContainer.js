@@ -46,6 +46,7 @@ const GroupsContainer = props => {
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
+  const [showThemeGroup, setShowThemeGroup] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
   // Get only those channels suggestions that user has not yet joined
 
@@ -67,6 +68,22 @@ const GroupsContainer = props => {
     if (dateObject.isBetween(beforeTime, afterTime)) setShowTownSquare(true)
     // checks if weekday is Saturday (6) or Sunday (7)
     if (weekday === 6 || weekday === 7) setShowTownSquare(false)
+  }, [])
+
+  useEffect(() => {
+    const dateObject = moment()
+    const format = 'DD MM YYYY, hh:mm:ss'
+    const beforeTime1 = moment('11 11 2020, 10:01:00', format)
+    const afterTime1 = moment('11 11 2020, 11:01:30', format)
+    const beforeTime2 = moment('12 11 2020, 08:00:00', format)
+    const afterTime2 = moment('12 11 2020, 09:30:00', format)
+    if (dateObject.isBetween(beforeTime1, afterTime1)) {
+      setShowThemeGroup(true)
+    } else if (dateObject.isBetween(beforeTime2, afterTime2)) {
+      setShowThemeGroup(true)
+    } else {
+      setShowThemeGroup(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -178,6 +195,7 @@ const GroupsContainer = props => {
         getPosts={getPosts}
         posts={posts}
         showTownSquare={showTownSquare}
+        showThemeGroup={showThemeGroup}
       />
     </main>
   )

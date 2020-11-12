@@ -14,6 +14,7 @@ const Group = props => {
     currentUserId,
     getPosts,
     showTownSquare,
+    showThemeGroup,
   } = props
 
   const [members, setMembers] = useState([])
@@ -103,6 +104,18 @@ const Group = props => {
     return channel.display_name
   }
 
+  const addLineBreaks = text => {
+    const slices = text.split('///')
+    return slices.map(slice => {
+      return (
+        <>
+          <span>{slice}</span>
+          <br />
+        </>
+      )
+    })
+  }
+
   const showChannel = () => {
     switch (channel.name) {
       case 'town-square':
@@ -118,7 +131,10 @@ const Group = props => {
       case 'off-topic':
         return (
           <div className="monitor-group-text">
-            <p>Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä ohjattuja keskusteluja.</p>
+            <p>
+              Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä
+              ohjattuja keskusteluja.
+            </p>
             <br />
             <p>{addLineBreaks(channel.header)}</p>
           </div>
@@ -141,14 +157,9 @@ const Group = props => {
     }
   }
 
-  const addLineBreaks = (text) => {
-    const slices = text.split('///')
-    return slices.map((slice) => { return (<><span>{slice}</span><br/></>) })
-  }
-
-  return (
-    <>
-      {channel.name === 'town-square' && !showTownSquare ? (
+  const getInactiveChannels = () => {
+    if (channel.name === 'town-square' && !showTownSquare) {
+      return (
         <>
           <div className=" group-box-content-inactive">
             <div className="group-header">
@@ -169,6 +180,39 @@ const Group = props => {
             </div>
           </div>
         </>
+      )
+    }
+    if (channel.name === 'off-topic' && !showThemeGroup) {
+      return (
+        <>
+          <div className=" group-box-content-inactive">
+            <div className="group-header">
+              <div
+                className="group-color-icon"
+                style={{
+                  backgroundColor: 'grey',
+                }}
+              />
+              <h2>Teemat</h2>
+            </div>
+            <div className="monitor-group-text">
+              <p>
+                Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
+              </p>
+              <p>Ryhmä on auki arkisin klo 9-21.</p>
+              <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
+            </div>
+          </div>
+        </>
+      )
+    }
+  }
+
+  return (
+    <>
+      {(channel.name === 'town-square' && !showTownSquare) ||
+      (channel.name === 'off-topic' && !showThemeGroup) ? (
+        getInactiveChannels()
       ) : (
         <Link
           className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
@@ -180,7 +224,13 @@ const Group = props => {
             },
           }}
         >
-          <div className={channel.name === 'off-topic' ? "long-group-box-content" : "group-box-content"}>
+          <div
+            className={
+              channel.name === 'off-topic'
+                ? 'long-group-box-content'
+                : 'group-box-content'
+            }
+          >
             <div className="group-header">
               <div
                 className="group-color-icon"

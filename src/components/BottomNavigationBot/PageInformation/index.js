@@ -55,6 +55,7 @@ const PageInformation = props => {
         \nKun klikkaat ryhmän nimeä, näet ryhmän tiedot. Näet ryhmän jäsenet, ja milloin he ovat olleet paikalla. Näet myös, mitkä asiat ryhmän jäseniä kiinnostaa.       
         \nKun klikkaat ryhmän jäsenen nimeä, näet hänen profiilinsa. Profiilissa voit lähettää hänelle yksityisen viestin.         
         \nTäällä voit myös poistua ryhmästä. Muista, että jos poistut ryhmästä, et voi palata siihen takaisin.
+        \nJos et käy Kohdataan-somessa yli kuukauteen, sinut poistetaan automaattisesti kaikista pienistä keskusteluryhmistä. Kaikki tietosi, kaverisi ja viestittelysi pysyvät palvelussa. Kun tulet palveluun uudestaan, voit liittyä uusiin ryhmiin ja tutustua uusiin ihmisiin.
         \nJos huomaat keskustelussa asiattoman viestin tai viestejä, voit ilmoittaa siitä valvojalle. Valvoja voi poistaa viestin. Valvoja voi tarvittaessa myös liittyä keskusteluun. Valvojalla on pääsy kaikkiin ryhmäkeskusteluihin.`
       break
     case '/member-profile':

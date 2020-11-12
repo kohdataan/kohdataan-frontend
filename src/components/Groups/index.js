@@ -19,7 +19,9 @@ const Groups = props => {
     updateUser,
     getPosts,
     showTownSquare,
+    showThemeGroup,
   } = props
+
 
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
@@ -50,7 +52,6 @@ const Groups = props => {
       disableBeacon: true,
     },
   ]
-
   return (
     <section className="groups-wrapper">
       <header className="groups-header">
@@ -68,6 +69,7 @@ const Groups = props => {
             teams={teams}
             getPosts={getPosts}
             showTownSquare={showTownSquare}
+            showThemeGroup={showThemeGroup}
           />
         ))}
       </div>
