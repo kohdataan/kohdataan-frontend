@@ -9,7 +9,7 @@ import ShowAge from '../RegistrationFlow/ShowAge'
 import Location from '../RegistrationFlow/Location'
 import ButtonContainer from '../ButtonContainer'
 import EditTitle from './EditTitle'
-import getAge from '../../utils/getAge'
+// import getAge from '../../utils/getAge'
 import './styles.scss'
 
 const EditProfile = props => {
@@ -87,7 +87,7 @@ const EditProfile = props => {
           <ShowAge
             hideStep
             showAge={newShowAge.toString()}
-            age={getAge(myUserInfo)}
+            age={myUserInfo && myUserInfo.birthdate}
             onChange={setNewShowAge}
           />
         </div>

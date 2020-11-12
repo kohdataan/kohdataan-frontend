@@ -102,7 +102,7 @@ export const fetchChannelsAndInvitations = () => {
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
     await dispatch(timedGetChannelInvitationsAction())
-    await dispatch(getProfiles())
+    // await dispatch(getProfiles())
     await dispatch(groupPageFetchingReady())
   }
 }

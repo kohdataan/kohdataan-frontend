@@ -117,7 +117,42 @@ const updatePassword = async data => {
   }
 }
 
+const getMmProfiles = async (id, token) => {
+  // gets user information for all mm-profiles
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/mm`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
+const getMe = async (id, token) => {
+  // get node user information for logged-in user
+  const uri = process.env.REACT_APP_NODE_BACKEND_URL
+  try {
+    const resp = await fetch(`${uri}/user/me/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return handleFetchErrors(resp)
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 const getUser = async (id, token) => {
+  // gets restricted user information for other, not-logged-in user
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/user/${id}`, {
@@ -325,6 +360,8 @@ export {
   resetPassword,
   checkIfResetLinkHasBeenUsed,
   setNewPassword,
+  getMe,
+  getMmProfiles,
   getUser,
   getUserByUsername,
   updateUser,

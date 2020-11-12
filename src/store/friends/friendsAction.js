@@ -39,7 +39,7 @@ export const fetchFriendsPageData = () => {
     const teamId = Object.keys(teams)[0]
     await dispatch(fetchMyChannelsAndMembers(teamId))
     await dispatch(fetchDirectChannelMembers())
-    await dispatch(getProfiles())
+    // await dispatch(getProfiles())
     await dispatch(friendsPageFetchingReady())
   }
 }

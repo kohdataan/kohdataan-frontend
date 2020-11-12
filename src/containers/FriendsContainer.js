@@ -8,13 +8,13 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
+import { getMmProfiles } from '../api/user/user'
 
 const FriendsContainer = props => {
   const {
     channels,
     currentUserId,
     myChannels,
-    profiles,
     getPosts,
     searchProfiles,
     fetchFriendsPageData,
@@ -29,6 +29,21 @@ const FriendsContainer = props => {
 
   const [directChannels, setDirectChannels] = useState([])
   const [isInitialized, setIsInitialized] = useState(false)
+  const [userProfiles, setUserProfiles] = useState([])
+
+  useEffect(() => {
+    const getProfiles = async () => {
+      const res = await getMmProfiles(
+        user.id,
+        localStorage.getItem('authToken')
+      )
+      if (res.success) {
+        const filteredProfiles = res.userDetails
+        setUserProfiles(filteredProfiles)
+      }
+    }
+    getProfiles()
+  }, [])
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -60,7 +75,7 @@ const FriendsContainer = props => {
       const friendId = friend && friend.user_id
       const friendInfo =
         friendId &&
-        Object.values(profiles).find(profile => profile.id === friendId)
+        Object.values(userProfiles).find(profile => profile.id === friendId)
       return friendInfo
     }
     return null

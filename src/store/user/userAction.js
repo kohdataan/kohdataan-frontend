@@ -42,7 +42,7 @@ export const addUserToState = () => {
     const token = localStorage.getItem('authToken')
     try {
       if (token) {
-        const user = await API.getUser(id, token)
+        const user = await API.getMe(id, token)
         await dispatch({
           type: types.ADD_USER_TO_STATE,
           user,
