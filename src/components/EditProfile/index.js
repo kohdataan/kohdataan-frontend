@@ -41,7 +41,6 @@ const EditProfile = props => {
     setShowModal(false)
     setError(false)
   }
-
   const handleSave = () => {
     handleEditReady(
       newDescription,

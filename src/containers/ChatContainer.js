@@ -179,12 +179,13 @@ const ChatContainer = props => {
 
   const handleLogout = () => logoutHandler(userLogout, matterMostLogout)
 
+  console.log(profiles)
   useEffect(() => {
     const getActiveMattermostProfiles = () => {
       const activeProfilesArr =
         currentMembers &&
         currentMembers
-          .map(member => profiles[member.user_id])
+          .map(member => profiles.find(p => p.id === member.user_id))
           .filter(
             member =>
               member &&
@@ -195,7 +196,9 @@ const ChatContainer = props => {
           )
       setActiveMemberMmProfiles(activeProfilesArr)
     }
-    getActiveMattermostProfiles()
+    if (profiles && profiles.length > 0) {
+      getActiveMattermostProfiles()
+    }
   }, [currentMembers, profiles, setActiveMemberMmProfiles, teams])
 
   return (
