@@ -2,7 +2,6 @@ import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
-import { searchProfiles as searchProfilesAction } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
 import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
@@ -16,7 +15,6 @@ const FriendsContainer = props => {
     currentUserId,
     myChannels,
     getPosts,
-    searchProfiles,
     fetchFriendsPageData,
     membersInChannel,
     updateUser,
@@ -29,7 +27,7 @@ const FriendsContainer = props => {
 
   const [directChannels, setDirectChannels] = useState([])
   const [isInitialized, setIsInitialized] = useState(false)
-  const [userProfiles, setUserProfiles] = useState([])
+  const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
     const getProfiles = async () => {
@@ -37,9 +35,9 @@ const FriendsContainer = props => {
         user.id,
         localStorage.getItem('authToken')
       )
-      if (res.success) {
+      if (res && res.userDetails) {
         const filteredProfiles = res.userDetails
-        setUserProfiles(filteredProfiles)
+        setProfiles(filteredProfiles)
       }
     }
     getProfiles()
@@ -75,12 +73,11 @@ const FriendsContainer = props => {
       const friendId = friend && friend.user_id
       const friendInfo =
         friendId &&
-        Object.values(userProfiles).find(profile => profile.id === friendId)
+        Object.values(profiles).find(profile => profile.id === friendId)
       return friendInfo
     }
     return null
   }
-
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
@@ -121,7 +118,6 @@ const FriendsContainer = props => {
         getUnreadCount={getUnreadCountByChannelId}
         getUsername={getUsername}
         getPosts={getPosts}
-        searchProfiles={searchProfiles}
         getLatestMessage={getLatestMessage}
         membersInChannel={membersInChannel}
         tutorialWatched={user.tutorialWatched}
@@ -130,6 +126,7 @@ const FriendsContainer = props => {
         myUserInfo={user}
         statuses={statuses}
         currentUserId={currentUserId}
+        profiles={profiles}
       />
     </main>
   )
@@ -139,9 +136,7 @@ FriendsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
-  searchProfiles: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
@@ -156,7 +151,6 @@ const mapStateToProps = state => {
   const { membersInChannel } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
-  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
@@ -167,7 +161,6 @@ const mapStateToProps = state => {
     currentUserId,
     user,
     mmUser,
-    profiles,
     posts,
     channels,
     members,
@@ -181,7 +174,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getPosts: getPostsAction,
-      searchProfiles: searchProfilesAction,
       fetchFriendsPageData: fetchFriendsPageDataAction,
       updateUser: updateUserAction,
     },

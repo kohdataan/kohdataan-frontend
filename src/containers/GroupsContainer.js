@@ -8,6 +8,7 @@ import {
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { getMmProfiles } from '../api/user/user'
 import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
@@ -34,7 +35,6 @@ const GroupsContainer = props => {
     fetchChannelsAndInvitations,
     getInvitationsAgain,
     resetChannelInvitations,
-    profiles,
     user,
     updateUser,
     getPosts,
@@ -47,7 +47,22 @@ const GroupsContainer = props => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
+  const [profiles, setProfiles] = useState([])
   // Get only those channels suggestions that user has not yet joined
+
+  useEffect(() => {
+    const getProfiles = async () => {
+      const res = await getMmProfiles(
+        user.id,
+        localStorage.getItem('authToken')
+      )
+      if (res && res.userDetails) {
+        const filteredProfiles = res.userDetails
+        setProfiles(filteredProfiles)
+      }
+    }
+    getProfiles()
+  }, [])
 
   // Get all group related data at once
   useEffect(() => {
@@ -134,7 +149,7 @@ const GroupsContainer = props => {
       const activeProfilesArr =
         profiles &&
         Object.values(profiles)
-          .map(member => profiles[member.id])
+          .map(member => profiles.find(p => p.id === member.id))
           .filter(member => member && member.delete_at === 0)
           .filter(member => member.position !== 'deleted')
           .filter(member => member.username !== 'surveybot')
@@ -145,7 +160,7 @@ const GroupsContainer = props => {
           )
       setActiveMemberMmProfiles(activeProfilesArr)
     }
-    getActiveMattermostProfiles()
+    if (profiles && profiles.length > 0) getActiveMattermostProfiles()
   }, [profiles, setActiveMemberMmProfiles, teams])
 
   if (!isInitialized) {

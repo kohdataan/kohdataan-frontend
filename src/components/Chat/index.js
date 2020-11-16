@@ -81,7 +81,10 @@ const Chat = props => {
       }
       return visibleName
     }
-    return 'Poistunut käyttäjä'
+    if (user && (user.delete_at !== 0 || user.position === 'deleted')) {
+      return 'Poistunut käyttäjä'
+    }
+    return '...'
   }
 
   const getUserDataById = id =>

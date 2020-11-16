@@ -20,7 +20,6 @@ const Groups = props => {
     getPosts,
     showTownSquare,
   } = props
-
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {

@@ -13,7 +13,6 @@ const Friends = props => {
     getUnreadCount,
     getUsername,
     getPosts,
-    searchProfiles,
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
@@ -22,6 +21,7 @@ const Friends = props => {
     myUserInfo,
     statuses,
     currentUserId,
+    profiles,
   } = props
 
   const [friendSearch, setFriendSearch] = useState('')
@@ -91,6 +91,7 @@ const Friends = props => {
         profile.username !== 'surveybot' &&
         profile.position !== 'deleted' &&
         profile.delete_at === 0 &&
+        profile.nickname.toLowerCase()[0] === searchTerm.toLowerCase()[0] &&
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
@@ -100,11 +101,7 @@ const Friends = props => {
       if (searchText === '') {
         handleFriendSearchReset()
       } else {
-        const foundProfiles = await searchProfiles(searchText)
-        const filtered = await filterSearchResults(
-          foundProfiles.data,
-          searchText
-        )
+        const filtered = await filterSearchResults(profiles, searchText)
         if (filtered) {
           setFriendSearchResult(filtered)
         }
@@ -207,7 +204,6 @@ Friends.propTypes = {
   getUnreadCount: PropTypes.func.isRequired,
   getUsername: PropTypes.func.isRequired,
   getPosts: PropTypes.func.isRequired,
-  searchProfiles: PropTypes.func.isRequired,
   getLatestMessage: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,
   tutorialWatched: PropTypes.bool.isRequired,
@@ -216,6 +212,7 @@ Friends.propTypes = {
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
 }
 
 export default memo(Friends)

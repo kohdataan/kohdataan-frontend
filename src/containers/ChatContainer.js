@@ -116,7 +116,7 @@ const ChatContainer = props => {
         user.id,
         localStorage.getItem('authToken')
       )
-      if (res.success) {
+      if (res && res.userDetails) {
         const filteredProfiles = res.userDetails
         setProfiles(filteredProfiles)
       }
@@ -179,7 +179,6 @@ const ChatContainer = props => {
 
   const handleLogout = () => logoutHandler(userLogout, matterMostLogout)
 
-  console.log(profiles)
   useEffect(() => {
     const getActiveMattermostProfiles = () => {
       const activeProfilesArr =
@@ -261,7 +260,6 @@ const mapStateToProps = (state, ownProps) => {
   const { teams } = state.entities
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
-  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
   const { statuses } = state.entities.users
@@ -271,7 +269,6 @@ const mapStateToProps = (state, ownProps) => {
     currentUserId,
     currentChannelId,
     user,
-    profiles,
     teams,
     posts,
     channels,
