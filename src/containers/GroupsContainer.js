@@ -209,7 +209,7 @@ GroupsContainer.propTypes = {
   getChannelMembers: PropTypes.func.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
+  // profiles: PropTypes.instanceOf(Object).isRequired,
   getInvitationsAgain: PropTypes.func.isRequired,
   resetChannelInvitations: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
@@ -229,7 +229,7 @@ const mapStateToProps = state => {
   const { channels } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
-  const { profiles } = state.entities.users
+  // const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
@@ -243,7 +243,7 @@ const mapStateToProps = state => {
     channelSuggestionMembers,
     user,
     mmUser,
-    profiles,
+    // profiles,
     teams,
     posts,
     channels,

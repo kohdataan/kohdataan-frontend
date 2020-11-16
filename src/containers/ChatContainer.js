@@ -11,10 +11,7 @@ import {
   uploadFile as uploadFileAction,
   getFilesForPost as getFilesForPostAction,
 } from 'mattermost-redux/actions/files'
-import {
-  getProfilesInChannel as getProfilesInChannelAction,
-  logout as matterMostLogoutAction,
-} from 'mattermost-redux/actions/users'
+import { logout as matterMostLogoutAction } from 'mattermost-redux/actions/users'
 import {
   removeChannelMember as removeChannelMemberAction,
   getChannelMembers as getChannelMembersAction,
@@ -286,7 +283,6 @@ const mapDispatchToProps = dispatch =>
       uploadFile: uploadFileAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getChannelMembers: getChannelMembersAction,
-      getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
       matterMostLogout: matterMostLogoutAction,
