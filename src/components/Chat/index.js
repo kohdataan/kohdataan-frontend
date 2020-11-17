@@ -84,7 +84,7 @@ const Chat = props => {
     if (user && (user.delete_at !== 0 || user.position === 'deleted')) {
       return 'Poistunut käyttäjä'
     }
-    return '...'
+    return ''
   }
 
   const getUserDataById = id =>

@@ -15,8 +15,7 @@ const Member = props => {
   } = props
   const userFirstLetter = nickName[0]
   const getUsername = () => {
-    const member = profiles && profiles.find(p => p.id === userId)
-    return member.username
+    return profiles && profiles[userId] && profiles[userId].username
   }
   if (isSystemAdmin(userId, profiles) || isTeamAdmin(userId, teams)) {
     return <></>

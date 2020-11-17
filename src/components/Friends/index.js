@@ -13,6 +13,7 @@ const Friends = props => {
     getUnreadCount,
     getUsername,
     getPosts,
+    searchProfiles,
     getLatestMessage,
     membersInChannel,
     tutorialWatched,
@@ -91,7 +92,6 @@ const Friends = props => {
         profile.username !== 'surveybot' &&
         profile.position !== 'deleted' &&
         profile.delete_at === 0 &&
-        profile.nickname.toLowerCase()[0] === searchTerm.toLowerCase()[0] &&
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
@@ -101,7 +101,11 @@ const Friends = props => {
       if (searchText === '') {
         handleFriendSearchReset()
       } else {
-        const filtered = await filterSearchResults(profiles, searchText)
+        const foundProfiles = await searchProfiles(searchText)
+        const filtered = await filterSearchResults(
+          foundProfiles.data,
+          searchText
+        )
         if (filtered) {
           setFriendSearchResult(filtered)
         }

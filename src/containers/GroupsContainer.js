@@ -8,7 +8,6 @@ import {
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { getMmProfiles } from '../api/user/user'
 import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
@@ -35,6 +34,7 @@ const GroupsContainer = props => {
     fetchChannelsAndInvitations,
     getInvitationsAgain,
     resetChannelInvitations,
+    profiles,
     user,
     updateUser,
     getPosts,
@@ -47,22 +47,7 @@ const GroupsContainer = props => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
-  const [profiles, setProfiles] = useState([])
   // Get only those channels suggestions that user has not yet joined
-
-  useEffect(() => {
-    const getProfiles = async () => {
-      const res = await getMmProfiles(
-        user.id,
-        localStorage.getItem('authToken')
-      )
-      if (res && res.userDetails) {
-        const filteredProfiles = res.userDetails
-        setProfiles(filteredProfiles)
-      }
-    }
-    getProfiles()
-  }, [])
 
   // Get all group related data at once
   useEffect(() => {
@@ -149,7 +134,7 @@ const GroupsContainer = props => {
       const activeProfilesArr =
         profiles &&
         Object.values(profiles)
-          .map(member => profiles.find(p => p.id === member.id))
+          .map(member => profiles[member.id])
           .filter(member => member && member.delete_at === 0)
           .filter(member => member.position !== 'deleted')
           .filter(member => member.username !== 'surveybot')
@@ -160,7 +145,7 @@ const GroupsContainer = props => {
           )
       setActiveMemberMmProfiles(activeProfilesArr)
     }
-    if (profiles && profiles.length > 0) getActiveMattermostProfiles()
+    getActiveMattermostProfiles()
   }, [profiles, setActiveMemberMmProfiles, teams])
 
   if (!isInitialized) {
@@ -209,7 +194,7 @@ GroupsContainer.propTypes = {
   getChannelMembers: PropTypes.func.isRequired,
   channelSuggestionMembers: PropTypes.instanceOf(Object),
   fetchChannelsAndInvitations: PropTypes.func.isRequired,
-  // profiles: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   getInvitationsAgain: PropTypes.func.isRequired,
   resetChannelInvitations: PropTypes.func.isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
@@ -229,7 +214,7 @@ const mapStateToProps = state => {
   const { channels } = state.entities.channels
   const { users } = state.entities
   const mmUser = users.profiles[currentUserId]
-  // const { profiles } = state.entities.users
+  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const members = state.entities.channels.membersInChannel
   const myChannels = state.entities.channels.myMembers
@@ -243,7 +228,7 @@ const mapStateToProps = state => {
     channelSuggestionMembers,
     user,
     mmUser,
-    // profiles,
+    profiles,
     teams,
     posts,
     channels,

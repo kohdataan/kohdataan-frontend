@@ -11,7 +11,11 @@ import {
   uploadFile as uploadFileAction,
   getFilesForPost as getFilesForPostAction,
 } from 'mattermost-redux/actions/files'
-import { logout as matterMostLogoutAction } from 'mattermost-redux/actions/users'
+import {
+  getProfiles as getProfilesAction,
+  getProfilesInChannel as getProfilesInChannelAction,
+  logout as matterMostLogoutAction,
+} from 'mattermost-redux/actions/users'
 import {
   removeChannelMember as removeChannelMemberAction,
   getChannelMembers as getChannelMembersAction,
@@ -19,12 +23,7 @@ import {
   viewChannel as viewChannelAction,
 } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import {
-  getMmProfiles,
-  getUserByUsername,
-  userLogout,
-  sendEmail,
-} from '../api/user/user'
+import { getUserByUsername, userLogout, sendEmail } from '../api/user/user'
 import { removeUserInterestsFromChannelPurpose } from '../api/channels/channels'
 import Chat from '../components/Chat'
 import logoutHandler from '../utils/userLogout'
@@ -33,7 +32,9 @@ import { isTeamAdmin, isSystemAdmin } from '../utils/userIsAdmin'
 const ChatContainer = props => {
   const {
     posts,
+    profiles,
     createPost,
+    getProfiles,
     currentUserId,
     channels,
     teams,
@@ -57,7 +58,6 @@ const ChatContainer = props => {
   // Sort and filter posts, posts dependent effect
   const [currentPosts, setCurrentPosts] = useState([])
   const [currentMembers, setCurrentMembers] = useState([])
-  const [profiles, setProfiles] = useState([])
   const currentChannel = channels[currentChannelId]
   const [filteredOrder, setFilteredOrder] = useState([])
   const [lastViewedAt, setLastViewedAt] = useState(0)
@@ -108,18 +108,8 @@ const ChatContainer = props => {
 
   // Get user profiles and current user's teams at initial render
   useEffect(() => {
-    const getProfiles = async () => {
-      const res = await getMmProfiles(
-        user.id,
-        localStorage.getItem('authToken')
-      )
-      if (res && res.userDetails) {
-        const filteredProfiles = res.userDetails
-        setProfiles(filteredProfiles)
-      }
-    }
     getProfiles()
-  }, [])
+  }, [getProfiles])
 
   // Get team related channels and members
   useEffect(() => {
@@ -181,7 +171,7 @@ const ChatContainer = props => {
       const activeProfilesArr =
         currentMembers &&
         currentMembers
-          .map(member => profiles.find(p => p.id === member.user_id))
+          .map(member => profiles[member.user_id])
           .filter(
             member =>
               member &&
@@ -192,9 +182,7 @@ const ChatContainer = props => {
           )
       setActiveMemberMmProfiles(activeProfilesArr)
     }
-    if (profiles && profiles.length > 0) {
-      getActiveMattermostProfiles()
-    }
+    getActiveMattermostProfiles()
   }, [currentMembers, profiles, setActiveMemberMmProfiles, teams])
 
   return (
@@ -231,12 +219,14 @@ const ChatContainer = props => {
 
 ChatContainer.propTypes = {
   posts: PropTypes.instanceOf(Object).isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   channels: PropTypes.instanceOf(Object).isRequired,
   teams: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
   getFilesForPost: PropTypes.func.isRequired,
   uploadFile: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   currentUserId: PropTypes.string.isRequired,
   getChannelMembers: PropTypes.func.isRequired,
   fetchMyChannelsAndMembers: PropTypes.func.isRequired,
@@ -257,6 +247,7 @@ const mapStateToProps = (state, ownProps) => {
   const { teams } = state.entities
   const { channels } = state.entities.channels
   const user = state.entities.users.profiles[currentUserId]
+  const { profiles } = state.entities.users
   const { posts } = state.entities.posts
   const currentChannelId = ownProps.match.params.id
   const { statuses } = state.entities.users
@@ -266,6 +257,7 @@ const mapStateToProps = (state, ownProps) => {
     currentUserId,
     currentChannelId,
     user,
+    profiles,
     teams,
     posts,
     channels,
@@ -283,6 +275,8 @@ const mapDispatchToProps = dispatch =>
       uploadFile: uploadFileAction,
       fetchMyChannelsAndMembers: fetchChannelsAndMembersAction,
       getChannelMembers: getChannelMembersAction,
+      getProfiles: getProfilesAction,
+      getProfilesInChannel: getProfilesInChannelAction,
       removeChannelMember: removeChannelMemberAction,
       viewChannel: viewChannelAction,
       matterMostLogout: matterMostLogoutAction,

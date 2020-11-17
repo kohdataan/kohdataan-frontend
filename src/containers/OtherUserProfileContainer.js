@@ -1,13 +1,10 @@
 import React, { useState, useEffect, memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { getProfilesByUsernames as getProfilesByUsernamesAction } from 'mattermost-redux/actions/users'
 import { createDirectChannel as createDirectChannelAction } from 'mattermost-redux/actions/channels'
 import PropTypes from 'prop-types'
-import {
-  getInterestsByUsername,
-  getUserByUsername,
-  getMmProfiles,
-} from '../api/user/user'
+import { getInterestsByUsername, getUserByUsername } from '../api/user/user'
 import Profile from '../components/Profile'
 
 const OtherUserProfileContainer = props => {
@@ -15,6 +12,7 @@ const OtherUserProfileContainer = props => {
   const {
     currentUser,
     username,
+    getProfilesByUsernames,
     history,
     createDirectChannel,
     currentUserId,
@@ -23,21 +21,7 @@ const OtherUserProfileContainer = props => {
   const [mmuser, setmmUser] = useState({})
   const [interests, setInterests] = useState([])
   const [otherUserInfo, setOtherUserInfo] = useState([])
-  const [profiles, setProfiles] = useState([])
 
-  useEffect(() => {
-    const getProfiles = async () => {
-      const res = await getMmProfiles(
-        currentUser.id,
-        localStorage.getItem('authToken')
-      )
-      if (res && res.userDetails) {
-        const filteredProfiles = res.userDetails
-        setProfiles(filteredProfiles)
-      }
-    }
-    getProfiles()
-  }, [])
   const startDirectChannel = async () => {
     const newChannel = await createDirectChannel(currentUser.id, mmuser.id)
     if (newChannel && newChannel.data && newChannel.data.id)
@@ -68,30 +52,25 @@ const OtherUserProfileContainer = props => {
         console.error(e)
       }
     }
-    if (username && profiles) {
-      const foundMmUser = Object.values(profiles).find(
-        p => p.username === username
-      )
-      setmmUser(foundMmUser)
+    if (username) {
+      getProfilesByUsernames([username])
+        .then(data => setmmUser(data.data[0]))
+        // eslint-disable-next-line no-console
+        .catch(e => console.error(e))
+      // TODO: Get other users info from node backend (location, description)
       fetchOtherUser()
     }
-  }, [username, profiles, getUserByUsername])
+  }, [username, getProfilesByUsernames])
 
   return (
-    <>
-      {profiles && mmuser ? (
-        <Profile
-          mmuser={mmuser}
-          userInterests={interests}
-          myUserInfo={otherUserInfo}
-          startDirectChannel={startDirectChannel}
-          history={history}
-          currentUserId={currentUserId}
-        />
-      ) : (
-        <></>
-      )}
-    </>
+    <Profile
+      mmuser={mmuser}
+      userInterests={interests}
+      myUserInfo={otherUserInfo}
+      startDirectChannel={startDirectChannel}
+      history={history}
+      currentUserId={currentUserId}
+    />
   )
 }
 
@@ -112,6 +91,7 @@ const mapStateToProps = (state, ownProps) => {
 OtherUserProfileContainer.propTypes = {
   currentUser: PropTypes.instanceOf(Object),
   username: PropTypes.string,
+  getProfilesByUsernames: PropTypes.func.isRequired,
   createDirectChannel: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
@@ -131,6 +111,7 @@ const shouldComponentUpdate = (props, prevProps) => {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      getProfilesByUsernames: getProfilesByUsernamesAction,
       createDirectChannel: createDirectChannelAction,
     },
     dispatch
