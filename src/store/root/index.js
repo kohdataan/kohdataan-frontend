@@ -1,7 +1,13 @@
 import { init } from 'mattermost-redux/actions/websocket'
 import { Client4 } from 'mattermost-redux/client'
-import { loadMe } from 'mattermost-redux/actions/users'
-import { getTeamMembers, selectTeam } from 'mattermost-redux/actions/teams'
+import { getMe, getMyPreferences } from 'mattermost-redux/actions/users'
+import {
+  getMyTeams,
+  getMyTeamMembers,
+  getMyTeamUnreads,
+  getTeamMembers,
+  selectTeam,
+} from 'mattermost-redux/actions/teams'
 import { setServerVersion } from 'mattermost-redux/actions/general'
 import * as types from '../../contants/actionTypes'
 import getInterestsAction from '../interest/interestAction'
@@ -35,7 +41,11 @@ export const initUser = () => {
     if (token) {
       await dispatch(addUserToState())
       await dispatch(getUserInterests())
-      await dispatch(loadMe())
+      await dispatch(getMe())
+      await dispatch(getMyPreferences())
+      await dispatch(getMyTeams())
+      await dispatch(getMyTeamMembers())
+      await dispatch(getMyTeamUnreads())
     }
   }
 }
