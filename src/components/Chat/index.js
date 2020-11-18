@@ -227,7 +227,7 @@ const Chat = props => {
       {showSider && !directChannel && (
         <MembersSider
           members={membersToShow}
-          profiles={profilesInChannel}
+          profiles={profiles}
           currentUserId={currentUserId}
           getNickNamebyId={getNicknameById}
           handleLeaveChannel={handleLeaveChannel}
