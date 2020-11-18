@@ -21,8 +21,6 @@ const Groups = props => {
     showTownSquare,
     showThemeGroup,
   } = props
-
-
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
   const goToPreviousTutorial = () => {

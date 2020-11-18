@@ -1,21 +1,15 @@
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
-import getAge from '../../../utils/getAge'
 import './styles.scss'
 
 const Header = props => {
   const { nickname, location, showAge, showLocation, birthdate } = props
-
   return (
     <div className="profile-header-item">
       <span className="sr-only">Käyttäjän nimi</span>
       <h1 className="profile-header-nickname">{nickname}</h1>
       {showAge && (
-        <p className="profile-header-text">
-          {`${getAge({
-            birthdate,
-          })} vuotta`}
-        </p>
+        <p className="profile-header-text">{`${birthdate} vuotta`}</p>
       )}
       {showLocation && <p className="profile-header-text">{location}</p>}
     </div>
@@ -27,7 +21,7 @@ Header.propTypes = {
   location: propTypes.string,
   showAge: propTypes.bool,
   showLocation: propTypes.bool,
-  birthdate: propTypes.string,
+  birthdate: propTypes.number,
 }
 
 Header.defaultProps = {
@@ -35,7 +29,7 @@ Header.defaultProps = {
   location: '',
   showAge: false,
   showLocation: false,
-  birthdate: '',
+  birthdate: null,
 }
 
 export default memo(Header)

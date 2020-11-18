@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
-  getUser as getUserAction,
+  getMe as getMeAction,
   setDefaultProfileImage as setDefaultProfileImageAction,
   uploadProfileImage as uploadProfileImageAction,
 } from 'mattermost-redux/actions/users'
@@ -122,7 +122,7 @@ const mapDispatchToProps = dispatch =>
     {
       updateUser: updateUserAction,
       uploadProfileImage: uploadProfileImageAction,
-      getUser: getUserAction,
+      getMe: getMeAction,
       setDefaultProfileImage: setDefaultProfileImageAction,
     },
     dispatch

@@ -8,6 +8,7 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
+import { getMmProfiles } from '../api/user/user'
 
 const FriendsContainer = props => {
   const {
@@ -65,7 +66,6 @@ const FriendsContainer = props => {
     }
     return null
   }
-
   // Get unread count by channel id
   const getUnreadCountByChannelId = channelId => {
     if (channels) {
@@ -115,6 +115,7 @@ const FriendsContainer = props => {
         myUserInfo={user}
         statuses={statuses}
         currentUserId={currentUserId}
+        profiles={profiles}
       />
     </main>
   )
@@ -124,7 +125,6 @@ FriendsContainer.propTypes = {
   channels: PropTypes.instanceOf(Object).isRequired,
   myChannels: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
   getPosts: PropTypes.func.isRequired,
   searchProfiles: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,

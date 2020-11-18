@@ -53,7 +53,6 @@ class App extends Component {
 
   render() {
     const { loading, user: pUser, mmuser } = this.props
-
     if (loading.root && localStorage.getItem('authToken')) {
       return <FullScreenLoading />
     }
