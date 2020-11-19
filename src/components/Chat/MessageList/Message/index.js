@@ -192,8 +192,17 @@ const Message = props => {
                         color: 'white',
                       }}
                     >
-                      <span>K</span>
-                      <span className="sr-only">Valvoja</span>
+                      {isAdmin ? (
+                        <>
+                          <span>K</span>
+                          <span className="sr-only">Valvoja</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>O</span>
+                          <span className="sr-only">Ohjaaja</span>
+                        </>
+                      )}
                     </div>
                   ) : (
                     <Link

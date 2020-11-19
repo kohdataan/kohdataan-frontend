@@ -197,10 +197,11 @@ const Group = props => {
             </div>
             <div className="monitor-group-text">
               <p>
-                Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
+                Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä
+                ohjattuja keskusteluja.
               </p>
-              <p>Ryhmä on auki arkisin klo 9-21.</p>
-              <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
+              <br />
+              <p>{addLineBreaks(channel.header)}</p>
             </div>
           </div>
         </>
@@ -287,6 +288,7 @@ Group.propTypes = {
   currentUserId: propTypes.string.isRequired,
   getPosts: propTypes.instanceOf(Object).isRequired,
   showTownSquare: propTypes.bool.isRequired,
+  showThemeGroup: propTypes.bool.isRequired,
 }
 
 export default memo(Group)

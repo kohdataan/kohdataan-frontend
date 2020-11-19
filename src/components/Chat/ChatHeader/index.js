@@ -63,6 +63,7 @@ const Header = props => {
           direct={direct}
           path={location.pathname}
           user={mmUser}
+          channelName={channel.name}
         />
       </div>
     </header>

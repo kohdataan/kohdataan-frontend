@@ -50,26 +50,28 @@ const Groups = props => {
       disableBeacon: true,
     },
   ]
+
   return (
     <section className="groups-wrapper">
       <header className="groups-header">
         <h1>Omat ryhmät</h1>
       </header>
       <div className="groups-boxes">
-        {Object.values(channels).map(channel => (
-          <Group
-            key={channel.id}
-            channel={channel}
-            getMembers={getMembers}
-            profiles={profiles}
-            unreadCount={getUnreadCount(channel.id)}
-            currentUserId={currentUserId}
-            teams={teams}
-            getPosts={getPosts}
-            showTownSquare={showTownSquare}
-            showThemeGroup={showThemeGroup}
-          />
-        ))}
+        {channels &&
+          channels.map(channel => (
+            <Group
+              key={channel.id}
+              channel={channel}
+              getMembers={getMembers}
+              profiles={profiles}
+              unreadCount={getUnreadCount(channel.id)}
+              currentUserId={currentUserId}
+              teams={teams}
+              getPosts={getPosts}
+              showTownSquare={showTownSquare}
+              showThemeGroup={showThemeGroup}
+            />
+          ))}
       </div>
       {!tutorialWatched && (
         <Tutorial
@@ -99,6 +101,7 @@ Groups.propTypes = {
   getPosts: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object),
   showTownSquare: PropTypes.bool.isRequired,
+  showThemeGroup: PropTypes.bool.isRequired,
 }
 
 export default memo(Groups)

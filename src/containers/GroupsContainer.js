@@ -48,6 +48,7 @@ const GroupsContainer = props => {
   const [showTownSquare, setShowTownSquare] = useState(false)
   const [showThemeGroup, setShowThemeGroup] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
+  const [timer, setTimer] = useState(0)
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group related data at once
@@ -59,32 +60,63 @@ const GroupsContainer = props => {
     initialize()
   }, [fetchChannelsAndInvitations])
 
-  useEffect(() => {
+  const updateThemeGroupOpen = () => {
+    const dateObject = moment()
+    const format = 'DD MM YYYY, hh:mm:ss'
+    const startTime1 = moment('24 11 2020, 18:00:00', format)
+    const endTime1 = moment('24 11 2020, 20:00:00', format)
+    const startTime2 = moment('07 12 2020, 18:00:00', format)
+    const endTime2 = moment('07 12 2020, 20:00:00', format)
+    if (dateObject.isBetween(startTime1, endTime1)) {
+      setShowThemeGroup(true)
+    } else if (dateObject.isBetween(startTime2, endTime2)) {
+      setShowThemeGroup(true)
+    } else {
+      setShowThemeGroup(false)
+    }
+    if (timer > 100000) {
+      setTimer(0)
+    } else {
+      setTimer(timer + 1)
+    }
+  }
+
+  const updateTownSquareOpen = () => {
     const dateObject = moment()
     const weekday = dateObject.isoWeekday()
     const format = 'hh:mm:ss'
     const beforeTime = moment('09:00:00', format)
     const afterTime = moment('21:00:00', format)
-    if (dateObject.isBetween(beforeTime, afterTime)) setShowTownSquare(true)
+    if (dateObject.isBetween(beforeTime, afterTime)) {
+      setShowTownSquare(true)
+    } else if (!dateObject.isBetween(beforeTime, afterTime)) {
+      setShowTownSquare(false)
+    }
     // checks if weekday is Saturday (6) or Sunday (7)
     if (weekday === 6 || weekday === 7) setShowTownSquare(false)
+    if (timer > 100000) {
+      setTimer(0)
+    } else {
+      setTimer(timer + 1)
+    }
+  }
+
+  // checks if public groups are open or closed on first render
+  useEffect(() => {
+    updateTownSquareOpen()
+    updateThemeGroupOpen()
   }, [])
 
+  // check every ten seconds if townsquare and theme group should be shown or not
   useEffect(() => {
-    const dateObject = moment()
-    const format = 'DD MM YYYY, hh:mm:ss'
-    const beforeTime1 = moment('11 11 2020, 10:01:00', format)
-    const afterTime1 = moment('11 11 2020, 11:01:30', format)
-    const beforeTime2 = moment('12 11 2020, 08:00:00', format)
-    const afterTime2 = moment('12 11 2020, 09:30:00', format)
-    if (dateObject.isBetween(beforeTime1, afterTime1)) {
-      setShowThemeGroup(true)
-    } else if (dateObject.isBetween(beforeTime2, afterTime2)) {
-      setShowThemeGroup(true)
-    } else {
-      setShowThemeGroup(false)
-    }
-  }, [])
+    const checkTime = setTimeout(updateTownSquareOpen, 10000)
+    return () => clearTimeout(checkTime)
+  }, [timer])
+
+  useEffect(() => {
+    const checkTime = setTimeout(updateThemeGroupOpen, 10000)
+    return () => clearTimeout(checkTime)
+  }, [timer])
 
   useEffect(() => {
     const getFilteredChannelSuggestions = () => {
@@ -196,6 +228,7 @@ const GroupsContainer = props => {
         posts={posts}
         showTownSquare={showTownSquare}
         showThemeGroup={showThemeGroup}
+        setShowThemeGroup={setShowThemeGroup}
       />
     </main>
   )

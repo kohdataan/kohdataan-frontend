@@ -4,7 +4,7 @@ import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
 const PageInformation = props => {
-  const { handleClick, path, direct, inChat } = props
+  const { handleClick, path, direct, inChat, channelName } = props
   let text = ''
   let page
   const regexForProfileLink = /\/profile\/[a-z0-9.-]+/i
@@ -13,7 +13,13 @@ const PageInformation = props => {
   } else if (inChat && direct) {
     page = '/private-chat'
   } else if (inChat && !direct) {
-    page = '/group-chat'
+    if (channelName === 'off-topic') {
+      page = '/themes'
+    } else if (channelName === 'town-square') {
+      page = '/town-square'
+    } else {
+      page = '/group-chat'
+    }
   } else {
     page = path
   }
@@ -74,6 +80,19 @@ const PageInformation = props => {
         \nTäällä voit muokata tietojasi, jos esimerkiksi sukunimesi, sähköpostisi tai puhelinnumerosi vaihtuu.
         \nTäällä voit myös poistaa käyttäjätilisi kokonaan. Kun poistat käyttäjätilisi, poistamme sen palvelusta viikon päästä. Jos haluat jatkaa palvelun käyttöä, kirjaudu palveluun ennen kuin viikko on kulunut. Kun poistat käyttäjätilisi, viestisi jäävät palveluun nimettömänä.`
       break
+    case '/themes':
+      text = `Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä ohjattuja keskusteluja.
+          \nRyhmä on auki vain keskustelujen ajan.
+          \nKaikki käyttäjät kuuluvat tähän ryhmään, joten ryhmään lähetetyt viestit näkyvät kaikille.
+          \nJos haluat lähettää valvojalle viestin, jota muut eivät näe, voit tehdä sen botin kautta.`
+      break
+    case '/town-square':
+      text = `Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa. 
+            \nRyhmä on auki arkisin klo 9-21.
+            \nValvojat ovat ryhmässä arkisin 9-17.
+            \nKaikki käyttäjät kuuluvat tähän ryhmään, joten ryhmään lähetetyt viestit näkyvät kaikille.
+            \nJos haluat lähettää valvojalle viestin, jota muut eivät näe, voit tehdä sen botin kautta.`
+      break
     default:
   }
 
@@ -92,12 +111,14 @@ PageInformation.propTypes = {
   path: PropTypes.string,
   direct: PropTypes.bool,
   inChat: PropTypes.bool,
+  channelName: PropTypes.string,
 }
 
 PageInformation.defaultProps = {
   direct: false,
   inChat: false,
   path: null,
+  channelName: null,
 }
 
 export default memo(PageInformation)
