@@ -44,7 +44,7 @@ const GroupSuggestions = props => {
     <section className="group-suggestions">
       <h1>Uudet ryhmät</h1>
       {joinedChannels &&
-      joinedChannels.length < 6 &&
+      joinedChannels.length < 7 &&
       cards &&
       cards.length > 0 &&
       !channelsLoading ? (
@@ -77,7 +77,7 @@ const GroupSuggestions = props => {
       <div className="group-suggestion-boxes">
         {channelsLoading && <BouncingLoader />}
         {joinedChannels &&
-          joinedChannels.length < 6 &&
+          joinedChannels.length < 7 &&
           cards &&
           cards.length > 0 &&
           !channelsLoading && (

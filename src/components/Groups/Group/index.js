@@ -101,6 +101,9 @@ const Group = props => {
     if (channel.name === 'town-square') {
       return 'Kohdataan'
     }
+    if (channel.name === 'off-topic') {
+      return 'Teemat'
+    }
     return channel.display_name
   }
 
@@ -126,6 +129,7 @@ const Group = props => {
             </p>
             <p>Ryhmä on auki arkisin klo 9-21.</p>
             <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
+            <p>Ryhmä on suljettu 24.12., 25.12., 31.12., 01.01. ja 06.01.</p>
           </div>
         )
       case 'off-topic':
@@ -177,6 +181,7 @@ const Group = props => {
               </p>
               <p>Ryhmä on auki arkisin klo 9-21.</p>
               <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
+              <p>Ryhmä on suljettu 24.12., 25.12., 31.12., 01.01. ja 06.01.</p>
             </div>
           </div>
         </>
@@ -207,6 +212,7 @@ const Group = props => {
         </>
       )
     }
+    return <></>
   }
 
   return (
