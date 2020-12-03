@@ -25,7 +25,6 @@ import getInterestsAction from '../store/interest/interestAction'
 import ModalContainer from '../components/ModalContainer'
 import ButtonContainer from '../components/ButtonContainer'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
-import getAge from '../utils/getAge'
 import updateUsername from '../utils/updateUsername'
 
 const RegistrationContainer = props => {
@@ -119,7 +118,7 @@ const RegistrationContainer = props => {
         return (
           <ShowAge
             onChange={setShowAge}
-            age={getAge({ birthdate: userBirthdate })}
+            age={userBirthdate}
             showAge={showAge.toString()}
           />
         )
