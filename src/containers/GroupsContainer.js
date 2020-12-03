@@ -65,7 +65,11 @@ const GroupsContainer = props => {
     const format = 'DD MM YYYY, hh:mm:ss'
     const startTime1 = moment('07 12 2020, 18:00:00', format)
     const endTime1 = moment('07 12 2020, 20:00:00', format)
+    const startTime2 = moment('10 12 2020, 16:00:00', format)
+    const endTime2 = moment('10 12 2020, 18:00:00', format)
     if (dateObject.isBetween(startTime1, endTime1)) {
+      setShowThemeGroup(true)
+    } else if (dateObject.isBetween(startTime2, endTime2)) {
       setShowThemeGroup(true)
     } else {
       setShowThemeGroup(false)
