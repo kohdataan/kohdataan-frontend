@@ -8,7 +8,6 @@ import { updateUser as updateUserAction } from '../store/user/userAction'
 import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
-import { getMmProfiles } from '../api/user/user'
 
 const FriendsContainer = props => {
   const {
@@ -126,6 +125,7 @@ FriendsContainer.propTypes = {
   myChannels: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
   getPosts: PropTypes.func.isRequired,
+  profiles: PropTypes.instanceOf(Object).isRequired,
   searchProfiles: PropTypes.func.isRequired,
   fetchFriendsPageData: PropTypes.func.isRequired,
   membersInChannel: PropTypes.instanceOf(Object).isRequired,

@@ -24,7 +24,6 @@
   padding: 15px 15px;
   height: 200px;
   @media (max-width: 360px) {
-    font-size: 14px;
     h2 {
       font-size: 18px;
     }
@@ -79,6 +78,9 @@
 
 .group-interests {
   margin-bottom: 10px;
+  @media (max-width: 360px) {
+    font-size: 14px;
+  }
 }
 
 .group-box-unreads {

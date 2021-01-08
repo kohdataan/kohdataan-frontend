@@ -124,12 +124,7 @@ const Group = props => {
       case 'town-square':
         return (
           <div className="monitor-group-text">
-            <p>
-              Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
-            </p>
-            <p>Ryhmä on auki arkisin klo 9-21.</p>
-            <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
-            <p>Ryhmä on suljettu 24.12., 25.12., 31.12., 01.01. ja 06.01.</p>
+            <p>{addLineBreaks(channel.header)}</p>
           </div>
         )
       case 'off-topic':
@@ -176,12 +171,7 @@ const Group = props => {
               <h2>Kohdataan</h2>
             </div>
             <div className="monitor-group-text">
-              <p>
-                Tässä ryhmässä voit jutella kaikkien muiden käyttäjien kanssa.
-              </p>
-              <p>Ryhmä on auki arkisin klo 9-21.</p>
-              <p>Valvojat ovat ryhmässä arkisin klo 9-17.</p>
-              <p>Ryhmä on suljettu 24.12., 25.12., 31.12., 01.01. ja 06.01.</p>
+              <p>{addLineBreaks(channel.header)}</p>
             </div>
           </div>
         </>
