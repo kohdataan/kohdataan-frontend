@@ -17,6 +17,9 @@ const UserInput = props => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [errorModalIsOpen, setErrorModalIsOpen] = useState(false)
   const [orientation, setOrientation] = useState(0)
+  const [showAudioModal, setShowAudioModal] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
+  const [showFilePreview, setShowFilePreview] = useState(false)
 
   const getExifData = file => {
     // get Exif data for file if it exists.
@@ -31,8 +34,6 @@ const UserInput = props => {
       })
     }
   }
-  const [isRecording, setIsRecording] = useState(false)
-  const [isUploading, setIsUploading] = useState(false)
 
   const closeModal = () => {
     setModalIsOpen(false)
@@ -40,7 +41,9 @@ const UserInput = props => {
     setFileId('')
     setOrientation(0)
     setMessage('')
-    setIsRecording(false)
+    setIsUploading(false)
+    setShowAudioModal(false)
+    setShowFilePreview(false)
   }
   const fileInput = React.createRef()
 
@@ -64,6 +67,7 @@ const UserInput = props => {
     }
     setMessage('')
     setModalIsOpen(false)
+    setShowFilePreview(false)
   }
 
   const handleChange = e => {
@@ -88,16 +92,18 @@ const UserInput = props => {
         res && res.data && res.data.file_infos && res.data.file_infos[0].id
       setFileId(id)
       setIsUploading(false)
+      setShowFilePreview(true)
     }
   }
 
   const startSendingAudio = () => {
-    setIsRecording(true)
+    setShowAudioModal(true)
     setModalIsOpen(true)
   }
 
   const handleAudioSubmit = async audioFile => {
-    setIsRecording(false)
+    setShowAudioModal(false)
+    setIsUploading(true)
     const data = new FormData()
     data.append('files', audioFile)
     data.append('channel_id', channel.id)
@@ -109,6 +115,8 @@ const UserInput = props => {
       file_ids: [id],
     }
     await createPost(post)
+    setIsUploading(false)
+    setModalIsOpen(false)
   }
 
   const clickFileInput = () => {
@@ -142,11 +150,13 @@ const UserInput = props => {
             className="icon-btn"
             onClick={clickFileInput}
             label="Lähetä kuva tai video"
+            disabled={showAudioModal || isUploading}
           >
             <div className="send-image-attachment-button" />
           </ButtonContainer>
           <ButtonContainer
             className="icon-btn"
+            disabled={showFilePreview || isUploading}
             onClick={startSendingAudio}
             label="Lähetä ääniviesti"
           >
@@ -165,12 +175,12 @@ const UserInput = props => {
       <ModalContainer
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        label={!isRecording ? 'Esikatselu' : 'Ääniviestin lähetys'}
-        isLong
+        label={!showAudioModal ? 'Esikatselu' : 'Ääniviestin lähetys'}
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
+        shouldCloseOnOverlayClick={false}
       >
-        {!isRecording && isUploading && !errorModalIsOpen && (
+        {!showAudioModal && isUploading && !errorModalIsOpen && (
           <div>
             <ButtonContainer
               className="icon-btn go-back-button image-max-size-exceeded"
@@ -183,7 +193,7 @@ const UserInput = props => {
             <p className="uploading-text">Ladataan...</p>
           </div>
         )}
-        {!isRecording && !isUploading && (
+        {showFilePreview && (
           <FilePreview
             handleSubmit={handleSubmit}
             message={message}
@@ -195,11 +205,11 @@ const UserInput = props => {
             isUploading={isUploading}
           />
         )}
-        {isRecording && (
+        {showAudioModal && (
           <AudioInput
             handleSubmit={handleAudioSubmit}
             closeModal={closeModal}
-            isRecording={isRecording}
+            showAudioModal={showAudioModal}
           />
         )}
       </ModalContainer>

@@ -16,7 +16,7 @@ const customStyles = {
     border: 'none',
     borderRadius: '5px',
     textAlign: 'center',
-    maxHeight: '80vh',
+    maxHeight: '100%',
     minWidth: '290px',
     maxWidth: '400px',
   },
@@ -163,6 +163,7 @@ const ModalContainer = props => {
     editModal,
     cookie,
     isSendMessage,
+    shouldCloseOnOverlayClick,
   } = props
 
   const getStyles = () => {
@@ -192,6 +193,7 @@ const ModalContainer = props => {
         label,
         modal: true,
       }}
+      shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
     >
       {children}
     </Modal>
@@ -212,6 +214,7 @@ ModalContainer.propTypes = {
   editModal: PropTypes.bool,
   cookie: PropTypes.bool,
   isSendMessage: PropTypes.bool,
+  shouldCloseOnOverlayClick: PropTypes.bool,
 }
 
 ModalContainer.defaultProps = {
@@ -221,6 +224,7 @@ ModalContainer.defaultProps = {
   tutorial: false,
   cookie: false,
   isSendMessage: false,
+  shouldCloseOnOverlayClick: true,
 }
 
 export default memo(ModalContainer)

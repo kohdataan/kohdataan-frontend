@@ -7,87 +7,64 @@ import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
 const AudioInput = props => {
-  const { handleSubmit, closeModal, isRecording } = props
+  const { handleSubmit, closeModal, showAudioModal } = props
   const [stream, setStream] = useState(null)
   const [recorder, setRecorder] = useState(null)
-  const [recordingFinished, setRecorderFinished] = useState(false)
   const timer = React.createRef()
 
-  // If timer has reached 60 seconds, it sets recordingFinished to true and this is activated
-  useEffect(() => {
-    if (recordingFinished) {
-      timer.current.stop()
-      recorder.stopRecording()
-      stream.stop()
-    } else if (recorder) {
-      recorder.startRecording()
+  const openStream = async () => {
+    const openedStream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    })
+    if (openedStream) {
+      setStream(openedStream)
     }
-  }, [recordingFinished, recorder, stream, timer])
+  }
 
-  // This useEffect handles opening and closing audio stream
   useEffect(() => {
-    if (isRecording && !isIE) {
-      const openStream = async () => {
-        setStream(
-          await navigator.mediaDevices.getUserMedia({
-            audio: true,
-          })
-        )
-      }
-      if (!stream) {
-        openStream()
-      }
+    if (showAudioModal) {
+      openStream()
     }
-    return () => {
-      if (stream) {
-        stream.stop()
-      }
-    }
-  }, [isRecording, stream])
+  }, [showAudioModal])
 
-  // This useEffect handles creating and setting recorder after stream is set
   useEffect(() => {
-    if (stream) {
-      setRecorder(
-        new RecordRTC(stream, {
+    const startRecording = async () => {
+      if (!isIE) {
+        const newRecorder = new RecordRTC(stream, {
           type: 'audio',
           mimeType: 'audio/wav',
           recorderType: StereoAudioRecorder,
+          sampleRate: 44100,
         })
-      )
+        setRecorder(newRecorder)
+        if (stream && newRecorder) {
+          newRecorder.startRecording()
+        }
+      }
     }
+    if (stream) startRecording()
   }, [stream])
 
-  // If recording is finished (timer is at 60 secs) recorder is already stopped.
-  const endRecording = () => {
-    if (recordingFinished) {
-      const blob = recorder.getBlob()
-      const file = new File([blob], 'audio.wav')
-      handleSubmit(file)
-      closeModal()
-    } else if (recorder) {
+  const stopRecording = async () => {
+    if (recorder) {
       recorder.stopRecording(() => {
         const blob = recorder.getBlob()
         const file = new File([blob], 'audio.wav')
         handleSubmit(file)
-        closeModal()
+        stream.stop()
       })
     } else {
       closeModal()
     }
   }
 
-  // If recording is finished (timer is at 60 secs) recorder is already stopped.
   const cancelRecording = () => {
-    if (recordingFinished) {
-      closeModal()
-    } else if (recorder) {
+    if (recorder) {
       recorder.stopRecording(() => {
-        closeModal()
+        stream.stop()
       })
-    } else {
-      closeModal()
     }
+    closeModal()
   }
 
   return (
@@ -117,20 +94,16 @@ const AudioInput = props => {
             <Timer
               ref={timer}
               lastUnit="s"
-              checkpoints={[
-                { time: 60000, callback: () => setRecorderFinished(true) },
-              ]}
+              checkpoints={[{ time: 60000, callback: () => stopRecording() }]}
             >
               <div className="audio-timer">
                 <Timer.Seconds />
               </div>
             </Timer>
-            <span
-              className={recordingFinished ? 'pulse-done' : 'pulse-recording'}
-            />
+            <span className={!showAudioModal ? 'pulse-done' : 'pulse-recording'} />
           </div>
           <p className="audio-description-text">
-            {recordingFinished ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
+            {!showAudioModal ? 'Äänitys valmis' : 'Äänitys käynnissä...'}
           </p>
           <div className="audio-control-buttons">
             <ButtonContainer
@@ -141,7 +114,7 @@ const AudioInput = props => {
             </ButtonContainer>
             <ButtonContainer
               className="button save-button"
-              onClick={endRecording}
+              onClick={stopRecording}
             >
               lähetä
             </ButtonContainer>
@@ -155,7 +128,7 @@ const AudioInput = props => {
 AudioInput.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
-  isRecording: PropTypes.bool.isRequired,
+  showAudioModal: PropTypes.bool.isRequired,
 }
 
 export default memo(AudioInput)

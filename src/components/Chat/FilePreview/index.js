@@ -61,21 +61,21 @@ const FilePreview = props => {
 
   return (
     <main className="image-preview-content">
+      <ButtonContainer
+        className="image-preview-close-modal-button go-back-button"
+        onClick={closeModal}
+        label="Sulje"
+      >
+        {' '}
+      </ButtonContainer>
       <div className="image">
-        <ButtonContainer
-          className="image-preview-close-modal-button go-back-button"
-          onClick={closeModal}
-          label="Sulje"
-        >
-          {' '}
-        </ButtonContainer>
         {fileId && filesData[fileId].mime_type.includes('image') && (
           <img
             className={imageContentClassList.join(' ')}
             src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
             alt="attachment"
-            width="100%"
-            height="100%"
+            width="220px"
+            height="auto"
           />
         )}
         {fileId && filesData[fileId].mime_type.includes('video') && (
@@ -84,8 +84,8 @@ const FilePreview = props => {
               className="react-player"
               url={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${fileId}`}
               controls
-              width="100%"
-              height="100%"
+              width="220px"
+              height="auto"
             />
           </div>
         )}
