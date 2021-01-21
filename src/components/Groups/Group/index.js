@@ -111,10 +111,10 @@ const Group = props => {
     const slices = text.split('///')
     return slices.map(slice => {
       return (
-        <>
+        <span key={slice.toString()}>
           <span>{slice}</span>
           <br />
-        </>
+        </span>
       )
     })
   }

@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import PropTypes from 'prop-types'
 import { isBrowser } from 'react-device-detect'
@@ -178,7 +178,6 @@ const UserInput = props => {
         label={!showAudioModal ? 'Esikatselu' : 'Ääniviestin lähetys'}
         className="image-preview-modal"
         overlayClassName="image-preview-modal-overlay"
-        shouldCloseOnOverlayClick={false}
       >
         {!showAudioModal && isUploading && !errorModalIsOpen && (
           <div>

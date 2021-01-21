@@ -1,5 +1,12 @@
 @import '../../../styles/colors.scss';
 
+.audio-message-error-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .audio-recording-content {
   display: flex;
   flex-direction: column;

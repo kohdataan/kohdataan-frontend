@@ -22,7 +22,6 @@ const Friends = props => {
     myUserInfo,
     statuses,
     currentUserId,
-    profiles,
   } = props
 
   const [friendSearch, setFriendSearch] = useState('')
@@ -216,7 +215,7 @@ Friends.propTypes = {
   myUserInfo: PropTypes.instanceOf(Object).isRequired,
   statuses: PropTypes.instanceOf(Object).isRequired,
   currentUserId: PropTypes.string.isRequired,
-  profiles: PropTypes.instanceOf(Object).isRequired,
+  searchProfiles: PropTypes.func.isRequired,
 }
 
 export default memo(Friends)
