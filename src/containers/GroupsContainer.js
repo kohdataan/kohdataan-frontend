@@ -63,13 +63,17 @@ const GroupsContainer = props => {
   const updateThemeGroupOpen = () => {
     const dateObject = moment()
     const format = 'DD MM YYYY, hh:mm:ss'
-    const startTime1 = moment('12 01 2021, 18:00:00', format)
-    const endTime1 = moment('12 01 2021, 20:00:00', format)
-    const startTime2 = moment('19 01 2021, 18:00:00', format)
-    const endTime2 = moment('19 01 2021, 20:00:00', format)
+    const startTime1 = moment('26 01 2021, 18:00:00', format)
+    const endTime1 = moment('26 01 2021, 20:00:00', format)
+    const startTime2 = moment('04 02 2021, 18:00:00', format)
+    const endTime2 = moment('04 02 2021, 20:00:00', format)
+    const startTime3 = moment('12 02 2021, 12:00:00', format)
+    const endTime3 = moment('12 02 2021, 14:00:00', format)
     if (dateObject.isBetween(startTime1, endTime1)) {
       setShowThemeGroup(true)
     } else if (dateObject.isBetween(startTime2, endTime2)) {
+      setShowThemeGroup(true)
+    } else if (dateObject.isBetween(startTime3, endTime3)) {
       setShowThemeGroup(true)
     } else {
       setShowThemeGroup(false)
