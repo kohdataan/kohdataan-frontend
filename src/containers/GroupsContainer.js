@@ -63,17 +63,9 @@ const GroupsContainer = props => {
   const updateThemeGroupOpen = () => {
     const dateObject = moment()
     const format = 'DD MM YYYY, hh:mm:ss'
-    const startTime1 = moment('26 01 2021, 18:00:00', format)
-    const endTime1 = moment('26 01 2021, 20:00:00', format)
-    const startTime2 = moment('04 02 2021, 18:00:00', format)
-    const endTime2 = moment('04 02 2021, 20:00:00', format)
-    const startTime3 = moment('12 02 2021, 12:00:00', format)
-    const endTime3 = moment('12 02 2021, 14:00:00', format)
+    const startTime1 = moment('04 03 2021, 17:00:00', format)
+    const endTime1 = moment('04 03 2021, 19:00:00', format)
     if (dateObject.isBetween(startTime1, endTime1)) {
-      setShowThemeGroup(true)
-    } else if (dateObject.isBetween(startTime2, endTime2)) {
-      setShowThemeGroup(true)
-    } else if (dateObject.isBetween(startTime3, endTime3)) {
       setShowThemeGroup(true)
     } else {
       setShowThemeGroup(false)
@@ -89,9 +81,14 @@ const GroupsContainer = props => {
     const dateObject = moment()
     const weekday = dateObject.isoWeekday()
     const format = 'hh:mm:ss'
+    const format2 = 'DD MM YYYY, hh:mm:ss'
     const beforeTime = moment('09:00:00', format)
     const afterTime = moment('21:00:00', format)
-    if (dateObject.isBetween(beforeTime, afterTime)) {
+    const startTime1 = moment('02 04 2021, 00:00:00', format2)
+    const endTime1 = moment('06 04 2021, 00:00:00', format2)
+    if (dateObject.isBetween(startTime1, endTime1)) {
+      setShowTownSquare(false)
+    } else if (dateObject.isBetween(beforeTime, afterTime)) {
       setShowTownSquare(true)
     } else if (!dateObject.isBetween(beforeTime, afterTime)) {
       setShowTownSquare(false)
