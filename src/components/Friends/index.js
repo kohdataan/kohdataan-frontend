@@ -94,7 +94,8 @@ const Friends = props => {
         profile.nickname.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
-  const handleFriendSearchChange = async searchText => {
+  const handleFriendSearchChange = async () => {
+    const searchText = friendSearchTextInput.current.value
     setFriendSearch(searchText)
     try {
       if (searchText === '') {
@@ -112,6 +113,16 @@ const Friends = props => {
     } catch (e) {
       setFriendSearchResult([])
     }
+  }
+
+  const sortSearchResultsAlphabetically = (a, b) => {
+    if (a.nickname.toLowerCase() > b.nickname.toLowerCase()) {
+      return 1
+    }
+    if (b.nickname.toLowerCase() > a.nickname.toLowerCase()) {
+      return -1
+    }
+    return 0
   }
 
   // if the user navigates back after visiting a profile, save the search term
@@ -180,13 +191,15 @@ const Friends = props => {
         </div>
       ) : (
         <div className="friends-boxes">
-          {Object.values(friendSearchResult).map(profile => (
-            <FriendSearch
-              key={profile.id}
-              profileData={profile}
-              searchTerm={friendSearch}
-            />
-          ))}
+          {Object.values(friendSearchResult)
+            .sort((a, b) => sortSearchResultsAlphabetically(a, b))
+            .map(profile => (
+              <FriendSearch
+                key={profile.id}
+                profileData={profile}
+                searchTerm={friendSearch}
+              />
+            ))}
           <p className="found-friends-count-info">{`Löydettiin ${friendSearchResult.length} käyttäjää`}</p>
         </div>
       )}

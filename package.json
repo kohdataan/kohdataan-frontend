@@ -10,7 +10,7 @@
     "jest-fetch-mock": "^3.0.3",
     "localforage": "^1.9.0",
     "localforage-observable": "^1.4.0",
-    "mattermost-redux": "^5.32.0",
+    "mattermost-redux": "~5.15.0",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
@@ -33,7 +33,7 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
-    "react-select": "^3.2.0",
+    "react-select": "^3.1.1",
     "react-swipy": "0.0.6",
     "react-test-renderer": "^16.14.0",
     "recordrtc": "^5.6.1",
@@ -41,7 +41,7 @@
     "redux-mock-store": "^1.5.4",
     "redux-persist": "4.10.2",
     "redux-thunk": "^2.3.0",
-    "uniqid": "^5.3.0",
+    "uniqid": "^5.2.0",
     "zen-observable": "^0.8.15"
   },
   "scripts": {
