@@ -30,6 +30,7 @@ const AudioInput = props => {
           }
         } catch (e) {
           setPermission(false)
+          // eslint-disable-next-line no-console
           console.error(e)
         }
       }

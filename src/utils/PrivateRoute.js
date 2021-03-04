@@ -5,18 +5,22 @@ import PropTypes from 'prop-types'
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   return (
     <Route
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
-      render={props =>
-        localStorage.getItem('authToken') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: location },
-            }}
-          />
-        )
+      render={
+        props =>
+          localStorage.getItem('authToken') ? (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: location },
+              }}
+            />
+          )
+        // eslint-disable-next-line react/jsx-curly-newline
       }
     />
   )

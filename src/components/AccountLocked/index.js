@@ -14,7 +14,7 @@ const AccountLocked = () => {
         Käyttäjätilisi on tällä hetkellä pois käytöstä.
       </p>
       <p className="account-locked-paragraph">
-        Ota tarvittaessa yhteyttä osoitteeseen{' '}
+        Ota tarvittaessa yhteyttä osoitteeseen &nbsp;
         <a
           href="mailto:kohdataan@kohdataan.fi"
           className="account-locked-email-link"

@@ -20,7 +20,8 @@ const PrivacyPolicy = ({ closeModal }) => {
         <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
         <div className="service-info-content">
           <p>
-            Tämä on <span className="uppercase-text">Kohdataan</span>
+            Tämä on &npsp;
+            <span className="uppercase-text">Kohdataan</span>
             -palvelun tietosuojaseloste. Tietosuojaselosteessa kerrotaan, mitä
             henkilötietoja palvelussa käyttäjistä kerätään ja mitä
             henkilötiedoilla tehdään.
@@ -50,9 +51,10 @@ const PrivacyPolicy = ({ closeModal }) => {
                 <br />
                 Puhelin: 0400 675 674
                 <br />
-                Sähköposti:
-{' '}
-                <a className="email-link" href="mailto:tanja.rasanen@kvl.fi">tanja.rasanen@kvl.fi</a>
+                Sähköposti: &nbsp;
+                <a className="email-link" href="mailto:tanja.rasanen@kvl.fi">
+                  tanja.rasanen@kvl.fi
+                </a>
                 <br />
                 Voit kysyä yhteyshenkilöltä lisätietoa tästä selosteesta tai
                 henkilötietojesi käytöstä.
@@ -66,9 +68,10 @@ const PrivacyPolicy = ({ closeModal }) => {
                 <br />
                 Puhelin: (09) 3480 9262
                 <br />
-                Sähköposti:
-{' '}
-                <a className="email-link" href="mailto:marko.peltomaki@kvl.fi">marko.peltomaki@kvl.fi</a>
+                Sähköposti: &npsp;
+                <a className="email-link" href="mailto:marko.peltomaki@kvl.fi">
+                  marko.peltomaki@kvl.fi
+                </a>
                 <br />
               </div>
             </li>
@@ -92,7 +95,8 @@ const PrivacyPolicy = ({ closeModal }) => {
               </p>
               <p>
                 Keräämme ja käsittelemme vain sellaisia henkilötietojasi, joita
-                tarvitaan <span className="uppercase-text">Kohdataan</span>
+                tarvitaan &npsp;
+                <span className="uppercase-text">Kohdataan</span>
                 -palvelun käyttöön.
               </p>
               Käsittelemme ja käytämme henkilötietojasi, jotta voimme
@@ -108,7 +112,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               </ul>
               <p>
                 Henkilötietojesi käyttö perustuu Kehitysvammaliiton ja sinun
-                väliseen sopimukseen{' '}
+                väliseen sopimukseen &npsp;
                 <span className="uppercase-text">Kohdataan</span>
                 -palvelun käytöstä.
               </p>
@@ -228,7 +232,8 @@ const PrivacyPolicy = ({ closeModal }) => {
                 Tietokoneesi selaimen tai mobiililaitteen asetuksista voit
                 hallita evästeiden käyttöä tai halutessasi estää ne kokonaan.
                 Jos estät asetuksistasi evästeiden käytön kokonaan, et pysty
-                käyttämään <span className="uppercase-text">Kohdataan</span>
+                käyttämään &npsp;
+                <span className="uppercase-text">Kohdataan</span>
                 -palvelua.
               </p>
             </li>
@@ -261,8 +266,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               <p>Rekisteröitynä sinulla on oikeus:</p>
               <ul>
                 <li>
-                  tarkastaa, mitä henkilötietoja sinusta on tallennettu
-{' '}
+                  tarkastaa, mitä henkilötietoja sinusta on tallennettu &npsp;
                   <span className="uppercase-text">Kohdataan</span>
                   -palvelun rekisteriin
                 </li>

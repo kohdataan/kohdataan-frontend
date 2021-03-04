@@ -161,7 +161,7 @@ export default function configureStore(initialState) {
 
                 store.dispatch({
                   type: General.OFFLINE_STORE_RESET,
-                  data: Object.assign({}, reduxInitialState, initialState),
+                  data: { ...reduxInitialState, ...initialState },
                 })
 
                 setTimeout(() => {

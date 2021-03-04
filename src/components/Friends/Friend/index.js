@@ -174,7 +174,8 @@ const Friend = props => {
               <div className="no-unread-messages">{}</div>
             )}
             <span className="sr-only">
-              `{unreadCount} lukemattomia viestejä`
+              {unreadCount}
+              &npsp; lukemattomia viestejä
             </span>
           </Link>
           <ButtonContainer

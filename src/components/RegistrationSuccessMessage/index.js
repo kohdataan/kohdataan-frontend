@@ -34,7 +34,7 @@ const RegistrationSuccessMessage = () => {
             roskapostikansio.
           </p>
           <p>
-            Voit myös pyytää, että lähetämme sinulle{' '}
+            Voit myös pyytää, että lähetämme sinulle &nbsp;
             <Link className="resend-verification-link" to="/email-verification">
               vahvistuslinkin uudestaan.
             </Link>

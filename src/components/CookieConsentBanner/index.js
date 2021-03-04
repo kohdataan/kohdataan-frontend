@@ -49,7 +49,7 @@ const CookieConsentBanner = () => {
           }}
         >
           Kohdataan-somessa käytämme evästeitä, jotta palvelu toimii ja sitä voi
-          käyttää. Voit lukea lisää evästeistä{' '}
+          käyttää. Voit lukea lisää evästeistä &nbsp;
           <ButtonContainer
             className="modal-btn"
             role="link"

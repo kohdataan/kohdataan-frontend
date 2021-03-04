@@ -22,7 +22,8 @@ const AccessibilityStatement = ({ closeModal }) => {
         <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
         <div className="service-info-content">
           <p>
-            Tämä on <span className="uppercase-text">Kohdataan</span>
+            Tämä on
+            <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuusseloste.
           </p>
           <h2 className="accessibility-statement-headline">
@@ -44,7 +45,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <h2 className="accessibility-statement-headline">
             <span className="uppercase-text">Kohdataan</span>
-            -palvelun saavutettavuus 
+            -palvelun saavutettavuus
           </h2>
           <p>
             <span className="uppercase-text">Kohdataan</span>
@@ -98,9 +99,10 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <h2 className="accessibility-statement-headline">Anna palautetta</h2>
           <p>
-            Jos huomaat <span className="uppercase-text">Kohdataan</span>
+            Jos huomaat
+            <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuudessa ongelmia, anna meille palautetta. Voit
-            antaa palautetta saavutettavuudesta sähköpostitse {' '}
+            antaa palautetta saavutettavuudesta sähköpostitse &nbsp;
             <a className="email-link" href="mailto:kohdataan@kohdataan.fi">
               kohdataan@kohdataan.fi
             </a>
@@ -109,7 +111,7 @@ const AccessibilityStatement = ({ closeModal }) => {
             -palvelun saavutettavuutta.
           </p>
           <h2 className="accessibility-statement-headline">
-            Saavutettavuuden valvonta 
+            Saavutettavuuden valvonta
           </h2>
           <p>
             Etelä-Suomen aluehallintovirasto valvoo saavutettavuusvaatimusten
@@ -129,17 +131,19 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <h2 className="accessibility-statement-headline">
             <span className="uppercase-text">Kohdataan</span>
-            -palvelun yhteystiedot 
+            -palvelun yhteystiedot
           </h2>
           <span>
-            Sähköposti: {' '}
-            <a className="email-link" href="mailto:kohdataan@kohdataan.fi">kohdataan@kohdataan.fi</a>
+            Sähköposti:&nbsp;
+            <a className="email-link" href="mailto:kohdataan@kohdataan.fi">
+              kohdataan@kohdataan.fi
+            </a>
           </span>
           <br />
           <span>Puhelinnumero: 09 348 090 (vaihde)</span>
           <br />
           <h2 className="accessibility-statement-headline">
-            Valvontaviranomaisen yhteystiedot 
+            Valvontaviranomaisen yhteystiedot
           </h2>
           <span>Etelä-Suomen aluehallintovirasto</span>
           <br />
@@ -154,9 +158,10 @@ const AccessibilityStatement = ({ closeModal }) => {
             </a>
           </p>
           <span>
-            Sähköposti:
-{' '}
-            <a className="email-link" href="mailto:saavutettavuus@avi.fi">saavutettavuus@avi.fi</a>
+            Sähköposti: &nbsp;
+            <a className="email-link" href="mailto:saavutettavuus@avi.fi">
+              saavutettavuus@avi.fi
+            </a>
           </span>
           <br />
           <span>Puhelinnumero: 02 9501 6000</span>

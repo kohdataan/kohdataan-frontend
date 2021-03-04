@@ -120,9 +120,9 @@ const Message = props => {
   return (
     <>
       <div
-        aria-haspopup="false"
         role="article"
         data-focusable="true"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
         aria-live={lastPost ? 'polite' : 'off'}
         className="message-container"

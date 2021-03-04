@@ -111,7 +111,6 @@ const EditInterestsContainer = props => {
           </ButtonContainer>
         </div>
       </ModalContainer>
-
     </div>
   )
 }

@@ -122,8 +122,9 @@ const Picture = props => {
                 <div className="zoom-controls-container">
                   <ButtonContainer
                     className="icon-btn"
-                    onKeyPress={() =>
-                      handleScaleByDirection('down', scale - 0.02)
+                    onKeyPress={
+                      () => handleScaleByDirection('down', scale - 0.02)
+                      // eslint-disable-next-line react/jsx-curly-newline
                     }
                     onClick={() => handleScaleByDirection('down', scale - 0.02)}
                     label="Pienennä"

@@ -57,7 +57,8 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
               <section>
                 <p>
                   Nämä käyttöehdot ovat sinun ja Kehitysvammaliiton välinen
-                  sopimus <span className="uppercase-text">Kohdataan</span>
+                  sopimus &nbsp;
+                  <span className="uppercase-text">Kohdataan</span>
                   -palvelun käytöstä.
                 </p>
                 <p>
@@ -67,7 +68,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 </p>
                 <p>
                   Jos haluat kysyä käyttöehdoista, voit lähettää sähköpostia
-                  osoitteeseen{' '}
+                  osoitteeseen &nbsp;
                   <a
                     className="email-link"
                     href="mailto:kohdataan@kohdataan.fi"
@@ -81,7 +82,8 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                 <ol className="service-info-list">
                   <li>
                     <span className="service-info-list-item">
-                      Mikä on <span className="uppercase-text">Kohdataan</span>
+                      Mikä on &nbsp;
+                      <span className="uppercase-text">Kohdataan</span>
                       -palvelu?
                     </span>
                     <p>
@@ -110,7 +112,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </span>
                     <p>
                       {' '}
-                      Voit käyttää{' '}
+                      Voit käyttää &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelua, jos olet vähintään 15-vuotias. Sinulla täytyy
                       olla toimiva sähköpostiosoite ja puhelinnumero. Palvelu on
@@ -130,14 +132,13 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </span>
                     <div className="list-item-content">
                       <p>
-                        {' '}
                         Kehitysvammaliitto tarjoaa sinulle parhaan mahdollisen
-{' '}
+                        &nbsp;
                         <span className="uppercase-text">Kohdataan</span>
                         -palvelun .
                       </p>
                       <p>
-                        {' '}
+                        &nbsp;
                         <span className="uppercase-text">Kohdataan</span>
                         -palvelussa saattaa olla virheitä, ja se voi olla joskus
                         poissa käytöstä. Kehitysvammaliitto pyrkii korjaamaan
@@ -145,8 +146,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                         mahdollisimman vähän.
                       </p>
                       <p>
-                        Kehitysvammaliitto ei ole vastuussa, jos
-{' '}
+                        Kehitysvammaliitto ei ole vastuussa, jos &nbsp;
                         <span className="uppercase-text">Kohdataan</span>
                         -palvelun käyttö aiheuttaa vahinkoja tai muita ongelmia,
                         esimerkiksi maksuja internetin käyttämisestä
@@ -163,9 +163,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       Mitä vastuita sinulla on?
                     </span>
                     <p>
-                      {' '}
-                      Sinulla voi olla
-{' '}
+                      Sinulla voi olla &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelussa vain yksi käyttäjätili. Käyttäjätili aukeaa,
                       kun rekisteröidyt palveluun.
@@ -178,8 +176,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       niin autamme sinua.
                     </p>
                     <p>
-                      Olet vastuussa kaikesta materiaalista, jota jaat
-{' '}
+                      Olet vastuussa kaikesta materiaalista, jota jaat &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelussa. Jaa vain materiaalia, johon sinulla on
                       oikeus. Älä jaa viestejä ja materiaaleja, jotka ovat
@@ -259,7 +256,8 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     <p>
                       Yksityisyytesi on meille hyvin tärkeää. Keräämme sinusta
                       ainoastaan niitä tietoja, joita tarvitaan, että voit
-                      käyttää <span className="uppercase-text">Kohdataan</span>
+                      käyttää &nbsp;
+                      <span className="uppercase-text">Kohdataan</span>
                       -palvelua ja saada meiltä viestejä.
                     </p>
                     <p>
@@ -268,7 +266,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       käy muuttamassa ne Rekisteröitymistiedot-osiossa.
                     </p>
                     <p>
-                      Kun käytät{' '}
+                      Kun käytät &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelua, hyväksyt samalla, että voimme tallentaa
                       evästeitä tietokoneellesi tai mobiililaitteellesi.
@@ -307,8 +305,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       Kuinka palvelun käyttö voi loppua?
                     </span>
                     <p>
-                      Voit lopettaa
-{' '}
+                      Voit lopettaa &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelun käytön ja poistaa käyttäjätilisi
                       Rekisteröitymistiedot-osiossa. Voit myös pyytää palvelun
@@ -317,8 +314,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       rekisteröidyit palveluun.
                     </p>
                     <p>
-                      Voit käyttää
-{' '}
+                      Voit käyttää &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelua vain, jos noudatat näitä käyttöehtoja. Jos et
                       noudata käyttöehtoja, Kehitysvammaliitto voi poistaa
@@ -327,8 +323,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </p>
                     <p>
                       Kun käyttäjätilisi poistetaan, käyttäjäprofiilisi ja
-                      kaikki profiilitietosi poistuvat
-{' '}
+                      kaikki profiilitietosi poistuvat &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelusta. Profiilitiedot poistuvat kaikissa
                       tilanteissa, silloin kun itse poistat käyttäjätilin ja
@@ -336,8 +331,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       jakamasi viestit ja materiaalit säilyvät palvelussa.
                     </p>
                     <p>
-                      Kehitysvammaliitolla on oikeus tehdä
-{' '}
+                      Kehitysvammaliitolla on oikeus tehdä &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palveluun muutoksia tai lopettaa koko palvelu. Jos
                       palvelu lopetetaan, Kehitysvammaliitto ilmoittaa siitä
@@ -356,8 +350,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       joka näkyy käyttäjätililläsi.
                     </p>
                     <p>
-                      Jos jatkat
-{' '}
+                      Jos jatkat &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelun käyttöä, hyväksyt samalla uudet käyttöehdot. Jos
                       et hyväksy muutettuja ehtoja, et voi jatkaa palvelun
@@ -385,21 +378,21 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                   <li>
                     <span className="service-info-list-item">Ota yhteyttä</span>
                     <p>
-                      Voit ottaa yhteyttä
-{' '}
+                      Voit ottaa yhteyttä &nbsp;
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelun valvojiin aina, kun sinulla on kysyttävää tai
                       ongelmia palvelun käytössä.
                     </p>
                     <p>
                       Voit ottaa yhteyttä valvojiin palvelussa olevalla
-                      lomakkeella tai sähköpostilla {' '} 
+                      lomakkeella tai sähköpostilla &nbsp;
                       <a
                         className="email-link"
                         href="mailto:kohdataan@kohdataan.fi"
                       >
                         kohdataan@kohdataan.fi
-                      </a>.
+                      </a>
+                      .
                     </p>
                   </li>
                 </ol>

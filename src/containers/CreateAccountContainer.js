@@ -38,7 +38,7 @@ const CreateAccountContainer = props => {
       number = number.replace('+', '00')
     } else if (number.startsWith('+46')) {
       number = number.replace('+', '00')
-    } 
+    }
     // create unique username for Mattermost
     // Mattermot username must begin with a letter and contain between 3 and 22 characters
     // including numbers, lowercase letters, and the symbols ".", "-", and "_".

@@ -115,7 +115,7 @@ const PasswordResetPage = props => {
             onKeyPress={handleSubmit(handleNewPassword)}
             tabIndex="0"
           >
-            {'Vaihda'}
+            Vaihda
           </button>
         </form>
 
