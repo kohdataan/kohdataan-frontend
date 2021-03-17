@@ -4,7 +4,7 @@ import uniqid from 'uniqid'
 import CreateAccount from '../components/CreateAccount'
 import * as API from '../api/user/user'
 
-const CreateAccountContainer = props => {
+const CreateAccountContainer = (props) => {
   const { history } = props
   const [errors, setErrors] = useState(null)
 

@@ -12,10 +12,10 @@ const LogIn = (props) => {
   // Set appropriate error given different errors
   useEffect(() => {
     if (user && user.errorMessage === 'Email needs to be verified') {
-      setError('email', 'VerificationError')
+      setError('email', { type: 'VerificationError' })
     } else if (user && user.errorMessage) {
-      setError('email', 'loginError')
-      setError('password', 'loginError')
+      setError('email', { type: 'loginError' })
+      setError('password', { type: 'loginError' })
     }
   }, [user, setError])
 

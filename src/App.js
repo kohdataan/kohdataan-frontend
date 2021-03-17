@@ -135,7 +135,7 @@ App.defaultProps = {
   mmuser: null,
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       rootStartUp: rootStartUpAction,
@@ -143,7 +143,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   const currentUserId =
     store &&
     store.entities &&

@@ -27,7 +27,7 @@ const EmailSmsForm = (props) => {
   useEffect(() => {
     const setApiErrors = () => {
       if (apiError && text === '') {
-        setError('email', 'loginError')
+        setError('email', { type: 'loginError' })
       } else if (apiError && text !== '') {
         setShowModal(true)
       }

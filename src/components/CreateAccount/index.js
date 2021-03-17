@@ -62,21 +62,18 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
 
     const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
     if (!ageAccepted) {
-      setError(
-        'day',
-        'registrationError',
-        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
-      )
-      setError(
-        'month',
-        'registrationError',
-        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
-      )
-      setError(
-        'year',
-        'registrationError',
-        'Voit käyttää palvelua, jos olet yli 15-vuotias.'
-      )
+      setError('day', {
+        type: 'registrationError',
+        message: 'Voit käyttää palvelua, jos olet yli 15-vuotias.',
+      })
+      setError('month', {
+        type: 'registrationError',
+        message: 'Voit käyttää palvelua, jos olet yli 15-vuotias.',
+      })
+      setError('year', {
+        type: 'registrationError',
+        message: 'Voit käyttää palvelua, jos olet yli 15-vuotias.',
+      })
     }
 
     if (!rulesAccepted) {

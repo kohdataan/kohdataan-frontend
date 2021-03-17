@@ -9,7 +9,7 @@ import {
 } from '../store/user/userAction'
 import * as API from '../api/user/user'
 
-const LogInContainer = props => {
+const LogInContainer = (props) => {
   const {
     match: {
       params: { uuid },
@@ -38,7 +38,7 @@ const LogInContainer = props => {
         history.push('/registration/info')
       }
     } else if (uuid) {
-      API.verifyEmail({ uuid }).then(response => {
+      API.verifyEmail({ uuid }).then((response) => {
         if (response.success) {
           setUuidValid(true)
         } else {
@@ -89,14 +89,14 @@ LogInContainer.defaultProps = {
   textToAdd: null,
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { user } = state
   return {
     user,
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       userLogin: userLoginAction,
