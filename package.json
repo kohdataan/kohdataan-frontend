@@ -18,7 +18,7 @@
     "react": "^16.14.0",
     "react-audio-player": "^0.14.0",
     "react-autosize-textarea": "^7.1.0",
-    "react-avatar-editor": "^12.0.0-beta.0",
+    "react-avatar-editor": "^11.1.0",
     "react-compound-timer": "^1.2.0",
     "react-content-loader": "^4.3.4",
     "react-cookie-consent": "^3.0.0",
