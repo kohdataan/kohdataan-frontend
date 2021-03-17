@@ -6,7 +6,7 @@ import RadioButton from '../../RadioButton'
 import getLocations from '../../../api/location/location'
 import './styles.scss'
 
-const Location = props => {
+const Location = (props) => {
   const [locations, setLocations] = useState([])
   const { value, onChange, setShowLocation, showLocation, hideStep } = props
 
@@ -16,7 +16,7 @@ const Location = props => {
         localStorage.getItem('authToken')
       )
       setLocations(
-        fetchedLocations.map(location => {
+        fetchedLocations.map((location) => {
           return { value: location, label: location }
         })
       )
@@ -25,7 +25,7 @@ const Location = props => {
   }, [])
 
   const customStyles = {
-    menu: provided => ({
+    menu: (provided) => ({
       ...provided,
       borderRadius: 0,
       border: '1px solid black',
@@ -35,21 +35,21 @@ const Location = props => {
       color: 'black',
       backgroundColor: state.isSelected ? 'lightgrey' : 'white',
     }),
-    control: provided => ({
+    control: (provided) => ({
       ...provided,
       borderRadius: 0,
       marginTop: '5%',
       border: '1px solid black',
       boxShadow: 'none',
     }),
-    dropdownIndicator: provided => ({
+    dropdownIndicator: (provided) => ({
       ...provided,
       color: '#f59023',
     }),
     indicatorSeparator: () => ({
       border: 0,
     }),
-    placeholder: provided => ({
+    placeholder: (provided) => ({
       ...provided,
       color: 'white',
     }),

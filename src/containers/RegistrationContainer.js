@@ -27,7 +27,7 @@ import ButtonContainer from '../components/ButtonContainer'
 import ErrorNotification from '../components/RegistrationFlow/ErrorNotification'
 import updateUsername from '../utils/updateUsername'
 
-const RegistrationContainer = props => {
+const RegistrationContainer = (props) => {
   const {
     match: {
       params: { step },
@@ -52,7 +52,7 @@ const RegistrationContainer = props => {
   const [openModal, setOpenModal] = useState(false)
 
   // Change nextButtonActive value only if new value is different
-  const setNextButtonStatus = value => {
+  const setNextButtonStatus = (value) => {
     if (value && !nextButtonActive) {
       setNextButtonActive(true)
     } else if (!value && nextButtonActive) {
@@ -60,12 +60,12 @@ const RegistrationContainer = props => {
     }
   }
 
-  const setProfileImage = i => {
+  const setProfileImage = (i) => {
     setImg(i)
     setImageUploaded(true)
   }
 
-  const checkInputValidity = page => {
+  const checkInputValidity = (page) => {
     switch (page) {
       case 'add-nickname':
         if (nickname.length < 1) {
@@ -110,7 +110,7 @@ const RegistrationContainer = props => {
         return (
           <Nickname
             value={nickname}
-            onChange={e => setNickname(e.target.value)}
+            onChange={(e) => setNickname(e.target.value)}
           />
         )
       case pages['add-show-age'].current:
@@ -126,7 +126,7 @@ const RegistrationContainer = props => {
         checkInputValidity('add-location')
         return (
           <Location
-            onChange={value => setLocation(value)}
+            onChange={(value) => setLocation(value)}
             value={location}
             setShowLocation={setShowLocation}
             showLocation={showLocation.toString()}
@@ -137,12 +137,12 @@ const RegistrationContainer = props => {
         return (
           <Description
             value={description}
-            onChange={e => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
         )
       case pages['add-image'].current:
         checkInputValidity('add-image')
-        return <Picture onChange={p => setProfileImage(p)} />
+        return <Picture onChange={(p) => setProfileImage(p)} />
       case pages['add-interests'].current:
         checkInputValidity('add-interests')
         return (
@@ -263,7 +263,7 @@ RegistrationContainer.defaultProps = {
   userBirthdate: '',
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateUser,
@@ -276,7 +276,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const mmuser =
     state.entities.users.profiles &&
