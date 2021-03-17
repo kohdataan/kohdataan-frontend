@@ -11,7 +11,7 @@ import ButtonContainer from '../ButtonContainer'
 import EditTitle from './EditTitle'
 import './styles.scss'
 
-const EditProfile = props => {
+const EditProfile = (props) => {
   const { history, myUserInfo, handleEditReady } = props
   const [newDescription, setNewDescription] = useState(
     myUserInfo.description || ''
@@ -78,7 +78,7 @@ const EditProfile = props => {
           <Nickname
             hideStep
             value={newNickname}
-            onChange={e => setNewNickname(e.target.value)}
+            onChange={(e) => setNewNickname(e.target.value)}
           />
         </div>
         <div className="edit-nickname">
@@ -95,14 +95,14 @@ const EditProfile = props => {
             showLocation={newShowLocation.toString()}
             value={newLocation}
             setShowLocation={setNewShowLocation}
-            onChange={value => setNewLocation(value)}
+            onChange={(value) => setNewLocation(value)}
           />
         </div>
         <div className="edit-nickname">
           <Description
             value={newDescription}
             hideStep
-            onChange={e => setNewDescription(e.target.value)}
+            onChange={(e) => setNewDescription(e.target.value)}
           />
         </div>
         <div

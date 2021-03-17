@@ -7,19 +7,19 @@ import { updateUser } from '../user/userAction'
 import { initUser, initTeam } from '../root/index'
 
 export const startGroupPageFetching = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({ type: types.START_INVITATION_FETCHING })
   }
 }
 
 export const groupPageFetchingReady = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({ type: types.INVITATION_FETCHING_READY })
   }
 }
 
-export const getMembersByChannelIdAction = channelId => {
-  return async dispatch => {
+export const getMembersByChannelIdAction = (channelId) => {
+  return async (dispatch) => {
     try {
       const res = await API.getChannelInvitationMembers(
         localStorage.getItem('authToken'),
@@ -38,7 +38,7 @@ export const getMembersByChannelIdAction = channelId => {
 }
 
 export const updateChannelInvitationsTimestamp = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     await dispatch(updateUser({ channelInvitationsAt: Date.now() }))
   }
 }
@@ -46,7 +46,7 @@ export const updateChannelInvitationsTimestamp = () => {
 export const getChannelInvitationsAction = () => {
   // Fetch channel invitations and related channel members
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const data = await API.getChannelInvitations(token)
       dispatch({
@@ -55,7 +55,7 @@ export const getChannelInvitationsAction = () => {
       })
       const promises = []
       if (data && data.found) {
-        data.found.forEach(channel => {
+        data.found.forEach((channel) => {
           promises.push(dispatch(getMembersByChannelIdAction(channel.id)))
         })
       }
@@ -68,7 +68,7 @@ export const getChannelInvitationsAction = () => {
 }
 
 export const resetChannelInvitations = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
       type: types.RESET_CHANNEL_INVITATIONS,
     })

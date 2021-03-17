@@ -5,9 +5,9 @@ import groupNameColors from '../../../assets/groupColors'
 import Member from '../../Groups/Group/Member'
 import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 
-const SuggestionBox = props => {
+const SuggestionBox = (props) => {
   const { channel, members, hidden, top, profiles, teams } = props
-  const sortPurpose = purpose => {
+  const sortPurpose = (purpose) => {
     return Object.keys(purpose).sort((a, b) => purpose[b] - purpose[a])
   }
 
@@ -52,14 +52,14 @@ const SuggestionBox = props => {
               {members &&
                 members
                   .filter(
-                    member =>
+                    (member) =>
                       member &&
                       member.delete_at === 0 &&
                       member.position !== 'deleted' &&
                       !isSystemAdmin(member.id, profiles) &&
                       !isTeamAdmin(member.id, teams)
                   )
-                  .map(member => (
+                  .map((member) => (
                     <Member
                       key={`suggestion-${member.id}`}
                       userId={member.id}

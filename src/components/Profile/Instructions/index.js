@@ -6,7 +6,7 @@ import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg'
 import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg'
 import './styles.scss'
 
-const Instructions = props => {
+const Instructions = (props) => {
   const {
     showModals,
     closeModal,

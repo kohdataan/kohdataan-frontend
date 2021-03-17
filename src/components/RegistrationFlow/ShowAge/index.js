@@ -4,7 +4,7 @@ import ShadowBox from '../../ShadowBox'
 import RadioButton from '../../RadioButton'
 import './styles.scss'
 
-const ShowAge = props => {
+const ShowAge = (props) => {
   const { onChange, showAge, age, hideStep } = props
 
   return (

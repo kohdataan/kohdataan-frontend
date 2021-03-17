@@ -4,7 +4,7 @@ export default function storageRehydrate(incoming, persistor) {
   return (dispatch, getState) => {
     const state = getState()
     persistor.pause()
-    Object.keys(incoming).forEach(key => {
+    Object.keys(incoming).forEach((key) => {
       const storage = {}
       try {
         const value = JSON.parse(incoming[key])

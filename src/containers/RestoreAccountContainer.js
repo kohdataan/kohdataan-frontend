@@ -9,7 +9,7 @@ import { restoreUserAccount as restoreUserAction } from '../store/user/userActio
 import * as API from '../api/user/user'
 import logoutHandler from '../utils/userLogout'
 
-const RestoreAccountContainer = props => {
+const RestoreAccountContainer = (props) => {
   const { restoreUserAccount, mmid, matterMostLogout } = props
 
   const handleLogout = () => logoutHandler(API.userLogout, matterMostLogout)
@@ -43,7 +43,7 @@ const RestoreAccountContainer = props => {
   )
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       restoreUserAccount: restoreUserAction,
@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   return {
     user: state.user,

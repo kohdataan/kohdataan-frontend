@@ -6,7 +6,7 @@ import getUsernameById from '../../../utils/getUsernameById'
 import { isSystemAdmin, isTeamAdmin } from '../../../utils/userIsAdmin'
 import isUserLeavingOrJoiningChannel from '../../../utils/isUserLeavingOrJoiningChannel'
 
-const MessageList = props => {
+const MessageList = (props) => {
   const {
     posts,
     teams,
@@ -24,7 +24,7 @@ const MessageList = props => {
 
   const [filteredPosts, setFilteredPosts] = useState([])
 
-  const getIconMemberStatus = userId =>
+  const getIconMemberStatus = (userId) =>
     `chat-${getStatusById(userId)}-status-icon`
 
   const ref = useRef()
@@ -33,7 +33,7 @@ const MessageList = props => {
   let previousDate = null
   let previousSender = null
 
-  const setTimeStampValues = post => {
+  const setTimeStampValues = (post) => {
     let showDate = false
     let showTime = true
     const sender = getNickNamebyId(post.user_id)
@@ -76,7 +76,7 @@ const MessageList = props => {
     }
   }
 
-  const isAdmin = id => {
+  const isAdmin = (id) => {
     return isSystemAdmin(id, profiles) || isTeamAdmin(id, teams)
   }
 
@@ -87,7 +87,7 @@ const MessageList = props => {
 
   useEffect(() => {
     const filtered = posts.filter(
-      p =>
+      (p) =>
         p.type !== 'system_purpose_change' &&
         (p.type === '' ||
           (isUserLeavingOrJoiningChannel(p) && !isAdmin(p.user_id)))
@@ -95,13 +95,13 @@ const MessageList = props => {
     setFilteredPosts(filtered)
   }, [posts])
 
-  const getLastPost = post => post.create_at === lastViewedAt
+  const getLastPost = (post) => post.create_at === lastViewedAt
 
   return (
     <div className="chat-message-list-container chat--message-list" ref={ref}>
       <div className="chat--message-list--container">
         {posts.length > 0 &&
-          filteredPosts.map(post => {
+          filteredPosts.map((post) => {
             const timestampValues = setTimeStampValues(post)
             const isUserLeavingOrJoining = isUserLeavingOrJoiningChannel(post)
             return (

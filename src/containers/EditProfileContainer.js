@@ -12,7 +12,7 @@ import dataUriToBlob from '../utils/dataUriToBlob'
 import EditProfile from '../components/EditProfile'
 import updateUsername from '../utils/updateUsername'
 
-const EditProfileContainer = props => {
+const EditProfileContainer = (props) => {
   const {
     history,
     mmuserId,
@@ -24,7 +24,7 @@ const EditProfileContainer = props => {
 
   if (!myUserInfo.profileReady) history.push('/registration/info')
 
-  const updateImages = async img => {
+  const updateImages = async (img) => {
     if (!img && !myUserInfo.imageUploaded) {
       await props.setDefaultProfileImage(mmuserId)
     } else if (img) {
@@ -84,7 +84,7 @@ const EditProfileContainer = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const currentUser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.interests
@@ -117,7 +117,7 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateUser: updateUserAction,

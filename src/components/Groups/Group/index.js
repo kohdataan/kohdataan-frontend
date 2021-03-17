@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import groupNameColors from '../../../assets/groupColors'
 import Member from './Member'
 
-const Group = props => {
+const Group = (props) => {
   const {
     channel,
     getMembers,
@@ -55,9 +55,9 @@ const Group = props => {
   // Only show members with existing profiles
   useEffect(() => {
     const setMemberProfilesToShow = () => {
-      const memberIds = members.map(member => member.user_id)
+      const memberIds = members.map((member) => member.user_id)
       const channelMembers = profiles.filter(
-        p => memberIds.indexOf(p.id) !== -1
+        (p) => memberIds.indexOf(p.id) !== -1
       )
       setMembersToShow(channelMembers)
     }
@@ -85,7 +85,7 @@ const Group = props => {
           .sort((p1, p2) => p1.create_at - p2.create_at)
           .slice(beginIndex)
         if (getUnreadMessages)
-          setUnreadPosts(getUnreadMessages.filter(p => p.type === '').length)
+          setUnreadPosts(getUnreadMessages.filter((p) => p.type === '').length)
       }
     }
     getUnreadPosts()
@@ -93,7 +93,7 @@ const Group = props => {
 
   useEffect(() => {
     if (members) {
-      setCurrentUser(members.find(member => member.user_id === currentUserId))
+      setCurrentUser(members.find((member) => member.user_id === currentUserId))
     }
   }, [currentUser, currentUserId, members])
 
@@ -107,9 +107,9 @@ const Group = props => {
     return channel.display_name
   }
 
-  const addLineBreaks = text => {
+  const addLineBreaks = (text) => {
     const slices = text.split('///')
-    return slices.map(slice => {
+    return slices.map((slice) => {
       return (
         <span key={slice.toString()}>
           <span>{slice}</span>
@@ -143,7 +143,7 @@ const Group = props => {
           <div className="group-current-members">
             <span className="sr-only">Jäsenet</span>
             {membersToShow &&
-              membersToShow.map(member => (
+              membersToShow.map((member) => (
                 <Member
                   key={`group-${member.id}`}
                   nickname={member.nickname}

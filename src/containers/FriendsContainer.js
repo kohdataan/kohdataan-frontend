@@ -9,7 +9,7 @@ import Friends from '../components/Friends'
 import BouncingLoader from '../components/BouncingLoader'
 import { fetchFriendsPageData as fetchFriendsPageDataAction } from '../store/friends/friendsAction'
 
-const FriendsContainer = props => {
+const FriendsContainer = (props) => {
   const {
     channels,
     currentUserId,
@@ -41,35 +41,35 @@ const FriendsContainer = props => {
   useEffect(() => {
     // Get channel objects based on myChannels
     const getChannelInfoForMyChannels = () =>
-      Object.values(channels).filter(channel =>
+      Object.values(channels).filter((channel) =>
         Object.keys(myChannels).includes(channel.id)
       )
     // Get only direct channels with at least one message
-    const getDirectChannels = allChannels =>
+    const getDirectChannels = (allChannels) =>
       Object.values(allChannels).filter(
-        channel => channel.type === 'D' && channel.total_msg_count > 0
+        (channel) => channel.type === 'D' && channel.total_msg_count > 0
       )
     const channelInfo = getChannelInfoForMyChannels()
     // Set direct channel info
     setDirectChannels(getDirectChannels(channelInfo))
   }, [channels, myChannels])
 
-  const getUsername = members => {
+  const getUsername = (members) => {
     if (members.length > 0) {
-      const friend = members.find(member => member.user_id !== currentUserId)
+      const friend = members.find((member) => member.user_id !== currentUserId)
       const friendId = friend && friend.user_id
       const friendInfo =
         friendId &&
-        Object.values(profiles).find(profile => profile.id === friendId)
+        Object.values(profiles).find((profile) => profile.id === friendId)
       return friendInfo
     }
     return null
   }
   // Get unread count by channel id
-  const getUnreadCountByChannelId = channelId => {
+  const getUnreadCountByChannelId = (channelId) => {
     if (channels) {
       const channel = Object.values(channels).find(
-        item => item.id === channelId
+        (item) => item.id === channelId
       )
       if (channel) {
         const channelMsgCount = channel.total_msg_count
@@ -80,7 +80,7 @@ const FriendsContainer = props => {
     return 0
   }
 
-  const getLatestMessage = posts => {
+  const getLatestMessage = (posts) => {
     // TODO: Even better posts loading
     const postMap = posts && Object.values(posts)[1]
     if (postMap) {
@@ -135,7 +135,7 @@ FriendsContainer.propTypes = {
   statuses: PropTypes.instanceOf(Object).isRequired,
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const { channels } = state.entities.channels
   const { membersInChannel } = state.entities.channels
@@ -162,7 +162,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getPosts: getPostsAction,

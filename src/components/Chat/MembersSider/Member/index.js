@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { isSystemAdmin, isTeamAdmin } from '../../../../utils/userIsAdmin'
 import './styles.scss'
 
-const Member = props => {
+const Member = (props) => {
   const {
     userId,
     nickName,

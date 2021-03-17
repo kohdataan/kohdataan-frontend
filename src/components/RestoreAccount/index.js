@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 
-const RestoreAccount = props => {
+const RestoreAccount = (props) => {
   const { handleRestore, handleDeleteNow } = props
   const [modalIsOpen, setModalIsOpen] = useState(true)
   const handleDelete = () => {

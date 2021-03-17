@@ -152,7 +152,7 @@ const customStylesSendMessage = {
   },
 }
 
-const ModalContainer = props => {
+const ModalContainer = (props) => {
   const {
     children,
     modalIsOpen,

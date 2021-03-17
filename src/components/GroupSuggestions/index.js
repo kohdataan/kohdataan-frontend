@@ -6,7 +6,7 @@ import SuggestionBox from './SuggestionBox'
 import ButtonContainer from '../ButtonContainer'
 import BouncingLoader from '../BouncingLoader'
 
-const GroupSuggestions = props => {
+const GroupSuggestions = (props) => {
   const {
     channels,
     joinedChannels,

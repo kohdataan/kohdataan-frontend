@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const FriendSearch = props => {
+const FriendSearch = (props) => {
   const { profileData, searchTerm } = props
 
   const imageUri =

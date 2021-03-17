@@ -9,7 +9,7 @@ import './styles.scss'
 import 'rc-slider/assets/index.css'
 import ImageUploader from '../../ImageUploader'
 
-const Picture = props => {
+const Picture = (props) => {
   const { onChange, hideStep } = props
   const [showFileLoader, setShowFileLoader] = useState(true)
   const [rotation, setRotation] = useState(0)
@@ -29,11 +29,11 @@ const Picture = props => {
     setImageUploaded(false)
   }
 
-  const handlePositionChange = pos => {
+  const handlePositionChange = (pos) => {
     setPosition(pos)
   }
 
-  const handleScale = value => {
+  const handleScale = (value) => {
     setScale(parseFloat(value))
   }
 

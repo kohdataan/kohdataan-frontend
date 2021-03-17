@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import './styles.scss'
 import propTypes from 'prop-types'
 
-const ButtonContainer = props => {
+const ButtonContainer = (props) => {
   const {
     className,
     disabled,

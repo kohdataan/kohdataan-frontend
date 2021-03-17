@@ -34,7 +34,7 @@ const closeModalBtnStyle = {
   margin: '10px',
 }
 
-const ToolTipModalContainer = props => {
+const ToolTipModalContainer = (props) => {
   const { content, modalIsOpen, closeModal, label } = props
   return (
     <Modal

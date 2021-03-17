@@ -10,7 +10,7 @@ import AudioInput from '../AudioInput'
 import BouncingLoader from '../../BouncingLoader'
 import './styles.scss'
 
-const UserInput = props => {
+const UserInput = (props) => {
   const { createPost, channel, uploadFile, filesData } = props
   const [message, setMessage] = useState('')
   const [fileId, setFileId] = useState('')
@@ -21,7 +21,7 @@ const UserInput = props => {
   const [isUploading, setIsUploading] = useState(false)
   const [showFilePreview, setShowFilePreview] = useState(false)
 
-  const getExifData = file => {
+  const getExifData = (file) => {
     // get Exif data for file if it exists.
     // Exif data is used to rotate the image to the correct orientation.
     if (file && isBrowser) {
@@ -47,7 +47,7 @@ const UserInput = props => {
   }
   const fileInput = React.createRef()
 
-  const isEmpty = str => {
+  const isEmpty = (str) => {
     return str.replace(/^\s+|\s+$/g, '').length === 0
   }
   const handleSubmit = async (e, msg) => {
@@ -70,11 +70,11 @@ const UserInput = props => {
     setShowFilePreview(false)
   }
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setMessage(e.target.value)
   }
 
-  const addFile = async e => {
+  const addFile = async (e) => {
     setIsUploading(true)
     const channelId = channel.id
     const data = new FormData()
@@ -101,7 +101,7 @@ const UserInput = props => {
     setModalIsOpen(true)
   }
 
-  const handleAudioSubmit = async audioFile => {
+  const handleAudioSubmit = async (audioFile) => {
     setShowAudioModal(false)
     setIsUploading(true)
     const data = new FormData()

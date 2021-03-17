@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import EmailSmsForm from '../components/EmailSmsForm'
 
-const PasswordResetRequestContainer = props => {
+const PasswordResetRequestContainer = (props) => {
   const { history } = props
   const [apiError, setApiError] = useState(false)
 
-  const handleResetRequest = async resetInfo => {
+  const handleResetRequest = async (resetInfo) => {
     const infoToSend = { email: resetInfo, phoneNumber: '' }
     const resp = await API.resetPassword(infoToSend)
     if (resp.success) {

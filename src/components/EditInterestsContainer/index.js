@@ -5,13 +5,13 @@ import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
 import getIcon from '../../utils/getIcon'
 
-const EditInterestsContainer = props => {
+const EditInterestsContainer = (props) => {
   const { options, interests, setInterests } = props
   const [sortedOptions, setSortedOptions] = useState(options)
   // Use ref of interests, because we don't want to sort each
   // time interests are changed, only on mount
   const interestsOnMount = useRef(interests)
-  const itemIsSelected = id => interests.includes(id)
+  const itemIsSelected = (id) => interests.includes(id)
   const [openModal, setOpenModal] = useState(false)
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const EditInterestsContainer = props => {
   }
 
   // Select item if less than 5 items are selected
-  const addToSelected = key => {
+  const addToSelected = (key) => {
     if (interests.length < 5) {
       const interestsArr = [...interests]
       interestsArr.push(key)
@@ -51,7 +51,7 @@ const EditInterestsContainer = props => {
   }
 
   // Remove from selected items
-  const removeFromSelected = id => {
+  const removeFromSelected = (id) => {
     const interestsArr = [...interests]
     const indx = interests.indexOf(id)
     if (indx > -1) {
@@ -61,7 +61,7 @@ const EditInterestsContainer = props => {
   }
 
   // Toggle selection
-  const handleClick = id => () => {
+  const handleClick = (id) => () => {
     if (!itemIsSelected(id)) {
       addToSelected(id)
     } else {
@@ -71,7 +71,7 @@ const EditInterestsContainer = props => {
 
   return (
     <div className="interests-grid">
-      {sortedOptions.map(interest => (
+      {sortedOptions.map((interest) => (
         <button
           key={interest.id}
           role="checkbox"

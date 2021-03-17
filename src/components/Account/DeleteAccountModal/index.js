@@ -4,7 +4,7 @@ import ModalContainer from '../../ModalContainer'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const DeleteAccountModal = props => {
+const DeleteAccountModal = (props) => {
   const { showModal, deleteUser, closeModal, deleteError } = props
 
   return (

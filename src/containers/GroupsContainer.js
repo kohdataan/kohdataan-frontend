@@ -20,7 +20,7 @@ import {
 import { updateUser as updateUserAction } from '../store/user/userAction'
 import { isSystemAdmin, isTeamAdmin } from '../utils/userIsAdmin'
 
-const GroupsContainer = props => {
+const GroupsContainer = (props) => {
   const {
     history,
     channels,
@@ -122,7 +122,7 @@ const GroupsContainer = props => {
   useEffect(() => {
     const getFilteredChannelSuggestions = () => {
       const mySuggestions = channelSuggestions.filter(
-        channel =>
+        (channel) =>
           channel && channel.id && !Object.keys(myChannels).includes(channel.id)
       )
       return mySuggestions
@@ -134,26 +134,26 @@ const GroupsContainer = props => {
 
   // Get only group channels
   // (filter direct messages and default channels out)
-  const getGroupChannels = allChannels => {
+  const getGroupChannels = (allChannels) => {
     const filteredChannels = Object.values(allChannels).filter(
-      channel => channel.type !== 'D'
+      (channel) => channel.type !== 'D'
     )
     return filteredChannels
   }
 
   // Get channel objects based on myChannels
   const getChannelInfoForMyChannels = () => {
-    const myCurrentChannels = Object.values(channels).filter(channel =>
+    const myCurrentChannels = Object.values(channels).filter((channel) =>
       Object.keys(myChannels).includes(channel.id)
     )
     return myCurrentChannels
   }
 
   // Get unread count by channel id
-  const getUnreadCountByChannelId = channelId => {
+  const getUnreadCountByChannelId = (channelId) => {
     if (channels) {
       const channel = Object.values(channels).find(
-        item => item.id === channelId
+        (item) => item.id === channelId
       )
       if (channel) {
         const channelMsgCount = channel.total_msg_count
@@ -164,7 +164,7 @@ const GroupsContainer = props => {
     return 0
   }
 
-  const handleJoinChannel = channelId => async () => {
+  const handleJoinChannel = (channelId) => async () => {
     try {
       await addUserInterestsToChannelPurpose(
         localStorage.getItem('authToken'),
@@ -184,12 +184,12 @@ const GroupsContainer = props => {
       const activeProfilesArr =
         profiles &&
         Object.values(profiles)
-          .map(member => profiles[member.id])
-          .filter(member => member && member.delete_at === 0)
-          .filter(member => member.position !== 'deleted')
-          .filter(member => member.username !== 'surveybot')
+          .map((member) => profiles[member.id])
+          .filter((member) => member && member.delete_at === 0)
+          .filter((member) => member.position !== 'deleted')
+          .filter((member) => member.username !== 'surveybot')
           .filter(
-            member =>
+            (member) =>
               !isSystemAdmin(member.id, profiles) &&
               !isTeamAdmin(member.id, teams)
           )
@@ -260,7 +260,7 @@ GroupsContainer.defaultProps = {
   channelSuggestionMembers: {},
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const { teams } = state.entities
   const { channels } = state.entities.channels
@@ -289,7 +289,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       joinChannel: joinChannelAction,

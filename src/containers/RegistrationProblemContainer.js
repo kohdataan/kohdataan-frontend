@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import RegistrationProblem from '../components/RegistrationProblem'
 import * as API from '../api/user/user'
 
-const RegistrationProblemContainer = props => {
+const RegistrationProblemContainer = (props) => {
   const { handleClick, history, user } = props
   const [text, setText] = useState('')
   const handleEmailSending = async (name, email, message, type) => {

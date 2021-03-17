@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 import BottomNavigationBot from '../../BottomNavigationBot'
 
-const Header = props => {
+const Header = (props) => {
   const {
     channel,
     toggleSider,

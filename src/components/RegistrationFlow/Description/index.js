@@ -6,7 +6,7 @@ import './styles.scss'
 
 const MAX_LENGTH = 200
 
-const Description = props => {
+const Description = (props) => {
   const { onChange, value, hideStep } = props
   return (
     <ShadowBox>

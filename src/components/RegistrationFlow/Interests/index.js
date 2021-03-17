@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import EditInterestsContainer from '../../EditInterestsContainer'
 
-const Interests = props => {
+const Interests = (props) => {
   const { options, interests, setInterests, hideStep } = props
 
   return (

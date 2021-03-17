@@ -5,7 +5,7 @@ import Options from './Options'
 import PrevNextNav from './PrevNextNav'
 import './styles.scss'
 
-const Questions = props => {
+const Questions = (props) => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
 
   const { data } = props

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import EmailSmsForm from '../components/EmailSmsForm'
 
-const EmailVerificationContainer = props => {
+const EmailVerificationContainer = (props) => {
   const { history } = props
   const [apiError, setApiError] = useState(false)
   const [text, setText] = useState('')
 
-  const handleVerifyRequest = async resetInfo => {
+  const handleVerifyRequest = async (resetInfo) => {
     const formattedInfo = {
       email: resetInfo.toLowerCase(),
       phoneNumber: '',

@@ -5,13 +5,13 @@ import ButtonContainer from '../ButtonContainer'
 import CameraIconPath from '../../assets/camera-add-solid.svg'
 import './styles.scss'
 
-const ImageUploader = props => {
+const ImageUploader = (props) => {
   const { onChange, setShowFileLoader } = props
   const [openModal, setOpenModal] = useState(false)
 
   const fileInput = React.createRef()
 
-  const onBeforeFileLoad = e => {
+  const onBeforeFileLoad = (e) => {
     if (e.target.files[0].size > 50000000) {
       setOpenModal(true)
       e.target.value = ''
@@ -34,7 +34,7 @@ const ImageUploader = props => {
     backgroundSize: '40%',
   }
 
-  const uploadFile = e => {
+  const uploadFile = (e) => {
     e.preventDefault()
     onBeforeFileLoad(e)
     if (!e.target.value) return
@@ -53,7 +53,7 @@ const ImageUploader = props => {
     <div>
       <div className="upload-file-container">
         <input
-          onChange={e => uploadFile(e)}
+          onChange={(e) => uploadFile(e)}
           name="image-upload"
           id="image-upload"
           type="file"

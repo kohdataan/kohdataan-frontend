@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import getIcon from '../../../utils/getIcon'
 
-const InterestsGrid = props => {
+const InterestsGrid = (props) => {
   const { interestList } = props
 
   const sortedInterestsList = [...interestList].sort((a, b) =>
@@ -11,7 +11,7 @@ const InterestsGrid = props => {
   )
   return (
     <div className="interests-grid">
-      {sortedInterestsList.map(interest => (
+      {sortedInterestsList.map((interest) => (
         <div className="interests-grid-item-container" key={interest.id}>
           <span className="interests-grid-item">
             <i

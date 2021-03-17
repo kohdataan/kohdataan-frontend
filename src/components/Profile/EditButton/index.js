@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const EditButton = props => {
+const EditButton = (props) => {
   const { isHighlighted, label } = props
   const classNameList = [
     'user-edit-button',

@@ -16,8 +16,8 @@ const BottomNavigationBot = forwardRef((props, ref) => {
   const [showSendMessage, setShowSendMessage] = useState(false)
   const [showInfoModal, setShowInfoModal] = useState(false)
   const [logOutConfirmation, setLogOutConfirmation] = useState(false)
-  const openModal = setter => setter(true)
-  const closeModal = setter => setter(false)
+  const openModal = (setter) => setter(true)
+  const closeModal = (setter) => setter(false)
 
   const openPageInformationModal = () => {
     setShowPageInformation(true)

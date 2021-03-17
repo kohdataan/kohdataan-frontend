@@ -3,8 +3,8 @@ import * as types from '../../contants/actionTypes'
 import * as channelAPI from '../../api/channels/channels'
 import * as API from '../../api/user/user'
 
-export const userLogin = user => {
-  return async dispatch => {
+export const userLogin = (user) => {
+  return async (dispatch) => {
     try {
       const res = await API.userLogin(user)
       if (res && res.user && res.token) {
@@ -37,7 +37,7 @@ export const userLogin = user => {
 }
 
 export const addUserToState = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const id = localStorage.getItem('userId')
     const token = localStorage.getItem('authToken')
     try {
@@ -56,10 +56,10 @@ export const addUserToState = () => {
   }
 }
 
-export const updateUser = data => {
+export const updateUser = (data) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       await API.updateUser(data, id, token)
       await dispatch({
@@ -74,10 +74,10 @@ export const updateUser = data => {
   }
 }
 
-export const updateUserPassword = data => {
+export const updateUserPassword = (data) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await API.updatePassword(data, id, token)
       if (res && res.ok) {
@@ -98,10 +98,10 @@ export const updateUserPassword = data => {
   }
 }
 
-export const restoreUserAccount = data => {
+export const restoreUserAccount = (data) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const resp = await API.restoreUser(data, id, token)
       if (resp && resp.success && resp.restored) {
@@ -119,7 +119,7 @@ export const restoreUserAccount = data => {
 
 export const getUserInterests = () => {
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const data = await API.getUserInterest(token)
       await dispatch({
@@ -133,10 +133,10 @@ export const getUserInterests = () => {
   }
 }
 
-export const addUserInterests = interests => {
+export const addUserInterests = (interests) => {
   const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const data = { userId: id, ...interests }
       await API.addUserInterests(data, token)

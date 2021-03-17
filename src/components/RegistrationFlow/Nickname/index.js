@@ -4,7 +4,7 @@ import ShadowBox from '../../ShadowBox'
 import InputField from '../../InputField'
 import './styles.scss'
 
-const Nickname = props => {
+const Nickname = (props) => {
   const { onChange, value, hideStep } = props
   return (
     <ShadowBox>

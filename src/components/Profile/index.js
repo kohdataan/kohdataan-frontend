@@ -10,7 +10,7 @@ import EditButton from './EditButton'
 import ButtonContainer from '../ButtonContainer'
 import Tutorial from '../Tutorial'
 
-const Profile = props => {
+const Profile = (props) => {
   const {
     currentUserId,
     mmuser,

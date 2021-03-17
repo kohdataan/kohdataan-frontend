@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
-const ShadowBox = props => {
+const ShadowBox = (props) => {
   const { children } = props
   return <div className="shadow-box-container">{children}</div>
 }

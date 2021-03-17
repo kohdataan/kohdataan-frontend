@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { updateUser as updateUserAction } from '../store/user/userAction'
 import Profile from '../components/Profile'
 
-const ProfileContainer = props => {
+const ProfileContainer = (props) => {
   const {
     currentUserId,
     mmuser,
@@ -30,7 +30,7 @@ const ProfileContainer = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const mmuser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.interests
@@ -63,7 +63,7 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateUser: updateUserAction,

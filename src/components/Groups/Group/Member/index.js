@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
-const Member = props => {
+const Member = (props) => {
   const { nickname, iconColor, userId, currentUserId } = props
   const userFirstLetter = nickname[0]
   const [image, setImage] = useState(null)

@@ -8,7 +8,7 @@ import ModalContainer from '../ModalContainer'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const Chat = props => {
+const Chat = (props) => {
   const {
     channel,
     teams,
@@ -36,7 +36,7 @@ const Chat = props => {
 
   useEffect(() => {
     setCurrentUser(
-      membersInChannel.find(member => member.user_id === currentUserId)
+      membersInChannel.find((member) => member.user_id === currentUserId)
     )
   }, [currentUser, currentUserId, membersInChannel])
 
@@ -52,8 +52,8 @@ const Chat = props => {
   useEffect(() => {
     const getMembersToShow = () => {
       if (!directChannel) {
-        const activeUserIds = profilesInChannel.map(profile => profile.id)
-        const members = Object.values(membersInChannel).filter(member =>
+        const activeUserIds = profilesInChannel.map((profile) => profile.id)
+        const members = Object.values(membersInChannel).filter((member) =>
           activeUserIds.includes(member.user_id)
         )
         setMembersToShow(members)
@@ -72,8 +72,8 @@ const Chat = props => {
     }
   }
 
-  const getNicknameById = id => {
-    const user = Object.values(profiles).find(profile => profile.id === id)
+  const getNicknameById = (id) => {
+    const user = Object.values(profiles).find((profile) => profile.id === id)
     let visibleName = 'Käyttäjä'
     if (user && user.delete_at === 0 && user.position !== 'deleted') {
       if (user && user.nickname) {
@@ -87,10 +87,10 @@ const Chat = props => {
     return ''
   }
 
-  const getUserDataById = id =>
-    Object.values(profiles).find(profile => profile.id === id)
+  const getUserDataById = (id) =>
+    Object.values(profiles).find((profile) => profile.id === id)
 
-  const getStatusById = id => {
+  const getStatusById = (id) => {
     const status = id ? statuses[id] : ''
     return status
   }
@@ -98,7 +98,7 @@ const Chat = props => {
   const getOtherUserName = () => {
     if (directChannel) {
       const otherUser = membersInChannel.find(
-        member => member.user_id !== currentUserId
+        (member) => member.user_id !== currentUserId
       )
       if (otherUser) {
         return (
@@ -121,11 +121,11 @@ const Chat = props => {
   const getOtherUser = () => {
     if (directChannel) {
       const friend = membersInChannel.find(
-        member => member.user_id !== currentUserId
+        (member) => member.user_id !== currentUserId
       )
       const mmid = friend && friend.user_id
       const mmProfile = Object.values(profiles).find(
-        profile => profile.id === mmid
+        (profile) => profile.id === mmid
       )
       return mmProfile && mmProfile.username
     }
@@ -135,11 +135,11 @@ const Chat = props => {
   const getDeleted = () => {
     if (directChannel) {
       const friend = membersToShow.find(
-        member => member.user_id !== currentUserId
+        (member) => member.user_id !== currentUserId
       )
       const mmid = friend && friend.user_id
       const mmProfile = Object.values(profiles).find(
-        profile => profile.id === mmid
+        (profile) => profile.id === mmid
       )
       if (
         mmProfile &&
@@ -164,7 +164,7 @@ const Chat = props => {
     setPinPostId(null)
   }
 
-  const completePinPost = id => {
+  const completePinPost = (id) => {
     const currentUserData = getUserDataById(currentUserId)
     sendEmail({
       name: `${currentUserData.nickname}(${currentUserData.username})`,

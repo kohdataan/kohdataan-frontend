@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-const InputField = props => {
+const InputField = (props) => {
   const {
     label,
     labelClassName,

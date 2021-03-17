@@ -7,7 +7,7 @@ import ButtonContainer from '../ButtonContainer'
 import SearchBar from '../SearchBar'
 import './styles.scss'
 
-const Friends = props => {
+const Friends = (props) => {
   const {
     channels,
     getUnreadCount,
@@ -61,7 +61,7 @@ const Friends = props => {
     },
   ]
 
-  const getStatusById = id => {
+  const getStatusById = (id) => {
     const status = id ? statuses[id] : ''
     return status
   }
@@ -86,7 +86,7 @@ const Friends = props => {
   const filterSearchResults = (data, searchTerm) =>
     data &&
     data.filter(
-      profile =>
+      (profile) =>
         profile.id !== currentUserId &&
         profile.username !== 'surveybot' &&
         profile.position !== 'deleted' &&
@@ -159,7 +159,7 @@ const Friends = props => {
           {channels && channels.length > 0 ? (
             Object.values(channels)
               .sort(sortByUnreadCount)
-              .map(channel => (
+              .map((channel) => (
                 <Friend
                   key={channel.id}
                   channel={channel}
@@ -193,7 +193,7 @@ const Friends = props => {
         <div className="friends-boxes">
           {Object.values(friendSearchResult)
             .sort((a, b) => sortSearchResultsAlphabetically(a, b))
-            .map(profile => (
+            .map((profile) => (
               <FriendSearch
                 key={profile.id}
                 profileData={profile}

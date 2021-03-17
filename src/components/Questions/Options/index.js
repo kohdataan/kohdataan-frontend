@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import OptionButton from './OptionButton'
 
-const Options = props => {
+const Options = (props) => {
   const { data } = props
   const { question, options } = data
 
@@ -15,7 +15,7 @@ const Options = props => {
     <div>
       {question && <h1>{question}</h1>}
       {options &&
-        options.map(option => (
+        options.map((option) => (
           <OptionButton
             key={option}
             text={option}

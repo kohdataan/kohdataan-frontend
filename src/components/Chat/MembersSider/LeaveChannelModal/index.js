@@ -5,7 +5,7 @@ import ButtonContainer from '../../../ButtonContainer'
 import ModalContainer from '../../../ModalContainer'
 import './styles.scss'
 
-const LeaveChannelModal = props => {
+const LeaveChannelModal = (props) => {
   const { showConfirmation, closeModal, handleLeaveChannel } = props
   return (
     <div className="leave-channel-modal-wrapper">

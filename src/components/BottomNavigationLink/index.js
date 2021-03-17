@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './styles.scss'
 
-const BottomNavigationLink = props => {
+const BottomNavigationLink = (props) => {
   const { title, route, icon } = props
 
   return (

@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const FilePreview = props => {
+const FilePreview = (props) => {
   const {
     handleSubmit,
     message,
@@ -22,7 +22,7 @@ const FilePreview = props => {
 
   const [msg, setMsg] = useState(message)
 
-  const addCaption = async e => {
+  const addCaption = async (e) => {
     handleSubmit(e, msg)
   }
 
@@ -93,7 +93,7 @@ const FilePreview = props => {
       <div className="image-preview-form">
         <div className="image-preview-user-input-wrapper">
           <form
-            onSubmit={e => addCaption(e)}
+            onSubmit={(e) => addCaption(e)}
             className="image-preview-user-input-content"
           >
             <TextareaAutosize
@@ -101,7 +101,7 @@ const FilePreview = props => {
               id="image-message"
               type="text"
               value={msg}
-              onChange={e => setMsg(e.target.value)}
+              onChange={(e) => setMsg(e.target.value)}
               placeholder="Kirjoita viesti"
               maxRows={3}
               rows={1}

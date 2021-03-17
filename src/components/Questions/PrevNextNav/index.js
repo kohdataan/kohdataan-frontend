@@ -3,13 +3,13 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 
-const PrevNextNav = props => {
+const PrevNextNav = (props) => {
   const { current, setCurrent, data } = props
   const numQuestions = data.length
   const showNext = current < data.length - 1
   const showPrew = current > 0
 
-  const handleClick = e => () => {
+  const handleClick = (e) => () => {
     return e === 'next' ? setCurrent(current + 1) : setCurrent(current - 1)
   }
 

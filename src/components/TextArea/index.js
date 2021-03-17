@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-const TextArea = props => {
+const TextArea = (props) => {
   const {
     label,
     showLabel,

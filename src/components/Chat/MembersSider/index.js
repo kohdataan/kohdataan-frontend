@@ -6,7 +6,7 @@ import ButtonContainer from '../../ButtonContainer'
 import LeaveChannelModal from './LeaveChannelModal'
 import useOutsideClick from '../../../hooks/useOutsideClick'
 
-const MembersSider = props => {
+const MembersSider = (props) => {
   const {
     members,
     profiles,
@@ -21,7 +21,7 @@ const MembersSider = props => {
 
   const [showConfirmation, setShowConfirmation] = useState(false)
 
-  const getIconMemberStatus = userId =>
+  const getIconMemberStatus = (userId) =>
     `chat-header-${getStatusById(userId)}-status-icon`
 
   const openModal = () => setShowConfirmation(true)
@@ -79,7 +79,7 @@ const MembersSider = props => {
     <div className="chat-header-members-sider" id="members-sider" ref={ref}>
       <div className="chat-header-members-sider-content">
         <h4 className="chat-header-members-sider-title ">Jäsenet</h4>
-        {members.map(member => (
+        {members.map((member) => (
           <Member
             key={member.user_id}
             userId={member.user_id}

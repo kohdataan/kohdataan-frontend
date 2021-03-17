@@ -125,7 +125,7 @@ export default function configureStore(initialState) {
             })
 
           observable.subscribe({
-            next: args => {
+            next: (args) => {
               if (
                 args.key &&
                 args.key.indexOf(`${KEY_PREFIX}storage:`) === 0 &&
@@ -171,7 +171,7 @@ export default function configureStore(initialState) {
             }
           })
         })
-        .catch(error => {
+        .catch((error) => {
           store.dispatch({
             type: ActionTypes.STORE_REHYDRATION_FAILED,
             error,
@@ -186,9 +186,9 @@ export default function configureStore(initialState) {
       debounce: 30,
       transforms: [setTransformer],
       _stateIterator: (collection, callback) => {
-        return Object.keys(collection).forEach(key => {
+        return Object.keys(collection).forEach((key) => {
           if (key === 'storage') {
-            Object.keys(collection.storage.storage).forEach(storageKey => {
+            Object.keys(collection.storage.storage).forEach((storageKey) => {
               callback(
                 collection.storage.storage[storageKey],
                 `storage:${storageKey}`

@@ -29,7 +29,7 @@ import Chat from '../components/Chat'
 import logoutHandler from '../utils/userLogout'
 import { isTeamAdmin, isSystemAdmin } from '../utils/userIsAdmin'
 
-const ChatContainer = props => {
+const ChatContainer = (props) => {
   const {
     posts,
     profiles,
@@ -69,7 +69,7 @@ const ChatContainer = props => {
   // Get current channel members
   useEffect(() => {
     if (currentChannelId) {
-      getChannelMembers(currentChannelId).then(data =>
+      getChannelMembers(currentChannelId).then((data) =>
         setCurrentMembers(data.data)
       )
     }
@@ -78,7 +78,7 @@ const ChatContainer = props => {
   useEffect(() => {
     const getCurrentMemberData = async () => {
       const currentMember = await currentMembers.find(
-        member => member.user_id === currentUserId
+        (member) => member.user_id === currentUserId
       )
       if (currentMember) setLastViewedAt(currentMember.last_viewed_at)
     }
@@ -90,15 +90,17 @@ const ChatContainer = props => {
     const getPostsAfterLastViewed = async () => {
       if (currentUser) {
         const lastViewedPost = Object.values(posts).find(
-          p => p.create_at === currentUser.last_viewed_at
+          (p) => p.create_at === currentUser.last_viewed_at
         )
         if (lastViewedPost) {
           const res = await getPostsAfter(currentChannelId, lastViewedPost.id)
           const filtered = Object.values(res.data.posts).filter(
-            p => p.type === ''
+            (p) => p.type === ''
           )
-          const filteredIds = Object.values(filtered).map(p => p.id)
-          const newOrder = res.data.order.filter(id => filteredIds.includes(id))
+          const filteredIds = Object.values(filtered).map((p) => p.id)
+          const newOrder = res.data.order.filter((id) =>
+            filteredIds.includes(id)
+          )
           setFilteredOrder(newOrder)
         }
       }
@@ -145,14 +147,14 @@ const ChatContainer = props => {
   // Filter and sort posts after fetching
   useEffect(() => {
     // Filter posts by channel id
-    const filterPostsByChannelId = channelId => {
+    const filterPostsByChannelId = (channelId) => {
       const filtered = Object.values(posts).filter(
-        post => post.channel_id === channelId
+        (post) => post.channel_id === channelId
       )
       return filtered
     }
     // Sort posts based on created timestamp
-    const sortPosts = allPosts => {
+    const sortPosts = (allPosts) => {
       const postsArr = Object.values(allPosts)
       postsArr.sort((a, b) => a.create_at - b.create_at)
       return postsArr
@@ -171,9 +173,9 @@ const ChatContainer = props => {
       const activeProfilesArr =
         currentMembers &&
         currentMembers
-          .map(member => profiles[member.user_id])
+          .map((member) => profiles[member.user_id])
           .filter(
-            member =>
+            (member) =>
               member &&
               member.delete_at === 0 &&
               member.position !== 'deleted' &&
@@ -266,7 +268,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getPosts: getPostsAction,

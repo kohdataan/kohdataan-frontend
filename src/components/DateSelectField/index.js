@@ -47,7 +47,7 @@ const DateSelectField = React.forwardRef((props, ref) => {
   let day = 10
   let options = []
 
-  const getBorderStyle = isFocused => {
+  const getBorderStyle = (isFocused) => {
     let border = '1px solid #f59023'
     if (isFocused) {
       border = '1px solid white'
@@ -63,28 +63,28 @@ const DateSelectField = React.forwardRef((props, ref) => {
   }
 
   const customStyles = {
-    container: provided => ({
+    container: (provided) => ({
       ...provided,
       width: '100%',
     }),
-    menu: provided => ({
+    menu: (provided) => ({
       ...provided,
       border: '2px solid #f59023',
     }),
-    placeholder: provided => ({
+    placeholder: (provided) => ({
       ...provided,
       color: 'white',
       fontSize: '15px',
     }),
-    clearIndicator: provided => ({
+    clearIndicator: (provided) => ({
       ...provided,
       display: 'none',
     }),
-    dropdownIndicator: provided => ({
+    dropdownIndicator: (provided) => ({
       ...provided,
       padding: '1px',
     }),
-    indicatorSeparator: provided => ({
+    indicatorSeparator: (provided) => ({
       ...provided,
       display: 'none',
     }),

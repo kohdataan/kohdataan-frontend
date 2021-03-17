@@ -6,15 +6,15 @@ import { addUserInterests as addUserInterestsAction } from '../store/user/userAc
 import getInterestsAction from '../store/interest/interestAction'
 import EditInterests from '../components/EditInterests'
 
-const EditInterestsContainer = props => {
+const EditInterestsContainer = (props) => {
   const { history, userInterests, interestOptions, addUserInterests } = props
 
-  const handleEditReady = ids => {
+  const handleEditReady = (ids) => {
     addUserInterests({ userInterests: ids })
   }
 
   const getCurrentIds = () => {
-    return userInterests.map(item => item.id)
+    return userInterests.map((item) => item.id)
   }
 
   return (
@@ -62,7 +62,7 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       addUserInterests: addUserInterestsAction,

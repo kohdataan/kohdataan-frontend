@@ -6,7 +6,7 @@ import DeleteAccountModal from './DeleteAccountModal'
 import * as API from '../../api/user/user'
 import './styles.scss'
 
-const Account = props => {
+const Account = (props) => {
   const {
     nodeUser,
     mmuser,
@@ -20,7 +20,7 @@ const Account = props => {
   const [deleteError, setDeleteError] = useState(null)
   const [field, setField] = useState('')
 
-  const openModal = fieldName => {
+  const openModal = (fieldName) => {
     setShowModal(!showModal)
     setField(fieldName)
   }
@@ -50,7 +50,7 @@ const Account = props => {
     }
   }
 
-  const updateAccountInfo = data => {
+  const updateAccountInfo = (data) => {
     if (field === 'email') {
       updateUser({ mmid: mmuser.id, email: data.email.trim().toLowerCase() })
     } else if (field === 'phoneNumber') {

@@ -6,7 +6,7 @@ import EditTitle from '../EditProfile/EditTitle'
 import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
 
-const EditInterests = props => {
+const EditInterests = (props) => {
   const {
     currentInterestIds,
     handleInterestEditReady,

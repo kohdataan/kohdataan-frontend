@@ -11,7 +11,7 @@ import {
 import logoutHandler from '../utils/userLogout'
 import * as API from '../api/user/user'
 
-const ChangeAccountInfoContainer = props => {
+const ChangeAccountInfoContainer = (props) => {
   const {
     myUserInfo,
     currentUser,
@@ -35,7 +35,7 @@ const ChangeAccountInfoContainer = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const currentUser = state.entities.users.profiles[currentUserId]
   const userInterests = state.user.interests
@@ -49,7 +49,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       updateUser: updateUserAction,

@@ -8,7 +8,7 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
       render={
-        props =>
+        (props) =>
           localStorage.getItem('authToken') ? (
             // eslint-disable-next-line react/jsx-props-no-spreading
             <Component {...props} />

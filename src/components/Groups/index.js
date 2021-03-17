@@ -6,7 +6,7 @@ import Tutorial from '../Tutorial'
 import ButtonContainer from '../ButtonContainer'
 import './styles.scss'
 
-const Groups = props => {
+const Groups = (props) => {
   const {
     history,
     channels,
@@ -58,7 +58,7 @@ const Groups = props => {
       </header>
       <div className="groups-boxes">
         {channels &&
-          channels.map(channel => (
+          channels.map((channel) => (
             <Group
               key={channel.id}
               channel={channel}

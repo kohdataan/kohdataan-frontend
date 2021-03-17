@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './styles.scss'
 import ButtonContainer from '../../ButtonContainer'
 
-const PageInformation = props => {
+const PageInformation = (props) => {
   const { handleClick, path, direct, inChat, channelName } = props
   let text = ''
   let page

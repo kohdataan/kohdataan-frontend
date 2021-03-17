@@ -4,7 +4,7 @@ import getInterests from '../../api/interests/interest'
 const getInterestsAction = () => {
   // const id = localStorage.getItem('userId')
   const token = localStorage.getItem('authToken')
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const interests = await getInterests(token)
       await dispatch({

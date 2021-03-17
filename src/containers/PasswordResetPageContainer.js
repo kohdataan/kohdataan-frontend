@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import * as API from '../api/user/user'
 import PasswordResetPage from '../components/PasswordResetPage'
 
-const PasswordResetPageContainer = props => {
+const PasswordResetPageContainer = (props) => {
   const {
     match: {
       params: { uuid },
@@ -14,7 +14,7 @@ const PasswordResetPageContainer = props => {
   useEffect(() => {
     const checkIfLinkIsUsed = async () => {
       const data = { uuid }
-      await API.checkIfResetLinkHasBeenUsed(data).then(resp => {
+      await API.checkIfResetLinkHasBeenUsed(data).then((resp) => {
         if (!resp.success) {
           history.push({
             pathname: '/login',
@@ -28,9 +28,9 @@ const PasswordResetPageContainer = props => {
     checkIfLinkIsUsed()
   }, [uuid, history])
 
-  const handleNewPassword = async password => {
+  const handleNewPassword = async (password) => {
     const data = { uuid, password: password.password }
-    await API.setNewPassword(data).then(resp => {
+    await API.setNewPassword(data).then((resp) => {
       if (!resp.success) {
         history.push({
           state: {

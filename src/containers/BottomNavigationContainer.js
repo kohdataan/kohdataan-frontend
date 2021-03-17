@@ -10,7 +10,7 @@ import BottomNavigationBot from '../components/BottomNavigationBot'
 import * as API from '../api/user/user'
 import logoutHandler from '../utils/userLogout'
 
-const BottomNavigationContainer = props => {
+const BottomNavigationContainer = (props) => {
   const {
     location: { pathname },
     logout: matterMostLogout,
@@ -60,7 +60,7 @@ BottomNavigationContainer.propTypes = {
   user: PropTypes.instanceOf(Object).isRequired,
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { currentUserId } = state.entities.users
   const user = state.entities.users.profiles[currentUserId]
   return {
@@ -69,7 +69,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       logout,

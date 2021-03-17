@@ -1,4 +1,4 @@
-const dataURItoBlob = dataURI => {
+const dataURItoBlob = (dataURI) => {
   if (!dataURI) {
     return undefined
   }

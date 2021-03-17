@@ -2,7 +2,7 @@ import React from 'react'
 import propTypes from 'prop-types'
 import Joyride from 'react-joyride'
 
-const Tutorial = props => {
+const Tutorial = (props) => {
   const { history, steps, updateTutorialWatched, navigateBack } = props
 
   const locale = {
@@ -88,7 +88,7 @@ const Tutorial = props => {
     },
   }
 
-  const handleJoyrideCallback = data => {
+  const handleJoyrideCallback = (data) => {
     const { action, lifecycle, step } = data
     if (!navigateBack) {
       if (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import ViewImage from '../components/Chat/ViewImage'
 
-const ViewImageContainer = props => {
+const ViewImageContainer = (props) => {
   const { history, match } = props
 
   return <ViewImage history={history} match={match} />

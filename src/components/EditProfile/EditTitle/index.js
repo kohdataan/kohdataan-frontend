@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const EditTitle = props => {
+const EditTitle = (props) => {
   const { text, history } = props
 
   const closeEditPage = () => {

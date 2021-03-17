@@ -7,13 +7,13 @@ import * as types from '../../contants/actionTypes'
 import { initUser, initTeam } from '../root/index'
 
 export const startFriendsPageFetching = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({ type: types.START_FRIENDS_FETCHING })
   }
 }
 
 export const friendsPageFetchingReady = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({ type: types.FRIENDS_FETCHING_READY })
   }
 }
@@ -22,7 +22,7 @@ export const fetchDirectChannelMembers = () => {
   return async (dispatch, getState) => {
     const { channels } = getState().entities.channels
     const promises = []
-    Object.values(channels).forEach(channel => {
+    Object.values(channels).forEach((channel) => {
       promises.push(dispatch(getChannelMembers(channel.id)))
     })
     await Promise.all(promises)

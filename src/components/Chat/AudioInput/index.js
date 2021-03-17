@@ -6,7 +6,7 @@ import Timer from 'react-compound-timer'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const AudioInput = props => {
+const AudioInput = (props) => {
   const { handleSubmit, closeModal, showAudioModal } = props
   const [stream, setStream] = useState(null)
   const [recorder, setRecorder] = useState(null)

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { getInterestsByUsername, getUserByUsername } from '../api/user/user'
 import Profile from '../components/Profile'
 
-const OtherUserProfileContainer = props => {
+const OtherUserProfileContainer = (props) => {
   // mattermost user
   const {
     currentUser,
@@ -54,9 +54,9 @@ const OtherUserProfileContainer = props => {
     }
     if (username) {
       getProfilesByUsernames([username])
-        .then(data => setmmUser(data.data[0]))
+        .then((data) => setmmUser(data.data[0]))
         // eslint-disable-next-line no-console
-        .catch(e => console.error(e))
+        .catch((e) => console.error(e))
       // TODO: Get other users info from node backend (location, description)
       fetchOtherUser()
     }
@@ -108,7 +108,7 @@ const shouldComponentUpdate = (props, prevProps) => {
   return JSON.stringify(rest) === JSON.stringify(prest)
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getProfilesByUsernames: getProfilesByUsernamesAction,

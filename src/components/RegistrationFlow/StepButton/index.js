@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 import './styles.scss'
 
-const StepButton = props => {
+const StepButton = (props) => {
   const {
     params: { next, previous, last },
     onClick,

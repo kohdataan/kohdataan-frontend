@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
-const ProfileImage = props => {
+const ProfileImage = (props) => {
   const { mmuser } = props
   const imageUri = `${process.env.REACT_APP_MATTERMOST_URL}/api/v4/users/${
     mmuser.id

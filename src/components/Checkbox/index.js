@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-const Checkbox = props => {
+const Checkbox = (props) => {
   const {
     name,
     labelClassName,

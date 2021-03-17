@@ -3,7 +3,7 @@ import './styles.scss'
 import propTypes from 'prop-types'
 import ButtonContainer from '../../../ButtonContainer'
 
-const OptionButton = props => {
+const OptionButton = (props) => {
   const { text, clickHandler } = props
 
   return (

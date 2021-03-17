@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './styles.scss'
 
-const EmailSmsInfo = props => {
+const EmailSmsInfo = (props) => {
   const { description, guide } = props
 
   return (

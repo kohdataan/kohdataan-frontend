@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import './styles.scss'
 
-const Header = props => {
+const Header = (props) => {
   const { nickname, location, showAge, showLocation, birthdate } = props
   return (
     <div className="profile-header-item">
