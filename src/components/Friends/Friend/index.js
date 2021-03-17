@@ -11,7 +11,7 @@ import {
 } from '../../../api/blocking/blocked_user'
 import { getUserByUsername, getUser } from '../../../api/user/user'
 
-const Friend = props => {
+const Friend = (props) => {
   const {
     channel,
     unreadCount,
@@ -32,7 +32,7 @@ const Friend = props => {
   const [otherUserInfo, setOtherUserInfo] = useState({})
   const masterUserEmail = process.env.REACT_APP_MASTER_USER_EMAIL
 
-  const getIconMemberStatus = userId =>
+  const getIconMemberStatus = (userId) =>
     `friends-${getStatusById(userId)}-status-icon`
 
   const imageUri =
@@ -106,7 +106,7 @@ const Friend = props => {
     const { id } = user
     const token = localStorage.getItem('authToken')
     if (blockedFriends.includes(id)) {
-      setBlockedFriends(blockedFriends.filter(foundId => foundId !== id))
+      setBlockedFriends(blockedFriends.filter((foundId) => foundId !== id))
       const data = { unblockedUser: user.id }
       await removeUserFromBlocked(data, token)
       setBlocked(false)
