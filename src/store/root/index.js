@@ -8,13 +8,13 @@ import getInterestsAction from '../interest/interestAction'
 import { addUserToState, getUserInterests } from '../user/userAction'
 
 export const rootLoading = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({ type: types.START_ROOT_LOADING })
   }
 }
 
 export const rootLoadingReady = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
       type: types.ROOT_LOADING_READY,
     })
@@ -22,7 +22,7 @@ export const rootLoadingReady = () => {
 }
 
 export const initMattermostReduxClient = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     await Client4.setUrl(`${process.env.REACT_APP_MATTERMOST_URL}`)
     await dispatch(init('web', `${process.env.REACT_APP_WEBSOCKET_URL}`))
     await dispatch(setServerVersion('5.20.1'))
@@ -30,7 +30,7 @@ export const initMattermostReduxClient = () => {
 }
 
 export const initUser = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const token = localStorage.getItem('authToken')
     if (token) {
       await dispatch(addUserToState())
@@ -53,7 +53,7 @@ export const initTeam = () => {
 }
 
 export const rootStartUp = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     await dispatch(rootLoading())
     await dispatch(initMattermostReduxClient())
     await dispatch(getInterestsAction())
