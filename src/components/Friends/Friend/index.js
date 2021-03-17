@@ -4,7 +4,6 @@ import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
-import { TextLine } from '../../ContentLoader'
 import {
   addUserToBlocked,
   removeUserFromBlocked,
@@ -159,7 +158,9 @@ const Friend = (props) => {
                 {message && !blocked ? (
                   <>{message}</>
                 ) : (
-                  <TextLine className="text-content" />
+                  <div className="text-content">
+                    <div className="no-content-bar" />
+                  </div>
                 )}
               </div>
             </div>
@@ -249,7 +250,9 @@ const Friend = (props) => {
                     {message && !blocked ? (
                       <>{message}</>
                     ) : (
-                      <TextLine className="text-content" />
+                      <div className="text-content">
+                        <div className="no-content-bar" />
+                      </div>
                     )}
                   </div>
                 </div>

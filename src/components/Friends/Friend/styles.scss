@@ -200,6 +200,28 @@
   color: gray;
 }
 
+.no-content-bar {
+  width: 180px;
+  height: 7px;
+  border-radius: 4px;
+  background-image: linear-gradient(to top, rgb(230, 230, 230), rgb(240, 240, 240), rgb(230, 230, 230));
+  background-color: rgb(220, 220, 220);
+  margin-top: 3px;
+  @media (max-width: 800px) {
+    width: 170px;
+  }
+  @media (max-width: 600px) {
+    width: 150px;
+    height: 5px;
+  }
+  @media (max-width: 415px) {
+    width: 100px;
+  }
+  @media (max-width: 335px) {
+    width: 80px;
+  }
+}
+
 .no-unread-messages {
   width: 30px;
   height: 30px;
