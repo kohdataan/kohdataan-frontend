@@ -24,7 +24,7 @@
     "react-cookie-consent": "^6.2.3",
     "react-device-detect": "^1.17.0",
     "react-dom": "^16.14.0",
-    "react-hook-form": "^3.29.4",
+    "react-hook-form": "^6.15.4",
     "react-hot-loader": "^4.13.0",
     "react-joyride": "^2.3.0",
     "react-linkify": "^1.0.0-alpha",

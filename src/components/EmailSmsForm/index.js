@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from 'react'
 import PropTypes from 'prop-types'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import ValidatedInputField from '../ValidatedInputField'
 import ModalContainer from '../ModalContainer'
@@ -10,7 +10,7 @@ import './styles.scss'
 // This component needs a function that takes in an object that contains email and phonenumber,
 // And then do something with this data. (send email with verification link, send password reset link, etc..)
 
-const EmailSmsForm = props => {
+const EmailSmsForm = (props) => {
   const {
     title,
     pagePurpose,
@@ -22,7 +22,7 @@ const EmailSmsForm = props => {
   } = props
   const [phoneNumber, setPhoneNumber] = useState('')
   const [showModal, setShowModal] = useState(false)
-  const { register, handleSubmit, errors, setError, clearError } = useForm()
+  const { register, handleSubmit, errors, setError, clearErrors } = useForm()
 
   useEffect(() => {
     const setApiErrors = () => {
@@ -35,7 +35,7 @@ const EmailSmsForm = props => {
     setApiErrors()
   }, [apiError, text, setError])
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     await handleRequest(data.email.trim().toLowerCase())
   }
 
@@ -78,7 +78,7 @@ const EmailSmsForm = props => {
                 })}
                 ariaInvalid={!!errors.email}
                 onChange={() => {
-                  clearError()
+                  clearErrors()
                   setApiError(false)
                 }}
                 inputClassName="registration-problem-input-text"
@@ -99,7 +99,7 @@ const EmailSmsForm = props => {
                 label="Puhelinnumero"
                 value={phoneNumber}
                 name="phoneNumber"
-                onChange={e => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 inputClassName="registration-problem-input-text"
                 labelClassName="registration-problem-input-field"
                 showPlaceholder={false}

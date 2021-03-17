@@ -1,12 +1,12 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import ValidatedInputField from '../ValidatedInputField'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
 import './styles.scss'
 
-const PasswordResetPage = props => {
+const PasswordResetPage = (props) => {
   const { handleNewPassword } = props
   const { register, handleSubmit, errors, watch } = useForm()
   const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false)
@@ -86,7 +86,7 @@ const PasswordResetPage = props => {
               name="passwordConfirm"
               ref={register({
                 required: true,
-                validate: value => {
+                validate: (value) => {
                   return value === watch('password')
                 },
               })}

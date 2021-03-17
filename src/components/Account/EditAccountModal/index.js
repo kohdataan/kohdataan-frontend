@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import ValidatedInputField from '../../ValidatedInputField'
 import ButtonContainer from '../../ButtonContainer'
 import ModalContainer from '../../ModalContainer'
@@ -29,11 +29,11 @@ const messages = {
   lastname: 'Sukunimen tulee olla 2-30 merkkiä pitkä.',
 }
 
-const EditAccountModal = props => {
+const EditAccountModal = (props) => {
   const { showModal, updateUser, field, closeModal } = props
   const { register, handleSubmit, errors, watch } = useForm()
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     updateUser(data)
   }
 
@@ -96,7 +96,7 @@ const EditAccountModal = props => {
               name="passwordConfirm"
               ref={register({
                 required: true,
-                validate: value => {
+                validate: (value) => {
                   return value === watch('password')
                 },
               })}

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import ValidatedTextArea from '../ValidatedTextArea'
 import ValidatedInputField from '../ValidatedInputField'
 import ButtonContainer from '../ButtonContainer'
@@ -13,9 +13,9 @@ const RegistrationProblem = ({
   text,
   user,
 }) => {
-  const { register, handleSubmit, errors, clearError } = useForm()
+  const { register, handleSubmit, errors, clearErrors } = useForm()
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     await handleEmailSending(
       data.name.trim(),
       user ? user.email : data.email.trim(),
@@ -55,7 +55,7 @@ const RegistrationProblem = ({
                   <ValidatedInputField
                     label="Oma nimi"
                     name="name"
-                    onChange={() => clearError('name')}
+                    onChange={() => clearErrors('name')}
                     ref={register({
                       required: true,
                       minLength: 2,
@@ -86,7 +86,7 @@ const RegistrationProblem = ({
                     <ValidatedInputField
                       label="Oma sähköposti"
                       name="email"
-                      onChange={() => clearError('email')}
+                      onChange={() => clearErrors('email')}
                       ref={register({
                         required: true,
                         pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -113,7 +113,7 @@ const RegistrationProblem = ({
                   <ValidatedTextArea
                     label="Viesti"
                     name="message"
-                    onChange={() => clearError('messsage')}
+                    onChange={() => clearErrors('messsage')}
                     ref={register({
                       required: true,
                     })}

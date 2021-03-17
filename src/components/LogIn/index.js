@@ -1,13 +1,13 @@
 import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import ValidatedInputField from '../ValidatedInputField'
 import './styles.scss'
 
-const LogIn = props => {
+const LogIn = (props) => {
   const { handleLogin, user, uuid, error, textToAdd } = props
-  const { register, handleSubmit, errors, setError, clearError } = useForm()
+  const { register, handleSubmit, errors, setError, clearErrors } = useForm()
 
   // Set appropriate error given different errors
   useEffect(() => {
@@ -19,7 +19,7 @@ const LogIn = props => {
     }
   }, [user, setError])
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     await handleLogin(data.email.trim().toLowerCase(), data.password)
   }
 
@@ -44,7 +44,7 @@ const LogIn = props => {
             <ValidatedInputField
               label="Sähköposti"
               name="email"
-              onChange={() => clearError()}
+              onChange={() => clearErrors()}
               ref={register({
                 required: true,
               })}
@@ -73,7 +73,7 @@ const LogIn = props => {
             <ValidatedInputField
               label="Salasana"
               name="password"
-              onChange={() => clearError()}
+              onChange={() => clearErrors()}
               ref={register({
                 required: true,
               })}

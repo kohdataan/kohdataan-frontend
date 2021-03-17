@@ -2,7 +2,7 @@
 import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import useForm from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import moment from 'moment'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
@@ -23,7 +23,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
     watch,
     setValue,
     setError,
-    clearError,
+    clearErrors,
   } = useForm()
   const [rulesAccepted, setRulesAccepted] = useState(false)
   // const [phoneNumberModalIsOpen, setPhoneNumberModalIsOpen] = useState(false)
@@ -51,7 +51,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
     setOpenErrorModal(false)
   }
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const usersBirthdate = moment
       .utc({
         year: birthyear,
@@ -214,9 +214,9 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   ariaInvalid={!!errors.day}
                   value={String(birthday)}
                   noOptionsMessage={() => 'Tarkista päivä.'}
-                  onChange={selected => {
+                  onChange={(selected) => {
                     if (selected) {
-                      clearError('day')
+                      clearErrors('day')
                       setBirthday(selected.value)
                     }
                     setValue('day', selected ? selected.value : null)
@@ -245,9 +245,9 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   errors={errors.month}
                   value={String(birthmonth)}
                   noOptionsMessage={() => 'Tarkista kuukausi.'}
-                  onChange={selected => {
+                  onChange={(selected) => {
                     if (selected) {
-                      clearError('month')
+                      clearErrors('month')
                       setBirthmonth(selected.value)
                     }
                     setValue('month', selected ? selected.value : null)
@@ -276,9 +276,9 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   errors={errors.year}
                   value={String(birthyear)}
                   noOptionsMessage={() => 'Tarkista vuosi.'}
-                  onChange={selected => {
+                  onChange={(selected) => {
                     if (selected) {
-                      clearError('year')
+                      clearErrors('year')
                       setBirthyear(selected.value)
                     }
                     setValue('year', selected ? selected.value : null)
@@ -310,9 +310,9 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 required: true,
                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               })}
-              onChange={selected => {
+              onChange={(selected) => {
                 if (selected) {
-                  clearError('email')
+                  clearErrors('email')
                   setCurrentApiErrors({})
                 }
               }}
@@ -431,7 +431,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               name="passwordConfirm"
               ref={register({
                 required: true,
-                validate: value => {
+                validate: (value) => {
                   return value === watch('password')
                 },
               })}
