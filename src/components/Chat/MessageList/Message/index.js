@@ -7,7 +7,7 @@ import propTypes from 'prop-types'
 import Linkify from 'react-linkify'
 import ButtonContainer from '../../../ButtonContainer'
 
-const Message = props => {
+const Message = (props) => {
   const {
     id,
     sender,
