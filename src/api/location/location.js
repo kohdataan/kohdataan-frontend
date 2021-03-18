@@ -1,6 +1,6 @@
 import handleFetchErrors from '../errors'
 
-const getLocations = async token => {
+const getLocations = async (token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/location/`, {

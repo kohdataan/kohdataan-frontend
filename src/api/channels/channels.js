@@ -1,6 +1,6 @@
 import handleFetchErrors from '../errors'
 
-const getChannelInvitations = async token => {
+const getChannelInvitations = async (token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/channelInvitation`, {
@@ -65,7 +65,7 @@ const removeUserInterestsFromChannelPurpose = async (token, channelId) => {
   }
 }
 
-const handleUserChangingInterestToChannelsPurposes = async token => {
+const handleUserChangingInterestToChannelsPurposes = async (token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/channelPurpose/resetUserChannels`, {

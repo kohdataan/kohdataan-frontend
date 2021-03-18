@@ -1,6 +1,6 @@
 import handleFetchErrors from '../errors'
 
-const userLogin = async data => {
+const userLogin = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/login`, {
@@ -16,7 +16,7 @@ const userLogin = async data => {
   }
 }
 
-const userLogout = async token => {
+const userLogout = async (token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/logout`, {
@@ -32,7 +32,7 @@ const userLogout = async token => {
   }
 }
 
-const userSignUp = async data => {
+const userSignUp = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/user`, {
@@ -49,7 +49,7 @@ const userSignUp = async data => {
   }
 }
 
-const resetPassword = async data => {
+const resetPassword = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/forgot`, {
@@ -66,7 +66,7 @@ const resetPassword = async data => {
   }
 }
 
-const setNewPassword = async data => {
+const setNewPassword = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/reset`, {
@@ -83,7 +83,7 @@ const setNewPassword = async data => {
   }
 }
 
-const checkIfResetLinkHasBeenUsed = async data => {
+const checkIfResetLinkHasBeenUsed = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/check-resetlink`, {
@@ -100,7 +100,7 @@ const checkIfResetLinkHasBeenUsed = async data => {
   }
 }
 
-const updatePassword = async data => {
+const updatePassword = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/auth/update-password`, {
@@ -222,7 +222,7 @@ const addUserInterests = async (data, token) => {
   return null
 }
 
-const getUserInterest = async token => {
+const getUserInterest = async (token) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/userInterest`, {
@@ -254,7 +254,7 @@ const getInterestsByUsername = async (token, username) => {
   }
 }
 
-const sendEmail = async data => {
+const sendEmail = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/sendMail/problem`, {
@@ -321,7 +321,7 @@ const restoreUser = async (data, id, token) => {
   }
 }
 
-const sendVerifyEmailLink = async data => {
+const sendVerifyEmailLink = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/emailverification/req`, {
@@ -337,7 +337,7 @@ const sendVerifyEmailLink = async data => {
   }
 }
 
-const verifyEmail = async data => {
+const verifyEmail = async (data) => {
   const uri = process.env.REACT_APP_NODE_BACKEND_URL
   try {
     const resp = await fetch(`${uri}/emailverification/ver`, {

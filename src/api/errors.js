@@ -1,4 +1,4 @@
-const handleFetchErrors = resp => {
+const handleFetchErrors = (resp) => {
   if (!resp.ok) {
     throw Error(resp.statusText)
   }
