@@ -99,10 +99,12 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       {' '}
                       <span className="uppercase-text">Kohdataan</span>
                       -palvelu on ilmainen, kotimainen ja turvallinen palvelu.
-                      Palvelua moderoidaan eli keskusteluista poistetaan
-                      asiattomat sisällöt. Valvojaan saa tarvittaessa yhteyden,
-                      ja valvoja pyrkii vastaamaan viesteihin mahdollisimman
-                      pian.
+                      Palvelua moderoidaan. Valvojat voivat tarvittaessa puuttua
+                      ryhmäkeskusteluihin ja poistaa asiattomat viestit.
+                      Valvojat voivat myös poistaa palvelusta käyttäjät, jotka
+                      eivät noudata käyttöehtoja ja sääntöjä. Valvojaan saa
+                      tarvittaessa yhteyden, ja valvoja pyrkii vastaamaan
+                      viesteihin mahdollisimman pian.
                     </p>
                   </li>
                   <li>
@@ -224,7 +226,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                     </span>
                     <div>
                       <span className="uppercase-text">Kohdataan</span>
-                      -palvelu kerää sinusta seuraavat henkilötiedot: 
+                      -palvelu kerää sinusta seuraavat henkilötiedot:
                       <ul>
                         <li>
                           kun rekisteröidyt palvelun käyttäjäksi
@@ -249,7 +251,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                         </li>
                         <li>
                           keskusteluryhmiin tuottamasi materiaalit, kuten
-                          tekstit, valokuvat, videot ja äänet.
+                          tekstit, valokuvat, videot ja äänet.
                         </li>
                       </ul>
                     </div>
@@ -335,7 +337,7 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
                       <span className="uppercase-text">Kohdataan</span>
                       -palveluun muutoksia tai lopettaa koko palvelu. Jos
                       palvelu lopetetaan, Kehitysvammaliitto ilmoittaa siitä
-                      sinulle sähköpostilla hyvissä ajoin etukäteen.  
+                      sinulle sähköpostilla hyvissä ajoin etukäteen.
                     </p>
                   </li>
                   <li>

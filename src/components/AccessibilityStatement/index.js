@@ -22,7 +22,7 @@ const AccessibilityStatement = ({ closeModal }) => {
         <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
         <div className="service-info-content">
           <p>
-            Tämä on
+            Tämä on &nbsp;
             <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuusseloste.
           </p>
@@ -31,7 +31,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </h2>
           <p>Saavutettavuusseloste kertoo verkkopalvelun saavutettavuudesta.</p>
           <p>
-            Saavutettavaa verkkopalvelu on sellainen, jota voivat käyttää
+            Saavutettava verkkopalvelu on sellainen, jota voivat käyttää
             mahdollisimman monet ihmiset. Saavutettavaa verkkopalvelua voivat
             siis käyttää myös ihmiset, joilla on jokin vamma tai
             toimintarajoite. Esimerkiksi näkövamma, kuulovamma, liikuntavamma
@@ -49,7 +49,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </h2>
           <p>
             <span className="uppercase-text">Kohdataan</span>
-            -palvelua koskee laki digitaalisten palvelujen tarjoamisesta. Lain
+            -palvelua koskee laki digitaalisten palvelujen tarjoamisesta. Lain
             mukaan julkisilla varoilla rahoitettujen verkkopalvelujen täytyy
             olla saavutettavia.
           </p>
@@ -75,21 +75,21 @@ const AccessibilityStatement = ({ closeModal }) => {
           </h3>
           <p>
             Ruudunlukuohjelman käyttäjä ei saa varmistusta siitä, että profiili-
-            ja rekisteröitymistietoja on muokattu onnistuneesti.  
+            ja rekisteröitymistietoja on muokattu onnistuneesti.
           </p>
           <h3 className="accessibility-statement-headline">
             Saavutettavuusvaatimukset, jotka eivät täyty:
           </h3>
           <p>4.1.3 Tilasta kertovat viestit</p>
           <h3 className="accessibility-statement-headline">
-            Syy noudattamatta jättämiselle: 
+            Syy noudattamatta jättämiselle:
           </h3>
           <p>
             Palvelun kaikkia ominaisuuksia ei ole vielä toteutettu. Puute
             korjataan mahdollisimman pian.
           </p>
           <h2 className="accessibility-statement-headline">
-            Sisältö, joka ei kuulu lainsäädännön piiriin 
+            Sisältö, joka ei kuulu lainsäädännön piiriin
           </h2>
           <p>
             Käyttäjien tuottama tai jakama sisältö ei kuulu lainsäädännön
@@ -99,7 +99,7 @@ const AccessibilityStatement = ({ closeModal }) => {
           </p>
           <h2 className="accessibility-statement-headline">Anna palautetta</h2>
           <p>
-            Jos huomaat
+            Jos huomaat &nbsp;
             <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuudessa ongelmia, anna meille palautetta. Voit
             antaa palautetta saavutettavuudesta sähköpostitse &nbsp;
@@ -107,7 +107,7 @@ const AccessibilityStatement = ({ closeModal }) => {
               kohdataan@kohdataan.fi
             </a>
             . Vastaamme palautteeseen kahden viikon aikana. Pyrimme jatkuvasti
-            <span className="uppercase-text">Kohdataan</span>
+            kehittmään &nbsp; <span className="uppercase-text">Kohdataan</span>
             -palvelun saavutettavuutta.
           </p>
           <h2 className="accessibility-statement-headline">

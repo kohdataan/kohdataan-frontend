@@ -20,7 +20,7 @@ const PrivacyPolicy = ({ closeModal }) => {
         <p className="bold-text">(voimassa 27.4.2020 alkaen)</p>
         <div className="service-info-content">
           <p>
-            Tämä on &npsp;
+            Tämä on &nbsp;
             <span className="uppercase-text">Kohdataan</span>
             -palvelun tietosuojaseloste. Tietosuojaselosteessa kerrotaan, mitä
             henkilötietoja palvelussa käyttäjistä kerätään ja mitä
@@ -68,7 +68,7 @@ const PrivacyPolicy = ({ closeModal }) => {
                 <br />
                 Puhelin: (09) 3480 9262
                 <br />
-                Sähköposti: &npsp;
+                Sähköposti: &nbsp;
                 <a className="email-link" href="mailto:marko.peltomaki@kvl.fi">
                   marko.peltomaki@kvl.fi
                 </a>
@@ -95,7 +95,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               </p>
               <p>
                 Keräämme ja käsittelemme vain sellaisia henkilötietojasi, joita
-                tarvitaan &npsp;
+                tarvitaan &nbsp;
                 <span className="uppercase-text">Kohdataan</span>
                 -palvelun käyttöön.
               </p>
@@ -112,7 +112,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               </ul>
               <p>
                 Henkilötietojesi käyttö perustuu Kehitysvammaliiton ja sinun
-                väliseen sopimukseen &npsp;
+                väliseen sopimukseen &nbsp;
                 <span className="uppercase-text">Kohdataan</span>
                 -palvelun käytöstä.
               </p>
@@ -169,7 +169,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               <p>
                 Keräämme henkilötietoja vain sinulta itseltäsi sekä evästeiden
                 ja vastaavien teknologioiden avulla laitteistasi. Tietoja
-                kerätään kerätään esimerkiksi silloin kun
+                kerätään esimerkiksi silloin kun
               </p>
               <ul>
                 <li>rekisteröidyt palveluun</li>
@@ -232,7 +232,7 @@ const PrivacyPolicy = ({ closeModal }) => {
                 Tietokoneesi selaimen tai mobiililaitteen asetuksista voit
                 hallita evästeiden käyttöä tai halutessasi estää ne kokonaan.
                 Jos estät asetuksistasi evästeiden käytön kokonaan, et pysty
-                käyttämään &npsp;
+                käyttämään &nbsp;
                 <span className="uppercase-text">Kohdataan</span>
                 -palvelua.
               </p>
@@ -250,7 +250,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               </p>
               <p>
                 Ulkopuoliset henkilöt saavat käyttää henkilötietoja
-                Kehitysvammaliiton luvalla vain
+                Kehitysvammaliiton luvalla vain &nbsp;
                 <span className="uppercase-text">Kohdataan</span>
                 -palvelun kehittämiseen.
               </p>
@@ -266,7 +266,7 @@ const PrivacyPolicy = ({ closeModal }) => {
               <p>Rekisteröitynä sinulla on oikeus:</p>
               <ul>
                 <li>
-                  tarkastaa, mitä henkilötietoja sinusta on tallennettu &npsp;
+                  tarkastaa, mitä henkilötietoja sinusta on tallennettu &nbsp;
                   <span className="uppercase-text">Kohdataan</span>
                   -palvelun rekisteriin
                 </li>
