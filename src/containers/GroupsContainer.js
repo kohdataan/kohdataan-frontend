@@ -7,7 +7,10 @@ import {
 } from 'mattermost-redux/actions/channels'
 import { getPosts as getPostsAction } from 'mattermost-redux/actions/posts'
 import PropTypes from 'prop-types'
-import moment from 'moment'
+import dayjs from 'dayjs'
+import isBetween from 'dayjs/plugin/isBetween'
+import isoWeek from 'dayjs/plugin/isoWeek'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { addUserInterestsToChannelPurpose } from '../api/channels/channels'
 import Groups from '../components/Groups'
 import GroupSuggestions from '../components/GroupSuggestions'
@@ -49,6 +52,9 @@ const GroupsContainer = (props) => {
   const [showThemeGroup, setShowThemeGroup] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
   const [timer, setTimer] = useState(0)
+  dayjs.extend(isBetween)
+  dayjs.extend(isoWeek)
+  dayjs.extend(customParseFormat)
   // Get only those channels suggestions that user has not yet joined
 
   // Get all group related data at once
@@ -61,10 +67,10 @@ const GroupsContainer = (props) => {
   }, [fetchChannelsAndInvitations])
 
   const updateThemeGroupOpen = () => {
-    const dateObject = moment()
+    const dateObject = dayjs()
     const format = 'DD MM YYYY, hh:mm:ss'
-    const startTime1 = moment('04 03 2021, 17:00:00', format)
-    const endTime1 = moment('04 03 2021, 19:00:00', format)
+    const startTime1 = dayjs('18 01 2021, 17:00:00', format)
+    const endTime1 = dayjs('18 01 2021, 19:00:00', format)
     if (dateObject.isBetween(startTime1, endTime1)) {
       setShowThemeGroup(true)
     } else {
@@ -78,14 +84,14 @@ const GroupsContainer = (props) => {
   }
 
   const updateTownSquareOpen = () => {
-    const dateObject = moment()
+    const dateObject = dayjs()
     const weekday = dateObject.isoWeekday()
     const format = 'hh:mm:ss'
     const format2 = 'DD MM YYYY, hh:mm:ss'
-    const beforeTime = moment('09:00:00', format)
-    const afterTime = moment('21:00:00', format)
-    const startTime1 = moment('02 04 2021, 00:00:00', format2)
-    const endTime1 = moment('06 04 2021, 00:00:00', format2)
+    const beforeTime = dayjs('09:00:00', format)
+    const afterTime = dayjs('21:00:00', format)
+    const startTime1 = dayjs('02 04 2021, 00:00:00', format2)
+    const endTime1 = dayjs('06 04 2021, 00:00:00', format2)
     if (dateObject.isBetween(startTime1, endTime1)) {
       setShowTownSquare(false)
     } else if (dateObject.isBetween(beforeTime, afterTime)) {

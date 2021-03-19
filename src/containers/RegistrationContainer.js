@@ -251,7 +251,7 @@ RegistrationContainer.propTypes = {
   interestOptions: PropTypes.instanceOf(Array),
   registrationError: PropTypes.string,
   addUserInterests: PropTypes.func.isRequired,
-  userBirthdate: PropTypes.string,
+  userBirthdate: PropTypes.number,
   mmuser: PropTypes.shape({ username: PropTypes.string }).isRequired,
   setDefaultProfileImage: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,

@@ -1,6 +1,6 @@
 import { fetchMyChannelsAndMembers } from 'mattermost-redux/actions/channels'
 import { getProfiles } from 'mattermost-redux/actions/users'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import * as types from '../../contants/actionTypes'
 import * as API from '../../api/channels/channels'
 import { updateUser } from '../user/userAction'
@@ -80,7 +80,7 @@ export const timedGetChannelInvitationsAction = () => {
     try {
       const { user } = getState()
       const lastInvitationsTimestamp = user && user.channelInvitationsAt
-      const hoursSince = moment().diff(lastInvitationsTimestamp, 'hours')
+      const hoursSince = dayjs().diff(lastInvitationsTimestamp, 'hours')
       if (hoursSince >= 24 || !lastInvitationsTimestamp) {
         await dispatch(getChannelInvitationsAction())
         await dispatch(updateChannelInvitationsTimestamp())

@@ -3,14 +3,15 @@ import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import moment from 'moment'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import ServiceRulesContainer from '../../containers/ServiceRulesContainer'
 import ValidatedInputField from '../ValidatedInputField'
 import DateSelectField from '../DateSelectField'
 import ButtonContainer from '../ButtonContainer'
 import ModalContainer from '../ModalContainer'
 import ToolTipModalContainer from '../../containers/ToolTipModalContainer'
-import getAge from '../../utils/getAge'
 import './styles.scss'
 import PrivacyPolicy from '../PrivacyPolicy'
 import AccessibilityStatement from '../AccessibilityStatement'
@@ -40,6 +41,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
     accessibilityStatementModalIsOpen,
     setAccessibilityStatementModalIsOpen,
   ] = useState(false)
+  dayjs.extend(utc)
+  dayjs.extend(customParseFormat)
 
   useEffect(() => {
     if (apiErrors && apiErrors.fields) {
@@ -52,15 +55,13 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   }
 
   const onSubmit = (data) => {
-    const usersBirthdate = moment
-      .utc({
-        year: birthyear,
-        month: birthmonth - 1,
-        day: birthday,
-      })
-      .format()
+    const usersBirthdate = dayjs(`${birthmonth} ${birthday} ${birthyear}`)
+      .utc()
+      .local()
+      .format('YYYY-MM-DD 00:00:00+00')
 
-    const ageAccepted = getAge({ birthdate: usersBirthdate }) >= 15
+    const ageInYears = dayjs().utc().local().diff(usersBirthdate, 'years')
+    const ageAccepted = ageInYears >= 15
     if (!ageAccepted) {
       setError('day', {
         type: 'registrationError',
