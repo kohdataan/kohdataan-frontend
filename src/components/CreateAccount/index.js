@@ -55,10 +55,10 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   }
 
   const onSubmit = (data) => {
-    const usersBirthdate = dayjs(`${birthmonth} ${birthday} ${birthyear}`)
+    const usersBirthdate = dayjs(`${birthyear}-${birthmonth}-${birthday}`)
       .utc()
       .local()
-      .format('YYYY-MM-DD 00:00:00+00')
+      .format('YYYY-MM-DD')
 
     const ageInYears = dayjs().utc().local().diff(usersBirthdate, 'years')
     const ageAccepted = ageInYears >= 15
@@ -85,7 +85,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
       handleAccountCreation(
         data.firstname.trim(),
         data.lastname.trim(),
-        usersBirthdate,
+        usersBirthdate.concat(' 00:00:00+00'),
         data.email.trim().toLowerCase(),
         data.phoneNumber,
         data.password
