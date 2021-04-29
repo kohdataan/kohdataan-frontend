@@ -41,14 +41,16 @@ const EditProfile = (props) => {
     setError(false)
   }
   const handleSave = () => {
-    handleEditReady(
-      newDescription,
-      newNickname,
-      newShowAge,
-      newShowLocation,
-      newLocation.value,
-      img
-    )
+    if (newNickname.trim().length !== 0) {
+      handleEditReady(
+        newDescription,
+        newNickname.trim(),
+        newShowAge,
+        newShowLocation,
+        newLocation.value,
+        img
+      )
+    }
   }
 
   return (

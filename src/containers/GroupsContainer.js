@@ -69,9 +69,17 @@ const GroupsContainer = (props) => {
   const updateThemeGroupOpen = () => {
     const dateObject = dayjs()
     const format = 'DD MM YYYY, hh:mm:ss'
-    const startTime1 = dayjs('18 01 2021, 17:00:00', format)
-    const endTime1 = dayjs('18 01 2021, 19:00:00', format)
-    if (dateObject.isBetween(startTime1, endTime1)) {
+    const startTime1 = dayjs('04 05 2021, 17:00:00', format)
+    const endTime1 = dayjs('04 05 2021, 19:00:00', format)
+    const startTime2 = dayjs('06 05 2021, 17:00:00', format)
+    const endTime2 = dayjs('06 05 2021, 18:00:00', format)
+    const startTime3 = dayjs('14 05 2021, 15:00:00', format)
+    const endTime3 = dayjs('14 05 2021, 16:00:00', format)
+    if (
+      dateObject.isBetween(startTime1, endTime1) ||
+      dateObject.isBetween(startTime2, endTime2) ||
+      dateObject.isBetween(startTime3, endTime3)
+    ) {
       setShowThemeGroup(true)
     } else {
       setShowThemeGroup(false)
@@ -90,8 +98,8 @@ const GroupsContainer = (props) => {
     const format2 = 'DD MM YYYY, hh:mm:ss'
     const beforeTime = dayjs('09:00:00', format)
     const afterTime = dayjs('21:00:00', format)
-    const startTime1 = dayjs('02 04 2021, 00:00:00', format2)
-    const endTime1 = dayjs('06 04 2021, 00:00:00', format2)
+    const startTime1 = dayjs('13 05 2021, 00:00:00', format2)
+    const endTime1 = dayjs('14 05 2021, 00:00:00', format2)
     if (dateObject.isBetween(startTime1, endTime1)) {
       setShowTownSquare(false)
     } else if (dateObject.isBetween(beforeTime, afterTime)) {
