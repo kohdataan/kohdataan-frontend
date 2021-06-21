@@ -9,6 +9,7 @@ exports[`Button container it matches the snapshot 1`] = `
   <input
     aria-invalid={false}
     aria-label="test"
+    autoComplete="on"
     className=""
     disabled={false}
     id="test"

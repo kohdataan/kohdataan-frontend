@@ -2,6 +2,7 @@
 
 exports[`Button container it matches the snapshot 1`] = `
 <button
+  aria-describedby={null}
   aria-label="test"
   className="button-container  test"
   disabled={false}
