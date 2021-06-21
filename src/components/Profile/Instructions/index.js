@@ -75,6 +75,7 @@ const Instructions = (props) => {
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.PROFILE_INFO_IS_PUBLIC)}
+          role="link"
         >
           Ok
         </ButtonContainer>
@@ -105,6 +106,7 @@ const Instructions = (props) => {
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_YOUR_PROFILE)}
+          role="link"
         >
           Ok
         </ButtonContainer>
@@ -141,6 +143,7 @@ const Instructions = (props) => {
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_THE_BOT)}
+          role="link"
         >
           Ok
         </ButtonContainer>
@@ -174,6 +177,7 @@ const Instructions = (props) => {
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_FRIENDS)}
+          role="link"
         >
           Ok
         </ButtonContainer>
@@ -205,6 +209,7 @@ const Instructions = (props) => {
         <ButtonContainer
           className="profile-modal-button"
           onClick={closeModal(modals.THIS_IS_GROUPS)}
+          role="link"
         >
           Ok
         </ButtonContainer>

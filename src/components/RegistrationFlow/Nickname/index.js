@@ -8,7 +8,7 @@ const Nickname = (props) => {
   const { onChange, value, hideStep } = props
   return (
     <ShadowBox>
-      <main role="main" className="add-user-nickname-container">
+      <div className="add-user-nickname-container">
         <div className="profile-creation-title-container">
           <h2 className="profile-creation-title">Kerro kuka olet.</h2>
           {!hideStep && <span className="profile-creation-step-text">1/6</span>}
@@ -21,9 +21,12 @@ const Nickname = (props) => {
           onChange={onChange}
           value={value}
           ariaRequired
+          ariaDescribedby="describe-nickname-input"
         />
-        <p className="add-user-nickname-title">Tämä nimi näkyy muille.</p>
-      </main>
+        <p className="add-user-nickname-title" id="describe-nickname-input">
+          Tämä nimi näkyy muille.
+        </p>
+      </div>
     </ShadowBox>
   )
 }

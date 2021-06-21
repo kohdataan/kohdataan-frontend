@@ -19,6 +19,7 @@ const PrevNextNav = (props) => {
         <ButtonContainer
           className="nav-button prev-button"
           onClick={handleClick('prev')}
+          role="link"
         >
           Edellinen
         </ButtonContainer>
@@ -28,6 +29,7 @@ const PrevNextNav = (props) => {
         <ButtonContainer
           className="nav-button next-button"
           onClick={handleClick('next')}
+          role="link"
         >
           Seuraava
         </ButtonContainer>

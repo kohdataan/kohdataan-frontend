@@ -231,6 +231,7 @@ const RegistrationContainer = (props) => {
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
             label="Sulje"
+            role="link"
           >
             <div className="go-back-button" />
           </ButtonContainer>

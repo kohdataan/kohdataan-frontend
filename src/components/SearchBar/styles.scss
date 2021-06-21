@@ -6,8 +6,11 @@
 
 form.search-bar {
   position: relative;
-  display: flex;
   width: 100%;
+  label {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .search-bar-container {
@@ -16,11 +19,9 @@ form.search-bar {
 }
 
 .search-bar-icon-clear {
-  font-size: 16px;
-  right: 12px;
+  font-size: 20px;
+  margin-left: -30px;
   opacity: 0.8;
-  position: absolute;
-  top: 12px;
   color: black;
 }
 
@@ -33,9 +34,6 @@ form.search-bar {
   border-radius: 0px;
   background: transparent;
   padding: 0 0;
-  position: absolute;
-  top: 6px;
-  right: 5px;
   color: black; 
 }
 
@@ -56,4 +54,9 @@ form.search-bar {
     outline: none;
     border: 1px solid black;
   }
+}
+
+.search-bar-input-content {
+  display: flex;
+  align-items: center;
 }

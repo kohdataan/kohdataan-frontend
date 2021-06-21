@@ -50,6 +50,7 @@ const RegistrationProblem = ({
               <form
                 className="registration-problem-form"
                 onSubmit={handleSubmit(onSubmit)}
+                noValidate
               >
                 <div className="formfield-container">
                   <ValidatedInputField
@@ -85,6 +86,7 @@ const RegistrationProblem = ({
                   <div className="formfield-container">
                     <ValidatedInputField
                       label="Oma sähköposti"
+                      type="email"
                       name="email"
                       onChange={() => clearErrors('email')}
                       ref={register({

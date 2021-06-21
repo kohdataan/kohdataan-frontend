@@ -14,7 +14,6 @@ const Group = (props) => {
     currentUserId,
     getPosts,
     showTownSquare,
-    showThemeGroup,
   } = props
 
   const [members, setMembers] = useState([])
@@ -177,7 +176,7 @@ const Group = (props) => {
         </>
       )
     }
-    if (channel.name === 'off-topic' && !showThemeGroup) {
+    if (channel.name === 'off-topic') {
       return (
         <>
           <div className=" group-box-content-inactive">
@@ -208,7 +207,7 @@ const Group = (props) => {
   return (
     <>
       {(channel.name === 'town-square' && !showTownSquare) ||
-      (channel.name === 'off-topic' && !showThemeGroup) ? (
+      (channel.name === 'off-topic' && channel.purpose === '') ? (
         getInactiveChannels()
       ) : (
         <Link
@@ -284,7 +283,6 @@ Group.propTypes = {
   currentUserId: propTypes.string.isRequired,
   getPosts: propTypes.instanceOf(Object).isRequired,
   showTownSquare: propTypes.bool.isRequired,
-  showThemeGroup: propTypes.bool.isRequired,
 }
 
 export default memo(Group)

@@ -31,6 +31,9 @@ const Header = (props) => {
       <Link
         className="chat-header-item chat-header-nav-back-button"
         to={direct ? '/friends' : '/'}
+        aria-label={
+          direct ? 'Takaisin sivulle Kaverit' : 'Takaisin sivulle Ryhmät'
+        }
       >
         {direct ? '< Kaverit' : '< Ryhmät'}
       </Link>

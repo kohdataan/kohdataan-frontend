@@ -120,7 +120,6 @@ const Message = (props) => {
   return (
     <>
       <div
-        role="article"
         data-focusable="true"
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
@@ -146,10 +145,6 @@ const Message = (props) => {
         )}
         <div className={messageWrapperClassList.join(' ')}>
           <div className="message-outer">
-            <span className="sr-only">
-              Viesti lähettäjältä
-              {isAdmin ? 'Valvoja' : sender}
-            </span>
             {timeSent !== '' ? (
               <header
                 className={`chat-message-header-content ${
@@ -158,6 +153,11 @@ const Message = (props) => {
                     : 'other-user-message-header'
                 }`}
               >
+                <h3 className="sr-only">
+                  Lähettäjä&nbsp;
+                  {isAdmin ? ' Valvoja' : sender}&nbsp;
+                  <span className="chat-message-timestamp">{timeSent}</span>
+                </h3>
                 {currentUserId !== senderId && !directChannel && (
                   <p
                     aria-hidden
@@ -170,7 +170,9 @@ const Message = (props) => {
                     {isAdmin ? 'Valvoja' : sender}
                   </p>
                 )}
-                <span className="chat-message-timestamp">{timeSent}</span>
+                <span aria-hidden className="chat-message-timestamp">
+                  {timeSent}
+                </span>
               </header>
             ) : (
               <div className="message-without-header-content" />
@@ -208,11 +210,12 @@ const Message = (props) => {
                     <Link
                       to={`/profile/${senderMmUsername}`}
                       className="channel-name-link"
-                      aria-label="Linkki profiiliin"
+                      aria-label={`Linkki profiiliin ${sender}`}
                     >
                       <i aria-hidden="true" title={sender[0]} />
                       <div
                         className="label chat-message-sender-icon"
+                        aria-hidden="true"
                         style={{
                           backgroundImage: `url(${image})`,
                         }}
@@ -306,7 +309,7 @@ const Message = (props) => {
                     !deleted &&
                     files[0] &&
                     filesData[files[0]].mime_type.includes('audio') && (
-                      <div className="player-wrapper" aria-label="ääniviesti">
+                      <div className="player-wrapper" aria-label="Ääniviesti">
                         <ReactAudioPlayer
                           src={`${process.env.REACT_APP_MATTERMOST_URL}/api/v4/files/${files[0]}`}
                           controls

@@ -149,7 +149,7 @@ const UserInput = (props) => {
           <ButtonContainer
             className="icon-btn"
             onClick={clickFileInput}
-            label="Lähetä kuva tai video"
+            label="Valitse tiedosto"
             disabled={showAudioModal || isUploading}
           >
             <div className="send-image-attachment-button" />
@@ -158,7 +158,7 @@ const UserInput = (props) => {
             className="icon-btn"
             disabled={showFilePreview || isUploading}
             onClick={startSendingAudio}
-            label="Lähetä ääniviesti"
+            label="Äänitä viesti"
           >
             <div className="send-voice-attachment-button" />
           </ButtonContainer>

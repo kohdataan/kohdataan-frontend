@@ -15,8 +15,9 @@ const ViewImage = ({ history, match }) => {
       <ButtonContainer
         className="view-image-go-back-button go-back-button"
         onClick={goBack}
+        role="link"
       >
-        <span className="sr-only">Sulje</span>
+        <span className="sr-only">Sulje esikatselu.</span>
       </ButtonContainer>
       <div className="image">
         <img

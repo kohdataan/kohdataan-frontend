@@ -10,7 +10,7 @@ const Description = (props) => {
   const { onChange, value, hideStep } = props
   return (
     <ShadowBox>
-      <main role="main" className="add-user-description-container">
+      <div className="add-user-description-container">
         <div className="profile-creation-title-container">
           <h2 className="profile-creation-title">Kerro itsestäsi.</h2>
           {!hideStep && <span className="profile-creation-step-text">4/6</span>}
@@ -24,19 +24,27 @@ const Description = (props) => {
           onChange={onChange}
           value={value}
           maxLength={MAX_LENGTH}
+          ariaDescribedby="description-info"
         />
 
-        <div className="add-user-description-details-container">
+        <div
+          className="add-user-description-details-container"
+          id="description-info"
+        >
           <div>
             Tämä kuvaus näkyy muille.
             <br />
             Voit lisätä kuvauksen myöhemmin.
           </div>
-          <div className="add-user-description-limit">
+          <div
+            className="add-user-description-limit"
+            aria-live="polite"
+            aria-atomic
+          >
             {`${value.length}/${MAX_LENGTH}`}
           </div>
         </div>
-      </main>
+      </div>
     </ShadowBox>
   )
 }

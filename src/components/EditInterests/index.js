@@ -60,7 +60,8 @@ const EditInterests = (props) => {
           <ButtonContainer
             className="icon-btn interests-icon-btn"
             onClick={closeModal}
-            label="Sulje"
+            label="Sulje dialogi"
+            role="link"
           >
             <div className="go-back-button" />
           </ButtonContainer>

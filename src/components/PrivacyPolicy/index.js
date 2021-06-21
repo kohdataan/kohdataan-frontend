@@ -12,7 +12,8 @@ const PrivacyPolicy = ({ closeModal }) => {
           <ButtonContainer
             className="privacy-policy-icon-btn"
             onClick={closeModal}
-            label="Sulje"
+            role="link"
+            label="Sulje dialogi"
           >
             <div className="go-back-button" />
           </ButtonContainer>
@@ -330,6 +331,8 @@ const PrivacyPolicy = ({ closeModal }) => {
       <ButtonContainer
         className="profile-modal-button privacy-policy-modal-button"
         onClick={closeModal}
+        role="link"
+        label="Sulje dialogi"
       >
         Sulje
       </ButtonContainer>

@@ -65,13 +65,16 @@ const IEWarningBanner = () => {
             <ButtonContainer
               className="accept-rules-icon-btn icon-btn"
               onClick={() => setIeModalIsOpen(false)}
-              label="Sulje"
+              role="link"
+              label="Sulje dialogi"
             >
               <div className="go-back-button" />
             </ButtonContainer>
             <ButtonContainer
               className="profile-modal-button accept-rules-modal-button"
               onClick={() => setIeModalIsOpen(false)}
+              role="link"
+              label="Sulje dialogi"
             >
               Sulje
             </ButtonContainer>

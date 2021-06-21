@@ -78,6 +78,7 @@ const Account = (props) => {
         <ButtonContainer
           className="icon-btn go-back-button close-edit-btn"
           onClick={closeEditPage}
+          role="link"
         >
           <span className="sr-only">Sulje</span>
         </ButtonContainer>
@@ -92,6 +93,7 @@ const Account = (props) => {
             className="account-edit-button"
             onClick={() => openModal('firstname')}
             label="Muokkaa etunimeä"
+            role="link"
           >
             Muokkaa
           </ButtonContainer>
@@ -105,6 +107,7 @@ const Account = (props) => {
             className="account-edit-button"
             onClick={() => openModal('lastname')}
             label="Muokkaa sukunimeä"
+            role="link"
           >
             Muokkaa
           </ButtonContainer>
@@ -118,6 +121,7 @@ const Account = (props) => {
             className="account-edit-button"
             onClick={() => openModal('email')}
             label="Muokkaa sähköpostia"
+            role="link"
           >
             Muokkaa
           </ButtonContainer>
@@ -131,6 +135,7 @@ const Account = (props) => {
             className="account-edit-button"
             onClick={() => openModal('phoneNumber')}
             label="Muokkaa puhelinnumeroa"
+            role="link"
           >
             Muokkaa
           </ButtonContainer>
@@ -144,6 +149,7 @@ const Account = (props) => {
             className="account-edit-button"
             onClick={() => openModal('password')}
             label="Muokkaa salasanaa"
+            role="link"
           >
             Muokkaa
           </ButtonContainer>
@@ -161,6 +167,7 @@ const Account = (props) => {
         <ButtonContainer
           className="account-delete-button button"
           onClick={() => setShowDeleteModal(true)}
+          role="link"
         >
           Poista käyttäjätili
         </ButtonContainer>
@@ -168,8 +175,10 @@ const Account = (props) => {
       <ButtonContainer
         className="button-secondary account-save-button"
         onClick={closeEditPage}
+        role="link"
       >
-        Tallenna
+        <span aria-hidden>Tallenna</span>
+        <span className="sr-only">Palaa edelliselle sivulle</span>
       </ButtonContainer>
       <EditAccountModal
         showModal={showModal}

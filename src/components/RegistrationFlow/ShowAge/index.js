@@ -9,7 +9,7 @@ const ShowAge = (props) => {
 
   return (
     <ShadowBox>
-      <main role="main" className="add-user-show-age-container">
+      <div className="add-user-show-age-container">
         <div className="profile-creation-title-container">
           <h2 className="profile-creation-title">
             Ikäsi:
@@ -32,7 +32,7 @@ const ShowAge = (props) => {
           onChange={() => onChange(false)}
           checked={showAge === 'false'}
         />
-      </main>
+      </div>
     </ShadowBox>
   )
 }

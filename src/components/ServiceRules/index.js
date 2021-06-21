@@ -28,7 +28,11 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   return (
     <div className="create-account-modal-container">
       <div className="service-rules-content">
-        <ButtonContainer className="accept-rules-link" onClick={openModal}>
+        <ButtonContainer
+          className="accept-rules-link"
+          onClick={openModal}
+          role="link"
+        >
           Hyväksy palvelun käyttöehdot
         </ButtonContainer>
         <ModalContainer
@@ -47,7 +51,8 @@ const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
               <ButtonContainer
                 className="accept-rules-icon-btn"
                 onClick={closeModal}
-                label="Sulje"
+                label="Sulje hyväksymättä"
+                role="link"
               >
                 <div className="go-back-button" />
               </ButtonContainer>

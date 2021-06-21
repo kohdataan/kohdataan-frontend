@@ -49,6 +49,7 @@ const SuggestionBox = (props) => {
         {channel && members && (
           <div className="suggestion-members-wrapper">
             <div className="group-current-members">
+              <h3 className="sr-only">Ryhmän jäsenet</h3>
               {members &&
                 members
                   .filter(

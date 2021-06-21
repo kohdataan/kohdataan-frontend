@@ -93,6 +93,7 @@ const MembersSider = (props) => {
         <ButtonContainer
           onClick={openModal}
           className="members-sider-leave-group-button"
+          role="link"
         >
           Poistu ryhmästä
         </ButtonContainer>

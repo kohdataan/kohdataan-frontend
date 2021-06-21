@@ -17,7 +17,7 @@ const CookieConsentBanner = () => {
 
   return (
     <ModalContainer
-      label="cookie-banner-modal"
+      label="Hyväksy evästeet"
       modalIsOpen={modalIsOpen}
       closeModal={() => {}}
       cookie

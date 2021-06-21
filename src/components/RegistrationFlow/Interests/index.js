@@ -7,7 +7,7 @@ const Interests = (props) => {
   const { options, interests, setInterests, hideStep } = props
 
   return (
-    <main role="main" className="add-user-interests-container">
+    <div className="add-user-interests-container">
       <h2 className="profile-creation-title">Kerro, mikä sinua kiinnostaa.</h2>
       <p>
         Ehdotamme sinulle kiinnostustesi mukaan keskusteluryhmiä, joissa voit
@@ -23,7 +23,7 @@ const Interests = (props) => {
         interests={interests}
         setInterests={setInterests}
       />
-    </main>
+    </div>
   )
 }
 

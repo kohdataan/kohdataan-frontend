@@ -57,7 +57,7 @@ const Location = (props) => {
 
   return (
     <ShadowBox>
-      <main role="main" className="add-user-location-container">
+      <div className="add-user-location-container">
         <div className="profile-creation-title-container">
           <h2 className="profile-creation-title">Asuinpaikkasi:</h2>
           {!hideStep && <span className="profile-creation-step-text">3/6</span>}
@@ -66,14 +66,14 @@ const Location = (props) => {
           className="basic-single"
           classNamePrefix="select"
           defaultValue={locations[0]}
-          placeholder="Kirjoita"
+          placeholder="Kirjoita tai valitse"
           isSearchable
           name="color"
           options={locations}
           value={value}
           onChange={onChange}
           styles={customStyles}
-          aria-label="Asuinpaikka"
+          aria-label="Asuinpaikkasi"
           aria-required
         />
         <RadioButton
@@ -90,7 +90,7 @@ const Location = (props) => {
           onChange={() => setShowLocation(false)}
           checked={showLocation === 'false'}
         />
-      </main>
+      </div>
     </ShadowBox>
   )
 }

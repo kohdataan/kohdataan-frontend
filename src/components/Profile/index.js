@@ -115,6 +115,7 @@ const Profile = (props) => {
           <ButtonContainer
             className="button profile-tutorial-btn"
             onClick={goToFriendsPage}
+            role="link"
           >
             Seuraava
           </ButtonContainer>
@@ -148,7 +149,7 @@ const Profile = (props) => {
     },
     {
       content: (
-        <div aria-label="tutoriaali-1" role="dialog" tabIndex={-1}>
+        <div aria-label="Ohjeita palvelun käyttöön 1">
           <p className="tutorial-step">1/6</p>
           <h1 className="tutorial-header">
             Seuraavilla sivuilla esittelemme sinulle Kohdataan-somen!
@@ -185,6 +186,8 @@ const Profile = (props) => {
           <ButtonContainer
             onClick={goToPreviousPage}
             className="profile-modal-header-button"
+            role="link"
+            label="Palaa edelliselle sivulle"
           >
             {'< Palaa'}
           </ButtonContainer>
@@ -234,6 +237,7 @@ const Profile = (props) => {
             <ButtonContainer
               onClick={startDirectChannel}
               className="profile-dm-button"
+              role="link"
             >
               Lähetä viesti
             </ButtonContainer>

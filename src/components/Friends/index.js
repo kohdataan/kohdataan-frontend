@@ -52,6 +52,7 @@ const Friends = (props) => {
           <ButtonContainer
             className="button friends-tutorial-btn"
             onClick={goToPreviousTutorial}
+            role="link"
           >
             Edellinen
           </ButtonContainer>

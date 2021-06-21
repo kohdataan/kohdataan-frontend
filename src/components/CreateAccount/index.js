@@ -304,6 +304,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
             <ValidatedInputField
               label="Sähköposti"
               name="email"
+              type="email"
               ref={register({
                 required: true,
                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -345,6 +346,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
               <ValidatedInputField
                 label="Puhelinnumero"
                 name="phoneNumber"
+                type="tel"
                 ref={register({
                   required: true,
                   minLength: 6,
@@ -492,6 +494,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
           </Link>
           <ButtonContainer
             className="create-account-link-block create-account-link-item create-account-link"
+            role="link"
             onClick={() => setPrivacyPolicyModalIsOpen(true)}
           >
             Tutustu tietosuojaselosteeseen.

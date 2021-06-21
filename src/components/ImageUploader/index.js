@@ -65,6 +65,7 @@ const ImageUploader = (props) => {
           className="icon-btn"
           onClick={clickFileInput}
           label="Lisää kuva"
+          ariaDescribedby="picture-info"
         >
           <div style={customIconStyle}>&nbsp;</div>
         </ButtonContainer>

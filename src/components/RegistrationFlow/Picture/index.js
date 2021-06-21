@@ -64,7 +64,7 @@ const Picture = (props) => {
 
   return (
     <ShadowBox>
-      <main role="main" className="add-user-picture-container">
+      <div className="add-user-picture-container">
         <div className="add-user-picture-title-container">
           <h2
             className="profile-creation-title add-user"
@@ -114,9 +114,9 @@ const Picture = (props) => {
                 <ButtonContainer
                   className="icon-btn rotate-btn"
                   onClick={handleRotate}
-                  label="Käännä"
+                  label="Käännä kuvaa"
                 >
-                  <i className="fas fa-retweet" />
+                  <i aria-hidden className="fas fa-retweet" />
                 </ButtonContainer>
                 <br />
                 <div className="zoom-controls-container">
@@ -129,7 +129,7 @@ const Picture = (props) => {
                     onClick={() => handleScaleByDirection('down', scale - 0.02)}
                     label="Pienennä"
                   >
-                    <i className="fas fa-minus zoom-control-sign" />
+                    <i aria-hidden className="fas fa-minus zoom-control-sign" />
                   </ButtonContainer>
                   <Slider
                     defaultValue={1}
@@ -166,19 +166,19 @@ const Picture = (props) => {
                     onClick={() => handleScaleByDirection('up', scale + 0.02)}
                     label="Suurenna"
                   >
-                    <i className="fas fa-plus zoom-control-sign" />
+                    <i aria-hidden className="fas fa-plus zoom-control-sign" />
                   </ButtonContainer>
                 </div>
                 <br />
               </div>
             </div>
           )}
-          <div className="add-user-picture-text">
+          <div id="picture-info" className="add-user-picture-text">
             <p className="add-user-topmost-text">Tämä kuva näkyy muille.</p>
             <p>Voit lisätä kuvan myös myöhemmin.</p>
           </div>
         </div>
-      </main>
+      </div>
     </ShadowBox>
   )
 }

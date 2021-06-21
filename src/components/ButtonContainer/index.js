@@ -11,6 +11,7 @@ const ButtonContainer = (props) => {
     onClick,
     label,
     role,
+    ariaDescribedby,
   } = props
   return (
     <button
@@ -24,6 +25,7 @@ const ButtonContainer = (props) => {
       tabIndex="0"
       aria-label={label}
       role={role}
+      aria-describedby={ariaDescribedby}
     >
       {children}
     </button>
@@ -42,6 +44,7 @@ ButtonContainer.propTypes = {
   secondary: propTypes.bool,
   label: propTypes.string,
   role: propTypes.string,
+  ariaDescribedby: propTypes.string,
 }
 
 ButtonContainer.defaultProps = {
@@ -49,6 +52,7 @@ ButtonContainer.defaultProps = {
   secondary: false,
   label: '',
   role: 'button',
+  ariaDescribedby: null,
 }
 
 export default memo(ButtonContainer)

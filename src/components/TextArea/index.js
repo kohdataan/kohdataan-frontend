@@ -12,6 +12,7 @@ const TextArea = (props) => {
     onChange,
     maxLength,
     rows,
+    ariaDescribedby,
   } = props
   return (
     <label htmlFor={label} className={inputClassName}>
@@ -27,6 +28,7 @@ const TextArea = (props) => {
         onChange={onChange}
         maxLength={maxLength}
         rows={rows}
+        aria-describedby={ariaDescribedby}
       />
     </label>
   )
@@ -41,6 +43,7 @@ TextArea.propTypes = {
   onChange: PropTypes.func.isRequired,
   maxLength: PropTypes.number,
   rows: PropTypes.number,
+  ariaDescribedby: PropTypes.string,
 }
 
 TextArea.defaultProps = {
@@ -50,6 +53,7 @@ TextArea.defaultProps = {
   labelClassName: '',
   maxLength: 1000,
   rows: 4,
+  ariaDescribedby: null,
 }
 
 export default memo(TextArea)

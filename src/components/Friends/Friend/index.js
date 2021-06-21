@@ -209,12 +209,15 @@ const Friend = (props) => {
             <ButtonContainer
               onClick={() => setShowModal(false)}
               className="cancel-button block-user-modal-btn"
+              role="link"
+              label="Sulje dialogi"
             >
               En
             </ButtonContainer>
             <ButtonContainer
               onClick={toggleBlockedStatus}
               className="confirm-button block-user-modal-btn"
+              role="link"
             >
               Kyllä
             </ButtonContainer>

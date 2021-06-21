@@ -55,6 +55,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
         className="button-image"
         onClick={() => openModal(setShowBot)}
         label="Avaa botti"
+        role="link"
       >
         <img src={botIcon} alt="Botti" />
       </ButtonContainer>
@@ -98,6 +99,7 @@ const BottomNavigationBot = forwardRef((props, ref) => {
               <ButtonContainer
                 className="bot-link"
                 onClick={openSendMessageModal}
+                role="link"
               >
                 Lähetä valvojalle viesti
               </ButtonContainer>
@@ -117,7 +119,11 @@ const BottomNavigationBot = forwardRef((props, ref) => {
           <hr aria-hidden="true" />
           <div className="modal-item">
             <i className="fas fa-info-circle modal-icon" aria-hidden="true" />
-            <ButtonContainer className="bot-link" onClick={openInfoModal}>
+            <ButtonContainer
+              className="bot-link"
+              onClick={openInfoModal}
+              role="link"
+            >
               Lisätietoa palvelusta
             </ButtonContainer>
             <ModalContainer

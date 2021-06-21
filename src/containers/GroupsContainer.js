@@ -49,7 +49,6 @@ const GroupsContainer = (props) => {
   const [isInitialized, setIsInitialized] = useState(false)
   const [filteredSuggestions, setFilteredSuggestions] = useState([])
   const [showTownSquare, setShowTownSquare] = useState(false)
-  const [showThemeGroup, setShowThemeGroup] = useState(false)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
   const [timer, setTimer] = useState(0)
   dayjs.extend(isBetween)
@@ -66,31 +65,6 @@ const GroupsContainer = (props) => {
     initialize()
   }, [fetchChannelsAndInvitations])
 
-  const updateThemeGroupOpen = () => {
-    const dateObject = dayjs()
-    const format = 'DD MM YYYY, hh:mm:ss'
-    const startTime1 = dayjs('04 05 2021, 17:00:00', format)
-    const endTime1 = dayjs('04 05 2021, 19:00:00', format)
-    const startTime2 = dayjs('06 05 2021, 17:00:00', format)
-    const endTime2 = dayjs('06 05 2021, 18:00:00', format)
-    const startTime3 = dayjs('14 05 2021, 15:00:00', format)
-    const endTime3 = dayjs('14 05 2021, 16:00:00', format)
-    if (
-      dateObject.isBetween(startTime1, endTime1) ||
-      dateObject.isBetween(startTime2, endTime2) ||
-      dateObject.isBetween(startTime3, endTime3)
-    ) {
-      setShowThemeGroup(true)
-    } else {
-      setShowThemeGroup(false)
-    }
-    if (timer > 100000) {
-      setTimer(0)
-    } else {
-      setTimer(timer + 1)
-    }
-  }
-
   const updateTownSquareOpen = () => {
     const dateObject = dayjs()
     const weekday = dateObject.isoWeekday()
@@ -98,8 +72,8 @@ const GroupsContainer = (props) => {
     const format2 = 'DD MM YYYY, hh:mm:ss'
     const beforeTime = dayjs('09:00:00', format)
     const afterTime = dayjs('21:00:00', format)
-    const startTime1 = dayjs('13 05 2021, 00:00:00', format2)
-    const endTime1 = dayjs('14 05 2021, 00:00:00', format2)
+    const startTime1 = dayjs('25 06 2021, 00:00:00', format2)
+    const endTime1 = dayjs('26 06 2021, 00:00:00', format2)
     if (dateObject.isBetween(startTime1, endTime1)) {
       setShowTownSquare(false)
     } else if (dateObject.isBetween(beforeTime, afterTime)) {
@@ -119,17 +93,11 @@ const GroupsContainer = (props) => {
   // checks if public groups are open or closed on first render
   useEffect(() => {
     updateTownSquareOpen()
-    updateThemeGroupOpen()
   }, [])
 
   // check every ten seconds if townsquare and theme group should be shown or not
   useEffect(() => {
     const checkTime = setTimeout(updateTownSquareOpen, 10000)
-    return () => clearTimeout(checkTime)
-  }, [timer])
-
-  useEffect(() => {
-    const checkTime = setTimeout(updateThemeGroupOpen, 10000)
     return () => clearTimeout(checkTime)
   }, [timer])
 
@@ -242,8 +210,6 @@ const GroupsContainer = (props) => {
         getPosts={getPosts}
         posts={posts}
         showTownSquare={showTownSquare}
-        showThemeGroup={showThemeGroup}
-        setShowThemeGroup={setShowThemeGroup}
       />
     </main>
   )

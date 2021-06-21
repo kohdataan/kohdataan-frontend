@@ -12,6 +12,7 @@ const InputField = (props) => {
     onChange,
     type,
     ariaRequired,
+    ariaDescribedby,
   } = props
   return (
     <label htmlFor={label} className={inputClassName}>
@@ -26,6 +27,7 @@ const InputField = (props) => {
         className={labelClassName}
         onChange={onChange}
         aria-required={ariaRequired}
+        aria-describedby={ariaDescribedby}
       />
     </label>
   )
@@ -41,6 +43,7 @@ InputField.propTypes = {
   showPlaceholder: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   ariaRequired: PropTypes.bool,
+  ariaDescribedby: PropTypes.string,
 }
 
 InputField.defaultProps = {
@@ -51,6 +54,7 @@ InputField.defaultProps = {
   labelClassName: '',
   showPlaceholder: true,
   ariaRequired: false,
+  ariaDescribedby: null,
 }
 
 export default memo(InputField)

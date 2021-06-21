@@ -19,7 +19,6 @@ const Groups = (props) => {
     updateUser,
     getPosts,
     showTownSquare,
-    showThemeGroup,
   } = props
   const updateTutorialWatched = () => updateUser({ tutorialWatched: true })
 
@@ -42,6 +41,7 @@ const Groups = (props) => {
           <ButtonContainer
             className="button groups-tutorial-btn"
             onClick={goToPreviousTutorial}
+            role="link"
           >
             Edellinen
           </ButtonContainer>
@@ -69,7 +69,6 @@ const Groups = (props) => {
               teams={teams}
               getPosts={getPosts}
               showTownSquare={showTownSquare}
-              showThemeGroup={showThemeGroup}
             />
           ))}
       </div>
@@ -101,7 +100,6 @@ Groups.propTypes = {
   getPosts: PropTypes.func.isRequired,
   history: PropTypes.instanceOf(Object),
   showTownSquare: PropTypes.bool.isRequired,
-  showThemeGroup: PropTypes.bool.isRequired,
 }
 
 export default memo(Groups)

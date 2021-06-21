@@ -64,7 +64,7 @@ const FilePreview = (props) => {
       <ButtonContainer
         className="image-preview-close-modal-button go-back-button"
         onClick={closeModal}
-        label="Sulje"
+        label="Sulje esikatselu"
       >
         {' '}
       </ButtonContainer>
