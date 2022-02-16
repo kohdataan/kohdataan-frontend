@@ -7,14 +7,8 @@ import * as API from '../../api/user/user'
 import './styles.scss'
 
 const Account = (props) => {
-  const {
-    nodeUser,
-    mmuser,
-    updateUser,
-    updatePassword,
-    history,
-    userLogout,
-  } = props
+  const { nodeUser, mmuser, updateUser, updatePassword, history, userLogout } =
+    props
   const [showModal, setShowModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteError, setDeleteError] = useState(null)

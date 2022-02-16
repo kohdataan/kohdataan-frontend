@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/jsx-curly-newline */
 import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
@@ -34,9 +35,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
   const [birthyear, setBirthyear] = useState('')
   const [currentApiErrors, setCurrentApiErrors] = useState({})
   const [openErrorModal, setOpenErrorModal] = useState(false)
-  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
-    false
-  )
+  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] =
+    useState(false)
   const [
     accessibilityStatementModalIsOpen,
     setAccessibilityStatementModalIsOpen,
@@ -87,7 +87,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         data.lastname.trim(),
         usersBirthdate.concat(' 00:00:00+00'),
         data.email.trim().toLowerCase(),
-        data.phoneNumber,
+        data.phoneNumber.trim(),
         data.password
       )
     }
@@ -120,7 +120,7 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
         <form
           className="create-account-input-content-container"
           onSubmit={handleSubmit(onSubmit)}
-          autoComplete="on"
+          noValidate
         >
           <div className="formfield-container">
             <ValidatedInputField
@@ -164,7 +164,6 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                 maxLength: 30,
                 pattern: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
               })}
-              autocomplete
               ariaInvalid={!!errors.lastname}
               inputClassName="create-account-input-text"
               labelClassName={
@@ -351,7 +350,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   required: true,
                   minLength: 6,
                   maxLength: 20,
-                  pattern: /^(\+358|00358|358|\+7|007|\+372|00372|\+46|0046|04|050)[0-9- ]{4,14}$/i,
+                  pattern:
+                    /^(\+358|00358|358|\+7|007|\+372|00372|\+46|0046|04|050)[0-9- ]{4,14}$/i,
                 })}
                 ariaInvalid={!!errors.phoneNumber}
                 inputClassName="create-account-input-text"
@@ -384,7 +384,8 @@ const CreateAccount = ({ handleAccountCreation, apiErrors }) => {
                   required: true,
                   maxLength: 30,
                   // password must contain lower and upper case letters and numbers
-                  pattern: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
+                  pattern:
+                    /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
                 })}
                 type="password"
                 ariaInvalid={!!errors.password}

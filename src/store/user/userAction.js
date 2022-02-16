@@ -11,7 +11,14 @@ export const userLogin = (user) => {
         localStorage.setItem('userId', res.user.id)
         localStorage.setItem('authToken', res.token)
         const { email, password } = user
-        await dispatch(matterMostLogin(email, password))
+        const mmRes = await dispatch(matterMostLogin(email, password))
+        if (mmRes && mmRes.error) {
+          await dispatch({
+            type: types.USER_LOGIN_FAILURE,
+            payload: mmRes.error,
+            error: true,
+          })
+        }
       } else {
         // This is so that state is updated and effects related to user are ran even if the error message does not change.
         await dispatch({

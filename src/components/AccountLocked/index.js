@@ -1,12 +1,7 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import './styles.scss'
 
 const AccountLocked = () => {
-  useEffect(() => {
-    localStorage.removeItem('userId')
-    localStorage.removeItem('authToken')
-  })
-
   return (
     <div className="account-locked-container">
       <h1 className="account-locked-text">Kohdataan</h1>
@@ -20,6 +15,11 @@ const AccountLocked = () => {
           className="account-locked-email-link"
         >
           kohdataan@kohdataan.fi.
+        </a>
+      </p>
+      <p className="account-locked-paragraph">
+        <a className="login-link" href="/login">
+          Takaisin
         </a>
       </p>
     </div>

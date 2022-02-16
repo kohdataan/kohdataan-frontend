@@ -22,7 +22,7 @@ const Header = (props) => {
   const getHeader = () => {
     if (otherUser) return otherUser
     if (channel.name === 'town-square') return 'Kohdataan'
-    if (channel.name === 'off-topic') return 'Teemat'
+    if (channel.name === 'off-topic') return 'Chatit'
     return channel.display_name
   }
 

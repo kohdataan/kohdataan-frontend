@@ -48,7 +48,7 @@ const FriendSearch = (props) => {
       </div>
     )
   }
-  return <></>
+  return null
 }
 
 FriendSearch.propTypes = {

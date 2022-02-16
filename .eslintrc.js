@@ -23,6 +23,8 @@ module.exports = {
         trailingComma: 'es5',
       },
     ],
+    'react/function-component-definition': 'off',
+    'default-param-last': 'off',
     semi: ['error', 'never'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],

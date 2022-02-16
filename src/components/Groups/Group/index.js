@@ -101,7 +101,7 @@ const Group = (props) => {
       return 'Kohdataan'
     }
     if (channel.name === 'off-topic') {
-      return 'Teemat'
+      return 'Chatit'
     }
     return channel.display_name
   }
@@ -158,120 +158,109 @@ const Group = (props) => {
   const getInactiveChannels = () => {
     if (channel.name === 'town-square' && !showTownSquare) {
       return (
-        <>
-          <div className=" group-box-content-inactive">
-            <div className="group-header">
-              <div
-                className="group-color-icon"
-                style={{
-                  backgroundColor: 'grey',
-                }}
-              />
-              <h2>Kohdataan</h2>
-            </div>
-            <div className="monitor-group-text">
-              <p>{addLineBreaks(channel.header)}</p>
-            </div>
+        <div className=" group-box-content-inactive">
+          <div className="group-header">
+            <div
+              className="group-color-icon"
+              style={{
+                backgroundColor: 'grey',
+              }}
+            />
+            <h2>Kohdataan</h2>
           </div>
-        </>
+          <div className="monitor-group-text">
+            <p>{addLineBreaks(channel.header)}</p>
+          </div>
+        </div>
       )
     }
     if (channel.name === 'off-topic') {
       return (
-        <>
-          <div className=" group-box-content-inactive">
-            <div className="group-header">
-              <div
-                className="group-color-icon"
-                style={{
-                  backgroundColor: 'grey',
-                }}
-              />
-              <h2>Teemat</h2>
-            </div>
-            <div className="monitor-group-text">
-              <p>
-                Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä
-                ohjattuja keskusteluja.
-              </p>
-              <br />
-              <p>{addLineBreaks(channel.header)}</p>
-            </div>
+        <div className=" group-box-content-inactive">
+          <div className="group-header">
+            <div
+              className="group-color-icon"
+              style={{
+                backgroundColor: 'grey',
+              }}
+            />
+            <h2>Chatit</h2>
           </div>
-        </>
+          <div className="monitor-group-text">
+            <p>
+              Täällä järjestämme kaikille avoimia, eri aiheisiin liittyviä
+              ohjattuja keskusteluja.
+            </p>
+            <br />
+            <p>{addLineBreaks(channel.header)}</p>
+          </div>
+        </div>
       )
     }
-    return <></>
+    return null
   }
 
-  return (
-    <>
-      {(channel.name === 'town-square' && !showTownSquare) ||
-      (channel.name === 'off-topic' && channel.purpose === '') ? (
-        getInactiveChannels()
-      ) : (
-        <Link
-          className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
-          to={{
-            pathname: `/chat/${channel.id}`,
-            state: {
-              unreadCount,
-              currentUser,
-            },
-          }}
-        >
+  return (channel.name === 'town-square' && !showTownSquare) ||
+    (channel.name === 'off-topic' && channel.purpose === '') ? (
+    getInactiveChannels()
+  ) : (
+    <Link
+      className={`${unreadPosts > 0 ? 'group-box-unreads' : ''} group-box`}
+      to={{
+        pathname: `/chat/${channel.id}`,
+        state: {
+          unreadCount,
+          currentUser,
+        },
+      }}
+    >
+      <div
+        className={
+          channel.name === 'off-topic'
+            ? 'long-group-box-content'
+            : 'group-box-content'
+        }
+      >
+        <div className="group-header">
           <div
-            className={
-              channel.name === 'off-topic'
-                ? 'long-group-box-content'
-                : 'group-box-content'
-            }
-          >
-            <div className="group-header">
-              <div
-                className="group-color-icon"
-                style={{
-                  backgroundColor:
-                    channel.name === 'town-square' ||
-                    channel.name === 'off-topic'
-                      ? 'grey'
-                      : groupNameColors[channel.display_name],
-                  border: `${
-                    channel.display_name.toLowerCase().includes('valkoiset')
-                      ? '1px solid grey'
-                      : 'none'
-                  }`,
-                }}
-              />
-              <h2>{getChannelHeader()}</h2>
-            </div>
-            {channel.name !== 'town-square' && channel.name !== 'off-topic' && (
-              <div className="group-interests">
-                <p>
-                  {`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}
-                </p>
-              </div>
-            )}
-            {showChannel()}
+            className="group-color-icon"
+            style={{
+              backgroundColor:
+                channel.name === 'town-square' || channel.name === 'off-topic'
+                  ? 'grey'
+                  : groupNameColors[channel.display_name],
+              border: `${
+                channel.display_name.toLowerCase().includes('valkoiset')
+                  ? '1px solid grey'
+                  : 'none'
+              }`,
+            }}
+          />
+          <h2>{getChannelHeader()}</h2>
+        </div>
+        {channel.name !== 'town-square' && channel.name !== 'off-topic' && (
+          <div className="group-interests">
+            <p>{`Kiinnostukset: ${parsedPurpose.slice(0, 3).join(', ')}`}</p>
           </div>
-          {unreadPosts === 1 && (
-            <div className="group-unreads-text">
-              <span>{`${unreadPosts} uusi viesti`}</span>
-            </div>
-          )}
-          {unreadPosts > 1 && (
-            <div className="group-unreads-text">
-              <span>{`${unreadPosts} uutta viestiä`}</span>
-            </div>
-          )}
-          {unreadPosts <= 0 && (
-            <div className="group-unreads-text no-unreads">
-              <p>Ei uusia viestejä</p>
-            </div>
-          )}
-        </Link>
+        )}
+        {showChannel()}
+      </div>
+      {unreadPosts === 1 && (
+        <div className="group-unreads-text">
+          <span>{`${unreadPosts} uusi viesti`}</span>
+        </div>
       )}
-    </>
+      {unreadPosts > 1 && (
+        <div className="group-unreads-text">
+          <span>{`${unreadPosts} uutta viestiä`}</span>
+        </div>
+      )}
+      {unreadPosts <= 0 && (
+        <div className="group-unreads-text no-unreads">
+          <p>Ei uusia viestejä</p>
+        </div>
+      )}
+    </Link>
   )
 }
 

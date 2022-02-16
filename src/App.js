@@ -27,12 +27,13 @@ import EditProfileContainer from './containers/EditProfileContainer'
 import InterestsContainer from './containers/InterestsContainer'
 import FullScreenLoading from './components/FullScreenLoading'
 import { rootStartUp as rootStartUpAction } from './store/root'
+import { userLogout } from './api/user/user'
 import ChangeAccountInfoContainer from './containers/ChangeAccountInfoContainer'
 import RestoreAccountContainer from './containers/RestoreAccountContainer'
-import AccountLocked from './components/AccountLocked'
 import CookieConsentBanner from './components/CookieConsentBanner'
 import IEWarningBanner from './components/IEWarningBanner'
 import './styles/defaults.scss'
+import AccountLockedContainer from './containers/AccountLockedContainer'
 
 class App extends Component {
   async componentDidMount() {
@@ -42,10 +43,17 @@ class App extends Component {
 
   // Compare important props and prevent re-render if those are not changing
   shouldComponentUpdate(nextProps) {
-    const { history, rootStartUp, user: pUser, loading } = this.props
+    const {
+      history,
+      rootStartUp,
+      user: pUser,
+      mmuser: pMmuser,
+      loading,
+    } = this.props
     return !(
       nextProps.history === history &&
       nextProps.user === pUser &&
+      nextProps.mmuser === pMmuser &&
       nextProps.loading === loading &&
       nextProps.rootStartUp === rootStartUp
     )
@@ -57,7 +65,10 @@ class App extends Component {
       return <FullScreenLoading />
     }
     if (!loading.root && localStorage.getItem('authToken') && !mmuser) {
-      return <AccountLocked />
+      const token = localStorage.getItem('authToken')
+      localStorage.removeItem('authToken')
+      localStorage.removeItem('userId')
+      userLogout(token)
     }
 
     return (
@@ -65,6 +76,7 @@ class App extends Component {
         {localStorage.getItem('authToken') && <BottomNavigationContainer />}
         <Route exact path="/login" component={LogInContainer} />
         <Route path="/login/:uuid" component={LogInContainer} />
+        <Route path="/deactivated" component={AccountLockedContainer} />
         <Route
           exact
           path="/email-verification"

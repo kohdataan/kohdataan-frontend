@@ -7,9 +7,8 @@ import './styles.scss'
 
 const CookieConsentBanner = () => {
   const [modalIsOpen, setModalIsOpen] = useState(true)
-  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
-    false
-  )
+  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] =
+    useState(false)
 
   const acceptCookies = () => {
     setModalIsOpen(false)

@@ -156,6 +156,7 @@ const Friend = (props) => {
                 }
               >
                 {message && !blocked ? (
+                  // eslint-disable-next-line react/jsx-no-useless-fragment
                   <>{message}</>
                 ) : (
                   <div className="text-content">
@@ -251,6 +252,7 @@ const Friend = (props) => {
                     }
                   >
                     {message && !blocked ? (
+                      // eslint-disable-next-line react/jsx-no-useless-fragment
                       <>{message}</>
                     ) : (
                       <div className="text-content">
@@ -267,6 +269,7 @@ const Friend = (props) => {
       </div>
     )
   }
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <></>
 }
 

@@ -1,5 +1,9 @@
 import React, { useEffect, useState, memo } from 'react'
 import { connect } from 'react-redux'
+import dayjs from 'dayjs'
+import isBetween from 'dayjs/plugin/isBetween'
+import isoWeek from 'dayjs/plugin/isoWeek'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { bindActionCreators } from 'redux'
 import {
   getPosts as getPostsAction,
@@ -53,6 +57,7 @@ const ChatContainer = (props) => {
     files,
     user,
     getPostsAfter,
+    history,
   } = props
 
   // Sort and filter posts, posts dependent effect
@@ -62,7 +67,11 @@ const ChatContainer = (props) => {
   const [filteredOrder, setFilteredOrder] = useState([])
   const [lastViewedAt, setLastViewedAt] = useState(0)
   const [activeMemberMmProfiles, setActiveMemberMmProfiles] = useState([])
+  const [timer, setTimer] = useState(0)
 
+  dayjs.extend(isBetween)
+  dayjs.extend(isoWeek)
+  dayjs.extend(customParseFormat)
   const currentUser =
     location && location.state ? location.state.currentUser : null
 
@@ -187,7 +196,40 @@ const ChatContainer = (props) => {
     getActiveMattermostProfiles()
   }, [currentMembers, profiles, setActiveMemberMmProfiles, teams])
 
+  const checkIfGroupShouldClose = () => {
+    if (
+      currentChannel &&
+      (currentChannel.name === 'town-square' ||
+        currentChannel.name === 'off-topic')
+    ) {
+      const dateObject = dayjs()
+      const weekday = dateObject.isoWeekday()
+      const format = 'hh:mm:ss'
+      const beforeTime = dayjs('09:00:00', format)
+      const afterTime = dayjs('21:00:00', format)
+      if (
+        !dateObject.isBetween(beforeTime, afterTime) ||
+        weekday === 6 ||
+        weekday === 7
+      ) {
+        history.push('/')
+      }
+      if (timer > 10000) {
+        setTimer(0)
+      } else {
+        setTimer(timer + 1)
+      }
+    }
+  }
+
+  // check every ten seconds if townsquare and theme group should be shown or not
+  useEffect(() => {
+    const checkTime = setTimeout(checkIfGroupShouldClose, 30000)
+    return () => clearTimeout(checkTime)
+  }, [timer, currentChannel])
+
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
       {currentChannel && (
         <Chat
@@ -242,6 +284,7 @@ ChatContainer.propTypes = {
   files: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.instanceOf(Object).isRequired,
   getPostsAfter: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {

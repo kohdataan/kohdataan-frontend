@@ -39,7 +39,8 @@ const PasswordResetPage = (props) => {
                   required: true,
                   maxLength: 30,
                   // password must contain lower and upper case letters and numbers
-                  pattern: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
+                  pattern:
+                    /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
                 })}
                 type="password"
                 ariaInvalid={!!errors.password}

@@ -87,6 +87,7 @@ const GroupSuggestions = (props) => {
                   <Swipeable
                     key={card.id}
                     min={80}
+                    // eslint-disable-next-line react/no-unstable-nested-components
                     buttons={({ left }) => (
                       <div className="suggestion-buttons-wrapper">
                         <ButtonContainer

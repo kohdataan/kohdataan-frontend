@@ -48,6 +48,16 @@ const LogInContainer = (props) => {
     }
   }, [user, history, uuid])
 
+  useEffect(() => {
+    if (
+      user &&
+      user.errorMessage &&
+      user.errorMessage.indexOf('deactivated') !== -1
+    ) {
+      history.push('/deactivated')
+    }
+  }, [user])
+
   const handleLogin = async (email, password) => {
     if (document.cookie.includes('CookieConsent=true')) {
       const userData = { email, password }
@@ -56,6 +66,7 @@ const LogInContainer = (props) => {
     } else {
       setError('cookiesNotAccepted')
     }
+    return null
   }
 
   return (

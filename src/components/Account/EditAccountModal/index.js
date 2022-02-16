@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { memo } from 'react'
 import propTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
@@ -15,7 +16,8 @@ const labels = {
 }
 const patterns = {
   email: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-  phoneNumber: /^(\+358|00358|358|\+7|007|\+372|00372|\+46|0046|04|050)[0-9- ]{4,14}$/i,
+  phoneNumber:
+    /^(\+358|00358|358|\+7|007|\+372|00372|\+46|0046|04|050)[0-9- ]{4,14}$/i,
   password: /^(?=.*[0-9]+.*)(?=.*[a-zäöüß]+.*)(?=.*[A-ZÄÖÜ]+.*)[\w\W]{10,}$/,
   firstname: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,
   lastname: /^[a-z A-ZäöüßÄÖÜ'-]+$/i,

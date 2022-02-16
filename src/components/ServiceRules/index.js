@@ -7,9 +7,8 @@ import './styles.scss'
 
 const ServiceRules = ({ setRulesAccepted, setOpenErrorModal }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] = useState(
-    false
-  )
+  const [privacyPolicyModalIsOpen, setPrivacyPolicyModalIsOpen] =
+    useState(false)
 
   const openModal = () => {
     setModalIsOpen(true)

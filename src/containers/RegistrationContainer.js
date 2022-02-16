@@ -4,11 +4,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
   getUser,
-  uploadProfileImage,
+  uploadProfileImage as uploadProfileImageAction,
   setDefaultProfileImage as setDefaultProfileImageAction,
 } from 'mattermost-redux/actions/users'
 import PropTypes from 'prop-types'
-import { updateUser, addUserInterests } from '../store/user/userAction'
+import {
+  updateUser as updateUserAction,
+  addUserInterests as addUserInterestsAction,
+} from '../store/user/userAction'
 import RegistrationTitle from '../components/RegistrationFlow/RegistrationTitle'
 import pages from '../contants/registrationPages'
 import StepButton from '../components/RegistrationFlow/StepButton'
@@ -38,6 +41,9 @@ const RegistrationContainer = (props) => {
     userBirthdate,
     mmuser,
     setDefaultProfileImage,
+    uploadProfileImage,
+    addUserInterests,
+    updateUser,
     history,
   } = props
   const [nickname, setNickname] = useState('')
@@ -161,7 +167,7 @@ const RegistrationContainer = (props) => {
     switch (step) {
       case pages['add-nickname'].current: {
         const updatedUsername = updateUsername(nickname, mmuser)
-        await props.updateUser({
+        await updateUser({
           nickname,
           username: updatedUsername,
           mmid: mattermostId,
@@ -169,25 +175,25 @@ const RegistrationContainer = (props) => {
         return setDefaultProfileImage(mattermostId)
       }
       case pages['add-show-age'].current: {
-        return props.updateUser({ showAge })
+        return updateUser({ showAge })
       }
       case pages['add-location'].current: {
-        return props.updateUser({
+        return updateUser({
           location: location.value,
           showLocation,
         })
       }
       case pages['add-description'].current: {
-        return props.updateUser({ description })
+        return updateUser({ description })
       }
       case pages['add-image'].current: {
-        await props.updateUser({
+        await updateUser({
           imageUploaded,
         })
-        return props.uploadProfileImage(mattermostId, dataUriToBlob(img))
+        return uploadProfileImage(mattermostId, dataUriToBlob(img))
       }
       case pages['add-interests'].current: {
-        return props.addUserInterests({ userInterests: interests })
+        return addUserInterests({ userInterests: interests })
       }
       default:
         return undefined
@@ -196,7 +202,7 @@ const RegistrationContainer = (props) => {
 
   const stepButtonActions = async () => {
     if (pages[step].last)
-      await props.updateUser({ profileReady: true, imageUploaded })
+      await updateUser({ profileReady: true, imageUploaded })
     await profileCreationAction()
   }
 
@@ -267,9 +273,9 @@ RegistrationContainer.defaultProps = {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      updateUser,
-      uploadProfileImage,
-      addUserInterests,
+      updateUser: updateUserAction,
+      uploadProfileImage: uploadProfileImageAction,
+      addUserInterests: addUserInterestsAction,
       getInterestsAction,
       getUser,
       setDefaultProfileImage: setDefaultProfileImageAction,
