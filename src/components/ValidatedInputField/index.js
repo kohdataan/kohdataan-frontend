@@ -29,7 +29,7 @@ const ValidatedInputField = React.forwardRef((props, ref) => {
         placeholder={showPlaceholder ? label : ''}
         className={labelClassName}
         disabled={disabled}
-        autoComplete="off"
+        autoComplete="on"
       />
     </label>
   )
