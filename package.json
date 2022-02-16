@@ -11,7 +11,7 @@
     "localforage": "^1.10.0",
     "localforage-observable": "^2.1.1",
     "mattermost-redux": "~5.26.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "rc-slider": "^9.7.1",
     "react": "^17.0.2",
