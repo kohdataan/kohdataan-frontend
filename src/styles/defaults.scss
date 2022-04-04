@@ -48,6 +48,7 @@ button {
   border: solid 1px $orange;
   border-radius: 30px;
   padding: 5px 10px;
+  color: black;
   &:focus {
     outline: thin $outlineColor solid; 
     outline-offset: 5px;

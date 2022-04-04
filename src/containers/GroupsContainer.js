@@ -72,8 +72,8 @@ const GroupsContainer = (props) => {
     const format2 = 'DD MM YYYY, hh:mm:ss'
     const beforeTime = dayjs('09:00:00', format)
     const afterTime = dayjs('21:00:00', format)
-    const startTime1 = dayjs('06 12 2021, 00:00:00', format2)
-    const endTime1 = dayjs('07 12 2021, 00:00:00', format2)
+    const startTime1 = dayjs('08 04 2022, 00:00:00', format2)
+    const endTime1 = dayjs('09 04 2022, 00:00:00', format2)
     const startTime2 = dayjs('23 12 2021, 15:00:00', format2)
     const endTime2 = dayjs('27 12 2021, 00:00:00', format2)
     const startTime3 = dayjs('06 01 2022, 00:00:00', format2)
